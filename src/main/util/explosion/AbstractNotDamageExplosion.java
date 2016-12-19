@@ -149,8 +149,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion{
 							CraftEventFactory.entityDamage = this.source;
 							boolean wasDamaged = false;
 
-							System.out.println(entity.getBukkitEntity() + "@" + isNotDamage(entity.getBukkitEntity()));
-							if (isNotDamage(entity.getBukkitEntity())) {
+							if (!isNotDamage(entity.getBukkitEntity())) {
 								wasDamaged = entity.damageEntity(DamageSource.explosion(this), (int) ((d13 * d13 + d13) / 2.0D * 8.0D * f3 + 1.0D));
 							}
 

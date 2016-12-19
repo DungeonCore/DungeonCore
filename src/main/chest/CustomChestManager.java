@@ -2,17 +2,17 @@ package main.chest;
 
 import java.util.HashMap;
 
+import main.chest.wireless.RepositoryChest;
+import main.chest.wireless.RepositoryType;
+import main.mob.mob.BossMobable;
+import net.md_5.bungee.api.ChatColor;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.material.Chest;
-
-import main.chest.wireless.RepositoryChest;
-import main.chest.wireless.RepositoryType;
-import main.mob.mob.BossMobable;
-import net.md_5.bungee.api.ChatColor;
 
 /**
  * チェストの場所と中身を管理する
@@ -91,7 +91,6 @@ public class CustomChestManager {
 			if (lines[1].equals(ChatColor.GREEN + "REPOSITORY")) {
 				RepositoryType instance = RepositoryType.getInstance(lines[2]);
 				if (instance != null) {
-					System.out.println("new chest: "+ loc);
 					registChest(loc, new RepositoryChest(loc, instance));
 				}
 			}

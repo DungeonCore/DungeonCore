@@ -84,9 +84,10 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
 		if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) {
 			return false;
 		}
-		double d0 = f();
+//		double d0 = f();
+		double d0 = 16;
 		@SuppressWarnings("unchecked")
-		List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 4.0D, d0), Predicates.and(this.c, predicateEntity));
+		List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0), Predicates.and(this.c, predicateEntity));
 
 		Collections.sort(list, this.b);
 		   if (list.isEmpty()) {

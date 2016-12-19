@@ -36,7 +36,6 @@ public class ChestListner implements Listener{
 
 			Location loc = e.getClickedBlock().getLocation();
 			AbstractCustomChest chest = CustomChestManager.getCustomChest(loc);
-			System.out.println(chest);
 
 			if (chest == null) {
 				if (p.getGameMode() != GameMode.CREATIVE) {
