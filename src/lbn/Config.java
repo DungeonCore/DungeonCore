@@ -11,49 +11,55 @@ import org.bukkit.inventory.ItemStack;
 import lbn.item.ItemManager;
 
 public class Config {
-  private static Set<Material> notClickBlock = new HashSet<>();
-  private static Set<Material> notClickItem = new HashSet<>();
-  private static Set<EntityType> notClickEntity = new HashSet<>();
-  private static Set<EntityType> notDamageEntity = new HashSet<>();
+
+  /**
+   * Author's twitter account.
+   */
+  public static final String DEVELOPER_TWITTER_ID = "@namiken1993";
+
+  private static Set<Material> clickIgnoredBlocks = new HashSet<>();
+  private static Set<Material> clickCancelledItems = new HashSet<>();
+  private static Set<EntityType> clickCancelledEntityTypes = new HashSet<>();
+  private static Set<EntityType> damageCancelledEntityType = new HashSet<>();
   static {
-    notClickBlock.add(Material.ANVIL);
-    notClickBlock.add(Material.ENCHANTMENT_TABLE);
-    notClickBlock.add(Material.PAINTING);
-    notClickBlock.add(Material.ITEM_FRAME);
-    notClickBlock.add(Material.FURNACE);
-    notClickBlock.add(Material.BURNING_FURNACE);
-    notClickBlock.add(Material.DISPENSER);
-    notClickBlock.add(Material.DROPPER);
-    notClickBlock.add(Material.BEACON);
-    notClickBlock.add(Material.HOPPER);
-    notClickBlock.add(Material.HOPPER_MINECART);
-    notClickBlock.add(Material.FIRE);
+    clickIgnoredBlocks.add(Material.ANVIL);
+    clickIgnoredBlocks.add(Material.ENCHANTMENT_TABLE);
+    clickIgnoredBlocks.add(Material.PAINTING);
+    clickIgnoredBlocks.add(Material.ITEM_FRAME);
+    clickIgnoredBlocks.add(Material.FURNACE);
+    clickIgnoredBlocks.add(Material.BURNING_FURNACE);
+    clickIgnoredBlocks.add(Material.DISPENSER);
+    clickIgnoredBlocks.add(Material.DROPPER);
+    clickIgnoredBlocks.add(Material.BEACON);
+    clickIgnoredBlocks.add(Material.HOPPER);
+    clickIgnoredBlocks.add(Material.HOPPER_MINECART);
+    clickIgnoredBlocks.add(Material.FIRE);
 
-    notClickItem.add(Material.EYE_OF_ENDER);
-    notClickItem.add(Material.ENDER_PEARL);
-    notClickItem.add(Material.BUCKET);
-    notClickItem.add(Material.LAVA_BUCKET);
-    notClickItem.add(Material.WATER_BUCKET);
-    notClickItem.add(Material.FLINT_AND_STEEL);
+    clickCancelledItems.add(Material.EYE_OF_ENDER);
+    clickCancelledItems.add(Material.ENDER_PEARL);
+    clickCancelledItems.add(Material.BUCKET);
+    clickCancelledItems.add(Material.LAVA_BUCKET);
+    clickCancelledItems.add(Material.WATER_BUCKET);
+    clickCancelledItems.add(Material.FLINT_AND_STEEL);
 
-    notClickEntity.add(EntityType.ITEM_FRAME);
-    notDamageEntity.add(EntityType.ITEM_FRAME);
+    clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
+    damageCancelledEntityType.add(EntityType.ITEM_FRAME);
   }
 
-  public static Set<Material> getClickCancelblock() {
-    return notClickBlock;
+  public static Set<Material> getClickCancelblocks() {
+    return clickIgnoredBlocks;
   }
 
-  public static Set<Material> getClickCancelItem() {
-    return notClickItem;
+  public static Set<Material> getClickCancelItems() {
+    return clickCancelledItems;
   }
 
-  public static Set<EntityType> getClickCancelEntityType() {
-    return notClickEntity;
+  public static Set<EntityType> getClickCancelEntityTypes() {
+    return clickCancelledEntityTypes;
   }
 
-  public static Set<EntityType> getDamageCancelEntityType() {
-    return notDamageEntity;
+  public static Set<EntityType> getDamageCancelEntityTypes() {
+    return damageCancelledEntityType;
   }
 
   public static boolean allowCraft(ItemStack result, Collection<ItemStack> materials) {
@@ -62,7 +68,5 @@ public class Config {
     }
     return false;
   }
-
-  public static String DEVELOPER_TWITTER_ID = "@namiken1993";
 
 }
