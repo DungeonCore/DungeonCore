@@ -2,6 +2,7 @@ package lbn;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -10,10 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import lbn.item.ItemManager;
 
 public class Config {
-	static HashSet<Material> notClickBlock = new HashSet<Material>();
-	static HashSet<Material> notClickItem = new HashSet<Material>();
-	static HashSet<EntityType> notClickEntity = new HashSet<EntityType>();
-	static HashSet<EntityType> notDamageEntity = new HashSet<EntityType>();
+	private static Set<Material> notClickBlock = new HashSet<Material>();
+	private static Set<Material> notClickItem = new HashSet<Material>();
+	private static Set<EntityType> notClickEntity = new HashSet<EntityType>();
+	private static Set<EntityType> notDamageEntity = new HashSet<EntityType>();
 	static {
 		notClickBlock.add(Material.ANVIL);
 		notClickBlock.add(Material.ENCHANTMENT_TABLE);
@@ -39,19 +40,19 @@ public class Config {
 		notDamageEntity.add(EntityType.ITEM_FRAME);
 	}
 
-	public static HashSet<Material> getClickCancelblock() {
+	public static Set<Material> getClickCancelblock() {
 		return notClickBlock;
 	}
 
-	public static HashSet<Material> getClickCancelItem() {
+	public static Set<Material> getClickCancelItem() {
 		return notClickItem;
 	}
 
-	public static HashSet<EntityType> getClickCancelEntityType() {
+	public static Set<EntityType> getClickCancelEntityType() {
 		return notClickEntity;
 	}
 
-	public static HashSet<EntityType> getDamageCancelEntityType() {
+	public static Set<EntityType> getDamageCancelEntityType() {
 		return notDamageEntity;
 	}
 
