@@ -45,7 +45,7 @@ public class Buyer {
 
 		ItemStack result = event.getRecipe().getResult();
 		//生成されたアイテムがお金なら何もしない
-		if (new GalionItem(0).isThisItem(result)) {
+		if (GalionItem.getInstance(0).isThisItem(result)) {
 			return;
 		}
 
@@ -104,7 +104,7 @@ public class Buyer {
 
 	private static void allClearMaterial(CraftingInventory crafting, InventoryClickEvent e) {
 		//生成されたアイテムがお金なら何もしない
-		if (!new GalionItem(0).isThisItem(crafting.getResult())) {
+		if (!GalionItem.getInstance(0).isThisItem(crafting.getResult())) {
 			return;
 		}
 
@@ -181,7 +181,7 @@ public class Buyer {
 
 				//売上が0より大きいならアイテムをセットする
 				if (galions >= 0 && !emptyItemFlg) {
-					crafting.setResult(new GalionItem(galions).getItem());
+					crafting.setResult(GalionItem.getInstance(galions).getItem());
 					((Player)e.getWhoClicked()).updateInventory();
 				}
 

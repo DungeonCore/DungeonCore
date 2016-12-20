@@ -66,7 +66,7 @@ public class MoneyCommand implements CommandExecutor{
 		} else if (operate.equalsIgnoreCase("add")) {
 			GalionManager.addGalion(target, galions, GalionEditReason.command);
 		} else if (operate.equalsIgnoreCase("item")) {
-			GalionItem galionItem = new GalionItem(galions);
+			GalionItem galionItem = GalionItem.getInstance(galions);
 			p.getInventory().addItem(galionItem.getItem());
 		} else {
 			p.sendMessage("不正なコマンドです");
