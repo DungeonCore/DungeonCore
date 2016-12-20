@@ -1,0 +1,123 @@
+package lbn.mob.customEntity1_7;
+
+import lbn.mob.customEntity.ICustomUndeadEntity;
+import net.minecraft.server.v1_8_R1.EntityGiantZombie;
+import net.minecraft.server.v1_8_R1.EntityHuman;
+import net.minecraft.server.v1_8_R1.EntityPigZombie;
+import net.minecraft.server.v1_8_R1.Navigation;
+import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_8_R1.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_8_R1.World;
+import net.minecraft.server.v1_8_R1.WorldServer;
+
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.Giant;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
+public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntity<Giant>{
+
+	public CustomGiant(World arg0) {
+		super(arg0);
+		((Navigation) getNavigation()).b(true);
+		this.goalSelector.a(0, new PathfinderGoalFloat(this));
+		this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this,
+				EntityHuman.class, 1.0D, false));
+		this.goalSelector.a(2, this.a);
+		this.goalSelector.a(5, new PathfinderGoalMoveTowardsRestriction(this,
+				1.0D));
+		this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 1.0D));
+		this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this,
+				EntityHuman.class, 8.0F));
+		this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+		n();
+	}
+
+	protected void n() {
+//		if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+//			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+//					EntityVillager.class, 1.0D, true));
+//		}
+//		this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+//				EntityIronGolem.class, 1.0D, true));
+//		this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
+//				false));
+		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true,
+				new Class[] { EntityPigZombie.class }));
+		this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+				this, EntityHuman.class, true));
+//		if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+//			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+//					this, EntityVillager.class, false));
+//		}
+//		this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+//				this, EntityIronGolem.class, true));
+	}
+
+	@Override
+	public Giant spawn(Location loc) {
+		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
+		//位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
+		 //ワールドにentityを追加
+		 world.addEntity(this, SpawnReason.CUSTOM);
+		 return (Giant) getBukkitEntity();
+	}
+
+	@Override
+	public void setNoKnockBackResistnce(double val) {
+
+	}
+
+	@Override
+	public double getNoKnockBackResistnce() {
+		return 0;
+	}
+
+	@Override
+	public void setFlyMob(boolean isFly) {
+
+	}
+
+	@Override
+	public boolean isFlyMob() {
+		return false;
+	}
+
+	@Override
+	public boolean isIgnoreWater() {
+		return false;
+	}
+
+	@Override
+	public void setIgnoreWater(boolean isIgnoreWater) {
+
+	}
+
+	@Override
+	public void setUndead(boolean isUndead) {
+
+	}
+
+	@Override
+	public boolean isUndead() {
+		return false;
+	}
+
+	@Override
+	public void setNonDayFire(boolean isNonDayFire) {
+
+	}
+
+	@Override
+	public boolean isNonDayFire() {
+		return false;
+	}
+
+}

@@ -31,6 +31,7 @@ public class ArmorBase {
 //			sendDebug(e, damageModifier);
 //		}
 
+		System.out.println("before:" + e.getFinalDamage());
 		//一旦防具のダメージを全て消す
 		if (e.isApplicable(DamageModifier.ARMOR)) {
 			e.setDamage(DamageModifier.ARMOR, 0);
@@ -38,6 +39,8 @@ public class ArmorBase {
 		if (e.isApplicable(DamageModifier.MAGIC)) {
 		e.setDamage(DamageModifier.MAGIC, 0);
 		}
+
+		System.out.println("mid:" + e.getFinalDamage());
 
 		//ダメージを与えたmob
 		LivingEntity mob = null;
@@ -63,6 +66,7 @@ public class ArmorBase {
 			case ENTITY_EXPLOSION:
 			case BLOCK_EXPLOSION:
 			case CUSTOM:
+			case LAVA:
 				isArmorCut = true;
 				break;
 			default:
@@ -109,7 +113,9 @@ public class ArmorBase {
 		}
 		damage = damage * (1- baseDamageCuteParcent) * strengthDamageCuteParcent;
 
+
 		e.setDamage(Math.max(damage, 0));
+		System.out.println("after:" + e.getFinalDamage());
 	}
 
 	protected static void sendDebug(EntityDamageEvent e, DamageModifier type) {

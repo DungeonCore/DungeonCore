@@ -3,6 +3,7 @@ package lbn.dungeoncore;
 import java.util.Collection;
 
 import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.EntityPig;
 import net.minecraft.server.v1_8_R1.EntityPigZombie;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
@@ -72,6 +73,7 @@ import lbn.item.ItemListener;
 import lbn.item.SetItemListner;
 import lbn.mob.MobListener;
 import lbn.mob.customEntity1_7.CustomEnderman;
+import lbn.mob.customEntity1_7.CustomGiant;
 import lbn.mob.customEntity1_7.CustomPig;
 import lbn.mob.customEntity1_7.CustomPigZombie;
 import lbn.mob.customEntity1_7.CustomSkeleton;
@@ -111,6 +113,7 @@ public class Main extends JavaPlugin {
 			NMSUtils.registerEntity("Witch", 66, EntityWitch.class, CustomWitch.class);
 			NMSUtils.registerEntity("Villager", 120, EntityVillager.class, CustomVillager.class);
 			NMSUtils.registerEntity("PigZombie", 57, EntityPigZombie.class, CustomPigZombie.class);
+			NMSUtils.registerEntity("Giant", 53, EntityGiantZombie.class, CustomGiant.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -81,7 +81,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable{
 			SpawnLevel level = SpawnLevel.getLevel(row[6]);
 
 			if (world == null) {
-				sendMessage("world:" + world + "が存在しません。:" + id);
+				sendMessage("world:" + row[1] + "が存在しません。:" + id);
 				return;
 			}
 

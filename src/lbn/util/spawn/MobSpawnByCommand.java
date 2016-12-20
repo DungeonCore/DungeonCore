@@ -24,6 +24,7 @@ import org.bukkit.entity.Player;
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.mob.customEntity1_7.CustomEnderDragon;
 import lbn.mob.customEntity1_7.CustomEnderman;
+import lbn.mob.customEntity1_7.CustomGiant;
 import lbn.mob.customEntity1_7.CustomPig;
 import lbn.mob.customEntity1_7.CustomPigZombie;
 import lbn.mob.customEntity1_7.CustomSkeleton;
@@ -144,6 +145,9 @@ public class MobSpawnByCommand{
 			break;
 		case PIG_ZOMBIE:
 			entity = new CustomPigZombie(world);
+			break;
+		case GIANT:
+			entity = new CustomGiant(world);
 			break;
 		default:
 			updateFlg = false;

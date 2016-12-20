@@ -358,4 +358,19 @@ public class ItemStackUtil {
 		sender.sendMessage("materialが不正です。");
 		return null;
 	}
+
+	public static ItemStack getDecrement(ItemStack item) {
+		if (item == null) {
+			return new ItemStack(Material.AIR);
+		}
+
+		if (item.getAmount() == 1) {
+			return new ItemStack(Material.AIR);
+		} else if (item.getAmount() > 1){
+			item.setAmount(item.getAmount() - 1);
+			return item;
+		} else {
+			return new ItemStack(Material.AIR);
+		}
+	}
 }

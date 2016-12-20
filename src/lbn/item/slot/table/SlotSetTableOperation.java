@@ -2,6 +2,15 @@ package lbn.item.slot.table;
 
 import java.util.Arrays;
 
+import lbn.dungeoncore.Main;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.item.attackitem.AttackItemStack;
+import lbn.item.slot.SlotInterface;
+import lbn.player.CraftTableViewManager;
+import lbn.player.crafttable.CraftTableType;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -14,15 +23,6 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeoncore.Main;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.item.attackitem.AttackItemStack;
-import lbn.item.slot.SlotInterface;
-import lbn.player.CraftTableViewManager;
-import lbn.player.crafttable.CraftTableType;
-import lbn.util.ItemStackUtil;
 
 public class SlotSetTableOperation {
 
@@ -48,6 +48,10 @@ public class SlotSetTableOperation {
 				inv.setItem(i + 1, items[i]);
 			}
 		}
+
+		//アイテムを１つ減少させる
+		inv.setItem(4, ItemStackUtil.getDecrement(inv.getItem(4)));
+		inv.setItem(6, ItemStackUtil.getDecrement(inv.getItem(6)));
 	}
 
 	public static boolean isOpenSlotTable(HumanEntity humanEntity) {
