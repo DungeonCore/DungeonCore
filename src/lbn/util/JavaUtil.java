@@ -17,7 +17,7 @@ public class JavaUtil {
 		return new InterfaceGetter(clazz).getInterfaceList();
 	}
 
-	static Random rnd = new Random();
+	private static Random rnd = new Random();
 
 	public static boolean isRandomTrue(int percent) {
 		if (rnd.nextInt(100) < percent) {
@@ -32,23 +32,24 @@ public class JavaUtil {
 	}
 
 	public static String getLocationString(Location loc) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(loc.getWorld().getName());
-		sb.append("(");
-		sb.append(loc.getBlockX());
-		sb.append(", ");
-		sb.append(loc.getBlockY());
-		sb.append(", ");
-		sb.append(loc.getBlockZ());
-		sb.append(")");
-		return sb.toString();
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(loc.getWorld().getName());
+//		sb.append("(");
+//		sb.append(loc.getBlockX());
+//		sb.append(", ");
+//		sb.append(loc.getBlockY());
+//		sb.append(", ");
+//		sb.append(loc.getBlockZ());
+//		sb.append(")");
+//		return sb.toString();
+	  return String.format("(%d, %d, %d)", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
-	public static int getInt(String data, int nullData) {
+	public static int getInt(String data, int alternative) {
 		try {
 			return Integer.parseInt(data);
-		} catch (Exception e) {
-			return nullData;
+		} catch (NumberFormatException e) {
+			return alternative;
 		}
 	}
 

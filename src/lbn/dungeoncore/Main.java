@@ -2,15 +2,6 @@ package lbn.dungeoncore;
 
 import java.util.Collection;
 
-import net.minecraft.server.v1_8_R1.EntityEnderman;
-import net.minecraft.server.v1_8_R1.EntityPig;
-import net.minecraft.server.v1_8_R1.EntityPigZombie;
-import net.minecraft.server.v1_8_R1.EntitySkeleton;
-import net.minecraft.server.v1_8_R1.EntitySpider;
-import net.minecraft.server.v1_8_R1.EntityVillager;
-import net.minecraft.server.v1_8_R1.EntityWitch;
-import net.minecraft.server.v1_8_R1.EntityZombie;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -89,6 +80,14 @@ import lbn.quest.QuestListener;
 import lbn.util.DungeonLog;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
+import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.EntityPig;
+import net.minecraft.server.v1_8_R1.EntityPigZombie;
+import net.minecraft.server.v1_8_R1.EntitySkeleton;
+import net.minecraft.server.v1_8_R1.EntitySpider;
+import net.minecraft.server.v1_8_R1.EntityVillager;
+import net.minecraft.server.v1_8_R1.EntityWitch;
+import net.minecraft.server.v1_8_R1.EntityZombie;
 
 
 public class Main extends JavaPlugin {
@@ -96,7 +95,11 @@ public class Main extends JavaPlugin {
 
 	public static JavaPlugin plugin;
 
-	public static boolean isDebug = false;
+	private static boolean debugging = false;
+
+	public static boolean isDebugging() {
+	  return debugging;
+	}
 
 	@Override
 	public void onEnable() {
@@ -145,7 +148,7 @@ public class Main extends JavaPlugin {
 		boolean isDebug = Boolean.parseBoolean(getConfig().getString("debug"));
 		MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
 
-		Main.isDebug = isDebug;
+		Main.debugging = isDebug;
 		DungeonLog.println("Debug:" + isDebug);
 
 		WireLessChestManager.getInstance().loadManageData();
