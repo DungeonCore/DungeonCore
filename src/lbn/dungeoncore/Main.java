@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import lbn.Announce;
 import lbn.InitManager;
 import lbn.LimitedListener;
-import lbn.RecipeRegistor;
+import lbn.RecipeRegister;
 import lbn.SystemListener;
 import lbn.chest.ChestListner;
 import lbn.chest.wireless.WireLessChestManager;
@@ -131,7 +131,7 @@ public class Main extends JavaPlugin {
     Announce.AnnounceInfo("サーバーがreloadされました。Minecraft1.8をお使いの方はダンジョン名が表示されなくなります。これはサーバーに入り直すことで解決できます。");
     
     try {
-      RecipeRegistor.addRecipe();
+      RecipeRegister.registerRecipe();
     } catch (Exception e) {
       e.printStackTrace();
     }
