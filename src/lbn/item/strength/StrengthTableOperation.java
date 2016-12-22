@@ -40,6 +40,10 @@ public class StrengthTableOperation {
 				inv.setItem(i + 1, items[i]);
 			}
 		}
+
+		//アイテムを１つ減少させる
+		inv.setItem(4, ItemStackUtil.getDecrement(inv.getItem(4)));
+		inv.setItem(6, ItemStackUtil.getDecrement(inv.getItem(6)));
 	}
 
 	public static boolean isOpenStrengthTable(HumanEntity humanEntity) {

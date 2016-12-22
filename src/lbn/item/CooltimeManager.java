@@ -2,12 +2,12 @@ package lbn.item;
 
 import java.util.HashMap;
 
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.util.Message;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.util.Message;
 
 public class CooltimeManager {
 

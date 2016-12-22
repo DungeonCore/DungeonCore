@@ -1,6 +1,6 @@
 name: DungeonCore
 version: 1.2
-main: main.lbn.Main
+main: lbn.dungeoncore.Main
 softdepend: [Multiverse-Core,TheLowSheetPlugin,HolographicDisplays]
 
 commands:
