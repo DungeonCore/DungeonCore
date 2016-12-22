@@ -78,7 +78,7 @@ import lbn.player.appendix.PlayerAppendixListener;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.status.PlayerStatusListener;
 import lbn.quest.QuestListener;
-import lbn.util.DungeonLog;
+import lbn.util.DungeonLogger;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
@@ -152,13 +152,13 @@ public class Main extends JavaPlugin {
     MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
     
     Main.debugging = isDebug;
-    DungeonLog.println("Debug:" + isDebug);
+    DungeonLogger.info("Debug:" + isDebug);
     
     WireLessChestManager.getInstance().loadManageData();
     // 60分に一回のルーチンスタート
     startRutinePerHour();
     
-    DungeonLog.println("Start complate!!");
+    DungeonLogger.info("Start complate!!");
   }
   
   public static Collection<? extends Player> getOnlinePlayer() {
@@ -277,7 +277,7 @@ public class Main extends JavaPlugin {
   }
   
   public static void save(boolean instant) {
-    DungeonLog.println("[dungeon core]saveします。");
+    DungeonLogger.info("[dungeon core]saveします。");
     
     // 時間がかかる処理は後で実行
     if (instant) {
