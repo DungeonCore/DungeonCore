@@ -44,9 +44,9 @@ public class VillagerChunkManager {
     for (AbstractVillager mob : chunkVillagerList.get(pair)) {
       sendDebug(c, mob.getName());
       try {
-        if (((AbstractVillager) mob).getLocation() != null) {
+        if (mob.getLocation() != null) {
           sendDebug(c, "spawn:" + mob.getName());
-          mob.spawn(((AbstractVillager) mob).getLocation());
+          mob.spawn(mob.getLocation());
         } else {
           // 起こり得ないがが念のため
           new LbnRuntimeException("villager location is null").printStackTrace();
@@ -67,9 +67,10 @@ public class VillagerChunkManager {
     for (AbstractMob<?> abstractMob : allMobs) {
       if (abstractMob instanceof AbstractVillager) {
         // chunkごとに保管しておく
-        Location location2 = ((AbstractVillager) abstractMob).getLocation();
-        if (location2 != null) {
-          chunkVillagerList.put(new ChunkInfo(location2.getChunk()), (AbstractVillager) abstractMob);
+        AbstractVillager mob = (AbstractVillager) abstractMob;
+        Location location = mob.getLocation();
+        if (location != null) {
+          chunkVillagerList.put(new ChunkInfo(location.getChunk()), mob);
         }
         
       }
