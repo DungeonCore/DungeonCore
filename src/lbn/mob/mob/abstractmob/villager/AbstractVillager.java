@@ -3,7 +3,10 @@ package lbn.mob.mob.abstractmob.villager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Set;
+=======
+>>>>>>> THELoW1.8/master
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -20,6 +23,7 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.AbstractCustomMob;
 import lbn.mob.customEntity1_7.CustomVillager;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import lbn.quest.quest.TouchVillagerQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
@@ -27,10 +31,14 @@ import lbn.util.DungeonLog;
 =======
 import lbn.util.DungeonLogger;
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+import lbn.util.DungeonLogger;
+>>>>>>> THELoW1.8/master
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import net.md_5.bungee.api.ChatColor;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager, Villager>{
 	@Override
@@ -137,6 +145,8 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
 
 	}
 =======
+=======
+>>>>>>> THELoW1.8/master
 public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager, Villager> {
   @Override
   protected CustomVillager getInnerEntity(World w) {
@@ -220,6 +230,9 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
       }
     }
   }
+<<<<<<< HEAD
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+>>>>>>> THELoW1.8/master
 }
 

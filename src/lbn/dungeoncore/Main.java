@@ -3,7 +3,10 @@ package lbn.dungeoncore;
 import java.util.Collection;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> THELoW1.8/master
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
@@ -89,9 +92,12 @@ import lbn.util.NMSUtils;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import net.minecraft.server.v1_8_R1.EntityGuardian;
 =======
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+>>>>>>> THELoW1.8/master
 import net.minecraft.server.v1_8_R1.EntityPig;
 import net.minecraft.server.v1_8_R1.EntityPigZombie;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
@@ -99,6 +105,7 @@ import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 import org.bukkit.Bukkit;
@@ -328,6 +335,11 @@ public class Main extends JavaPlugin {
 
 
 public class Main extends JavaPlugin {
+=======
+
+
+public class Main extends JavaPlugin {
+>>>>>>> THELoW1.8/master
   public static String     dataFolder;
   
   public static JavaPlugin plugin;
@@ -541,5 +553,8 @@ public class Main extends JavaPlugin {
       }.runTaskTimer(plugin, 0, 1);
     }
   }
+<<<<<<< HEAD
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+>>>>>>> THELoW1.8/master
 }

@@ -1,6 +1,7 @@
 package lbn.util.spawn;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.mob.customEntity1_7.CustomEnderDragon;
 import lbn.mob.customEntity1_7.CustomEnderman;
@@ -25,6 +26,8 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 
 =======
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+>>>>>>> THELoW1.8/master
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -34,6 +37,7 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 public class MobSpawnByCommand{
@@ -282,6 +286,8 @@ public class MobSpawnByCommand{
 //		return null;
 //	}
 =======
+=======
+>>>>>>> THELoW1.8/master
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.mob.customEntity1_7.CustomEnderDragon;
 import lbn.mob.customEntity1_7.CustomEnderman;
@@ -304,7 +310,10 @@ import net.minecraft.server.v1_8_R1.NBTBase;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.NBTTagList;
 import net.minecraft.server.v1_8_R1.WorldServer;
+<<<<<<< HEAD
 >>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
+=======
+>>>>>>> THELoW1.8/master
 
 
 public class MobSpawnByCommand {

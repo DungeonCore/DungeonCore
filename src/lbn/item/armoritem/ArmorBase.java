@@ -18,6 +18,7 @@ import lbn.mob.MobHolder;
 import lbn.util.DungeonLogger;
 
 public class ArmorBase {
+<<<<<<< HEAD
 <<<<<<< .merge_file_a26516
 	public static void onArmor(EntityDamageEvent e) {
 		Entity entity = e.getEntity();
@@ -119,6 +120,8 @@ public class ArmorBase {
 		DungeonLog.printDevelopln(type + ":" + e.getDamage(type));
 	}
 =======
+=======
+>>>>>>> THELoW1.8/master
   public static void onArmor(EntityDamageEvent e) {
     Entity entity = e.getEntity();
     if (entity.getType() != EntityType.PLAYER) {
@@ -224,5 +227,8 @@ public class ArmorBase {
   protected static void sendDebug(EntityDamageEvent e, DamageModifier type) {
     DungeonLogger.development(type + ":" + e.getDamage(type));
   }
+<<<<<<< HEAD
 >>>>>>> .merge_file_a26548
+=======
+>>>>>>> THELoW1.8/master
 }
