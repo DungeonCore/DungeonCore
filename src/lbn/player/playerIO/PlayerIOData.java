@@ -6,10 +6,6 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
-import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
-import org.bukkit.entity.Player;
-
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
 import lbn.player.status.StatusAddReason;
@@ -19,13 +15,12 @@ import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.quest.NullQuest;
-<<<<<<< HEAD
-import lbn.quest.questData.QuestData;
-import lbn.util.DungeonLog;
-=======
 import lbn.util.DungeonLogger;
->>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
 import lbn.util.InOutputUtil;
+
+import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
+import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
+import org.bukkit.entity.Player;
 
 public class PlayerIOData {
   /**
@@ -60,11 +55,11 @@ public class PlayerIOData {
     this.playerExpLevel = playerExpLevel;
     this.questDataMap = questDataMap;
   }
-  
+
   public PlayerIOData(Player p) {
     inputData(p);
   }
-  
+
   public PlayerIOData(ResultSet rs) throws SQLException {
     this.swordLevel = rs.getInt("sword_level");
     this.swordExp = rs.getInt("sword_exp");
@@ -76,25 +71,25 @@ public class PlayerIOData {
     this.saveType = rs.getString("save_type");
     this.playerExpLevel = 100;
   }
-  
+
   protected void inputData(Player p) {
     String type = PlayerLastSaveType.getType(p);
     if (type == null) {
       type = "A";
     }
-    
+
     SwordStatusManager instance = SwordStatusManager.getInstance();
     swordLevel = instance.getLevel(p);
     swordExp = instance.getExp(p);
-    
+
     BowStatusManager instance2 = BowStatusManager.getInstance();
     bowLevel = instance2.getLevel(p);
     bowExp = instance2.getExp(p);
-    
+
     MagicStatusManager instance3 = MagicStatusManager.getInstance();
     magicLevel = instance3.getLevel(p);
     magicExp = instance3.getExp(p);
-    
+
     Set<Quest> complateQuest = QuestManager.getComplateQuest(p);
     complateQuestId = new String[complateQuest.size()];
     int i = 0;
@@ -102,7 +97,7 @@ public class PlayerIOData {
       complateQuestId[i] = quest.getId();
       i++;
     }
-    
+
     Set<Quest> doingQuest = QuestManager.getDoingQuest(p);
     doingQuestId = new String[doingQuest.size()];
     int j = 0;
@@ -110,56 +105,53 @@ public class PlayerIOData {
       doingQuestId[j] = quest.getId();
       j++;
     }
-    
+
     playerExpLevel = p.getLevel();
-    
+
     galions = GalionManager.getGalion(p);
-    
-    Map<String, Integer> jsonFormat = QuestData.getJsonFormat(p);
-    questDataMap = jsonFormat;
-    
+
     saveType = type;
   }
-  
+
   public int                  swordLevel;
   public int                  swordExp;
-  
+
   public int                  bowLevel;
   public int                  bowExp;
-  
+
   public int                  magicLevel;
   public int                  magicExp;
-  
+
   public int                  galions;
-  
+
   public String               saveType;
-  
+
   public int                  playerExpLevel;
-  
+
   public String[]             complateQuestId;
-  
+
   public String[]             doingQuestId;
-  
+
   public Map<String, Integer> questDataMap;
-  
+
   public void update(Player p) {
     PlayerLastSaveType.regist(p, saveType);
-    
+
     SwordStatusManager instance = SwordStatusManager.getInstance();
     instance.remove(p);
     instance.setLevel(p, swordLevel);
     instance.addExp(p, swordExp, StatusAddReason.system);
-    
+
     BowStatusManager instance2 = BowStatusManager.getInstance();
     instance2.remove(p);
     instance2.setLevel(p, bowLevel);
     instance2.addExp(p, bowExp, StatusAddReason.system);
-    
+
     MagicStatusManager instance3 = MagicStatusManager.getInstance();
     instance3.remove(p);
     instance3.setLevel(p, magicLevel);
     instance3.addExp(p, magicExp, StatusAddReason.system);
-    
+
     // QuestManager.remove(p);
     // //クエスト追加
     // UUID uniqueId = p.getUniqueId();
@@ -169,12 +161,12 @@ public class PlayerIOData {
     // for (String string : doingQuestId) {
     // QuestManager.doingQuestList.put(uniqueId, getQuest(string));
     // }
-    
+
     GalionManager.setGalion(p, galions, GalionEditReason.system);
-    
+
     // QuestData.setJsonFormat(p, questDataMap);
   }
-  
+
   public Quest getQuest(String string) {
     Quest questById = QuestManager.getQuestById(string);
     if (questById == null) {
@@ -182,11 +174,11 @@ public class PlayerIOData {
     }
     return questById;
   }
-  
+
   protected boolean isSave() {
     return true;
   }
-  
+
   /**
    * データをセーブする
    *
@@ -198,26 +190,25 @@ public class PlayerIOData {
       DungeonLogger.error("Load中にエラーが発生したためSaveできませんでした。(PlayerIOData)");
       return false;
     }
-    
+
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String json = gson.toJson(this);
-    
+
     return InOutputUtil.write(json, "player_data" + File.separator + p.getUniqueId() + "_" + saveType + ".text");
   }
-  
+
   public static void remove(Player p) {
     SwordStatusManager instance = SwordStatusManager.getInstance();
     instance.remove(p);
-    
+
     BowStatusManager instance2 = BowStatusManager.getInstance();
     instance2.remove(p);
-    
+
     MagicStatusManager instance3 = MagicStatusManager.getInstance();
     instance3.remove(p);
-    
+
     QuestManager.remove(p);
-    
+
     GalionManager.remove(p);
   }
 }
-

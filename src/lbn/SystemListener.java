@@ -36,9 +36,9 @@ import lbn.player.status.StatusViewerInventory;
 import lbn.util.DungeonLogger;
 
 public class SystemListener implements Listener {
-  
+
   public static int loginPlayer = 0;
-  
+
   @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
   public void StopClicking(InventoryClickEvent event) {
     Inventory topInventory = event.getView().getTopInventory();
@@ -47,7 +47,7 @@ public class SystemListener implements Listener {
       return;
     }
   }
-  
+
   @EventHandler
   public void ServerCommandEvent(ServerCommandEvent event) {
     String command = event.getCommand();
@@ -55,36 +55,37 @@ public class SystemListener implements Listener {
       DungeonLogger.info(command);
     }
   }
-  
+
 	@EventHandler
 	public void onChunkUnLoad(ChunkUnloadEvent e) {
+		//チェストを開いている最中にChunkがUnloadされると閉まるのでチェストワールドのChunkはUnloadしない
 		if (e.getWorld().getName().equals("chest")) {
 			e.setCancelled(true);
 		}
 	}
-  
+
   @EventHandler
   public void joinDungeon(PlayerJoinDungeonGameEvent e) {
     e.getPlayer().sendMessage(getLoginMessage(e.getPlayer()));
-    
+
     Player player = e.getPlayer();
     PlayerIODataManager.load(player);
-    
+
     if (!MobSpawnerPointManager.isRunSpawnManage()) {
       MobSpawnerPointManager.startSpawnManage();
     }
   }
-  
+
   @EventHandler
   public void quitDungeon(PlayerQuitDungeonGameEvent e) {
     if (Main.getOnlinePlayer().size() == 0) {
       MobSpawnerPointManager.stopSpawnManage();
     }
-    
+
     PlayerIODataManager.save(e.getPlayer());
     PlayerIODataManager.remove(e.getPlayer());
   }
-  
+
   @EventHandler
   public void login(final PlayerJoinEvent e) {
     if (PlayerJoinDungeonGameEvent.inDungeon(e.getPlayer())) {
@@ -92,7 +93,7 @@ public class SystemListener implements Listener {
           e.getPlayer());
       Bukkit.getServer().getPluginManager().callEvent(event);
     }
-    
+
     List<World> worlds = Bukkit.getWorlds();
     for (World world : worlds) {
       List<Player> players = world.getPlayers();
@@ -100,17 +101,17 @@ public class SystemListener implements Listener {
     }
     loginPlayer++;
   }
-  
+
   @EventHandler
   public void loadChunk(ChunkLoadEvent e) {
     MobSpawnerPointManager.loadChunk(e.getChunk());
   }
-  
+
   @EventHandler
   public void unloadChunk(ChunkUnloadEvent e) {
     MobSpawnerPointManager.unloadChunk(e.getChunk());
   }
-  
+
   private static String[] getLoginMessage(Player player) {
     if (player.hasPermission("main.lbnDungeonUtil.command.mod.login_msg")) {
       String[] msg = new String[] {
@@ -138,9 +139,9 @@ public class SystemListener implements Listener {
           ChatColor.RED + "====LOGIN====" };
       return msg;
     }
-    
+
   }
-  
+
   @EventHandler
   public void logout(PlayerQuitEvent e) {
     if (PlayerJoinDungeonGameEvent.inDungeon(e.getPlayer())) {
@@ -150,17 +151,17 @@ public class SystemListener implements Listener {
     }
     loginPlayer--;
   }
-  
+
   @EventHandler
   public void onExplosionPrimeEvent(ExplosionPrimeEvent e) {
     e.setFire(false);
   }
-  
+
   @EventHandler
   public void onEntityExplodeEvent(EntityExplodeEvent e) {
     e.blockList().clear();
   }
-  
+
   @EventHandler
   public void onEnable(PluginEnableEvent e) {
     List<World> worlds = Bukkit.getWorlds();
@@ -169,7 +170,7 @@ public class SystemListener implements Listener {
       loginPlayer += players.size();
     }
   }
-  
+
   @EventHandler(priority = EventPriority.MONITOR)
   public void onSpawn(CreatureSpawnEvent e) {
     // Logは一旦止めておく
@@ -186,7 +187,7 @@ public class SystemListener implements Listener {
     // }
     // }
   }
-  
+
   @EventHandler
   public void onCommand(PlayerCommandPreprocessEvent e) {
     Player player = e.getPlayer();
@@ -199,7 +200,7 @@ public class SystemListener implements Listener {
       GalionManager.addGalion(player, galion, GalionEditReason.penalty);
     }
   }
-  
+
   @EventHandler
   public void PlayerPortalEvent(PlayerPortalEvent e) {
     Location to = e.getTo();
