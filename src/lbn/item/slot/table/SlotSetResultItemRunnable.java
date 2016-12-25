@@ -35,9 +35,7 @@ public class SlotSetResultItemRunnable extends BukkitRunnable{
 			AttackItemStack attackItem = (AttackItemStack)slotItems[0];
 			SlotInterface magicStone = (SlotInterface) slotItems[1];
 
-
 			SlotSetOperator slotSetOperator = new SlotSetOperator(attackItem, magicStone);
-
 			//エラーがあるかチェックする
 			String error = slotSetOperator.check();
 			if (error != null) {

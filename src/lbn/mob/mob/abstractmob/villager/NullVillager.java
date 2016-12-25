@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -20,7 +19,7 @@ public class NullVillager extends AbstractVillager{
 	}
 
 	@Override
-	protected List<String> getMessage(Player p, Villager mob) {
+	protected List<String> getMessage(Player p, LivingEntity mob) {
 		return null;
 	}
 	String name;

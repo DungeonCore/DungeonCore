@@ -175,7 +175,8 @@ public class Buyer {
 					if (buyPrice == -1) {
 						continue;
 					}
-					buyPrice *= itemStack.getAmount();
+					//今は1つだけ売れるようにする
+//					buyPrice *= itemStack.getAmount();
 					galions += buyPrice;
 				}
 

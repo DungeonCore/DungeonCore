@@ -24,7 +24,10 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.quest.quest.KillMobQuest;
 import lbn.quest.quest.PickItemQuest;
+import lbn.quest.quest.QuestType;
 import lbn.quest.quest.StrengthItemQuest;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 
 public class QuestListener implements Listener{
 	@EventHandler
@@ -42,21 +45,27 @@ public class QuestListener implements Listener{
 			return;
 		}
 
+		Player player = e.getPlayer();
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(player);
+
 		Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 		for (PickItemQuest pickItemQuest : quest) {
-			pickItemQuest.onPickUp(e);
+			pickItemQuest.onPickUp(e, session);
+			//終了条件を満たしているなら終了する
+			onSatisfyCondition(player, pickItemQuest);
 		}
 	}
 
 	@EventHandler
 	public void onStrength(PlayerStrengthFinishEvent e) {
+		Player player = e.getPlayer();
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(player);
 		//今実行中のクエスト中からStrengthItemQuestを探しだす
-		Set<Quest> doingQuest = QuestManager.getDoingQuest(e.getPlayer());
+		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.STRENGTH_ITEM_QUEST);
 		for (Quest quest : doingQuest) {
-			if (!StrengthItemQuest.isStrengthItemQuest(quest)) {
-				continue;
-			}
-			((StrengthItemQuest)quest).onStrength(e);
+			((StrengthItemQuest)quest).onStrength(e, questSession);
+			//終了条件を満たしているなら終了する
+			onSatisfyCondition(player, quest);
 		}
 	}
 
@@ -79,13 +88,20 @@ public class QuestListener implements Listener{
 			return;
 		}
 
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+
 		//今実行中のクエスト中からStrengthItemQuestを探しだす
-		Set<Quest> doingQuest = QuestManager.getDoingQuest(p);
+		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.KILL_MOB_QUEST);
 		for (Quest quest : doingQuest) {
-			if (!KillMobQuest.isKillMobQuest(quest)) {
-				continue;
-			}
-			((KillMobQuest)quest).onDeath(e);
+			((KillMobQuest)quest).onDeath(e, questSession);
+			//終了条件を満たしたなら村人の場所へ帰らせる
+			onSatisfyCondition(p, quest);
+		}
+	}
+
+	public void onSatisfyCondition(Player p, Quest quest) {
+		if (quest.canFinish(p)) {
+			quest.onSatisfyComplateCondtion(p);
 		}
 	}
 

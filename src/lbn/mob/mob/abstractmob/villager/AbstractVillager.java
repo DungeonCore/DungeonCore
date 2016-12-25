@@ -1,7 +1,9 @@
 package lbn.mob.mob.abstractmob.villager;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -19,6 +21,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.AbstractCustomMob;
 import lbn.mob.customEntity1_7.CustomVillager;
+import lbn.quest.quest.TouchVillagerQuest;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.DungeonLog;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
@@ -70,15 +75,16 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
 		e.setCancelled(true);
 	}
 
-	abstract protected List<String> getMessage(Player p, Villager mob);
+	abstract protected List<String> getMessage(Player p, LivingEntity mob);
 
 	@Override
 	public void onInteractEntity(PlayerInteractEntityEvent e) {
 		e.setCancelled(true);
 
 		Player p = e.getPlayer();
+		LivingEntity entity = (LivingEntity) e.getRightClicked();
 		//動く村人なら消す
-		if (!LivingEntityUtil.isCustomVillager(e.getRightClicked())) {
+		if (!LivingEntityUtil.isCustomVillager(entity)) {
 			Entity rightClicked = e.getRightClicked();
 			rightClicked.remove();
 			if (p.getGameMode() != GameMode.CREATIVE) {
@@ -87,24 +93,44 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
 			return;
 		}
 
+		//この村人をタッチするクエストで進行中のクエストがあったら他の会話は開始しない
+		boolean isDoingTouchQuest = false;
+		Set<TouchVillagerQuest> questForVillager = TouchVillagerQuest.getQuestByTargetVillager(entity);
+
 		//メッセージを取得
-		List<String> message;
-		VillagerData villageData = getVillageData();
-		if (villageData != null) {
-			message = Arrays.asList(villageData.getTexts());
-		} else {
-			message = getMessage(p, (Villager)e.getRightClicked());
-		}
-		if (message == null) {
-			return;
+		List<String> message = new ArrayList<String>();
+
+		//実行中のクエストを調べる
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		for (TouchVillagerQuest touchVillagerQuest : questForVillager) {
+			if (questSession.isDoing(touchVillagerQuest)) {
+				//クエスト処理
+				touchVillagerQuest.onTouchVillager(p, entity, questSession);
+				questSession.setQuestData(touchVillagerQuest, 1);
+				if (touchVillagerQuest.canFinish(p)) {
+					touchVillagerQuest.onSatisfyComplateCondtion(p);
+				}
+				//メッセージを格納
+				message.addAll(Arrays.asList(touchVillagerQuest.talkOnTouch()));
+				isDoingTouchQuest = true;
+			}
 		}
 
+		//もしクエスト実行中でなければ通常の村人のメッセージを出力する
+		if (!isDoingTouchQuest) {
+			VillagerData villageData = getVillageData();
+			if (villageData != null) {
+				message = Arrays.asList(villageData.getTexts());
+			}
+		}
 		if (!message.isEmpty()) {
 			p.sendMessage("");
 			for (String string : message) {
 				p.sendMessage(ChatColor.GOLD + string);
 			}
 		}
+
+
 	}
 }
 

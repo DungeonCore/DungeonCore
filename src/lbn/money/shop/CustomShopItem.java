@@ -70,7 +70,7 @@ public class CustomShopItem extends ShopItem{
 
 	/**
 	 * テンプレートを取得
-	 * @param item
+	 * @param get_money_item
 	 * @param price
 	 * @return
 	 */

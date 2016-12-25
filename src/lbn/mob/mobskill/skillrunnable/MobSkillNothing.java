@@ -1,8 +1,8 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.LivingEntity;
-
 import lbn.mob.mobskill.MobSkillRunnable;
+
+import org.bukkit.entity.Entity;
 
 public class MobSkillNothing extends MobSkillRunnable{
 
@@ -11,7 +11,7 @@ public class MobSkillNothing extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 	}
 
 }

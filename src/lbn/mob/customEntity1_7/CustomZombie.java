@@ -143,7 +143,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 //		}
 //	}
 
-	//TODO 燃えるかも
 	@Override
 	public void m() {
 		if (isNonDayFire) {

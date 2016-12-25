@@ -1,13 +1,13 @@
 package lbn.quest.quest;
 
-import java.util.List;
-
-import org.bukkit.entity.Player;
+import java.util.Set;
 
 import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.quest.Quest;
+
+import org.bukkit.entity.Player;
 
 public class NullQuest implements Quest{
 
@@ -48,7 +48,7 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public List<Quest> getBeforeQuest() {
+	public Set<Quest> getBeforeQuest() {
 		return null;
 	}
 
@@ -83,11 +83,6 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public boolean isDoing(Player p) {
-		return false;
-	}
-
-	@Override
 	public boolean canDestory() {
 		return false;
 	}
@@ -104,5 +99,62 @@ public class NullQuest implements Quest{
 
 	@Override
 	public void giveRewardItem(Player p) {
+	}
+
+	@Override
+	public Quest getAutoExecuteNextQuest() {
+		return null;
+	}
+
+	@Override
+	public boolean isShowTitle() {
+		return false;
+	}
+
+	@Override
+	public long getCoolTimeSecound() {
+		return 0;
+	}
+
+	@Override
+	public boolean canFinish(Player p) {
+		return false;
+	}
+
+	@Override
+	public boolean isNullQuest() {
+		return true;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (obj instanceof Quest) {
+			return getId().equals(((Quest) obj).getId());
+		}
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return getId().hashCode();
+	}
+
+	@Override
+	public QuestType getQuestType() {
+		return QuestType.UnknownQuest;
+	}
+
+	@Override
+	public boolean isComplate(int data) {
+		return false;
+	}
+
+	@Override
+	public void onSatisfyComplateCondtion(Player p) {
+
 	}
 }

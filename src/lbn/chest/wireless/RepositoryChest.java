@@ -16,10 +16,10 @@ import net.md_5.bungee.api.ChatColor;
 
 public class RepositoryChest extends WireLessChest{
 
-	Location loc;
+//	Location loc;
 	RepositoryType type;
 	public RepositoryChest(Location loc, RepositoryType type) {
-		this.loc = loc;
+//		this.loc = loc;
 		this.type = type;
 
 		if (MenuSelecor.contains("Repository Menu:" + type)) {

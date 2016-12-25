@@ -2,6 +2,15 @@ package lbn.quest.quest;
 
 import java.util.Set;
 
+import lbn.common.event.quest.ComplateQuestEvent;
+import lbn.common.event.quest.DestructionQuestEvent;
+import lbn.common.event.quest.StartQuestEvent;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.JavaUtil;
+
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -9,63 +18,106 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.HashMultimap;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.item.ItemInterface;
-import lbn.quest.QuestData;
-import lbn.quest.QuestManager;
-
-public abstract class PickItemQuest extends AbstractVillagerQuest{
-	static HashMultimap<ItemInterface, PickItemQuest> needItemMap = HashMultimap.create();
+public class PickItemQuest extends AbstractVillagerQuest{
+	static HashMultimap<String, PickItemQuest> needItemMap = HashMultimap.create();
 
 	public static Set<PickItemQuest> getQuest(ItemInterface item) {
-		return needItemMap.get(item);
+		return needItemMap.get(item.getId());
 	}
 
-	public PickItemQuest() {
+	private PickItemQuest(String id, String pickItemId, int needCount) {
+		super(id);
 		init();
 	}
 
-	protected void init() {
-		needItemMap.put(getNeedItem(), this);
+	public static PickItemQuest getInstance(String id, String data1, String data2) {
+		if (data1 == null) {
+			return null;
+		}
+		//採取数チェック
+		int count = JavaUtil.getInt(data2, -1);
+		if (count <= 0) {
+			return null;
+		}
+		return new PickItemQuest(id, data1, count);
 	}
 
-	abstract public ItemInterface getNeedItem();
+	protected void init() {
+		needItemMap.put(getNeedItem().getId(), this);
+	}
 
-	abstract public int needCount();
 
-	public void onPickUp(PlayerPickupItemEvent e) {
-		ItemStack itemStack = e.getItem().getItemStack();
-		//実行中でないなら何もしない
-		if (!QuestManager.isDoingQuest(this, e.getPlayer())) {
-			e.setCancelled(true);
+	String pickItemId;
+	protected ItemInterface getNeedItem() {
+		return ItemManager.getCustomItemById(pickItemId);
+	}
+
+	int needCount;
+	public int needCount() {
+		return needCount;
+	}
+
+	public void onPickUp(PlayerPickupItemEvent e, PlayerQuestSession session) {
+		ItemStack pickItem = e.getItem().getItemStack();
+		if (pickItem == null) {
+			return;
+		}
+		ItemInterface customPickItem = ItemManager.getCustomItem(pickItem);
+		if (customPickItem == null) {
 			return;
 		}
 
-		if (itemStack == null || !getNeedItem().isThisItem(itemStack) || itemStack.getAmount() == 0) {
+		boolean isQuestItem = customPickItem.isQuestItem();
+
+		//実行中でない時
+		if (!session.isDoing(this)) {
+			//クエストアイテムなら取得させない
+			if (isQuestItem) {
+				e.setCancelled(true);
+			}
 			return;
 		}
 
-		int nowCount = QuestData.getData(this, e.getPlayer()) + itemStack.getAmount();
-		//クエスト完了の時
-		if (nowCount >= needCount()) {
-			onPickItem(e.getPlayer(), needCount());
-			QuestManager.complateQuest(this, e.getPlayer());
-			QuestData.remove(this, e.getPlayer());
+		//終了条件を満たしてるなら何もしない
+		if (session.isComplate(this)) {
+			//クエストアイテムなら取得させない
+			if (isQuestItem) {
+				e.setCancelled(true);
+			}
+			return;
+		}
+
+		//対象のアイテムが存在しないなら何もしない
+		ItemInterface needItem = getNeedItem();
+		if (needItem == null) {
+			return;
+		}
+
+		int nowCount = session.getQuestData(this);
+		int pickCount = pickItem.getAmount();
+
+		//全て拾ってもクエスト達成しない時
+		if (nowCount + pickCount <= needCount()) {
+			//クエストアイテムならインベントリにいれない
+			if (isQuestItem) {
+				e.getItem().remove();
+				e.setCancelled(true);
+			}
 		} else {
-			QuestData.setData(this, e.getPlayer(), nowCount);
-			onPickItem(e.getPlayer(), nowCount);
+			//クエストアイテムなら必要数以上拾わせない
+			if (isQuestItem) {
+				//ex) 拾った個数3個 - 必要数10個 + 今まで拾った個数8個 = 1 個
+				pickItem.setAmount(pickCount - (needCount() - nowCount));
+				e.getItem().setItemStack(pickItem);
+				e.setCancelled(true);
+			}
 		}
 
-		if (nowCount <= needCount()) {
-			itemStack.setAmount(0);
-			e.getItem().setItemStack(itemStack);
-			e.getItem().remove();
-			e.setCancelled(true);
-		} else if (nowCount > needCount()) {
-			itemStack.setAmount(nowCount - needCount());
-			e.getItem().setItemStack(itemStack);
-			e.setCancelled(true);
-		}
+		//最終的にDataとして残る個数
+		int totalCount = Math.min(nowCount + pickCount, needCount());
+
+		onPickItem(e.getPlayer(), totalCount);
+		session.setQuestData(this, totalCount);
 	}
 
 	protected void onPickItem(Player player, int nowCount) {
@@ -75,14 +127,31 @@ public abstract class PickItemQuest extends AbstractVillagerQuest{
 
 	@Override
 	public String getCurrentInfo(Player p) {
-		int data = QuestData.getData(this, p);
+		int data =  PlayerQuestSessionManager.getQuestSession(p).getQuestData(this);
 		return "達成度(" + data + "/" + needCount() + ")";
 	}
 
 	@Override
 	public void onComplate(ComplateQuestEvent e) {
 		Player player = e.getPlayer();
-		sendQuestClearMessage(player);
+		sendQuestComplateMessage(player);
 	}
 
+	@Override
+	public void onStart(StartQuestEvent e) {
+	}
+
+	@Override
+	public void onDistruction(DestructionQuestEvent e) {
+	}
+
+	@Override
+	public QuestType getQuestType() {
+		return QuestType.PICK_ITEM_QUEST;
+	}
+
+	@Override
+	public boolean isComplate(int data) {
+		return data >= needCount;
+	}
 }

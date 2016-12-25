@@ -1,6 +1,6 @@
 package lbn.mob.mobskill;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 
 public interface MobSkillInterface {
 	public MobSkillExcuteTimingType getTiming();
@@ -13,5 +13,5 @@ public interface MobSkillInterface {
 
 	public int excutePercent();
 
-	public void execute(LivingEntity target, LivingEntity mob);
+	public void execute(Entity target, Entity mob);
 }

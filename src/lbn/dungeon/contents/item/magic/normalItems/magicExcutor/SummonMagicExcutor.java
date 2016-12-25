@@ -56,7 +56,7 @@ public class SummonMagicExcutor implements MagicExcuteable{
 
 	@Override
 	public void excuteMagic(Player p, PlayerInteractEvent e) {
-		Location added = p.getLocation().add(p.getLocation().getDirection().multiply(3).setY(0));
+		Location added = p.getLocation();
 		Zombie spawn = getSummonMob().spawn(added);
 		SummonPlayerManager.addSummon(spawn, p);
 	}

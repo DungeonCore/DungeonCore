@@ -1,9 +1,9 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.util.Vector;
-
 import lbn.mob.mobskill.MobSkillRunnable;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class MobSkillKeepAwayTarget extends MobSkillRunnable{
 
@@ -12,7 +12,7 @@ public class MobSkillKeepAwayTarget extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 		Vector vectorMob = mob.getLocation().toVector();
 		Vector vectorDamager = target.getLocation().toVector();
 		target.setVelocity(vectorDamager.subtract(vectorMob).normalize().multiply(3).setY(0));

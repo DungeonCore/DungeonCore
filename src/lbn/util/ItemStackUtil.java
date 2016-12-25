@@ -373,4 +373,23 @@ public class ItemStackUtil {
 			return new ItemStack(Material.AIR);
 		}
 	}
+
+	/**
+	 * インベントリから同じアイテムのものを取得する
+	 * @param inv
+	 * @param item
+	 * @return
+	 */
+	public static Map<Integer, ItemStack> allSameItems(Inventory inv, ItemStack item) {
+		HashMap<Integer, ItemStack> slots = new HashMap<>();
+		if (item != null) {
+			ItemStack[] inventory = inv.getContents();
+			for (int i = 0; i < inventory.length; i++) {
+				if (item.isSimilar(inventory[i])) {
+					slots.put(i, inventory[i]);
+				}
+			}
+		}
+		return slots;
+	}
 }

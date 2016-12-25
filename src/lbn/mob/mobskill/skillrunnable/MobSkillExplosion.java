@@ -1,10 +1,10 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.LivingEntity;
-
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.JavaUtil;
 import lbn.util.explosion.NotMonsterDamageExplosion;
+
+import org.bukkit.entity.Entity;
 
 public class MobSkillExplosion extends MobSkillRunnable{
 
@@ -15,7 +15,7 @@ public class MobSkillExplosion extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 		new NotMonsterDamageExplosion(target.getLocation(), explosionSize).runExplosion();
 	}
 

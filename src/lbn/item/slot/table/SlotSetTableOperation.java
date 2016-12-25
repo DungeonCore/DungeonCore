@@ -122,6 +122,11 @@ public class SlotSetTableOperation {
 		if (e.getRawSlot() == 4 || e.getRawSlot() == 6) {
 			new SlotSetResultItemRunnable(top, e).runTaskLater(Main.plugin, 1);
 		} else if (e.getSlotType() == SlotType.RESULT) {
+			if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
+				e.setCancelled(true);
+				return;
+			}
+
 			Object[] slotItems = getSlotItems(top);
 			if (slotItems == null) {
 				return;

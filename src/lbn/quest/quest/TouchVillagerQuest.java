@@ -2,45 +2,55 @@ package lbn.quest.quest;
 
 import java.util.Set;
 
-import org.bukkit.entity.EntityType;
+import lbn.common.event.quest.ComplateQuestEvent;
+import lbn.common.event.quest.DestructionQuestEvent;
+import lbn.common.event.quest.StartQuestEvent;
+import lbn.quest.questData.PlayerQuestSession;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 
 import com.google.common.collect.HashMultimap;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.quest.QuestManager;
-
-public abstract class TouchVillagerQuest extends AbstractVillagerQuest{
+public class TouchVillagerQuest extends AbstractVillagerQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
 
-	public TouchVillagerQuest() {
-		init();
+	String villagerName;
+	String[] talk;
+
+	private TouchVillagerQuest(String id, String name, String[] talk) {
+		super(id);
+		name = villagerName;
+		this.talk = talk;
+		targetVillagerNameQuestList.put(getTargetVillagerName().toLowerCase(), this);
 	}
 
-	protected void init() {
-		if (getTargetVillagerName() != null) {
-			targetVillagerNameQuestList.put(getTargetVillagerName().toLowerCase(), this);
+	public String[] talkOnTouch() {
+		return talk;
+	}
+
+	public static TouchVillagerQuest getInstance(String id, String data1, String data2) {
+		if (data1 == null || data2 == null) {
+			return null;
 		}
+		return new TouchVillagerQuest(id, data1, data2.split(","));
 	}
 
-	public static Set<TouchVillagerQuest> getQuestByTargetVillager(Villager e) {
+	public static Set<TouchVillagerQuest> getQuestByTargetVillager(LivingEntity e) {
 		String name = e.getCustomName().toLowerCase();
 		return targetVillagerNameQuestList.get(name);
 	}
 
-	public void onTouchVillager(Player p, LivingEntity entity) {
-		if (entity.getType() != EntityType.VILLAGER) {
-			return;
-		}
-		String name = ((Villager)entity).getCustomName();
+	public void onTouchVillager(Player p, LivingEntity entity, PlayerQuestSession session) {
+		String name = ((LivingEntity)entity).getCustomName();
 		if (name.equalsIgnoreCase(getTargetVillagerName())) {
-			QuestManager.complateQuest(this, p);
+			session.setQuestData(this, 1);
 		}
 	}
 
-	abstract public String getTargetVillagerName();
+	public String getTargetVillagerName() {
+		return villagerName;
+	}
 
 	@Override
 	public String getCurrentInfo(Player p) {
@@ -49,5 +59,29 @@ public abstract class TouchVillagerQuest extends AbstractVillagerQuest{
 
 	@Override
 	public void onComplate(ComplateQuestEvent e) {
+	}
+
+	@Override
+	public QuestType getQuestType() {
+		return QuestType.TOUCH_VILLAGER_QUEST;
+	}
+
+	@Override
+	public boolean isComplate(int data) {
+		return data == 1;
+	}
+
+	@Override
+	public void onStart(StartQuestEvent e) {
+	}
+
+	@Override
+	public void onDistruction(DestructionQuestEvent e) {
+
+	}
+
+	@Override
+	protected void init() {
+
 	}
 }

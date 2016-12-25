@@ -1,7 +1,7 @@
 package lbn.mob.mobskill;
 
 import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 
 public enum ParticleLocationType {
 	MONSTER_UNDER("モンスターの足元", 0, true),
@@ -35,7 +35,7 @@ public enum ParticleLocationType {
 		return null;
 	}
 
-	public Location getLocation(LivingEntity mob, LivingEntity target) {
+	public Location getLocation(Entity mob, Entity target) {
 		Location loc;
 		if (isMobLoc) {
 			loc = mob.getLocation();

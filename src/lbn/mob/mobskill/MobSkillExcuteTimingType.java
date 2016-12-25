@@ -1,7 +1,7 @@
 package lbn.mob.mobskill;
 
 import org.bukkit.entity.Damageable;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 
 public enum MobSkillExcuteTimingType {
 	ALWAYS("体力関係なし"),
@@ -28,9 +28,14 @@ public enum MobSkillExcuteTimingType {
 		return null;
 	}
 
-	public boolean canExecute(LivingEntity e) {
-		double health = ((Damageable)e).getHealth();
-		double maxHealth = ((Damageable)e).getMaxHealth();
+	public boolean canExecute(Entity e) {
+		double health = 1;
+		double maxHealth = 1;
+
+		if (e.getType().isAlive()) {
+			health = ((Damageable)e).getHealth();
+			maxHealth = ((Damageable)e).getMaxHealth();
+		}
 		switch (this) {
 		case HP_OVER_50PER:
 			return health > maxHealth * 0.5;

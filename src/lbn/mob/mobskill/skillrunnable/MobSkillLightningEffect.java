@@ -1,15 +1,15 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.LivingEntityUtil;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 public class MobSkillLightningEffect extends MobSkillRunnable{
 
@@ -18,11 +18,11 @@ public class MobSkillLightningEffect extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 		strikeLightningEffect(target, mob);
 	}
 
-	public static void strikeLightningEffect(LivingEntity target, LivingEntity mob) {
+	public static void strikeLightningEffect(Entity target, Entity mob) {
 		AbstractMob<?> mob2 = MobHolder.getMob(mob);
 		if (mob2.isBoss()) {
 			LivingEntityUtil.strikeLightningEffect(target.getLocation(), ((BossMobable)mob2).getCombatPlayer());

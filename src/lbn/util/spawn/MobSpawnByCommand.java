@@ -1,26 +1,5 @@
 package lbn.util.spawn;
 
-import net.minecraft.server.v1_8_R1.CommandAbstract;
-import net.minecraft.server.v1_8_R1.CommandException;
-import net.minecraft.server.v1_8_R1.CommandSummon;
-import net.minecraft.server.v1_8_R1.Entity;
-import net.minecraft.server.v1_8_R1.EntityTypes;
-import net.minecraft.server.v1_8_R1.IChatBaseComponent;
-import net.minecraft.server.v1_8_R1.MojangsonParser;
-import net.minecraft.server.v1_8_R1.NBTBase;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.NBTTagList;
-import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.mob.customEntity1_7.CustomEnderDragon;
 import lbn.mob.customEntity1_7.CustomEnderman;
@@ -32,6 +11,25 @@ import lbn.mob.customEntity1_7.CustomSpider;
 import lbn.mob.customEntity1_7.CustomWitch;
 import lbn.mob.customEntity1_7.CustomZombie;
 import lbn.util.DungeonLog;
+import net.minecraft.server.v1_8_R1.CommandAbstract;
+import net.minecraft.server.v1_8_R1.CommandException;
+import net.minecraft.server.v1_8_R1.CommandSummon;
+import net.minecraft.server.v1_8_R1.Entity;
+import net.minecraft.server.v1_8_R1.EntityTypes;
+import net.minecraft.server.v1_8_R1.IChatBaseComponent;
+import net.minecraft.server.v1_8_R1.MojangsonParser;
+import net.minecraft.server.v1_8_R1.NBTBase;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
+import net.minecraft.server.v1_8_R1.WorldServer;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 
 public class MobSpawnByCommand{
@@ -63,17 +61,19 @@ public class MobSpawnByCommand{
 			}
 			localNBTTagCompound1.setString("id", str);
 
-			//NBTTag generic.attackDamageをとる
-			NBTTagList nbtBase = (NBTTagList) localNBTTagCompound1.get("Attributes");
-			if (nbtBase != null) {
-				for (int i = 0; i < nbtBase.size(); i++) {
-					NBTBase g = nbtBase.g(i);
-					if (g.toString().contains("generic.attackDamage")) {
-						nbtBase.a(i);
-						continue;
-					}
-				}
-			}
+
+			//NBTTag generic.attackDamageをとらないのでコメントアウト
+//			//NBTTag generic.attackDamageをとる
+//			NBTTagList nbtBase = (NBTTagList) localNBTTagCompound1.get("Attributes");
+//			if (nbtBase != null) {
+//				for (int i = 0; i < nbtBase.size(); i++) {
+//					NBTBase g = nbtBase.g(i);
+//					if (g.toString().contains("generic.attackDamage")) {
+//						nbtBase.a(i);
+//						continue;
+//					}
+//				}
+//			}
 
 			WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
 			Entity localObject1_1 = getEntity(localNBTTagCompound1, world);

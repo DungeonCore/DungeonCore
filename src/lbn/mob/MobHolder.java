@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
+import lbn.dungeon.contents.mob.NormalMob;
+import lbn.mob.attribute.Attribute;
+import lbn.mob.mob.NullMob;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
-
-import lbn.dungeon.contents.mob.NormalMob;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.mob.NullMob;
 
 public class MobHolder{
 	private static final NullMob NULL_MOB = new NullMob();
@@ -89,7 +89,7 @@ public class MobHolder{
 	 */
 	public static AbstractMob<?> getMob(EntityEvent e) {
 		Entity entity = e.getEntity();
-		if (entity instanceof LivingEntity) {
+		if (entity.getType().isAlive()) {
 			return getMob((LivingEntity) entity);
 		} else {
 			return new NormalMob(e.getEntityType());
@@ -168,7 +168,7 @@ public class MobHolder{
 	 * @param e
 	 * @return
 	 */
-	public static AbstractMob<?> getMob(LivingEntity e) {
+	public static AbstractMob<?> getMob(Entity e) {
 		if (e == null) {
 			return NULL_MOB;
 		}

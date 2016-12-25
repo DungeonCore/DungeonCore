@@ -3,17 +3,16 @@ package lbn.mob.mob.abstractmob.villager;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.common.menu.MenuSelecor;
+import lbn.money.BuyerShopSelector;
+import lbn.quest.Quest;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-import lbn.common.menu.MenuSelecor;
-import lbn.money.BuyerShopSelector;
-import lbn.quest.Quest;
 
 public class SpletSheetVillager extends QuestVillager{
 
@@ -33,7 +32,7 @@ public class SpletSheetVillager extends QuestVillager{
 	}
 
 	@Override
-	protected List<String> getMessage(Player p, Villager mob) {
+	protected List<String> getMessage(Player p, LivingEntity mob) {
 		return Arrays.asList(data.getTexts());
 	}
 

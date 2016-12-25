@@ -139,8 +139,24 @@ public class CommandableMob extends AbstractMob<Entity>{
 		//skill
 		executeMobSkill(mob, target, MobSkillExcuteConditionType.MOB_ATTACK);
 
-		//攻撃ポイント
+		//攻撃力ポイント
 		e.setDamage(e.getDamage() * attackPoint);
+
+		//ジャイアントの攻撃範囲調整
+		if (getEntityType() == EntityType.GIANT) {
+			Location location = mob.getLocation();
+			location.setY(0);
+			Location location2 = target.getLocation();
+			location2.setY(0);
+			if (location.distance(location2) > 2.5) {
+				e.setCancelled(true);
+			}
+		} else if (getEntityType() == EntityType.GUARDIAN) {
+		//ガーディアンの攻撃速度調整
+			if (rnd.nextInt(4) != 0) {
+				e.setCancelled(true);
+			}
+		}
 
 		//もとのmobの効果
 		if (this.mob == null) {
@@ -277,22 +293,27 @@ public class CommandableMob extends AbstractMob<Entity>{
 		skillNameSet.add(skillName);
 	}
 
-	protected Random rnd = new Random();
+	static protected Random rnd = new Random();
 
 	public void executeMobSkill(LivingEntity mob, LivingEntity target, MobSkillExcuteConditionType type) {
 		Set<MobSkillInterface> skillList = MobSkillManager.getSkill(skillNameSet, type);
 		for (MobSkillInterface skill : skillList) {
-			//発動タイミングを調べる
-			if (!skill.getTiming().canExecute(mob)) {
-				continue;
-			}
-
-			//確立を調べる
-			if (rnd.nextInt(100) + 1 > skill.excutePercent()) {
-				continue;
-			}
-			skill.execute(target, mob);
+			MobSkillExecutor(mob, target, skill);
 		}
+	}
+
+
+	public static void MobSkillExecutor(Entity mob, Entity target, MobSkillInterface skill) {
+		//発動タイミングを調べる
+		if (!skill.getTiming().canExecute(mob)) {
+			return;
+		}
+
+		//確立を調べる
+		if (rnd.nextInt(100) + 1 > skill.excutePercent()) {
+			return;
+		}
+		skill.execute(target, mob);
 	}
 
 	 int money = 10;

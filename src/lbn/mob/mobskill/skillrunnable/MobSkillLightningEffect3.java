@@ -1,11 +1,11 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import lbn.dungeoncore.Main;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.JavaUtil;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class MobSkillLightningEffect3 extends MobSkillRunnable{
 
@@ -14,7 +14,7 @@ public class MobSkillLightningEffect3 extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 			int num = JavaUtil.getInt(data, 3);
 
 		new BukkitRunnable() {

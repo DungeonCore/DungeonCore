@@ -120,7 +120,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	/**
 	 * 武器のダメージを取得 (武器本体のダメージも含まれます)
 	 * @param p
-	 * @param item
+	 * @param get_money_item
 	 * @return
 	 */
 	public double getAttackItemDamage(int strengthLevel) {

@@ -1,10 +1,10 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.util.Vector;
-
 import lbn.mob.mobskill.MobSkillRunnable;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 public class MobSkillTpToTarget extends MobSkillRunnable{
 
@@ -14,7 +14,7 @@ public class MobSkillTpToTarget extends MobSkillRunnable{
 
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 		if (mob.isValid() && target.isValid()) {
 			Location location = target.getLocation();
 			location.setDirection(location.getDirection().multiply(-1));

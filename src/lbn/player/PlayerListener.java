@@ -3,6 +3,20 @@ package lbn.player;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.command.TpCutCommand;
+import lbn.common.event.player.PlayerChangeGalionsEvent;
+import lbn.common.event.player.PlayerChangeStatusExpEvent;
+import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.dungeoncore.Main;
+import lbn.mob.AbstractMob;
+import lbn.mob.LastDamageManager;
+import lbn.mob.MobHolder;
+import lbn.money.galion.GalionEditReason;
+import lbn.money.galion.GalionManager;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,19 +41,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import lbn.command.TpCutCommand;
-import lbn.common.event.player.PlayerChangeGalionsEvent;
-import lbn.common.event.player.PlayerChangeStatusExpEvent;
-import lbn.common.event.player.PlayerChangeStatusLevelEvent;
-import lbn.common.event.player.PlayerJoinDungeonGameEvent;
-import lbn.dungeoncore.Main;
-import lbn.mob.AbstractMob;
-import lbn.mob.LastDamageManager;
-import lbn.mob.MobHolder;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 public class PlayerListener implements Listener{
 	@EventHandler(priority=EventPriority.LOWEST)
@@ -133,6 +135,16 @@ public class PlayerListener implements Listener{
 		PlayerData.onDeath(e);
 		//TPをキャンセルする
 		TpCutCommand.setTpCancel(e.getEntity());
+
+		//ポーション効果を消す
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				for (PotionEffect potionEffect : e.getEntity().getActivePotionEffects()) {
+					e.getEntity().removePotionEffect(potionEffect.getType());
+				}
+			}
+		}.runTaskLater(Main.plugin, 20);
 	}
 
 	@EventHandler
@@ -183,6 +195,10 @@ public class PlayerListener implements Listener{
 	public void onStart(PlayerJoinDungeonGameEvent e) {
 		//まだTPしてなければTPする
 		PlayerChestTpManager.executeIfNotTeleported(e.getPlayer());
+
+		if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
+			ActionBarAPI.sendActionBar(e.getPlayer(), ChatColor.AQUA + "Welcome to THE LoW", 20 * 15);
+		}
 	}
 
 	public static void updateSidebar(Player p) {

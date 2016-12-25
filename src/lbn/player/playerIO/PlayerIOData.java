@@ -17,9 +17,9 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
-import lbn.quest.QuestData;
 import lbn.quest.QuestManager;
 import lbn.quest.quest.NullQuest;
+import lbn.quest.questData.QuestData;
 import lbn.util.DungeonLog;
 import lbn.util.InOutputUtil;
 

@@ -2,13 +2,6 @@ package lbn.mob.mobskill;
 
 import java.util.ArrayList;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
@@ -17,6 +10,14 @@ import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.damagedFalling.DamageFallingblockForMonsterSkill;
 import lbn.util.particle.ParticleData;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class NormalMobSkill implements MobSkillInterface{
 
@@ -56,7 +57,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	ParticleLocationType particleLocType;
 
 	@Override
-	public void execute(LivingEntity condtionTarget, LivingEntity mob) {
+	public void execute(Entity condtionTarget, Entity mob) {
 		if (mob == null) {
 			return;
 		}
@@ -75,13 +76,13 @@ public class NormalMobSkill implements MobSkillInterface{
 		}.runTaskLater(Main.plugin, laterTick);
 	}
 
-	protected void executeDamageOther(LivingEntity condtionTarget, LivingEntity mob) {
+	protected void executeDamageOther(Entity condtionTarget, Entity mob) {
 		AbstractMob<?> mob2 = MobHolder.getMob(mob);
 		if (mob2 == null || mob2.isNullMob()) {
 			return;
 		}
 
-		ArrayList<LivingEntity> targetList = new ArrayList<LivingEntity>();
+		ArrayList<Entity> targetList = new ArrayList<Entity>();
 		switch (targetingMethod) {
 		case DEPEND_ON_CONDTION:
 			if (condtionTarget != null && condtionTarget.isValid()) {
@@ -133,7 +134,7 @@ public class NormalMobSkill implements MobSkillInterface{
 			break;
 		}
 
-		for (LivingEntity livingEntity : targetList) {
+		for (Entity livingEntity : targetList) {
 			executeOneTarget(livingEntity, mob);
 		}
 
@@ -141,7 +142,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		executeParticle(targetList, mob);
 	}
 
-	protected void executeFallingblockDamage(LivingEntity condtionTarget, LivingEntity mob) {
+	protected void executeFallingblockDamage(Entity condtionTarget, Entity mob) {
 		int blockId = 3;
 		int data = 0;
 		double speed = 2.0;
@@ -164,7 +165,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 
 		DamageFallingblockForMonsterSkill damageFallingblockForMonsterSkill = new DamageFallingblockForMonsterSkill(mob, condtionTarget.getLocation(), getMaterialById(blockId), (byte)data, speed){
-			ArrayList<LivingEntity> damagedList = new ArrayList<>();
+			ArrayList<Entity> damagedList = new ArrayList<>();
 			@Override
 			protected void executeDamage(LivingEntity target, LivingEntity mob) {
 				executeOneTarget(target, mob);
@@ -188,7 +189,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		return material;
 	}
 
-	protected void executeParticle(ArrayList<LivingEntity> targetList, LivingEntity mob) {
+	protected void executeParticle(ArrayList<Entity> targetList, Entity mob) {
 		if (particleData != null) {
 			//軽量化のため、順次実行
 			new BukkitRunnable() {
@@ -206,18 +207,21 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 	}
 
-	protected void executeOneTarget(LivingEntity condtionTarget, LivingEntity mob) {
-		if (potionEffect != null) {
-			condtionTarget.addPotionEffect(potionEffect);
-		}
-
-		if (damage > 0) {
-			condtionTarget.damage(damage);
-		}
-
+	protected void executeOneTarget(Entity condtionTarget, Entity mob) {
 		if (fireTick > 0) {
 			condtionTarget.setFireTicks(fireTick);
 		}
+
+		if (condtionTarget.getType().isAlive()) {
+			if (potionEffect != null) {
+				((LivingEntity) condtionTarget).addPotionEffect(potionEffect);
+			}
+
+			if (damage > 0) {
+				((Damageable) condtionTarget).damage(damage);
+			}
+		}
+
 
 		runnable.execute(condtionTarget, mob);
 	}

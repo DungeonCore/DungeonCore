@@ -138,7 +138,7 @@ public class MoneyListener implements Listener{
 					if (customItem != null && customItem instanceof GalionItem) {
 						int galions = new GalionItem(entry.getValue()).getGalions();
 						indexList.add(entry.getKey());
-						GalionManager.addGalion(player, galions * entry.getValue().getAmount(), GalionEditReason.item);
+						GalionManager.addGalion(player, galions * entry.getValue().getAmount(), GalionEditReason.get_money_item);
 					}
 				}
 

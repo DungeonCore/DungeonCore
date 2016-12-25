@@ -7,25 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import me.confuser.barapi.BarAPI;
-
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import com.google.common.collect.HashBasedTable;
-
 import lbn.chest.AbstractCustomChest;
 import lbn.chest.BossChest;
 import lbn.chest.CustomChestManager;
@@ -45,6 +26,24 @@ import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 import lbn.util.spawn.LbnNBTTag;
 import lbn.util.spawn.MobSpawnByCommand;
+
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
+import com.google.common.collect.HashBasedTable;
 
 public class CommandBossMob extends CommandableMob implements BossMobable{
 
@@ -272,17 +271,16 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onDeathPrivate(EntityDeathEvent e) {
 		super.onDeathPrivate(e);
 
 		entityList.remove(getName());
 
-		if (Main.plugin.getServer().getPluginManager().isPluginEnabled("BarAPI")) {
+		if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
 			for (Player p : combatPlayerSet.keySet()) {
 				if (p.isOnline()) {
-					BarAPI.removeBar(p);
+					ActionBarAPI.sendActionBar(p, "");
 				}
 			}
 		}
@@ -314,7 +312,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	}
 
 	class UpdateNameLater extends BukkitRunnable {
-		@SuppressWarnings({ "deprecation", "unchecked" })
+		@SuppressWarnings("unchecked")
 		@Override
 		public void run() {
 			LivingEntity entity = getEntity();
@@ -323,16 +321,16 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 				double nowHealth = ((Damageable)entity).getHealth();
 				entity.setCustomName(StringUtils.join(getAttribute().getPrefix(), getName(), ChatColor.RED , " [" , (int)nowHealth , "/" , (int)maxHealth, "]"));
 
-				if (Main.plugin.getServer().getPluginManager().isPluginEnabled("BarAPI")) {
+				if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
 					for (Player p : combatPlayerSet.keySet()) {
 						if (p == null) {
 							continue;
 						}
 						if (p.isOnline()) {
 							if (nowHealth <= 0) {
-								BarAPI.removeBar(p);
+								ActionBarAPI.sendActionBar(p, "");
 							} else {
-								BarAPI.setMessage(p, getName() + ChatColor.RED + " [" + (int)nowHealth + "/" + (int)maxHealth+ "]", (float) (nowHealth / maxHealth * 100));
+								ActionBarAPI.sendActionBar(p, getName() + ChatColor.RED + " [" + (int)nowHealth + "/" + (int)maxHealth+ "]");
 							}
 						}
 					}

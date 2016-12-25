@@ -2,6 +2,16 @@ package lbn;
 
 import java.util.List;
 
+import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.common.event.player.PlayerQuitDungeonGameEvent;
+import lbn.dungeoncore.Main;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.money.galion.GalionEditReason;
+import lbn.money.galion.GalionManager;
+import lbn.player.playerIO.PlayerIODataManager;
+import lbn.player.status.StatusViewerInventory;
+import lbn.util.DungeonLog;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -25,16 +35,6 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.Inventory;
 
-import lbn.common.event.player.PlayerJoinDungeonGameEvent;
-import lbn.common.event.player.PlayerQuitDungeonGameEvent;
-import lbn.dungeoncore.Main;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
-import lbn.player.playerIO.PlayerIODataManager;
-import lbn.player.status.StatusViewerInventory;
-import lbn.util.DungeonLog;
-
 public class SystemListener implements Listener {
 
 	public static int loginPlayer = 0;
@@ -45,6 +45,17 @@ public class SystemListener implements Listener {
 		if (topInventory.getTitle().equals(StatusViewerInventory.TITLE)) {
 			event.setCancelled(true);
 			return;
+		}
+	}
+
+	@EventHandler
+	public void onChunkLoad(ChunkLoadEvent e) {
+	}
+
+	@EventHandler
+	public void onChunkUnLoad(ChunkUnloadEvent e) {
+		if (e.getWorld().getName().equals("chest")) {
+			e.setCancelled(true);
 		}
 	}
 

@@ -25,7 +25,7 @@ public enum BeneEffectType {
 	RESISTANCE_SPIDER(new BeneEffectResistance(EntityType.SPIDER, 0.05), "クモ耐性", "9"),
 	RESISTANCE_GIANT(new BeneEffectResistance(EntityType.GIANT, 0.05), "ジャイアント耐性", "10"),
 	RESISTANCE_PIGMAN(new BeneEffectResistance(EntityType.PIG_ZOMBIE, 0.05), "ピッグマン耐性", "11"),
-	POTION_SPEED(new BeneEffectPotion(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1), 0.015, false), "ダメージ時確率でスピード付与", "12"),
+	POTION_SPEED(new BeneEffectPotion(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1), 0.02, false), "ダメージ時確率でスピード付与", "12"),
 	POTION_RESISTANC(new BeneEffectPotion(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 2, 0), 0.015, false), "ダメージ時確率で耐性付与", "13"),
 	POTION_REGENERATION(new BeneEffectPotion(new PotionEffect(PotionEffectType.REGENERATION, 20 * 3, 0), 0.015, false), "ダメージ時確率でリジェネレーション付与", "14"),
 	POTION_SLOW(new BeneEffectPotion(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 1), 0.03, true), "ダメージ時確率で敵に鈍足付与", "15"),

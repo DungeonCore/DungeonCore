@@ -3,15 +3,15 @@ package lbn.mob.mobskill.skillrunnable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-
 import lbn.dungeon.contents.mob.NormalMob;
 import lbn.dungeoncore.SpletSheet.MobSheetRunnable;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mobskill.MobSkillRunnable;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 
 public class MobSkillSpawnMob2 extends MobSkillRunnable{
 
@@ -28,8 +28,7 @@ public class MobSkillSpawnMob2 extends MobSkillRunnable{
 	NormalMob normalMob = new NormalMob(EntityType.ZOMBIE);
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
-
+	public void execute(Entity target, Entity mob) {
 		int count = getCount();
 
 		//initした後にモブを更新してたらinitする

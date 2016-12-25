@@ -3,6 +3,7 @@ package lbn.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -276,9 +277,14 @@ public class ItemListener implements Listener{
 		final CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
 		//強化を行う
 		if (e.getSlotType() != SlotType.RESULT){
+
 			new StrengthLaterRunnable(top, e).runTaskLater(Main.plugin, 1);
 		} else {
 			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
+				if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
+					e.setCancelled(true);
+					return;
+				}
 				new CraeteStrengthItemResultLater(e).runTaskLater(Main.plugin);
 			} else {
 				e.setCancelled(true);

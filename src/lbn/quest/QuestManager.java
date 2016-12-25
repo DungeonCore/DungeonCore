@@ -19,6 +19,7 @@ import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.dungeoncore.Main;
+import lbn.quest.questData.QuestData;
 import lbn.util.Message;
 
 
@@ -149,7 +150,6 @@ public class QuestManager {
 		doingQuestList.remove(p.getUniqueId(), q);
 		complateQuestList.put(p.getUniqueId(), q);
 
-		QuestData.remove(q, p);
 		QuestEvent event = new ComplateQuestEvent(p, q);
 		Bukkit.getServer().getPluginManager().callEvent(event);
 	}

@@ -1,12 +1,13 @@
 package lbn.quest;
 
-import java.util.List;
-
-import org.bukkit.entity.Player;
+import java.util.Set;
 
 import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
+import lbn.quest.quest.QuestType;
+
+import org.bukkit.entity.Player;
 
 public interface Quest{
 	public String getId();
@@ -21,13 +22,15 @@ public interface Quest{
 
 	public void onDistruction(DestructionQuestEvent e);
 
-	public List<Quest> getBeforeQuest();
+	public Set<Quest> getBeforeQuest();
 
 	public boolean isMainQuest();
 
 	public boolean isStartOverlap();
 
 	public boolean canDestory();
+
+	public void onSatisfyComplateCondtion(Player p);
 
 	public String getCurrentInfo(Player p);
 
@@ -37,11 +40,31 @@ public interface Quest{
 
 	public void playStartSound(Player p);
 
-	public boolean isDoing(Player p);
+	public boolean isNullQuest();
 
+	public QuestType getQuestType();
+
+	public boolean isComplate(int data);
+
+	/**
+	 * 受けた後の会話
+	 * @return
+	 */
 	public String[] getTalk1();
 
+	/**
+	 * 完了した後の会話
+	 * @return
+	 */
 	public String[] getTalk2();
 
+	public boolean isShowTitle();
+
+	public Quest getAutoExecuteNextQuest();
+
+	public long getCoolTimeSecound();
+
 	public void giveRewardItem(Player p);
+
+	public boolean canFinish(Player p);
 }

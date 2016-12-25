@@ -2,25 +2,6 @@ package lbn.dungeoncore;
 
 import java.util.Collection;
 
-import net.minecraft.server.v1_8_R1.EntityEnderman;
-import net.minecraft.server.v1_8_R1.EntityGiantZombie;
-import net.minecraft.server.v1_8_R1.EntityPig;
-import net.minecraft.server.v1_8_R1.EntityPigZombie;
-import net.minecraft.server.v1_8_R1.EntitySkeleton;
-import net.minecraft.server.v1_8_R1.EntitySpider;
-import net.minecraft.server.v1_8_R1.EntityVillager;
-import net.minecraft.server.v1_8_R1.EntityWitch;
-import net.minecraft.server.v1_8_R1.EntityZombie;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.Announce;
 import lbn.InitManager;
 import lbn.LimitedListener;
 import lbn.RecipeRegistor;
@@ -41,6 +22,7 @@ import lbn.command.CommandTpOtherWorld;
 import lbn.command.CommandViewInfo;
 import lbn.command.DeleteMonster;
 import lbn.command.MobCommand;
+import lbn.command.MobSkillExecuteCommand;
 import lbn.command.MoneyCommand;
 import lbn.command.PlayerStatusCommand;
 import lbn.command.QuestCommand;
@@ -74,6 +56,7 @@ import lbn.item.SetItemListner;
 import lbn.mob.MobListener;
 import lbn.mob.customEntity1_7.CustomEnderman;
 import lbn.mob.customEntity1_7.CustomGiant;
+import lbn.mob.customEntity1_7.CustomGuardian;
 import lbn.mob.customEntity1_7.CustomPig;
 import lbn.mob.customEntity1_7.CustomPigZombie;
 import lbn.mob.customEntity1_7.CustomSkeleton;
@@ -91,6 +74,24 @@ import lbn.quest.QuestListener;
 import lbn.util.DungeonLog;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
+import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.EntityGiantZombie;
+import net.minecraft.server.v1_8_R1.EntityGuardian;
+import net.minecraft.server.v1_8_R1.EntityPig;
+import net.minecraft.server.v1_8_R1.EntityPigZombie;
+import net.minecraft.server.v1_8_R1.EntitySkeleton;
+import net.minecraft.server.v1_8_R1.EntitySpider;
+import net.minecraft.server.v1_8_R1.EntityVillager;
+import net.minecraft.server.v1_8_R1.EntityWitch;
+import net.minecraft.server.v1_8_R1.EntityZombie;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class Main extends JavaPlugin {
@@ -114,6 +115,7 @@ public class Main extends JavaPlugin {
 			NMSUtils.registerEntity("Villager", 120, EntityVillager.class, CustomVillager.class);
 			NMSUtils.registerEntity("PigZombie", 57, EntityPigZombie.class, CustomPigZombie.class);
 			NMSUtils.registerEntity("Giant", 53, EntityGiantZombie.class, CustomGiant.class);
+			NMSUtils.registerEntity("Guardian", 68, EntityGuardian.class, CustomGuardian.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -125,7 +127,11 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 
-		Announce.AnnounceInfo("サーバーがreloadされました。Minecraft1.8をお使いの方はダンジョン名が表示されなくなります。これはサーバーに入り直すことで解決できます。");
+//		try {
+//			VersionUtil.setOldPotionEffectType();
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		try {
 			RecipeRegistor.addRecipe();
@@ -200,6 +206,7 @@ public class Main extends JavaPlugin {
 		registCommand(new CommandExecuteLockByTimeCommand(), "timelock");
 		registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
 		registCommand(new CommandTpOtherWorld(), "tpworld");
+		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
 	}
 
 	private void registCommand(CommandExecutor instance, String name) {

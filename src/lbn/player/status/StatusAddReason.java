@@ -2,6 +2,7 @@ package lbn.player.status;
 
 public enum StatusAddReason {
 	monster_drop(true),
+	quest_reword(true),
 	system(false),
 	commad(true);
 

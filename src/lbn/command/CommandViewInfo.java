@@ -100,9 +100,61 @@ public class CommandViewInfo implements CommandExecutor{
 //		case "doragon1":
 //			makeDragon1();
 //			break;
+		case "dungeon":
+			makeDungeonGround((Player)paramCommandSender);
+			break;
+//		case "dungeonCheck":
+//			makeDungeonGround((Player)paramCommandSender);
+//			break;
 		}
 		return true;
 
+	}
+
+
+	private void makeDungeonGround(Player p) {
+		Location location = p.getLocation();
+		if (!location.getWorld().getName().equals("dungeon")) {
+			return;
+		}
+
+			new BukkitRunnable() {
+				int xx = location.getBlockX() + 150;
+				int c = 0;
+
+				int blockCount = 0;
+				@Override
+				public void run() {
+					for (int z = location.getBlockZ() - 150; z < location.getBlockZ() + 150; z++) {
+						if (!new Location(location.getWorld(), xx, 3, z).getBlock().getType().equals(Material.GRASS)) {
+//							System.out.println("a:" + new Location(location.getWorld(), xx, 3, z).getBlock().getType() + "@" + xx + ", " + z);
+							continue;
+						}
+
+						if (location.getWorld().getHighestBlockYAt(location) != 4) {
+							continue;
+						}
+
+						for (int y = 2; y<= 200; y++) {
+							new Location(location.getWorld(), xx, y, z).getBlock().setType(Material.STONE);
+							blockCount++;
+						}
+					}
+
+					xx--;
+					c++;
+
+					if (xx % 10 == 0) {
+						p.sendMessage(c * 100 / 300 + "%  完了 :" + blockCount);
+						blockCount = 0;
+					}
+
+					if (xx < location.getBlockX() - 150) {
+						p.sendMessage("100%  完了");
+						cancel();
+					}
+				}
+			}.runTaskTimer(Main.plugin, 0, 1);
 	}
 
 

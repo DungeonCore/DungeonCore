@@ -6,7 +6,8 @@ public enum GalionEditReason {
 	consume_shop(true),
 	consume_strength(true),
 	command(true),
-	item(true),
+	get_money_item(true),
+	quest_reword(true),
 	system(false);
 
 	boolean isPrintMessageLog;

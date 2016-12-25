@@ -1,11 +1,11 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-
 import lbn.dungeoncore.Main;
 import lbn.mob.mobskill.MobSkillRunnable;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 public class MobSkillUpperTargetHight extends MobSkillRunnable{
 
@@ -14,7 +14,7 @@ public class MobSkillUpperTargetHight extends MobSkillRunnable{
 	}
 
 	@Override
-	public void execute(LivingEntity target, LivingEntity mob) {
+	public void execute(Entity target, Entity mob) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {

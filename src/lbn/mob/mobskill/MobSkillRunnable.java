@@ -1,6 +1,6 @@
 package lbn.mob.mobskill;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 
 public abstract class MobSkillRunnable {
 	protected String data;
@@ -8,5 +8,5 @@ public abstract class MobSkillRunnable {
 	public MobSkillRunnable(String data) {
 		this.data = data;
 	}
-	abstract public void execute(LivingEntity target, LivingEntity mob);
+	abstract public void execute(Entity target, Entity mob);
 }
