@@ -35,7 +35,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.Inventory;
 
-<<<<<<< .merge_file_a26924
+<<<<<<< HEAD
 public class SystemListener implements Listener {
 
 	public static int loginPlayer = 0;
@@ -396,5 +396,5 @@ public class SystemListener implements Listener {
       e.setCancelled(true);
     }
   }
->>>>>>> .merge_file_a27028
+>>>>>>> 5eb46ba068bffd9c43fda3779207a40c9a1ae830
 }

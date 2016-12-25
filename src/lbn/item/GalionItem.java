@@ -1,6 +1,8 @@
 package lbn.item;
 
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,51 +10,76 @@ import org.bukkit.inventory.ItemStack;
 
 import lbn.util.ItemStackUtil;
 
-public class GalionItem extends AbstractItem{
+public final class GalionItem extends AbstractItem {
 
-	public GalionItem(int galions) {
-		this.galions = galions;
-	}
+  /**
+   * Instance cache
+   */
+  private static Map<Integer, GalionItem> cache = new WeakHashMap<>();
 
-	public GalionItem(ItemStack stack) {
-		List<String> lore = ItemStackUtil.getLore(stack);
-		for (String string : lore) {
-			if (string.contains("+") && string.contains("galions")) {
-				String replace = string.replace("+", "").replace("galions", "");
-				this.galions = Integer.parseInt(ChatColor.stripColor(replace).trim());
-			}
-		}
-	}
+  /**
+   * Get instance of GalionItem.
+   *
+   * @param galions
+   *          value
+   * @return instance
+   */
+  public static GalionItem getInstance(int galions) {
+    Integer key = Integer.valueOf(galions);
+    if (cache.containsKey(key)) {
+      return cache.get(key);
+    }
+    GalionItem item = new GalionItem(galions);
+    cache.put(key, item);
+    return item;
+  }
 
-	@Override
-	public String getItemName() {
-		return ChatColor.GOLD + "Money";
-	}
+  private GalionItem(int galions) {
+    this.galions = galions;
+  }
 
-	@Override
-	public String getId() {
-		return "galions";
-	}
+  public GalionItem(ItemStack stack) {
+    List<String> lore = ItemStackUtil.getLore(stack);
+    for (String string : lore) {
+      if (string.contains("+") && string.contains("galions")) {
+        String replace = string.replace("+", "").replace("galions", "");
+        this.galions = Integer.parseInt(ChatColor.stripColor(replace).trim());
+      }
+    }
+  }
 
-	@Override
-	protected Material getMaterial() {
-		return Material.GOLD_INGOT;
-	}
+  /**
+   * Immutable
+   */
+  private int galions = 0;
 
-	int galions = 0;
+  @Override
+  public String getItemName() {
+    return ChatColor.GOLD + "Money";
+  }
 
-	@Override
-	protected String[] getDetail() {
-		return new String[]{"+ " + galions + " galions"};
-	}
+  @Override
+  public String getId() {
+    return "galions";
+  }
 
-	public int getGalions() {
-		return galions;
-	}
+  @Override
+  protected Material getMaterial() {
+    return Material.GOLD_INGOT;
+  }
 
-	@Override
-	public int getBuyPrice(ItemStack item) {
-		return getGalions();
-	}
+  @Override
+  protected String[] getDetail() {
+    return new String[] { "+ " + galions + " galions" };
+  }
+
+  public int getGalions() {
+    return galions;
+  }
+
+  @Override
+  public int getBuyPrice(ItemStack item) {
+    return getGalions();
+  }
 
 }

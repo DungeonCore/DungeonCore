@@ -22,7 +22,7 @@ public class ItemManager {
 	static HashMap<Class<?>, HashMap<String, ItemInterface>> allItemIdClassList = new HashMap<>();
 
 	static {
-		registItem(new GalionItem(0));
+		registItem(GalionItem.getInstance(0));
 	}
 
 	public static void registItem(ItemInterface[] item) {

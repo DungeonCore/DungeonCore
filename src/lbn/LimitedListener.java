@@ -77,7 +77,7 @@ public class LimitedListener implements Listener{
 		Block clickedBlock = event.getClickedBlock();
 		if (clickedBlock != null) {
 			Material material = clickedBlock.getType();
-			if (Config.getClickCancelblock().contains(material)) {
+			if (Config.getClickCancelblocks().contains(material)) {
 				event.setCancelled(true);
 				return;
 			}
@@ -180,7 +180,7 @@ public class LimitedListener implements Listener{
 			return ;
 		}
 
-		if (Config.getClickCancelItem().contains(itemInHand.getType())) {
+		if (Config.getClickCancelItems().contains(itemInHand.getType())) {
 			e.setCancelled(true);
 		}
 	}
@@ -200,7 +200,7 @@ public class LimitedListener implements Listener{
 		}
 
 		EntityType type = rightClicked.getType();
-		if (Config.getClickCancelEntityType().contains(type)) {
+		if (Config.getClickCancelEntityTypes().contains(type)) {
 			e.setCancelled(true);
 		}
 	}
@@ -237,7 +237,7 @@ public class LimitedListener implements Listener{
 			return;
 		}
 
-		if (Config.getDamageCancelEntityType().contains(type)) {
+		if (Config.getDamageCancelEntityTypes().contains(type)) {
 			e.setCancelled(true);
 		}
 	}

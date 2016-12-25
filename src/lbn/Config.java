@@ -2,6 +2,7 @@ package lbn;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -10,58 +11,62 @@ import org.bukkit.inventory.ItemStack;
 import lbn.item.ItemManager;
 
 public class Config {
-	static HashSet<Material> notClickBlock = new HashSet<Material>();
-	static HashSet<Material> notClickItem = new HashSet<Material>();
-	static HashSet<EntityType> notClickEntity = new HashSet<EntityType>();
-	static HashSet<EntityType> notDamageEntity = new HashSet<EntityType>();
-	static {
-		notClickBlock.add(Material.ANVIL);
-		notClickBlock.add(Material.ENCHANTMENT_TABLE);
-		notClickBlock.add(Material.PAINTING);
-		notClickBlock.add(Material.ITEM_FRAME);
-		notClickBlock.add(Material.FURNACE);
-		notClickBlock.add(Material.BURNING_FURNACE);
-		notClickBlock.add(Material.DISPENSER);
-		notClickBlock.add(Material.DROPPER);
-		notClickBlock.add(Material.BEACON);
-		notClickBlock.add(Material.HOPPER);
-		notClickBlock.add(Material.HOPPER_MINECART);
-		notClickBlock.add(Material.FIRE);
 
-		notClickItem.add(Material.EYE_OF_ENDER);
-		notClickItem.add(Material.ENDER_PEARL);
-		notClickItem.add(Material.BUCKET);
-		notClickItem.add(Material.LAVA_BUCKET);
-		notClickItem.add(Material.WATER_BUCKET);
-		notClickItem.add(Material.FLINT_AND_STEEL);
+  /**
+   * Author's twitter account.
+   */
+  public static final String DEVELOPER_TWITTER_ID = "@namiken1993";
 
-		notClickEntity.add(EntityType.ITEM_FRAME);
-		notDamageEntity.add(EntityType.ITEM_FRAME);
-	}
+  private static Set<Material> clickIgnoredBlocks = new HashSet<>();
+  private static Set<Material> clickCancelledItems = new HashSet<>();
+  private static Set<EntityType> clickCancelledEntityTypes = new HashSet<>();
+  private static Set<EntityType> damageCancelledEntityType = new HashSet<>();
+  static {
+    clickIgnoredBlocks.add(Material.ANVIL);
+    clickIgnoredBlocks.add(Material.ENCHANTMENT_TABLE);
+    clickIgnoredBlocks.add(Material.PAINTING);
+    clickIgnoredBlocks.add(Material.ITEM_FRAME);
+    clickIgnoredBlocks.add(Material.FURNACE);
+    clickIgnoredBlocks.add(Material.BURNING_FURNACE);
+    clickIgnoredBlocks.add(Material.DISPENSER);
+    clickIgnoredBlocks.add(Material.DROPPER);
+    clickIgnoredBlocks.add(Material.BEACON);
+    clickIgnoredBlocks.add(Material.HOPPER);
+    clickIgnoredBlocks.add(Material.HOPPER_MINECART);
+    clickIgnoredBlocks.add(Material.FIRE);
 
-	public static HashSet<Material> getClickCancelblock() {
-		return notClickBlock;
-	}
+    clickCancelledItems.add(Material.EYE_OF_ENDER);
+    clickCancelledItems.add(Material.ENDER_PEARL);
+    clickCancelledItems.add(Material.BUCKET);
+    clickCancelledItems.add(Material.LAVA_BUCKET);
+    clickCancelledItems.add(Material.WATER_BUCKET);
+    clickCancelledItems.add(Material.FLINT_AND_STEEL);
 
-	public static HashSet<Material> getClickCancelItem() {
-		return notClickItem;
-	}
+    clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
+    damageCancelledEntityType.add(EntityType.ITEM_FRAME);
+  }
 
-	public static HashSet<EntityType> getClickCancelEntityType() {
-		return notClickEntity;
-	}
+  public static Set<Material> getClickCancelblocks() {
+    return clickIgnoredBlocks;
+  }
 
-	public static HashSet<EntityType> getDamageCancelEntityType() {
-		return notDamageEntity;
-	}
+  public static Set<Material> getClickCancelItems() {
+    return clickCancelledItems;
+  }
 
-	public static boolean allowCraft(ItemStack result, Collection<ItemStack> materials) {
-		if (ItemManager.getCustomItem(result) != null) {
-			return true;
-		}
-		return false;
-	}
+  public static Set<EntityType> getClickCancelEntityTypes() {
+    return clickCancelledEntityTypes;
+  }
 
-	public static String DEVELOPER_TWITTER_ID = "@namiken1993";
+  public static Set<EntityType> getDamageCancelEntityTypes() {
+    return damageCancelledEntityType;
+  }
+
+  public static boolean allowCraft(ItemStack result, Collection<ItemStack> materials) {
+    if (ItemManager.getCustomItem(result) != null) {
+      return true;
+    }
+    return false;
+  }
 
 }
