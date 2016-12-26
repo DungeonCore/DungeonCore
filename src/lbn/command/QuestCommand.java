@@ -25,9 +25,9 @@ public class QuestCommand implements CommandExecutor{
 				return false;
 			}
 
-			if (QuestManager.canStartQuestByTellrow(q, p)) {
-				QuestManager.startQuest(q, p, false);
-			}
+//			if (QuestManager.canStartQuestByTellrow(q, p)) {
+//				QuestManager.startQuest(q, p, false);
+//			}
 		}
 		return true;
 	}

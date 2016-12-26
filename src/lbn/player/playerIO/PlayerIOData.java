@@ -4,7 +4,6 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.Set;
 
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
@@ -90,21 +89,21 @@ public class PlayerIOData {
     magicLevel = instance3.getLevel(p);
     magicExp = instance3.getExp(p);
 
-    Set<Quest> complateQuest = QuestManager.getComplateQuest(p);
-    complateQuestId = new String[complateQuest.size()];
-    int i = 0;
-    for (Quest quest : complateQuest) {
-      complateQuestId[i] = quest.getId();
-      i++;
-    }
-
-    Set<Quest> doingQuest = QuestManager.getDoingQuest(p);
-    doingQuestId = new String[doingQuest.size()];
-    int j = 0;
-    for (Quest quest : doingQuest) {
-      doingQuestId[j] = quest.getId();
-      j++;
-    }
+//    Set<Quest> complateQuest = QuestManager.getComplateQuest(p);
+//    complateQuestId = new String[complateQuest.size()];
+//    int i = 0;
+//    for (Quest quest : complateQuest) {
+//      complateQuestId[i] = quest.getId();
+//      i++;
+//    }
+//
+//    Set<Quest> doingQuest = QuestManager.getDoingQuest(p);
+//    doingQuestId = new String[doingQuest.size()];
+//    int j = 0;
+//    for (Quest quest : doingQuest) {
+//      doingQuestId[j] = quest.getId();
+//      j++;
+//    }
 
     playerExpLevel = p.getLevel();
 
@@ -207,7 +206,7 @@ public class PlayerIOData {
     MagicStatusManager instance3 = MagicStatusManager.getInstance();
     instance3.remove(p);
 
-    QuestManager.remove(p);
+//    QuestManager.remove(p);
 
     GalionManager.remove(p);
   }

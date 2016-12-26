@@ -7,6 +7,23 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeoncore.Main;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.mob.attribute.Attribute;
+import lbn.mob.attribute.AttributeNormal;
+import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.SummonMobable;
+import lbn.player.AttackType;
+import lbn.player.status.IStatusManager;
+import lbn.player.status.StatusAddReason;
+import lbn.quest.quest.PickItemQuest;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.JavaUtil;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -27,22 +44,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeoncore.Main;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeNormal;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.SummonMobable;
-import lbn.player.AttackType;
-import lbn.player.status.IStatusManager;
-import lbn.player.status.StatusAddReason;
-import lbn.quest.QuestManager;
-import lbn.quest.quest.PickItemQuest;
-import lbn.util.JavaUtil;
-import lbn.util.Message;
 
 public abstract class AbstractMob<T extends Entity> {
 	protected Random rnd = new Random();
@@ -253,10 +254,16 @@ public abstract class AbstractMob<T extends Entity> {
 			}
 		}
 
+		PlayerQuestSession questSession = null;
+
 		//DROPするのがクエストアイテムの場合、クエスト進行中でないからドロップさせない
 		Iterator<ItemStack> iterator = arrayList.iterator();
 		label1:
 		while (iterator.hasNext()) {
+			if (questSession == null) {
+				questSession = PlayerQuestSessionManager.getQuestSession(lastDamagePlayer.getPlayer());
+			}
+
 			ItemStack next = iterator.next();
 			ItemInterface customItem = ItemManager.getCustomItem(next);
 			//カスタムアイテムでないなら何もしない
@@ -273,7 +280,7 @@ public abstract class AbstractMob<T extends Entity> {
 			Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 			for (PickItemQuest pickItemQuest : quest) {
 				//1つでも実行中なら許可する
-				if (QuestManager.isDoingQuest(pickItemQuest, lastDamagePlayer)) {
+				if (questSession.isDoing(pickItemQuest)) {
 					continue label1;
 				}
 			}

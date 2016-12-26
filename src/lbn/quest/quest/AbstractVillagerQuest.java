@@ -75,9 +75,11 @@ public abstract class AbstractVillagerQuest implements Quest{
 		p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, (float) 0.1);
 	}
 
+	boolean canDestory = true;
+
 	@Override
 	public boolean canDestory() {
-		return !isMainQuest();
+		return !isMainQuest() && canDestory;
 	}
 
 	/**
@@ -245,12 +247,14 @@ public abstract class AbstractVillagerQuest implements Quest{
 		ItemStack item = rewordItem.getItem();
 		//空きがあるならTRUE
 		if (p.getInventory().firstEmpty() != -1) {
+			Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
 			return true;
 		}
 
 		//最大スタック数が1の場合はこの時点でFALSE
 		int maxStackSize = item.getMaxStackSize();
 		if (maxStackSize != 1) {
+			Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
 			return false;
 		}
 
@@ -261,6 +265,7 @@ public abstract class AbstractVillagerQuest implements Quest{
 				return true;
 			}
 		}
+		Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
 		return false;
 	}
 

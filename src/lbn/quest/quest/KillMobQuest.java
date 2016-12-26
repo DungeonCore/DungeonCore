@@ -8,7 +8,6 @@ import lbn.common.event.quest.StartQuestEvent;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
-import lbn.quest.QuestManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -69,11 +68,12 @@ public class KillMobQuest extends AbstractVillagerQuest{
 
 	@Override
 	public String getCurrentInfo(Player p) {
-		if (!QuestManager.isDoingQuest(this, p)) {
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		if (!questSession.isDoing(this)) {
 			return "";
 		}
 
-		int data = PlayerQuestSessionManager.getQuestSession(p).getQuestData(this);
+		int data = questSession.getQuestData(this);
 		return "達成度(" + data + "/" + getNeedCount() + ")";
 	}
 

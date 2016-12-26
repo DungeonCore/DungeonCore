@@ -22,7 +22,7 @@ public class QuestViewIcon {
 	public static boolean isQuestIconItem(ItemStack itemStack) {
 		 if (itemStack.getType() == Material.WRITTEN_BOOK || itemStack.getType() == Material.BOOK){
 			 List<String> lore = ItemStackUtil.getLore(itemStack);
-			 if (lore.contains(INFO)) {
+			 if (lore.contains("quest_viewer_item")) {
 				 return true;
 			 }
 		}
@@ -49,7 +49,7 @@ public class QuestViewIcon {
 		ItemStackUtil.addLore(itemStack, "");
 		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[PROGRESS]");
 		ItemStackUtil.addLore(itemStack, "" + ChatColor.WHITE + quest.getCurrentInfo(p));
-		ItemStackUtil.addLore(itemStack, "");
+		ItemStackUtil.addLore(itemStack, ChatColor.BLACK + "quest_viewer_item");
 
 		//破棄の許可・不許可を追加
 		if (quest.isMainQuest()) {

@@ -1,13 +1,13 @@
 package lbn.mob.mob.abstractmob.villager;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Collection;
 
 import lbn.quest.Quest;
-import lbn.quest.QuestManager;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -34,10 +34,16 @@ public abstract class QuestVillager extends AbstractVillager{
 			return null;
 		}
 
-		Set<Quest> complateQuest = QuestManager.getComplateQuest(p);
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+
+		Collection<Quest> complateQuest = questSession.getComplateQuestList();
 		for (Quest quest : getHaveQuest()) {
 			//もし前のクエストが完了していないならスキップする
-			if (quest.getBeforeQuest() != null && !complateQuest.containsAll(quest.getBeforeQuest())) {
+			if (quest.getBeforeQuest() != null) {
+				continue;
+			}
+
+			if (!complateQuest.containsAll(quest.getBeforeQuest())) {
 				continue;
 			}
 
@@ -57,7 +63,8 @@ public abstract class QuestVillager extends AbstractVillager{
 	}
 
 	protected String getDetail(Quest quest, Player p) {
-		if (QuestManager.isDoingQuest(quest, p)) {
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
+		if (session.isDoing(quest)) {
 			return StringUtils.join(new Object[]{ChatColor.GOLD , getName() , ChatColor.WHITE , "「" , quest.getQuestDetail() , "」", ChatColor.RED, quest.getCurrentInfo(p)});
 		} else {
 			return StringUtils.join(new Object[]{ChatColor.GOLD , getName() , ChatColor.WHITE , "「" , quest.getQuestDetail() , "」"});
@@ -70,6 +77,7 @@ public abstract class QuestVillager extends AbstractVillager{
 		if (getHaveQuest() == null || getHaveQuest().length == 0) {
 			return;
 		}
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(player);
 		//次受注するであろうクエストの説明を出す
 		Quest quest = getAvailableQuest(player);
 		if (quest == null) {
@@ -80,8 +88,9 @@ public abstract class QuestVillager extends AbstractVillager{
 
 		player.sendMessage(messageList.toArray(new String[0]));
 		//もしクエストを実行していないならクエストを実行するためのコマンドを出す
-		if (!QuestManager.isDoingQuest(quest, player)) {
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), QuestManager.getStartTellrowCommand(player, quest));
+		if (!session.isDoing(quest)) {
+			//TODO Quest Selecetor追加
+//			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), QuestManager.getStartTellrowCommand(player, quest));
 		}
 	}
 

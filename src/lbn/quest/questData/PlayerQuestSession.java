@@ -1,61 +1,68 @@
 package lbn.quest.questData;
 
-import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.TimeZone;
 
 import lbn.quest.Quest;
 import lbn.quest.quest.QuestType;
+import lbn.util.JavaUtil;
 
 import com.google.common.collect.HashMultimap;
 
 public class PlayerQuestSession {
 //	HashMultimap<QuestType, String> doingQuest = HashMultimap.create();
-	static HashMultimap<QuestType, Quest> doingQuest = HashMultimap.create();
-	HashMap<String, Long> complateQuestLastComplateData = new HashMap<>();
-	HashMap<String, Integer> complateQuestComplateCount = new HashMap<>();
+	HashMultimap<QuestType, Quest> doingQuest = HashMultimap.create();
+	HashMap<Quest, ComplateData> complateQuest = new HashMap<>();
 
-	HashMap<String, Integer> complateQuestData = new HashMap<>();
+	HashMap<String, Integer> questData = new HashMap<>();
 
 	public boolean isDoing(Quest q) {
-		return doingQuest.containsKey(q.getId());
+		return doingQuest.containsValue(q);
 	}
 
 	public boolean isComplate(Quest q) {
-		return complateQuestLastComplateData.containsKey(q.getId());
+		return complateQuest.containsKey(q);
 	}
 
 	public Set<Quest> getDoingQuestListByType(QuestType type) {
 		return doingQuest.get(type);
 	}
 
+	public Collection<Quest> getDoingQuestList() {
+		return doingQuest.values();
+	}
+
+	public Collection<Quest> getComplateQuestList() {
+		return doingQuest.values();
+	}
+
 	/**
-	 * クエストのデータ値をセットする
+	 * クエストのデータ値を渡す
 	 * @param q
 	 * @return
 	 */
 	public int getQuestData(Quest q) {
-		if (complateQuestData.containsKey(q.getId())) {
-			return complateQuestData.get(q.getId());
+		if (questData.containsKey(q.getId())) {
+			return questData.get(q.getId());
 		}
 		return 0;
 	}
 
 	public void setQuestData(Quest q, int data) {
-		complateQuestData.put(q.getId(), data);
+		questData.put(q.getId(), data);
 	}
 
 	public long getComplateDate(Quest q) {
-		if (complateQuestLastComplateData.containsKey(q.getId())) {
-			return complateQuestLastComplateData.get(q.getId());
+		if (complateQuest.containsKey(q)) {
+			return complateQuest.get(q).complateData;
 		}
 		return 0;
 	}
 
 	public long getComplateCount(Quest q) {
-		if (complateQuestComplateCount.containsKey(q.getId())) {
-			return complateQuestComplateCount.get(q.getId());
+		if (complateQuest.containsKey(q)) {
+			return complateQuest.get(q).complateCount;
 		}
 		return 0;
 	}
@@ -66,21 +73,32 @@ public class PlayerQuestSession {
 
 	public void removeQuest(Quest q) {
 		doingQuest.remove(q.getQuestType(), q);
+		questData.remove(q.getId());
 	}
-
-	static TimeZone timeZone = TimeZone.getTimeZone("Asia/Tokyo");
 
 	public void complateQuest(Quest q) {
+		ComplateData complateData = complateQuest.get(q);
+		if (complateData == null) {
+			complateData = new ComplateData();
+		}
 		//完了時間をセット
-		 Calendar cal1 = Calendar.getInstance(timeZone);
-		 long timeInMillis = cal1.getTimeInMillis();
-		complateQuestLastComplateData.put(q.getId(), timeInMillis);
+		complateData.complateCount = complateData.complateCount + 1;
 
 		//完了時間をセット
-		int complateCount = 1;
-		if (complateQuestComplateCount.containsKey(q.getId())) {
-			complateCount += complateQuestComplateCount.get(q.getId());
-		}
-		complateQuestComplateCount.put(q.getId(), complateCount);
+		complateData.complateData = JavaUtil.getJapanTimeInMillis();
+		complateQuest.put(q, complateData);
+
+		//実行中から削除
+		doingQuest.remove(q.getQuestType(), q);
+		questData.remove(q.getId());
 	}
+
+	public int getNowQuestSize() {
+		return doingQuest.values().size();
+	}
+}
+
+class ComplateData {
+	long complateData = 0;
+	int complateCount = 0;
 }

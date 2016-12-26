@@ -1,8 +1,10 @@
 package lbn.util;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -77,6 +79,14 @@ public class JavaUtil {
 		particleData.run(l);
 		l.getWorld().playSound(l, Sound.FIREWORK_BLAST, 1, 1);
 	}
+
+	static TimeZone timeZone = TimeZone.getTimeZone("Asia/Tokyo");
+
+	public static long getJapanTimeInMillis() {
+		 Calendar cal1 = Calendar.getInstance(timeZone);
+		 long timeInMillis = cal1.getTimeInMillis();
+		 return timeInMillis;
+	}
 }
 
 class InterfaceGetter {
@@ -107,5 +117,4 @@ class InterfaceGetter {
 		search(this.clazz);
 		return this.interfaceList;
 	}
-
 }

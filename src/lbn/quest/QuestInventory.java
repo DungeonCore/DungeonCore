@@ -1,6 +1,10 @@
 package lbn.quest;
 
-import java.util.Set;
+import java.util.Collection;
+
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.Message;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,14 +15,15 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import lbn.util.Message;
-
 public class QuestInventory {
 	public static void openQuestViewer(Player p) {
 		QuestViewIcon questViewIcon = new QuestViewIcon(p);
 
 		Inventory view = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + "quest_view");
-		Set<Quest> doingQuest = QuestManager.getDoingQuest(p);
+
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
+
+		Collection<Quest> doingQuest = session.getDoingQuestList();
 		//メインクエストを先に表示
 		for (Quest quest : doingQuest) {
 			if (quest.isMainQuest()) {
@@ -51,12 +56,13 @@ public class QuestInventory {
 			player.closeInventory();
 			return;
 		}
-		if (quest.canDestory()) {
-			QuestManager.removeQuest(quest, e.getPlayer());
+
+		boolean removeQuest = QuestManager.removeQuest(quest, e.getPlayer());
+		//クエストを削除できたらアイテムを削除する
+		if (removeQuest) {
 			e.getItemDrop().remove();
 		} else {
-			Player player = e.getPlayer();
-			Message.sendMessage(player, "このクエストは破棄できません。");
+		//クエストを削除できなければ操作をキャンセルする
 			e.setCancelled(true);
 		}
 	}
@@ -76,7 +82,7 @@ public class QuestInventory {
 		if (title.contains("quest_view")) {
 			ItemStack itemStack = e.getCurrentItem();
 			Quest quest = new QuestViewIcon((Player) e.getView().getPlayer()).getQuest(itemStack);
-			if (quest != null && !quest.canDestory()) {
+			if (quest != null && !quest.canDestory() && !quest.isMainQuest()) {
 				e.setCancelled(true);
 			}
 		//クリックしたのがQuestViewでない時はキャンセルする
