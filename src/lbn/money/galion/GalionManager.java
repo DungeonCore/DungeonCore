@@ -1,6 +1,5 @@
 package lbn.money.galion;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import lbn.common.event.player.PlayerChangeGalionsEvent;
