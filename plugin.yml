@@ -196,6 +196,16 @@ commands:
       permission:  main.lbnDungeonUtil.command.builder.mobskillexcute
       usage: /<command> mobskillid target
       permission-message: You don't have <permission>
+   announce:
+      description: アナウンスする
+      permission: main.lbnDungeonUtil.command.message
+      usage: /<command> message
+      permission-message: You don't have <permission>
+   attention:
+      description: 重大アナウンスする
+      permission: main.lbnDungeonUtil.command.message
+      usage: /<command> message
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

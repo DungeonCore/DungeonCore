@@ -84,16 +84,16 @@ import lbn.quest.QuestListener;
 import lbn.util.DungeonLogger;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
-import net.minecraft.server.v1_7_R4.EntityEnderman;
-import net.minecraft.server.v1_7_R4.EntityGiantZombie;
-import net.minecraft.server.v1_7_R4.EntityPig;
-import net.minecraft.server.v1_7_R4.EntityPigZombie;
-import net.minecraft.server.v1_7_R4.EntitySkeleton;
-import net.minecraft.server.v1_7_R4.EntitySpider;
-import net.minecraft.server.v1_7_R4.EntityVillager;
-import net.minecraft.server.v1_7_R4.EntityWitch;
-import net.minecraft.server.v1_7_R4.EntityZombie;
+import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.EntityGuardian;
+import net.minecraft.server.v1_8_R1.EntityPig;
+import net.minecraft.server.v1_8_R1.EntityPigZombie;
+import net.minecraft.server.v1_8_R1.EntitySkeleton;
+import net.minecraft.server.v1_8_R1.EntitySpider;
+import net.minecraft.server.v1_8_R1.EntityVillager;
+import net.minecraft.server.v1_8_R1.EntityWitch;
+import net.minecraft.server.v1_8_R1.EntityZombie;
 
 
 public class Main extends JavaPlugin {
