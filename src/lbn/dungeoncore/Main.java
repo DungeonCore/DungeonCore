@@ -2,12 +2,22 @@ package lbn.dungeoncore;
 
 import java.util.Collection;
 
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.InitManager;
 import lbn.LimitedListener;
 import lbn.RecipeRegister;
 import lbn.SystemListener;
 import lbn.chest.ChestListner;
 import lbn.chest.wireless.WireLessChestManager;
+import lbn.command.CommandAnnounce;
+import lbn.command.CommandAttention;
 import lbn.command.CommandChest;
 import lbn.command.CommandEquipPlayer;
 import lbn.command.CommandExecuteLockByTimeCommand;
@@ -85,14 +95,6 @@ import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
 
 public class Main extends JavaPlugin {
 	public static String		 dataFolder;
@@ -167,6 +169,8 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registCommand() {
+		registCommand(new CommandAnnounce(), "announce");
+		registCommand(new CommandAttention(), "attention");
 		registCommand(new CommandGiveItem(), "getItem");
 		registCommand(new CommandGiveSetItem(), "getSetItem");
 		registCommand(new CommandExtraMob(), "spawnmob");
