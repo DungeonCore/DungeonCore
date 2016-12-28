@@ -16,7 +16,7 @@ public class GalionManager {
 
   public static void setGalion(Player p, int val, GalionEditReason reason) {
     remove(p);
-    addGalion(p, val, GalionEditReason.system);
+    addGalion(p, val, reason);
   }
 
   public static void addGalion(Player p, int val, GalionEditReason reason) {
@@ -55,7 +55,7 @@ public class GalionManager {
 
   public static void printLog(Player p, int val, GalionEditReason reason) {
     if (reason != GalionEditReason.mob_drop) {
-      final String format = "%s get galions by %s, (total %d galions)";
+      final String format = "%s get %d galions by %s, (total %d galions)";
       final String message = String.format(format, p.getName(), val, reason.toString(), galionMap.get(p));
       SystemLog.addLog(message);
     }

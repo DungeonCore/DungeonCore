@@ -2,6 +2,7 @@ package lbn.command;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.google.common.collect.HashMultimap;
@@ -83,6 +86,12 @@ public class CommandViewInfo implements CommandExecutor{
 		case "save":
 			PlayerIODataManager.saveAsZip();
 			break;
+		case "status":
+			sendPlayerStatus(target);
+			break;
+		case "addEffect":
+			addEffect(target);
+			break;
 		case "version":
 			paramCommandSender.sendMessage("1.1");
 			break;
@@ -109,6 +118,21 @@ public class CommandViewInfo implements CommandExecutor{
 		}
 		return true;
 
+	}
+
+
+	private void addEffect(Player target) {
+		new PotionEffect(PotionEffectType.SPEED, 80, 1).apply(target);
+		new PotionEffect(PotionEffectType.POISON, 80, 1).apply(target);
+	}
+
+
+	private void sendPlayerStatus(Player target) {
+		Collection<PotionEffect> activePotionEffects = target.getActivePotionEffects();
+		target.sendMessage("active potion effect:");
+		for (PotionEffect potionEffect : activePotionEffects) {
+			target.sendMessage("    " + potionEffect.getType() + ", " + (potionEffect.getDuration() / 20) + "s");
+		}
 	}
 
 

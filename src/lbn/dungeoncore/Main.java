@@ -16,6 +16,7 @@ import lbn.RecipeRegister;
 import lbn.SystemListener;
 import lbn.chest.ChestListner;
 import lbn.chest.wireless.WireLessChestManager;
+import lbn.command.CommandAddBene;
 import lbn.command.CommandAnnounce;
 import lbn.command.CommandAttention;
 import lbn.command.CommandChest;
@@ -209,6 +210,7 @@ public class Main extends JavaPlugin {
 		registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
 		registCommand(new CommandTpOtherWorld(), "tpworld");
 		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
+		registCommand(new CommandAddBene(), "addBene");
 	}
 
 	private void registCommand(CommandExecutor instance, String name) {
