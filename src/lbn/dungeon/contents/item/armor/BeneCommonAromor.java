@@ -25,7 +25,7 @@ import lbn.item.strength.StrengthOperator;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
-public class BeneCommonAromor extends CommonArmor{
+public class BeneCommonAromor extends CommonArmor implements Beneable{
 	public BeneCommonAromor(Material m) {
 		super(m);
 	}

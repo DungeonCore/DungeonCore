@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lbn.item.strength.StrengthOperator;
+import lbn.util.ItemStackUtil;
+
+import org.bukkit.inventory.ItemStack;
+
 
 public class BeneEffectManager {
 	static ArrayList<BeneEffectType> typeA = new ArrayList<BeneEffectType>();
@@ -76,6 +81,14 @@ public class BeneEffectManager {
 			arrayList.add(beneEffectType.getLine(strengthLevel));
 		}
 		return arrayList;
+	}
+
+	public static void updateBeneLore(ItemStack item, List<BeneEffectType> types) {
+		ArrayList<String> beneLore = BeneEffectManager.getBeneLore(types, StrengthOperator.getLevel(item));
+		List<String> lore = ItemStackUtil.getLore(item);
+		StrengthOperator.removedStrengthLore(lore);
+		StrengthOperator.addStrengthLore(beneLore, lore);
+		ItemStackUtil.setLore(item, lore);
 	}
 
 //	public static ArrayList<String> getUpdatedLore(List<String> list, int strengthLevel) {
