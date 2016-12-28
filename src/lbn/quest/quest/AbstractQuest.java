@@ -24,8 +24,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractVillagerQuest implements Quest{
-	public AbstractVillagerQuest(String id) {
+public abstract class AbstractQuest implements Quest{
+	public AbstractQuest(String id) {
 		this.id = id;
 	}
 	@Override
@@ -294,6 +294,13 @@ public abstract class AbstractVillagerQuest implements Quest{
 	@Override
 	public boolean isNullQuest() {
 		return false;
+	}
+
+	int availableMainLevel = 0;
+
+	@Override
+	public int getAvailableMainLevel() {
+		return availableMainLevel;
 	}
 
 

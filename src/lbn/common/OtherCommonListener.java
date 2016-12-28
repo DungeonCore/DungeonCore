@@ -41,7 +41,7 @@ import lbn.command.CommandChest;
 import lbn.command.CommandGiveItem;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.SimplySetSpawnPointCommand;
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.common.other.BookshelfCommandRunner;
 import lbn.common.other.DungeonList;
 import lbn.common.other.GetItemSign;
@@ -261,14 +261,14 @@ public class OtherCommonListener implements Listener{
 
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
-		MenuSelecor.onSelect(e);
+		MenuSelectorManager.onSelect(e);
 
 		CommandGiveItem.onClick(e);
 	}
 
 	@EventHandler
 	public void onDrag(InventoryDragEvent e) {
-		MenuSelecor.onSelect(e);
+		MenuSelectorManager.onSelect(e);
 
 		CommandGiveItem.onClick(e);
 	}

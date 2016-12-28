@@ -7,6 +7,7 @@ import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
+import lbn.player.status.mainStatus.MainStatusManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -52,39 +53,70 @@ public class QuestManager {
 		allQuestById.put(ChatColor.stripColor(q.getId()).toUpperCase(), q);
 	}
 
+	public static QuestStartStatus getStartQuestStatus(Quest q, Player p) {
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
+
+		//現在実行中
+		if (session.isDoing(q)) {
+			Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
+			return QuestStartStatus.DOING_NOW;
+		}
+
+		//クエスト上限
+		if (session.getNowQuestSize() >= getMaxQuestCount(p)) {
+			Message.sendMessage(p, Message.QUEST_OVER_COUNT);
+			return QuestStartStatus.RECEIVE_COUNT_MAXIMUM;
+		}
+
+		//クエストのクールタイム
+		long complateDate = session.getComplateDate(q);
+		if (complateDate + q.getCoolTimeSecound() * 60 * 1000 >= JavaUtil.getJapanTimeInMillis()) {
+			Message.sendMessage(p, "このクエストはまだ受けられません(時間)");
+			return QuestStartStatus.REMAIND_COOL_TIME;
+		}
+
+		//利用可能レベル
+		int mainLevel = q.getAvailableMainLevel();
+		if (mainLevel > MainStatusManager.getInstance().getLevel(p)) {
+			return QuestStartStatus.LACK_AVAILAVLE_MAIN_LEVEL;
+		}
+
+		//重複不可の時
+		if (!q.isStartOverlap()) {
+			//完了回数がでないときは利用不可とする
+			if (session.getComplateCount(q) != 0) {
+				return QuestStartStatus.CANNT_OVERLAP;
+			}
+		}
+
+		//前提クエストの確認
+		Set<Quest> beforeQuest = q.getBeforeQuest();
+		for (Quest quest : beforeQuest) {
+			if (!session.isComplate(quest)) {
+				Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
+				return QuestStartStatus.LACK_BEFORE_QUEST;
+			}
+		}
+
+		return QuestStartStatus.CAN_START;
+	}
+
 	/**
 	 * クエストを開始する
 	 * @param q
 	 * @param p
 	 * @return
 	 */
-	public static boolean startQuest(Quest q, Player p, boolean force) {
+	public static boolean startQuest(Quest q, Player p, boolean force, QuestStartStatus status) {
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 
-		//現在実行中
-		if (session.isDoing(q)) {
-			Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
-			return false;
-		}
-
-		if (!force) {
-			//クエスト上限
-			if (session.getNowQuestSize() >= getMaxQuestCount(p)) {
-				Message.sendMessage(p, Message.QUEST_OVER_COUNT);
+		if (!status.canStart()) {
+			//強制実行でないときは実行しない
+			if (!force) {
 				return false;
-			}
-
-			//クエストのクールタイム
-			long complateDate = session.getComplateDate(q);
-			if (complateDate + q.getCoolTimeSecound() * 60 * 1000 >= JavaUtil.getJapanTimeInMillis()) {
-				Message.sendMessage(p, "このクエストはまだ受けられません(時間)");
-				return false;
-			}
-
-			Set<Quest> beforeQuest = q.getBeforeQuest();
-			for (Quest quest : beforeQuest) {
-				if (!session.isComplate(quest)) {
-					Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
+			} else {
+				//強制実行だがそれでも実行出来ないときは実行しない
+				if (!status.canStartIfForce()) {
 					return false;
 				}
 			}
@@ -136,7 +168,7 @@ public class QuestManager {
 		//次のクエストを開始する
 		Quest autoExecuteNextQuest = q.getAutoExecuteNextQuest();
 		if (autoExecuteNextQuest != null) {
-			startQuest(autoExecuteNextQuest, p, true);
+			startQuest(autoExecuteNextQuest, p, true, getStartQuestStatus(autoExecuteNextQuest, p));
 		}
 
 	}
@@ -182,4 +214,46 @@ public class QuestManager {
 //		return canStartQuestByTellrowMap.containsEntry(q, p);
 //	}
 
+	/**
+	 * クエストを受けることが出来るかどうかを判断するためにのENUM
+	 * @author kensuke
+	 *
+	 */
+	public static enum QuestStartStatus {
+		CAN_START(true, true),
+		DOING_NOW("同じクエストを同時に受けることはできません", true, false),
+		RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true),
+		REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true),
+		LACK_AVAILAVLE_MAIN_LEVEL("メインレベルが足りません", false, true),
+		CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true),
+		LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
+
+		String errorMessage = null;
+		boolean canStart;
+		boolean canStartIfForce;
+
+		private QuestStartStatus(boolean canStart, boolean canStartIfForce) {
+			this.canStart = canStart;
+			this.canStartIfForce = canStartIfForce;
+		}
+
+		private QuestStartStatus(String errorMessage, boolean canStart, boolean canStartIfForce) {
+			this.canStart = canStart;
+			this.errorMessage = errorMessage;
+			this.canStartIfForce = canStartIfForce;
+		}
+
+		public boolean canStart() {
+			return canStart;
+		}
+
+		public boolean canStartIfForce() {
+			return canStartIfForce;
+		}
+
+		public String canntMessage() {
+			return errorMessage;
+		}
+	}
 }
+

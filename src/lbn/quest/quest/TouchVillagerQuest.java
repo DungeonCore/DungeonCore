@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
-public class TouchVillagerQuest extends AbstractVillagerQuest{
+public class TouchVillagerQuest extends AbstractQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
 
 	String villagerName;

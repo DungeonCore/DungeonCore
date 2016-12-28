@@ -9,7 +9,7 @@ import lbn.quest.questData.PlayerQuestSession;
 
 import org.bukkit.entity.Player;
 
-public abstract class StrengthItemQuest extends AbstractVillagerQuest{
+public abstract class StrengthItemQuest extends AbstractQuest{
 
 	static HashMap<String, StrengthItemQuest> questList = new HashMap<String, StrengthItemQuest>();
 

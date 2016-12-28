@@ -16,7 +16,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class KillMobQuest extends AbstractVillagerQuest{
+public class KillMobQuest extends AbstractQuest{
 	static HashSet<String> mobNameList = new HashSet<>();
 
 	private KillMobQuest(String id, String targetMobName, int needCount) {

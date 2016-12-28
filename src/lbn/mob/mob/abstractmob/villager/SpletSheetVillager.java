@@ -3,16 +3,16 @@ package lbn.mob.mob.abstractmob.villager;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.common.menu.MenuSelecor;
-import lbn.money.BuyerShopSelector;
-import lbn.quest.Quest;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import lbn.common.menu.MenuSelectorManager;
+import lbn.money.BuyerShopSelector;
+import lbn.quest.Quest;
 
 public class SpletSheetVillager extends QuestVillager{
 
@@ -54,7 +54,7 @@ public class SpletSheetVillager extends QuestVillager{
 		} else if (data.getType() == VillagerType.SHOP) {
 			BuyerShopSelector.onOpen((Player) damager, getName());
 		} if (data.getType() == VillagerType.BLACKSMITH) {
-			MenuSelecor.open((Player) damager, "blacksmith menu");
+			MenuSelectorManager.open((Player) damager, "blacksmith menu");
 		}
 	}
 

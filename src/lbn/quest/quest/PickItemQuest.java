@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.HashMultimap;
 
-public class PickItemQuest extends AbstractVillagerQuest{
+public class PickItemQuest extends AbstractQuest{
 	static HashMultimap<String, PickItemQuest> needItemMap = HashMultimap.create();
 
 	public static Set<PickItemQuest> getQuest(ItemInterface item) {

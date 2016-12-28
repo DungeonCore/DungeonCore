@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
@@ -39,8 +40,8 @@ public class RepairUi {
 				p.sendMessage("未実装です");
 			}
 		});
-		MenuSelecor.regist(menuSelecor);
-		MenuSelecor.open(p, "Repair Menu");
+		menuSelecor.regist();
+		MenuSelectorManager.open(p, "Repair Menu");
 	}
 
 	public static int getNeedGalion(ItemStack...item) {

@@ -67,4 +67,6 @@ public interface Quest{
 	public void giveRewardItem(Player p);
 
 	public boolean canFinish(Player p);
+
+	public int getAvailableMainLevel();
 }

@@ -157,4 +157,9 @@ public class NullQuest implements Quest{
 	public void onSatisfyComplateCondtion(Player p) {
 
 	}
+
+	@Override
+	public int getAvailableMainLevel() {
+		return 0;
+	}
 }

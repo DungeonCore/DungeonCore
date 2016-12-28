@@ -65,7 +65,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 		}
 
 		if (arg3[0].equals("start")) {
-			QuestManager.startQuest(quest, p, false);
+			QuestManager.startQuest(quest, p, false, QuestManager.getStartQuestStatus(quest, p));
 		} else if (arg3[0].equals("remove")) {
 			QuestManager.removeQuest(quest, p);
 		} else if (arg3[0].equals("complate")) {

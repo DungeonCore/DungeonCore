@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
@@ -70,7 +71,7 @@ public class SpecialAttackItemSelector extends AbstractItem implements RightClic
 			i++;
 		}
 
-		MenuSelecor.regist(menuSelecor);
+		menuSelecor.regist();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -130,7 +131,7 @@ public class SpecialAttackItemSelector extends AbstractItem implements RightClic
 
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
-		MenuSelecor.open(e.getPlayer(), specialItem.getId() + " selector");
+		MenuSelectorManager.open(e.getPlayer(), specialItem.getId() + " selector");
 	}
 
 	@Override
@@ -140,7 +141,7 @@ public class SpecialAttackItemSelector extends AbstractItem implements RightClic
 
 	@Override
 	public void excuteOnLeftClick(PlayerInteractEvent e) {
-		MenuSelecor.open(e.getPlayer(), specialItem.getId() + " selector");
+		MenuSelectorManager.open(e.getPlayer(), specialItem.getId() + " selector");
 	}
 
 }

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
@@ -22,7 +23,7 @@ public class RepositoryChest extends WireLessChest{
 //		this.loc = loc;
 		this.type = type;
 
-		if (MenuSelecor.contains("Repository Menu:" + type)) {
+		if (MenuSelectorManager.contains("Repository Menu:" + type)) {
 			return;
 		}
 
@@ -67,7 +68,7 @@ public class RepositoryChest extends WireLessChest{
 		if (chestContentsLocation != null) {
 			return chestContentsLocation;
 		}
-		MenuSelecor.open(p, "Repository Menu:" + type);
+		MenuSelectorManager.open(p, "Repository Menu:" + type);
 
 		return null;
 	}

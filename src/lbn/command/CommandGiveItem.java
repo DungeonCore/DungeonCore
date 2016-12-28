@@ -19,6 +19,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.dungeon.contents.item.key.KeyItemable;
 import lbn.item.ItemInterface;
@@ -35,9 +36,9 @@ import lbn.util.DungeonLogger;
 import lbn.util.ItemStackUtil;
 
 public class CommandGiveItem implements CommandExecutor {
-  
+
   public static boolean initFlg = false;
-  
+
   @Override
   public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
       String[] paramArrayOfString) {
@@ -47,14 +48,14 @@ public class CommandGiveItem implements CommandExecutor {
       } else if (initFlg) {
         init();
       }
-      MenuSelecor.open((Player) paramCommandSender, "item nemu");
+      MenuSelectorManager.open((Player) paramCommandSender, "item nemu");
     } else {
       giveItem(paramCommandSender, paramArrayOfString);
     }
     return true;
-    
+
   }
-  
+
   // 使わないので一旦コメントアウト
   // private void openInv(Player paramCommandSender) {
   // List<ItemInterface> allItem = ItemManager.getAllItem();
@@ -106,48 +107,48 @@ public class CommandGiveItem implements CommandExecutor {
   // }
   // paramCommandSender.openInventory(createInventory);
   // }
-  
+
   private void giveItem(CommandSender sender, String[] paramArrayOfString) {
     if (paramArrayOfString.length == 0) {
       return;
     }
-    
+
     Player target = null;
     if (sender instanceof Player) {
       target = (Player) sender;
     }
-    
+
     String itemId = "";
-    
+
     Player playerExact = Bukkit.getPlayerExact(paramArrayOfString[0]);
-    
+
     int startIndex = 0;
     if (playerExact != null) {
       target = playerExact;
       startIndex = 1;
     }
-    
+
     for (int i = startIndex; i < paramArrayOfString.length; i++) {
       itemId += paramArrayOfString[i] + " ";
     }
     itemId = itemId.trim();
-    
+
     ItemInterface customItemById = ItemManager.getCustomItemById(itemId);
     if (customItemById != null && target != null) {
       target.getInventory().addItem(customItemById.getItem());
     }
   }
-  
+
   static int count = 0;
   static {
     init();
   }
-  
+
   protected static void init() {
     DungeonLogger.development("item list init!!");
     MenuSelecor menuSelecor = new MenuSelecor("item nemu");
     Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<Integer, TreeSet<ItemInterface>>();
-    
+
     count = 0;
     // アイテムをグループごとに分類分けする
     for (ItemInterface item : ItemManager.getAllItem()) {
@@ -174,38 +175,38 @@ public class CommandGiveItem implements CommandExecutor {
         TreeSet<ItemInterface> treeSet = getTreeSet();
         allItem.put(rtn, treeSet);
       }
-      
+
       TreeSet<ItemInterface> treeSet = allItem.get(rtn);
       treeSet.add(item);
       count++;
     }
-    
-    
+
+
     ItemStack itemStack = new ItemStack(Material.DIAMOND_SWORD);
     ItemStackUtil.setDispName(itemStack, "武器");
     menuSelecor.addMenu(itemStack, 9, getRun(allItem.get(1)));
-    
+
     ItemStack itemStack2 = new ItemStack(Material.DIAMOND_CHESTPLATE);
     ItemStackUtil.setDispName(itemStack2, "装備");
     menuSelecor.addMenu(itemStack2, 11, getRun(allItem.get(2)));
-    
+
     ItemStack itemStack3 = new ItemStack(Material.INK_SACK);
     itemStack3.setDurability((short) 10);
     ItemStackUtil.setDispName(itemStack3, "魔法石");
     menuSelecor.addMenu(itemStack3, 13, getRun(allItem.get(8)));
-    
+
     ItemStack itemStack4 = new ItemStack(Material.TRIPWIRE_HOOK);
     ItemStackUtil.setDispName(itemStack4, "鍵・クエストアイテム");
     menuSelecor.addMenu(itemStack4, 15, getRun(allItem.get(99)));
-    
+
     ItemStack itemStack5 = new ItemStack(Material.FEATHER);
     ItemStackUtil.setDispName(itemStack5, "その他");
     menuSelecor.addMenu(itemStack5, 17, getRun(allItem.get(1000)));
-    MenuSelecor.regist(menuSelecor);
-    
+    MenuSelectorManager.regist(menuSelecor);
+
     initFlg = false;
   }
-  
+
   protected static TreeSet<ItemInterface> getTreeSet() {
     TreeSet<ItemInterface> treeSet = new TreeSet<ItemInterface>(new Comparator<ItemInterface>() {
       @Override
@@ -216,7 +217,7 @@ public class CommandGiveItem implements CommandExecutor {
         if (order1 != order2) {
           return Double.compare(order1, order2);
         }
-        
+
         // アイテムのレベルごと
         int level1 = -1;
         int level2 = -1;
@@ -229,29 +230,29 @@ public class CommandGiveItem implements CommandExecutor {
         if (level1 != level2) {
           return Integer.compare(level1, level2);
         }
-        
+
         // 魔法石の場合は特別
         if (o1 instanceof SlotInterface && o2 instanceof SlotInterface) {
           if (((SlotInterface) o1).getSlotType() != ((SlotInterface) o2).getSlotType()) {
             return ((SlotInterface) o1).getSlotType().compareTo(((SlotInterface) o2).getSlotType());
           }
-          
+
           if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel().getSucessPer()) {
             return Double.compare(((SlotInterface) o2).getLevel().getSucessPer(),
                 ((SlotInterface) o1).getLevel().getSucessPer());
           }
         }
-        
+
         return o1.getId().compareTo(o2.getId());
       }
-      
+
       HashMap<ItemInterface, Double> cache = new HashMap<ItemInterface, Double>();
-      
+
       double getOrder(ItemInterface item) {
         if (cache.containsKey(item)) {
           return cache.get(item);
         }
-        
+
         double rtn;
         if (item instanceof SwordItem) {
           rtn = 1;
@@ -278,7 +279,7 @@ public class CommandGiveItem implements CommandExecutor {
     });
     return treeSet;
   }
-  
+
   protected static SelectRunnable getRun(Set<ItemInterface> items) {
     return new SelectRunnable() {
       @Override
@@ -292,33 +293,33 @@ public class CommandGiveItem implements CommandExecutor {
       }
     };
   }
-  
+
   protected static ItemStack getBackItem() {
     return ItemStackUtil.getItem("メニューに戻る", Material.CHEST);
   }
-  
+
   public static void onClick(InventoryInteractEvent e) {
     Inventory inventory = e.getInventory();
     String name = inventory.getName();
     if (!"item list".equals(name)) {
       return;
     }
-    
+
     if (e instanceof InventoryClickEvent) {
       if (getBackItem().equals(((InventoryClickEvent) e).getCurrentItem())) {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
-        MenuSelecor.open(p, "item nemu");
+        MenuSelectorManager.open(p, "item nemu");
       }
     } else if (e instanceof InventoryDragEvent) {
       if (getBackItem().equals(((InventoryDragEvent) e).getOldCursor())
           || getBackItem().equals(((InventoryDragEvent) e).getCursor())) {
         e.setCancelled(true);
         Player p = (Player) e.getWhoClicked();
-        MenuSelecor.open(p, "item nemu");
+        MenuSelectorManager.open(p, "item nemu");
       }
-      
+
     }
-    
+
   }
 }

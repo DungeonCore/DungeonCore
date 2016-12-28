@@ -12,7 +12,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -26,7 +25,7 @@ public abstract class QuestVillager extends AbstractVillager{
 	public void onDamage(LivingEntity mob, Entity damager,
 			EntityDamageByEntityEvent e) {
 		super.onDamage(mob, damager, e);
-		onQuestExcute((Player)damager, (Villager)mob);
+		onQuestExcute((Player)damager, mob);
 	}
 
 	public Quest getAvailableQuest(Player p) {
@@ -71,7 +70,7 @@ public abstract class QuestVillager extends AbstractVillager{
 		}
 	}
 
-	protected void onQuestExcute(Player player, Villager villager) {
+	protected void onQuestExcute(Player player, LivingEntity villager) {
 		ArrayList<String> messageList = new ArrayList<String>();
 		//クエストを持っていないなら何もしない
 		if (getHaveQuest() == null || getHaveQuest().length == 0) {
