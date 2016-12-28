@@ -26,7 +26,7 @@ public class RepairUi {
 				11,
 				new SelectRunnable() {
 					@Override
-					public void run(Player p) {
+					public void run(Player p, ItemStack item) {
 						repairItemAll(p);
 						p.playSound(p.getLocation(), Sound.ANVIL_USE, 1, 1);
 					}
@@ -36,7 +36,7 @@ public class RepairUi {
 				15,
 				new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				p.sendMessage("未実装です");
 			}
 		});

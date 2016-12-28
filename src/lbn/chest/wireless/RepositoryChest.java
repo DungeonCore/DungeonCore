@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
@@ -32,7 +33,7 @@ public class RepositoryChest extends WireLessChest{
 		menuSelecor.addMenu(ItemStackUtil.getItem("倉庫を購入する", Material.WOOL, (byte)5,
 				Message.getMessage("{0}Galionで倉庫を購入する", type.price)), 11, new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				if (GalionManager.getGalion(p) > type.getPrice()) {
 					//チェストを作成
 					instance.createChest(p, type.getType());
@@ -49,7 +50,7 @@ public class RepositoryChest extends WireLessChest{
 		menuSelecor.addMenu(ItemStackUtil.getItem("倉庫を購入しない", Material.WOOL, (byte)14,
 				Message.getMessage("倉庫を購入しない")), 15, new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				p.closeInventory();
 			}
 		});

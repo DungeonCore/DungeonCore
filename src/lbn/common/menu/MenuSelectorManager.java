@@ -31,7 +31,7 @@ public class MenuSelectorManager {
 	public static void open(Player p, String title) {
 		MenuSelecor selector = getSelector(title);
 		if (selector != null) {
-			p.openInventory(selector.createInventory);
+			selector.open(p);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class MenuSelectorManager {
 
 		ItemStack currentItem = event.getCurrentItem();
 		if (selector.runMap.containsKey(currentItem)) {
-			selector.runMap.get(currentItem).run(p);
+			selector.runMap.get(currentItem).run(p, currentItem);
 		}
 	}
 }

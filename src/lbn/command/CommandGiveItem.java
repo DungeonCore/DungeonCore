@@ -283,7 +283,7 @@ public class CommandGiveItem implements CommandExecutor {
   protected static SelectRunnable getRun(Set<ItemInterface> items) {
     return new SelectRunnable() {
       @Override
-      public void run(Player p) {
+      public void run(Player p, ItemStack item) {
         Inventory createInventory = Bukkit.createInventory(null, (int) (((items.size()) / 9) + 2) * 9, "item list");
         for (ItemInterface iItem : items) {
           createInventory.addItem(iItem.getItem());

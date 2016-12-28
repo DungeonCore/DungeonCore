@@ -36,8 +36,12 @@ public class MenuSelecor {
 		return this;
 	}
 
+	public void open(Player p) {
+		p.openInventory(createInventory);
+	}
 
-	static  {
+
+	static {
 		MenuSelecor menuSelecor = new MenuSelecor("blacksmith menu");
 		//魔法石装着
 		ItemStack itemStack = new ItemStack(Material.BEACON);
@@ -50,7 +54,7 @@ public class MenuSelecor {
 		menuSelecor.addMenu(itemStack, 15,
 		new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				SlotSetTableOperation.openSlotTable(p);
 			}
 		});
@@ -66,7 +70,7 @@ public class MenuSelecor {
 		menuSelecor.addMenu(itemStack2, 13,
 				new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				StrengthTableOperation.openStrengthTable(p);
 			}
 		});
@@ -77,7 +81,7 @@ public class MenuSelecor {
 		menuSelecor.addMenu(itemStack3, 11,
 				new SelectRunnable() {
 			@Override
-			public void run(Player p) {
+			public void run(Player p, ItemStack item) {
 				RepairUi.onOpenUi(p);
 			}
 		});

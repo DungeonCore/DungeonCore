@@ -54,7 +54,7 @@ public class SpecialAttackItemSelector extends AbstractItem implements RightClic
 			}
 			menuSelecor.addMenu(itemStack.getItem(), i, new SelectRunnable() {
 				@Override
-				public void run(Player p) {
+				public void run(Player p, ItemStack item) {
 					ItemStack itemInHand = p.getItemInHand();
 					//手に持っているのがこのアイテムでないなら何もしない
 					if (!isThisItem(itemInHand)) {
