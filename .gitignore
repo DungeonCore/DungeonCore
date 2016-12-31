@@ -2,3 +2,5 @@ spigot-1.8.jar
 /bin/
 /.classpath
 /.project
+.settings/
+*.jar
