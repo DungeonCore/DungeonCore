@@ -40,17 +40,14 @@ public class CommandGiveItem implements CommandExecutor {
 	public static boolean initFlg = false;
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] paramArrayOfString) {
-		if (paramCommandSender instanceof Player && paramArrayOfString.length == 0) {
-			if (count != ItemManager.getAllItem().size()) {
-				init();
-			} else if (initFlg) {
+	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+		if (sender instanceof Player && args.length == 0) {
+			if ((count != ItemManager.getAllItem().size()) || initFlg) {
 				init();
 			}
-			MenuSelectorManager.open((Player) paramCommandSender, "item nemu");
+			MenuSelectorManager.open((Player) sender, "item nemu");
 		} else {
-			giveItem(paramCommandSender, paramArrayOfString);
+			giveItem(sender, args);
 		}
 		return true;
 
