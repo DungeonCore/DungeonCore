@@ -1,16 +1,17 @@
 package lbn.command;
 
+import static java.lang.String.*;
+import static lbn.Announce.*;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import lbn.Announce;
-
-public class CommandAnnounce implements CommandExecutor {
+public final class CommandAnnounce implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		Announce.AnnounceInfo(arg2);
+	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+		announce(join(" ", args));
 		return true;
 	}
 
