@@ -7,7 +7,7 @@ import static org.bukkit.ChatColor.*;
 /**
  * This class has utility methods for message broadcasting.
  */
-public final class Announce {
+public final class Announcement {
 
 	/**
 	 * Format string for announcement
