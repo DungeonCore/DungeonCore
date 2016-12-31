@@ -1,5 +1,6 @@
 package lbn.quest;
 
+import java.util.List;
 import java.util.Set;
 
 import lbn.common.event.quest.ComplateQuestEvent;
@@ -69,4 +70,6 @@ public interface Quest{
 	public boolean canFinish(Player p);
 
 	public int getAvailableMainLevel();
+
+	public List<String> getRewordText();
 }

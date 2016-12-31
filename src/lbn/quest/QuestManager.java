@@ -54,6 +54,10 @@ public class QuestManager {
 	}
 
 	public static QuestStartStatus getStartQuestStatus(Quest q, Player p) {
+		if (q == null || q.isNullQuest()) {
+			return QuestStartStatus.UNKNOW_QUEST;
+		}
+
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 
 		//現在実行中
@@ -221,6 +225,7 @@ public class QuestManager {
 	 */
 	public static enum QuestStartStatus {
 		CAN_START(true, true),
+		UNKNOW_QUEST("クエストが存在しません", false, false),
 		DOING_NOW("同じクエストを同時に受けることはできません", true, false),
 		RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true),
 		REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true),

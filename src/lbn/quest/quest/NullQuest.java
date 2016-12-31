@@ -1,5 +1,7 @@
 package lbn.quest.quest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import lbn.common.event.quest.ComplateQuestEvent;
@@ -161,5 +163,10 @@ public class NullQuest implements Quest{
 	@Override
 	public int getAvailableMainLevel() {
 		return 0;
+	}
+
+	@Override
+	public List<String> getRewordText() {
+		return Arrays.asList("なし");
 	}
 }

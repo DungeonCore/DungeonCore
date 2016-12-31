@@ -14,7 +14,7 @@ public enum QuestType {
 		this.detail = detail;
 	}
 
-	public QuestType getInstance(String detail) {
+	public static QuestType getInstance(String detail) {
 		for (QuestType type : values()) {
 			if (type.detail.equals(detail)) {
 				return type;
@@ -23,7 +23,7 @@ public enum QuestType {
 		return UnknownQuest;
 	}
 
-	public Quest getQuestInstance(String id, String deta1, String deta2) {
+	public Quest createQuestInstance(String id, String deta1, String deta2) {
 		Quest q = null;
 		switch (this) {
 		case KILL_MOB_QUEST:

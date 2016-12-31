@@ -55,8 +55,6 @@ public class MenuSelectorManager {
 		MenuSelecor selector = getSelector(title);
 
 		ItemStack currentItem = event.getCurrentItem();
-		if (selector.runMap.containsKey(currentItem)) {
-			selector.runMap.get(currentItem).run(p, currentItem);
-		}
+		selector.onSelectItem(p, currentItem);
 	}
 }

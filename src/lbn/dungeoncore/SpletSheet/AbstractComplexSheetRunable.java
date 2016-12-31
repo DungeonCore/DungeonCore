@@ -16,14 +16,14 @@ import lbn.util.DungeonLogger;
 
 public abstract class AbstractComplexSheetRunable implements SheetRunnable<String[][]> {
   ArrayList<Task>                taskList         = new ArrayList<Task>();
-  
+
   public static final int        TASK_KIND_ADD    = 1;
   public static final int        TASK_KIND_DELETE = 2;
   public static final int        TASK_KIND_GET    = 3;
   public static final int        TASK_KIND_UPDATE = 4;
-  
+
   static HashMap<Class<?>, Long> lastUpDate       = new HashMap<Class<?>, Long>();
-  
+
   public long getLastUpdate() {
     Long long1 = lastUpDate.get(this.getClass());
     if (long1 == null) {
@@ -31,7 +31,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     }
     return long1;
   }
-  
+
   /**
    * データ一覧を取得するためのコンストラクタ
    *
@@ -40,21 +40,21 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
   public AbstractComplexSheetRunable(CommandSender sender) {
     this.sender = sender;
   }
-  
+
   public void addData(HashMap<String, Object> map) {
     Task task = new Task();
     task.kind = TASK_KIND_ADD;
     task.map = map;
     taskList.add(task);
   }
-  
+
   public void deleteData(String query) {
     Task task = new Task();
     task.kind = TASK_KIND_DELETE;
     task.query = query;
     taskList.add(task);
   }
-  
+
   public void getData(String query) {
     Task task = new Task();
     task.kind = TASK_KIND_GET;
@@ -62,7 +62,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     taskList.add(task);
     getDataFlg = true;
   }
-  
+
   public void updateData(HashMap<String, Object> map, String query) {
     Task task = new Task();
     task.kind = TASK_KIND_UPDATE;
@@ -71,25 +71,25 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     task.map = map;
     getDataFlg = true;
   }
-  
+
   boolean                  getDataFlg    = false;
-  
+
   protected static boolean isTransaction = false;
-  
+
   public boolean isTransaction() {
     return isTransaction;
   }
-  
+
   public void closeTransaction() {
     isTransaction = false;
   }
-  
+
   CommandSender sender;
-  
+
   abstract String getSheetName();
-  
+
   abstract public String[] getTag();
-  
+
   @Override
   public String[][] call() throws Exception {
     LbnSpreadSheet instance = LbnSpreadSheet.getInstance(getSheetName());
@@ -106,9 +106,9 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     } finally {
       isTransaction = false;
     }
-    
+
   }
-  
+
   protected String[][] execute(LbnSpreadSheet instance, String[][] rtn, Task task) throws IOException, Exception {
     DungeonLogger.development("start read spread sheet:" + getSheetName());
     try {
@@ -139,7 +139,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     DungeonLogger.development("end read spread sheet:" + getSheetName());
     return rtn;
   }
-  
+
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
     try {
@@ -149,7 +149,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
           sender.sendMessage("結果を返しませんでした。:" + getSheetName());
           return;
         }
-        
+
         sender.sendMessage("処理を開始します。:" + getSheetName());
         for (String[] row : allData) {
           excuteOnerow(row);
@@ -158,13 +158,13 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
       } else {
         sender.sendMessage("更新が完了しました:" + getSheetName());
       }
-    } finally {
       lastUpDate.put(getClass(), System.currentTimeMillis());
+    } finally {
       isTransaction = false;
     }
-    
+
   }
-  
+
   public static String getLocationString(Location loc) {
     if (loc == null) {
       return "";
@@ -172,30 +172,30 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     return StringUtils.join(
         new Object[] { loc.getWorld().getName(), ":", loc.getBlockX(), ",", loc.getBlockY(), ",", loc.getBlockZ() });
   }
-  
+
   public static Location getLocationByString(String str) {
     try {
       String[] split = str.split(":");
       World w = Bukkit.getWorld(split[0]);
-      
+
       String[] split2 = split[1].split(",");
       double x = Double.parseDouble(split2[0]);
       double y = Double.parseDouble(split2[1]);
       double z = Double.parseDouble(split2[2]);
-      
+
       if (w == null) {
         return null;
       }
-      
+
       return new Location(w, x, y, z);
     } catch (Exception e) {
       return null;
     }
   }
-  
-  
+
+
   abstract protected void excuteOnerow(String[] row);
-  
+
 }
 
 class Task {

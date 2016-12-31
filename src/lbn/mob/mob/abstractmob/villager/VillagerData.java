@@ -4,18 +4,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.quest.Quest;
-import lbn.quest.QuestManager;
-import lbn.quest.quest.NullQuest;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
@@ -43,7 +40,7 @@ public class VillagerData {
 	String name;
 	String data;
 	VillagerType type;
-	Set<Quest> questList = new HashSet<>();
+	Set<String> questList = new HashSet<>();
 	String[] texts;
 	boolean isAdult = true;
 
@@ -91,12 +88,7 @@ public class VillagerData {
 		if (quests != null) {
 			//クエストを取得する
 			for (String id : quests.split(",")) {
-				Quest questById = QuestManager.getQuestById(id.trim());
-				if (questById == null) {
-					questById = new NullQuest(id);
-					sendMsg(p, "存在しないクエストIDです:" + id);
-				}
-				questList.add(questById);
+				questList.add(id);
 			}
 		}
 
@@ -120,7 +112,7 @@ public class VillagerData {
 		return type;
 	}
 
-	public Set<Quest> getQuestList() {
+	public Set<String> getQuestList() {
 		return questList;
 	}
 

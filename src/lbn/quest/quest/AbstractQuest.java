@@ -1,10 +1,13 @@
 package lbn.quest.quest;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
 import lbn.mob.mob.abstractmob.villager.AbstractVillager;
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
@@ -15,6 +18,8 @@ import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
@@ -25,7 +30,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractQuest implements Quest{
-	public AbstractQuest(String id) {
+	protected AbstractQuest(String id) {
 		this.id = id;
 	}
 	@Override
@@ -35,12 +40,13 @@ public abstract class AbstractQuest implements Quest{
 
 	abstract protected void init();
 
-	AbstractVillager villager;
+	public String villagerName;
 
 	@Override
 	public void onSatisfyComplateCondtion(Player p) {
-		if (villager != null) {
-			//TODO QuestMessgaerを実装
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		if (villagerName != null) {
+
 		}
 	}
 
@@ -119,7 +125,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	boolean isSucessBeforeQuest = false;
-	Set<String> beforeQuestIds = null;
+	String[] beforeQuestIds = null;
 	Set<Quest> beforeQuests = null;
 	@Override
 	public Set<Quest> getBeforeQuest() {
@@ -240,11 +246,11 @@ public abstract class AbstractQuest implements Quest{
 			return false;
 		}
 
-		if (rewordItem == null) {
+		if (getRewordItem() == null) {
 			return true;
 		}
 
-		ItemStack item = rewordItem.getItem();
+		ItemStack item = getRewordItem().getItem();
 		//空きがあるならTRUE
 		if (p.getInventory().firstEmpty() != -1) {
 			Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
@@ -271,17 +277,25 @@ public abstract class AbstractQuest implements Quest{
 
 	@Override
 	public void giveRewardItem(Player p) {
-		AbstractNormalStatusManager instance = SwordStatusManager.getInstance();
-		instance.addExp(p, swordExe, StatusAddReason.quest_reword);
-		AbstractNormalStatusManager instance2 = BowStatusManager.getInstance();
-		instance2.addExp(p, bowExe, StatusAddReason.quest_reword);
-		AbstractNormalStatusManager instance3 = MagicStatusManager.getInstance();
-		instance3.addExp(p, magicExe, StatusAddReason.quest_reword);
+		if (swordExe != 0) {
+			AbstractNormalStatusManager instance = SwordStatusManager.getInstance();
+			instance.addExp(p, swordExe, StatusAddReason.quest_reword);
+		}
+		if (bowExe != 0) {
+			AbstractNormalStatusManager instance2 = BowStatusManager.getInstance();
+			instance2.addExp(p, bowExe, StatusAddReason.quest_reword);
+		}
+		if (magicExe != 0) {
+			AbstractNormalStatusManager instance3 = MagicStatusManager.getInstance();
+			instance3.addExp(p, magicExe, StatusAddReason.quest_reword);
+		}
 
-		GalionManager.addGalion(p, rewordMoney, GalionEditReason.quest_reword);
+		if (rewordMoney != 0) {
+			GalionManager.addGalion(p, rewordMoney, GalionEditReason.quest_reword);
+		}
 
-		if (rewordItem != null) {
-			p.getInventory().addItem(rewordItem.getItem());
+		if (getRewordItem() != null) {
+			p.getInventory().addItem(getRewordItem().getItem());
 		}
 	}
 
@@ -289,7 +303,15 @@ public abstract class AbstractQuest implements Quest{
 	int bowExe = 0;
 	int magicExe = 0;
 	int rewordMoney = 0;
-	ItemInterface rewordItem = null;
+
+	String reworldItemId = null;
+
+	public ItemInterface getRewordItem() {
+		if (reworldItemId != null) {
+			return ItemManager.getCustomItemById(reworldItemId);
+		}
+		return null;
+	}
 
 	@Override
 	public boolean isNullQuest() {
@@ -303,5 +325,31 @@ public abstract class AbstractQuest implements Quest{
 		return availableMainLevel;
 	}
 
+	@Override
+	public List<String> getRewordText() {
+		ArrayList<String> texts = new ArrayList<String>();
+		if (swordExe != 0) {
+			texts.add("剣レベル: +" + swordExe + "exp");
+		}
+		if (bowExe != 0) {
+			texts.add("弓レベル: +" + bowExe + "exp");
+		}
+		if (magicExe != 0) {
+			texts.add("魔法レベル: +" + magicExe + "exp");
+		}
+
+		if (rewordMoney != 0) {
+			texts.add("お金: +" + rewordMoney + "Galions");
+		}
+
+		if (getRewordItem() != null) {
+			texts.add("アイテム: " + getRewordItem().getItemName());
+		}
+
+		if (texts.isEmpty()) {
+			texts.add("なし");
+		}
+		return texts;
+	}
 
 }

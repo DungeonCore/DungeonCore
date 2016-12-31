@@ -21,14 +21,14 @@ public class MenuSelecor {
 		MenuSelectorManager.regist(this);
 	}
 
-	String title;
-	Inventory createInventory;
+	protected String title;
+	protected Inventory createInventory;
 	public MenuSelecor(String title) {
 		this.title = title;
 		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + "-- " + title + " --");
 	}
 
-	HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
+	protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
 
 	public MenuSelecor addMenu(ItemStack item, int index, SelectRunnable run) {
 		createInventory.setItem(index, item);
@@ -38,6 +38,12 @@ public class MenuSelecor {
 
 	public void open(Player p) {
 		p.openInventory(createInventory);
+	}
+
+	public void onSelectItem(Player p, ItemStack item) {
+		if (runMap.containsKey(item)) {
+			runMap.get(item).run(p, item);
+		}
 	}
 
 
