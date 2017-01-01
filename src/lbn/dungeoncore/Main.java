@@ -96,13 +96,13 @@ import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
 
-
 public class Main extends JavaPlugin {
-	public static String		 dataFolder;
+
+	public static String dataFolder;
 
 	public static JavaPlugin plugin;
 
-	private static boolean	 debugging = false;
+	private static boolean debugging = false;
 
 	public static boolean isDebugging() {
 		return debugging;
@@ -145,7 +145,6 @@ public class Main extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 
 		new InitManager().init();
 
@@ -298,16 +297,12 @@ public class Main extends JavaPlugin {
 				@Override
 				public void run() {
 					switch (i) {
-						case 0:
-							break;
-						case 9:
-							PlayerIODataManager.allSave(false);
-							break;
-						default:
-							break;
+					case 9:
+						PlayerIODataManager.allSave(false);
+						break;
 					}
 					i++;
-					if (i == 10) {
+					if (i >= 10) {
 						cancel();
 					}
 				}
