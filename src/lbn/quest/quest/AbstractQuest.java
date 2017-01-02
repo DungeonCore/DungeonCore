@@ -1,14 +1,21 @@
 package lbn.quest.quest;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import lbn.common.event.quest.ComplateQuestEvent;
+import lbn.common.event.quest.DestructionQuestEvent;
+import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
 import lbn.money.galion.GalionEditReason;
 import lbn.money.galion.GalionManager;
 import lbn.player.status.AbstractNormalStatusManager;
@@ -17,17 +24,14 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
+import lbn.quest.QuestAnnouncement;
 import lbn.quest.QuestManager;
+import lbn.quest.QuestProcessingStatus;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
-
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import lbn.util.QuestUtil;
 
 public abstract class AbstractQuest implements Quest{
 	protected AbstractQuest(String id) {
@@ -38,15 +42,13 @@ public abstract class AbstractQuest implements Quest{
 		return getId().hashCode();
 	}
 
-	abstract protected void init();
-
-	public String villagerName;
-
+	/**
+	 * 終了条件を見たした時に行う処理
+	 */
 	@Override
 	public void onSatisfyComplateCondtion(Player p) {
-		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
-		if (villagerName != null) {
-
+		if (endVillager != null) {
+			QuestUtil.sendSatisfyComplateForVillager(endVillager, p);
 		}
 	}
 
@@ -93,15 +95,7 @@ public abstract class AbstractQuest implements Quest{
 	 * @param player
 	 */
 	protected void sendProgressMessage(Player player, int needCount, int nowCount) {
-		player.sendMessage(StringUtils.join(new Object[]{ChatColor.GOLD, "[Quest]", ChatColor.GREEN, getName(), "  (", nowCount, "/", needCount, ")"}));
-	}
-
-	/**
-	 * クエストクリアメッセージ
-	 * @param player
-	 */
-	protected void sendQuestComplateMessage(Player player) {
-		Message.sendMessage(player, StringUtils.join(new Object[]{ChatColor.GREEN, ChatColor.BOLD + Message.getMessage(player, "クエスト達成！！ 村人のところに戻ろう")}));
+		QuestAnnouncement.sendQuestProcessInfo(player, MessageFormat.format("{0} ({1}/{2})", getName(), nowCount, needCount));
 	}
 
 	String id;
@@ -241,7 +235,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	@Override
-	public boolean canFinish(Player p) {
+	public boolean canGetRewordItem(Player p) {
 		if (!p.isOnline()) {
 			return false;
 		}
@@ -352,4 +346,44 @@ public abstract class AbstractQuest implements Quest{
 		return texts;
 	}
 
+	String startVillager = null;
+	@Override
+	public String getStartVillagerName() {
+		return startVillager;
+	}
+
+	String endVillager = null;
+	@Override
+	public String getEndVillagerName() {
+		return endVillager;
+	}
+
+	@Override
+	public void onStart(StartQuestEvent e) {
+	}
+
+	@Override
+	public void onDistruction(DestructionQuestEvent e) {
+	}
+
+	@Override
+	public void onComplate(ComplateQuestEvent e) {
+	}
+
+	@Override
+	public QuestProcessingStatus getProcessingStatus(Player p) {
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		//クエストを実行しているか確認
+		if (!questSession.isDoing(this)) {
+			//実行していなければNOT_START
+			return QuestProcessingStatus.NOT_START;
+		}
+
+		int questData = questSession.getQuestData(this);
+		//終了条件を満たしていないならPROCESSING
+		if (!isComplate(questData)) {
+			return QuestProcessingStatus.PROCESSING;
+		}
+		return QuestProcessingStatus.PROCESS_END;
+	}
 }

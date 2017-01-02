@@ -2,19 +2,16 @@ package lbn.quest.quest;
 
 import java.util.HashSet;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
-import lbn.common.event.quest.StartQuestEvent;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDeathEvent;
+
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
-
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDeathEvent;
 
 public class KillMobQuest extends AbstractQuest{
 	static HashSet<String> mobNameList = new HashSet<>();
@@ -23,7 +20,7 @@ public class KillMobQuest extends AbstractQuest{
 		super(id);
 		this.targetMobName = targetMobName;
 		this.needCount = needCount;
-		init();
+		mobNameList.add(targetMobName);
 	}
 
 	public static KillMobQuest getInstance(String id, String data1, String data2) {
@@ -37,10 +34,6 @@ public class KillMobQuest extends AbstractQuest{
 			return null;
 		}
 		return new KillMobQuest(id, data1, count);
-	}
-
-	protected void init() {
-		mobNameList.add(targetMobName);
 	}
 
 	public static boolean containsTargetMob(AbstractMob<?> mob) {
@@ -77,12 +70,6 @@ public class KillMobQuest extends AbstractQuest{
 		return "達成度(" + data + "/" + getNeedCount() + ")";
 	}
 
-	@Override
-	public void onComplate(ComplateQuestEvent e) {
-		Player player = e.getPlayer();
-		sendQuestComplateMessage(player);
-	}
-
 	String targetMobName;
 
 	protected AbstractMob<?> getTargetMob() {
@@ -92,16 +79,6 @@ public class KillMobQuest extends AbstractQuest{
 	int needCount = 0;
 	protected int getNeedCount() {
 		return needCount;
-	}
-
-	@Override
-	public void onStart(StartQuestEvent e) {
-
-	}
-
-	@Override
-	public void onDistruction(DestructionQuestEvent e) {
-
 	}
 
 	@Override

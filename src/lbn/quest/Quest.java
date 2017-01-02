@@ -67,9 +67,15 @@ public interface Quest{
 
 	public void giveRewardItem(Player p);
 
-	public boolean canFinish(Player p);
+	public boolean canGetRewordItem(Player p);
 
 	public int getAvailableMainLevel();
 
 	public List<String> getRewordText();
+
+	public String getStartVillagerName();
+
+	public String getEndVillagerName();
+
+	public QuestProcessingStatus getProcessingStatus(Player p);
 }

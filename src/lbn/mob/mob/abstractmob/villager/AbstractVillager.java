@@ -5,9 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomVillager;
+import lbn.mob.AbstractMob;
 import lbn.quest.quest.TouchVillagerQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
@@ -15,25 +26,13 @@ import lbn.util.DungeonLogger;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-
-public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager, Villager>{
-	@Override
-	protected CustomVillager getInnerEntity(World w) {
-		return new CustomVillager(w);
-	}
-
+public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 	abstract public Location getLocation();
+
+	@Override
+	public void onOtherDamage(EntityDamageEvent e) {
+		e.setDamage(0);
+	}
 
 	@Override
 	public void onSpawn(PlayerCustomMobSpawnEvent e) {
@@ -47,7 +46,6 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
 				}
 			} else {
 				spawn.setAdult();
-//			DungeonLog.errorln(getName() + " dont have villgaer data!!");
 			}
 			spawn.setCustomName(getName());
 			spawn.setCustomNameVisible(true);
@@ -105,7 +103,7 @@ public abstract class AbstractVillager extends AbstractCustomMob<CustomVillager,
 				//クエスト処理
 				touchVillagerQuest.onTouchVillager(p, entity, questSession);
 				questSession.setQuestData(touchVillagerQuest, 1);
-				if (touchVillagerQuest.canFinish(p)) {
+				if (touchVillagerQuest.canGetRewordItem(p)) {
 					touchVillagerQuest.onSatisfyComplateCondtion(p);
 				}
 				//メッセージを格納

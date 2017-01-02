@@ -4,12 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.quest.Quest;
-
-import org.bukkit.entity.Player;
+import lbn.quest.QuestProcessingStatus;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 
 public class NullQuest implements Quest{
 
@@ -119,7 +122,7 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public boolean canFinish(Player p) {
+	public boolean canGetRewordItem(Player p) {
 		return false;
 	}
 
@@ -169,4 +172,25 @@ public class NullQuest implements Quest{
 	public List<String> getRewordText() {
 		return Arrays.asList("なし");
 	}
+
+	@Override
+	public String getStartVillagerName() {
+		return null;
+	}
+
+	@Override
+	public String getEndVillagerName() {
+		return null;
+	}
+
+	@Override
+	public QuestProcessingStatus getProcessingStatus(Player p) {
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		if (questSession.isDoing(this)) {
+			return QuestProcessingStatus.PROCESSING;
+		} else {
+			return QuestProcessingStatus.NOT_START;
+		}
+	}
+
 }

@@ -2,15 +2,12 @@ package lbn.quest.quest;
 
 import java.util.Set;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
-import lbn.common.event.quest.StartQuestEvent;
-import lbn.quest.questData.PlayerQuestSession;
-
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
+
+import lbn.quest.questData.PlayerQuestSession;
 
 public class TouchVillagerQuest extends AbstractQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
@@ -58,10 +55,6 @@ public class TouchVillagerQuest extends AbstractQuest{
 	}
 
 	@Override
-	public void onComplate(ComplateQuestEvent e) {
-	}
-
-	@Override
 	public QuestType getQuestType() {
 		return QuestType.TOUCH_VILLAGER_QUEST;
 	}
@@ -69,19 +62,5 @@ public class TouchVillagerQuest extends AbstractQuest{
 	@Override
 	public boolean isComplate(int data) {
 		return data == 1;
-	}
-
-	@Override
-	public void onStart(StartQuestEvent e) {
-	}
-
-	@Override
-	public void onDistruction(DestructionQuestEvent e) {
-
-	}
-
-	@Override
-	protected void init() {
-
 	}
 }

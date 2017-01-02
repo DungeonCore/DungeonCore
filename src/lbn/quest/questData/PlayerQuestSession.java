@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
+import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.quest.Quest;
 import lbn.quest.quest.QuestType;
 import lbn.util.JavaUtil;
@@ -16,6 +17,11 @@ public class PlayerQuestSession {
 	HashMap<Quest, ComplateData> complateQuest = new HashMap<>();
 
 	HashMap<String, Integer> questData = new HashMap<>();
+
+	long lastUpdate = -1;
+	{
+		lastUpdate = new QuestSheetRunnable(null).getLastUpdate();
+	}
 
 	public boolean isDoing(Quest q) {
 		return doingQuest.containsValue(q);

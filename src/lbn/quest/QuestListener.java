@@ -100,7 +100,7 @@ public class QuestListener implements Listener{
 	}
 
 	public void onSatisfyCondition(Player p, Quest quest) {
-		if (quest.canFinish(p)) {
+		if (quest.canGetRewordItem(p)) {
 			quest.onSatisfyComplateCondtion(p);
 		}
 	}
@@ -115,15 +115,6 @@ public class QuestListener implements Listener{
 	public void onComplateQuest(ComplateQuestEvent e) {
 		e.getQuest().onComplate(e);
 		e.getQuest().playCompleteSound(e.getPlayer());
-
-		//クエストが完了したら次のクエストを開始する
-//		QuestGroup questGroup = QuestGroupManager.getQuestGroup(e.getQuest());
-//		//もしグループが登録されていなかったら何もしない
-//		if (questGroup == null) {
-//			return;
-//		}
-//		Quest next = questGroup.next(e.getPlayer(), e.getQuest());
-//		QuestManager.startQuest(next, e.getPlayer(), true);
 	}
 
 	@EventHandler

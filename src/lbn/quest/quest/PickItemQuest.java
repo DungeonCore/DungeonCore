@@ -2,21 +2,18 @@ package lbn.quest.quest;
 
 import java.util.Set;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
-import lbn.common.event.quest.StartQuestEvent;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.quest.questData.PlayerQuestSessionManager;
-import lbn.util.JavaUtil;
-
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.HashMultimap;
+
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.JavaUtil;
 
 public class PickItemQuest extends AbstractQuest{
 	static HashMultimap<String, PickItemQuest> needItemMap = HashMultimap.create();
@@ -27,7 +24,7 @@ public class PickItemQuest extends AbstractQuest{
 
 	private PickItemQuest(String id, String pickItemId, int needCount) {
 		super(id);
-		init();
+		needItemMap.put(getNeedItem().getId(), this);
 	}
 
 	public static PickItemQuest getInstance(String id, String data1, String data2) {
@@ -41,11 +38,6 @@ public class PickItemQuest extends AbstractQuest{
 		}
 		return new PickItemQuest(id, data1, count);
 	}
-
-	protected void init() {
-		needItemMap.put(getNeedItem().getId(), this);
-	}
-
 
 	String pickItemId;
 	protected ItemInterface getNeedItem() {
@@ -129,20 +121,6 @@ public class PickItemQuest extends AbstractQuest{
 	public String getCurrentInfo(Player p) {
 		int data =  PlayerQuestSessionManager.getQuestSession(p).getQuestData(this);
 		return "達成度(" + data + "/" + needCount() + ")";
-	}
-
-	@Override
-	public void onComplate(ComplateQuestEvent e) {
-		Player player = e.getPlayer();
-		sendQuestComplateMessage(player);
-	}
-
-	@Override
-	public void onStart(StartQuestEvent e) {
-	}
-
-	@Override
-	public void onDistruction(DestructionQuestEvent e) {
 	}
 
 	@Override

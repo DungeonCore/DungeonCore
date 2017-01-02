@@ -153,7 +153,7 @@ public class QuestManager {
 	 * @param p
 	 */
 	public static void complateQuest(Quest q, Player p) {
-		if (!q.canFinish(p)) {
+		if (!q.canGetRewordItem(p)) {
 			return;
 		}
 

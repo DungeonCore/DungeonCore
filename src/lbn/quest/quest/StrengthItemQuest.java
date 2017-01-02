@@ -2,23 +2,18 @@ package lbn.quest.quest;
 
 import java.util.HashMap;
 
+import org.bukkit.entity.Player;
+
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.quest.Quest;
 import lbn.quest.questData.PlayerQuestSession;
 
-import org.bukkit.entity.Player;
-
-public abstract class StrengthItemQuest extends AbstractQuest{
+public class StrengthItemQuest extends AbstractQuest{
 
 	static HashMap<String, StrengthItemQuest> questList = new HashMap<String, StrengthItemQuest>();
 
 	public StrengthItemQuest(String id, String data1, String data2) {
 		super(id);
-		init();
-	}
-
-	protected void init() {
 		questList.put(getId(), this);
 	}
 
@@ -34,10 +29,6 @@ public abstract class StrengthItemQuest extends AbstractQuest{
 
 	protected boolean isQuestComplate(PlayerStrengthFinishEvent e) {
 		return e.isSuccess();
-	}
-
-	@Override
-	public void onComplate(ComplateQuestEvent e) {
 	}
 
 	@Override
