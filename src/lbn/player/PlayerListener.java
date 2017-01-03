@@ -21,6 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -44,6 +45,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 public class PlayerListener implements Listener{
+	public static void main(String[] args) {
+		for (Sound string : Sound.values()) {
+			System.out.println(string);
+		}
+	}
+
 	@EventHandler(priority=EventPriority.LOWEST)
 	public void onDamage(EntityDamageByEntityEvent e) {
 		LastDamageManager.setLastDamageStatic(e);
@@ -89,7 +96,7 @@ public class PlayerListener implements Listener{
 		}
 
 		if (event.getReason().isPrintMessageLog()) {
-			Message.sendMessage((Player)player, ChatColor.GRAY + "{0} + {1}xp", event.getManager().getManagerName(), event.getAddExp());
+			Message.sendMessage((Player)player, ChatColor.AQUA + "{0} + {1}xp", event.getManager().getManagerName(), event.getAddExp());
 		}
 	}
 
@@ -103,7 +110,7 @@ public class PlayerListener implements Listener{
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onMoneyExp(PlayerChangeGalionsEvent event) {
 		if (event.getReason().isPrintMessageLog()) {
-			Message.sendMessage(event.getPlayer(), ChatColor.GRAY + "お金{0} {1} Galions", event.getGalions() >= 0 ? " +" : "",event.getGalions());
+			Message.sendMessage(event.getPlayer(), ChatColor.YELLOW + "{0} Galions 入手した", event.getGalions());
 		}
 
 		//まだこの時点では確定してないのでタイミングをずらす

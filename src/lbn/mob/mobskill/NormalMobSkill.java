@@ -6,6 +6,7 @@ import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.CommandableMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.damagedFalling.DamageFallingblockForMonsterSkill;
@@ -26,7 +27,7 @@ public class NormalMobSkill implements MobSkillInterface{
 			MobSkillExcuteTimingType timing,
 			MobSkillExcuteConditionType condition, String id, int percent, ParticleData particleData,
 			ParticleLocationType particleLocType, MobSkillTargetingMethodType targetingMethod,
-			String targetingMethodData, int laterTick) {
+			String targetingMethodData, int laterTick, String chainId) {
 		this.potionEffect = potionEffect;
 		this.damage = damage;
 		this.fireTick = fireTick;
@@ -40,6 +41,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		this.targetingMethod = targetingMethod;
 		this.targetingDeta = targetingMethodData;
 		this.laterTick = laterTick;
+		this.chainId = chainId;
 	}
 
 	protected MobSkillTargetingMethodType targetingMethod;
@@ -55,6 +57,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	int laterTick;
 	ParticleData particleData;
 	ParticleLocationType particleLocType;
+	String chainId;
 
 	@Override
 	public void execute(Entity condtionTarget, Entity mob) {
@@ -62,18 +65,30 @@ public class NormalMobSkill implements MobSkillInterface{
 			return;
 		}
 
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-
-				if (targetingMethod == MobSkillTargetingMethodType.DROPING_ITEM || targetingMethod == MobSkillTargetingMethodType.FALLING_BLOCK) {
-					executeFallingblockDamage(condtionTarget, mob);
-				} else {
-					executeDamageOther(condtionTarget, mob);
+		if (laterTick == 0) {
+			executeMobSkill(condtionTarget, mob);
+		} else {
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					executeMobSkill(condtionTarget, mob);
 				}
+			}.runTaskLater(Main.plugin, laterTick);
+		}
+	}
 
+	public void executeMobSkill(Entity condtionTarget, Entity mob) {
+		if (targetingMethod == MobSkillTargetingMethodType.DROPING_ITEM || targetingMethod == MobSkillTargetingMethodType.FALLING_BLOCK) {
+			executeFallingblockDamage(condtionTarget, mob);
+		} else {
+			executeDamageOther(condtionTarget, mob);
+		}
+		if (chainId != null && !chainId.equals(id)) {
+			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
+			if (fromId != null) {
+				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
 			}
-		}.runTaskLater(Main.plugin, laterTick);
+		}
 	}
 
 	protected void executeDamageOther(Entity condtionTarget, Entity mob) {

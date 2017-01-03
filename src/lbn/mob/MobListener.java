@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import lbn.chest.CustomChestManager;
+import lbn.common.event.EndermanFindTargetEvent;
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeoncore.Main;
+import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.SummonMobable;
+import lbn.mob.mob.abstractmob.AbstractEnderman;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -29,14 +37,6 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.chest.CustomChestManager;
-import lbn.common.event.EndermanFindTargetEvent;
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeoncore.Main;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractEnderman;
 
 public class MobListener implements Listener {
 	public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
@@ -168,6 +168,12 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onInteractEntity(PlayerInteractEntityEvent e) {
+		Entity rightClicked = e.getRightClicked();
+		Player ncp = (Player) rightClicked;
+		ncp.setDisplayName("adawwadawdwa1");
+		ncp.setCustomName("adwawadwafaaa2");
+		System.out.println("aaa");
+
 		if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
 			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)e.getRightClicked());
 			mob.onInteractEntity(e);

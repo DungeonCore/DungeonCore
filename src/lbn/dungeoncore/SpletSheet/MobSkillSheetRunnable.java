@@ -51,7 +51,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 	public String[] getTag() {
 		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "debuffeffect", "debuffsecond",
 				"debufflevel", "data", "particletype", "particleshape", "particledata", "particlelocation", "targeting",
-				"targetingdata", "latersecond"};
+				"targetingdata", "latersecond", "chain"};
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 
 		NormalMobSkill normalMobSkill = new NormalMobSkill(potionEffect, damage, fireTick, skill, timing,
-				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick);
+				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18]);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}

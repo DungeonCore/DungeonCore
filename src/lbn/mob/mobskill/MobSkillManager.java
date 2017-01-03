@@ -17,6 +17,10 @@ public class MobSkillManager {
 		skillMap.put(skill.getName(), skill);
 	}
 
+	public static MobSkillInterface fromId(String id) {
+		return skillMap.get(id);
+	}
+
 	public static Set<MobSkillInterface> getSkill(Set<String> nameList, MobSkillExcuteConditionType timing) {
 		HashSet<MobSkillInterface> skillSet = new HashSet<MobSkillInterface>();
 		for (String string : nameList) {
