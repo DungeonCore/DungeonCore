@@ -3,10 +3,11 @@ package lbn.quest.quest;
 import lbn.quest.Quest;
 
 public enum QuestType {
-	KILL_MOB_QUEST("アイテム採取"),
-	PICK_ITEM_QUEST("モンスター討伐"),
+	PICK_ITEM_QUEST("アイテム採取"),
+	KILL_MOB_QUEST("モンスター討伐"),
 	TOUCH_VILLAGER_QUEST("会話"),
 	STRENGTH_ITEM_QUEST("アイテム強化"),
+	TAKE_ITEM_QUEST("特定のアイテムを特定のNPCに渡す"),
 	UnknownQuest("未定義");
 
 	String detail;
@@ -28,10 +29,16 @@ public enum QuestType {
 		switch (this) {
 		case KILL_MOB_QUEST:
 			q = KillMobQuest.getInstance(id, deta1, deta2);
+			break;
 		case PICK_ITEM_QUEST:
 			q = PickItemQuest.getInstance(id, deta1, deta2);
+			break;
 		case TOUCH_VILLAGER_QUEST:
 			q = TouchVillagerQuest.getInstance(id, deta1, deta2);
+			break;
+		case TAKE_ITEM_QUEST:
+			q = TakeItemQuest.getInstance(id, deta1, deta2);
+			break;
 		default:
 			break;
 		}

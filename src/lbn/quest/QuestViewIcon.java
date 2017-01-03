@@ -1,5 +1,6 @@
 package lbn.quest;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -8,13 +9,17 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.ItemStackUtil;
 
 public class QuestViewIcon {
 	Player p;
+	PlayerQuestSession questSession;
 
 	public QuestViewIcon(Player p) {
 		this.p = p;
+		questSession = PlayerQuestSessionManager.getQuestSession(p);
 	}
 
 	static final String INFO = ChatColor.GREEN + "[INFO]";
@@ -22,7 +27,7 @@ public class QuestViewIcon {
 	public static boolean isQuestIconItem(ItemStack itemStack) {
 		 if (itemStack.getType() == Material.WRITTEN_BOOK || itemStack.getType() == Material.BOOK){
 			 List<String> lore = ItemStackUtil.getLore(itemStack);
-			 if (lore.contains("quest_viewer_item")) {
+			 if (lore.contains(ChatColor.BLACK + "quest_viewer_item")) {
 				 return true;
 			 }
 		}
@@ -30,31 +35,37 @@ public class QuestViewIcon {
 	}
 
 	public ItemStack getItemStack(Quest quest) {
+		QuestProcessingStatus status = questSession.getProcessingStatus(quest);
+
 		ItemStack itemStack;
 		if (quest.isMainQuest()) {
 			itemStack = new ItemStack(Material.WRITTEN_BOOK);
 			//アイテム名追加
-			ItemStackUtil.setDispName(itemStack, ChatColor.GOLD + quest.getName() + ChatColor.RED + "[メインクエスト]");
+			ItemStackUtil.setDispName(itemStack, MessageFormat.format("{0}{1}{2}[メインクエスト]", ChatColor.GOLD, quest.getName(), ChatColor.RED));
 		} else {
 			itemStack = new ItemStack(Material.BOOK);
 			//アイテム名追加
 			ItemStackUtil.setDispName(itemStack, ChatColor.LIGHT_PURPLE + quest.getName());
 		}
 		//loreを追加
-		String[] split = quest.getQuestDetail().split("。");
 		ItemStackUtil.addLore(itemStack, INFO);
-		for (String string : split) {
-			ItemStackUtil.addLore(itemStack, " " + ChatColor.WHITE + string + "。");
+		for (String string : quest.getQuestDetail()) {
+			ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, string));
 		}
 		ItemStackUtil.addLore(itemStack, "");
-		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[PROGRESS]");
-		ItemStackUtil.addLore(itemStack, "" + ChatColor.WHITE + quest.getCurrentInfo(p));
+		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[クリア条件]");
+		ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getComplateCondition()));
 		ItemStackUtil.addLore(itemStack, ChatColor.BLACK + "quest_viewer_item");
+		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[進行状況]");
+		ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getCurrentInfo(p)));
+		if (status == QuestProcessingStatus.PROCESS_END && quest.getEndVillagerName() != null) {
+			ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getEndVillagerName() + "のところへ報告へ行こう"));
+		}
 
 		//破棄の許可・不許可を追加
 		if (quest.isMainQuest()) {
 			ItemStackUtil.addLore(itemStack, ChatColor.DARK_GRAY + "メインクエストは破棄できません。");
-		} else if (quest.canDestory()) {
+		} else if (!quest.canDestory()) {
 			ItemStackUtil.addLore(itemStack, ChatColor.DARK_GRAY +  "このクエストは破棄できません。");
 		} else {
 			ItemStackUtil.addLore(itemStack, ChatColor.DARK_GRAY +  "破棄する場合はこの本を捨ててください。");

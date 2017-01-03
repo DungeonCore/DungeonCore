@@ -9,19 +9,16 @@ public class PlayerQuestSessionManager {
 	static HashMap<UUID, PlayerQuestSession> hashMap = new HashMap<UUID, PlayerQuestSession>();
 
 	public static PlayerQuestSession getQuestSession(Player p) {
-		PlayerQuestSession playerQuestSession = hashMap.get(p.getUniqueId());
-		if (playerQuestSession == null) {
-			loadSession(p);
-			return new PlayerQuestSession();
+		if (!hashMap.containsKey(p.getUniqueId())) {
+			hashMap.put(p.getUniqueId(), new PlayerQuestSession());
 		}
+		PlayerQuestSession playerQuestSession = hashMap.get(p.getUniqueId());
 		return playerQuestSession;
 	}
 
 	public static void loadSession(Player p) {
-		//TODO
 	}
 
 	public static void saveSession(Player p) {
-		//TODO
 	}
 }

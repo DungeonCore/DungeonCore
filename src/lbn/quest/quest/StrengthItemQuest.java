@@ -45,4 +45,9 @@ public class StrengthItemQuest extends AbstractQuest{
 	public boolean isComplate(int data) {
 		return data == 1;
 	}
+
+	@Override
+	public String getComplateCondition() {
+		return "アイテムを一回強化する";
+	}
 }

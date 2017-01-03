@@ -1,5 +1,6 @@
 package lbn.quest.quest;
 
+import java.text.MessageFormat;
 import java.util.HashSet;
 
 import org.bukkit.entity.LivingEntity;
@@ -9,6 +10,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
+import lbn.quest.QuestProcessingStatus;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -48,12 +50,11 @@ public class KillMobQuest extends AbstractQuest{
 			if (p == null) {
 				return;
 			}
-			//カウントを加算する
-			int data = session.getQuestData(this);
-
-			//必要キル数未満の場合は加算する
-			if (data < getNeedCount()) {
+			if (session.getProcessingStatus(this) == QuestProcessingStatus.PROCESSING) {
+				//カウントを加算する
+				int data = session.getQuestData(this);
 				session.setQuestData(this, data + 1);
+				//メッセージを出力
 				sendProgressMessage(p, getNeedCount(), data + 1);
 			}
 		}
@@ -62,12 +63,12 @@ public class KillMobQuest extends AbstractQuest{
 	@Override
 	public String getCurrentInfo(Player p) {
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
-		if (!questSession.isDoing(this)) {
-			return "";
+		QuestProcessingStatus status = questSession.getProcessingStatus(this);
+		if (status == QuestProcessingStatus.PROCESSING || status == QuestProcessingStatus.PROCESS_END) {
+			int data = questSession.getQuestData(this);
+			return "達成度(" + data + "/" + getNeedCount() + ")";
 		}
-
-		int data = questSession.getQuestData(this);
-		return "達成度(" + data + "/" + getNeedCount() + ")";
+		return "";
 	}
 
 	String targetMobName;
@@ -91,4 +92,8 @@ public class KillMobQuest extends AbstractQuest{
 		return data >= needCount;
 	}
 
+	@Override
+	public String getComplateCondition() {
+		return MessageFormat.format("モンスター[{0}]を{1}体倒す", targetMobName, needCount);
+	}
 }

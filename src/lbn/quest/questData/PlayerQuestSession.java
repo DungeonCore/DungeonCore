@@ -2,10 +2,13 @@ package lbn.quest.questData;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.quest.Quest;
+import lbn.quest.QuestManager;
+import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.QuestType;
 import lbn.util.JavaUtil;
 
@@ -23,7 +26,7 @@ public class PlayerQuestSession {
 		lastUpdate = new QuestSheetRunnable(null).getLastUpdate();
 	}
 
-	public boolean isDoing(Quest q) {
+	private boolean isDoing(Quest q) {
 		return doingQuest.containsValue(q);
 	}
 
@@ -32,14 +35,46 @@ public class PlayerQuestSession {
 	}
 
 	public Set<Quest> getDoingQuestListByType(QuestType type) {
+		if (lastUpdate < new QuestSheetRunnable(null).getLastUpdate()) {
+			updateQuestInstance();
+		}
 		return doingQuest.get(type);
 	}
 
+	/**
+	 * クエストインスタンスを新しいものに更新する
+	 */
+	private void updateQuestInstance() {
+		//doingQuestを更新
+		HashMultimap<QuestType, Quest> newDoingQuest = HashMultimap.create();
+		for (Entry<QuestType, Quest> entry : doingQuest.entries()) {
+			Quest questById = QuestManager.getQuestById(entry.getValue().getId());
+			newDoingQuest.put(questById.getQuestType(), questById);
+		}
+		doingQuest = newDoingQuest;
+
+		//complateQuestを更新
+		HashMap<Quest, ComplateData> newComplateQuest = new HashMap<>();
+		for (Entry<Quest, ComplateData> entry : newComplateQuest.entrySet()) {
+			Quest questById = QuestManager.getQuestById(entry.getKey().getId());
+			newComplateQuest.put(questById, entry.getValue());
+		}
+		complateQuest = newComplateQuest;
+
+		lastUpdate = new QuestSheetRunnable(null).getLastUpdate();
+	}
+
 	public Collection<Quest> getDoingQuestList() {
+		if (lastUpdate < new QuestSheetRunnable(null).getLastUpdate()) {
+			updateQuestInstance();
+		}
 		return doingQuest.values();
 	}
 
 	public Collection<Quest> getComplateQuestList() {
+		if (lastUpdate < new QuestSheetRunnable(null).getLastUpdate()) {
+			updateQuestInstance();
+		}
 		return doingQuest.values();
 	}
 
@@ -101,6 +136,22 @@ public class PlayerQuestSession {
 
 	public int getNowQuestSize() {
 		return doingQuest.values().size();
+	}
+
+
+	public QuestProcessingStatus getProcessingStatus(Quest q) {
+		//クエストを実行しているか確認
+		if (!isDoing(q)) {
+			//実行していなければNOT_START
+			return QuestProcessingStatus.NOT_START;
+		}
+
+		int questData = getQuestData(q);
+		//終了条件を満たしていないならPROCESSING
+		if (!q.isComplate(questData)) {
+			return QuestProcessingStatus.PROCESSING;
+		}
+		return QuestProcessingStatus.PROCESS_END;
 	}
 }
 

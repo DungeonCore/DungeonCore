@@ -4,15 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.entity.Player;
-
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.quest.Quest;
-import lbn.quest.QuestProcessingStatus;
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.quest.questData.PlayerQuestSessionManager;
+
+import org.bukkit.entity.Player;
 
 public class NullQuest implements Quest{
 
@@ -33,23 +28,8 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public String getQuestDetail() {
-		return "クエストが存在しません";
-	}
-
-	@Override
-	public void onStart(StartQuestEvent e) {
-
-	}
-
-	@Override
-	public void onComplate(ComplateQuestEvent e) {
-
-	}
-
-	@Override
-	public void onDistruction(DestructionQuestEvent e) {
-
+	public String[] getQuestDetail() {
+		return new String[]{"クエストが存在しません"};
 	}
 
 	@Override
@@ -93,12 +73,12 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public String[] getTalk1() {
+	public String[] getTalkOnStart() {
 		return null;
 	}
 
 	@Override
-	public String[] getTalk2() {
+	public String[] getTalkOnComplate() {
 		return null;
 	}
 
@@ -184,13 +164,11 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public QuestProcessingStatus getProcessingStatus(Player p) {
-		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
-		if (questSession.isDoing(this)) {
-			return QuestProcessingStatus.PROCESSING;
-		} else {
-			return QuestProcessingStatus.NOT_START;
-		}
+	public String getComplateCondition() {
+		return "クエスト未登録";
 	}
 
+	@Override
+	public void onStartQuestEvent(StartQuestEvent e) {
+	}
 }

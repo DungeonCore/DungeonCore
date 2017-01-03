@@ -50,6 +50,11 @@ public class MenuSelectorManager {
 
 		InventoryClickEvent event = (InventoryClickEvent) e;
 
+		//クリックしたのが上のインベントリでないなら無視
+		if (event.getClickedInventory() != view.getTopInventory()) {
+			return;
+		}
+
 		Player p = (Player) event.getWhoClicked();
 
 		MenuSelecor selector = getSelector(title);

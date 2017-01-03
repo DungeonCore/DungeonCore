@@ -3,6 +3,7 @@ package lbn.util;
 import java.text.MessageFormat;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -33,16 +34,27 @@ public class QuestUtil {
 		}
 
 		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-		Bukkit.dispatchCommand(consoleSender,
-				MessageFormat.format("/tellraw {0} [\"\",{\"text\":\"{6}{1}\"},{\"text\":\"{2}\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Type : {3}    , Location : {4}\"}},{\"text\":\"{5}\"}]",
-						p.getName(),
-						"クエストクリア!!!  ",
-						p.getName(),
-						villager.getEntityType(),
-						loc,
-						"のところに戻ろう",
-						QuestAnnouncement.QUEST_INFO_PREFIX
-						));
+		String command = MessageFormat.format("tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
+				p.getName(),
+				"クエストクリア!!!  ",
+				villager.getName(),
+				villager.getEntityType(),
+				loc,
+				"のところに戻ろう",
+				QuestAnnouncement.QUEST_INFO_PREFIX,
+				"{"
+				);
+		Bukkit.dispatchCommand(consoleSender, command);
+	}
 
+	public static void sendMessageByVillager(Player p, String[] text) {
+		if (text == null || text.length == 0) {
+			return;
+		}
+
+		p.sendMessage("");
+		for (String string : text) {
+			p.sendMessage(ChatColor.GOLD + string);
+		}
 	}
 }

@@ -7,16 +7,19 @@ import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
+import lbn.dungeoncore.Main;
 import lbn.player.status.mainStatus.MainStatusManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
+import lbn.util.QuestUtil;
 import lbn.util.TitleSender;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class QuestManager {
@@ -24,6 +27,10 @@ public class QuestManager {
 
 	private static HashMap<String, Quest> allQuestById = new HashMap<String, Quest>();
 
+	public static void clear() {
+		allQuestByName.clear();
+		allQuestById.clear();
+	}
 
 	public static Quest getQuestByName(String name) {
 		return allQuestByName.get(ChatColor.stripColor(name).toUpperCase());
@@ -46,11 +53,12 @@ public class QuestManager {
 
 	public static void registQuest(Quest q) {
 		if (allQuestById.containsKey(q.getId())) {
-//			new LbnRuntimeException("quest id is deplicated!! : " + q.getId()).printStackTrace();
 			return;
 		}
 		allQuestByName.put(ChatColor.stripColor(q.getName()).toUpperCase(), q);
 		allQuestById.put(ChatColor.stripColor(q.getId()).toUpperCase(), q);
+
+		AvailbleQuestHolder.regist(q);
 	}
 
 	public static QuestStartStatus getStartQuestStatus(Quest q, Player p) {
@@ -59,23 +67,23 @@ public class QuestManager {
 		}
 
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
+		QuestProcessingStatus processingStatus = session.getProcessingStatus(q);
 
 		//現在実行中
-		if (session.isDoing(q)) {
-			Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
+		if (processingStatus.isDoing()) {
+//			Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
 			return QuestStartStatus.DOING_NOW;
 		}
 
-		//クエスト上限
+		//クエスト数上限
 		if (session.getNowQuestSize() >= getMaxQuestCount(p)) {
-			Message.sendMessage(p, Message.QUEST_OVER_COUNT);
+//			Message.sendMessage(p, Message.QUEST_OVER_COUNT);
 			return QuestStartStatus.RECEIVE_COUNT_MAXIMUM;
 		}
 
 		//クエストのクールタイム
 		long complateDate = session.getComplateDate(q);
 		if (complateDate + q.getCoolTimeSecound() * 60 * 1000 >= JavaUtil.getJapanTimeInMillis()) {
-			Message.sendMessage(p, "このクエストはまだ受けられません(時間)");
 			return QuestStartStatus.REMAIND_COOL_TIME;
 		}
 
@@ -97,7 +105,7 @@ public class QuestManager {
 		Set<Quest> beforeQuest = q.getBeforeQuest();
 		for (Quest quest : beforeQuest) {
 			if (!session.isComplate(quest)) {
-				Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
+//				Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
 				return QuestStartStatus.LACK_BEFORE_QUEST;
 			}
 		}
@@ -112,6 +120,19 @@ public class QuestManager {
 	 * @return
 	 */
 	public static boolean startQuest(Quest q, Player p, boolean force, QuestStartStatus status) {
+		return startQuest(q, p, force, status, false);
+	}
+
+		/**
+		 * クエストを開始する
+		 * @param q
+		 * @param p
+		 * @param force 強制的にクエストを実行
+		 * @param status
+		 * @param laterTitle Titleなどを遅れて実行する場合はTRUE
+		 * @return
+		 */
+	public static boolean startQuest(Quest q, Player p, boolean force, QuestStartStatus status, boolean laterTitle) {
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 
 		if (!status.canStart()) {
@@ -134,13 +155,40 @@ public class QuestManager {
 		}
 
 		//title表示
-		if (q.isShowTitle()) {
-			TitleSender.getInstance().sendTitle(p, Message.getMessage(ChatColor.GOLD + "[Quest] クエスト開始"), ChatColor.GOLD + q.getName());
+		if (laterTitle) {
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					showStartEffect(q, p);
+				}
+			}.runTaskLater(Main.plugin, 20 * 5);
+		} else {
+			showStartEffect(q, p);
 		}
 
 		//実行中にする
 		session.startQuest(q);
 		return true;
+	}
+
+	/**
+	 * クエストを開始するためのエフェクトを表示する
+	 * @param q
+	 * @param p
+	 */
+	private static void showStartEffect(Quest q, Player p) {
+		if (q.isShowTitle()) {
+			//TITLE表示
+			TitleSender titleSender = new TitleSender();
+			titleSender.setTitle("[Quest] クエスト開始", ChatColor.GOLD, true);
+			titleSender.setSubTitle(q.getName(), ChatColor.GOLD, false);
+			titleSender.execute(p);
+		}
+
+		//音を鳴らす
+		q.playStartSound(p);
+
+		QuestUtil.sendMessageByVillager(p, q.getTalkOnStart());
 	}
 
 	private static int getMaxQuestCount(Player p) {
@@ -154,12 +202,13 @@ public class QuestManager {
 	 */
 	public static void complateQuest(Quest q, Player p) {
 		if (!q.canGetRewordItem(p)) {
+			QuestAnnouncement.sendQuestError(p, "インベントリに空きが無いため、報酬を受け取れません。");
 			return;
 		}
 
 		ComplateQuestEvent event = new ComplateQuestEvent(p, q);
 		Bukkit.getServer().getPluginManager().callEvent(event);
-		if (!event.isCancelled()) {
+		if (event.isCancelled()) {
 			return;
 		}
 
@@ -169,10 +218,23 @@ public class QuestManager {
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 		questSession.complateQuest(q);
 
+		if (q.isShowTitle()) {
+			TitleSender titleSender = new TitleSender();
+			titleSender.setTitle("[Quest] クエスト完了", ChatColor.GOLD, true);
+			titleSender.setSubTitle(q.getName(), ChatColor.GOLD, false);
+			titleSender.execute(p);
+		}
+		//音を鳴らす
+		q.playCompleteSound(p);
+		//テキストを表示
+		QuestUtil.sendMessageByVillager(p, q.getTalkOnComplate());
+
 		//次のクエストを開始する
 		Quest autoExecuteNextQuest = q.getAutoExecuteNextQuest();
 		if (autoExecuteNextQuest != null) {
-			startQuest(autoExecuteNextQuest, p, true, getStartQuestStatus(autoExecuteNextQuest, p));
+			//同時に終了と開始のタイトルコマンドを実行できないので開始のタイトルを遅らせて実行する
+			boolean laterShow = autoExecuteNextQuest.isShowTitle() && q.isShowTitle();
+			startQuest(autoExecuteNextQuest, p, true, getStartQuestStatus(autoExecuteNextQuest, p), laterShow);
 		}
 
 	}
@@ -188,7 +250,7 @@ public class QuestManager {
 			return false;
 		}
 
-		if (q.canDestory()) {
+		if (!q.canDestory()) {
 			p.sendMessage(ChatColor.RED + "このクエストは破棄できません。");
 			return false;
 		}
@@ -197,6 +259,8 @@ public class QuestManager {
 
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 		session.removeQuest(q);
+
+		q.playDistructionSound(p);
 
 		Message.sendMessage(p, Message.QUEST_REMOVE_MESSAGE, q.getName());
 		return true;
@@ -226,7 +290,7 @@ public class QuestManager {
 	public static enum QuestStartStatus {
 		CAN_START(true, true),
 		UNKNOW_QUEST("クエストが存在しません", false, false),
-		DOING_NOW("同じクエストを同時に受けることはできません", true, false),
+		DOING_NOW("同じクエストを同時に受けることはできません", false, false),
 		RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true),
 		REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true),
 		LACK_AVAILAVLE_MAIN_LEVEL("メインレベルが足りません", false, true),

@@ -1,5 +1,6 @@
 package lbn.quest.quest;
 
+import java.text.MessageFormat;
 import java.util.Set;
 
 import org.bukkit.Sound;
@@ -11,6 +12,7 @@ import com.google.common.collect.HashMultimap;
 
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.quest.QuestProcessingStatus;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -25,6 +27,9 @@ public class PickItemQuest extends AbstractQuest{
 	private PickItemQuest(String id, String pickItemId, int needCount) {
 		super(id);
 		needItemMap.put(getNeedItem().getId(), this);
+
+		this.pickItemId = pickItemId;
+		this.needCount = needCount;
 	}
 
 	public static PickItemQuest getInstance(String id, String data1, String data2) {
@@ -61,21 +66,10 @@ public class PickItemQuest extends AbstractQuest{
 
 		boolean isQuestItem = customPickItem.isQuestItem();
 
-		//実行中でない時
-		if (!session.isDoing(this)) {
-			//クエストアイテムなら取得させない
-			if (isQuestItem) {
-				e.setCancelled(true);
-			}
-			return;
-		}
-
-		//終了条件を満たしてるなら何もしない
-		if (session.isComplate(this)) {
-			//クエストアイテムなら取得させない
-			if (isQuestItem) {
-				e.setCancelled(true);
-			}
+		QuestProcessingStatus processingStatus = session.getProcessingStatus(this);
+		//実行中でない時はクエストアイテムを取得させない
+		if (processingStatus != QuestProcessingStatus.PROCESSING) {
+			e.setCancelled(true);
 			return;
 		}
 
@@ -131,5 +125,15 @@ public class PickItemQuest extends AbstractQuest{
 	@Override
 	public boolean isComplate(int data) {
 		return data >= needCount;
+	}
+
+	@Override
+	public String getComplateCondition() {
+		ItemInterface needItem = getNeedItem();
+		if (needItem == null) {
+			return MessageFormat.format("アイテム[{0}]を{1}個集める", pickItemId, needCount);
+		} else {
+			return MessageFormat.format("アイテム[{0}]を{1}個集める", needItem.getItemName(), needCount);
+		}
 	}
 }

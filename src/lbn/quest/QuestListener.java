@@ -100,27 +100,22 @@ public class QuestListener implements Listener{
 	}
 
 	public void onSatisfyCondition(Player p, Quest quest) {
-		if (quest.canGetRewordItem(p)) {
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
+		if (quest.isComplate(questSession.getQuestData(quest))) {
 			quest.onSatisfyComplateCondtion(p);
 		}
 	}
 
 	@EventHandler
 	public void onStartQuest(StartQuestEvent e) {
-		e.getQuest().onStart(e);
-		e.getQuest().playStartSound(e.getPlayer());
 	}
 
 	@EventHandler
 	public void onComplateQuest(ComplateQuestEvent e) {
-		e.getQuest().onComplate(e);
-		e.getQuest().playCompleteSound(e.getPlayer());
 	}
 
 	@EventHandler
 	public void onRemoveQuest(DestructionQuestEvent e) {
-		e.getQuest().onDistruction(e);
-		e.getQuest().playDistructionSound(e.getPlayer());
 	}
 
 	@EventHandler

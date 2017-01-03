@@ -1,13 +1,14 @@
 package lbn.command;
 
+import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.quest.QuestInventory;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.quest.Quest;
-import lbn.quest.QuestInventory;
-import lbn.quest.QuestManager;
 
 public class QuestCommand implements CommandExecutor{
 
@@ -19,17 +20,18 @@ public class QuestCommand implements CommandExecutor{
 			return true;
 		}
 
-		if (paramArrayOfString.length == 2 && paramArrayOfString[0].equals("start")) {
-			Quest q = QuestManager.getQuestById(paramArrayOfString[1]);
-			if (q == null) {
-				return false;
-			}
 
-//			if (QuestManager.canStartQuestByTellrow(q, p)) {
-//				QuestManager.startQuest(q, p, false);
-//			}
+		if (paramArrayOfString[0].equals("reload")) {
+			QuestSheetRunnable questSheetRunnable = new QuestSheetRunnable(p);
+			SpletSheetExecutor.onExecute(questSheetRunnable);
+			return true;
 		}
-		return true;
+		return false;
+	}
+
+	public static void questReload() {
+		QuestSheetRunnable questSheetRunnable = new QuestSheetRunnable(Bukkit.getConsoleSender());
+		SpletSheetExecutor.onExecute(questSheetRunnable);
 	}
 
 }

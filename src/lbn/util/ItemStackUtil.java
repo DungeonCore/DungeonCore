@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -392,4 +393,31 @@ public class ItemStackUtil {
 		}
 		return slots;
 	}
+
+	public static boolean canGiveItem(Player p, ItemStack item) {
+		if (!p.isOnline()) {
+			return false;
+		}
+
+		//インベントリに１つ以上の空きがあるならTRUE
+		if (p.getInventory().firstEmpty() != -1) {
+			return true;
+		}
+
+		//最大スタック数が1の場合はこの時点でFALSE
+		int maxStackSize = item.getMaxStackSize();
+		if (maxStackSize != 1) {
+			return false;
+		}
+
+		//stackした時にアイテムを格納できるか確認する
+		Map<Integer, ItemStack> all = ItemStackUtil.allSameItems(p.getInventory(), item);
+		for (ItemStack invItem : all.values()) {
+			if (invItem.getAmount() + item.getAmount() <= maxStackSize) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

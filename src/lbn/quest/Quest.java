@@ -3,8 +3,6 @@ package lbn.quest;
 import java.util.List;
 import java.util.Set;
 
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.quest.quest.QuestType;
 
@@ -15,13 +13,7 @@ public interface Quest{
 
 	public String getName();
 
-	public String getQuestDetail();
-
-	public void onStart(StartQuestEvent e);
-
-	public void onComplate(ComplateQuestEvent e);
-
-	public void onDistruction(DestructionQuestEvent e);
+	public String[] getQuestDetail();
 
 	public Set<Quest> getBeforeQuest();
 
@@ -51,13 +43,13 @@ public interface Quest{
 	 * 受けた後の会話
 	 * @return
 	 */
-	public String[] getTalk1();
+	public String[] getTalkOnStart();
 
 	/**
 	 * 完了した後の会話
 	 * @return
 	 */
-	public String[] getTalk2();
+	public String[] getTalkOnComplate();
 
 	public boolean isShowTitle();
 
@@ -73,9 +65,11 @@ public interface Quest{
 
 	public List<String> getRewordText();
 
+	public String getComplateCondition();
+
 	public String getStartVillagerName();
 
 	public String getEndVillagerName();
 
-	public QuestProcessingStatus getProcessingStatus(Player p);
+	public void onStartQuestEvent(StartQuestEvent e);
 }

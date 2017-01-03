@@ -5,6 +5,7 @@ import java.util.List;
 
 import lbn.common.menu.MenuSelectorManager;
 import lbn.money.BuyerShopSelector;
+import lbn.quest.viewer.QuestSelectorViewer;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -12,8 +13,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 
-public class SpletSheetVillager extends QuestVillager{
+public class SpletSheetVillager extends AbstractVillager{
 
 	VillagerData data;
 
@@ -23,11 +25,6 @@ public class SpletSheetVillager extends QuestVillager{
 
 	public String getData() {
 		return getVillageData().getData();
-	}
-
-	@Override
-	public String[] getHaveQuest() {
-		return data.questList.toArray(new String[0]);
 	}
 
 	@Override
@@ -47,9 +44,13 @@ public class SpletSheetVillager extends QuestVillager{
 		if (damager.getType() != EntityType.PLAYER) {
 			return;
 		}
+		super.onDamage(mob, damager, e);
+		if (!isExecuteOnDamage) {
+			return;
+		}
 
 		if (data.getType() == VillagerType.NORMAL) {
-			super.onDamage(mob, damager, e);
+			QuestSelectorViewer.openSelector(this, (Player)damager);
 		} else if (data.getType() == VillagerType.SHOP) {
 			BuyerShopSelector.onOpen((Player) damager, getName());
 		} if (data.getType() == VillagerType.BLACKSMITH) {
@@ -60,5 +61,14 @@ public class SpletSheetVillager extends QuestVillager{
 	@Override
 	public Location getLocation() {
 		return data.getLocation();
+	}
+
+	@Override
+	public void onAttack(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
+	}
+
+	@Override
+	public void onDeathPrivate(EntityDeathEvent e) {
 	}
 }

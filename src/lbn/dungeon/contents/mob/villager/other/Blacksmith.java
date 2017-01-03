@@ -26,6 +26,10 @@ public class Blacksmith extends AbstractVillager{
 	@Override
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		e.setCancelled(true);
+		super.onDamage(mob, damager, e);
+		if (!isExecuteOnDamage) {
+			return;
+		}
 		if (damager.getType() == EntityType.PLAYER) {
 			final Player p = (Player) damager;
 			MenuSelectorManager.open(p, "blacksmith menu");

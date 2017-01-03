@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 
 import lbn.command.CommandChest;
 import lbn.command.MobCommand;
+import lbn.command.QuestCommand;
 import lbn.command.VillagerCommand;
 import lbn.common.other.DungeonList;
 import lbn.common.other.HolographicDisplaysManager;
@@ -39,6 +40,8 @@ public class InitManager {
 			CommandChest.allReload();
 
 			SetItemManager.initServer();
+
+			QuestCommand.questReload();
 
 //			SystemSqlExecutor.execute();
 

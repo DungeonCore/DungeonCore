@@ -2,11 +2,21 @@ package lbn.mob.mob.abstractmob.villager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.AbstractMob;
+import lbn.quest.Quest;
+import lbn.quest.QuestManager;
+import lbn.quest.QuestProcessingStatus;
+import lbn.quest.quest.TouchVillagerQuest;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.DungeonLogger;
+
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -16,15 +26,6 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.AbstractMob;
-import lbn.quest.quest.TouchVillagerQuest;
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.quest.questData.PlayerQuestSessionManager;
-import lbn.util.DungeonLogger;
-import lbn.util.JavaUtil;
-import lbn.util.LivingEntityUtil;
 
 public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 	abstract public Location getLocation();
@@ -67,9 +68,32 @@ public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 		return EntityType.VILLAGER;
 	}
 
+	public boolean isExecuteOnDamage = true;
+
 	@Override
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		e.setCancelled(true);
+		if (damager.getType() != EntityType.PLAYER) {
+			return;
+		}
+		Player p = (Player) damager;
+		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
+		Collection<Quest> doingQuestList = session.getDoingQuestList();
+		for (Quest quest : doingQuestList) {
+			//もし終了の村人がこの村人でないなら無視
+			if (!getName().equals(quest.getEndVillagerName())) {
+				continue;
+			}
+
+			//もし処理を全て終わらせていないなら無視
+			if (session.getProcessingStatus(quest) != QuestProcessingStatus.PROCESS_END) {
+				continue;
+			}
+
+			//完了にする
+			QuestManager.complateQuest(quest, p);
+			isExecuteOnDamage = false;
+		}
 	}
 
 	abstract protected List<String> getMessage(Player p, LivingEntity mob);
@@ -81,14 +105,14 @@ public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 		Player p = e.getPlayer();
 		LivingEntity entity = (LivingEntity) e.getRightClicked();
 		//動く村人なら消す
-		if (!LivingEntityUtil.isCustomVillager(entity)) {
-			Entity rightClicked = e.getRightClicked();
-			rightClicked.remove();
-			if (p.getGameMode() != GameMode.CREATIVE) {
-				JavaUtil.addBonusGold(p, rightClicked.getLocation());
-			}
-			return;
-		}
+//		if (!LivingEntityUtil.isCustomVillager(entity)) {
+//			Entity rightClicked = e.getRightClicked();
+//			rightClicked.remove();
+//			if (p.getGameMode() != GameMode.CREATIVE) {
+//				JavaUtil.addBonusGold(p, rightClicked.getLocation());
+//			}
+//			return;
+//		}
 
 		//この村人をタッチするクエストで進行中のクエストがあったら他の会話は開始しない
 		boolean isDoingTouchQuest = false;
@@ -99,13 +123,13 @@ public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 		for (TouchVillagerQuest touchVillagerQuest : questForVillager) {
-			if (questSession.isDoing(touchVillagerQuest)) {
-				//クエスト処理
+			//クエスト実行中なら処理を行う
+			if (questSession.getProcessingStatus(touchVillagerQuest) == QuestProcessingStatus.PROCESSING) {
+				//村人にタッチしたときの処理を実行
 				touchVillagerQuest.onTouchVillager(p, entity, questSession);
+				//データを記録
 				questSession.setQuestData(touchVillagerQuest, 1);
-				if (touchVillagerQuest.canGetRewordItem(p)) {
-					touchVillagerQuest.onSatisfyComplateCondtion(p);
-				}
+				touchVillagerQuest.onSatisfyComplateCondtion(p);
 				//メッセージを格納
 				message.addAll(Arrays.asList(touchVillagerQuest.talkOnTouch()));
 				isDoingTouchQuest = true;

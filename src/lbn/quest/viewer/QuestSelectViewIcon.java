@@ -49,7 +49,9 @@ public class QuestSelectViewIcon {
 
 		//Itemを作成
 		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.AQUA + q.getQuestDetail());
+		for (String detail : q.getQuestDetail()) {
+			lore.add(ChatColor.AQUA + detail);
+		}
 		lore.add(ID_PREFIX + q.getId());
 		lore.add("[報酬]");
 		for (String reword : q.getRewordText()) {

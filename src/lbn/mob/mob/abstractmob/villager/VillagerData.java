@@ -1,8 +1,6 @@
 package lbn.mob.mob.abstractmob.villager;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
@@ -40,7 +38,6 @@ public class VillagerData {
 	String name;
 	String data;
 	VillagerType type;
-	Set<String> questList = new HashSet<>();
 	String[] texts;
 	boolean isAdult = true;
 
@@ -85,13 +82,6 @@ public class VillagerData {
 			}
 		}
 
-		if (quests != null) {
-			//クエストを取得する
-			for (String id : quests.split(",")) {
-				questList.add(id);
-			}
-		}
-
 		if ("子供".equals(adult)) {
 			isAdult = false;
 		}
@@ -110,10 +100,6 @@ public class VillagerData {
 
 	public VillagerType getType() {
 		return type;
-	}
-
-	public Set<String> getQuestList() {
-		return questList;
 	}
 
 	public String[] getTexts() {
@@ -138,6 +124,6 @@ public class VillagerData {
 
 	@Override
 	public String toString() {
-		return StringUtils.join(new Object[]{"name:", name, ", type:", type, ", quests:", questList, ", texts:", texts});
+		return StringUtils.join(new Object[]{"name:", name, ", type:", type,  ", texts:", texts});
 	}
 }

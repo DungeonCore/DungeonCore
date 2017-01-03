@@ -57,6 +57,13 @@ public class QuestInventory {
 			return;
 		}
 
+		//クエストを削除できないので操作をキャンセルする
+		if (!quest.canDestory()) {
+			e.getPlayer().sendMessage(ChatColor.RED + "このクエストは破棄できません。");
+			e.setCancelled(true);
+			return;
+		}
+
 		boolean removeQuest = QuestManager.removeQuest(quest, e.getPlayer());
 		//クエストを削除できたらアイテムを削除する
 		if (removeQuest) {
@@ -82,7 +89,7 @@ public class QuestInventory {
 		if (title.contains("quest_view")) {
 			ItemStack itemStack = e.getCurrentItem();
 			Quest quest = new QuestViewIcon((Player) e.getView().getPlayer()).getQuest(itemStack);
-			if (quest != null && !quest.canDestory() && !quest.isMainQuest()) {
+			if (quest != null && !quest.canDestory()) {
 				e.setCancelled(true);
 			}
 		//クリックしたのがQuestViewでない時はキャンセルする

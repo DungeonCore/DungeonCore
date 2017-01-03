@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import com.google.common.collect.HashMultimap;
 
 import lbn.quest.questData.PlayerQuestSession;
+import lbn.util.QuestUtil;
 
 public class TouchVillagerQuest extends AbstractQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
@@ -15,7 +16,7 @@ public class TouchVillagerQuest extends AbstractQuest{
 	String villagerName;
 	String[] talk;
 
-	private TouchVillagerQuest(String id, String name, String[] talk) {
+	protected TouchVillagerQuest(String id, String name, String[] talk) {
 		super(id);
 		name = villagerName;
 		this.talk = talk;
@@ -39,9 +40,12 @@ public class TouchVillagerQuest extends AbstractQuest{
 	}
 
 	public void onTouchVillager(Player p, LivingEntity entity, PlayerQuestSession session) {
-		String name = ((LivingEntity)entity).getCustomName();
+		String name = entity.getCustomName();
 		if (name.equalsIgnoreCase(getTargetVillagerName())) {
 			session.setQuestData(this, 1);
+
+			//メッセージを出力
+			QuestUtil.sendMessageByVillager(p, talk);
 		}
 	}
 
@@ -62,5 +66,10 @@ public class TouchVillagerQuest extends AbstractQuest{
 	@Override
 	public boolean isComplate(int data) {
 		return data == 1;
+	}
+
+	@Override
+	public String getComplateCondition() {
+		return villagerName + "と会って話をする";
 	}
 }

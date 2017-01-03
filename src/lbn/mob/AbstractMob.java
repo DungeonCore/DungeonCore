@@ -15,9 +15,11 @@ import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
+import lbn.mob.mob.abstractmob.villager.AbstractVillager;
 import lbn.player.AttackType;
 import lbn.player.status.IStatusManager;
 import lbn.player.status.StatusAddReason;
+import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.PickItemQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
@@ -53,6 +55,20 @@ public abstract class AbstractMob<T extends Entity> {
 		return isBoss;
 	}
 
+
+	TheLowMobType type = TheLowMobType.NORMAL;
+	{
+		if (this instanceof SummonMobable) {
+			type = TheLowMobType.SUMMON;
+		} else if (this instanceof AbstractVillager) {
+			type = TheLowMobType.VILLAGER;
+		}
+	}
+
+	public TheLowMobType getTheLowMobType() {
+		return type;
+	}
+
 	abstract public String getName();
 
 	abstract public void onSpawn(PlayerCustomMobSpawnEvent e);
@@ -83,16 +99,17 @@ public abstract class AbstractMob<T extends Entity> {
 		//属性適用
 		getAttribute().onDamage(mob, damager, e);
 
+		if (getTheLowMobType() == TheLowMobType.VILLAGER) {
+			((AbstractVillager)this).isExecuteOnDamage = true;
+			return;
+		}
+
 		//ボスモンスターの時はダメージ計算の補正を行わない
-		if (this instanceof BossMobable) {
+		if (isBoss()) {
 			return;
 		}
 
-		if (this instanceof SummonMobable) {
-			return;
-		}
-
-		if (getEntityType() == EntityType.VILLAGER) {
+		if (getTheLowMobType() == TheLowMobType.SUMMON) {
 			return;
 		}
 
@@ -260,6 +277,7 @@ public abstract class AbstractMob<T extends Entity> {
 		Iterator<ItemStack> iterator = arrayList.iterator();
 		label1:
 		while (iterator.hasNext()) {
+			//quest sessionインスタンスを作成
 			if (questSession == null) {
 				questSession = PlayerQuestSessionManager.getQuestSession(lastDamagePlayer.getPlayer());
 			}
@@ -279,8 +297,8 @@ public abstract class AbstractMob<T extends Entity> {
 			//クエスト実行中か調べる
 			Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 			for (PickItemQuest pickItemQuest : quest) {
-				//1つでも実行中なら許可する
-				if (questSession.isDoing(pickItemQuest)) {
+				//1つでもクエストが実行中なら許可する
+				if (questSession.getProcessingStatus(pickItemQuest) == QuestProcessingStatus.PROCESSING) {
 					continue label1;
 				}
 			}

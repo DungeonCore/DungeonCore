@@ -4,15 +4,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import lbn.common.event.quest.ComplateQuestEvent;
-import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
@@ -26,12 +19,12 @@ import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
 import lbn.quest.QuestManager;
-import lbn.quest.QuestProcessingStatus;
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 import lbn.util.QuestUtil;
+
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractQuest implements Quest{
 	protected AbstractQuest(String id) {
@@ -112,9 +105,9 @@ public abstract class AbstractQuest implements Quest{
 		return name;
 	}
 
-	String detail;
+	String[] detail;
 	@Override
-	public String getQuestDetail() {
+	public String[] getQuestDetail() {
 		return detail;
 	}
 
@@ -171,13 +164,13 @@ public abstract class AbstractQuest implements Quest{
 	String[] talk1 = null;
 
 	@Override
-	public String[] getTalk1() {
+	public String[] getTalkOnStart() {
 		return talk1;
 	}
 
 	String[] talk2 = null;
 	@Override
-	public String[] getTalk2() {
+	public String[] getTalkOnComplate() {
 		return talk2;
 	}
 
@@ -236,37 +229,13 @@ public abstract class AbstractQuest implements Quest{
 
 	@Override
 	public boolean canGetRewordItem(Player p) {
-		if (!p.isOnline()) {
-			return false;
-		}
-
-		if (getRewordItem() == null) {
+		ItemInterface rewordItem = getRewordItem();
+		if (rewordItem == null) {
 			return true;
 		}
+		ItemStack item = rewordItem.getItem();
 
-		ItemStack item = getRewordItem().getItem();
-		//空きがあるならTRUE
-		if (p.getInventory().firstEmpty() != -1) {
-			Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
-			return true;
-		}
-
-		//最大スタック数が1の場合はこの時点でFALSE
-		int maxStackSize = item.getMaxStackSize();
-		if (maxStackSize != 1) {
-			Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
-			return false;
-		}
-
-		//stackした時にアイテムを格納できるか確認する
-		Map<Integer, ItemStack> all = ItemStackUtil.allSameItems(p.getInventory(), item);
-		for (ItemStack invItem : all.values()) {
-			if (invItem.getAmount() + item.getAmount() <= maxStackSize) {
-				return true;
-			}
-		}
-		Message.sendMessage(p, "インベントリに空きが無いためクエストを完了できません。");
-		return false;
+		return ItemStackUtil.canGiveItem(p, item);
 	}
 
 	@Override
@@ -359,31 +328,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	@Override
-	public void onStart(StartQuestEvent e) {
+	public void onStartQuestEvent(StartQuestEvent e) {
 	}
 
-	@Override
-	public void onDistruction(DestructionQuestEvent e) {
-	}
-
-	@Override
-	public void onComplate(ComplateQuestEvent e) {
-	}
-
-	@Override
-	public QuestProcessingStatus getProcessingStatus(Player p) {
-		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
-		//クエストを実行しているか確認
-		if (!questSession.isDoing(this)) {
-			//実行していなければNOT_START
-			return QuestProcessingStatus.NOT_START;
-		}
-
-		int questData = questSession.getQuestData(this);
-		//終了条件を満たしていないならPROCESSING
-		if (!isComplate(questData)) {
-			return QuestProcessingStatus.PROCESSING;
-		}
-		return QuestProcessingStatus.PROCESS_END;
-	}
 }
