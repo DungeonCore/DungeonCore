@@ -3,12 +3,12 @@ package lbn.mobspawn.gettter;
 import java.util.Collection;
 import java.util.HashMap;
 
-import org.bukkit.entity.EntityType;
-
 import lbn.dungeon.contents.mob.NormalMob;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.NullMob;
+
+import org.bukkit.entity.EntityType;
 
 public class SpawnMobGetterManager {
 	static HashMap<String, SpawnMobGetterInterface> spawnMobList = new HashMap<>();

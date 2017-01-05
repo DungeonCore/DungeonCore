@@ -6,13 +6,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-
 import lbn.item.GalionItem;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 
 public class JavaUtil {
 	public static Set<Class<?>> getInterface(Class<?> clazz) {
@@ -50,6 +50,14 @@ public class JavaUtil {
 	public static int getInt(String data, int other) {
 		try {
 			return Integer.parseInt(data);
+		} catch (NumberFormatException e) {
+			return other;
+		}
+	}
+
+	public static float getFloat(String data, float other) {
+		try {
+			return Float.parseFloat(data);
 		} catch (NumberFormatException e) {
 			return other;
 		}

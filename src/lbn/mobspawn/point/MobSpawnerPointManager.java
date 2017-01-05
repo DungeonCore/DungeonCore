@@ -5,15 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.event.block.BlockBreakEvent;
-
-import com.google.common.collect.HashMultimap;
-
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.Main;
 import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
@@ -22,6 +13,15 @@ import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.SpawnPointMonitor;
 import lbn.util.DungeonLogger;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
+
+import com.google.common.collect.HashMultimap;
 
 public class MobSpawnerPointManager {
   static HashMultimap<ChunkWrapper, MobSpawnerPoint> spawnPointListAndChunk = HashMultimap.create();

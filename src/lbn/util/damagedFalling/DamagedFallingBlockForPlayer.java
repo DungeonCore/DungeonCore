@@ -1,5 +1,11 @@
 package lbn.util.damagedFalling;
 
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.mob.LastDamageManager;
+import lbn.player.AttackType;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -9,12 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-
-import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.common.event.player.PlayerKillEntityEvent;
-import lbn.mob.LastDamageManager;
-import lbn.player.AttackType;
-import lbn.util.LivingEntityUtil;
 
 public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFallingblock{
 

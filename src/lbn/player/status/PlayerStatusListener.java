@@ -1,14 +1,5 @@
 package lbn.player.status;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.other.SystemLog;
@@ -21,6 +12,15 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.mainStatus.MainStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 
 public class PlayerStatusListener implements Listener{
 	public static IStatusManager[] managerList = {MainStatusManager.getInstance(), SwordStatusManager.getInstance(), MagicStatusManager.getInstance(), BowStatusManager.getInstance()};

@@ -5,6 +5,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import lbn.command.CommandChest;
+import lbn.command.CommandGiveItem;
+import lbn.command.util.CommandSpecialSign;
+import lbn.command.util.SimplySetSpawnPointCommand;
+import lbn.common.citizenNpc.CitizenNpcManager;
+import lbn.common.menu.MenuSelectorManager;
+import lbn.common.other.BookshelfCommandRunner;
+import lbn.common.other.DungeonList;
+import lbn.common.other.GetItemSign;
+import lbn.common.other.InHandItemClickSign;
+import lbn.common.other.SoulBound;
+import lbn.common.other.Stun;
+import lbn.dungeoncore.Main;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.util.ItemStackUtil;
+import net.citizensnpcs.api.event.NPCSpawnEvent;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -36,21 +53,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.command.CommandChest;
-import lbn.command.CommandGiveItem;
-import lbn.command.util.CommandSpecialSign;
-import lbn.command.util.SimplySetSpawnPointCommand;
-import lbn.common.menu.MenuSelectorManager;
-import lbn.common.other.BookshelfCommandRunner;
-import lbn.common.other.DungeonList;
-import lbn.common.other.GetItemSign;
-import lbn.common.other.InHandItemClickSign;
-import lbn.common.other.SoulBound;
-import lbn.common.other.Stun;
-import lbn.dungeoncore.Main;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.ItemStackUtil;
 
 public class OtherCommonListener implements Listener{
 	@EventHandler
@@ -286,6 +288,11 @@ public class OtherCommonListener implements Listener{
 	@EventHandler
 	public void onBrakeSponge(BlockBreakEvent e) {
 		MobSpawnerPointManager.onBrakeSponge(e);
+	}
+
+	@EventHandler
+	public void onNPCSpawnEvent(NPCSpawnEvent e) {
+		CitizenNpcManager.NPCSpawnEvent(e);
 	}
 
 }

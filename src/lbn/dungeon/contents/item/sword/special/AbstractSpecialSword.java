@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.item.sword.special;
 
-import org.bukkit.Material;
-
 import lbn.dungeon.contents.item.sword.LevelSword;
 import lbn.item.itemInterface.SpecialAttackItemable;
+
+import org.bukkit.Material;
 
 public abstract class AbstractSpecialSword extends LevelSword implements SpecialAttackItemable{
 

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.setItem.AbstractCommonSetItem;
 import lbn.item.setItem.SetItemInterface;
@@ -17,6 +13,10 @@ import lbn.item.setItem.SetStrengthableItemParts;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.appendix.PlayerAppendixManager;
 import lbn.player.appendix.appendixObject.SetItemAppendix;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class AttackCrystal extends AbstractCommonSetItem{
 	public AttackCrystal() {

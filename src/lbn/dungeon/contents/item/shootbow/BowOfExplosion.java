@@ -2,17 +2,6 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.List;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Projectile;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.projectiles.ProjectileSource;
-
 import lbn.dungeon.contents.strength_template.BowLevel12;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
@@ -23,6 +12,17 @@ import lbn.player.AttackType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.NoPlayerDamageExplotionForAttackType;
 import lbn.util.explosion.NotMonsterDamageExplosion;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.projectiles.ProjectileSource;
 
 public class BowOfExplosion extends BowItem implements Strengthenable{
 	@Override

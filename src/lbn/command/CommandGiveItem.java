@@ -6,18 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
@@ -34,6 +22,18 @@ import lbn.item.setItem.SetItemParts;
 import lbn.item.slot.SlotInterface;
 import lbn.util.DungeonLogger;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class CommandGiveItem implements CommandExecutor {
 

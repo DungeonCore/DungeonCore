@@ -1,8 +1,8 @@
 package lbn.dungeoncore.SpletSheet;
 
-import org.bukkit.command.CommandSender;
-
 import lbn.common.text.SayText;
+
+import org.bukkit.command.CommandSender;
 
 public class SayTextSpletSheet extends AbstractSheetRunable{
 

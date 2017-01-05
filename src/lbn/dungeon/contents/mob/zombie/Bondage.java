@@ -1,5 +1,11 @@
 package lbn.dungeon.contents.mob.zombie;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.LastDamageManager;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.player.AttackType;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -8,12 +14,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.LastDamageManager;
-import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.player.AttackType;
-import lbn.util.LivingEntityUtil;
 
 public class Bondage extends AbstractZombie{
 

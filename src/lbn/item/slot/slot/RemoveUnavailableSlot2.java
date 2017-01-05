@@ -1,9 +1,9 @@
 package lbn.item.slot.slot;
 
+import lbn.item.slot.SlotLevel;
+
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.slot.SlotLevel;
 
 public class RemoveUnavailableSlot2 extends RemoveUnavailableSlot{
 	@Override

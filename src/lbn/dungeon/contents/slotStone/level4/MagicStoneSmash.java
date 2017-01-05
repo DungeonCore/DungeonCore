@@ -1,10 +1,10 @@
 package lbn.dungeon.contents.slotStone.level4;
 
-import org.bukkit.ChatColor;
-
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
+
+import org.bukkit.ChatColor;
 
 public class MagicStoneSmash extends KillSlot{
 

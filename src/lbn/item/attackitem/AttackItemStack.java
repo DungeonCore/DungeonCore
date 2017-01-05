@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.SlotManager;
@@ -17,6 +14,9 @@ import lbn.item.slot.slot.EmptySlot;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.AttackType;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * 武器のみ

@@ -3,6 +3,11 @@ package lbn.util;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lbn.dungeoncore.Main;
+import lbn.mob.LastDamageManager;
+import lbn.mob.SummonPlayerManager;
+import lbn.mob.customEntity1_7.CustomVillager;
+import lbn.player.AttackType;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityLightning;
 import net.minecraft.server.v1_8_R1.EntityMonster;
@@ -28,12 +33,6 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import lbn.dungeoncore.Main;
-import lbn.mob.LastDamageManager;
-import lbn.mob.SummonPlayerManager;
-import lbn.mob.customEntity1_7.CustomVillager;
-import lbn.player.AttackType;
 
 public class LivingEntityUtil {
 	public static boolean isEnemy(Entity e) {

@@ -3,6 +3,8 @@ package lbn.dungeon.contents.item.sword;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.item.ItemInterface;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,8 +12,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemInterface;
 
 public class NormalSwordWrapper extends LevelSword{
 

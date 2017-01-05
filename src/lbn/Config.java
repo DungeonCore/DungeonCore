@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import lbn.item.ItemManager;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemManager;
 
 public class Config {
 

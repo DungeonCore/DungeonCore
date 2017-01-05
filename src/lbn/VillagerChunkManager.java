@@ -3,6 +3,12 @@ package lbn;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.mob.mob.abstractmob.villager.AbstractVillager;
+import lbn.util.DungeonLogger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -11,12 +17,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import com.google.common.collect.HashMultimap;
-
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
-import lbn.util.DungeonLogger;
 
 public class VillagerChunkManager {
   public static HashMultimap<ChunkInfo, AbstractVillager> chunkVillagerList = HashMultimap.create();

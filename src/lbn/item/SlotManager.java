@@ -2,9 +2,6 @@ package lbn.item;
 
 import java.util.HashMap;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.AddEmptySlotItem;
 import lbn.item.slot.slot.AddEmptySlotItem2;
@@ -12,6 +9,9 @@ import lbn.item.slot.slot.EmptySlot;
 import lbn.item.slot.slot.RemoveUnavailableSlot;
 import lbn.item.slot.slot.RemoveUnavailableSlot2;
 import lbn.item.slot.slot.UnavailableSlot;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
 
 public class SlotManager {
 	static HashMap<String, String> idNameMap = new HashMap<String, String>();

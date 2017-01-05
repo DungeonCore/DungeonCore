@@ -1,12 +1,12 @@
 package lbn.mobspawn.boss;
 
-import org.bukkit.Location;
-
 import lbn.mob.AbstractMob;
 import lbn.mob.mob.BossMobable;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.gettter.SpletSheetSpawnMobGetter;
 import lbn.mobspawn.point.MobSpawnerPoint;
+
+import org.bukkit.Location;
 
 public class SpredSheetSpawnBossGetter extends SpletSheetSpawnMobGetter{
 

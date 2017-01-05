@@ -1,16 +1,16 @@
 package lbn.mob.mob.abstractmob;
 
+import lbn.mob.AbstractCustomMob;
+import lbn.mob.customEntity1_7.CustomEntityUtil;
+import lbn.mob.customEntity1_7.CustomSkeleton;
+import lbn.mob.mob.SummonMobable;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomEntityUtil;
-import lbn.mob.customEntity1_7.CustomSkeleton;
-import lbn.mob.mob.SummonMobable;
 
 public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, Skeleton> {
 	/**

@@ -3,11 +3,11 @@ package lbn.util.particle;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lbn.util.LbnRunnable;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
-
-import lbn.util.LbnRunnable;
 
 public class SpringParticleData extends ParticleData{
 

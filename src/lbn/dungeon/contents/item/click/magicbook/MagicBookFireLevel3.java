@@ -2,6 +2,10 @@ package lbn.dungeon.contents.item.click.magicbook;
 
 import java.util.List;
 
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+import lbn.util.particle.SpringParticleData;
+
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -11,10 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.SpringParticleData;
 
 public class MagicBookFireLevel3 extends AbstractMagicBook{
 

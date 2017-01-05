@@ -1,5 +1,9 @@
 package lbn.dungeon.contents.mob.zombie;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeoncore.Main;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -9,10 +13,6 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeoncore.Main;
-import lbn.mob.mob.abstractmob.AbstractZombie;
 
 public class MineralizationSoldier extends AbstractZombie{
 	@Override

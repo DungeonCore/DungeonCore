@@ -1,14 +1,14 @@
 package lbn.command.util;
 
+import lbn.common.text.SayText;
+import lbn.dungeoncore.SpletSheet.SayTextSpletSheet;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.common.text.SayText;
-import lbn.dungeoncore.SpletSheet.SayTextSpletSheet;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class SayTextCommand implements CommandExecutor{
 

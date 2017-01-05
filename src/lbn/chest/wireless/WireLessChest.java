@@ -1,12 +1,12 @@
 package lbn.chest.wireless;
 
+import lbn.chest.AbstractCustomChest;
+
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import lbn.chest.AbstractCustomChest;
 
 public abstract class WireLessChest extends AbstractCustomChest{
 	abstract public Location getContainsLocation(Player p, Block block, PlayerInteractEvent e);

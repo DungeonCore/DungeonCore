@@ -1,16 +1,16 @@
 package lbn.mobspawn.boss;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.LivingEntity;
-
 import lbn.mob.AbstractMob;
 import lbn.mob.mob.BossMobable;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.point.SpletSheetMobSpawnerPoint;
 import lbn.util.DungeonLogger;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.LivingEntity;
 
 public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
   

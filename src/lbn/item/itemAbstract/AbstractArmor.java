@@ -2,16 +2,16 @@ package lbn.item.itemAbstract;
 
 import java.util.List;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.AbstractItem;
 import lbn.item.armoritem.ArmorMaterial;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
+
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractArmor extends AbstractItem implements ArmorItemable, Strengthenable{
 

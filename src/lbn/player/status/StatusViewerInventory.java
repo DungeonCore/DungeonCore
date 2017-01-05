@@ -1,5 +1,8 @@
 package lbn.player.status;
 
+import lbn.player.status.mainStatus.MainStatusManager;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
@@ -9,9 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Wool;
-
-import lbn.player.status.mainStatus.MainStatusManager;
-import lbn.util.ItemStackUtil;
 
 public class StatusViewerInventory {
 	public static final String TITLE =  "STATUS VIEWER";

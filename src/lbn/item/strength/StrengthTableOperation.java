@@ -2,6 +2,10 @@ package lbn.item.strength;
 
 import java.util.Arrays;
 
+import lbn.player.CraftTableViewManager;
+import lbn.player.crafttable.CraftTableType;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -11,10 +15,6 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.player.CraftTableViewManager;
-import lbn.player.crafttable.CraftTableType;
-import lbn.util.ItemStackUtil;
 
 public class StrengthTableOperation {
 

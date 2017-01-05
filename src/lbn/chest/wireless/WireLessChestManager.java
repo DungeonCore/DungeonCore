@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
+import lbn.common.other.SystemLog;
+import lbn.util.DungeonLogger;
+import lbn.util.InOutputUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,10 +22,6 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.reflect.TypeToken;
-
-import lbn.common.other.SystemLog;
-import lbn.util.DungeonLogger;
-import lbn.util.InOutputUtil;
 
 public enum WireLessChestManager {
   INSTANCE;

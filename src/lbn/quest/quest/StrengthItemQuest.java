@@ -2,11 +2,11 @@ package lbn.quest.quest;
 
 import java.util.HashMap;
 
-import org.bukkit.entity.Player;
-
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.quest.Quest;
 import lbn.quest.questData.PlayerQuestSession;
+
+import org.bukkit.entity.Player;
 
 public class StrengthItemQuest extends AbstractQuest{
 

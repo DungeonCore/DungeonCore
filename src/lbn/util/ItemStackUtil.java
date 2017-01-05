@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,9 +22,6 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.google.common.base.Joiner;
-
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
 
 public class ItemStackUtil {
 	public static final String SOUL_BOUND = "soulbound";

@@ -2,11 +2,11 @@ package lbn.mobspawn.gettter;
 
 import java.util.List;
 
-import org.bukkit.Location;
-
 import lbn.mob.AbstractMob;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.point.MobSpawnerPoint;
+
+import org.bukkit.Location;
 
 public interface SpawnMobGetterInterface {
 	String getName();

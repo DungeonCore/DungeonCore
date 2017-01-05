@@ -2,6 +2,12 @@ package lbn.dungeon.contents.mob.zombie;
 
 import java.util.ArrayList;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.util.LivingEntityUtil;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -14,12 +20,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class ShyZombie extends AbstractZombie {
 

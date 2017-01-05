@@ -1,16 +1,16 @@
 package lbn.dungeon.contents.mob.zombie;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.bukkit.Sound;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class Hermit extends AbstractZombie {
 

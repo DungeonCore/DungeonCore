@@ -2,6 +2,8 @@ package lbn.mob.customEntity1_7;
 
 import java.lang.reflect.Field;
 
+import lbn.mob.customEntity.ICustomUndeadEntity;
+import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
@@ -28,9 +30,6 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-
-import lbn.mob.customEntity.ICustomUndeadEntity;
-import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 
 
 public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntity<Skeleton>{

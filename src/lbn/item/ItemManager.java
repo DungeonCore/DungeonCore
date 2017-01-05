@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.slot.SlotInterface;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
+
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
 
 public class ItemManager {
 	static HashMap<String, ItemInterface> allItemNameList = new HashMap<>();

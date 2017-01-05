@@ -17,6 +17,7 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -27,7 +28,7 @@ public class NormalMobSkill implements MobSkillInterface{
 			MobSkillExcuteTimingType timing,
 			MobSkillExcuteConditionType condition, String id, int percent, ParticleData particleData,
 			ParticleLocationType particleLocType, MobSkillTargetingMethodType targetingMethod,
-			String targetingMethodData, int laterTick, String chainId) {
+			String targetingMethodData, int laterTick, String chainId, String skillTalk) {
 		this.potionEffect = potionEffect;
 		this.damage = damage;
 		this.fireTick = fireTick;
@@ -42,6 +43,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		this.targetingDeta = targetingMethodData;
 		this.laterTick = laterTick;
 		this.chainId = chainId;
+		this.skillTalk = skillTalk;
 	}
 
 	protected MobSkillTargetingMethodType targetingMethod;
@@ -58,6 +60,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	ParticleData particleData;
 	ParticleLocationType particleLocType;
 	String chainId;
+	String skillTalk;
 
 	@Override
 	public void execute(Entity condtionTarget, Entity mob) {
@@ -78,19 +81,19 @@ public class NormalMobSkill implements MobSkillInterface{
 	}
 
 	public void executeMobSkill(Entity condtionTarget, Entity mob) {
+		//対象の選び方によって実行方法を変える
 		if (targetingMethod == MobSkillTargetingMethodType.DROPING_ITEM || targetingMethod == MobSkillTargetingMethodType.FALLING_BLOCK) {
 			executeFallingblockDamage(condtionTarget, mob);
 		} else {
 			executeDamageOther(condtionTarget, mob);
 		}
-		if (chainId != null && !chainId.equals(id)) {
-			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
-			if (fromId != null) {
-				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
-			}
-		}
 	}
 
+	/**
+	 * 指定されたターゲット方法でターゲットを取り、スキルを実行
+	 * @param condtionTarget
+	 * @param mob
+	 */
 	protected void executeDamageOther(Entity condtionTarget, Entity mob) {
 		AbstractMob<?> mob2 = MobHolder.getMob(mob);
 		if (mob2 == null || mob2.isNullMob()) {
@@ -157,6 +160,11 @@ public class NormalMobSkill implements MobSkillInterface{
 		executeParticle(targetList, mob);
 	}
 
+	/**
+	 * 対象にブロックかアイテムを当ててスキルを実行
+	 * @param condtionTarget
+	 * @param mob
+	 */
 	protected void executeFallingblockDamage(Entity condtionTarget, Entity mob) {
 		int blockId = 3;
 		int data = 0;
@@ -204,6 +212,11 @@ public class NormalMobSkill implements MobSkillInterface{
 		return material;
 	}
 
+	/**
+	 * パーティクルを実行
+	 * @param targetList
+	 * @param mob
+	 */
 	protected void executeParticle(ArrayList<Entity> targetList, Entity mob) {
 		if (particleData != null) {
 			//軽量化のため、順次実行
@@ -222,6 +235,11 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 	}
 
+	/**
+	 * 一人のターゲットに対してスキルを即時実行
+	 * @param condtionTarget
+	 * @param mob
+	 */
 	protected void executeOneTarget(Entity condtionTarget, Entity mob) {
 		if (fireTick > 0) {
 			condtionTarget.setFireTicks(fireTick);
@@ -236,9 +254,22 @@ public class NormalMobSkill implements MobSkillInterface{
 				((Damageable) condtionTarget).damage(damage);
 			}
 		}
-
-
 		runnable.execute(condtionTarget, mob);
+
+		//次のスキルが設定されている場合は実行
+		if (chainId != null && !chainId.equals(id)) {
+			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
+			if (fromId != null) {
+				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+			}
+		}
+
+		//skilltalkが設定されている場合は実行
+		if (skillTalk != null && !skillTalk.isEmpty()) {
+			if (condtionTarget.getType() == EntityType.PLAYER) {
+				((Player)condtionTarget).sendMessage(skillTalk);
+			}
+		}
 	}
 
 	@Override

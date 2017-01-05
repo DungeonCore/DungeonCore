@@ -1,11 +1,10 @@
 package lbn.mob.customEntity1_7;
 
+import lbn.mob.customEntity.ICustomEntitySummonable;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
-
-import lbn.mob.customEntity.ICustomEntitySummonable;
 
 public class CustomEntityUtil {
 	public static EntityLiving getEntity(org.bukkit.entity.LivingEntity entity) {

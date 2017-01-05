@@ -3,13 +3,13 @@ package lbn.mob;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
+import lbn.mob.mob.NullMob;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-
-import lbn.mob.mob.NullMob;
 
 public class VillagerManager {
 	static HashMap<String, AbstractMob<?>> villagerNameMap = new HashMap<String, AbstractMob<?>>();

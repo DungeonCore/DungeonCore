@@ -3,6 +3,8 @@ package lbn;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.dungeoncore.Main;
+
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -46,8 +48,6 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeoncore.Main;
 
 public class LimitedListener implements Listener{
 	static String targetWorldName = "world";

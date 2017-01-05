@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.mob.combination;
 
+import lbn.dungeon.contents.mob.NormalMob;
+import lbn.mob.AbstractMob;
+import lbn.mob.mob.abstractmob.AbstractCombinationMob;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Zombie;
-
-import lbn.dungeon.contents.mob.NormalMob;
-import lbn.mob.AbstractMob;
-import lbn.mob.mob.abstractmob.AbstractCombinationMob;
 
 public class MiniSlimeZombie extends AbstractCombinationMob<Slime>{
 

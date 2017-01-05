@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.item.material;
 
+import lbn.item.AbstractItem;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.AbstractItem;
 
 public class CaveStone extends AbstractItem {
 	@Override

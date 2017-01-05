@@ -1,8 +1,8 @@
 package lbn.common.other;
 
-import org.bukkit.event.player.PlayerInteractEvent;
-
 import lbn.item.itemInterface.GettingItemable;
+
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GetItemSign extends InHandItemClickSign{
 

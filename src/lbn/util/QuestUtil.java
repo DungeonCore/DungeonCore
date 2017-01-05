@@ -2,16 +2,16 @@ package lbn.util;
 
 import java.text.MessageFormat;
 
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.mob.mob.abstractmob.villager.AbstractVillager;
+import lbn.quest.QuestAnnouncement;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
-import lbn.quest.QuestAnnouncement;
 
 public class QuestUtil {
 	public static void sendSatisfyComplateForVillager(String villagerName, Player p) {

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.item.key.AbstractTeleportKey;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.key.AbstractTeleportKey;
-import lbn.util.ItemStackUtil;
 
 public class SpreadSheetKeyTpItem extends AbstractTeleportKey{
 

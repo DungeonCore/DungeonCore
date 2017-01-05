@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import lbn.player.AttackType;
+import lbn.util.DungeonLogger;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -14,10 +18,6 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
-
-import lbn.player.AttackType;
-import lbn.util.DungeonLogger;
-import lbn.util.ItemStackUtil;
 
 public class LastDamageManager {
   static HashMap<Integer, Player>     entityPlayerMap     = new HashMap<>();

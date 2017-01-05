@@ -3,15 +3,15 @@ package lbn.dungeon.contents.chest;
 import java.util.HashSet;
 import java.util.UUID;
 
+import lbn.chest.WhiteListChest;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
-
-import lbn.chest.WhiteListChest;
-import lbn.util.Message;
 
 public class AlphaWhiteListChest extends WhiteListChest{
 

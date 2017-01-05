@@ -2,6 +2,15 @@ package lbn.item.strength;
 
 import java.util.ArrayList;
 
+import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
+import lbn.dungeoncore.Main;
+import lbn.item.ItemManager;
+import lbn.item.itemInterface.Strengthenable;
+import lbn.money.galion.GalionManager;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,15 +20,6 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeoncore.Main;
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.Strengthenable;
-import lbn.money.galion.GalionManager;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 
 public class StrengthLaterRunnable extends BukkitRunnable{
 	 public StrengthLaterRunnable(CraftingInventory top, InventoryClickEvent e) {

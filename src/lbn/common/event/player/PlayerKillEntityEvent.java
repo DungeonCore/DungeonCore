@@ -1,13 +1,13 @@
 package lbn.common.event.player;
 
+import lbn.item.attackitem.AttackItemStack;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.attackitem.AttackItemStack;
 
 public class PlayerKillEntityEvent extends PlayerEvent{
 	private static final HandlerList handlers = new HandlerList();

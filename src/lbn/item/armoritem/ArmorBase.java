@@ -1,5 +1,11 @@
 package lbn.item.armoritem;
 
+import lbn.item.ItemManager;
+import lbn.item.itemInterface.ArmorItemable;
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.util.DungeonLogger;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -10,12 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.ArmorItemable;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.util.DungeonLogger;
 
 public class ArmorBase {
   public static void onArmor(EntityDamageEvent e) {

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.util.DungeonLogger;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
-import lbn.util.DungeonLogger;
 
 public class RouteSearcher {
   Block  start;

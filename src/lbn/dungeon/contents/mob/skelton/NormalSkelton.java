@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.mob.skelton;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
-import lbn.util.LivingEntityUtil;
 
 public class NormalSkelton extends AbstractSkelton{
 

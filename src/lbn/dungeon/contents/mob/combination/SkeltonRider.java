@@ -1,17 +1,17 @@
 package lbn.dungeon.contents.mob.combination;
 
+import lbn.dungeon.contents.mob.NormalMob;
+import lbn.dungeon.contents.mob.skelton.SkeltonRiderSkelton;
+import lbn.mob.AbstractMob;
+import lbn.mob.mob.abstractmob.AbstractCombinationMob;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.entity.Bat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.dungeon.contents.mob.NormalMob;
-import lbn.dungeon.contents.mob.skelton.SkeltonRiderSkelton;
-import lbn.mob.AbstractMob;
-import lbn.mob.mob.abstractmob.AbstractCombinationMob;
-import lbn.util.LivingEntityUtil;
 
 public class SkeltonRider extends AbstractCombinationMob<Bat>{
 	@Override

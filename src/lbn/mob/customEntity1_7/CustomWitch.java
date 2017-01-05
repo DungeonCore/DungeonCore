@@ -1,5 +1,7 @@
 package lbn.mob.customEntity1_7;
 
+import lbn.mob.customEntity.ICustomEntity;
+import lbn.mob.mob.abstractmob.AbstractWitch;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
 import net.minecraft.server.v1_8_R1.World;
@@ -9,9 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Witch;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-
-import lbn.mob.customEntity.ICustomEntity;
-import lbn.mob.mob.abstractmob.AbstractWitch;
 
 public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 

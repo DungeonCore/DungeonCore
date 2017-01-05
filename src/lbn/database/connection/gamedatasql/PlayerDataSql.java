@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
-
 import lbn.database.connection.DatabaseConnection;
 import lbn.player.playerIO.PlayerIOData;
 import lbn.player.playerIO.PlayerIODataManager;
+
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public class PlayerDataSql {
 	UUID id;

@@ -2,6 +2,11 @@ package lbn.command;
 
 import java.util.UUID;
 
+import lbn.player.playerIO.PlayerIOData;
+import lbn.player.playerIO.PlayerIODataManager;
+import lbn.player.playerIO.PlayerLastSaveType;
+import lbn.player.status.StatusViewerInventory;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
@@ -10,11 +15,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import lbn.player.playerIO.PlayerIOData;
-import lbn.player.playerIO.PlayerIODataManager;
-import lbn.player.playerIO.PlayerLastSaveType;
-import lbn.player.status.StatusViewerInventory;
 
 public class CommandStatusView implements CommandExecutor {
   @Override

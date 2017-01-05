@@ -2,14 +2,14 @@ package lbn.item.repair.repairTable;
 
 import java.util.ArrayList;
 
-import org.bukkit.inventory.ItemStack;
-
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.item.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotType;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.slot.slot.UnavailableSlot;
+
+import org.bukkit.inventory.ItemStack;
 
 public class RepairSetOperator {
 	protected RepairSetOperator(AttackItemStack attackItem,

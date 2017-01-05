@@ -2,12 +2,6 @@ package lbn.player.status.mainStatus;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.player.status.IStatusDetail;
 import lbn.player.status.IStatusManager;
 import lbn.player.status.PlayerStatus;
@@ -16,6 +10,12 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.util.ItemStackUtil;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.inventory.ItemStack;
 
 public class MainStatusManager implements IStatusManager{
 

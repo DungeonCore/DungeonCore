@@ -3,6 +3,8 @@ package lbn.command.util;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.util.LivingEntityUtil;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
@@ -13,8 +15,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
-import lbn.util.LivingEntityUtil;
 
 public class RemoveMobCommand implements CommandExecutor{
 

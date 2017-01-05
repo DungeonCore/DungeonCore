@@ -3,10 +3,6 @@ package lbn.quest.quest;
 import java.text.MessageFormat;
 import java.util.HashSet;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDeathEvent;
-
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
@@ -14,6 +10,10 @@ import lbn.quest.QuestProcessingStatus;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
+
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDeathEvent;
 
 public class KillMobQuest extends AbstractQuest{
 	static HashSet<String> mobNameList = new HashSet<>();

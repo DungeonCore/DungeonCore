@@ -2,11 +2,11 @@ package lbn.mob;
 
 import java.util.HashMap;
 
+import lbn.dungeoncore.LbnRuntimeException;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
-import lbn.dungeoncore.LbnRuntimeException;
 
 public class SummonPlayerManager {
 	static HashMap<LivingEntity, Player> entityOwnerMap = new HashMap<>();

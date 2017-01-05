@@ -1,5 +1,7 @@
 package lbn.util;
 
+import lbn.dungeoncore.Main;
+
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -7,8 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeoncore.Main;
 
 public class BlockUtil {
 

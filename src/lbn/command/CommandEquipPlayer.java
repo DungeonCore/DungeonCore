@@ -3,20 +3,6 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionType;
-import org.bukkit.util.StringUtil;
-
-import com.google.common.collect.ImmutableList;
-
 import lbn.common.other.DungeonData;
 import lbn.dungeon.contents.item.armor.BeneCommonAromor;
 import lbn.dungeon.contents.item.armor.CommonArmor;
@@ -36,6 +22,20 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.util.LivingEntityUtil;
+
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionType;
+import org.bukkit.util.StringUtil;
+
+import com.google.common.collect.ImmutableList;
 
 public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 

@@ -3,14 +3,14 @@ package lbn.dungeon.contents.item.click;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.other.DungeonData;
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.RightClickItemable;
+
+import org.bukkit.Material;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class DungeonDirector extends AbstractItem implements RightClickItemable{
 

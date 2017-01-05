@@ -2,13 +2,13 @@ package lbn.dungeon.contents.slotStone.level4;
 
 import java.util.Random;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.LivingEntity;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.CombatSlot;
 import lbn.util.LivingEntityUtil;
+
+import org.bukkit.ChatColor;
+import org.bukkit.entity.LivingEntity;
 
 public class CombatLightningStone extends CombatSlot{
 

@@ -1,5 +1,11 @@
 package lbn.dungeon.contents.item.click;
 
+import lbn.dungeoncore.Main;
+import lbn.item.itemAbstract.RightClickItem;
+import lbn.util.Message;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,12 +16,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import lbn.dungeoncore.Main;
-import lbn.item.itemAbstract.RightClickItem;
-import lbn.util.Message;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class JumpBoost extends RightClickItem{
 	@Override

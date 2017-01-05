@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.slotStone.level1;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
 import lbn.util.particle.ParticleData;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 
 public abstract class AbstractKillEffectSlotStone extends KillSlot{
 

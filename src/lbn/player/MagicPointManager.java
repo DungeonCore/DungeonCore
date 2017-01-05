@@ -2,9 +2,9 @@ package lbn.player;
 
 import java.util.HashMap;
 
-import org.bukkit.entity.Player;
-
 import lbn.util.LbnRunnable;
+
+import org.bukkit.entity.Player;
 
 public class MagicPointManager {
 

@@ -1,8 +1,8 @@
 package lbn.player.status.mainStatus;
 
-import org.bukkit.Material;
-
 import lbn.player.status.IStatusDetail;
+
+import org.bukkit.Material;
 
 public class MainStatusDetail implements IStatusDetail{
 	@Override

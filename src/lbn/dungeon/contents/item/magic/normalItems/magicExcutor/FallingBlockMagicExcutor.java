@@ -1,15 +1,15 @@
 package lbn.dungeon.contents.item.magic.normalItems.magicExcutor;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.util.damagedFalling.DamagedFallingBlockForPlayer;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class FallingBlockMagicExcutor implements MagicExcuteable{
 	int availableLevel = 0;

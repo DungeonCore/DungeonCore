@@ -3,15 +3,15 @@ package lbn.item.slot.slot;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.AbstractItem;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
 public class AddEmptySlotItem extends AbstractItem implements SlotInterface{
 

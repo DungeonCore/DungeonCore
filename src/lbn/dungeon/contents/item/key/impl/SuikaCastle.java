@@ -1,5 +1,9 @@
 package lbn.dungeon.contents.item.key.impl;
 
+import lbn.dungeon.contents.item.key.AbstractKeyItem;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -8,10 +12,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class SuikaCastle extends AbstractKeyItem{
 	public SuikaCastle(String no, String loc) {

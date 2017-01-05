@@ -2,6 +2,10 @@ package lbn.dungeon.contents.item.key.impl;
 
 import java.util.List;
 
+import lbn.dungeon.contents.item.key.AbstractKeyItem;
+import lbn.item.itemInterface.GettingItemable;
+import lbn.util.ItemStackUtil;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,10 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.item.itemInterface.GettingItemable;
-import lbn.util.ItemStackUtil;
 
 
 public class KalgrusKey extends AbstractKeyItem implements GettingItemable {

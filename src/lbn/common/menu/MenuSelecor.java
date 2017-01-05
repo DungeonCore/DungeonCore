@@ -3,18 +3,18 @@ package lbn.common.menu;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import lbn.item.repair.newrepair.RepairUi;
+import lbn.item.slot.table.SlotSetTableOperation;
+import lbn.item.strength.StrengthTableOperation;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.repair.newrepair.RepairUi;
-import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.StrengthTableOperation;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 
 public class MenuSelecor {
 	public void regist() {

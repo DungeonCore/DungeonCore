@@ -2,17 +2,17 @@ package lbn.dungeon.contents.mob.zombie;
 
 import java.util.HashMap;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeon.contents.mob.witch.Necromancer;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeon.contents.mob.witch.Necromancer;
-import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.util.LivingEntityUtil;
 
 public class NecroZombie extends AbstractZombie{
 

@@ -5,6 +5,18 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import lbn.chest.BossChest;
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeon.contents.mob.zombie.BabyArthur;
+import lbn.dungeoncore.Main;
+import lbn.mob.LastDamageManager;
+import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.util.LivingEntityUtil;
+import lbn.util.particle.CircleParticleData;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,18 +32,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import lbn.chest.BossChest;
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeon.contents.mob.zombie.BabyArthur;
-import lbn.dungeoncore.Main;
-import lbn.mob.LastDamageManager;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
-import lbn.util.LivingEntityUtil;
-import lbn.util.particle.CircleParticleData;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class Arthur extends AbstractSkelton implements BossMobable{
 

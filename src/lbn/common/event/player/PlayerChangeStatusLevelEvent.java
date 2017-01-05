@@ -1,10 +1,10 @@
 package lbn.common.event.player;
 
+import lbn.player.status.IStatusManager;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import lbn.player.status.IStatusManager;
 
 public class PlayerChangeStatusLevelEvent extends Event{
 	private static final HandlerList handlers = new HandlerList();

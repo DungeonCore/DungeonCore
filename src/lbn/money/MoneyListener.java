@@ -4,6 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import lbn.dungeoncore.Main;
+import lbn.item.GalionItem;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.money.buyer.Buyer;
+import lbn.money.galion.GalionEditReason;
+import lbn.money.galion.GalionManager;
+import lbn.money.shop.CustomShop;
+import lbn.money.shop.ShopItem;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -19,18 +31,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeoncore.Main;
-import lbn.item.GalionItem;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.money.buyer.Buyer;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
-import lbn.money.shop.CustomShop;
-import lbn.money.shop.ShopItem;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 
 public class MoneyListener implements Listener{
 

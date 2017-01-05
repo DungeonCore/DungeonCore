@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.item.Cooltimable;
+import lbn.item.CooltimeManager;
+import lbn.item.ItemInterface;
+import lbn.item.strength.StrengthOperator;
+import lbn.player.AttackType;
+import lbn.util.JavaUtil;
+import lbn.util.LivingEntityUtil;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+import lbn.util.particle.SpringParticleData;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,17 +26,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.item.Cooltimable;
-import lbn.item.CooltimeManager;
-import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
-import lbn.util.JavaUtil;
-import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.SpringParticleData;
 
 public class SpecialSwordAquatempest extends AbstractSpecialSword implements Cooltimable{
 	static ArrayList<ItemInterface> itemList = new ArrayList<ItemInterface>();

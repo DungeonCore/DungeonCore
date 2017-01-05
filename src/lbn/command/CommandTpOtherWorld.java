@@ -1,5 +1,7 @@
 package lbn.command;
 
+import lbn.util.JavaUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -7,8 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.util.JavaUtil;
 
 public class CommandTpOtherWorld implements CommandExecutor{
 

@@ -4,15 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-
 import lbn.player.status.IStatusManager;
 import lbn.player.status.PlayerStatus;
 import lbn.player.status.PlayerStatusListener;
@@ -21,6 +12,15 @@ import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.mainStatus.MainStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 

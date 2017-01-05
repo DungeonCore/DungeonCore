@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import lbn.mob.SummonPlayerManager;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityCreature;
@@ -19,8 +20,6 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
-import lbn.mob.SummonPlayerManager;
 
 public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget{
 	protected final Class<EntityLiving> a;

@@ -2,21 +2,6 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.Random;
 
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-
 import lbn.dungeon.contents.strength_template.NotSrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
@@ -32,6 +17,21 @@ import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 import lbn.util.particle.StraightParticleData;
+
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 public class LaserBow extends BowItem implements Cooltimable{
 	@Override

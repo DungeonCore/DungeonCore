@@ -1,9 +1,5 @@
 package lbn.item.itemAbstract;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.CooltimeManager;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.itemInterface.LeftClickItemable;
@@ -12,6 +8,10 @@ import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.AttackType;
 import lbn.player.MagicPointManager;
 import lbn.util.Message;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class MagicItem extends AbstractAttackItem implements RightClickItemable, LeftClickItemable{
 

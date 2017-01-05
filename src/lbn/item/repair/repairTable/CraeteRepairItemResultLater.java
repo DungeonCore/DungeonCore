@@ -2,6 +2,11 @@ package lbn.item.repair.repairTable;
 
 import java.util.Random;
 
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.dungeoncore.Main;
+import lbn.item.attackitem.AttackItemStack;
+import lbn.item.slot.SlotInterface;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,11 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.dungeoncore.Main;
-import lbn.item.attackitem.AttackItemStack;
-import lbn.item.slot.SlotInterface;
 
 public class CraeteRepairItemResultLater extends BukkitRunnable{
 	static Random rnd = new Random();

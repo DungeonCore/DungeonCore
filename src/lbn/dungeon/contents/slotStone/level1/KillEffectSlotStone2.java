@@ -1,10 +1,10 @@
 package lbn.dungeon.contents.slotStone.level1;
 
-import org.bukkit.Location;
-import org.bukkit.Sound;
-
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.Location;
+import org.bukkit.Sound;
 
 public class KillEffectSlotStone2 extends AbstractKillEffectSlotStone{
 

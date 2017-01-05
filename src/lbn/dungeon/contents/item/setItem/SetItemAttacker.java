@@ -3,10 +3,6 @@ package lbn.dungeon.contents.item.setItem;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.setItem.AbstractCommonSetItem;
 import lbn.item.setItem.SetItemParts;
 import lbn.item.setItem.SetItemPartsType;
@@ -14,6 +10,10 @@ import lbn.player.appendix.PlayerAppendixManager;
 import lbn.player.appendix.appendixObject.SetItemAppendix;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class SetItemAttacker extends AbstractCommonSetItem{
 	public SetItemAttacker() {

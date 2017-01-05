@@ -1,5 +1,7 @@
 package lbn.command.util;
 
+import lbn.dungeoncore.Main;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -9,8 +11,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeoncore.Main;
 
 public class TmCommand implements CommandExecutor{
 

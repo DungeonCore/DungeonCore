@@ -1,13 +1,13 @@
 package lbn.player;
 
-import org.bukkit.Material;
-
 import lbn.player.status.IStatusManager;
 import lbn.player.status.bowStatus.BowStatusManager;
 import lbn.player.status.magicStatus.MagicStatusManager;
 import lbn.player.status.mainStatus.MainStatusManager;
 import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.Material;
 
 public enum AttackType {
 	SWORD(SwordStatusManager.getInstance(), 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),

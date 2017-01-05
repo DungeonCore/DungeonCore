@@ -2,6 +2,14 @@ package lbn.money.buyer;
 
 import java.util.ArrayList;
 
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.dungeoncore.Main;
+import lbn.item.GalionItem;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.player.CraftTableViewManager;
+import lbn.player.crafttable.CraftTableType;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -15,14 +23,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.dungeoncore.Main;
-import lbn.item.GalionItem;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.player.CraftTableViewManager;
-import lbn.player.crafttable.CraftTableType;
 
 public class Buyer {
 	public static void onOpen(Player p) {

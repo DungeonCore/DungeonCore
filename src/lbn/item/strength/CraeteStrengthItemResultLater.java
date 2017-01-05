@@ -4,6 +4,15 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
+import lbn.dungeoncore.Main;
+import lbn.item.ItemManager;
+import lbn.item.itemInterface.Strengthenable;
+import lbn.money.galion.GalionEditReason;
+import lbn.money.galion.GalionManager;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,15 +25,6 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-
-import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeoncore.Main;
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.Strengthenable;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
-import lbn.util.ItemStackUtil;
 
 public class CraeteStrengthItemResultLater extends BukkitRunnable{
 	static Random rnd = new Random();

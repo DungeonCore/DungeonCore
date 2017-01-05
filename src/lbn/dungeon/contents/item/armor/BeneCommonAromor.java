@@ -5,13 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
@@ -24,6 +17,13 @@ import lbn.item.armoritem.BeneEffectType;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class BeneCommonAromor extends CommonArmor implements Beneable{
 	public BeneCommonAromor(Material m) {

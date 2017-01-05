@@ -3,16 +3,16 @@ package lbn.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.AttackType;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public abstract class AbstractItem implements ItemInterface{
 	@Override

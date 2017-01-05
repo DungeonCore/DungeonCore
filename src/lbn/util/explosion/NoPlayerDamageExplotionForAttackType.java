@@ -1,14 +1,14 @@
 package lbn.util.explosion;
 
+import lbn.mob.LastDamageManager;
+import lbn.mob.SummonPlayerManager;
+import lbn.player.AttackType;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
-import lbn.mob.LastDamageManager;
-import lbn.mob.SummonPlayerManager;
-import lbn.player.AttackType;
 
 public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion{
 

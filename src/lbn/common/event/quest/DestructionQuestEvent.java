@@ -1,9 +1,9 @@
 package lbn.common.event.quest;
 
+import lbn.quest.Quest;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
-
-import lbn.quest.Quest;
 
 public class DestructionQuestEvent extends QuestEvent{
 

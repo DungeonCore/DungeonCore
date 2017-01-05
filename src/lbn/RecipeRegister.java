@@ -1,16 +1,35 @@
 package lbn;
 
-import static org.bukkit.Material.*;
+import static org.bukkit.Material.CHAINMAIL_BOOTS;
+import static org.bukkit.Material.CHAINMAIL_CHESTPLATE;
+import static org.bukkit.Material.CHAINMAIL_HELMET;
+import static org.bukkit.Material.CHAINMAIL_LEGGINGS;
+import static org.bukkit.Material.DIAMOND_BOOTS;
+import static org.bukkit.Material.DIAMOND_CHESTPLATE;
+import static org.bukkit.Material.DIAMOND_HELMET;
+import static org.bukkit.Material.DIAMOND_LEGGINGS;
+import static org.bukkit.Material.GOLD_BOOTS;
+import static org.bukkit.Material.GOLD_CHESTPLATE;
+import static org.bukkit.Material.GOLD_HELMET;
+import static org.bukkit.Material.GOLD_LEGGINGS;
+import static org.bukkit.Material.IRON_BOOTS;
+import static org.bukkit.Material.IRON_CHESTPLATE;
+import static org.bukkit.Material.IRON_HELMET;
+import static org.bukkit.Material.IRON_LEGGINGS;
+import static org.bukkit.Material.LEATHER_BOOTS;
+import static org.bukkit.Material.LEATHER_CHESTPLATE;
+import static org.bukkit.Material.LEATHER_HELMET;
+import static org.bukkit.Material.LEATHER_LEGGINGS;
 
 import java.util.Arrays;
+
+import lbn.dungeon.contents.item.material.ArmorMaterialItem;
+import lbn.item.armoritem.ArmorMaterial;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.inventory.ShapelessRecipe;
-
-import lbn.dungeon.contents.item.material.ArmorMaterialItem;
-import lbn.item.armoritem.ArmorMaterial;
 
 public class RecipeRegister {
 

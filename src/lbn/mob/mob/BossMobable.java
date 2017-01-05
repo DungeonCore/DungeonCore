@@ -2,11 +2,11 @@ package lbn.mob.mob;
 
 import java.util.Set;
 
+import lbn.chest.BossChest;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-
-import lbn.chest.BossChest;
 
 public interface BossMobable{
 	public BossChest getBossChest();

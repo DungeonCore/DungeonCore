@@ -1,8 +1,8 @@
 package lbn.item.itemInterface;
 
-import org.bukkit.entity.Player;
-
 import lbn.player.status.IStatusManager;
+
+import org.bukkit.entity.Player;
 
 public interface AvailableLevelItemable {
 	int getAvailableLevel();

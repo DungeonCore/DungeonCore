@@ -6,18 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.math.NumberUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
-
-import com.google.common.collect.ImmutableList;
-
 import lbn.SystemListener;
 import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
@@ -29,6 +17,18 @@ import lbn.mobspawn.point.MobSpawnerPoint;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.mobspawn.point.SpawnScheduler;
 import lbn.mobspawn.point.SpletSheetMobSpawnerPoint;
+
+import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
+
+import com.google.common.collect.ImmutableList;
 
 public class SetSpawnPointCommand implements CommandExecutor, TabCompleter{
 

@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.item.magic;
 
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.strength.StrengthOperator;
+
+import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractMagicExcuter implements MagicExcuteable{
 

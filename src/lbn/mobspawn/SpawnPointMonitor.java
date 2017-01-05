@@ -1,13 +1,13 @@
 package lbn.mobspawn;
 
+import lbn.mobspawn.point.MobSpawnerPoint;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.util.JavaUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
-
-import lbn.mobspawn.point.MobSpawnerPoint;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.JavaUtil;
 
 public class SpawnPointMonitor {
 	MobSpawnerPoint point;

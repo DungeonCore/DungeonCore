@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.bukkit.command.CommandSender;
-
 import lbn.dungeoncore.Main;
 import lbn.util.DungeonLogger;
 import lbn.util.InOutputUtil;
+
+import org.bukkit.command.CommandSender;
 
 public class SystemLog {
   private static ArrayList<String> logs = new ArrayList<String>();

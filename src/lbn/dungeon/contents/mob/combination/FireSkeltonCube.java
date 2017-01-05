@@ -1,5 +1,11 @@
 package lbn.dungeon.contents.mob.combination;
 
+import lbn.dungeon.contents.mob.NormalMob;
+import lbn.dungeon.contents.mob.slime.FireCube;
+import lbn.mob.AbstractMob;
+import lbn.mob.mob.abstractmob.AbstractCombinationMob;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -8,12 +14,6 @@ import org.bukkit.entity.Slime;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.dungeon.contents.mob.NormalMob;
-import lbn.dungeon.contents.mob.slime.FireCube;
-import lbn.mob.AbstractMob;
-import lbn.mob.mob.abstractmob.AbstractCombinationMob;
-import lbn.util.LivingEntityUtil;
 
 public class FireSkeltonCube extends AbstractCombinationMob<Slime>{
 

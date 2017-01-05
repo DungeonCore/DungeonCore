@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.strength_template;
 
-import org.bukkit.inventory.ItemStack;
-
 import lbn.dungeon.contents.item.material.ArmorMaterialItem;
 import lbn.item.armoritem.ArmorMaterial;
+
+import org.bukkit.inventory.ItemStack;
 
 public class BeneArmorStrengthTemplate implements StrengthTemplate{
 	public BeneArmorStrengthTemplate(ArmorMaterial am) {

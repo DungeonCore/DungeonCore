@@ -5,16 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
 import lbn.item.Cooltimable;
 import lbn.item.CooltimeManager;
 import lbn.item.ItemInterface;
@@ -24,6 +14,16 @@ import lbn.util.Message;
 import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class SpecialSwordIceAspect extends AbstractSpecialSword implements Cooltimable{
 	private static HashMap<Integer, ItemInterface> itemList = new HashMap<Integer, ItemInterface>();

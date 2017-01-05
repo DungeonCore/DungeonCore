@@ -1,11 +1,11 @@
 package lbn.item.itemInterface;
 
+import lbn.item.ItemInterface;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemInterface;
 
 public interface ArmorItemable extends ItemInterface {
 

@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.item.ItemInterface;
 import lbn.item.slot.SlotLevel;
@@ -17,6 +12,11 @@ import lbn.player.MagicPointManager;
 import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 
 public class MagicHealMagicStone extends KillSlot{
 

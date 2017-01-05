@@ -2,6 +2,8 @@ package lbn.util.damagedFalling;
 
 import java.util.List;
 
+import lbn.util.LbnRunnable;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -9,8 +11,6 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
-
-import lbn.util.LbnRunnable;
 
 public abstract class AbstractDamageFallingblock extends LbnRunnable{
 	protected FallingBlock spawnEntity;

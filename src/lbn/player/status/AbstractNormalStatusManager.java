@@ -1,10 +1,10 @@
 package lbn.player.status;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 
 
 public abstract class AbstractNormalStatusManager extends AbstractStatusManager{

@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.item.other.strengthBase;
 
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.slotStone.other.MagicStoneJade;
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class StrengthBaseJade extends StrengthBaseItem{
 	@Override

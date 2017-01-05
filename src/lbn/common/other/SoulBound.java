@@ -1,5 +1,7 @@
 package lbn.common.other;
 
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -10,8 +12,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.util.ItemStackUtil;
 
 public class SoulBound {
 	public static final String EXTRA_INV_NAME = "extra inventory";

@@ -3,11 +3,11 @@ package lbn.player;
 import java.util.HashMap;
 import java.util.UUID;
 
+import lbn.util.DungeonLogger;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import lbn.util.DungeonLogger;
 
 public class PlayerData {
   static HashMap<UUID, Long> lastDeath = new HashMap<UUID, Long>();

@@ -1,7 +1,5 @@
 package lbn;
 
-import org.bukkit.Bukkit;
-
 import lbn.command.CommandChest;
 import lbn.command.MobCommand;
 import lbn.command.QuestCommand;
@@ -20,6 +18,8 @@ import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.playerIO.PlayerLastSaveType;
 import lbn.util.LbnRunnable;
+
+import org.bukkit.Bukkit;
 
 public class InitManager {
 

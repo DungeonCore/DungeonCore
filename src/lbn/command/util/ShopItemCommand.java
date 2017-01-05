@@ -1,14 +1,14 @@
 package lbn.command.util;
 
+import lbn.money.shop.CustomShopItem;
+import lbn.util.JavaUtil;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.money.shop.CustomShopItem;
-import lbn.util.JavaUtil;
 
 public class ShopItemCommand implements CommandExecutor{
 

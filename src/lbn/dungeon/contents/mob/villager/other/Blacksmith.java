@@ -3,6 +3,11 @@ package lbn.dungeon.contents.mob.villager.other;
 import java.util.HashSet;
 import java.util.List;
 
+import lbn.common.menu.MenuSelectorManager;
+import lbn.mob.mob.abstractmob.villager.AbstractVillager;
+import lbn.util.LbnRunnable;
+import lbn.util.Message;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,11 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-
-import lbn.common.menu.MenuSelectorManager;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
-import lbn.util.LbnRunnable;
-import lbn.util.Message;
 
 public class Blacksmith extends AbstractVillager{
 

@@ -3,6 +3,13 @@ package lbn.dungeon.contents.mob.witch;
 import java.util.HashSet;
 import java.util.Set;
 
+import lbn.chest.BossChest;
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeon.contents.mob.zombie.NecroZombie;
+import lbn.mob.LastDamageManager;
+import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.abstractmob.AbstractWitch;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Damageable;
@@ -15,13 +22,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.chest.BossChest;
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeon.contents.mob.zombie.NecroZombie;
-import lbn.mob.LastDamageManager;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.abstractmob.AbstractWitch;
 
 //http://prnt.sc/bw4jm4
 public class Necromancer extends AbstractWitch implements BossMobable{

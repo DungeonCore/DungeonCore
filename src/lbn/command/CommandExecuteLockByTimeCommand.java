@@ -3,6 +3,8 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import lbn.util.JavaUtil;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,8 +12,6 @@ import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import lbn.util.JavaUtil;
 
 public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 

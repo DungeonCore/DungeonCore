@@ -1,12 +1,12 @@
 package lbn.item.itemInterface;
 
+import lbn.item.ItemInterface;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemInterface;
 
 public interface BowItemable extends ItemInterface{
 	public void excuteOnShootBow(EntityShootBowEvent e);

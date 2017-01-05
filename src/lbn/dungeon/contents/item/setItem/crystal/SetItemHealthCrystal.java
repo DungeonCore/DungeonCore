@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemManager;
 import lbn.item.setItem.AbstractCommonSetItem;
@@ -18,6 +14,10 @@ import lbn.item.strength.StrengthOperator;
 import lbn.player.appendix.PlayerAppendixManager;
 import lbn.player.appendix.appendixObject.SetItemAppendix;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class SetItemHealthCrystal extends AbstractCommonSetItem{
 	@Override

@@ -1,13 +1,13 @@
 package lbn.mob;
 
+import lbn.mob.customEntity.ICustomEntity;
+import lbn.mob.customEntity1_7.CustomEntityUtil;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-
-import lbn.mob.customEntity.ICustomEntity;
-import lbn.mob.customEntity1_7.CustomEntityUtil;
 
 public abstract class AbstractCustomMob<T extends ICustomEntity<?>, K extends LivingEntity> extends AbstractMob<K>{
 

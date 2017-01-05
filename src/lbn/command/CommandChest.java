@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import lbn.chest.AllPlayerSameContentChest;
+import lbn.chest.ChestLocationManager;
+import lbn.chest.CustomChestManager;
+import lbn.chest.EachPlayerContentChest;
+import lbn.chest.SpletSheetChest;
+import lbn.chest.wireless.RepositoryType;
+import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -21,15 +30,6 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
-
-import lbn.chest.AllPlayerSameContentChest;
-import lbn.chest.ChestLocationManager;
-import lbn.chest.CustomChestManager;
-import lbn.chest.EachPlayerContentChest;
-import lbn.chest.SpletSheetChest;
-import lbn.chest.wireless.RepositoryType;
-import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class CommandChest implements CommandExecutor, TabCompleter {
 

@@ -1,14 +1,14 @@
 package lbn.dungeon.contents.mob.zombie;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.mob.abstractmob.AbstractZombie;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.MobAttackExplosion;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 
 public class SuicideAttackZombie extends AbstractZombie{
 	@Override

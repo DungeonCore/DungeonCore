@@ -1,12 +1,12 @@
 package lbn.dungeon.contents.mob.witch;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractWitch;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractWitch;
 
 public class Witch extends AbstractWitch{
 

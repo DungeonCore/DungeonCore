@@ -2,6 +2,10 @@ package lbn.player.appendix;
 
 import java.util.Random;
 
+import lbn.common.other.Stun;
+import lbn.dungeoncore.Main;
+import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -10,10 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.common.other.Stun;
-import lbn.dungeoncore.Main;
-import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
 
 public class PlayerAppendixListener implements Listener{
 	@EventHandler

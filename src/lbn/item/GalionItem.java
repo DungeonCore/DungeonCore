@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.util.ItemStackUtil;
 
 public final class GalionItem extends AbstractItem {
 

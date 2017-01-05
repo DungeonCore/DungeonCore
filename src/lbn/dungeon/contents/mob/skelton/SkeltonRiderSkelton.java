@@ -2,14 +2,14 @@ package lbn.dungeon.contents.mob.skelton;
 
 import java.util.List;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractSkelton;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
 
 public class SkeltonRiderSkelton extends AbstractSkelton{
 

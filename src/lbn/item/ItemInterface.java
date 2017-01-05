@@ -1,8 +1,8 @@
 package lbn.item;
 
-import org.bukkit.inventory.ItemStack;
-
 import lbn.player.AttackType;
+
+import org.bukkit.inventory.ItemStack;
 
 public interface ItemInterface{
 	String getItemName();

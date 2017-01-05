@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import lbn.common.event.player.PlayerChangeStatusExpEvent;
+import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.util.ItemStackUtil;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,10 +16,6 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.common.event.player.PlayerChangeStatusExpEvent;
-import lbn.common.event.player.PlayerChangeStatusLevelEvent;
-import lbn.util.ItemStackUtil;
 
 
 public abstract class AbstractStatusManager implements IStatusManager{

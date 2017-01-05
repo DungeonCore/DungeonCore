@@ -1,8 +1,5 @@
 package lbn.dungeon.contents.slotStone.other;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.CombatSlot;
@@ -10,6 +7,9 @@ import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 
 public class MagicStoneJade extends CombatSlot{
 

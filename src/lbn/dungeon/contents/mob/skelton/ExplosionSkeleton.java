@@ -1,16 +1,16 @@
 package lbn.dungeon.contents.mob.skelton;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeon.contents.item.shootbow.BowOfExplosion;
+import lbn.item.strength.StrengthOperator;
+import lbn.mob.mob.abstractmob.AbstractSkelton;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeon.contents.item.shootbow.BowOfExplosion;
-import lbn.item.strength.StrengthOperator;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
 
 public class ExplosionSkeleton extends AbstractSkelton {
 

@@ -1,14 +1,14 @@
 package lbn.dungeon.contents;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.item.shootbow.DebugBow;
 import lbn.dungeon.contents.item.sword.DebugSword;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 public class ContentsListner implements Listener{
 	@EventHandler

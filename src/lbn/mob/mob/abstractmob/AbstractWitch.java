@@ -1,11 +1,11 @@
 package lbn.mob.mob.abstractmob;
 
+import lbn.mob.AbstractCustomMob;
+import lbn.mob.customEntity1_7.CustomWitch;
+
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
-
-import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomWitch;
 
 public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch>{
 	@Override

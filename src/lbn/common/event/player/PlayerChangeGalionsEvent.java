@@ -1,10 +1,10 @@
 package lbn.common.event.player;
 
+import lbn.money.galion.GalionEditReason;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
-
-import lbn.money.galion.GalionEditReason;
 
 public class PlayerChangeGalionsEvent extends PlayerEvent{
 

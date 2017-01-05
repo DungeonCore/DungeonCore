@@ -4,6 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
+import lbn.item.ItemInterface;
+import lbn.item.strength.StrengthOperator;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -13,11 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
 
 public class SpecialSwordMebiusSword extends AbstractSpecialSword{
 	protected SpecialSwordMebiusSword( int availableLevel, Material m) {

@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.item.armor.old;
 
+import lbn.item.ItemManager;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.item.ItemManager;
 
 public class DiamondArmor extends LeatherArmor{
 

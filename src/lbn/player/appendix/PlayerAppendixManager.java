@@ -2,13 +2,13 @@ package lbn.player.appendix;
 
 import java.util.UUID;
 
+import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
+import lbn.util.InOutputUtil;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
-
-import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
-import lbn.util.InOutputUtil;
 
 public class PlayerAppendixManager {
 	public static float DEFAULT_WALK_SPEED = 0.2f;

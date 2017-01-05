@@ -1,12 +1,12 @@
 package lbn.util.explosion;
 
+import lbn.mob.MobHolder;
+import lbn.mob.mob.SummonMobable;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-
-import lbn.mob.MobHolder;
-import lbn.mob.mob.SummonMobable;
 
 public abstract class NotPlayerDamageExplosion extends AbstractNotDamageExplosion {
 

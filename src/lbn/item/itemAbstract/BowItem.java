@@ -1,14 +1,5 @@
 package lbn.item.itemAbstract;
 
-import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.ItemInterface;
 import lbn.item.attackitem.AbstractAttackItem;
@@ -17,6 +8,15 @@ import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.AttackType;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class BowItem extends AbstractAttackItem implements  ItemInterface, BowItemable, LeftClickItemable{
 	@Override

@@ -2,6 +2,10 @@ package lbn.money;
 
 import java.util.Arrays;
 
+import lbn.money.buyer.Buyer;
+import lbn.money.shop.CustomShop;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.Bukkit;
@@ -12,11 +16,6 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.money.buyer.Buyer;
-import lbn.money.shop.CustomShop;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 
 public class BuyerShopSelector {
 	private static final String SHOP_MENU = "- Shop - ";

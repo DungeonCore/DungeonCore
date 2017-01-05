@@ -1,8 +1,8 @@
 package lbn.player.status.magicStatus;
 
-import org.bukkit.Material;
-
 import lbn.player.status.IStatusDetail;
+
+import org.bukkit.Material;
 
 public class MagicStatusDetail implements IStatusDetail{
 	@Override

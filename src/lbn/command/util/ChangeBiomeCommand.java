@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.common.other.RouteSearcher;
+import lbn.dungeoncore.Main;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,9 +20,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
-
-import lbn.common.other.RouteSearcher;
-import lbn.dungeoncore.Main;
 
 public class ChangeBiomeCommand implements CommandExecutor, TabCompleter{
 

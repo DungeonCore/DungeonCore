@@ -2,6 +2,10 @@ package lbn.mob.customEntity1_7;
 
 import java.lang.reflect.Field;
 
+import lbn.mob.customEntity.ICustomUndeadEntity;
+import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.mob.SummonMobable;
+import lbn.mob.mob.abstractmob.AbstractZombie;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityMonster;
@@ -27,11 +31,6 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import com.google.common.base.Predicate;
-
-import lbn.mob.customEntity.ICustomUndeadEntity;
-import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
-import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractZombie;
 
 public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>{
     public CustomZombie(org.bukkit.World bukkitWorld, AbstractZombie zombie) {

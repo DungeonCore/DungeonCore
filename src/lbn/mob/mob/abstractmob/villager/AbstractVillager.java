@@ -149,8 +149,6 @@ public abstract class AbstractVillager extends AbstractMob<LivingEntity>{
 				p.sendMessage(ChatColor.GOLD + string);
 			}
 		}
-
-
 	}
 }
 

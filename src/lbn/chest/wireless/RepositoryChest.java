@@ -1,12 +1,5 @@
 package lbn.chest.wireless;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
@@ -15,6 +8,13 @@ import lbn.money.galion.GalionManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class RepositoryChest extends WireLessChest{
 

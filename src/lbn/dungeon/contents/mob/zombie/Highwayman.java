@@ -3,6 +3,10 @@ package lbn.dungeon.contents.mob.zombie;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.util.LivingEntityUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,10 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.util.LivingEntityUtil;
 
 public class Highwayman extends AbstractZombie{
 	ArrayList<EquipmentType> typeList = new ArrayList<>();

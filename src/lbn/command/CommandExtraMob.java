@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.util.DungeonLogger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
@@ -19,10 +23,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
-
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.util.DungeonLogger;
 
 public class CommandExtraMob implements CommandExecutor, TabCompleter {
   

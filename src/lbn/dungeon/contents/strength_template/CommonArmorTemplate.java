@@ -1,8 +1,8 @@
 package lbn.dungeon.contents.strength_template;
 
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.armoritem.ArmorMaterial;
+
+import org.bukkit.inventory.ItemStack;
 
 public class CommonArmorTemplate implements StrengthTemplate{
 

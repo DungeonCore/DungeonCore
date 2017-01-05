@@ -2,17 +2,17 @@ package lbn.money.shop;
 
 import java.util.ArrayList;
 
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.Chest;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.abstractmob.villager.SpletSheetVillager;
+
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
+import org.bukkit.inventory.ItemStack;
 
 public class CustomShop extends Shop{
 	public CustomShop(String villagerName) {

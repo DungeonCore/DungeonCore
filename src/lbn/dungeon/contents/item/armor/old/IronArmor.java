@@ -1,8 +1,8 @@
 package lbn.dungeon.contents.item.armor.old;
 
-import org.bukkit.Material;
-
 import lbn.item.ItemManager;
+
+import org.bukkit.Material;
 
 public class IronArmor extends ChainArmor{
 

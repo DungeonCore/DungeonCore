@@ -2,6 +2,12 @@ package lbn.command.util;
 
 import java.util.HashMap;
 
+import lbn.dungeon.contents.item.key.KeyItemable;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.item.itemInterface.GettingItemable;
+import lbn.util.ItemStackUtil;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -12,12 +18,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeon.contents.item.key.KeyItemable;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.GettingItemable;
-import lbn.util.ItemStackUtil;
 
 public class CommandSpecialSign implements CommandExecutor{
 	public static HashMap<Player, Location> signClickMap = new HashMap<Player, Location>();

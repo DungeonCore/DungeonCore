@@ -3,13 +3,13 @@ package lbn.dungeon.contents.item.material;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
 import lbn.item.armoritem.ArmorMaterial;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
 public class ArmorMaterialItem extends AbstractItem{
 	ArmorMaterial m;

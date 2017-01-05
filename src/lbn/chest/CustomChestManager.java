@@ -2,6 +2,9 @@ package lbn.chest;
 
 import java.util.HashMap;
 
+import lbn.chest.wireless.RepositoryChest;
+import lbn.chest.wireless.RepositoryType;
+import lbn.mob.mob.BossMobable;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.Location;
@@ -10,10 +13,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.material.Chest;
-
-import lbn.chest.wireless.RepositoryChest;
-import lbn.chest.wireless.RepositoryType;
-import lbn.mob.mob.BossMobable;
 
 /**
  * チェストの場所と中身を管理する

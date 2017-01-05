@@ -3,12 +3,12 @@ package lbn.money.galion;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.other.SystemLog;
 import lbn.player.playerIO.PlayerIODataManager;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class GalionManager {
 

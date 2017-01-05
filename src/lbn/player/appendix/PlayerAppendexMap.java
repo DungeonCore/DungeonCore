@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 
+import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
+import lbn.player.appendix.appendixObject.SumPlayerAppendix;
+
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
-
-import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
-import lbn.player.appendix.appendixObject.SumPlayerAppendix;
 
 class PlayerAppendexMap extends HashMap<UUID, SumPlayerAppendix> {
 	private static final long serialVersionUID = 8518517389962217280L;

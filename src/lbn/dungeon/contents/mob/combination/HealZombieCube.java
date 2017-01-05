@@ -1,14 +1,14 @@
 package lbn.dungeon.contents.mob.combination;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Slime;
-import org.bukkit.entity.Zombie;
-
 import lbn.dungeon.contents.mob.slime.HealCube;
 import lbn.dungeon.contents.mob.zombie.NormalZombie;
 import lbn.mob.AbstractMob;
 import lbn.mob.mob.abstractmob.AbstractCombinationMob;
 import lbn.util.LivingEntityUtil;
+
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Slime;
+import org.bukkit.entity.Zombie;
 
 public class HealZombieCube extends AbstractCombinationMob<Slime>{
 

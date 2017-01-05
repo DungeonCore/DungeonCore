@@ -1,8 +1,5 @@
 package lbn.dungeoncore.SpletSheet;
 
-import org.bukkit.command.CommandSender;
-import org.bukkit.potion.PotionEffect;
-
 import lbn.mob.mobskill.DebuffType;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillExcuteTimingType;
@@ -31,6 +28,9 @@ import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 import lbn.util.particle.SpringParticleData;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.potion.PotionEffect;
+
 public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 	public MobSkillSheetRunnable(CommandSender p) {
@@ -51,7 +51,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 	public String[] getTag() {
 		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "debuffeffect", "debuffsecond",
 				"debufflevel", "data", "particletype", "particleshape", "particledata", "particlelocation", "targeting",
-				"targetingdata", "latersecond", "chain"};
+				"targetingdata", "latersecond", "chain", "skilltalk"};
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 
 		NormalMobSkill normalMobSkill = new NormalMobSkill(potionEffect, damage, fireTick, skill, timing,
-				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18]);
+				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19]);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}

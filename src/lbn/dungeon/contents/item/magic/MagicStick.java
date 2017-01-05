@@ -1,5 +1,12 @@
 package lbn.dungeon.contents.item.magic;
 
+import lbn.dungeon.contents.mob.zombie.AbstractSummonZombie;
+import lbn.dungeon.contents.strength_template.NormalWeaponStrengthTemplate;
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
+import lbn.item.itemAbstract.MagicItem;
+import lbn.item.itemInterface.MagicExcuteable;
+import lbn.mob.SummonPlayerManager;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -8,13 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeon.contents.mob.zombie.AbstractSummonZombie;
-import lbn.dungeon.contents.strength_template.NormalWeaponStrengthTemplate;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.itemAbstract.MagicItem;
-import lbn.item.itemInterface.MagicExcuteable;
-import lbn.mob.SummonPlayerManager;
 
 public class MagicStick extends MagicItem{
 	@Override

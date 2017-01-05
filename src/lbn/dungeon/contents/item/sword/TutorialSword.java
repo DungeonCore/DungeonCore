@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.item.sword;
 
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
+import lbn.dungeon.contents.strength_template.TutorialTemplate;
+
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeon.contents.strength_template.TutorialTemplate;
 
 public class TutorialSword extends LevelSword{
 

@@ -1,10 +1,10 @@
 package lbn.dungeon.contents.slotStone.level3;
 
-import org.bukkit.ChatColor;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.CombatSlot;
+
+import org.bukkit.ChatColor;
 
 public class MagicStoneInstaceKill extends CombatSlot{
 

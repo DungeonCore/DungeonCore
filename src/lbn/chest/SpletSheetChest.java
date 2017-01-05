@@ -6,6 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.mob.mob.CommandBossMob;
+import lbn.player.PlayerChestTpManager;
+import lbn.util.DungeonLogger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -18,12 +24,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mob.mob.CommandBossMob;
-import lbn.player.PlayerChestTpManager;
-import lbn.util.DungeonLogger;
 
 public abstract class SpletSheetChest extends AbstractCustomChest {
   

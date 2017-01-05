@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.bukkit.configuration.file.FileConfiguration;
-
 import lbn.database.connection.DatabaseConnection;
 import lbn.dungeoncore.Main;
 import lbn.util.DungeonLogger;
+
+import org.bukkit.configuration.file.FileConfiguration;
 
 public abstract class SystemSqlRunnable {
   abstract int getExecuteId();

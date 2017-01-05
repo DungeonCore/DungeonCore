@@ -2,6 +2,9 @@ package lbn.command.util;
 
 import java.util.Arrays;
 
+import lbn.util.BlockUtil;
+import lbn.util.BlockUtil.BlockData;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,9 +15,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.util.BlockUtil;
-import lbn.util.BlockUtil.BlockData;
 
 public class ToggleSetBlockCommand implements CommandExecutor{
 	@SuppressWarnings("deprecation")

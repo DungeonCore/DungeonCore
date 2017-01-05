@@ -1,14 +1,14 @@
 package lbn.item.repair.repairTable;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.CraftingInventory;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import lbn.dungeoncore.Main;
 import lbn.item.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.util.Message;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class RepairSetResultItemRunnable extends BukkitRunnable{
 	 public RepairSetResultItemRunnable(CraftingInventory top, InventoryClickEvent e) {

@@ -72,7 +72,7 @@ public class MobListener implements Listener {
 		mob.updateName(false);
 
 		//もしSummonの場合は指定時間後に削除する
-		if (mob instanceof SummonMobable) {
+		if (mob.getTheLowMobType() == TheLowMobType.SUMMON) {
 			new BukkitRunnable() {
 				@Override
 				public void run() {
@@ -168,12 +168,6 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onInteractEntity(PlayerInteractEntityEvent e) {
-		Entity rightClicked = e.getRightClicked();
-		Player ncp = (Player) rightClicked;
-		ncp.setDisplayName("adawwadawdwa1");
-		ncp.setCustomName("adwawadwafaaa2");
-		System.out.println("aaa");
-
 		if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
 			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)e.getRightClicked());
 			mob.onInteractEntity(e);

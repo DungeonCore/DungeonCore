@@ -3,19 +3,19 @@ package lbn.quest.quest;
 import java.text.MessageFormat;
 import java.util.Set;
 
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
-
-import com.google.common.collect.HashMultimap;
-
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
+
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
+
+import com.google.common.collect.HashMultimap;
 
 public class PickItemQuest extends AbstractQuest{
 	static HashMultimap<String, PickItemQuest> needItemMap = HashMultimap.create();
@@ -26,10 +26,10 @@ public class PickItemQuest extends AbstractQuest{
 
 	private PickItemQuest(String id, String pickItemId, int needCount) {
 		super(id);
-		needItemMap.put(getNeedItem().getId(), this);
-
 		this.pickItemId = pickItemId;
 		this.needCount = needCount;
+		needItemMap.put(pickItemId, this);
+
 	}
 
 	public static PickItemQuest getInstance(String id, String data1, String data2) {

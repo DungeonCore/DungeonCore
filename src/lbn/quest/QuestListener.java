@@ -2,17 +2,6 @@ package lbn.quest;
 
 import java.util.Set;
 
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
@@ -28,6 +17,17 @@ import lbn.quest.quest.QuestType;
 import lbn.quest.quest.StrengthItemQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
+
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class QuestListener implements Listener{
 	@EventHandler

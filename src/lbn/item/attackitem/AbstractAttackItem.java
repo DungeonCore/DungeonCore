@@ -4,13 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
 import lbn.item.AbstractItem;
@@ -28,6 +21,13 @@ import lbn.player.status.IStatusManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
+
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, AvailableLevelItemable, RightClickItemable, CombatItemable{
 	public boolean isAvilable(Player player) {

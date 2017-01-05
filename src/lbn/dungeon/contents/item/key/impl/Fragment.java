@@ -1,5 +1,8 @@
 package lbn.dungeon.contents.item.key.impl;
 
+import lbn.dungeon.contents.item.key.AbstractKeyItem;
+import lbn.dungeoncore.Main;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,9 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.dungeoncore.Main;
 
 public class Fragment  extends AbstractKeyItem{
 
