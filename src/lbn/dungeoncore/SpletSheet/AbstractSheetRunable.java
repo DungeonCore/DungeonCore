@@ -41,7 +41,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
   CommandSender p;
 
-  abstract String getSheetName();
+  abstract public String getSheetName();
 
   abstract public String[] getTag();
 

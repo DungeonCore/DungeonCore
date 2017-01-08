@@ -20,7 +20,7 @@ public class ChestSheetRunable extends AbstractComplexSheetRunable {
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "chest";
 	}
 

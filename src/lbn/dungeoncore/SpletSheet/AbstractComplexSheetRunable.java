@@ -86,7 +86,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
 
   CommandSender sender;
 
-  abstract String getSheetName();
+  abstract public String getSheetName();
 
   abstract public String[] getTag();
 
