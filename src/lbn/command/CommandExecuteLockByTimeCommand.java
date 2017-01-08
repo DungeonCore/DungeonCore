@@ -3,29 +3,33 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import lbn.command.util.TaskManager;
 import lbn.util.JavaUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class CommandExecuteLockByTimeCommand implements CommandExecutor{
+	static TaskManager taskManager = new TaskManager();
 
 	static HashMap<Location, Long> executeMap = new HashMap<Location, Long>();
 
 	@Override
 	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
-		Location blockLoc = null;
-		if (paramCommandSender instanceof BlockCommandSender) {
-			blockLoc = ((BlockCommandSender)paramCommandSender).getBlock().getLocation();
-		} else {
-			paramCommandSender.sendMessage("このコマンドはコマンドブロック用です");
+		if (paramArrayOfString.length == 1 && paramArrayOfString[0].equals("list")) {
+			taskManager.showList(paramCommandSender);
 			return true;
+		}
+
+		//実行者の座標を取得
+		Location blockLoc = JavaUtil.getSenderLocation(paramCommandSender);
+		if (blockLoc == null) {
+			return false;
 		}
 
 		double second = 0;
@@ -45,6 +49,8 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length), " ");
 			Bukkit.dispatchCommand(paramCommandSender, command);
 			executeMap.put(blockLoc, System.currentTimeMillis());
+
+			taskManager.regist(paramCommandSender, (long) (second * 20));
 			return true;
 		}
 
@@ -54,6 +60,8 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length), " ");
 			Bukkit.dispatchCommand(paramCommandSender, command);
 			executeMap.put(blockLoc, System.currentTimeMillis());
+
+			taskManager.regist(paramCommandSender, (long) (second * 20));
 		}
 		return true;
 	}
