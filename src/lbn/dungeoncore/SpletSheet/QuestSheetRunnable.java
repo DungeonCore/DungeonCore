@@ -20,7 +20,7 @@ public class QuestSheetRunnable extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "quest";
 	}
 

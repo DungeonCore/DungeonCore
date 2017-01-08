@@ -36,7 +36,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "mob";
 	}
 

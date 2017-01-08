@@ -25,7 +25,7 @@ public class SayTextSpletSheet extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "sayText";
 	}
 

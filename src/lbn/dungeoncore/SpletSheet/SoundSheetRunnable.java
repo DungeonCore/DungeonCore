@@ -2,12 +2,14 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
-import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
-
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
 import lbn.util.JavaUtil;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 public class SoundSheetRunnable extends AbstractSheetRunable{
 
@@ -21,7 +23,7 @@ public class SoundSheetRunnable extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "sound";
 	}
 
@@ -56,6 +58,12 @@ public class SoundSheetRunnable extends AbstractSheetRunable{
 		SoundData soundData = new SoundData(id, valueOf, vol, pitch);
 
 		SoundManager.regist(soundData);
+	}
+
+	public static void allReload() {
+		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
+		SoundSheetRunnable soundSheetRunnable = new SoundSheetRunnable(consoleSender);
+		SpletSheetExecutor.onExecute(soundSheetRunnable);
 	}
 
 }

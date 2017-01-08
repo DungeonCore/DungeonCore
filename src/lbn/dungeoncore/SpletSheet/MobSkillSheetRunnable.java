@@ -43,7 +43,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "mobskill";
 	}
 
@@ -51,7 +51,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 	public String[] getTag() {
 		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "debuffeffect", "debuffsecond",
 				"debufflevel", "data", "particletype", "particleshape", "particledata", "particlelocation", "targeting",
-				"targetingdata", "latersecond", "chain", "skilltalk"};
+				"targetingdata", "latersecond", "chain", "skilltalk", "soundid", "soundtarget"};
 	}
 
 	@Override
@@ -117,9 +117,16 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		int laterTick = (int) (JavaUtil.getDouble(row[17], 0) * 20);
 
+		boolean isOnePlayerSoundTarget = false;
+		if ("対象のみ".equals(row[21])) {
+			isOnePlayerSoundTarget = true;
+		}
+
+		String soundId = "".equals(row[20]) ? null : row[20];
 
 		NormalMobSkill normalMobSkill = new NormalMobSkill(potionEffect, damage, fireTick, skill, timing,
-				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19]);
+				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18],
+				row[19], soundId, isOnePlayerSoundTarget);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}

@@ -9,4 +9,8 @@ public interface SheetRunnable<T> extends Callable<T> {
 	boolean isTransaction();
 
 	void closeTransaction();
+
+	String getSheetName();
+
+	String[] getTag();
 }

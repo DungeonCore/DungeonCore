@@ -20,11 +20,11 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
 public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
-  
+
   public SpawnPointSheetRunnable(CommandSender p) {
     super(p);
   }
-  
+
   public void addData(MobSpawnerPoint point, String memo) {
     HashMap<String, Object> map = new HashMap<String, Object>();
     map.put("id", point.getId());
@@ -36,7 +36,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     map.put("最大湧き数", point.getMaxMobCount());
     map.put("level", point.getLevel());
     SpawnMobGetterInterface spawnMobGetter = point.getSpawnMobGetter();
-    
+
     int i = 1;
     for (AbstractMob<?> mob : spawnMobGetter.getAllMobList()) {
       String name = mob.getName();
@@ -56,19 +56,19 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     }
     addData(map);
   }
-  
+
   @Override
-  String getSheetName() {
+  public String getSheetName() {
     return "spawnpoint";
   }
-  
+
   @Override
   public String[] getTag() {
     return new String[] { "id", "world", "x", "y", "z", "最大湧き数", "level", "dungeonhight", "looknearchunk", "mob1",
         "mob2", "mob3", "mob4", "mob5", "mob6", "mob7", "mob8", "mob9", "mob10", "mob11", "mob12", "mob13", "mob14",
         "mob15", "mob16", "mob17", "mob18", "mob19", "mob20" };
   }
-  
+
   @Override
   protected void excuteOnerow(String[] row) {
     try {
@@ -78,14 +78,14 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
       double y = Double.parseDouble(row[3]);
       double z = Double.parseDouble(row[4]);
       int maxCount = Integer.parseInt(row[5]);
-      
+
       SpawnLevel level = SpawnLevel.getLevel(row[6]);
-      
+
       if (world == null) {
         sendMessage("world:" + row[1] + "が存在しません。:" + id);
         return;
       }
-      
+
       SpletSheetSpawnMobGetter spletSheetSpawnMobGetter;
       if (level == SpawnLevel.BOSS) {
         spletSheetSpawnMobGetter = new SpredSheetSpawnBossGetter(id);
@@ -98,7 +98,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
           sendMessage(row[i] + "は無視されました。");
         }
       }
-      
+
       MobSpawnerPoint mobSpawnerPoint = spletSheetSpawnMobGetter.getMobSpawnerPoint(new Location(world, x, y, z),
           maxCount, level);
       mobSpawnerPoint.setDungeonHight(JavaUtil.getInt(row[7], 6));
@@ -109,7 +109,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
       sendMessage("入力されたデータが不正です。(spawn mob 設定)");
     }
   }
-  
+
   @Override
   public void getData(String query) {
     if (query == null || query.isEmpty()) {
@@ -117,15 +117,15 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     }
     super.getData(query);
   }
-  
+
   protected void sendMessage(String msg) {
     sender.sendMessage(msg);
   }
-  
+
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
     super.onCallbackFunction(submit);
-    
+
     for (World world : Bukkit.getWorlds()) {
       // loadされているchunkを設定する
       Chunk[] loadedChunks = world.getLoadedChunks();

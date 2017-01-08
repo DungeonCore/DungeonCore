@@ -37,7 +37,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 		return "item";
 	}
 

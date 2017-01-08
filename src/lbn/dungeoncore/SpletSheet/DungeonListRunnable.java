@@ -17,7 +17,7 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 	}
 
 	@Override
-	String getSheetName() {
+	public String getSheetName() {
 
 		return "dungeonlist";
 	}
