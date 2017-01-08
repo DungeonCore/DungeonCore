@@ -11,6 +11,7 @@ import lbn.dungeon.contents.ItemRegister;
 import lbn.dungeon.contents.MobRegister;
 import lbn.dungeon.contents.SpawnMobGetterRegister;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
@@ -42,6 +43,8 @@ public class InitManager {
 			SetItemManager.initServer();
 
 			QuestCommand.questReload();
+
+			SoundSheetRunnable.allReload();
 
 //			SystemSqlExecutor.execute();
 

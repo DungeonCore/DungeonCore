@@ -252,10 +252,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 				return;
 			}
 			//ランダムで一番近くのプレイヤー
-			for (LivingEntity entity : LivingEntityUtil.getNearFrendly(getEntity(), 20, 20, 20)) {
-				if (entity.getType() == EntityType.VILLAGER) {
-					continue;
-				}
+			for (LivingEntity entity : LivingEntityUtil.getNearFrendly(getEntity(), 30, 20, 30)) {
 				//combatプレイやーでないなら無視
 				if (entity.getType() == EntityType.PLAYER) {
 					if (!combatPlayerSet.containsKey(entity)) {
@@ -263,6 +260,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 					}
 				}
 				executeMobSkill(getEntity(), entity, condtion);
+				return;
 			}
 		}
 

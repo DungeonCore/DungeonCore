@@ -35,7 +35,9 @@ public class CustomChestManager {
 
 		if (bossChest != null) {
 			Location chestLoc = bossChest.setChest(e);
-			chestList.put(chestLoc, bossChest);
+			if (chestLoc != null) {
+				chestList.put(chestLoc, bossChest);
+			}
 		}
 	}
 

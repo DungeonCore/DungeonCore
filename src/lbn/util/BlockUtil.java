@@ -48,6 +48,7 @@ public class BlockUtil {
 
 	public static void setRedstone(Location loc) {
 		loadChunk(loc);
+
 		loc.getBlock().setType(Material.REDSTONE_BLOCK);
 		new BukkitRunnable() {
 			@Override

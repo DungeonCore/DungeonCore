@@ -2,6 +2,8 @@ package lbn.mob.mobskill;
 
 import java.util.ArrayList;
 
+import lbn.common.sound.SoundData;
+import lbn.common.sound.SoundManager;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
@@ -28,7 +30,7 @@ public class NormalMobSkill implements MobSkillInterface{
 			MobSkillExcuteTimingType timing,
 			MobSkillExcuteConditionType condition, String id, int percent, ParticleData particleData,
 			ParticleLocationType particleLocType, MobSkillTargetingMethodType targetingMethod,
-			String targetingMethodData, int laterTick, String chainId, String skillTalk) {
+			String targetingMethodData, int laterTick, String chainId, String skillTalk, String soundId, boolean isSoundTargetOnePlayer) {
 		this.potionEffect = potionEffect;
 		this.damage = damage;
 		this.fireTick = fireTick;
@@ -44,6 +46,8 @@ public class NormalMobSkill implements MobSkillInterface{
 		this.laterTick = laterTick;
 		this.chainId = chainId;
 		this.skillTalk = skillTalk;
+		this.soundId = soundId;
+		this.isSoundTargetOnePlayer = isSoundTargetOnePlayer;
 	}
 
 	protected MobSkillTargetingMethodType targetingMethod;
@@ -61,6 +65,8 @@ public class NormalMobSkill implements MobSkillInterface{
 	ParticleLocationType particleLocType;
 	String chainId;
 	String skillTalk;
+	String soundId;
+	boolean isSoundTargetOnePlayer;
 
 	@Override
 	public void execute(Entity condtionTarget, Entity mob) {
@@ -156,6 +162,22 @@ public class NormalMobSkill implements MobSkillInterface{
 			executeOneTarget(livingEntity, mob);
 		}
 
+		//周囲に対して実行の場合はここで一回だけ音を鳴らす
+		if (!isSoundTargetOnePlayer) {
+			SoundData fromId = SoundManager.fromId(soundId);
+			if (fromId != null) {
+				fromId.playSoundAllPlayer(mob.getLocation());
+			}
+		}
+
+		//次のスキルが設定されている場合は実行
+		if (chainId != null && !chainId.equals(id)) {
+			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
+			if (fromId != null) {
+				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+			}
+		}
+
 		//パーティクルを発動
 		executeParticle(targetList, mob);
 	}
@@ -193,6 +215,22 @@ public class NormalMobSkill implements MobSkillInterface{
 			protected void executeDamage(LivingEntity target, LivingEntity mob) {
 				executeOneTarget(target, mob);
 				damagedList.add(target);
+
+				//周囲に対して実行の場合はここで一回だけ音を鳴らす
+				if (!isSoundTargetOnePlayer) {
+					SoundData fromId = SoundManager.fromId(soundId);
+					if (fromId != null) {
+						fromId.playSoundAllPlayer(mob.getLocation());
+					}
+				}
+
+				//次のスキルが設定されている場合は実行
+				if (chainId != null && !chainId.equals(id)) {
+					MobSkillInterface fromId = MobSkillManager.fromId(chainId);
+					if (fromId != null) {
+						CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+					}
+				}
 			}
 			@Override
 			public synchronized void cancel() throws IllegalStateException {
@@ -256,18 +294,20 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 		runnable.execute(condtionTarget, mob);
 
-		//次のスキルが設定されている場合は実行
-		if (chainId != null && !chainId.equals(id)) {
-			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
-			if (fromId != null) {
-				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
-			}
-		}
-
 		//skilltalkが設定されている場合は実行
 		if (skillTalk != null && !skillTalk.isEmpty()) {
 			if (condtionTarget.getType() == EntityType.PLAYER) {
 				((Player)condtionTarget).sendMessage(skillTalk);
+			}
+		}
+
+		//対象に対してのみ実行の場合はここで一回だけ音を鳴らす
+		if (isSoundTargetOnePlayer) {
+			if (condtionTarget.getType() == EntityType.PLAYER) {
+				SoundData fromId = SoundManager.fromId(soundId);
+				if (fromId != null) {
+					fromId.playSoundOnePlayer(mob.getLocation(), (Player)condtionTarget);
+				}
 			}
 		}
 	}

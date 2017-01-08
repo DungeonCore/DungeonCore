@@ -45,11 +45,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 public class PlayerListener implements Listener{
-	public static void main(String[] args) {
-		for (Sound string : Sound.values()) {
-			System.out.println(string);
-		}
-	}
 
 	@EventHandler(priority=EventPriority.LOWEST)
 	public void onDamage(EntityDamageByEntityEvent e) {

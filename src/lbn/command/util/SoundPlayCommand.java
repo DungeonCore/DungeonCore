@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+import lbn.common.sound.SoundData;
+import lbn.common.sound.SoundManager;
+
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -47,18 +50,32 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
 			return false;
 		}
 
+		Location soundPlayLoc = null;
+		if ((sender instanceof BlockCommandSender)) {
+			soundPlayLoc = ((BlockCommandSender) sender).getBlock().getLocation();
+		} else if (sender instanceof Player) {
+			soundPlayLoc = ((Player) sender).getLocation();
+		}
+		if (soundPlayLoc == null) {
+			return false;
+		}
+
 		try {
 			if ((sender instanceof BlockCommandSender)) {
-				World world = ((BlockCommandSender) sender).getBlock().getWorld();
-				world.playSound(((BlockCommandSender) sender).getBlock().getLocation(), Sound.valueOf(arg3[0].toUpperCase()), size, pitch);
+				soundPlayLoc.getWorld().playSound(soundPlayLoc, Sound.valueOf(arg3[0].toUpperCase()), size, pitch);
 				return true;
 			} else if (sender instanceof Player) {
-				((Player) sender).getWorld().playSound(((Player) sender).getLocation(), Sound.valueOf(arg3[0].toUpperCase()), size, pitch);
+				((Player) sender).getWorld().playSound(soundPlayLoc, Sound.valueOf(arg3[0].toUpperCase()), size, pitch);
 				return true;
 			}
 		} catch (Exception e) {
-			sender.sendMessage(arg3[0] + "は存在しない可能性があります。/soundPlay listを実行し確認してください。");
 		}
+		SoundData fromId = SoundManager.fromId(arg3[0]);
+		if (fromId != null) {
+			fromId.playSoundAllPlayer(soundPlayLoc);
+			return true;
+		}
+		sender.sendMessage(arg3[0] + "は存在しない可能性があります。/soundPlay listを実行し確認してください。");
 		return false;
 	}
 

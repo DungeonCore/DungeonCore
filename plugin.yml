@@ -211,6 +211,21 @@ commands:
       permission:  main.lbnDungeonUtil.command.mod.addBene
       usage: /<command> benetype benetype ....
       permission-message: You don't have <permission>
+   sheet_reload:
+      description: スプレットシートの内容を適応させる
+      permission:  main.lbnDungeonUtil.command.mod.sheet_reload
+      usage: /<command> sheet_name | list
+      permission-message: You don't have <permission>
+   setredstone:
+      description: 指定した座標に一瞬だけredstoneを置く
+      permission:  main.lbnDungeonUtil.command.builder.setredstone
+      usage: /<command> x y z
+      permission-message: You don't have <permission>
+   loop:
+      description: 指定した回数、指定した時間間隔で、指定したコマンドを実行する
+      permission:  main.lbnDungeonUtil.command.builder.loop
+      usage: /<command> 実行する間隔(秒) 実行する回数 command
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

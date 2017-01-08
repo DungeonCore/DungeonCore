@@ -155,7 +155,7 @@ public class MobListener implements Listener {
 
 
 		//もしボスの場合はチェストを設置する
-		if (mob instanceof BossMobable) {
+		if (mob.isBoss()) {
 			CustomChestManager.setBossRewardChest((BossMobable) mob);
 		}
 	}

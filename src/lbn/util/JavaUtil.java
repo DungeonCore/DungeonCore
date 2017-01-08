@@ -12,6 +12,8 @@ import lbn.util.particle.ParticleType;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.command.BlockCommandSender;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class JavaUtil {
@@ -94,6 +96,16 @@ public class JavaUtil {
 		 Calendar cal1 = Calendar.getInstance(timeZone);
 		 long timeInMillis = cal1.getTimeInMillis();
 		 return timeInMillis;
+	}
+
+	public static Location getSenderLocation (CommandSender sender){
+		Location senderLoc = null;
+		if ((sender instanceof BlockCommandSender)) {
+			senderLoc = ((BlockCommandSender) sender).getBlock().getLocation();
+		} else if (sender instanceof Player) {
+			senderLoc = ((Player) sender).getLocation();
+		}
+		return senderLoc;
 	}
 }
 

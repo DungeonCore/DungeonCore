@@ -10,6 +10,9 @@ public class SoundManager {
 	}
 
 	public static SoundData fromId(String id) {
+		if (id == null || id.isEmpty()) {
+			return null;
+		}
 		return soundMap.get(id);
 	}
 

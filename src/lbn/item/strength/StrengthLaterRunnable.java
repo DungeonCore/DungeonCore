@@ -90,7 +90,6 @@ public class StrengthLaterRunnable extends BukkitRunnable{
 
 		//アイテムをセットする
 		top.setResult(event.getItem());
-		System.out.println(event.getItem());
 
 		//メタデータをいれておく
 		ItemStack clone = strengthItem.clone();
@@ -102,7 +101,6 @@ public class StrengthLaterRunnable extends BukkitRunnable{
 			@Override
 			public void run() {
 				((Player)e.getWhoClicked()).updateInventory();
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			}
 		}.runTaskLater(Main.plugin, 3);
 	}

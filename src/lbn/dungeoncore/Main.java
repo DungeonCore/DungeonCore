@@ -32,6 +32,7 @@ import lbn.command.QuestCommand;
 import lbn.command.SetDungeonCommand;
 import lbn.command.SetSpawnPointCommand;
 import lbn.command.ShopCommand;
+import lbn.command.SpletSheetCommand;
 import lbn.command.StrengthItemCommand;
 import lbn.command.TpCutCommand;
 import lbn.command.VillagerCommand;
@@ -39,10 +40,12 @@ import lbn.command.util.ChangeBiomeCommand;
 import lbn.command.util.CommandSavePlayer;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.DelayCommand;
+import lbn.command.util.LoopCommand;
 import lbn.command.util.RemoveMobCommand;
 import lbn.command.util.SearchPathCommand;
 import lbn.command.util.SequenceCommand;
 import lbn.command.util.SequenceSetBlockCommand;
+import lbn.command.util.SetRedStoneBlockCommand;
 import lbn.command.util.ShopItemCommand;
 import lbn.command.util.SimplySetSpawnPointCommand;
 import lbn.command.util.SoundPlayCommand;
@@ -210,6 +213,9 @@ public class Main extends JavaPlugin {
 		registCommand(new CommandTpOtherWorld(), "tpworld");
 		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
 		registCommand(new CommandAddBene(), "addBene");
+		registCommand(new SpletSheetCommand(), "sheet_reload");
+		registCommand(new SetRedStoneBlockCommand(), "setredstone");
+		registCommand(new LoopCommand(), "loop");
 	}
 
 	private void registCommand(CommandExecutor instance, String name) {
