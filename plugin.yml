@@ -226,6 +226,11 @@ commands:
       permission:  main.lbnDungeonUtil.command.builder.loop
       usage: /<command> 実行する間隔(秒) 実行する回数 command
       permission-message: You don't have <permission>
+   randomExec:
+      description: 指定されたコマンドの中からランダムで1つ実行
+      permission:  main.lbnDungeonUtil.command.builder.randomExec
+      usage: /<command> command1 ? command2 ? command3 ? .....
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

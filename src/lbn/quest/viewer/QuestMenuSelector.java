@@ -68,7 +68,6 @@ class QuestMenuSelectorRunnable implements SelectRunnable{
 			return;
 		}
 
-		long currentTimeMillis = System.currentTimeMillis();
 		MenuSelecor menuSelecor = new QuestConfirmMenu(questByItem);
 		menuSelecor.open(p);
 	}

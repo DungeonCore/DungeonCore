@@ -41,6 +41,7 @@ import lbn.command.util.CommandSavePlayer;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.DelayCommand;
 import lbn.command.util.LoopCommand;
+import lbn.command.util.RandomExecuteCommand;
 import lbn.command.util.RemoveMobCommand;
 import lbn.command.util.SearchPathCommand;
 import lbn.command.util.SequenceCommand;
@@ -216,6 +217,7 @@ public class Main extends JavaPlugin {
 		registCommand(new SpletSheetCommand(), "sheet_reload");
 		registCommand(new SetRedStoneBlockCommand(), "setredstone");
 		registCommand(new LoopCommand(), "loop");
+		registCommand(new RandomExecuteCommand(), "randomExec");
 	}
 
 	private void registCommand(CommandExecutor instance, String name) {
