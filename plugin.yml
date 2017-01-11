@@ -1,7 +1,7 @@
 name: DungeonCore
 version: 1.2
 main: lbn.dungeoncore.Main
-softdepend: [Multiverse-Core,TheLowSheetPlugin,HolographicDisplays]
+softdepend: [Multiverse-Core,TheLowSheetPlugin,HolographicDisplays,Citizens]
 
 commands:
    getItem:
