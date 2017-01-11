@@ -231,6 +231,11 @@ commands:
       permission:  main.lbnDungeonUtil.command.builder.randomExec
       usage: /<command> command1 ? command2 ? command3 ? .....
       permission-message: You don't have <permission>
+   jumpboost:
+      description: 指定したプレイヤーをジャンプさせる(ランチャーパッドのようにとばす)
+      permission:  main.lbnDungeonUtil.command.builder.jumpboost
+      usage: /<command> player n (向いている方向にnだけとばす) or /<command> player x y z (x y z方向にとばす)
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

@@ -24,6 +24,7 @@ import lbn.command.CommandStatusView;
 import lbn.command.CommandTpOtherWorld;
 import lbn.command.CommandViewInfo;
 import lbn.command.DeleteMonster;
+import lbn.command.JumpCommand;
 import lbn.command.MobCommand;
 import lbn.command.MobSkillExecuteCommand;
 import lbn.command.MoneyCommand;
@@ -218,6 +219,7 @@ public class Main extends JavaPlugin {
 		registCommand(new SetRedStoneBlockCommand(), "setredstone");
 		registCommand(new LoopCommand(), "loop");
 		registCommand(new RandomExecuteCommand(), "randomExec");
+		registCommand(new JumpCommand(), "jumpboost");
 	}
 
 	private void registCommand(CommandExecutor instance, String name) {

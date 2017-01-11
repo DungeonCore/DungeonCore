@@ -3,8 +3,11 @@ package lbn.util.explosion;
 import lbn.mob.LastDamageManager;
 import lbn.mob.SummonPlayerManager;
 import lbn.player.AttackType;
+import net.minecraft.server.v1_8_R1.DamageSource;
 
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -23,6 +26,11 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
 
 	@Override
 	public void damageEntity(Entity target, float d10) {
+		if (sourceEntity == null) {
+			super.damageEntity(target, d10);
+			return;
+		}
+
 		if (target instanceof LivingEntity) {
 			if (sourceEntity.getType() == EntityType.PLAYER) {
 				LastDamageManager.onDamage((LivingEntity) target, (Player)sourceEntity, type);
@@ -33,7 +41,8 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
 				}
 			}
 		}
-		super.damageEntity(target, d10);
+		//プレイヤーによるダメージにする
+		((CraftEntity)target).getHandle().damageEntity(DamageSource.playerAttack(((CraftPlayer)sourceEntity).getHandle()), d10);
 	}
 
 }

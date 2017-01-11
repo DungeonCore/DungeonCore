@@ -1,20 +1,17 @@
 package lbn.dungeon.contents.item.click;
 
-import lbn.dungeoncore.Main;
 import lbn.item.itemAbstract.RightClickItem;
+import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class JumpBoost extends RightClickItem{
@@ -39,25 +36,7 @@ public class JumpBoost extends RightClickItem{
 		player.getWorld().playSound(player.getLocation(), Sound.BAT_LOOP, 1, 3);
 		new ParticleData(ParticleType.crit, 100).setDispersion(0.5, 0.5, 0.5).run(player.getLocation());
 
-		new BukkitRunnable() {
-			int count = 0;
-			@Override
-			public void run() {
-				if (count == 60 * 20) {
-					cancel();
-				}
-
-				if (player.isDead() || !player.isOnline() || player.getGameMode() == GameMode.CREATIVE) {
-					cancel();
-				}
-
-				if (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-					cancel();
-				}
-				count++;
-				player.setFallDistance(0);
-			}
-		}.runTaskTimer(Main.plugin, 20, 1);
+		LivingEntityUtil.setNoFallDamage(player);
 
 		return true;
 	}

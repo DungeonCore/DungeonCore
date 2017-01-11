@@ -17,9 +17,12 @@ import org.bukkit.util.Vector;
  */
 public class ParticleData {
 
-	public String particle;
+	public static void main(String[] args) {
+		for (EnumParticle enums : EnumParticle.values()) {
+			System.out.println(enums);
+		}
+	}
 	public EnumParticle particleEnum;
-	public ParticleType particleType;
 	public int amount;
 
 	public double dx = 0.32D;
@@ -27,25 +30,25 @@ public class ParticleData {
 	public double dz = 0.32D;
 
 	public ParticleData(ParticleType particle, int amount) {
-		this.particle = particle.toString();
-		this.particleType = particle;
 		this.amount = amount;
 		this.particleEnum = particle.getEnumType();
 	}
 
+	public ParticleData(EnumParticle particle, int amount) {
+		this.amount = amount;
+		this.particleEnum = particle;
+	}
+
 	public ParticleData(ParticleData data) {
-		this.particle = data.particle;
-		this.particleEnum = data.particleType.getEnumType();
 		this.amount = data.amount;
 		this.lastArgument = data.lastArgument;
+		this.particleEnum = data.particleEnum;
 		this.dx = data.dx;
 		this.dy = data.dy;
 		this.dz = data.dz;
 	}
 
 	public ParticleData setParticle(ParticleType particle) {
-		this.particle = particle.toString();
-		this.particleType = particle;
 		this.particleEnum = particle.getEnumType();
 		return this;
 	}
@@ -130,7 +133,7 @@ public class ParticleData {
 	 * @return パーティクル名(小文字)
 	 */
 	public String getParticleName() {
-		return particle.toString();
+		return particleEnum.toString();
 	}
 
 	@Override

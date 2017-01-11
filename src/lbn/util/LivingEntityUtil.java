@@ -16,6 +16,7 @@ import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftAnimals;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
@@ -254,6 +255,29 @@ public class LivingEntityUtil {
 		target.damage(0.0);
 		//HP処理
 		addHealth(target, val);
+	}
+
+
+	public static void setNoFallDamage(Player player) {
+		new BukkitRunnable() {
+			int count = 0;
+			@Override
+			public void run() {
+				if (count == 60 * 20) {
+					cancel();
+				}
+
+				if (player.isDead() || !player.isOnline() || player.getGameMode() == GameMode.CREATIVE) {
+					cancel();
+				}
+
+				if (player.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+					cancel();
+				}
+				count++;
+				player.setFallDistance(0);
+			}
+		}.runTaskTimer(Main.plugin, 20, 2);
 	}
 
 	public static void setNoDamageTick(LivingEntity entity, int tick) {
