@@ -103,9 +103,8 @@ public class PlayerListener implements Listener{
 
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onMoneyExp(PlayerChangeGalionsEvent event) {
-		if (event.getReason().isPrintMessageLog()) {
-			Message.sendMessage(event.getPlayer(), ChatColor.YELLOW + "{0} Galions 入手した", event.getGalions());
-		}
+		//メッセージを表示
+		event.getReason().sendMessageLog(event.getPlayer(), event.getGalions());
 
 		//まだこの時点では確定してないのでタイミングをずらす
 		new BukkitRunnable() {

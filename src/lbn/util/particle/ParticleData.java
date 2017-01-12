@@ -16,12 +16,6 @@ import org.bukkit.util.Vector;
  *
  */
 public class ParticleData {
-
-	public static void main(String[] args) {
-		for (EnumParticle enums : EnumParticle.values()) {
-			System.out.println(enums);
-		}
-	}
 	public EnumParticle particleEnum;
 	public int amount;
 
