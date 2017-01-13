@@ -14,6 +14,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
+/**
+ * SpletSheetから読み込みと編集の処理を実装するための抽象クラス
+ *
+ */
 public abstract class AbstractComplexSheetRunable implements SheetRunnable<String[][]> {
   ArrayList<Task>                taskList         = new ArrayList<Task>();
 

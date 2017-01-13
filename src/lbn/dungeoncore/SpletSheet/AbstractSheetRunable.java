@@ -11,6 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
+/**
+ * SpletSheetから読み込む処理だけを実装するための抽象クラス
+ *
+ */
 public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> {
 
   public AbstractSheetRunable(CommandSender p) {
