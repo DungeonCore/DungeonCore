@@ -1,20 +1,21 @@
 package lbn.util;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
-import lbn.item.GalionItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import lbn.item.GalionItem;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
 
 public class JavaUtil {
 	public static Set<Class<?>> getInterface(Class<?> clazz) {
@@ -106,6 +107,17 @@ public class JavaUtil {
 			senderLoc = ((Player) sender).getLocation();
 		}
 		return senderLoc;
+	}
+
+	public static Object getField(Class<?> clazz, String fieldName, Object targetInstance) {
+		try {
+			Field field = clazz.getDeclaredField(fieldName);
+			field.setAccessible(true);
+			return field.get(targetInstance);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
 
