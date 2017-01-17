@@ -10,7 +10,7 @@ import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.ItemStackUtil;
 import lbn.util.QuestUtil;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -24,7 +24,7 @@ public class TakeItemQuest extends TouchVillagerQuest{
 	}
 
 	@Override
-	public void onTouchVillager(Player p, LivingEntity entity, PlayerQuestSession session) {
+	public void onTouchVillager(Player p, Entity entity, PlayerQuestSession session) {
 		//NPCが同じかチェック
 		String name = entity.getCustomName();
 		if (!name.equalsIgnoreCase(getTargetVillagerName())) {

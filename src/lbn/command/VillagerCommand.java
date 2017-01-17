@@ -1,26 +1,22 @@
 package lbn.command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
-import lbn.util.LivingEntityUtil;
+import lbn.npc.NpcManager;
+import lbn.npc.VillagerNpc;
+import net.citizensnpcs.api.npc.NPC;
 
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 
 public class VillagerCommand implements CommandExecutor{
 
@@ -41,8 +37,6 @@ public class VillagerCommand implements CommandExecutor{
 			removeVillager(arg0, targetName);
 		} else if (arg3[0].equalsIgnoreCase("reload")) {
 			reloadVillager(arg0, targetName);
-		} else if (arg3[0].equalsIgnoreCase("reset")) {
-			resetVillager(arg0, targetName);
 		} else {
 			arg0.sendMessage(arg3[0] + "は認められていません。[spawn, remove, reload, reset]のみ可能です。");
 			return false;
@@ -50,24 +44,9 @@ public class VillagerCommand implements CommandExecutor{
 		return true;
 	}
 
-	protected void resetVillager(CommandSender arg0, String targetName) {
-		Player p = (Player) arg0;
-		List<Entity> nearbyEntities = p.getNearbyEntities(30, 10, 30);
-		for (Entity entity : nearbyEntities) {
-			if (entity.getType() != EntityType.VILLAGER) {
-				continue;
-			}
-
-			if (!LivingEntityUtil.isCustomVillager(entity)) {
-				entity.remove();
-			}
-		}
-	}
-
 	public static void reloadAllVillager(CommandSender arg0, boolean init) {
 		try {
 			VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
-			villagerSheetRunnable.setChunkLoadInit(init);
 			villagerSheetRunnable.getData(null);
 			SpletSheetExecutor.onExecute(villagerSheetRunnable);
 		} catch (Exception e) {
@@ -95,11 +74,43 @@ public class VillagerCommand implements CommandExecutor{
 	}
 
 	protected void removeVillager(CommandSender sender, String targetName) {
-		//locationを更新
+		ArrayList<VillagerNpc> npcList = new ArrayList<VillagerNpc>();
+
+		//名前が指定されていない時はプレイヤーの周囲のNPCを調べる
+		if (targetName == null) {
+			List<Entity> nearbyEntities = ((Player)sender).getNearbyEntities(1, 1, 1);
+			for (Entity entity : nearbyEntities) {
+				//NPCならリストに追加
+				VillagerNpc villagerNpc = NpcManager.getVillagerNpc(entity);
+				if (villagerNpc != null) {
+					npcList.add(villagerNpc);
+				}
+			}
+		} else {
+			List<Entity> nearbyEntities = ((Player)sender).getNearbyEntities(5, 2, 5);
+			for (Entity entity : nearbyEntities) {
+				VillagerNpc villagerNpc = NpcManager.getVillagerNpc(entity);
+				//NPCでないなら無視する
+				if (villagerNpc == null) {
+					continue;
+				}
+				//名前が違うなら無視する
+				if (!villagerNpc.getName().equals(targetName)) {
+					continue;
+				}
+				npcList.add(villagerNpc);
+			}
+		}
+
+		//スプレットシートの内容を変更する
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(sender);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("location", "");
-		villagerSheetRunnable.updateData(map, "name=" + targetName);
+		for (VillagerNpc villagerNpc : npcList) {
+			//locationを更新
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("location", "");
+			villagerSheetRunnable.updateData(map, "name=" + villagerNpc.getName());
+		}
+
 		try {
 			SpletSheetExecutor.onExecute(villagerSheetRunnable);
 		} catch (Exception e) {
@@ -107,23 +118,9 @@ public class VillagerCommand implements CommandExecutor{
 			sender.sendMessage("エラーが発生しました。");
 		}
 
-		List<Entity> nearbyEntities = ((Player)sender).getNearbyEntities(1, 1, 1);
-		if (targetName == null) {
-			nearbyEntities = ((Player)sender).getNearbyEntities(5, 2, 5);
-		} else {
-			nearbyEntities = ((Player)sender).getNearbyEntities(1, 1, 1);
-		}
-		//名前が指定されている場合はその村人だけ削除する
-		for (Entity entity : nearbyEntities) {
-			if (entity instanceof Villager) {
-				if (targetName == null) {
-					entity.remove();
-				} else {
-					if (targetName.equalsIgnoreCase(((Villager) entity).getCustomName())) {
-						entity.remove();
-					}
-				}
-			}
+		//ワールドから削除する
+		for (VillagerNpc villagerNpc : npcList) {
+			villagerNpc.remove();
 		}
 	}
 
@@ -133,23 +130,24 @@ public class VillagerCommand implements CommandExecutor{
 			return;
 		}
 
-		AbstractMob<?> mob = MobHolder.getMob(targetName);
-		if (mob == null || mob.getEntityType() != EntityType.VILLAGER) {
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(targetName);
+		if (villagerNpc == null) {
 			arg0.sendMessage(targetName + "という名前の村人が存在しません。");
 			return;
 		}
 
 		//前スポーンしたものを削除する
-		if (((AbstractVillager)mob).getLocation() != null) {
-			removeVillager(targetName, mob);
+		NPC npc = villagerNpc.getNpc();
+		if (npc != null) {
+			villagerNpc.remove();
 		}
 
 		Location location = ((Player)arg0).getLocation();
-		location.setX(location.getBlockX());
+		location.setX(location.getBlockX() + 0.5);
 		location.setY(location.getBlockY());
-		location.setZ(location.getBlockZ());
+		location.setZ(location.getBlockZ() + 0.5);
 		//スポーンさせる
-		mob.spawn(location);
+		villagerNpc.spawn(location);
 		//スプレットシートに書きこむ
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -160,16 +158,6 @@ public class VillagerCommand implements CommandExecutor{
 		} catch (Exception e) {
 			e.printStackTrace();
 			arg0.sendMessage("エラーが発生しました。");
-		}
-	}
-
-	protected void removeVillager(String targetName, AbstractMob<?> mob) {
-		Chunk chunk = ((AbstractVillager)mob).getLocation().getChunk();
-		Entity[] entities = chunk.getEntities();
-		for (Entity entity : entities) {
-			if (entity.getType() == EntityType.VILLAGER && ((LivingEntity)entity).getCustomName().equals(targetName)) {
-				entity.remove();
-			}
 		}
 	}
 }

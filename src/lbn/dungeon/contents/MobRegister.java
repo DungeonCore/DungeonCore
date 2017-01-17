@@ -14,7 +14,6 @@ import lbn.dungeon.contents.mob.skelton.SummonSkelton;
 import lbn.dungeon.contents.mob.skelton.Tadmor;
 import lbn.dungeon.contents.mob.slime.FireCube;
 import lbn.dungeon.contents.mob.slime.HealCube;
-import lbn.dungeon.contents.mob.villager.VillagerRegister;
 import lbn.dungeon.contents.mob.zombie.AbstractSummonZombie;
 import lbn.dungeon.contents.mob.zombie.BabyArthur;
 import lbn.dungeon.contents.mob.zombie.Bondage;
@@ -67,6 +66,5 @@ public class MobRegister {
 		MobHolder.registMob(new Hermit());
 		MobHolder.registMob(new NormalSummonZombie(0, 0));
 
-		VillagerRegister.regist();
 	}
 }

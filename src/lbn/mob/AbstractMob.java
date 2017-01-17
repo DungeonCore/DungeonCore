@@ -15,7 +15,6 @@ import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
 import lbn.player.AttackType;
 import lbn.player.status.IStatusManager;
 import lbn.player.status.StatusAddReason;
@@ -60,8 +59,6 @@ public abstract class AbstractMob<T extends Entity> {
 	{
 		if (this instanceof SummonMobable) {
 			type = TheLowMobType.SUMMON;
-		} else if (this instanceof AbstractVillager) {
-			type = TheLowMobType.VILLAGER;
 		}
 	}
 
@@ -98,11 +95,6 @@ public abstract class AbstractMob<T extends Entity> {
 	public void onDamageBefore(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		//属性適用
 		getAttribute().onDamage(mob, damager, e);
-
-		if (getTheLowMobType() == TheLowMobType.VILLAGER) {
-			((AbstractVillager)this).isExecuteOnDamage = true;
-			return;
-		}
 
 		//ボスモンスターの時はダメージ計算の補正を行わない
 		if (isBoss()) {

@@ -5,7 +5,7 @@ import java.util.Set;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.QuestUtil;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
@@ -34,12 +34,12 @@ public class TouchVillagerQuest extends AbstractQuest{
 		return new TouchVillagerQuest(id, data1, data2.split(","));
 	}
 
-	public static Set<TouchVillagerQuest> getQuestByTargetVillager(LivingEntity e) {
+	public static Set<TouchVillagerQuest> getQuestByTargetVillager(Entity e) {
 		String name = e.getCustomName().toLowerCase();
 		return targetVillagerNameQuestList.get(name);
 	}
 
-	public void onTouchVillager(Player p, LivingEntity entity, PlayerQuestSession session) {
+	public void onTouchVillager(Player p, Entity entity, PlayerQuestSession session) {
 		String name = entity.getCustomName();
 		if (name.equalsIgnoreCase(getTargetVillagerName())) {
 			session.setQuestData(this, 1);

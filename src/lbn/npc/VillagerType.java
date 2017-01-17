@@ -1,4 +1,4 @@
-package lbn.mob.mob.abstractmob.villager;
+package lbn.npc;
 
 public enum VillagerType {
 	NORMAL, SHOP, BLACKSMITH;

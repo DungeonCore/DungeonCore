@@ -12,6 +12,12 @@ import lbn.dungeoncore.Main;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractEnderman;
+import lbn.npc.NpcManager;
+import net.citizensnpcs.api.event.NPCDamageEvent;
+import net.citizensnpcs.api.event.NPCDespawnEvent;
+import net.citizensnpcs.api.event.NPCLeftClickEvent;
+import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.event.NPCSpawnEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -207,15 +213,6 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onDisablePlugin(PluginDisableEvent e) {
-		//再セットするので削除しない
-//		for (BossMobable bossMobable : bossoList) {
-//			LivingEntity entity = bossMobable.getEntity();
-//			if (entity == null || !entity.isValid()) {
-//				continue;
-//			}
-//			entity.remove();
-//		}
-
 		for (AbstractMob<?> mobs : MobHolder.getAllMobs()) {
 			mobs.onDisablePlugin(e);
 		}
@@ -227,10 +224,35 @@ public class MobListener implements Listener {
 		for (Entity entity : entities) {
 			if (entity.getType().isAlive()) {
 				AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
-				if (mob != null && mob instanceof BossMobable) {
+				if (mob != null && mob.isBoss()) {
 					entity.remove();
 				}
 			}
 		}
+	}
+
+	@EventHandler
+	public void onNPCRightClickEvent(NPCRightClickEvent e) {
+		NpcManager.onNPCRightClickEvent(e);
+	}
+
+	@EventHandler
+	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
+		NpcManager.onNPCLeftClickEvent(e);
+	}
+
+	@EventHandler
+	public void onNPCDamageEvent(NPCDamageEvent e) {
+		NpcManager.onNPCDamageEvent(e);
+	}
+
+	@EventHandler
+	public void onNPCSpawnEvent(NPCSpawnEvent e) {
+		NpcManager.onNPCSpawnEvent(e);
+	}
+
+	@EventHandler
+	public void onNPCDespawnEvent(NPCDespawnEvent e) {
+		NpcManager.onNPCDespawnEvent(e);
 	}
 }

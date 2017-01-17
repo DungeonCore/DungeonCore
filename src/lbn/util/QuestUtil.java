@@ -2,9 +2,8 @@ package lbn.util;
 
 import java.text.MessageFormat;
 
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
+import lbn.npc.NpcManager;
+import lbn.npc.VillagerNpc;
 import lbn.quest.QuestAnnouncement;
 
 import org.bukkit.Bukkit;
@@ -14,17 +13,21 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class QuestUtil {
+	/**
+	 * 村人から受けたクエストのクリア条件が満たされたときの処理
+	 * @param villagerName
+	 * @param p
+	 */
 	public static void sendSatisfyComplateForVillager(String villagerName, Player p) {
 		//TODO 音追加
 
-		AbstractMob<?> mob = MobHolder.getMob(villagerName);
-		if (mob == null && !(mob instanceof AbstractVillager)) {
+		VillagerNpc npc = NpcManager.getVillagerNpc(villagerName);
+		if (npc == null) {
 			p.sendMessage("クエストクリア!!!  " + villagerName + "のところに戻ろう！！");
 			return;
 		}
 
-		AbstractVillager villager = (AbstractVillager) mob;
-		Location location = villager.getLocation();
+		Location location = npc.getLocation();
 
 		String loc;
 		if (location != null) {
@@ -37,8 +40,8 @@ public class QuestUtil {
 		String command = MessageFormat.format("tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
 				p.getName(),
 				"クエストクリア!!!  ",
-				villager.getName(),
-				villager.getEntityType(),
+				npc.getName(),
+				npc.getEntityType(),
 				loc,
 				"のところに戻ろう",
 				QuestAnnouncement.QUEST_INFO_PREFIX,

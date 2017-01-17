@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import lbn.mob.mob.abstractmob.villager.AbstractVillager;
+import lbn.npc.VillagerNpc;
 
 import org.bukkit.entity.Player;
 
@@ -17,10 +17,10 @@ public class AvailbleQuestHolder {
 		villagerNameQuestMap.put(q.getEndVillagerName(), q);
 	}
 
-	public static List<Quest> getAvailableQuestList(AbstractVillager v, Player p) {
+	public static List<Quest> getAvailableQuestList(VillagerNpc npc, Player p) {
 		ArrayList<Quest> availableQuestList = new ArrayList<Quest>();
 
-		Set<Quest> set = villagerNameQuestMap.get(v.getName());
+		Set<Quest> set = villagerNameQuestMap.get(npc.getName());
 		for (Quest quest : set) {
 			if (QuestManager.getStartQuestStatus(quest, p).canStart()) {
 				availableQuestList.add(quest);

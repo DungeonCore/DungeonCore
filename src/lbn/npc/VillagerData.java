@@ -1,33 +1,42 @@
-package lbn.mob.mob.abstractmob.villager;
+package lbn.npc;
 
 import java.util.HashMap;
 
-import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.EntityType;
 
+/**
+ * NPCのデータを管理するためのクラス
+ * @author KENSUKE
+ *
+ */
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
 
-	public static void registSpletsheetVillager(CommandSender p ,String name, String type, String quests, String texts, String location, String adult, String data) {
-		VillagerData villagerData = new VillagerData(p, name, type, quests, texts, location, adult, data);
+	public static void registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin) {
+		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin);
 		if (villagerData.isError) {
 			if (!(p instanceof ConsoleCommandSender)) {
-				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, quests, texts}, ",") + "]");
+				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, texts}, ",") + "]");
 			}
 			return;
 		}
 		villagerMap.put(name, villagerData);
 
-		AbstractMob<?> mob = MobHolder.getMob(name);
-		if (mob == null || mob.isNullMob()) {
-			MobHolder.registMob(new SpletSheetVillager(villagerData));
+		//もしまだNPCが登録されていなければ新しく登録する
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(name);
+		if (villagerNpc == null) {
+			NpcManager.regist(new VillagerNpc(villagerData));
+		} else {
+		//登録されている時はデータを上書きする
+			villagerNpc.data = villagerData;
+			//NPCを更新する
+			villagerNpc.updateNpc();
 		}
 	}
 
@@ -41,11 +50,13 @@ public class VillagerData {
 	String[] texts;
 	boolean isAdult = true;
 
-	Location loc = null;
+	EntityType entityType = EntityType.VILLAGER;
+
+	String skin = null;
 
 	boolean isError = false;
 
-	private VillagerData(CommandSender p, String name, String type, String quests, String texts, String location, String adult, String data) {
+	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin) {
 		this.name = name;
 		if (name == null || name.isEmpty()) {
 			sendMsg(p, "名前は絶対必要です。");
@@ -74,17 +85,17 @@ public class VillagerData {
 			this.texts = new String[0];
 		}
 
-		if (location != null && !location.isEmpty()) {
-			loc = AbstractComplexSheetRunable.getLocationByString(location);
-			if (loc == null) {
-				sendMsg(p, "locationが不正です");
-				isError = true;
-			}
-		}
-
 		if ("子供".equals(adult)) {
 			isAdult = false;
 		}
+
+		try {
+			entityType = EntityType.valueOf(mobtype);
+		} catch (Exception e) {
+			entityType = EntityType.VILLAGER;
+		}
+
+		this.skin = skin;
 
 	}
 
@@ -118,12 +129,17 @@ public class VillagerData {
 		return data;
 	}
 
-	public Location getLocation() {
-		return loc;
+	public String getSkin() {
+		return skin;
+	}
+
+	public EntityType getEntityType() {
+		return entityType;
 	}
 
 	@Override
 	public String toString() {
 		return StringUtils.join(new Object[]{"name:", name, ", type:", type,  ", texts:", texts});
 	}
+
 }
