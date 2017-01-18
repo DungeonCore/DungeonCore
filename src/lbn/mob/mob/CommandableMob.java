@@ -35,6 +35,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -52,6 +53,10 @@ public class CommandableMob extends AbstractMob<Entity>{
 	@Override
 	public boolean isRiding() {
 		return isRiding;
+	}
+
+	public LbnNBTTag getNbtTag() {
+		return nbtTag;
 	}
 
 
@@ -83,7 +88,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	@EventHandler
 	protected Entity spawnPrivate(Location loc) {
-		Entity spawn = MobSpawnByCommand.spawn(loc, command);
+		Entity spawn = MobSpawnByCommand.spawn(loc, command, nbtTag);
 
 		if (health == -1) {
 			if (spawn.getType().isAlive()) {
@@ -219,11 +224,15 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	@Override
 	public void onOtherDamage(EntityDamageEvent e) {
-		if (this.mob == null) {
-			return;
+		if (e.getCause() == DamageCause.DROWNING && nbtTag.isWaterMonster()) {
+			e.setCancelled(true);
 		}
-		this.mob.onOtherDamage(e);
+
+		if (this.mob != null) {
+			this.mob.onOtherDamage(e);
+		}
 	}
+
 
 	@Override
 	public void onDeathPrivate(EntityDeathEvent e) {

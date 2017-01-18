@@ -9,9 +9,9 @@ import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
-import net.minecraft.server.v1_8_R1.GenericAttributes;
 import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.Items;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFleeSun;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
@@ -149,6 +149,12 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 	Player owner = null;
 
 	@Override
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
+	}
+
+	@Override
 	public boolean W() {
 		if (!isIgnoreWater) {
 			return super.W();
@@ -166,15 +172,6 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 			return false;
 		}
 	}
-	@Override
-	public void setFlyMob(boolean isFly) {
-		this.isBatFly = isFly;
-	}
-
-	@Override
-	public boolean isFlyMob() {
-		return isBatFly;
-	}
 
 	@Override
 	public Skeleton spawn(Location loc) {
@@ -187,25 +184,5 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 	}
 
 	boolean isIgnoreWater = false;
-
-	@Override
-	public boolean isIgnoreWater() {
-		return isIgnoreWater;
-	}
-
-	@Override
-	public void setIgnoreWater(boolean isIgnoreWater) {
-		this.isIgnoreWater = false;
-	}
-
-	@Override
-	public void setNoKnockBackResistnce(double val) {
-		getAttributeInstance(GenericAttributes.c).setValue(val);
-	}
-
-	@Override
-	public double getNoKnockBackResistnce() {
-		return getAttributeInstance(GenericAttributes.c).getValue();
-	}
 
 }

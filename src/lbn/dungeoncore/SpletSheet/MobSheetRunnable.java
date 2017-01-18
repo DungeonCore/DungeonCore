@@ -10,6 +10,7 @@ import lbn.mob.mob.CommandBossMob;
 import lbn.mob.mob.CommandableMob;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
+import lbn.util.spawn.LbnNBTTag;
 
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -65,11 +66,6 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				sendMessage("Summonコマンドが記入されていません：" + name);
 				return;
 			}
-//			boolean bool = false;
-//			try {
-//				bool = Boolean.parseBoolean(row[2]);
-//			} catch (Exception e) {
-//			}
 
 			boolean isBoss = false;
 
@@ -91,6 +87,17 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				sendMessage("入力されたsummon commandが不正です。:" + name);
 				return;
 			}
+
+			//LbnNbtTagを取得
+			LbnNBTTag nbtTag = instance.getNbtTag();
+			if (nbtTag == null) {
+				sendMessage("入力されたsummon commandが不正です。(1):" + name);
+				return;
+			}
+
+			//WaterMob化
+			boolean isWaterZombie = JavaUtil.getBoolean(row[2], false);
+			nbtTag.setWaterMonster(isWaterZombie);
 
 			if (row[3] != null && !row[3].isEmpty()) {
 				ItemStack item = ItemStackUtil.getItemStack(row[3]);

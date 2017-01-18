@@ -17,6 +17,10 @@ import net.minecraft.server.v1_8_R1.PlayerSelector;
 
 public abstract class AbstractNotUsuallyCommand extends CommandAbstract{
 
+	public int a() {
+		return 2;
+	}
+
 	public void regist() {
 		String fallbackPrefix = getCommandWrapper() instanceof VanillaCommandWrapper ? "minecraft" : Main.plugin.getName();
 		((CraftServer)Bukkit.getServer()).getCommandMap().register(fallbackPrefix, getCommandWrapper());

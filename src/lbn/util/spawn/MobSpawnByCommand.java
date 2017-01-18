@@ -37,7 +37,7 @@ public class MobSpawnByCommand {
 		new CommandSummon().execute(((CraftPlayer) p).getHandle(), comand);
 	}
 
-	public static org.bukkit.entity.Entity spawn(Location loc, String[] paramArrayOfString) {
+	public static org.bukkit.entity.Entity spawn(Location loc, String[] paramArrayOfString, LbnNBTTag nbtTag) {
 		// summonがあったら取り除く
 		if (paramArrayOfString[0].equalsIgnoreCase("summon") || paramArrayOfString[0].equalsIgnoreCase("/summon")) {
 			String[] newParam = new String[paramArrayOfString.length - 1];
@@ -54,6 +54,8 @@ public class MobSpawnByCommand {
 				NBTBase localNBTBase = MojangsonParser.parse(((IChatBaseComponent) localObject1).c());
 				if ((localNBTBase instanceof NBTTagCompound)) {
 					localNBTTagCompound1 = (NBTTagCompound) localNBTBase;
+					//オリジナルのTagをつける
+					localNBTTagCompound1.setBoolean("IsWaterMonster", nbtTag.isWaterMonster());
 				} else {
 					a("Not a valid tag");
 					return null;

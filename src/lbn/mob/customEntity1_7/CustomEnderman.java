@@ -2,6 +2,7 @@ package lbn.mob.customEntity1_7;
 
 import lbn.mob.customEntity.ICustomEntity;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
@@ -50,39 +51,30 @@ public class CustomEnderman extends EntityEnderman implements ICustomEntity<Ende
 	}
 
 	@Override
-	public void setNoKnockBackResistnce(double val) {
-		// TODO 自動生成されたメソッド・スタブ
-
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
 	}
 
 	@Override
-	public double getNoKnockBackResistnce() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+	public boolean W() {
+		if (!isIgnoreWater) {
+			return super.W();
+		} else {
+			inWater = false;
+			return false;
+		}
 	}
 
 	@Override
-	public void setFlyMob(boolean isFly) {
-		// TODO 自動生成されたメソッド・スタブ
-
+	public boolean V() {
+		if (!isIgnoreWater) {
+			return super.V();
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	public boolean isFlyMob() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-
-	@Override
-	public boolean isIgnoreWater() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-
-	@Override
-	public void setIgnoreWater(boolean isIgnoreWater) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
+	boolean isIgnoreWater = false;
 
 }

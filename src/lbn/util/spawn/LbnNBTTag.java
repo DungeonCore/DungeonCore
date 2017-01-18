@@ -12,6 +12,8 @@ public class LbnNBTTag {
 
 	public boolean isRiding = false;
 
+	public boolean isWaterMonster = false;
+
 	public void setRiding(boolean isRiding) {
 		this.isRiding = isRiding;
 	}
@@ -22,5 +24,13 @@ public class LbnNBTTag {
 
 	public boolean isRiding() {
 		return isRiding;
+	}
+
+	public boolean isWaterMonster() {
+		return isWaterMonster;
+	}
+
+	public void setWaterMonster(boolean isWaterMonster) {
+		this.isWaterMonster = isWaterMonster;
 	}
 }

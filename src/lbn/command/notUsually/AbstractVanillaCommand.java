@@ -11,6 +11,11 @@ public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand{
 	}
 
 	@Override
+	public int a() {
+		return command.a();
+	}
+
+	@Override
 	public String getCommand() {
 		return command.getCommand();
 	}

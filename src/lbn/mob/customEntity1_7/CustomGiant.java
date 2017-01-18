@@ -9,6 +9,7 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityIronGolem;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
@@ -128,34 +129,31 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
 	}
 
 	@Override
-	public void setNoKnockBackResistnce(double val) {
-
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
 	}
 
 	@Override
-	public double getNoKnockBackResistnce() {
-		return 0;
+	public boolean W() {
+		if (!isIgnoreWater) {
+			return super.W();
+		} else {
+			inWater = false;
+			return false;
+		}
 	}
 
 	@Override
-	public void setFlyMob(boolean isFly) {
-
+	public boolean V() {
+		if (!isIgnoreWater) {
+			return super.V();
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	public boolean isFlyMob() {
-		return false;
-	}
-
-	@Override
-	public boolean isIgnoreWater() {
-		return false;
-	}
-
-	@Override
-	public void setIgnoreWater(boolean isIgnoreWater) {
-
-	}
+	boolean isIgnoreWater = false;
 
 	@Override
 	public void setUndead(boolean isUndead) {

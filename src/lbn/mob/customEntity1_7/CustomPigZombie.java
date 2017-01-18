@@ -9,6 +9,7 @@ import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityIronGolem;
 import net.minecraft.server.v1_8_R1.EntityPigZombie;
 import net.minecraft.server.v1_8_R1.EntityZombie;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
@@ -62,11 +63,6 @@ public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Sp
 		 return (Spider) getBukkitEntity();
 	}
 
-	@Override
-	public void setNoKnockBackResistnce(double val) {
-
-	}
-
 	protected void n() {
 		this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
 		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] {EntityZombie.class }));
@@ -84,28 +80,30 @@ public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Sp
 //	}
 
 	@Override
-	public double getNoKnockBackResistnce() {
-		return 0;
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
 	}
 
 	@Override
-	public void setFlyMob(boolean isFly) {
-
+	public boolean W() {
+		if (!isIgnoreWater) {
+			return super.W();
+		} else {
+			inWater = false;
+			return false;
+		}
 	}
 
 	@Override
-	public boolean isFlyMob() {
-		return false;
+	public boolean V() {
+		if (!isIgnoreWater) {
+			return super.V();
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	public boolean isIgnoreWater() {
-		return false;
-	}
-
-	@Override
-	public void setIgnoreWater(boolean isIgnoreWater) {
-
-	}
+	boolean isIgnoreWater = false;
 
 }

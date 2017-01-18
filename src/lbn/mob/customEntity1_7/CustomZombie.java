@@ -12,7 +12,7 @@ import net.minecraft.server.v1_8_R1.EntityMonster;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
-import net.minecraft.server.v1_8_R1.GenericAttributes;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalAvoidTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
@@ -187,16 +187,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 	boolean isFly = false;
 
 	@Override
-	public void setFlyMob(boolean isFly) {
-		this.isFly = isFly;
-	}
-
-	@Override
-	public boolean isFlyMob() {
-		return isFly;
-	}
-
-	@Override
 	public Zombie spawn(Location loc) {
 		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
 		//位置を指定
@@ -206,17 +196,13 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		 return (Zombie) getBukkitEntity();
 	}
 
+	@Override
+	public void a(NBTTagCompound nbttagcompound) {
+		super.a(nbttagcompound);
+		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
+	}
+
 	boolean isIgnoreWater = false;
-
-	@Override
-	public boolean isIgnoreWater() {
-		return isIgnoreWater;
-	}
-
-	@Override
-	public void setIgnoreWater(boolean isIgnoreWater) {
-		this.isIgnoreWater = isIgnoreWater;
-	}
 
 	@Override
 	public boolean W() {
@@ -235,16 +221,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		} else {
 			return false;
 		}
-	}
-
-	@Override
-	public void setNoKnockBackResistnce(double val) {
-		getAttributeInstance(GenericAttributes.c).setValue(val);
-	}
-
-	@Override
-	public double getNoKnockBackResistnce() {
-		return getAttributeInstance(GenericAttributes.c).getValue();
 	}
 
 }

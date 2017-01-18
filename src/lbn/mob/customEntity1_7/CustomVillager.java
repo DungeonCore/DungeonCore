@@ -2,7 +2,7 @@ package lbn.mob.customEntity1_7;
 
 import lbn.mob.customEntity.ICustomEntity;
 import net.minecraft.server.v1_8_R1.EntityVillager;
-import net.minecraft.server.v1_8_R1.GenericAttributes;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
@@ -43,36 +43,30 @@ public class CustomVillager  extends EntityVillager implements ICustomEntity<Vil
 			 return (Villager) getBukkitEntity();
 		}
 
-		@Deprecated
 		@Override
-		public void setFlyMob(boolean isFly) {
+		public void a(NBTTagCompound nbttagcompound) {
+			super.a(nbttagcompound);
+			isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
 		}
 
-		@Deprecated
 		@Override
-		public boolean isFlyMob() {
-			return false;
+		public boolean W() {
+			if (!isIgnoreWater) {
+				return super.W();
+			} else {
+				inWater = false;
+				return false;
+			}
+		}
+
+		@Override
+		public boolean V() {
+			if (!isIgnoreWater) {
+				return super.V();
+			} else {
+				return false;
+			}
 		}
 
 		boolean isIgnoreWater = false;
-
-		@Override
-		public boolean isIgnoreWater() {
-			return isIgnoreWater;
-		}
-
-		@Override
-		public void setIgnoreWater(boolean isIgnoreWater) {
-			this.isIgnoreWater = isIgnoreWater;
-		}
-
-		@Override
-		public void setNoKnockBackResistnce(double val) {
-			getAttributeInstance(GenericAttributes.c).setValue(val);
-		}
-
-		@Override
-		public double getNoKnockBackResistnce() {
-			return getAttributeInstance(GenericAttributes.c).getValue();
-		}
 }

@@ -51,6 +51,7 @@ public class NormalSummonZombie extends AbstractSummonZombie{
 
 		switch (level) {
 		case 0:
+			LivingEntityUtil.setEquipment(e, new ItemStack(Material.PUMPKIN), null, null, null, 0);
 			break;
 		case 10:
 			LivingEntityUtil.setEquipment(e, new ItemStack(Material.PUMPKIN), null, null, null, 0);
