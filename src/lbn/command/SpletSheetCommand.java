@@ -3,8 +3,16 @@ package lbn.command;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
+import lbn.dungeoncore.SpletSheet.BuffSheetRunnable;
 import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
@@ -15,13 +23,6 @@ import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 
 public class SpletSheetCommand implements CommandExecutor{
 	static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
@@ -35,6 +36,7 @@ public class SpletSheetCommand implements CommandExecutor{
 		regist(new QuestSheetRunnable(sender));
 		regist(new SoundSheetRunnable(sender));
 		regist(new SpawnPointSheetRunnable(sender));
+		regist(new BuffSheetRunnable(sender));
 		regist(new VillagerSheetRunnable(sender));
 	}
 
