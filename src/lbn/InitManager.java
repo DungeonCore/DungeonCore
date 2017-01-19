@@ -3,6 +3,7 @@ package lbn;
 import lbn.command.CommandChest;
 import lbn.command.MobCommand;
 import lbn.command.QuestCommand;
+import lbn.command.SpletSheetCommand;
 import lbn.command.VillagerCommand;
 import lbn.common.other.DungeonList;
 import lbn.common.other.HolographicDisplaysManager;
@@ -46,7 +47,11 @@ public class InitManager {
 
 			SoundSheetRunnable.allReload();
 
-//			SystemSqlExecutor.execute();
+			SpletSheetCommand.allReload(null, "buff");
+
+			SpletSheetCommand.allReload(null, "particle");
+
+			//			SystemSqlExecutor.execute();
 
 			new LbnRunnable() {
 				@Override

@@ -17,6 +17,8 @@ import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MobSheetRunnable;
+import lbn.dungeoncore.SpletSheet.MobSkillSheetRunnable;
+import lbn.dungeoncore.SpletSheet.ParticleSheetRunnable;
 import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
@@ -32,7 +34,8 @@ public class SpletSheetCommand implements CommandExecutor{
 		regist(new DungeonListRunnable(sender));
 		regist(new ItemSheetRunnable(sender));
 		regist(new MobSheetRunnable(sender));
-		regist(new MobSheetRunnable(sender));
+		regist(new MobSkillSheetRunnable(sender));
+		regist(new ParticleSheetRunnable(sender));
 		regist(new QuestSheetRunnable(sender));
 		regist(new SoundSheetRunnable(sender));
 		regist(new SpawnPointSheetRunnable(sender));
@@ -55,6 +58,14 @@ public class SpletSheetCommand implements CommandExecutor{
 		if (sheetName.equals("list")) {
 			arg0.sendMessage(sheetMap.keySet().toString());
 			return true;
+		}
+
+		return allReload(arg0, sheetName);
+	}
+
+	public static boolean allReload(CommandSender arg0, String sheetName) {
+		if (arg0 == null) {
+			arg0 = Bukkit.getConsoleSender();
 		}
 
 		Class<?> c = sheetMap.get(sheetName);
