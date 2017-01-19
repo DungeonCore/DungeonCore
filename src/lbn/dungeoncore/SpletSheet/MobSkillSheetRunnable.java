@@ -23,10 +23,6 @@ import lbn.mob.mobskill.skillrunnable.MobSkillTpToTarget;
 import lbn.mob.mobskill.skillrunnable.MobSkillUpperTarget;
 import lbn.mob.mobskill.skillrunnable.MobSkillUpperTargetHight;
 import lbn.util.JavaUtil;
-import lbn.util.particle.CircleParticleData;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.SpringParticleData;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.potion.PotionEffect;
@@ -50,7 +46,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 	@Override
 	public String[] getTag() {
 		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "debuffeffect", "debuffsecond",
-				"debufflevel", "data", "particletype", "particleshape", "particledata", "particlelocation", "targeting",
+				"debufflevel", "data", "particleId", "dummy1", "dummy2", "particlelocation", "targeting",
 				"targetingdata", "latersecond", "chain", "skilltalk", "soundid", "soundtarget"};
 	}
 
@@ -96,19 +92,19 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 		}
 
 		//パーティクルの設置
-		ParticleType type = ParticleType.getType(row[11]);
-		ParticleData data = null;
-		double particleData = JavaUtil.getDouble(row[13], 0);
+//		ParticleType type = ParticleType.getType(row[11]);
+//		ParticleData data = null;
+//		double particleData = JavaUtil.getDouble(row[13], 0);
 		ParticleLocationType particleLocationType = ParticleLocationType.getValue(row[14]);
 		if (particleLocationType == null) {
 			particleLocationType = ParticleLocationType.MONSTER_BODY;
 		}
 
-		if (type != null) {
-			data = getParticleData(row, type, particleData);
-		} else {
-			data = null;
-		}
+//		if (type != null) {
+//			data = getParticleData(row, type, particleData);
+//		} else {
+//			data = null;
+//		}
 
 		MobSkillTargetingMethodType targetingMethod = MobSkillTargetingMethodType.getInstance(row[15]);
 		if (targetingMethod == null) {
@@ -125,26 +121,26 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 		String soundId = "".equals(row[20]) ? null : row[20];
 
 		NormalMobSkill normalMobSkill = new NormalMobSkill(potionEffect, damage, fireTick, skill, timing,
-				condition, id, rate, data, particleLocationType, targetingMethod, row[16], laterTick, row[18],
+				condition, id, rate, row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18],
 				row[19], soundId, isOnePlayerSoundTarget);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}
 
-	protected ParticleData getParticleData(String[] row, ParticleType type,
-			double particleData) {
-		ParticleData data;
-		if ("円".equals(row[12])) {
-			data = new CircleParticleData(new ParticleData(type, 1), 3);
-		} else if ("バネ状".equals(row[12])) {
-			data = new SpringParticleData(new ParticleData(type, 3), 3, 6, 1.5, 10);
-		} else {
-			data = new ParticleData(type, 30);
-		}
-		data.setLastArgument(particleData);
-
-		return data;
-	}
+//	protected ParticleData getParticleData(String[] row, ParticleType type,
+//			double particleData) {
+//		ParticleData data;
+//		if ("円".equals(row[12])) {
+//			data = new CircleParticleData(new ParticleData(type, 1), 3);
+//		} else if ("バネ状".equals(row[12])) {
+//			data = new SpringParticleData(new ParticleData(type, 3), 3, 6, 1.5, 10);
+//		} else {
+//			data = new ParticleData(type, 30);
+//		}
+//		data.setLastArgument(particleData);
+//
+//		return data;
+//	}
 
 	public double getDouble(String deta) {
 		if (deta == null || deta.isEmpty()) {

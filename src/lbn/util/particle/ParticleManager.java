@@ -17,6 +17,9 @@ public class ParticleManager {
 	}
 
 	public static ParticleData getParticleData(String id) {
+		if (id == null) {
+			return null;
+		}
 		return dataMap.get(id);
 	}
 

@@ -13,6 +13,7 @@ import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.damagedFalling.DamageFallingblockForMonsterSkill;
 import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleManager;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Damageable;
@@ -28,7 +29,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	public NormalMobSkill(PotionEffect potionEffect, double damage,
 			int fireTick, MobSkillRunnable runnable,
 			MobSkillExcuteTimingType timing,
-			MobSkillExcuteConditionType condition, String id, int percent, ParticleData particleData,
+			MobSkillExcuteConditionType condition, String id, int percent, String particleId,
 			ParticleLocationType particleLocType, MobSkillTargetingMethodType targetingMethod,
 			String targetingMethodData, int laterTick, String chainId, String skillTalk, String soundId, boolean isSoundTargetOnePlayer) {
 		this.potionEffect = potionEffect;
@@ -39,7 +40,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		this.condition = condition;
 		this.id = id;
 		this.percent = percent;
-		this.particleData = particleData;
+		this.particleId = particleId;
 		this.particleLocType = particleLocType;
 		this.targetingMethod = targetingMethod;
 		this.targetingDeta = targetingMethodData;
@@ -61,7 +62,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	private String id;
 	private int percent;
 	int laterTick;
-	ParticleData particleData;
+	String particleId;
 	ParticleLocationType particleLocType;
 	String chainId;
 	String skillTalk;
@@ -256,6 +257,7 @@ public class NormalMobSkill implements MobSkillInterface{
 	 * @param mob
 	 */
 	protected void executeParticle(ArrayList<Entity> targetList, Entity mob) {
+		ParticleData particleData = ParticleManager.getParticleData(particleId);
 		if (particleData != null) {
 			//軽量化のため、順次実行
 			new BukkitRunnable() {
