@@ -1,13 +1,14 @@
 package lbn.common.buff;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.potion.PotionEffectType;
 
 public class BuffDataFactory {
 
-	private static final List<BuffData> buffs = new ArrayList<>();
+	private static final Map<String, BuffData> buffs = new HashMap<>();
 
 	private BuffDataFactory() {
 	}
@@ -21,21 +22,15 @@ public class BuffDataFactory {
 	}
 
 	public static void register(BuffData data) {
-		buffs.add(data);
+		buffs.put(data.getId(), data);
 	}
 
-	public static List<BuffData> getBuffs() {
-		return buffs;
+	public static Collection<BuffData> getBuffs() {
+		return buffs.values();
 	}
 
 	public static BuffData getBuffFromId(String id) {
-		for(BuffData data : buffs) {
-			if(data.getId() == id) {
-				return data;
-			}
-		}
-
-		return null;
+		return buffs.get(id);
 	}
 
 	public static void clear() {
