@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.item.slot.SlotInterface;
+import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 
@@ -23,6 +24,7 @@ public class ItemManager {
 
 	static {
 		registItem(GalionItem.getInstance(0));
+		registItem(MagicGemstoneWrapper.getAllItem());
 	}
 
 	public static void registItem(ItemInterface[] item) {

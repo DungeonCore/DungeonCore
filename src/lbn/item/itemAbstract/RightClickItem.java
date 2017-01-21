@@ -2,6 +2,7 @@ package lbn.item.itemAbstract;
 
 import lbn.item.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
+import lbn.util.ItemStackUtil;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -13,12 +14,7 @@ public abstract class RightClickItem extends AbstractItem implements RightClickI
 	public void excuteOnRightClick(PlayerInteractEvent e) {
 		Player player = e.getPlayer();
 		if (excuteOnRightClick2(e) && isConsumeWhenUse()) {
-			//消費させる
-			if (player.getItemInHand().getAmount() == 1) {
-				player.getInventory().clear(player.getInventory().getHeldItemSlot());
-			} else {
-				player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
-			}
+			ItemStackUtil.consumeItemInHand(player);
 		}
 	}
 

@@ -1,8 +1,12 @@
 package lbn.item;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 import lbn.item.slot.SlotInterface;
+import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.AddEmptySlotItem;
 import lbn.item.slot.slot.AddEmptySlotItem2;
 import lbn.item.slot.slot.EmptySlot;
@@ -13,9 +17,12 @@ import lbn.item.slot.slot.UnavailableSlot;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 
+import com.google.common.collect.HashMultimap;
+
 public class SlotManager {
 	static HashMap<String, String> idNameMap = new HashMap<String, String>();
 	static HashMap<String, SlotInterface> slotIDMap = new HashMap<String, SlotInterface>();
+	static HashMultimap<SlotLevel, SlotInterface> levelSlotMap = HashMultimap.create();
 
 	static {
 		registSlot(new UnavailableSlot());
@@ -29,6 +36,7 @@ public class SlotManager {
 	public static void registSlot(SlotInterface slot) {
 		idNameMap.put(slot.getSlotName(), slot.getId());
 		slotIDMap.put(slot.getId(), slot);
+		levelSlotMap.put(slot.getLevel(), slot);
 	}
 
 	//使わないと思うから一旦コメントアウト
@@ -88,48 +96,18 @@ public class SlotManager {
 		}
 		return line.contains("    ■ ") && line.contains("id:");
 	}
-//
-//	public static boolean removeSlot(ItemStack item, AbstractSlot slot) {
-//		List<String> loreList = ItemStackUtil.getLore(item);
-//		Iterator<String> lore = loreList.iterator();
-//
-//		boolean thisSlotFlg = false;
-//
-//		while (lore.hasNext()) {
-//			String string  = lore.next();
-//			AbstractSlot slotByLore = getSlotByLore(string);
-//			if (slotByLore == null) {
-//				continue;
-//			}
-//
-//			//見つけたフラグが立っていたら次の行に説明がある可能性がある
-//			if (thisSlotFlg) {
-//				//説明だったら削除
-//				if (string.contains("        - ")) {
-//					lore.remove();
-//				}
-//				break;
-//			}
-//
-//			//目的のスロットを見つけたら削除する
-//			if (slotByLore.equals(slot)) {
-//				//見つけたフラグを立てておく
-//				thisSlotFlg = true;
-//				lore.remove();
-//			}
-//		}
-//
-//		ItemStackUtil.setLore(item, loreList);
-//		return thisSlotFlg;
-//	}
-//
-//	public static boolean addEmptySlot(ItemStack item) {
-//		if (ItemManager.getCustomItem(item) == null) {
-//			return false;
-//		}
-//
-//		List<String> lore = ItemStackUtil.getLore(item);
-//
-//
-//	}
+
+	/**
+	 * 指定したLevelからそれにあったMagicStoneを取得する
+	 * @param level
+	 * @return
+	 */
+	public static Collection<SlotInterface> getSlotListByLevel(SlotLevel level) {
+		Set<SlotInterface> set = levelSlotMap.get(level);
+		if (set != null) {
+			return set;
+		} else {
+			return Collections.emptyList();
+		}
+	}
 }

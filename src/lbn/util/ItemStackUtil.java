@@ -420,4 +420,13 @@ public class ItemStackUtil {
 		return false;
 	}
 
+	public static void consumeItemInHand(Player player) {
+		//消費させる
+		if (player.getItemInHand().getAmount() == 1) {
+			player.getInventory().clear(player.getInventory().getHeldItemSlot());
+		} else {
+			player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+		}
+	}
+
 }
