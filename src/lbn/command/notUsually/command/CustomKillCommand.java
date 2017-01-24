@@ -13,7 +13,7 @@ public class CustomKillCommand extends AbstractVanillaCommand{
 	}
 
 	@Override
-    public void execute(ICommandListener icommandlistener, String[] astring) {
+	protected void execute2(ICommandListener icommandlistener, String[] astring) {
         if (astring.length == 0) {
             EntityPlayer entityplayer = b(icommandlistener);
             entityplayer.G();

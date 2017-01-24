@@ -27,7 +27,7 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand{
 	}
 
 	@Override
-	public void execute(ICommandListener paramICommandListener,
+	protected void execute2(ICommandListener paramICommandListener,
 			String[] paramArrayOfString) throws CommandException {
 		if (paramArrayOfString.length < 4) {
 			throw new ExceptionUsage("commands.setblock.usage", new Object[0]);

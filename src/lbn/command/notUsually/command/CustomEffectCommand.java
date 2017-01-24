@@ -19,97 +19,94 @@ public class CustomEffectCommand extends AbstractVanillaCommand{
 		super(new CommandEffect());
 	}
 
-	public void execute(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) {
-		try {
-			if (paramArrayOfString.length < 2) {
-				throw new ExceptionUsage("commands.effect.usage", new Object[0]);
-			}
+	@Override
+	protected void execute2(ICommandListener paramICommandListener,
+			String[] paramArrayOfString) throws CommandException{
+		if (paramArrayOfString.length < 2) {
+			throw new ExceptionUsage("commands.effect.usage", new Object[0]);
+		}
 
-			//1.7の方の名前を使う
-			String effectName = getEffectName(paramArrayOfString[1]);
-			paramArrayOfString[1] = effectName;
+		//1.7の方の名前を使う
+		String effectName = getEffectName(paramArrayOfString[1]);
+		paramArrayOfString[1] = effectName;
 
-			EntityLiving localEntityLiving = (EntityLiving) a(
-					paramICommandListener, paramArrayOfString[0],
-					EntityLiving.class);
-			if (paramArrayOfString[1].equals("clear")) {
-				if (localEntityLiving.getEffects().isEmpty()) {
-					throw new CommandException(
-							"commands.effect.failure.notActive.all",
-							new Object[] { localEntityLiving.getName() });
-				}
-				localEntityLiving.removeAllEffects();
-				a(paramICommandListener, this,
-						"commands.effect.success.removed.all",
-						new Object[] { localEntityLiving.getName() });
-				return;
-			}
-			int i;
-			try {
-				i = a(paramArrayOfString[1], 1);
-			} catch (Exception localExceptionInvalidNumber) {
-				MobEffectList localMobEffectList1 = MobEffectList
-						.b(paramArrayOfString[1]);
-				if (localMobEffectList1 == null) {
-					throw localExceptionInvalidNumber;
-				}
-				i = localMobEffectList1.id;
-			}
-			int j = 600;
-			int k = 30;
-			int m = 0;
-			if ((i < 0) || (i >= MobEffectList.byId.length)
-					|| (MobEffectList.byId[i] == null)) {
-				throw new ExceptionInvalidNumber("commands.effect.notFound",
-						new Object[] { Integer.valueOf(i) });
-			}
-			MobEffectList localMobEffectList2 = MobEffectList.byId[i];
-			if (paramArrayOfString.length >= 3) {
-				k = a(paramArrayOfString[2], 0, 1000000);
-				if (localMobEffectList2.isInstant()) {
-					j = k;
-				} else {
-					j = k * 20;
-				}
-			} else if (localMobEffectList2.isInstant()) {
-				j = 1;
-			}
-			if (paramArrayOfString.length >= 4) {
-				m = a(paramArrayOfString[3], 0, 255);
-			}
-			boolean bool = true;
-			if ((paramArrayOfString.length >= 5)
-					&& ("true".equalsIgnoreCase(paramArrayOfString[4]))) {
-				bool = false;
-			}
-			if (k > 0) {
-				MobEffect localMobEffect = new MobEffect(i, j, m, false, bool);
-				localEntityLiving.addEffect(localMobEffect);
-				a(paramICommandListener, this, "commands.effect.success",
-						new Object[] {
-								new ChatMessage(localMobEffect.g(), new Object[0]),
-								Integer.valueOf(i), Integer.valueOf(m),
-								localEntityLiving.getName(), Integer.valueOf(k) });
-				return;
-			}
-			if (localEntityLiving.hasEffect(i)) {
-				localEntityLiving.removeEffect(i);
-				a(paramICommandListener,
-						this,
-						"commands.effect.success.removed",
-						new Object[] {
-								new ChatMessage(localMobEffectList2.a(),
-										new Object[0]), localEntityLiving.getName() });
-			} else {
+		EntityLiving localEntityLiving = (EntityLiving) a(
+				paramICommandListener, paramArrayOfString[0],
+				EntityLiving.class);
+		if (paramArrayOfString[1].equals("clear")) {
+			if (localEntityLiving.getEffects().isEmpty()) {
 				throw new CommandException(
-						"commands.effect.failure.notActive",
-						new Object[] {
-								new ChatMessage(localMobEffectList2.a(),
-										new Object[0]), localEntityLiving.getName() });
+						"commands.effect.failure.notActive.all",
+						new Object[] { localEntityLiving.getName() });
 			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+			localEntityLiving.removeAllEffects();
+			a(paramICommandListener, this,
+					"commands.effect.success.removed.all",
+					new Object[] { localEntityLiving.getName() });
+			return;
+		}
+		int i;
+		try {
+			i = a(paramArrayOfString[1], 1);
+		} catch (Exception localExceptionInvalidNumber) {
+			MobEffectList localMobEffectList1 = MobEffectList
+					.b(paramArrayOfString[1]);
+			if (localMobEffectList1 == null) {
+				throw localExceptionInvalidNumber;
+			}
+			i = localMobEffectList1.id;
+		}
+		int j = 600;
+		int k = 30;
+		int m = 0;
+		if ((i < 0) || (i >= MobEffectList.byId.length)
+				|| (MobEffectList.byId[i] == null)) {
+			throw new ExceptionInvalidNumber("commands.effect.notFound",
+					new Object[] { Integer.valueOf(i) });
+		}
+		MobEffectList localMobEffectList2 = MobEffectList.byId[i];
+		if (paramArrayOfString.length >= 3) {
+			k = a(paramArrayOfString[2], 0, 1000000);
+			if (localMobEffectList2.isInstant()) {
+				j = k;
+			} else {
+				j = k * 20;
+			}
+		} else if (localMobEffectList2.isInstant()) {
+			j = 1;
+		}
+		if (paramArrayOfString.length >= 4) {
+			m = a(paramArrayOfString[3], 0, 255);
+		}
+		boolean bool = true;
+		if ((paramArrayOfString.length >= 5)
+				&& ("true".equalsIgnoreCase(paramArrayOfString[4]))) {
+			bool = false;
+		}
+		if (k > 0) {
+			MobEffect localMobEffect = new MobEffect(i, j, m, false, bool);
+			localEntityLiving.addEffect(localMobEffect);
+			a(paramICommandListener, this, "commands.effect.success",
+					new Object[] {
+							new ChatMessage(localMobEffect.g(), new Object[0]),
+							Integer.valueOf(i), Integer.valueOf(m),
+							localEntityLiving.getName(), Integer.valueOf(k) });
+			return;
+		}
+		if (localEntityLiving.hasEffect(i)) {
+			localEntityLiving.removeEffect(i);
+			a(paramICommandListener,
+					this,
+					"commands.effect.success.removed",
+					new Object[] {
+							new ChatMessage(localMobEffectList2.a(),
+									new Object[0]), localEntityLiving.getName() });
+		} else {
+			throw new CommandException(
+					"commands.effect.failure.notActive",
+					new Object[] {
+							new ChatMessage(localMobEffectList2.a(),
+									new Object[0]), localEntityLiving.getName() });
 		}
 	}
 

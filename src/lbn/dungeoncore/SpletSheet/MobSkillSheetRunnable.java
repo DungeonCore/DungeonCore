@@ -1,6 +1,6 @@
 package lbn.dungeoncore.SpletSheet;
 
-import lbn.mob.mobskill.DebuffType;
+import lbn.common.buff.BuffType;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillExcuteTimingType;
 import lbn.mob.mobskill.MobSkillManager;
@@ -83,7 +83,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		PotionEffect potionEffect = null;
 
-		DebuffType debuffType = DebuffType.getDebuffType(row[7]);
+		BuffType debuffType = BuffType.getDebuffType(row[7]);
 		int debuffTick = (int)(getDouble(row[8]) * 20);
 		int debuffLevel = (int) getDouble(row[9]);
 

@@ -4,15 +4,14 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttack;
+import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
-import net.minecraft.server.v1_8_R1.ItemStack;
-import net.minecraft.server.v1_8_R1.Items;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFleeSun;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
@@ -43,7 +42,6 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 		this(world.getWorld(), false);
 	}
 
-	private PathfinderGoalArrowAttack bp = new PathfinderGoalArrowAttack(this, 1.0D, 20, 60, 15.0F);
 	private PathfinderGoalMeleeAttack bq = new PathfinderGoalMeleeAttack(this, EntityLiving.class, 1.2D, false);
 
 	public CustomSkeleton(org.bukkit.World bukkitWorld, boolean isSummon) {
@@ -70,9 +68,9 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
 			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
-			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, 1.0D));
-			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
-			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
+			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
@@ -88,15 +86,20 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 			return;
 		}
 
-		this.goalSelector.a(this.bq);
-		this.goalSelector.a(this.bp);
-		ItemStack itemstack =  bz();
-
-		if ((itemstack != null) && (itemstack.getItem() == Items.BOW)) {
-			this.goalSelector.a(4, this.bp);
-		} else {
-			this.goalSelector.a(4, this.bq);
-		}
+		//テスト処理のため一旦コメントアウト
+//		this.goalSelector.a(this.bq);
+//		this.goalSelector.a(this.bp);
+//		ItemStack itemstack =  bz();
+//
+//		if ((itemstack != null) && (itemstack.getItem() == Items.BOW)) {
+//			this.goalSelector.a(4, this.bp);
+//		} else {
+//			this.goalSelector.a(4, this.bq);
+//		}
+		TheLoWPathfinderGoalArrowAttack theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(this, 1.25D, 20, 10.0F);
+		theLoWPathfinderGoalArrowAttack.setNearAttackRange(5);
+			this.goalSelector.a(4, theLoWPathfinderGoalArrowAttack);
+			this.goalSelector.a(5, this.bq);
 	}
 
 	@Override
@@ -184,5 +187,4 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 	}
 
 	boolean isIgnoreWater = false;
-
 }

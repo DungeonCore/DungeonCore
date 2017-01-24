@@ -4,14 +4,19 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttack;
 import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.util.LivingEntityUtil;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityMonster;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
+import net.minecraft.server.v1_8_R1.EntitySnowball;
 import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
+import net.minecraft.server.v1_8_R1.IRangedEntity;
+import net.minecraft.server.v1_8_R1.MathHelper;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalAvoidTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
@@ -25,14 +30,19 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.projectiles.ProjectileSource;
 
 import com.google.common.base.Predicate;
 
-public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>{
+public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>, IRangedEntity{
     public CustomZombie(org.bukkit.World bukkitWorld, AbstractZombie zombie) {
     	this(((CraftWorld)bukkitWorld).getHandle(), zombie);
     }
@@ -64,10 +74,12 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			if (isAvoidPlayer) {
 				this.goalSelector.a(1, new PathfinderGoalAvoidTarget(this, new AvoidPlayer(), 6.0F, 2.0D, 1.2D));
 			}
+
+			this.goalSelector.a(2, new TheLoWPathfinderGoalArrowAttack(this, 1.25D, 20, 10.0F));
 			if (isSummon) {
-				this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityMonster.class, nearingSpeed, false));
+				this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityMonster.class, nearingSpeed, false));
 			} else {
-				this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityLiving.class, nearingSpeed, false));
+				this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityLiving.class, nearingSpeed, false));
 			}
 //			if (world.spigotConfig.zombieAggressiveTowardsVillager) this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0D, true));
 			this.goalSelector.a(5, new PathfinderGoalMoveTowardsRestriction(this, 1.0D));
@@ -160,7 +172,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		}
 	}
 
-	boolean isUndead = true;
+	boolean isUndead = false;
 
 	@Override
 	public void setUndead(boolean isUndead) {
@@ -200,6 +212,8 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
+
+
 	}
 
 	boolean isIgnoreWater = false;
@@ -220,6 +234,34 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			return super.V();
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public void a(EntityLiving entityliving, float paramFloat) {
+		double d0 = entityliving.locY + entityliving.getHeadHeight()
+				- 1.100000023841858D;
+		double d1 = entityliving.locX - this.locX;
+		double d3 = entityliving.locZ - this.locZ;
+		float f1 = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.2F;
+
+		CraftEntity bukkitEntity2 = getBukkitEntity();
+		Location location = entityliving.getBukkitEntity().getLocation();
+
+		if ("test mob".equals(getName())) {
+			EntitySnowball entitysnowball = new EntitySnowball(this.world, this);
+			double d2 = d0 - entitysnowball.locY;
+			entitysnowball.shoot(d1, d2 + f1, d3, 1.6F, 12.0F);
+			makeSound("random.bow", 1.0F, 1.0F / (bb().nextFloat() * 0.4F + 0.8F));
+			this.world.addEntity(entitysnowball);
+		} else if ("test mob2".equals(getName())) {
+			LivingEntityUtil.strikeLightningEffect(entityliving.getBukkitEntity().getLocation(), Bukkit.getPlayer("Namiken"));
+			Bukkit.getPlayer("Namiken").playSound(location, Sound.AMBIENCE_THUNDER, 1, 0.5f);
+		} else if ("test mob3".equals(getName())) {
+			Fireball launchProjectile = ((ProjectileSource)bukkitEntity2).launchProjectile(Fireball.class);
+			launchProjectile.setIsIncendiary(false);
+			launchProjectile.setShooter((ProjectileSource)bukkitEntity2);
+			location.getWorld().playSound(location, Sound.BLAZE_HIT, 1, 0.5f);
 		}
 	}
 
