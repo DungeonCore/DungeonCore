@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import lbn.common.buff.BuffData;
+import lbn.common.buff.BuffDataFactory;
 import lbn.dungeoncore.Main;
 import lbn.item.CooltimeManager;
 import lbn.item.slot.table.SlotSetTableOperation;
@@ -111,6 +113,12 @@ public class CommandViewInfo implements CommandExecutor{
 //			break;
 		case "dungeon":
 			makeDungeonGround((Player)paramCommandSender);
+			break;
+		case "buff":
+			BuffData buffFromId = BuffDataFactory.getBuffFromId(paramArrayOfString[1]);
+			if (buffFromId != null) {
+				buffFromId.addBuff( (Player) paramCommandSender);
+			}
 			break;
 //		case "dungeonCheck":
 //			makeDungeonGround((Player)paramCommandSender);

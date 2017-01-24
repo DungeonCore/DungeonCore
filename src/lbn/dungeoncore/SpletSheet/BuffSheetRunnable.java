@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
+import lbn.common.buff.BuffType;
 import lbn.util.JavaUtil;
 
 public class BuffSheetRunnable extends AbstractSheetRunable {
@@ -42,7 +43,14 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
 	protected void excuteOnerow(String[] row) {
 
 		String id = row[0];
-		PotionEffectType effect = PotionEffectType.getByName(row[1]);
+
+		BuffType debuffType = BuffType.getDebuffType(row[1]);
+		if (debuffType == null) {
+			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + row[1]  + "]");
+			return;
+		}
+
+		PotionEffectType effect = debuffType.getType();
 		int second = JavaUtil.getInt(row[2], 0);
 		int level = JavaUtil.getInt(row[3], 0);
 
