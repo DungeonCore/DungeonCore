@@ -1,5 +1,8 @@
 package lbn.command.notUsually;
 
+import java.util.List;
+
+import net.minecraft.server.v1_8_R1.BlockPosition;
 import net.minecraft.server.v1_8_R1.CommandAbstract;
 import net.minecraft.server.v1_8_R1.CommandException;
 import net.minecraft.server.v1_8_R1.ExceptionUsage;
@@ -41,5 +44,17 @@ public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand{
 	@Override
 	public int compareTo(Object o) {
 		return command.compareTo(o);
+	}
+
+	@Override
+	public List<?> tabComplete(ICommandListener paramICommandListener,
+			String[] paramArrayOfString, BlockPosition paramBlockPosition) {
+		return command.tabComplete(paramICommandListener, paramArrayOfString,
+				paramBlockPosition);
+	}
+
+	@Override
+	public boolean isListStart(String[] paramArrayOfString, int paramInt) {
+		return command.isListStart(paramArrayOfString, paramInt);
 	}
 }
