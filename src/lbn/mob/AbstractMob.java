@@ -16,7 +16,7 @@ import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
 import lbn.player.AttackType;
-import lbn.player.status.IStatusManager;
+import lbn.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.PickItemQuest;
@@ -35,7 +35,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
@@ -92,14 +91,15 @@ public abstract class AbstractMob<T extends Entity> {
 		return 10;
 	}
 
+	/**
+	 * クリエイティブの時、ダメージ量を表示させる
+	 * @param mob
+	 * @param damager
+	 * @param e
+	 */
 	public void onDamageBefore(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		//属性適用
 		getAttribute().onDamage(mob, damager, e);
-
-		//ボスモンスターの時はダメージ計算の補正を行わない
-		if (isBoss()) {
-			return;
-		}
 
 		if (getTheLowMobType() == TheLowMobType.SUMMON) {
 			return;
@@ -108,12 +108,9 @@ public abstract class AbstractMob<T extends Entity> {
 		Player player = LastDamageManager.getLastDamagePlayer(mob);
 		AttackType type = LastDamageManager.getLastDamageAttackType(mob);
 		if (player == null) {
-//			new RuntimeException("Last Damage player is null: "+ getName()).printStackTrace();
 			return;
 		}
-
-		double damagePer = getDamagePer(player, mob, type);
-		e.setDamage(e.getDamage() * damagePer);
+		e.setDamage(e.getDamage() );
 
 		//クエリの時だけダメージを表示させる
 		if (player.getGameMode() == GameMode.CREATIVE) {
@@ -121,32 +118,10 @@ public abstract class AbstractMob<T extends Entity> {
 				double health = ((Damageable)mob).getHealth();
 				@Override
 				public void run() {
-					Message.sendMessage(player, "{0}:{1}ダメージ！！(もとのダメージの倍率:{2})", type, JavaUtil.round(health - ((Damageable)mob).getHealth(), 2), JavaUtil.round(damagePer, 2));
+					Message.sendMessage(player, "{0}:{1}ダメージ！！(もとのダメージの倍率:1.0)", type, JavaUtil.round(health - ((Damageable)mob).getHealth(), 2));
 				}
 			}.runTaskLater(Main.plugin, 2);
 		}
-	}
-
-	protected double getDamagePer(Player p, LivingEntity mob, AttackType type) {
-		double editLevel = 0;
-		if (type.isDamageCaluculate()) {
-			EntityDamageEvent cause = mob.getLastDamageCause();
-			//この場合は攻撃者がSummonMobとするのでダメージ倍率は考慮しない
-			if (cause != null && type == AttackType.MAGIC && cause.getCause() == DamageCause.ENTITY_ATTACK) {
-				return 1.0;
-			}
-			int attackLevel = type.getManager().getLevel(p);
-			//他のレベルは影響しないようにする
-//			int mainLevel = MainStatusManager.getInstance().getLevel(p);
-			editLevel = attackLevel;
-			//無いとは思うが念のため
-//			if (editLevel < 0) {
-//				new RuntimeException(Message.getMessage("edit level is minus. : mainLevel{0} , {1}{2} ", mainLevel, type.getManager().getManagerName(), attackLevel)).printStackTrace();
-//				editLevel = MagicStatusManager.getInstance().getLevel(p);
-//			}
-		}
-
-		return type.getDamagePer((int)editLevel);
 	}
 
 	abstract public void onOtherDamage(EntityDamageEvent e);
@@ -341,12 +316,13 @@ public abstract class AbstractMob<T extends Entity> {
 
 	}
 
-	public void addExp(LivingEntity entity, AttackType type, Player p) {
-		IStatusManager instance = type.getManager();
-		if (instance == null) {
-			return;
-		}
-
+	/**
+	 * PlayerにExpを加算させる
+	 * @param entity
+	 * @param type
+	 * @param p
+	 */
+	public void addExp(LivingEntity entity, AttackType type, TheLowPlayer p) {
 		//コウモリの場合は経験値を加算しない
 		if (entity.getType() == EntityType.BAT) {
 			return;
@@ -372,6 +348,6 @@ public abstract class AbstractMob<T extends Entity> {
 				}
 			}
 		}
-		instance.addExp(p, exp, StatusAddReason.monster_drop);
+		p.addTheLowExp(type.getLevelType(), exp, StatusAddReason.monster_drop);
 	}
 }

@@ -31,8 +31,8 @@ commands:
       permission-message: You don't have <permission>
       aliases: [stats]
    statusCommand:
-      description: This is operate manager.
-      usage: /<command> [manager name] [add|set|show] [value] [player]
+      description: This is operate status.
+      usage: /<command> set type 値 (target),  /<command> load target 
       permission: main.lbnDungeonUtil.command.admin.manager
       permission-message: You don't have <permission>
    set_spawn_point:

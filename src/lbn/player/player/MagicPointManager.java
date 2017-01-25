@@ -1,7 +1,9 @@
-package lbn.player;
+package lbn.player.player;
 
 import java.util.HashMap;
 
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.LbnRunnable;
 
 import org.bukkit.entity.Player;
@@ -35,6 +37,11 @@ public class MagicPointManager {
 	}
 
 	public static int getMaxMagicPoint(Player p) {
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer != null) {
+			return theLowPlayer.getMaxMagicPoint();
+		}
+		//ロードされていない時はとりあえず100にしておく
 		return 100;
 	}
 

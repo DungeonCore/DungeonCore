@@ -1,31 +1,26 @@
 package lbn.player;
 
-import lbn.player.status.IStatusManager;
-import lbn.player.status.bowStatus.BowStatusManager;
-import lbn.player.status.magicStatus.MagicStatusManager;
-import lbn.player.status.mainStatus.MainStatusManager;
-import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;
 
 public enum AttackType {
-	SWORD(SwordStatusManager.getInstance(), 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
-	BOW(BowStatusManager.getInstance(), 14, ItemStackUtil.getVanillaDamage(Material.BOW)),
-	MAGIC(MagicStatusManager.getInstance(), 9, 6),
+	SWORD(TheLowLevelType.SWORD, 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
+	BOW(TheLowLevelType.BOW, 14, ItemStackUtil.getVanillaDamage(Material.BOW)),
+	MAGIC(TheLowLevelType.BOW, 9, 6),
 	OTHER(),
 	IGNORE();
 
 
-	private AttackType(IStatusManager manager, double expectedValue, double level0MinDamage) {
-		this.manager = manager;
+	private AttackType(TheLowLevelType type, double expectedValue, double level0MinDamage) {
+		this.levelType = type;
 		this.expectedValue = expectedValue;
 		this.level0MinDamage = level0MinDamage;
 		isDamageCaluculate = true;
 	}
 
 	private AttackType() {
-		manager = MainStatusManager.getInstance();
+		this.levelType = TheLowLevelType.MAIN;
 	}
 
 
@@ -40,12 +35,12 @@ public enum AttackType {
 
 	double level0MinDamage = 4;
 
-	IStatusManager manager;
+	TheLowLevelType levelType;
 
 	 double expectedValue = 7;
 
-	public IStatusManager getManager() {
-		return manager;
+	public TheLowLevelType getLevelType() {
+		return levelType;
 	}
 
 	public double getExpectedValue() {

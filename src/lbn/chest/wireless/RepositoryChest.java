@@ -3,8 +3,9 @@ package lbn.chest.wireless;
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
@@ -34,11 +35,17 @@ public class RepositoryChest extends WireLessChest{
 				Message.getMessage("{0}Galionで倉庫を購入する", type.price)), 11, new SelectRunnable() {
 			@Override
 			public void run(Player p, ItemStack item) {
-				if (GalionManager.getGalion(p) > type.getPrice()) {
+				TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+				if (theLowPlayer == null) {
+					Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+					return;
+				}
+
+				if (theLowPlayer.getGalions() > type.getPrice()) {
 					//チェストを作成
 					instance.createChest(p, type.getType());
 					//お金を引く
-					GalionManager.addGalion(p, -type.getPrice(), GalionEditReason.consume_shop);
+					theLowPlayer.addGalions(-type.getPrice(), GalionEditReason.consume_shop);
 					Message.sendMessage(p, ChatColor.GREEN + "倉庫({0})を購入しました。", type.getType());
 				} else {
 					Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。", type.getType());

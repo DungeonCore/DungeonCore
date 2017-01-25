@@ -1,4 +1,4 @@
-package lbn.money.galion;
+package lbn.money;
 
 import lbn.util.Message;
 
@@ -32,6 +32,10 @@ public enum GalionEditReason {
 	 */
 	public void sendMessageLog(Player p, int galions) {
 		if (galions == 0) {
+			return;
+		}
+
+		if (p == null) {
 			return;
 		}
 

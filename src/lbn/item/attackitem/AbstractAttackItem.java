@@ -17,7 +17,9 @@ import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
-import lbn.player.status.IStatusManager;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
@@ -31,7 +33,12 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, AvailableLevelItemable, RightClickItemable, CombatItemable{
 	public boolean isAvilable(Player player) {
-		int level = getAttackType().getManager().getLevel(player);
+		//Playerインスタンスを取得
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
+		if (theLowPlayer == null) {
+			return false;
+		}
+		int level = theLowPlayer.getTheLowLevel(getLevelType());
 		if (getAvailableLevel() > level) {
 			return false;
 		}
@@ -59,8 +66,8 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	}
 
 	@Override
-	public IStatusManager getManager() {
-		return getAttackType().getManager();
+	public TheLowLevelType getLevelType() {
+		return getAttackType().getLevelType();
 	}
 
 	/**
@@ -141,7 +148,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	protected List<String> getAddDetail() {
 		List<String> lore = super.getAddDetail();
 		//使用可能レベル
-		lore.add(Message.getMessage("使用可能：{0}{1}以上", getAttackType().getManager().getManagerName(), getAvailableLevel()));
+		lore.add(Message.getMessage("使用可能：{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel()));
 		lore.add("最大SLOT数：" + getMaxSlotCount() + "個");
 		return lore;
 	}
@@ -168,7 +175,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	}
 
 	protected void sendNotAvailableMessage(Player p) {
-		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getManager().getManagerName(), getAvailableLevel());
+		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
 	}
 
 	protected double getMaxAttackDamage() {

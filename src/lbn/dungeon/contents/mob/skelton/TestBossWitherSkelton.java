@@ -8,6 +8,8 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.LastDamageManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;
@@ -69,15 +71,16 @@ public class TestBossWitherSkelton extends AbstractSkelton implements BossMobabl
 		e.setDamage(e.getDamage() / 3.0);
 
 		Player p = LastDamageManager.getLastDamagePlayer(mob);
-		if (!combatPlayerSet.contains(p)) {
-			combatPlayerSet.add(p);
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (!combatPlayerSet.contains(theLowPlayer)) {
+			combatPlayerSet.add(theLowPlayer);
 		}
 	}
 
-	HashSet<Player> combatPlayerSet = new HashSet<Player>();
+	HashSet<TheLowPlayer> combatPlayerSet = new HashSet<>();
 
 	@Override
-	public Set<Player> getCombatPlayer() {
+	public Set<TheLowPlayer> getCombatPlayer() {
 		return combatPlayerSet;
 	}
 

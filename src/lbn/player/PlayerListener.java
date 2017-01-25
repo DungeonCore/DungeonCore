@@ -8,12 +8,14 @@ import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.player.MagicPointManager;
+import lbn.player.player.PlayerChestTpManager;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 
@@ -73,7 +75,11 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		int dropGalions = mob.getDropGalions();
-		GalionManager.addGalion(p, dropGalions, GalionEditReason.mob_drop);
+
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer != null) {
+			theLowPlayer.addGalions(dropGalions, GalionEditReason.mob_drop);
+		}
 	}
 
 	@EventHandler
@@ -90,13 +96,13 @@ public class PlayerListener implements Listener{
 		}
 
 		if (event.getReason().isPrintMessageLog()) {
-			Message.sendMessage((Player)player, ChatColor.AQUA + "{0} + {1}xp", event.getManager().getManagerName(), event.getAddExp());
+			Message.sendMessage((Player)player, ChatColor.AQUA + "{0} + {1}exp", event.getLevelType().getName(), event.getAddExp());
 		}
 	}
 
 	@EventHandler()
 	public void onLevelUp(PlayerChangeStatusLevelEvent e) {
-		if (e.getPlayer().isOnline()) {
+		if (e.isOnline()) {
 			updateSidebar((Player) e.getPlayer());
 		}
 	}
@@ -104,7 +110,14 @@ public class PlayerListener implements Listener{
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onMoneyExp(PlayerChangeGalionsEvent event) {
 		//メッセージを表示
-		event.getReason().sendMessageLog(event.getPlayer(), event.getGalions());
+		event.getReason().sendMessageLog(event.getPlayer(), event.getAddGalions());
+
+		//Logを残す
+		if (event.getReason() != GalionEditReason.mob_drop) {
+			final String format = "%s get %d galions by %s, (total %d galions)";
+			final String message = String.format(format, event.getTheLowPlayer().getName(), event.getAddGalions(), event.getReason().toString(), event.getTheLowPlayer().getGalions());
+			SystemLog.addLog(message);
+		}
 
 		//まだこの時点では確定してないのでタイミングをずらす
 		new BukkitRunnable() {
@@ -132,7 +145,11 @@ public class PlayerListener implements Listener{
 
 	@EventHandler
 	public void onDeathPlayer(PlayerDeathEvent e) {
-		PlayerData.onDeath(e);
+		//最後に死んだ時間をセット
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e.getEntity());
+		if (theLowPlayer != null) {
+			theLowPlayer.setLastDeathTimeMillis(System.currentTimeMillis());
+		}
 		//TPをキャンセルする
 		TpCutCommand.setTpCancel(e.getEntity());
 

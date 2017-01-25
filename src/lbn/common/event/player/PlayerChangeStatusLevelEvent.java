@@ -1,46 +1,33 @@
 package lbn.common.event.player;
 
-import lbn.player.status.IStatusManager;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeStatusLevelEvent extends Event{
+public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
-	OfflinePlayer p;
-	int oldlevel;
-	int nowLevel;
-	IStatusManager manager;
+	int level;
+	TheLowLevelType type;
 
-	public PlayerChangeStatusLevelEvent(OfflinePlayer p, int oldlevel, int nowLevel, IStatusManager manager) {
-		this.p = p;
-		this.oldlevel = oldlevel;
-		this.nowLevel = nowLevel;
-		this.manager = manager;
+	public PlayerChangeStatusLevelEvent(TheLowPlayer player, int level, TheLowLevelType type) {
+		super(player);
+		this.level = level;
+		this.type = type;
 	}
 
-	public int getNowLevel() {
-		return nowLevel;
+	public int getLevel() {
+		return level;
 	}
 
 	public int getNowExp() {
-		return manager.getExp(p);
+		return player.getTheLowExp(type);
 	}
 
-	public int getBeforeLevel() {
-		return oldlevel;
+	public TheLowLevelType getLevelType() {
+		return type;
 	}
-
-	public IStatusManager getManager() {
-		return manager;
-	}
-
-	public OfflinePlayer getPlayer() {
-		return p;
-	}
-
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;

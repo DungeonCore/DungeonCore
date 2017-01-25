@@ -8,7 +8,7 @@ import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.item.ItemInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
-import lbn.player.MagicPointManager;
+import lbn.player.player.MagicPointManager;
 import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;

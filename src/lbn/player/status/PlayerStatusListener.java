@@ -1,6 +1,5 @@
 package lbn.player.status;
 
-import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.other.SystemLog;
 import lbn.mob.AbstractMob;
@@ -8,10 +7,8 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.player.AttackType;
-import lbn.player.status.bowStatus.BowStatusManager;
-import lbn.player.status.magicStatus.MagicStatusManager;
-import lbn.player.status.mainStatus.MainStatusManager;
-import lbn.player.status.swordStatus.SwordStatusManager;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.LivingEntity;
@@ -23,7 +20,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 public class PlayerStatusListener implements Listener{
-	public static IStatusManager[] managerList = {MainStatusManager.getInstance(), SwordStatusManager.getInstance(), MagicStatusManager.getInstance(), BowStatusManager.getInstance()};
 
 	@EventHandler
 	public void onDeath(EntityDeathEvent e) {
@@ -48,19 +44,18 @@ public class PlayerStatusListener implements Listener{
 				return;
 			}
 		}
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer == null) {
+			return;
+		}
 
 		AbstractMob<?> mob = MobHolder.getMob(entity);
-		mob.addExp(entity, type, p);
+		mob.addExp(entity, type, theLowPlayer);
 	}
 
 	@EventHandler
 	public void onChangeStatusLevel(PlayerChangeStatusLevelEvent e) {
-		String join = StringUtils.join(new Object[]{e.getPlayer().getName(), "の", e.getManager().getManagerName(), "がレベル", e.getNowLevel(), "(" , e.getNowExp(), ")になりました。"});
+		String join = StringUtils.join(new Object[]{e.getOfflinePlayer().getName(), "の", e.getLevelType().getName(), "がレベル", e.getLevel(), "(" , e.getNowExp(), ")になりました。"});
 		SystemLog.addLog(join);
 	}
-
-	@EventHandler
-	public void onChangeStatusXp(PlayerChangeStatusExpEvent e) {
-	}
-
 }

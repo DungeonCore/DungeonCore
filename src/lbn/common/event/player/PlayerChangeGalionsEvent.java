@@ -1,16 +1,15 @@
 package lbn.common.event.player;
 
-import lbn.money.galion.GalionEditReason;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
 
-public class PlayerChangeGalionsEvent extends PlayerEvent{
+public class PlayerChangeGalionsEvent extends TheLowPlayerEvent{
 
 	int val;
 	GalionEditReason reason;
-	public PlayerChangeGalionsEvent(Player who, int val, GalionEditReason reason) {
+	public PlayerChangeGalionsEvent(TheLowPlayer who, int val, GalionEditReason reason) {
 		super(who);
 		this.reason = reason;
 		this.val = val;
@@ -27,7 +26,7 @@ public class PlayerChangeGalionsEvent extends PlayerEvent{
 		return handlers;
 	}
 
-	public int getGalions() {
+	public int getAddGalions() {
 		return val;
 	}
 
@@ -42,6 +41,4 @@ public class PlayerChangeGalionsEvent extends PlayerEvent{
 	public void setReason(GalionEditReason reason) {
 		this.reason = reason;;
 	}
-
-
 }

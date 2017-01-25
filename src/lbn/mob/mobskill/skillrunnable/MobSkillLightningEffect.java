@@ -5,6 +5,7 @@ import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mobskill.MobSkillRunnable;
+import lbn.player.TheLowPlayer;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;
@@ -25,7 +26,10 @@ public class MobSkillLightningEffect extends MobSkillRunnable{
 	public static void strikeLightningEffect(Entity target, Entity mob) {
 		AbstractMob<?> mob2 = MobHolder.getMob(mob);
 		if (mob2.isBoss()) {
-			LivingEntityUtil.strikeLightningEffect(target.getLocation(), ((BossMobable)mob2).getCombatPlayer());
+			//コンバットPlayerのみ雷を落とす
+			for (TheLowPlayer player : ((BossMobable)mob2).getCombatPlayer()) {
+				LivingEntityUtil.strikeLightningEffect(target.getLocation(), player.getOnlinePlayer());
+			}
 		} else {
 			if (target.getType() == EntityType.PLAYER) {
 				LivingEntityUtil.strikeLightningEffect(target.getLocation(), (Player)(target));

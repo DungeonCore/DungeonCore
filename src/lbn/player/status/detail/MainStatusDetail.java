@@ -1,10 +1,16 @@
-package lbn.player.status.mainStatus;
+package lbn.player.status.detail;
 
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;
 
-public class MainStatusDetail implements IStatusDetail{
+public class MainStatusDetail extends IStatusDetail{
+	public MainStatusDetail(TheLowPlayer p) {
+		super(p);
+	}
+
 	@Override
 	public String[] getIndexDetail() {
 		return new String[]{"プレイヤー自身のレベルです"};
@@ -25,4 +31,8 @@ public class MainStatusDetail implements IStatusDetail{
 		return Material.SKULL_ITEM;
 	}
 
+	@Override
+	public TheLowLevelType getLevelType() {
+		return TheLowLevelType.MAIN;
+	}
 }

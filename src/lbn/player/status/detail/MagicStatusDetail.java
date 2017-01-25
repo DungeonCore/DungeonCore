@@ -1,10 +1,16 @@
-package lbn.player.status.magicStatus;
+package lbn.player.status.detail;
 
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;
 
-public class MagicStatusDetail implements IStatusDetail{
+public class MagicStatusDetail extends IStatusDetail{
+	public MagicStatusDetail(TheLowPlayer p) {
+		super(p);
+	}
+
 	@Override
 	public String[] getIndexDetail() {
 		return new String[]{"魔法で敵を倒すたびに", "レベルが上がっていきます。"};
@@ -25,4 +31,8 @@ public class MagicStatusDetail implements IStatusDetail{
 		return Material.BLAZE_ROD;
 	}
 
+	@Override
+	public TheLowLevelType getLevelType() {
+		return TheLowLevelType.MAGIC;
+	}
 }

@@ -1,8 +1,9 @@
 package lbn.command;
 
 import lbn.item.GalionItem;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.Message;
 
 import org.bukkit.Bukkit;
@@ -14,27 +15,16 @@ import org.bukkit.entity.Player;
 
 public class MoneyCommand implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		Player p = (Player) sender;
-		if (args.length == 0) {
-			int galion = GalionManager.getGalion(p);
-			Message.sendMessage(p, ChatColor.GREEN + "You have {0} Galions", galion);
-			return true;
+		if (args.length == 0 || args.length == 1) {
+			return showMoney(sender, args);
 		}
+
+		Player p = (Player) sender;
 
 		if (!p.hasPermission("main.lbnDungeonUtil.command.admin.galions")) {
-			return true;
-		}
-
-		if (args.length == 1) {
-			Player target = Bukkit.getPlayerExact(args[0]);
-			if (target != null) {
-				int galion = GalionManager.getGalion(target);
-				sender.sendMessage(target.getDisplayName() + " have " + galion + " galions");
-			} else {
-				sender.sendMessage(args[0] + "というプレイヤーは存在しません。");
-			}
 			return true;
 		}
 
@@ -49,27 +39,57 @@ public class MoneyCommand implements CommandExecutor {
 			return false;
 		}
 
-		Player target = p;
+		TheLowPlayer theLowPlayer = null;
 		if (args.length == 3) {
-			Player player = Bukkit.getPlayer(args[2]);
-			if (player == null || !player.isOnline()) {
-				p.sendMessage("Player名が不正です");
-				return false;
-			}
-			p = player;
+			theLowPlayer = TheLowPlayerManager.getTheLowPlayer(Bukkit.getOfflinePlayer(args[2]));
+		} else {
+			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)sender);
+		}
+
+		if (theLowPlayer == null) {
+			sender.sendMessage(ChatColor.RED  + "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
+			return true;
 		}
 
 		String operate = args[0];
 		if (operate.equalsIgnoreCase("set")) {
-			GalionManager.setGalion(target, galions, GalionEditReason.command);
+			theLowPlayer.setGalions(galions, GalionEditReason.command);
 		} else if (operate.equalsIgnoreCase("add")) {
-			GalionManager.addGalion(target, galions, GalionEditReason.command);
+			theLowPlayer.addGalions(galions, GalionEditReason.command);
 		} else if (operate.equalsIgnoreCase("item")) {
 			GalionItem galionItem = GalionItem.getInstance(galions);
 			p.getInventory().addItem(galionItem.getItem());
 		} else {
 			p.sendMessage("不正なコマンドです");
 		}
+		return true;
+	}
+
+	@SuppressWarnings("deprecation")
+	public boolean showMoney(CommandSender sender, String[] args) {
+		Player p = (Player) sender;
+		TheLowPlayer theLowPlayer = null;
+		if (args.length == 0) {
+			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)sender);
+		} else  {
+			if (!p.hasPermission("main.lbnDungeonUtil.command.admin.galions")) {
+				theLowPlayer = TheLowPlayerManager.getTheLowPlayer(Bukkit.getOfflinePlayer(args[1]));
+				return false;
+			}
+		}
+
+		if (theLowPlayer == null) {
+			sender.sendMessage(ChatColor.RED  + "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
+			return true;
+		}
+
+		int galions = theLowPlayer.getGalions();
+		if (p.getUniqueId().equals(theLowPlayer.getUUID())) {
+			Message.sendMessage(p, ChatColor.GREEN + "You have {0} Galions", galions);
+		} else {
+			Message.sendMessage(p, ChatColor.GREEN + theLowPlayer.getName() + " have {0} Galions", galions);
+		}
+
 		return true;
 	}
 

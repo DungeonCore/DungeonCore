@@ -12,6 +12,8 @@ import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;
@@ -89,8 +91,9 @@ public class Arthur extends AbstractSkelton implements BossMobable{
 	public void onDamage(LivingEntity mob, Entity damager,
 			EntityDamageByEntityEvent e) {
 		Player p = LastDamageManager.getLastDamagePlayer(mob);
-		if (!combatPlayerSet.contains(p)) {
-			combatPlayerSet.add(p);
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (!combatPlayerSet.contains(theLowPlayer)) {
+			combatPlayerSet.add(theLowPlayer);
 		}
 
 		//全体ダメージ
@@ -153,10 +156,10 @@ public class Arthur extends AbstractSkelton implements BossMobable{
 		return null;
 	}
 
-	HashSet<Player> combatPlayerSet = new HashSet<Player>();
+	HashSet<TheLowPlayer> combatPlayerSet = new HashSet<>();
 
 	@Override
-	public Set<Player> getCombatPlayer() {
+	public Set<TheLowPlayer> getCombatPlayer() {
 		return combatPlayerSet;
 	}
 

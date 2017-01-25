@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import lbn.dungeoncore.Main;
 import lbn.mob.mob.BossMobable;
+import lbn.player.TheLowPlayer;
 import lbn.util.LbnRunnable;
 import lbn.util.Message;
 
@@ -37,9 +38,12 @@ public class BossChest extends SpletSheetChest{
 		CustomChestManager.registChest(getChestLocation(e.getEntity()).getBlock().getLocation(), this);
 
 		//全ての人のインベントリをセット
-		for (Player p : e.getCombatPlayer()) {
+		for (TheLowPlayer p : e.getCombatPlayer()) {
 			if (p != null) {
-				rewordInventoryMap.put(p, getNewInventory(p));
+				Player onlinePlayer = p.getOnlinePlayer();
+				if (onlinePlayer == null) {
+					rewordInventoryMap.put(onlinePlayer, getNewInventory(onlinePlayer));
+				}
 			}
 		}
 

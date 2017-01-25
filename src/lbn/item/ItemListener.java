@@ -28,7 +28,11 @@ import lbn.item.strength.StrengthLaterRunnable;
 import lbn.item.strength.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.player.AttackType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -273,19 +277,24 @@ public class ItemListener implements Listener{
 			e.setCancelled(true);
 		}
 
+		//Playerデータがロードされていないので何もしない
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)e.getWhoClicked());
+		if (theLowPlayer == null) {
+			Message.sendMessage((Player)e.getWhoClicked(), ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+			return;
+		}
 
-		final CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
+		CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
 		//強化を行う
 		if (e.getSlotType() != SlotType.RESULT){
-
-			new StrengthLaterRunnable(top, e).runTaskLater(Main.plugin, 1);
+			new StrengthLaterRunnable(top, e, theLowPlayer).runTaskLater(Main.plugin, 1);
 		} else {
 			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
 				if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
 					e.setCancelled(true);
 					return;
 				}
-				new CraeteStrengthItemResultLater(e).runTaskLater(Main.plugin);
+				new CraeteStrengthItemResultLater(e, theLowPlayer).runTaskLater(Main.plugin);
 			} else {
 				e.setCancelled(true);
 			}

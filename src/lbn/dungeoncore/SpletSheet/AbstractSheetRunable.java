@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 /**
  * SpletSheetから読み込む処理だけを実装するための抽象クラス
@@ -100,9 +101,9 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
   abstract protected void excuteOnerow(String[] row);
 
   protected void sendMessage(String msg) {
-    // if (p instanceof ConsoleCommandSender) {
-    // return;
-    // }
+     if (p instanceof ConsoleCommandSender) {
+    	 return;
+     }
     p.sendMessage(msg);
   }
 

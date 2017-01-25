@@ -1,4 +1,4 @@
-package lbn.player;
+package lbn.player.player;
 
 import java.util.HashMap;
 

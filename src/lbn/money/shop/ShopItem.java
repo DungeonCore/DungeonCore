@@ -70,7 +70,7 @@ public class ShopItem {
 		}
 
 		AvailableLevelItemable item = (AvailableLevelItemable)customItem;
-		return item.getManager().getManagerName() + " " + item.getAvailableLevel() + "以上";
+		return item.getLevelType().getName() + " " + item.getAvailableLevel() + "以上";
 	}
 
 	/**

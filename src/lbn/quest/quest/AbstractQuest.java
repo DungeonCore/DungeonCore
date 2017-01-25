@@ -9,13 +9,11 @@ import java.util.Set;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
-import lbn.player.status.AbstractNormalStatusManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.player.status.StatusAddReason;
-import lbn.player.status.bowStatus.BowStatusManager;
-import lbn.player.status.magicStatus.MagicStatusManager;
-import lbn.player.status.swordStatus.SwordStatusManager;
 import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
 import lbn.quest.QuestManager;
@@ -240,25 +238,29 @@ public abstract class AbstractQuest implements Quest{
 
 	@Override
 	public void giveRewardItem(Player p) {
-		if (swordExe != 0) {
-			AbstractNormalStatusManager instance = SwordStatusManager.getInstance();
-			instance.addExp(p, swordExe, StatusAddReason.quest_reword);
-		}
-		if (bowExe != 0) {
-			AbstractNormalStatusManager instance2 = BowStatusManager.getInstance();
-			instance2.addExp(p, bowExe, StatusAddReason.quest_reword);
-		}
-		if (magicExe != 0) {
-			AbstractNormalStatusManager instance3 = MagicStatusManager.getInstance();
-			instance3.addExp(p, magicExe, StatusAddReason.quest_reword);
-		}
 
-		if (rewordMoney != 0) {
-			GalionManager.addGalion(p, rewordMoney, GalionEditReason.quest_reword);
-		}
-
+		//報酬アイテムを渡す
 		if (getRewordItem() != null) {
 			p.getInventory().addItem(getRewordItem().getItem());
+		}
+
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+
+		if (theLowPlayer != null) {
+			//お金を渡す
+			if (rewordMoney != 0) {
+				theLowPlayer.addGalions(rewordMoney, GalionEditReason.quest_reword);
+			}
+
+			if (swordExe != 0) {
+				theLowPlayer.addTheLowExp(TheLowLevelType.SWORD, swordExe, StatusAddReason.quest_reword);
+			}
+			if (bowExe != 0) {
+				theLowPlayer.addTheLowExp(TheLowLevelType.BOW, bowExe, StatusAddReason.quest_reword);
+			}
+			if (magicExe != 0) {
+				theLowPlayer.addTheLowExp(TheLowLevelType.MAGIC, magicExe, StatusAddReason.quest_reword);
+			}
 		}
 	}
 

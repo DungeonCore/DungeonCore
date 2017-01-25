@@ -18,9 +18,9 @@ import lbn.dungeon.contents.slotStone.level4.CombatLightningStone;
 import lbn.dungeon.contents.slotStone.level4.HealSlotStone2;
 import lbn.item.attackitem.AttackItemStack;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.status.bowStatus.BowStatusManager;
-import lbn.player.status.magicStatus.MagicStatusManager;
-import lbn.player.status.swordStatus.SwordStatusManager;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;
@@ -348,9 +348,10 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 	}
 
 	protected void updatePlayerLevel(Player p, int level) {
-		SwordStatusManager.getInstance().setLevel(p, level);
-		BowStatusManager.getInstance().setLevel(p, level);
-		MagicStatusManager.getInstance().setLevel(p, level);
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer != null) {
+			theLowPlayer.setTheLowLevel(TheLowLevelType.MAIN, level);
+		}
 	}
 
 	static ArrayList<String> difficulties = new ArrayList<>();

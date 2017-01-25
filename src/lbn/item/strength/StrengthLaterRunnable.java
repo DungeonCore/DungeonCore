@@ -7,7 +7,7 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.money.galion.GalionManager;
+import lbn.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
@@ -22,13 +22,15 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class StrengthLaterRunnable extends BukkitRunnable{
-	 public StrengthLaterRunnable(CraftingInventory top, InventoryClickEvent e) {
+	 public StrengthLaterRunnable(CraftingInventory top, InventoryClickEvent e, TheLowPlayer theLowPlayer) {
 		this.top = top;
 		this.e = e;
+		this.theLowPlayer = theLowPlayer;
 	}
 
 	CraftingInventory top;
 	 InventoryClickEvent e;
+	 TheLowPlayer theLowPlayer;
 
 	@Override
 	public void run() {
@@ -75,7 +77,7 @@ public class StrengthLaterRunnable extends BukkitRunnable{
 		}
 
 		//強化素材のチェック
-		MaterialCheck materialCheck = new MaterialCheck((Player) e.getWhoClicked(), template, nowLevel + 1);
+		MaterialCheck materialCheck = new MaterialCheck((Player) e.getWhoClicked(), template, nowLevel + 1, theLowPlayer);
 
 		ItemStack updateRedGlass = getUpdateRedGlass(template, StrengthOperator.getLevel(item), materialCheck);
 		top.setItem(5, updateRedGlass);
@@ -159,8 +161,11 @@ class MaterialCheck {
 
 	int nowMoney = 0;
 
-	public MaterialCheck(Player p, StrengthTemplate template, int level) {
+	TheLowPlayer theLowPlayer;
+
+	public MaterialCheck(Player p, StrengthTemplate template, int level, TheLowPlayer theLowPlayer) {
 		this.template = template;
+		this.theLowPlayer = theLowPlayer;
 
 		ItemStack[] strengthMaterials = template.getStrengthMaterials(level);
 
@@ -177,7 +182,7 @@ class MaterialCheck {
 
 		int strengthGalions = template.getStrengthGalions(level);
 		ChatColor color;
-		if (GalionManager.getGalion(p) >= strengthGalions) {
+		if (theLowPlayer.getGalions() >= strengthGalions) {
 			color = ChatColor.GREEN;
 		} else {
 			canStrength = false;
@@ -185,7 +190,7 @@ class MaterialCheck {
 		}
 		needMoney = Message.getMessage(p, "{0}   - {1} Galions", color, strengthGalions);
 
-		nowMoney = GalionManager.getGalion(p);
+		nowMoney = theLowPlayer.getGalions();
 	}
 
 	public boolean canStrength() {

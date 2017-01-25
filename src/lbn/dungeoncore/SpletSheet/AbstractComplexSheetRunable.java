@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 /**
  * SpletSheetから読み込みと編集の処理を実装するための抽象クラス
@@ -168,6 +169,13 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
     }
 
   }
+
+  protected void sendMessage(String msg) {
+	     if (sender instanceof ConsoleCommandSender) {
+	    	 return;
+	     }
+	    sender.sendMessage(msg);
+	  }
 
   public static String getLocationString(Location loc) {
     if (loc == null) {

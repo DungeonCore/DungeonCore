@@ -16,6 +16,7 @@ import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftAnimals;
@@ -294,14 +295,20 @@ public class LivingEntityUtil {
 	}
 
 		public static void strikeLightningEffect(Location location, Player...p) {
+			if (p == null) {
+				return;
+			}
+
 			for (Player player : p) {
 				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
+				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}
 		}
 
 		public static void strikeLightningEffect(Location location, Collection<Player> p) {
 			for (Player player : p) {
 				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
+				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}
 		}
 }

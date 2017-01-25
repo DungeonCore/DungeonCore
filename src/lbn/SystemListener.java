@@ -6,8 +6,9 @@ import lbn.common.event.player.PlayerJoinDungeonGameEvent;
 import lbn.common.event.player.PlayerQuitDungeonGameEvent;
 import lbn.dungeoncore.Main;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.status.StatusViewerInventory;
 import lbn.util.DungeonLogger;
@@ -83,7 +84,6 @@ public class SystemListener implements Listener {
     }
 
     PlayerIODataManager.save(e.getPlayer());
-    PlayerIODataManager.remove(e.getPlayer());
   }
 
   @EventHandler
@@ -196,8 +196,12 @@ public class SystemListener implements Listener {
     }
     String message = e.getMessage();
     if (message.trim().equalsIgnoreCase("/kill")) {
-      int galion = (int) (GalionManager.getGalion(player) * -0.05);
-      GalionManager.addGalion(player, galion, GalionEditReason.penalty);
+
+      TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
+      int galion = (int) (theLowPlayer.getGalions() * -0.05);
+		if (theLowPlayer != null) {
+			theLowPlayer.addGalions(galion, GalionEditReason.mob_drop);
+		}
     }
   }
 

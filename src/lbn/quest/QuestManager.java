@@ -8,7 +8,9 @@ import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.dungeoncore.Main;
-import lbn.player.status.mainStatus.MainStatusManager;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -87,9 +89,14 @@ public class QuestManager {
 			return QuestStartStatus.REMAIND_COOL_TIME;
 		}
 
+		//メインレベルを取得
+		int mainLevel = 0;
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer != null) {
+			mainLevel = theLowPlayer.getTheLowLevel(TheLowLevelType.MAIN);
+		}
 		//利用可能レベル
-		int mainLevel = q.getAvailableMainLevel();
-		if (mainLevel > MainStatusManager.getInstance().getLevel(p)) {
+		if (q.getAvailableMainLevel() > mainLevel) {
 			return QuestStartStatus.LACK_AVAILAVLE_MAIN_LEVEL;
 		}
 

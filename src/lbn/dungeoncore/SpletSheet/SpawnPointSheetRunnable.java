@@ -118,10 +118,6 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     super.getData(query);
   }
 
-  protected void sendMessage(String msg) {
-    sender.sendMessage(msg);
-  }
-
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
     super.onCallbackFunction(submit);

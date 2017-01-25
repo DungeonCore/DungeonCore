@@ -154,7 +154,7 @@ public class Main extends JavaPlugin {
 			public void run() {
 				if (i == 0) {
 					// 一時間に一回セーブする
-					save(false);
+					save();
 				} else if (i == 1) {
 				} else if (i == 2) {
 					// TODO 何か処理
@@ -169,7 +169,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		save(true);
+		save();
 		// WireLessChestManager.getInstance().saveManageData();
 		SystemLog.outPutSystemIn();
 		SystemLog.outPut();
@@ -184,30 +184,8 @@ public class Main extends JavaPlugin {
 		}
 	}
 
-	public static void save(boolean instant) {
+	public static void save() {
 		DungeonLogger.info("[dungeon core]saveします。");
-
-		// 時間がかかる処理は後で実行
-		if (instant) {
-			PlayerIODataManager.allSave(true);
-		} else {
-			// 1tick後に実行
-			new BukkitRunnable() {
-				int i = 0;
-
-				@Override
-				public void run() {
-					switch (i) {
-					case 9:
-						PlayerIODataManager.allSave(false);
-						break;
-					}
-					i++;
-					if (i >= 10) {
-						cancel();
-					}
-				}
-			}.runTaskTimer(plugin, 0, 1);
-		}
+		PlayerIODataManager.allSave();
 	}
 }

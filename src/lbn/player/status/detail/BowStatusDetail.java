@@ -1,10 +1,16 @@
-package lbn.player.status.bowStatus;
+package lbn.player.status.detail;
 
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;
 
-public class BowStatusDetail implements IStatusDetail{
+public class BowStatusDetail extends IStatusDetail{
+	public BowStatusDetail(TheLowPlayer p) {
+		super(p);
+	}
+
 	@Override
 	public String[] getIndexDetail() {
 		return new String[]{"弓で敵を倒すたびに", "レベルが上がっていきます。"};
@@ -25,4 +31,8 @@ public class BowStatusDetail implements IStatusDetail{
 		return Material.BOW;
 	}
 
+	@Override
+	public TheLowLevelType getLevelType() {
+		return TheLowLevelType.BOW;
+	}
 }

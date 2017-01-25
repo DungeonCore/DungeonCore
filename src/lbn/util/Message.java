@@ -1,5 +1,7 @@
 package lbn.util;
 
+import lbn.player.TheLowPlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,6 +27,13 @@ public class Message {
 	public static void sendMessage(Player p,String message,  Object...arg) {
 		if (p != null) {
 			p.sendMessage(getMessage(p, message, arg));
+		}
+	}
+
+	public static void sendMessage(TheLowPlayer player,String message,  Object...arg) {
+		Player onlinePlayer = player.getOnlinePlayer();
+		if (onlinePlayer != null) {
+			sendMessage(player.getOnlinePlayer(), message, arg);
 		}
 	}
 

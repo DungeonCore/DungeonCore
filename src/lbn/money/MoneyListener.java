@@ -9,10 +9,10 @@ import lbn.item.GalionItem;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.money.buyer.Buyer;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
 import lbn.money.shop.CustomShop;
 import lbn.money.shop.ShopItem;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
@@ -46,6 +46,13 @@ public class MoneyListener implements Listener{
 
 		Player p = (Player) e.getWhoClicked();
 
+		//Playerデータがロードされていない時は何もしない
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer == null) {
+			Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+			return;
+		}
+
 		InventoryView view = e.getView();
 		if (e.getClickedInventory() == null || e.getClickedInventory().equals(view.getBottomInventory())) {
 			return;
@@ -65,7 +72,7 @@ public class MoneyListener implements Listener{
 		}
 
 		//お金チェック
-		if (GalionManager.getGalion(p) < shopItem.getPrice()) {
+		if (theLowPlayer.getGalions() < shopItem.getPrice()) {
 			Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。");
 			return;
 		}
@@ -83,7 +90,7 @@ public class MoneyListener implements Listener{
 		p.getInventory().addItem(buyItem);
 
 		//お金の計算を行う
-		GalionManager.addGalion(p, - shopItem.getPrice(), GalionEditReason.consume_shop);
+		theLowPlayer.addGalions(- shopItem.getPrice(), GalionEditReason.consume_shop);
 	}
 
 	@EventHandler
@@ -128,6 +135,12 @@ public class MoneyListener implements Listener{
 		if (player.getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
+
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
+		if (theLowPlayer == null) {
+			return;
+		}
+
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -138,7 +151,7 @@ public class MoneyListener implements Listener{
 					if (customItem != null && customItem instanceof GalionItem) {
 						int galions = new GalionItem(entry.getValue()).getGalions();
 						indexList.add(entry.getKey());
-						GalionManager.addGalion(player, galions * entry.getValue().getAmount(), GalionEditReason.get_money_item);
+						theLowPlayer.addGalions(galions * entry.getValue().getAmount(), GalionEditReason.get_money_item);
 					}
 				}
 

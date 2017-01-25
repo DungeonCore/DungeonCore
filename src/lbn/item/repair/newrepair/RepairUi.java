@@ -3,8 +3,9 @@ package lbn.item.repair.newrepair;
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
@@ -69,7 +70,13 @@ public class RepairUi {
 	 * @param p
 	 */
 	public static void repairItemAll(Player p) {
-		int galion = GalionManager.getGalion(p);
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer == null) {
+			Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+			return;
+		}
+
+		int galion = theLowPlayer.getGalions();
 
 		PlayerInventory inventory = p.getInventory();
 		int needGalion = getNeedGalion(inventory.getContents()) + getNeedGalion(inventory.getArmorContents());
@@ -78,6 +85,7 @@ public class RepairUi {
 			Message.sendMessage(p, "お金が足りないので修理できません。");
 			return;
 		}
+
 
 		//防具以外のアイテムを修理
 		for (int i = 0; i < inventory.getSize(); i++) {
@@ -105,7 +113,7 @@ public class RepairUi {
 			inventory.setBoots(boots);
 		}
 
-		GalionManager.addGalion(p, - needGalion, GalionEditReason.consume_strength);
+		theLowPlayer.addGalions(- needGalion, GalionEditReason.consume_strength);
 
 		Message.sendMessage(p, "アイテムを修理しました。");
 		return;

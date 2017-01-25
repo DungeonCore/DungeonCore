@@ -9,8 +9,8 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.money.galion.GalionEditReason;
-import lbn.money.galion.GalionManager;
+import lbn.money.GalionEditReason;
+import lbn.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;
@@ -29,10 +29,12 @@ import org.bukkit.scheduler.BukkitTask;
 public class CraeteStrengthItemResultLater extends BukkitRunnable{
 	static Random rnd = new Random();
 
-	public CraeteStrengthItemResultLater(InventoryClickEvent e) {
+	public CraeteStrengthItemResultLater(InventoryClickEvent e, TheLowPlayer theLowPlayer) {
 		this.e = e;
+		this.theLowPlayer = theLowPlayer;
 	}
 	InventoryClickEvent e;
+	TheLowPlayer theLowPlayer;
 
 	boolean canStrength = false;
 
@@ -76,7 +78,7 @@ public class CraeteStrengthItemResultLater extends BukkitRunnable{
 			consumeMaterial(p, needItem);
 		}
 		//お金を消費する
-		GalionManager.addGalion(p, - template.getStrengthGalions(nextLevel), GalionEditReason.consume_strength);
+		theLowPlayer.addGalions(- template.getStrengthGalions(nextLevel), GalionEditReason.consume_strength);
 
 		int chance = template.successChance(nextLevel);
 
@@ -165,7 +167,7 @@ public class CraeteStrengthItemResultLater extends BukkitRunnable{
 
 	public boolean checkGalions(Player p, ItemStack item, StrengthTemplate template, int nextLevel) {
 		int strengthGalions = template.getStrengthGalions(nextLevel);
-		boolean rtn = GalionManager.getGalion(p) >= strengthGalions;
+		boolean rtn = theLowPlayer.getGalions() >= strengthGalions;
 		if (!rtn) {
 			p.sendMessage(ChatColor.RED + "強化料金が足りないため、強化できませんでした。");
 		}

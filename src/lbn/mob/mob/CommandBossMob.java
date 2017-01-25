@@ -19,8 +19,9 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.player.AttackType;
-import lbn.player.PlayerData;
-import lbn.player.status.IStatusManager;
+import lbn.player.TheLowLevelType;
+import lbn.player.TheLowPlayer;
+import lbn.player.TheLowPlayerManager;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
@@ -181,24 +182,26 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 		return e;
 	}
 
-	HashMap<Player, Long> combatPlayerSet = new HashMap<Player, Long>();
+	private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<TheLowPlayer, Long>();
 
-	HashBasedTable<Player, AttackType, Double> combatDanageMap = HashBasedTable.create();
+	private HashBasedTable<TheLowPlayer, TheLowLevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		super.onDamage(mob, damager, e);
 
-		Player p = LastDamageManager.getLastDamagePlayer(mob);
+		Player player = LastDamageManager.getLastDamagePlayer(mob);
 		AttackType type = LastDamageManager.getLastDamageAttackType(mob);
+
+		TheLowPlayer p = TheLowPlayerManager.getTheLowPlayer(player);
 		if (p != null) {
 			combatPlayerSet.put(p, System.currentTimeMillis());
 
 			//ダメージを記録
 			double doubleNowDamage = 0;
-			if (combatDanageMap.contains(p, type)) {
-				doubleNowDamage = combatDanageMap.get(p, type);
+			if (combatDamagePlayerMap.contains(p, type)) {
+				doubleNowDamage = combatDamagePlayerMap.get(p, type);
 			}
-			combatDanageMap.put(p, type, doubleNowDamage + e.getDamage());
+			combatDamagePlayerMap.put(p, type.getLevelType(), doubleNowDamage + e.getDamage());
 		}
 
 		//ボスモブとして認識されていないなら再セットする
@@ -219,13 +222,12 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	}
 
 	@Override
-	public Set<Player> getCombatPlayer() {
-		Iterator<Entry<Player, Long>> iterator = combatPlayerSet.entrySet().iterator();
+	public Set<TheLowPlayer> getCombatPlayer() {
+		Iterator<Entry<TheLowPlayer, Long>> iterator = combatPlayerSet.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Entry<Player, Long> entry = iterator.next();
-			PlayerData data = new PlayerData(entry.getKey());
+			Entry<TheLowPlayer, Long> entry = iterator.next();
 			//Combatした時間よりも後に死んでいたらCombatを認めない
-			if (data.getLastDeath() > entry.getValue()) {
+			if (entry.getKey().getLastDeathTimeMillis() > entry.getValue()) {
 				iterator.remove();
 			}
 		}
@@ -276,9 +278,9 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 		entityList.remove(getName());
 
 		if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
-			for (Player p : combatPlayerSet.keySet()) {
+			for (TheLowPlayer p : combatPlayerSet.keySet()) {
 				if (p.isOnline()) {
-					ActionBarAPI.sendActionBar(p, "");
+					ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
 				}
 			}
 		}
@@ -289,7 +291,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			public void run2() {
 				//コンバットプレイヤーをクリア
 				combatPlayerSet.clear();
-				combatDanageMap.clear();
+				combatDamagePlayerMap.clear();
 			}
 		}.runTaskLater(Main.plugin, 2);
 	}
@@ -320,15 +322,15 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 				entity.setCustomName(StringUtils.join(getAttribute().getPrefix(), getName(), ChatColor.RED , " [" , (int)nowHealth , "/" , (int)maxHealth, "]"));
 
 				if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
-					for (Player p : combatPlayerSet.keySet()) {
+					for (TheLowPlayer p : combatPlayerSet.keySet()) {
 						if (p == null) {
 							continue;
 						}
 						if (p.isOnline()) {
 							if (nowHealth <= 0) {
-								ActionBarAPI.sendActionBar(p, "");
+								ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
 							} else {
-								ActionBarAPI.sendActionBar(p, getName() + ChatColor.RED + " [" + (int)nowHealth + "/" + (int)maxHealth+ "]");
+								ActionBarAPI.sendActionBar(p.getOnlinePlayer(), getName() + ChatColor.RED + " [" + (int)nowHealth + "/" + (int)maxHealth+ "]");
 							}
 						}
 					}
@@ -338,7 +340,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	}
 
 	@Override
-	public void addExp(LivingEntity entity, AttackType type, Player p) {
+	public void addExp(LivingEntity entity, AttackType type, TheLowPlayer p) {
 		int exp = getExp(type);
 		if (exp == -1) {
 			exp = (int) (((Damageable)entity).getMaxHealth() * 1.3);
@@ -346,17 +348,17 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 
 		//totalダメージを取得
 		double totalDamage = 0;
-		for (Double damage : combatDanageMap.values()) {
+		for (Double damage : combatDamagePlayerMap.values()) {
 			if (damage != null) {
 				totalDamage += damage.doubleValue();
 			}
 		}
 		//経験値を分配する
-		for (Entry<Player, Map<AttackType, Double>> entry : combatDanageMap.rowMap().entrySet()) {
-			for (Entry<AttackType, Double> typeEntry : entry.getValue().entrySet()) {
-				if (typeEntry.getKey().getManager() != null) {
-					IStatusManager manager = typeEntry.getKey().getManager();
-					manager.addExp(entry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
+		for (Entry<TheLowPlayer, Map<TheLowLevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
+			TheLowPlayer theLowPlayer = entry.getKey();
+			for (Entry<TheLowLevelType, Double> typeEntry : entry.getValue().entrySet()) {
+				if (typeEntry.getKey() != null) {
+					theLowPlayer.addTheLowExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
 				}
 			}
 		}
