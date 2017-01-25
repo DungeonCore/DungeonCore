@@ -1,5 +1,6 @@
 package lbn.player.player;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -13,10 +14,12 @@ import lbn.player.TheLowLevelType;
 import lbn.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
 import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
+import lbn.util.TitleSender;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class CustomPlayer implements TheLowPlayer{
@@ -24,6 +27,9 @@ public class CustomPlayer implements TheLowPlayer{
 		this.player = p;
 	}
 
+	/**
+	 * プレイヤーデータ初期者処理
+	 */
 	public void init() {
 		theLowLevelMap.put(TheLowLevelType.SWORD, 0);
 		theLowLevelMap.put(TheLowLevelType.BOW, 0);
@@ -49,7 +55,8 @@ public class CustomPlayer implements TheLowPlayer{
 		if (type == TheLowLevelType.MAIN) {
 			return (int) ((getTheLowLevel(TheLowLevelType.SWORD) + getTheLowLevel(TheLowLevelType.BOW) + getTheLowLevel(TheLowLevelType.MAGIC))/ 3.0);
 		}
-		return theLowLevelMap.get(type);
+		//最大レベルを上回っていた場合は最大レベルを返す
+		return Math.min(theLowLevelMap.get(type), getMaxLevel(type));
 	}
 
 	@Override
@@ -121,6 +128,20 @@ public class CustomPlayer implements TheLowPlayer{
 	protected void levelUp(TheLowLevelType type, int level) {
 		setTheLowLevel(type, level);
 		Message.sendMessage(this, ChatColor.GREEN + " === LEVEL UP === ");
+		Message.sendMessage(this, MessageFormat.format("{0} === {1}  {2}レベル === ", ChatColor.YELLOW, type.getName(), level));
+		Message.sendMessage(this, ChatColor.GREEN + " === LEVEL UP === ");
+
+		Player player = getOnlinePlayer();
+		if (player != null) {
+			//タイトルを表示
+			TitleSender titleSender = new TitleSender();
+			titleSender.setTitle("== LEVEL UP ==", ChatColor.GREEN, true);
+			titleSender.setSubTitle(MessageFormat.format("{0} {1}  {2}レベル", ChatColor.YELLOW, type.getName(), level), ChatColor.YELLOW, false);
+			titleSender.execute(getOnlinePlayer());
+
+			//音を鳴らす
+			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
+		}
 	}
 
 	@Override

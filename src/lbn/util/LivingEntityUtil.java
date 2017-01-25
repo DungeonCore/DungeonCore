@@ -300,13 +300,23 @@ public class LivingEntityUtil {
 			}
 
 			for (Player player : p) {
+				if (player == null) {
+					continue;
+				}
 				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
 				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}
 		}
 
 		public static void strikeLightningEffect(Location location, Collection<Player> p) {
+			if (p == null) {
+				return;
+			}
+
 			for (Player player : p) {
+				if (player == null) {
+					continue;
+				}
 				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
 				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}

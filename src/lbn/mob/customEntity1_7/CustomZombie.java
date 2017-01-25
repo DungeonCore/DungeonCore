@@ -36,6 +36,7 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.projectiles.ProjectileSource;
@@ -255,8 +256,8 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			makeSound("random.bow", 1.0F, 1.0F / (bb().nextFloat() * 0.4F + 0.8F));
 			this.world.addEntity(entitysnowball);
 		} else if ("test mob2".equals(getName())) {
-			LivingEntityUtil.strikeLightningEffect(entityliving.getBukkitEntity().getLocation(), Bukkit.getPlayer("Namiken"));
-			Bukkit.getPlayer("Namiken").playSound(location, Sound.AMBIENCE_THUNDER, 1, 0.5f);
+			Player player = Bukkit.getPlayer("Namiken");
+			LivingEntityUtil.strikeLightningEffect(entityliving.getBukkitEntity().getLocation(), player);
 		} else if ("test mob3".equals(getName())) {
 			Fireball launchProjectile = ((ProjectileSource)bukkitEntity2).launchProjectile(Fireball.class);
 			launchProjectile.setIsIncendiary(false);
