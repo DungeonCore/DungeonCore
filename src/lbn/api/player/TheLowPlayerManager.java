@@ -1,4 +1,4 @@
-package lbn.player;
+package lbn.api.player;
 
 import java.util.Collections;
 import java.util.HashSet;

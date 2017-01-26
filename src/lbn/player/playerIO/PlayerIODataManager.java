@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import lbn.Config;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.wireless.WireLessChestManager;
 import lbn.dungeoncore.Main;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.Message;
 
 import org.bukkit.Bukkit;

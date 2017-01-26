@@ -3,14 +3,14 @@ package lbn.quest;
 import java.util.HashMap;
 import java.util.Set;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.quest.ComplateQuestEvent;
 import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.dungeoncore.Main;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -93,7 +93,7 @@ public class QuestManager {
 		int mainLevel = 0;
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			mainLevel = theLowPlayer.getTheLowLevel(TheLowLevelType.MAIN);
+			mainLevel = theLowPlayer.getLevel(TheLowLevelType.MAIN);
 		}
 		//利用可能レベル
 		if (q.getAvailableMainLevel() > mainLevel) {

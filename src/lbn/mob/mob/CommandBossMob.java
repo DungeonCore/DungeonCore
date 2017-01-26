@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.AbstractCustomChest;
 import lbn.chest.BossChest;
 import lbn.chest.CustomChestManager;
@@ -19,9 +22,6 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.player.AttackType;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
@@ -358,7 +358,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			TheLowPlayer theLowPlayer = entry.getKey();
 			for (Entry<TheLowLevelType, Double> typeEntry : entry.getValue().entrySet()) {
 				if (typeEntry.getKey() != null) {
-					theLowPlayer.addTheLowExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
+					theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
 				}
 			}
 		}

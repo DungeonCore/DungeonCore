@@ -1,7 +1,7 @@
 package lbn.common.event.player;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;
 

@@ -1,25 +1,20 @@
 package lbn.player.player;
 
-import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.UUID;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.other.DungeonData;
 import lbn.common.other.DungeonList;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
-import lbn.util.Message;
-import lbn.util.TitleSender;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class CustomPlayer implements TheLowPlayer{
@@ -31,16 +26,14 @@ public class CustomPlayer implements TheLowPlayer{
 	 * プレイヤーデータ初期者処理
 	 */
 	public void init() {
-		theLowLevelMap.put(TheLowLevelType.SWORD, 0);
-		theLowLevelMap.put(TheLowLevelType.BOW, 0);
-		theLowLevelMap.put(TheLowLevelType.MAGIC, 0);
-		theLowExpMap.put(TheLowLevelType.SWORD, 0);
-		theLowExpMap.put(TheLowLevelType.BOW, 0);
-		theLowExpMap.put(TheLowLevelType.MAGIC, 0);
+		levelData = new PlayerLevelIntData(0, 0, 0);
+		expData = new PlayerLevelIntData(0, 0, 0);
+		maxLevelData = new PlayerLevelIntData(60, 65, 70);
 	}
 
-	HashMap<TheLowLevelType, Integer> theLowLevelMap = new HashMap<TheLowLevelType, Integer>();
-	HashMap<TheLowLevelType, Integer> theLowExpMap = new HashMap<TheLowLevelType, Integer>();
+	PlayerLevelIntData levelData = null;
+	PlayerLevelIntData expData = null;
+	PlayerLevelIntData maxLevelData = null;
 
 	int galions = 0;
 
@@ -51,48 +44,34 @@ public class CustomPlayer implements TheLowPlayer{
 	int maxMagicPointLevel = 100;
 
 	@Override
-	public int getTheLowLevel(TheLowLevelType type) {
-		if (type == TheLowLevelType.MAIN) {
-			return (int) ((getTheLowLevel(TheLowLevelType.SWORD) + getTheLowLevel(TheLowLevelType.BOW) + getTheLowLevel(TheLowLevelType.MAGIC))/ 3.0);
-		}
+	public int getLevel(TheLowLevelType type) {
 		//最大レベルを上回っていた場合は最大レベルを返す
-		return Math.min(theLowLevelMap.get(type), getMaxLevel(type));
+		return Math.min(levelData.get(type), getMaxLevel(type));
 	}
 
 	@Override
-	public void setTheLowLevel(TheLowLevelType type, int level) {
-		//メインレベルが指定された時は全てのレベルをセットする
-		if (type == TheLowLevelType.MAIN) {
-			setTheLowLevel(TheLowLevelType.SWORD, level);
-			setTheLowLevel(TheLowLevelType.BOW, level);
-			setTheLowLevel(TheLowLevelType.MAGIC, level);
-			return;
-		}
-
-		//最大レベルを超えていなければレベルを加算させない
-		if (level <= getMaxLevel(type)) {
-			theLowLevelMap.put(type, level);
-
-			//Eventを呼ぶ
-			new PlayerChangeStatusLevelEvent(this, level, type).callEvent();
-		}
+	public void setLevel(TheLowLevelType type, int level) {
+		//最大レベルを上回っていたら最大レベルを返す
+		levelData.put(type, Math.min(level, getMaxLevel(type)));
+		//Eventを呼ぶ
+		new PlayerChangeStatusLevelEvent(this, level, type).callEvent();
 	}
 
 	@Override
-	public int getTheLowExp(TheLowLevelType type) {
+	public int getExp(TheLowLevelType type) {
 		if (type == TheLowLevelType.MAIN) {
 			return 0;
 		}
-		return theLowExpMap.get(type);
+		return expData.get(type);
 	}
 
 	@Override
-	public void addTheLowExp(TheLowLevelType type, int addExp, StatusAddReason reason) {
+	public void addExp(TheLowLevelType type, int addExp, StatusAddReason reason) {
 		//メインレベルが指定された時は全ての経験値をセットする
 		if (type == TheLowLevelType.MAIN) {
-			addTheLowExp(TheLowLevelType.SWORD, addExp, reason);
-			addTheLowExp(TheLowLevelType.BOW, addExp, reason);
-			addTheLowExp(TheLowLevelType.MAGIC, addExp, reason);
+			addExp(TheLowLevelType.SWORD, addExp, reason);
+			addExp(TheLowLevelType.BOW, addExp, reason);
+			addExp(TheLowLevelType.MAGIC, addExp, reason);
 			return;
 		}
 
@@ -101,10 +80,10 @@ public class CustomPlayer implements TheLowPlayer{
 		addExp = event.getAddExp();
 
 		//現在の経験値
-		int nowExp = getTheLowExp(type) + addExp;
+		int nowExp = getExp(type) + addExp;
 
 		//現在のレベル
-		int nowLevel = getTheLowLevel(type) + 1;
+		int nowLevel = getLevel(type) + 1;
 
 		for (; nowExp >= getNeedExp(type, nowLevel); nowLevel++) {
 			//最大レベルを超えていたらレベルアップさせない
@@ -117,7 +96,7 @@ public class CustomPlayer implements TheLowPlayer{
 			//必要な経験値を引く
 			nowExp -= getNeedExp(type, nowLevel);
 		}
-		theLowExpMap.put(type, nowExp);
+		expData.put(type, nowExp);
 	}
 
 	/**
@@ -126,27 +105,21 @@ public class CustomPlayer implements TheLowPlayer{
 	 * @param level
 	 */
 	protected void levelUp(TheLowLevelType type, int level) {
-		setTheLowLevel(type, level);
-		Message.sendMessage(this, ChatColor.GREEN + " === LEVEL UP === ");
-		Message.sendMessage(this, MessageFormat.format("{0} === {1}  {2}レベル === ", ChatColor.YELLOW, type.getName(), level));
-		Message.sendMessage(this, ChatColor.GREEN + " === LEVEL UP === ");
-
-		Player player = getOnlinePlayer();
-		if (player != null) {
-			//タイトルを表示
-			TitleSender titleSender = new TitleSender();
-			titleSender.setTitle("== LEVEL UP ==", ChatColor.GREEN, true);
-			titleSender.setSubTitle(MessageFormat.format("{0} {1}  {2}レベル", ChatColor.YELLOW, type.getName(), level), ChatColor.YELLOW, false);
-			titleSender.execute(getOnlinePlayer());
-
-			//音を鳴らす
-			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
-		}
+		//レベルをセットする
+		setLevel(type, level);
+		//eventの発生させる
+		PlayerLevelUpEvent event = new PlayerLevelUpEvent(this, type);
+		event.callEvent();
 	}
 
 	@Override
 	public int getMaxLevel(TheLowLevelType type) {
-		return 63;
+		return maxLevelData.get(type);
+	}
+
+	@Override
+	public void setMaxLevel(TheLowLevelType type, int value) {
+		maxLevelData.put(type, value);
 	}
 
 	@Override
@@ -239,5 +212,4 @@ public class CustomPlayer implements TheLowPlayer{
 	public void setMaxMagicPoint(int maxMagicPointLevel) {
 		this.maxMagicPointLevel = maxMagicPointLevel;
 	}
-
 }

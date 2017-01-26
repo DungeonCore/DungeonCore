@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
@@ -16,7 +17,6 @@ import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
 import lbn.player.AttackType;
-import lbn.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.PickItemQuest;
@@ -348,6 +348,6 @@ public abstract class AbstractMob<T extends Entity> {
 				}
 			}
 		}
-		p.addTheLowExp(type.getLevelType(), exp, StatusAddReason.monster_drop);
+		p.addExp(type.getLevelType(), exp, StatusAddReason.monster_drop);
 	}
 }

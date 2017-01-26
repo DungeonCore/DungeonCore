@@ -1,7 +1,7 @@
 package lbn.common.event.player;
 
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.event.HandlerList;

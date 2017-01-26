@@ -2,12 +2,12 @@ package lbn.item.strength;
 
 import java.util.ArrayList;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 

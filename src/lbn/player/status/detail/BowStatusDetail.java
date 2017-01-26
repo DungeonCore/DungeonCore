@@ -1,7 +1,7 @@
 package lbn.player.status.detail;
 
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;

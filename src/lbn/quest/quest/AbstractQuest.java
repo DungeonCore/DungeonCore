@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
@@ -253,13 +253,13 @@ public abstract class AbstractQuest implements Quest{
 			}
 
 			if (swordExe != 0) {
-				theLowPlayer.addTheLowExp(TheLowLevelType.SWORD, swordExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(TheLowLevelType.SWORD, swordExe, StatusAddReason.quest_reword);
 			}
 			if (bowExe != 0) {
-				theLowPlayer.addTheLowExp(TheLowLevelType.BOW, bowExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(TheLowLevelType.BOW, bowExe, StatusAddReason.quest_reword);
 			}
 			if (magicExe != 0) {
-				theLowPlayer.addTheLowExp(TheLowLevelType.MAGIC, magicExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(TheLowLevelType.MAGIC, magicExe, StatusAddReason.quest_reword);
 			}
 		}
 	}

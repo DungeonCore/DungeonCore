@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
 import lbn.item.AbstractItem;
@@ -17,9 +20,6 @@ import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
@@ -38,7 +38,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 		if (theLowPlayer == null) {
 			return false;
 		}
-		int level = theLowPlayer.getTheLowLevel(getLevelType());
+		int level = theLowPlayer.getLevel(getLevelType());
 		if (getAvailableLevel() > level) {
 			return false;
 		}

@@ -1,7 +1,7 @@
 package lbn.command;
 
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.player.status.StatusViewerInventory;
 
 import org.bukkit.Bukkit;

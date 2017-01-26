@@ -1,6 +1,7 @@
 package lbn.util;
 
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayer;
+import lbn.common.event.player.TheLowPlayerEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,6 +26,16 @@ public class Message {
 	}
 
 	public static void sendMessage(Player p,String message,  Object...arg) {
+		if (p != null) {
+			p.sendMessage(getMessage(p, message, arg));
+		}
+	}
+
+	public static void sendMessage(TheLowPlayerEvent event,String message,  Object...arg) {
+		if (event == null) {
+			return;
+		}
+		Player p = event.getPlayer();
 		if (p != null) {
 			p.sendMessage(getMessage(p, message, arg));
 		}

@@ -2,8 +2,8 @@ package lbn.player.status;
 
 import java.util.ArrayList;
 
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 
 import org.apache.commons.lang.StringUtils;
@@ -20,7 +20,7 @@ public abstract class IStatusDetail {
 	protected TheLowPlayer p;
 
 	public IStatusDetail(TheLowPlayer p) {
-		level = p.getTheLowLevel(getLevelType());
+		level = p.getLevel(getLevelType());
 		maxLevel = p.getMaxLevel(getLevelType());
 		this.p = p;
 	}
@@ -57,8 +57,8 @@ public abstract class IStatusDetail {
 		ItemStack itemStack = new ItemStack(Material.WOOL);
 		setPinkWool(itemStack, DyeColor.WHITE);
 		ItemStackUtil.addLore(itemStack, new String[]{ChatColor.GREEN + "    ・現在のレベル:" + level + " level",
-				ChatColor.GREEN + "    ・現在の経験値 : " + p.getTheLowExp(levelType) + " exp",
-				ChatColor.GREEN + "    ・次レベルまであと" + (p.getNeedExp(levelType, level + 1) - p.getTheLowExp(levelType)) + " exp必要", ""});
+				ChatColor.GREEN + "    ・現在の経験値 : " + p.getExp(levelType) + " exp",
+				ChatColor.GREEN + "    ・次レベルまであと" + (p.getNeedExp(levelType, level + 1) - p.getExp(levelType)) + " exp必要", ""});
 		ItemStackUtil.setDispName(itemStack, getDisplayName()  + "  "+ "レベル" + level);
 		ItemStackUtil.addLore(itemStack, getIndexDetail());
 		return itemStack;
@@ -84,7 +84,7 @@ public abstract class IStatusDetail {
 			setViewIconLore(item, viewIndex);
 		} else {
 			//指定された場所のレベルが最大レベルを下回っている場合はボタンを設置
-			if (indexLevel <= maxLevel) {
+			if (indexLevel < maxLevel) {
 				item = new ItemStack(Material.STONE_BUTTON);
 				ItemStackUtil.setDispName(item,  "STAGE" + viewIndex +  ChatColor.RED + "  (LOCKED)");
 				setViewIconLore(item, viewIndex);

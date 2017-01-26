@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.dungeoncore.Main;
 import lbn.item.GalionItem;
 import lbn.item.ItemInterface;
@@ -11,8 +13,6 @@ import lbn.item.ItemManager;
 import lbn.money.buyer.Buyer;
 import lbn.money.shop.CustomShop;
 import lbn.money.shop.ShopItem;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.BossChest;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeon.contents.mob.zombie.BabyArthur;
@@ -12,8 +14,6 @@ import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.CircleParticleData;
 import lbn.util.particle.ParticleData;

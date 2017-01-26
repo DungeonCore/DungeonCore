@@ -1,11 +1,11 @@
 package lbn.mob.mobskill.skillrunnable;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mobskill.MobSkillRunnable;
-import lbn.player.TheLowPlayer;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;

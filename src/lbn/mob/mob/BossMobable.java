@@ -2,8 +2,8 @@ package lbn.mob.mob;
 
 import java.util.Set;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.chest.BossChest;
-import lbn.player.TheLowPlayer;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

@@ -1,9 +1,9 @@
 package lbn.command;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.item.GalionItem;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.Message;
 
 import org.bukkit.Bukkit;

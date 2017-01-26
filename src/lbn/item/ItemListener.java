@@ -3,6 +3,8 @@ package lbn.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
@@ -28,8 +30,6 @@ import lbn.item.strength.StrengthLaterRunnable;
 import lbn.item.strength.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.player.AttackType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;

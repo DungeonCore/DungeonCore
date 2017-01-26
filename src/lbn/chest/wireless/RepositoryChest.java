@@ -1,11 +1,11 @@
 package lbn.chest.wireless;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;

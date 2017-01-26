@@ -1,7 +1,7 @@
 package lbn.common.event.player;
 
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;
 
@@ -22,7 +22,7 @@ public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent{
 	}
 
 	public int getNowExp() {
-		return player.getTheLowExp(type);
+		return player.getExp(type);
 	}
 
 	public TheLowLevelType getLevelType() {

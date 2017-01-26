@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.money.GalionEditReason;
-import lbn.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;

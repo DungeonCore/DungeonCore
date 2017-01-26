@@ -3,9 +3,9 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.util.JavaUtil;
 import net.md_5.bungee.api.ChatColor;
 
@@ -89,8 +89,8 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 	}
 
 	protected void setLevel(TheLowLevelType type, int value, TheLowPlayer target, Player sender) {
-		target.setTheLowLevel(type, value);
-		sender.sendMessage(type.getName() + "が" + target.getTheLowLevel(type) + "(" + target.getTheLowExp(type) + "xp)になりました。");
+		target.setLevel(type, value);
+		sender.sendMessage(type.getName() + "が" + target.getLevel(type) + "(" + target.getExp(type) + "xp)になりました。");
 	}
 
 	@Override

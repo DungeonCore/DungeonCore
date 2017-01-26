@@ -2,9 +2,9 @@ package lbn.chest;
 
 import java.util.HashMap;
 
+import lbn.api.player.TheLowPlayer;
 import lbn.dungeoncore.Main;
 import lbn.mob.mob.BossMobable;
-import lbn.player.TheLowPlayer;
 import lbn.util.LbnRunnable;
 import lbn.util.Message;
 

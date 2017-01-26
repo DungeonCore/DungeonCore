@@ -1,4 +1,4 @@
-package lbn;
+package lbn.api.other;
 
 import static java.lang.String.format;
 import static org.bukkit.Bukkit.broadcastMessage;

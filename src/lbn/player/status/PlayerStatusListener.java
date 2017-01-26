@@ -1,5 +1,7 @@
 package lbn.player.status;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.other.SystemLog;
 import lbn.mob.AbstractMob;
@@ -7,8 +9,6 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.player.AttackType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.LivingEntity;

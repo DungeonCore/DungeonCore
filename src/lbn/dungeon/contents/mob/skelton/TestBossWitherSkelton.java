@@ -3,13 +3,13 @@ package lbn.dungeon.contents.mob.skelton;
 import java.util.HashSet;
 import java.util.Set;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.BossChest;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.LastDamageManager;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;

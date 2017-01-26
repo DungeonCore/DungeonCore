@@ -3,6 +3,9 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.api.player.TheLowLevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.common.other.DungeonData;
 import lbn.dungeon.contents.item.armor.BeneCommonAromor;
 import lbn.dungeon.contents.item.armor.CommonArmor;
@@ -18,9 +21,6 @@ import lbn.dungeon.contents.slotStone.level4.CombatLightningStone;
 import lbn.dungeon.contents.slotStone.level4.HealSlotStone2;
 import lbn.item.attackitem.AttackItemStack;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.TheLowLevelType;
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;
@@ -350,7 +350,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 	protected void updatePlayerLevel(Player p, int level) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			theLowPlayer.setTheLowLevel(TheLowLevelType.MAIN, level);
+			theLowPlayer.setLevel(TheLowLevelType.MAIN, level);
 		}
 	}
 

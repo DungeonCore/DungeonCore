@@ -1,13 +1,17 @@
 package lbn.player;
 
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.command.TpCutCommand;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
@@ -18,11 +22,13 @@ import lbn.player.player.MagicPointManager;
 import lbn.player.player.PlayerChestTpManager;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
+import lbn.util.TitleSender;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -215,6 +221,25 @@ public class PlayerListener implements Listener{
 
 		if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
 			ActionBarAPI.sendActionBar(e.getPlayer(), ChatColor.AQUA + "Welcome to THE LoW", 20 * 15);
+		}
+	}
+
+	@EventHandler
+	public void onLevelUp(PlayerLevelUpEvent event) {
+		Message.sendMessage(event, ChatColor.GREEN + " === LEVEL UP === ");
+		Message.sendMessage(event, MessageFormat.format("{0} === {1}  {2}レベル === ", ChatColor.YELLOW, event.getLevelType().getName(), event.getNewLevel()));
+		Message.sendMessage(event, ChatColor.GREEN + " === LEVEL UP === ");
+
+		Player player = event.getTheLowPlayer().getOnlinePlayer();
+		if (player != null) {
+			//タイトルを表示
+			TitleSender titleSender = new TitleSender();
+			titleSender.setTitle("== LEVEL UP ==", ChatColor.GREEN, true);
+			titleSender.setSubTitle(MessageFormat.format("{0} {1}  {2}レベル", ChatColor.YELLOW, event.getLevelType().getName(), event.getNewLevel()), ChatColor.YELLOW, false);
+			titleSender.execute(player);
+
+			//音を鳴らす
+			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
 		}
 	}
 

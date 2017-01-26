@@ -2,8 +2,8 @@ package lbn.player.player;
 
 import java.util.HashMap;
 
-import lbn.player.TheLowPlayer;
-import lbn.player.TheLowPlayerManager;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
 import lbn.util.LbnRunnable;
 
 import org.bukkit.entity.Player;

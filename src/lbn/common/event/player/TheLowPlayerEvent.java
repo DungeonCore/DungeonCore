@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

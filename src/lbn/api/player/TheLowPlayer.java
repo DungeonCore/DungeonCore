@@ -1,4 +1,4 @@
-package lbn.player;
+package lbn.api.player;
 
 import java.util.UUID;
 
@@ -15,31 +15,49 @@ public interface TheLowPlayer {
 	 * @param type
 	 * @return
 	 */
-	public int getTheLowLevel(TheLowLevelType type);
+	public int getLevel(TheLowLevelType type);
 
 	/**
 	 * The Lowのレベルを取得
 	 * @param type
 	 * @return
 	 */
-	public int getTheLowExp(TheLowLevelType type);
+	public int getExp(TheLowLevelType type);
 
 	/**
 	 * The Lowのレベルをセットする
 	 * @param type
 	 * @param level
 	 */
-	public void setTheLowLevel(TheLowLevelType type, int level);
+	public void setLevel(TheLowLevelType type, int level);
 
 	/**
 	 * The Lowの経験値を追加する
 	 * @param type
 	 * @return
 	 */
-	public void addTheLowExp(TheLowLevelType type, int exp, StatusAddReason reason);
+	public void addExp(TheLowLevelType type, int exp, StatusAddReason reason);
 
+	/**
+	 * 最大レベルを取得する
+	 * @param type
+	 * @return
+	 */
 	public int getMaxLevel(TheLowLevelType type);
 
+	/**
+	 * 最大レベルをセットする
+	 * @param type
+	 * @return
+	 */
+	public void setMaxLevel(TheLowLevelType type, int value);
+
+	/**
+	 * 次にレベルになるまでに必要な総経験値を取得
+	 * @param type
+	 * @param level
+	 * @return
+	 */
 	public int getNeedExp(TheLowLevelType type, int level);
 
 	/**
@@ -112,6 +130,10 @@ public interface TheLowPlayer {
 	 */
 	public UUID getUUID();
 
+	/**
+	 * 現在のSaveTypeを取得
+	 * @return
+	 */
 	public String getSaveType();
 
 	/**

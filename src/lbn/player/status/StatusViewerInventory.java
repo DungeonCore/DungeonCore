@@ -1,6 +1,6 @@
 package lbn.player.status;
 
-import lbn.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayer;
 import lbn.player.status.detail.BowStatusDetail;
 import lbn.player.status.detail.MagicStatusDetail;
 import lbn.player.status.detail.MainStatusDetail;
