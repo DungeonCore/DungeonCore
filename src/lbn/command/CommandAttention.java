@@ -11,6 +11,9 @@ public final class CommandAttention implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+		if (args.length == 0) {
+			return false;
+		}
 		attention(join(" ", args));
 		return true;
 	}
