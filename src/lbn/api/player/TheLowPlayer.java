@@ -2,8 +2,11 @@ package lbn.api.player;
 
 import java.util.UUID;
 
+import lbn.api.PlayerStatusType;
+import lbn.api.TheLowLevelType;
 import lbn.common.other.DungeonData;
 import lbn.money.GalionEditReason;
+import lbn.player.ability.AbilityInterface;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.OfflinePlayer;
@@ -59,18 +62,6 @@ public interface TheLowPlayer {
 	 * @return
 	 */
 	public int getNeedExp(TheLowLevelType type, int level);
-
-	/**
-	 * 最大MagiPointレベル
-	 * @return
-	 */
-	public int getMaxMagicPoint();
-
-	/**
-	 * 最大MagiPointレベル
-	 * @return
-	 */
-	public void setMaxMagicPoint(int magipointLevel);
 
 	/**
 	 *お金を取得
@@ -147,4 +138,23 @@ public interface TheLowPlayer {
 	 * @return
 	 */
 	public void setLastDeathTimeMillis(long time);
+
+	/**
+	 * Abilityを追加
+	 * @param ablity
+	 */
+	public void addAbility(AbilityInterface ablity);
+
+	/**
+	 * Abilityを削除
+	 * @param ablity
+	 */
+	public void removeAbility(AbilityInterface ablity);
+
+	/**
+	 * Playerの追加ステータス情報を取得する
+	 * @param type
+	 * @return
+	 */
+	public double getStatusData(PlayerStatusType type);
 }

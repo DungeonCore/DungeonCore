@@ -25,13 +25,12 @@ import lbn.dungeon.contents.mob.zombie.NormalSummonZombie;
 import lbn.dungeon.contents.mob.zombie.Saratoga_v1;
 import lbn.dungeon.contents.mob.zombie.ShyZombie;
 import lbn.dungeon.contents.mob.zombie.SuicideAttackZombie;
-import lbn.dungeon.contents.mob.zombie.WaterZombie;
 import lbn.mob.MobHolder;
 
 
 public class MobRegister {
 	public static void registMob() {
-		MobHolder.registMob(new WaterZombie());
+//		MobHolder.registMob(new WaterZombie());
 		MobHolder.registMob(new AbstractSummonZombie());
 		MobHolder.registMob(new SummonSkelton());
 //		MobHolder.registMob(new TestBossWitherSkelton());

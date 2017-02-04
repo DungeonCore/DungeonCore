@@ -1,6 +1,6 @@
 package lbn.item.itemInterface;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 
 import org.bukkit.entity.Player;
 

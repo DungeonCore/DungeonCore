@@ -1,6 +1,6 @@
 package lbn.player;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;

@@ -54,15 +54,14 @@ public class MobSpawnByCommand {
 				NBTBase localNBTBase = MojangsonParser.parse(((IChatBaseComponent) localObject1).c());
 				if ((localNBTBase instanceof NBTTagCompound)) {
 					localNBTTagCompound1 = (NBTTagCompound) localNBTBase;
-					//オリジナルのTagをつける
-					localNBTTagCompound1.setBoolean("IsWaterMonster", nbtTag.isWaterMonster());
 				} else {
 					a("Not a valid tag");
 					return null;
 				}
 			}
 			localNBTTagCompound1.setString("id", str);
-
+			//オリジナルのTagをつける
+			localNBTTagCompound1.setBoolean("IsWaterMonster", nbtTag.isWaterMonster());
 			//NBTTag generic.attackDamageをとらないので一時的にコメントアウト
 //			//NBTTag generic.attackDamageをとる
 //			NBTTagList nbtBase = (NBTTagList) localNBTTagCompound1.get("Attributes");

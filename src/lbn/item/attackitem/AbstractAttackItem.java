@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
@@ -26,6 +26,7 @@ import lbn.util.Message;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -33,6 +34,11 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, AvailableLevelItemable, RightClickItemable, CombatItemable{
 	public boolean isAvilable(Player player) {
+		//クリエイティブなら使えるようにする
+		if (player.getGameMode() == GameMode.CREATIVE) {
+			return true;
+		}
+
 		//Playerインスタンスを取得
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
 		if (theLowPlayer == null) {

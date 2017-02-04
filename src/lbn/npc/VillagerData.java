@@ -134,6 +134,9 @@ public class VillagerData {
 	}
 
 	public EntityType getEntityType() {
+		if (entityType == null) {
+			return EntityType.VILLAGER;
+		}
 		return entityType;
 	}
 

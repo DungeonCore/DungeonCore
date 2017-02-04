@@ -54,15 +54,10 @@ public abstract class AbstractMob<T extends Entity> {
 	}
 
 
-	TheLowMobType type = TheLowMobType.NORMAL;
-	{
-		if (this instanceof SummonMobable) {
-			type = TheLowMobType.SUMMON;
-		}
-	}
+	boolean isSummon = this instanceof SummonMobable;
 
-	public TheLowMobType getTheLowMobType() {
-		return type;
+	public boolean isSummonMob() {
+		return isSummon;
 	}
 
 	abstract public String getName();
@@ -101,7 +96,7 @@ public abstract class AbstractMob<T extends Entity> {
 		//属性適用
 		getAttribute().onDamage(mob, damager, e);
 
-		if (getTheLowMobType() == TheLowMobType.SUMMON) {
+		if (isSummonMob()) {
 			return;
 		}
 

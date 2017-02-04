@@ -2,7 +2,7 @@ package lbn.player.status;
 
 import java.util.ArrayList;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 

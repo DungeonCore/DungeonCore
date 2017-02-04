@@ -2,7 +2,8 @@ package lbn.player.player;
 
 import java.util.UUID;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.PlayerStatusType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
@@ -11,6 +12,7 @@ import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.other.DungeonData;
 import lbn.common.other.DungeonList;
 import lbn.money.GalionEditReason;
+import lbn.player.ability.AbilityInterface;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.Bukkit;
@@ -31,17 +33,28 @@ public class CustomPlayer implements TheLowPlayer{
 		maxLevelData = new PlayerLevelIntData(60, 65, 70);
 	}
 
+	//レベル
 	PlayerLevelIntData levelData = null;
+
+	//経験値
 	PlayerLevelIntData expData = null;
+
+	//最大レベル
 	PlayerLevelIntData maxLevelData = null;
 
+	//所持金
 	int galions = 0;
 
 	OfflinePlayer player;
 
+	//現在いるダンジョンID
 	int inDungeonId = -1;
 
+	//最大マジックポイント
 	int maxMagicPointLevel = 100;
+
+	//PlayerStatusData
+	PlayerStatusData playerStatusData = new PlayerStatusData(this);
 
 	@Override
 	public int getLevel(TheLowLevelType type) {
@@ -186,9 +199,11 @@ public class CustomPlayer implements TheLowPlayer{
 		return player.getUniqueId();
 	}
 
+	String dataType = "typeA";
+
 	@Override
 	public String getSaveType() {
-		return "typeA";
+		return dataType;
 	}
 
 	long lastDeathMilleTime = -1;
@@ -204,12 +219,49 @@ public class CustomPlayer implements TheLowPlayer{
 	}
 
 	@Override
-	public int getMaxMagicPoint() {
-		return maxMagicPointLevel;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dataType == null) ? 0 : dataType.hashCode());
+		result = prime * result + ((player == null) ? 0 : player.hashCode());
+		return result;
 	}
 
 	@Override
-	public void setMaxMagicPoint(int maxMagicPointLevel) {
-		this.maxMagicPointLevel = maxMagicPointLevel;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CustomPlayer other = (CustomPlayer) obj;
+		if (dataType == null) {
+			if (other.dataType != null)
+				return false;
+		} else if (!dataType.equals(other.dataType))
+			return false;
+		if (player == null) {
+			if (other.player != null)
+				return false;
+		} else if (!player.equals(other.player))
+			return false;
+		return true;
+	}
+
+	@Override
+	public void addAbility(AbilityInterface ability) {
+		playerStatusData.addData(ability);
+	}
+
+	@Override
+	public void removeAbility(AbilityInterface ability) {
+		playerStatusData.removeData(ability);
+	}
+
+	@Override
+	public double getStatusData(PlayerStatusType type) {
+		return playerStatusData.getData(type);
 	}
 }

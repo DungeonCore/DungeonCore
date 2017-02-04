@@ -3,7 +3,7 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.util.JavaUtil;

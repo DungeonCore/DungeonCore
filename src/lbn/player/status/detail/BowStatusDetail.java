@@ -1,6 +1,6 @@
 package lbn.player.status.detail;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 

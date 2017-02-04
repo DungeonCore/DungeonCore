@@ -63,6 +63,9 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
       } else {
         return instance.getAllData(getTag());
       }
+    } catch (Exception e){
+    	e.printStackTrace();
+    	throw e;
     } finally {
       closeTransaction();
       DungeonLogger.development("complate read spread sheet:" + getSheetName());

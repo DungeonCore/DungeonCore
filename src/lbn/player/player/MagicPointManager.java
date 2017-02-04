@@ -39,7 +39,6 @@ public class MagicPointManager {
 	public static int getMaxMagicPoint(Player p) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			return theLowPlayer.getMaxMagicPoint();
 		}
 		//ロードされていない時はとりあえず100にしておく
 		return 100;

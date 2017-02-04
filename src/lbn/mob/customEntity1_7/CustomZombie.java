@@ -213,8 +213,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 	public void a(NBTTagCompound nbttagcompound) {
 		super.a(nbttagcompound);
 		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
-
-
 	}
 
 	boolean isIgnoreWater = false;

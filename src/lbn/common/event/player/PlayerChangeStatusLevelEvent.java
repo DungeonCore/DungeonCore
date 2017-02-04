@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;

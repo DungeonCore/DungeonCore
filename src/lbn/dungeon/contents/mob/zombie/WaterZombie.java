@@ -3,8 +3,10 @@ package lbn.dungeon.contents.mob.zombie;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.mob.abstractmob.AbstractZombie;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -35,6 +37,13 @@ public class WaterZombie extends AbstractZombie{
 
 	@Override
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
+	}
+
+	@Override
+	protected Zombie spawnPrivate(Location loc) {
+		Zombie spawnPrivate = super.spawnPrivate(loc);
+		System.out.println("aaaaaaaaaaaa");
+		return spawnPrivate;
 	}
 
 	@Override

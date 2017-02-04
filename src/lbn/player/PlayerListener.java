@@ -88,12 +88,6 @@ public class PlayerListener implements Listener{
 		}
 	}
 
-	@EventHandler
-	public void onDeath(EntityDeathEvent e) {
-		//取得経験値は常にゼロ
-		e.setDroppedExp(0);
-	}
-
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onGetExp(PlayerChangeStatusExpEvent event) {
 		OfflinePlayer player = event.getPlayer();

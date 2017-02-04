@@ -36,6 +36,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
@@ -72,6 +73,12 @@ public class OtherCommonListener implements Listener{
 				e.getDrops().remove(s);
 			}
 		}
+	}
+
+	@EventHandler
+	public void onDeath(EntityDeathEvent e) {
+		//取得経験値は常にゼロ
+		e.setDroppedExp(0);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -120,7 +127,6 @@ public class OtherCommonListener implements Listener{
 		if (!ItemStackUtil.isUnsafeEnchant(itemMeta)) {
 			return false;
 		}
-
 		return true;
 	}
 

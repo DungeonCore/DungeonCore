@@ -1,6 +1,6 @@
 package lbn.player.player;
 
-import lbn.api.player.TheLowLevelType;
+import lbn.api.TheLowLevelType;
 
 public class PlayerLevelIntData {
 	public PlayerLevelIntData(int swordData, int bowData, int magicData) {

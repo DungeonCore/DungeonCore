@@ -78,7 +78,7 @@ public class MobListener implements Listener {
 		mob.updateName(false);
 
 		//もしSummonの場合は指定時間後に削除する
-		if (mob.getTheLowMobType() == TheLowMobType.SUMMON) {
+		if (mob.isSummonMob()) {
 			new BukkitRunnable() {
 				@Override
 				public void run() {

@@ -7,15 +7,15 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
+import lbn.item.GalionItem;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
+
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import lbn.item.GalionItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 public class JavaUtil {
 	public static Set<Class<?>> getInterface(Class<?> clazz) {
@@ -53,7 +53,7 @@ public class JavaUtil {
 	public static int getInt(String data, int other) {
 		try {
 			return Integer.parseInt(data);
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			return other;
 		}
 	}
@@ -61,7 +61,7 @@ public class JavaUtil {
 	public static float getFloat(String data, float other) {
 		try {
 			return Float.parseFloat(data);
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			return other;
 		}
 	}
@@ -82,6 +82,14 @@ public class JavaUtil {
 			return other;
 		}
 	}
+
+//	public static double getRelativeDouble(String deta, double other) {
+//		try {
+//			CommandAbstract.b(paramDouble, paramString, paramInt1, paramInt2, paramBoolean)
+//		} catch (Exception e) {
+//			return other;
+//		}
+//	}
 
 	static ParticleData particleData = new ParticleData(ParticleType.fireworksSpark, 100);
 
