@@ -1,18 +1,24 @@
-package lbn.player.player;
+package lbn.player.customplayer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import lbn.api.AbilityType;
+import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
-import lbn.api.TheLowLevelType;
+import lbn.api.player.AbilityInterface;
+import lbn.api.player.OneReincarnationData;
+import lbn.api.player.ReincarnationInterface;
 import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.other.DungeonData;
 import lbn.common.other.DungeonList;
 import lbn.money.GalionEditReason;
-import lbn.player.ability.AbilityInterface;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.Bukkit;
@@ -30,7 +36,7 @@ public class CustomPlayer implements TheLowPlayer{
 	public void init() {
 		levelData = new PlayerLevelIntData(0, 0, 0);
 		expData = new PlayerLevelIntData(0, 0, 0);
-		maxLevelData = new PlayerLevelIntData(60, 65, 70);
+		maxLevelData = new PlayerLevelIntData(60, 60, 60);
 	}
 
 	//レベル
@@ -56,14 +62,17 @@ public class CustomPlayer implements TheLowPlayer{
 	//PlayerStatusData
 	PlayerStatusData playerStatusData = new PlayerStatusData(this);
 
+	//転生データを管理するクラス
+	PlayerReincarnationData reincarnationData = new PlayerReincarnationData();
+
 	@Override
-	public int getLevel(TheLowLevelType type) {
+	public int getLevel(LevelType type) {
 		//最大レベルを上回っていた場合は最大レベルを返す
 		return Math.min(levelData.get(type), getMaxLevel(type));
 	}
 
 	@Override
-	public void setLevel(TheLowLevelType type, int level) {
+	public void setLevel(LevelType type, int level) {
 		//最大レベルを上回っていたら最大レベルを返す
 		levelData.put(type, Math.min(level, getMaxLevel(type)));
 		//Eventを呼ぶ
@@ -71,20 +80,20 @@ public class CustomPlayer implements TheLowPlayer{
 	}
 
 	@Override
-	public int getExp(TheLowLevelType type) {
-		if (type == TheLowLevelType.MAIN) {
+	public int getExp(LevelType type) {
+		if (type == LevelType.MAIN) {
 			return 0;
 		}
 		return expData.get(type);
 	}
 
 	@Override
-	public void addExp(TheLowLevelType type, int addExp, StatusAddReason reason) {
+	public void addExp(LevelType type, int addExp, StatusAddReason reason) {
 		//メインレベルが指定された時は全ての経験値をセットする
-		if (type == TheLowLevelType.MAIN) {
-			addExp(TheLowLevelType.SWORD, addExp, reason);
-			addExp(TheLowLevelType.BOW, addExp, reason);
-			addExp(TheLowLevelType.MAGIC, addExp, reason);
+		if (type == LevelType.MAIN) {
+			addExp(LevelType.SWORD, addExp, reason);
+			addExp(LevelType.BOW, addExp, reason);
+			addExp(LevelType.MAGIC, addExp, reason);
 			return;
 		}
 
@@ -117,7 +126,7 @@ public class CustomPlayer implements TheLowPlayer{
 	 * @param type
 	 * @param level
 	 */
-	protected void levelUp(TheLowLevelType type, int level) {
+	protected void levelUp(LevelType type, int level) {
 		//レベルをセットする
 		setLevel(type, level);
 		//eventの発生させる
@@ -126,17 +135,17 @@ public class CustomPlayer implements TheLowPlayer{
 	}
 
 	@Override
-	public int getMaxLevel(TheLowLevelType type) {
+	public int getMaxLevel(LevelType type) {
 		return maxLevelData.get(type);
 	}
 
 	@Override
-	public void setMaxLevel(TheLowLevelType type, int value) {
+	public void setMaxLevel(LevelType type, int value) {
 		maxLevelData.put(type, value);
 	}
 
 	@Override
-	public int getNeedExp(TheLowLevelType type, int level) {
+	public int getNeedExp(LevelType type, int level) {
 		return (int) Math.ceil(180 + 1.3 * Math.pow(level, 2.5));
 	}
 
@@ -263,5 +272,60 @@ public class CustomPlayer implements TheLowPlayer{
 	@Override
 	public double getStatusData(PlayerStatusType type) {
 		return playerStatusData.getData(type);
+	}
+
+	@Override
+	public boolean doReincarnation(ReincarnationInterface reincarnationInterface, LevelType levelType) {
+		if (!canReincarnation(levelType)) {
+			return false;
+		}
+		//転生を行う
+		OneReincarnationData oneReincarnationData = reincarnationData.addReincarnation(reincarnationInterface, levelType);
+		//転生を行ったときの効果を追加する
+		reincarnationInterface.addReincarnation(this, levelType, oneReincarnationData.getCount());
+		//60レベル引いたレベルをセットする
+		setLevel(levelType, getLevel(levelType) - 60);
+
+		//Eventを発火させる
+		new PlayerCompleteReincarnationEvent(this, oneReincarnationData).callEvent();
+		return true;
+	}
+
+	@Override
+	public boolean canReincarnation(LevelType levelType) {
+		int level = getLevel(levelType);
+		//現在のレベルが60レベル以下なら転生できない
+		if (level < 60) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int getEachReincarnationCount(LevelType levelType) {
+		return reincarnationData.getNowReincarnationCount(levelType);
+	}
+
+	@Override
+	public void applyAbilityData(boolean check) {
+//		if (check) {
+//			playerStatusData.checkAbility();
+//		}
+		playerStatusData.applyAllAbility();
+		//TODO
+	}
+
+	@Override
+	public void clearAbilityData(AbilityType abilityType) {
+		playerStatusData.clear(abilityType);
+	}
+
+	@Override
+	public List<OneReincarnationData> getReincarnationData() {
+		ArrayList<OneReincarnationData> allReincarnationData = new ArrayList<OneReincarnationData>();
+		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.SWORD));
+		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.BOW));
+		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.MAGIC));
+		return allReincarnationData;
 	}
 }

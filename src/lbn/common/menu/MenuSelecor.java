@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuSelecor {
+public class MenuSelecor implements MenuSelectorInterface{
 	public void regist() {
 		MenuSelectorManager.regist(this);
 	}
@@ -24,26 +24,47 @@ public class MenuSelecor {
 	protected String title;
 	protected Inventory createInventory;
 	public MenuSelecor(String title) {
-		this.title = title;
+		this.title = ChatColor.WHITE + "-- " + title + " --";
 		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + "-- " + title + " --");
 	}
 
 	protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
 
+	/**
+	 * メニューを追加する
+	 * @param item
+	 * @param index
+	 * @param run
+	 * @return
+	 */
 	public MenuSelecor addMenu(ItemStack item, int index, SelectRunnable run) {
 		createInventory.setItem(index, item);
 		runMap.put(item, run);
 		return this;
 	}
 
+	/**
+	 * メニューを開く
+	 * @param p
+	 */
 	public void open(Player p) {
 		p.openInventory(createInventory);
 	}
 
+	/**
+	 * アイテムを選択したときの処理
+	 * @param p
+	 * @param item
+	 */
 	public void onSelectItem(Player p, ItemStack item) {
 		if (runMap.containsKey(item)) {
 			runMap.get(item).run(p, item);
 		}
+	}
+
+	@Override
+	public String getTitle() {
+		return title;
 	}
 
 
@@ -94,4 +115,5 @@ public class MenuSelecor {
 
 		MenuSelectorManager.regist(menuSelecor);
 	}
+
 }

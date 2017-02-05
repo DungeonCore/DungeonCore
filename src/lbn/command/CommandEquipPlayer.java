@@ -3,7 +3,7 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.other.DungeonData;
@@ -350,7 +350,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 	protected void updatePlayerLevel(Player p, int level) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			theLowPlayer.setLevel(TheLowLevelType.MAIN, level);
+			theLowPlayer.setLevel(LevelType.MAIN, level);
 		}
 	}
 

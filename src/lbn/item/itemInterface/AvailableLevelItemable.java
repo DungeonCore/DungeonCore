@@ -1,6 +1,6 @@
 package lbn.item.itemInterface;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 
 import org.bukkit.entity.Player;
 
@@ -9,5 +9,5 @@ public interface AvailableLevelItemable {
 
 	boolean isAvilable(Player player);
 
-	TheLowLevelType getLevelType();;
+	LevelType getLevelType();;
 }

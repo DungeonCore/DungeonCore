@@ -1,19 +1,19 @@
 package lbn.player;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;
 
 public enum ItemType {
-	SWORD(TheLowLevelType.SWORD, 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
-	BOW(TheLowLevelType.BOW, 14, ItemStackUtil.getVanillaDamage(Material.BOW)),
-	MAGIC(TheLowLevelType.BOW, 9, 6),
+	SWORD(LevelType.SWORD, 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
+	BOW(LevelType.BOW, 14, ItemStackUtil.getVanillaDamage(Material.BOW)),
+	MAGIC(LevelType.BOW, 9, 6),
 	OTHER(),
 	IGNORE();
 
 
-	private ItemType(TheLowLevelType type, double expectedValue, double level0MinDamage) {
+	private ItemType(LevelType type, double expectedValue, double level0MinDamage) {
 		this.levelType = type;
 		this.expectedValue = expectedValue;
 		this.level0MinDamage = level0MinDamage;
@@ -21,7 +21,7 @@ public enum ItemType {
 	}
 
 	private ItemType() {
-		this.levelType = TheLowLevelType.MAIN;
+		this.levelType = LevelType.MAIN;
 	}
 
 
@@ -36,11 +36,11 @@ public enum ItemType {
 
 	double level0MinDamage = 4;
 
-	TheLowLevelType levelType;
+	LevelType levelType;
 
 	 double expectedValue = 7;
 
-	public TheLowLevelType getLevelType() {
+	public LevelType getLevelType() {
 		return levelType;
 	}
 

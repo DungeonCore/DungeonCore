@@ -6,10 +6,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.bukkit.OfflinePlayer;
-import org.bukkit.event.player.PlayerEvent;
+import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.player.customplayer.CustomPlayer;
+import net.md_5.bungee.api.ChatColor;
 
-import lbn.player.player.CustomPlayer;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerEvent;
 
 public class TheLowPlayerManager {
 	static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<UUID, TheLowPlayer>();
@@ -24,6 +27,8 @@ public class TheLowPlayerManager {
 		//TODO ロードする
 		CustomPlayer customPlayer = new CustomPlayer(p);
 		customPlayer.init();
+		//eventを発火させる
+		new PlayerLoadedDataEvent(customPlayer, p).callEvent();
 		loadedPlayerMap.put(p.getUniqueId(), customPlayer);
 	}
 
@@ -68,5 +73,13 @@ public class TheLowPlayerManager {
 	 */
 	public static boolean isLoaded(OfflinePlayer p) {
 		return loadedPlayerMap.containsKey(p);
+	}
+
+	/**
+	 * ロード中のメッセージを表示
+	 * @param p
+	 */
+	public static void sendLoingingMessage(Player p) {
+		p.sendMessage(ChatColor.RED + "現在データをロード中です。もう暫くお待ち下さい。");
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
@@ -72,7 +72,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	}
 
 	@Override
-	public TheLowLevelType getLevelType() {
+	public LevelType getLevelType() {
 		return getAttackType().getLevelType();
 	}
 

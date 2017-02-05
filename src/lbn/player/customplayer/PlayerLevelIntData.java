@@ -1,6 +1,6 @@
-package lbn.player.player;
+package lbn.player.customplayer;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 
 public class PlayerLevelIntData {
 	public PlayerLevelIntData(int swordData, int bowData, int magicData) {
@@ -23,7 +23,7 @@ public class PlayerLevelIntData {
 
 	int mainData = 0;
 
-	public int get(TheLowLevelType type) {
+	public int get(LevelType type) {
 		switch (type) {
 		case SWORD:
 			return swordData;
@@ -38,7 +38,7 @@ public class PlayerLevelIntData {
 		}
 	}
 
-	public void put(TheLowLevelType type, int data) {
+	public void put(LevelType type, int data) {
 		switch (type) {
 		case SWORD:
 			swordData = data;
@@ -62,7 +62,7 @@ public class PlayerLevelIntData {
 		updateMainLevel();
 	}
 
-	public void add(TheLowLevelType type, int data) {
+	public void add(LevelType type, int data) {
 		switch (type) {
 		case SWORD:
 			swordData += data;

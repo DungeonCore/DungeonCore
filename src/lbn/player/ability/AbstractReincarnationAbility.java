@@ -4,9 +4,9 @@ import lbn.api.AbilityType;
 import lbn.api.player.AbilityInterface;
 
 
-public abstract class AbstractItemEquipAbility implements AbilityInterface {
+public abstract class AbstractReincarnationAbility implements AbilityInterface{
 	@Override
 	public AbilityType getAbilityType() {
-		return AbilityType.SET_ITEM_ABILITY;
+		return AbilityType.REINCARNATION_ABILITY;
 	}
 }

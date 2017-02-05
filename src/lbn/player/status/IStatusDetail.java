@@ -2,7 +2,7 @@ package lbn.player.status;
 
 import java.util.ArrayList;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.util.ItemStackUtil;
 
@@ -33,10 +33,10 @@ public abstract class IStatusDetail {
 
 	abstract public Material getViewIconMaterial();
 
-	abstract public TheLowLevelType getLevelType();
+	abstract public LevelType getLevelType();
 
 	public ItemStack getTitleViewIcon() {
-		if (getLevelType() == TheLowLevelType.MAIN) {
+		if (getLevelType() == LevelType.MAIN) {
 			return getIndexItemForMainStatus();
 		} else {
 			return getIndexItem();
@@ -53,7 +53,7 @@ public abstract class IStatusDetail {
 	}
 
 	protected ItemStack getIndexItem() {
-		TheLowLevelType levelType = getLevelType();
+		LevelType levelType = getLevelType();
 		ItemStack itemStack = new ItemStack(Material.WOOL);
 		setPinkWool(itemStack, DyeColor.WHITE);
 		ItemStackUtil.addLore(itemStack, new String[]{ChatColor.GREEN + "    ・現在のレベル:" + level + " level",

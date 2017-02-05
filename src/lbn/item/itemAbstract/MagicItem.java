@@ -6,7 +6,7 @@ import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.ItemType;
-import lbn.player.player.MagicPointManager;
+import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;
 
 import org.bukkit.entity.Player;

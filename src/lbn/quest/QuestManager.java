@@ -3,7 +3,7 @@ package lbn.quest;
 import java.util.HashMap;
 import java.util.Set;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.quest.ComplateQuestEvent;
@@ -93,7 +93,7 @@ public class QuestManager {
 		int mainLevel = 0;
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			mainLevel = theLowPlayer.getLevel(TheLowLevelType.MAIN);
+			mainLevel = theLowPlayer.getLevel(LevelType.MAIN);
 		}
 		//利用可能レベル
 		if (q.getAvailableMainLevel() > mainLevel) {

@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
 
@@ -10,10 +10,10 @@ public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
 	int addExp;
-	TheLowLevelType levelType;
+	LevelType levelType;
 	StatusAddReason reason;
 
-	public PlayerChangeStatusExpEvent(TheLowPlayer p, int addExp, TheLowLevelType levelType, StatusAddReason reason) {
+	public PlayerChangeStatusExpEvent(TheLowPlayer p, int addExp, LevelType levelType, StatusAddReason reason) {
 		super(p);
 		this.addExp = addExp;
 		this.levelType = levelType;
@@ -28,7 +28,7 @@ public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent{
 		return addExp;
 	}
 
-	public TheLowLevelType getLevelType() {
+	public LevelType getLevelType() {
 		return levelType;
 	}
 

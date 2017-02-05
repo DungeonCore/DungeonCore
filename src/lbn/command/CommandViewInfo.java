@@ -16,6 +16,7 @@ import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.player.playerIO.PlayerIODataManager;
+import lbn.player.reincarnation.ReincarnationTypeMune;
 import lbn.util.InOutputUtil;
 
 import org.bukkit.Bukkit;
@@ -112,12 +113,17 @@ public class CommandViewInfo implements CommandExecutor{
 		case "buff":
 			BuffData buffFromId = BuffDataFactory.getBuffFromId(paramArrayOfString[1]);
 			if (buffFromId != null) {
-				buffFromId.addBuff( (Player) paramCommandSender);
+				buffFromId.addBuff((Player) paramCommandSender);
 			}
+			break;
+		case "reinc":
+			new ReincarnationTypeMune().open((Player) paramCommandSender);
 			break;
 //		case "dungeonCheck":
 //			makeDungeonGround((Player)paramCommandSender);
 //			break;
+			default :
+				paramCommandSender.sendMessage("unknown param");
 		}
 		return true;
 

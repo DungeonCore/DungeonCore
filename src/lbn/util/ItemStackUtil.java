@@ -9,11 +9,13 @@ import java.util.Map.Entry;
 
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -427,6 +429,34 @@ public class ItemStackUtil {
 		} else {
 			player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
 		}
+	}
+
+	/**
+	 * NTBTagをセットする
+	 * @param item
+	 * @param name
+	 * @param value
+	 */
+	public static void setNBTTag(ItemStack item, String name, String value) {
+		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		if (nmsStack.getTag() == null) {
+			nmsStack.setTag(new NBTTagCompound());
+		}
+		nmsStack.getTag().setString(name, value);
+		item.setItemMeta(CraftItemStack.getItemMeta(nmsStack));
+	}
+
+	/**
+	 * NTBTagを取得する
+	 * @param item
+	 * @param name
+	 */
+	public static String getNBTTag(ItemStack item, String name) {
+		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		if (nmsStack.getTag() == null) {
+			return "";
+		}
+		return nmsStack.getTag().getString(name);
 	}
 
 }

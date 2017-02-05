@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;
@@ -9,9 +9,9 @@ public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
 	int level;
-	TheLowLevelType type;
+	LevelType type;
 
-	public PlayerChangeStatusLevelEvent(TheLowPlayer player, int level, TheLowLevelType type) {
+	public PlayerChangeStatusLevelEvent(TheLowPlayer player, int level, LevelType type) {
 		super(player);
 		this.level = level;
 		this.type = type;
@@ -25,7 +25,7 @@ public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent{
 		return player.getExp(type);
 	}
 
-	public TheLowLevelType getLevelType() {
+	public LevelType getLevelType() {
 		return type;
 	}
 	@Override

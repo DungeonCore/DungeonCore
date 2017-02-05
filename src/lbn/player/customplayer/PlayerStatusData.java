@@ -1,12 +1,14 @@
-package lbn.player.player;
+package lbn.player.customplayer;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import lbn.api.AbilityType;
 import lbn.api.PlayerStatusType;
+import lbn.api.player.AbilityInterface;
 import lbn.api.player.TheLowPlayer;
-import lbn.player.ability.AbilityInterface;
-import lbn.player.ability.AbilityType;
 
 import org.bukkit.entity.Player;
 
@@ -151,5 +153,38 @@ public class PlayerStatusData {
 		if (dataMapDouble.containsKey(PlayerStatusType.MAX_HP)) {
 			onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP));
 		}
+
+		//マジックポイントの回復を開始する
+		if (MagicPointManager.getMaxMagicPoint(onlinePlayer) > MagicPointManager.getNowMagicPoint(onlinePlayer)) {
+			MagicPointManager.startHealMagicPoint(onlinePlayer);
+		}
 	}
+
+	/**
+	 * 指定されたAbilityTypeを全て削除する
+	 * @param type
+	 */
+	public void clear(AbilityType type) {
+		//全て取得し、1つずつ削除する
+		Set<AbilityInterface> set = new HashSet<AbilityInterface>(abilityType.get(type));
+		for (AbilityInterface abilityInterface : set) {
+			removeData(abilityInterface);
+		}
+	}
+
+//	/**
+//	 * Abilityの整合性をチェック, 修正する
+//	 */
+//	public void checkAbility() {
+//		//すべてクリアする
+//		clear(AbilityType.REINCARNATION_ABILITY);
+//		//転生済みの転生データを全て取得し1つずつ適応する
+//		List<OneReincarnationData> reincarnationData = player.getReincarnationData();
+//		for (OneReincarnationData oneReincarnationData : reincarnationData) {
+//			ReincarnationInterface reincarnationInterface = oneReincarnationData.getReincarnationInterface();
+//			if (oneReincarnationData instanceof AbstractAbilityReincarnation) {
+//
+//			}
+//		}
+//	}
 }

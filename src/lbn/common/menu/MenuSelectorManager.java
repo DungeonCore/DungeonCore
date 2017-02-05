@@ -10,26 +10,22 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class MenuSelectorManager {
-	static HashMap<String, MenuSelecor> selectorMap = new HashMap<String, MenuSelecor>();
+	static HashMap<String, MenuSelectorInterface> selectorMap = new HashMap<String, MenuSelectorInterface>();
 
-	public static MenuSelecor getSelector(String title) {
-		if (title.contains("--")) {
-			return selectorMap.get(ChatColor.stripColor(title).trim());
-		} else {
-			return selectorMap.get("-- " + ChatColor.stripColor(title).trim() + " --");
-		}
+	public static MenuSelectorInterface getSelector(String title) {
+		return selectorMap.get(ChatColor.stripColor(title).trim());
 	}
 
 	public static boolean contains(String title) {
 		return selectorMap.containsKey(ChatColor.stripColor(title).trim());
 	}
 
-	public static void regist(MenuSelecor menu) {
-		selectorMap.put(ChatColor.stripColor("-- " + menu.title + " --"), menu);
+	public static void regist(MenuSelectorInterface menu) {
+		selectorMap.put(ChatColor.stripColor(menu.getTitle()), menu);
 	}
 
 	public static void open(Player p, String title) {
-		MenuSelecor selector = getSelector(title);
+		MenuSelectorInterface selector = getSelector(title);
 		if (selector != null) {
 			selector.open(p);
 		}
@@ -57,7 +53,7 @@ public class MenuSelectorManager {
 
 		Player p = (Player) event.getWhoClicked();
 
-		MenuSelecor selector = getSelector(title);
+		MenuSelectorInterface selector = getSelector(title);
 
 		ItemStack currentItem = event.getCurrentItem();
 		selector.onSelectItem(p, currentItem);

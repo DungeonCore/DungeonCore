@@ -10,8 +10,10 @@ import lbn.command.TpCutCommand;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerJoinDungeonGameEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
+import lbn.common.event.player.PlayerLoadedDataEvent;
 import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
@@ -20,11 +22,14 @@ import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.money.GalionEditReason;
-import lbn.player.player.MagicPointManager;
-import lbn.player.player.PlayerChestTpManager;
+import lbn.player.customplayer.MagicPointManager;
+import lbn.player.customplayer.PlayerChestTpManager;
+import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.TitleSender;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -33,6 +38,7 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,6 +53,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -170,6 +177,34 @@ public class PlayerListener implements Listener{
 	public void onJoin(PlayerJoinEvent e) {
 		MagicPointManager.onJoinServer(e.getPlayer());
 		updateSidebar(e.getPlayer());
+
+		//Abilityを適応
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e.getPlayer());
+		if (theLowPlayer != null) {
+			theLowPlayer.applyAbilityData(true);
+		}
+	}
+
+	@EventHandler
+	public void onLoad(PlayerLoadedDataEvent e) {
+		if (e.isSuccess()) {
+			//ロード成功時
+			Player player = e.getPlayer();
+			if (player != null) {
+				MagicPointManager.onJoinServer(e.getPlayer());
+				updateSidebar(e.getPlayer());
+			}
+			//Abilityを適応
+			TheLowPlayer theLowPlayer = e.getTheLowPlayer();
+			theLowPlayer.applyAbilityData(true);
+		} else {
+			//ロード失敗
+			//PlayerがオンラインならKickする
+			Player player = e.getPlayer();
+			if (player != null) {
+				player.kickPlayer("貴方のPlayerデータのロードに失敗しました。TwitterID : @namiken1993または公式Discordまで至急連絡をください。");
+			}
+		}
 	}
 
 	@EventHandler
@@ -281,6 +316,42 @@ public class PlayerListener implements Listener{
 			//音を鳴らす
 			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
 		}
+	}
+
+	@EventHandler
+	public void onReincarnation(PlayerCompleteReincarnationEvent e) {
+		Player player = e.getPlayer();
+		if (player == null) {
+			return;
+		}
+
+		//花火を表示
+		Firework spawn = player.getWorld().spawn(player.getLocation().add(0,2,0), Firework.class);
+		FireworkMeta fireworkMeta = spawn.getFireworkMeta();
+		fireworkMeta.setPower(10);
+		//パーティクル
+		new ParticleData(ParticleType.lava, 30).run(player.getLocation());
+		//音をだす
+		new LbnRunnable() {
+			@Override
+			public void run2() {
+				player.getWorld().playSound(player.getLocation(), Sound.FIREWORK_BLAST, 1, 10);
+				if (getRunCount() >= 2) {
+					cancel();
+				}
+			}
+		}.runTaskTimer(30);
+
+		//Level Type名
+		String levelTypeName = e.getLevelType().getName();
+
+		TitleSender titleSender = new TitleSender();
+		titleSender.setTitle("さらなる高みへ", ChatColor.GREEN, true);
+		titleSender.setSubTitle(levelTypeName + "を転生完了", ChatColor.YELLOW, false);
+		titleSender.execute(player);
+
+		player.sendMessage(MessageFormat.format("{0}{1}の転生が完了しました。{2}が{3}レベルになった代わりに選択した特殊効果を得ます。",
+				ChatColor.GREEN, levelTypeName, levelTypeName, e.getTheLowPlayer().getLevel(e.getLevelType())));
 	}
 
 	/**

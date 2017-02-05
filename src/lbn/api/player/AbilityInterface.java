@@ -1,7 +1,8 @@
-package lbn.player.ability;
+package lbn.api.player;
 
 import java.util.HashMap;
 
+import lbn.api.AbilityType;
 import lbn.api.PlayerStatusType;
 
 /**

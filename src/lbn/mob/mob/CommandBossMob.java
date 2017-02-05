@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.AbstractCustomChest;
@@ -184,7 +184,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 
 	private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<TheLowPlayer, Long>();
 
-	private HashBasedTable<TheLowPlayer, TheLowLevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
+	private HashBasedTable<TheLowPlayer, LevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		super.onDamage(mob, damager, e);
@@ -195,7 +195,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 		LastDamageMethodType lastDamageType = LastDamageManager.getLastDamageAttackType(mob);
 
 		//攻撃方法を対応するステータスのTypeに変換
-		TheLowLevelType type = lastDamageType.getLevelType();
+		LevelType type = lastDamageType.getLevelType();
 
 		//攻撃者がいる　または　攻撃方法に対応するステータスが存在するならダメージを記録する
 		if (p != null && type != null) {
@@ -359,9 +359,9 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			}
 		}
 		//経験値を分配する
-		for (Entry<TheLowPlayer, Map<TheLowLevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
+		for (Entry<TheLowPlayer, Map<LevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
 			TheLowPlayer theLowPlayer = entry.getKey();
-			for (Entry<TheLowLevelType, Double> typeEntry : entry.getValue().entrySet()) {
+			for (Entry<LevelType, Double> typeEntry : entry.getValue().entrySet()) {
 				if (typeEntry.getKey() != null) {
 					theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
 				}

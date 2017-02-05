@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.quest.StartQuestEvent;
@@ -253,13 +253,13 @@ public abstract class AbstractQuest implements Quest{
 			}
 
 			if (swordExe != 0) {
-				theLowPlayer.addExp(TheLowLevelType.SWORD, swordExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(LevelType.SWORD, swordExe, StatusAddReason.quest_reword);
 			}
 			if (bowExe != 0) {
-				theLowPlayer.addExp(TheLowLevelType.BOW, bowExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(LevelType.BOW, bowExe, StatusAddReason.quest_reword);
 			}
 			if (magicExe != 0) {
-				theLowPlayer.addExp(TheLowLevelType.MAGIC, magicExe, StatusAddReason.quest_reword);
+				theLowPlayer.addExp(LevelType.MAGIC, magicExe, StatusAddReason.quest_reword);
 			}
 		}
 	}

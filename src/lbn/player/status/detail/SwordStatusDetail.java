@@ -1,6 +1,6 @@
 package lbn.player.status.detail;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
 
@@ -32,8 +32,8 @@ public class SwordStatusDetail extends IStatusDetail{
 	}
 
 	@Override
-	public TheLowLevelType getLevelType() {
-		return TheLowLevelType.SWORD;
+	public LevelType getLevelType() {
+		return LevelType.SWORD;
 	}
 
 }

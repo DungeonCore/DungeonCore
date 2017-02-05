@@ -1,12 +1,13 @@
 package lbn.api.player;
 
+import java.util.List;
 import java.util.UUID;
 
+import lbn.api.AbilityType;
+import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
-import lbn.api.TheLowLevelType;
 import lbn.common.other.DungeonData;
 import lbn.money.GalionEditReason;
-import lbn.player.ability.AbilityInterface;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.OfflinePlayer;
@@ -18,42 +19,42 @@ public interface TheLowPlayer {
 	 * @param type
 	 * @return
 	 */
-	public int getLevel(TheLowLevelType type);
+	public int getLevel(LevelType type);
 
 	/**
 	 * The Lowのレベルを取得
 	 * @param type
 	 * @return
 	 */
-	public int getExp(TheLowLevelType type);
+	public int getExp(LevelType type);
 
 	/**
 	 * The Lowのレベルをセットする
 	 * @param type
 	 * @param level
 	 */
-	public void setLevel(TheLowLevelType type, int level);
+	public void setLevel(LevelType type, int level);
 
 	/**
 	 * The Lowの経験値を追加する
 	 * @param type
 	 * @return
 	 */
-	public void addExp(TheLowLevelType type, int exp, StatusAddReason reason);
+	public void addExp(LevelType type, int exp, StatusAddReason reason);
 
 	/**
 	 * 最大レベルを取得する
 	 * @param type
 	 * @return
 	 */
-	public int getMaxLevel(TheLowLevelType type);
+	public int getMaxLevel(LevelType type);
 
 	/**
 	 * 最大レベルをセットする
 	 * @param type
 	 * @return
 	 */
-	public void setMaxLevel(TheLowLevelType type, int value);
+	public void setMaxLevel(LevelType type, int value);
 
 	/**
 	 * 次にレベルになるまでに必要な総経験値を取得
@@ -61,7 +62,7 @@ public interface TheLowPlayer {
 	 * @param level
 	 * @return
 	 */
-	public int getNeedExp(TheLowLevelType type, int level);
+	public int getNeedExp(LevelType type, int level);
 
 	/**
 	 *お金を取得
@@ -152,9 +153,49 @@ public interface TheLowPlayer {
 	public void removeAbility(AbilityInterface ablity);
 
 	/**
+	 * Abilityデータを適応させる
+	 * @param check TRUE：Abilityの整合性チェックを行ってから適応, FALSE：整合性チェックを行わないで適応
+	 */
+	public void applyAbilityData(boolean check);
+
+	/**
 	 * Playerの追加ステータス情報を取得する
 	 * @param type
 	 * @return
 	 */
 	public double getStatusData(PlayerStatusType type);
+
+	/**
+	 * 転生を行う
+	 * @param reincarnationInterface 転生効果
+	 * @param levelType 転生を行うLevelType
+	 * @return 転生に成功したらTRUE
+	 */
+	public boolean doReincarnation(ReincarnationInterface reincarnationInterface, LevelType levelType);
+
+	/**
+	 * 転生できるならTRUE
+	 * @param levelType 転生を行うLevelType
+	 * @return
+	 */
+	public boolean canReincarnation(LevelType levelType);
+
+	/**
+	 * 指定されたLevelTypeで何回転生をしたか取得
+	 * @param levelType
+	 * @return
+	 */
+	public int getEachReincarnationCount(LevelType levelType);
+
+	/**
+	 * 全ての転生データを取得
+	 * @return
+	 */
+	public List<OneReincarnationData> getReincarnationData();
+
+	/**
+	 * 指定したAbilityTypeのAbilityデータを削除する
+	 * @param abilityType
+	 */
+	void clearAbilityData(AbilityType abilityType);
 }

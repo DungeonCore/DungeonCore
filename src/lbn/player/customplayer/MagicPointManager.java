@@ -1,7 +1,8 @@
-package lbn.player.player;
+package lbn.player.customplayer;
 
 import java.util.HashMap;
 
+import lbn.api.PlayerStatusType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.util.LbnRunnable;
@@ -39,6 +40,7 @@ public class MagicPointManager {
 	public static int getMaxMagicPoint(Player p) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
+			theLowPlayer.getStatusData(PlayerStatusType.MAX_MAGIC_POINT);
 		}
 		//ロードされていない時はとりあえず100にしておく
 		return 100;

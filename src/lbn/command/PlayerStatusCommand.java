@@ -3,7 +3,7 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.List;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.util.JavaUtil;
@@ -39,13 +39,13 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 			loadData(offlinePlayer, sender);
 		} else if (params[0].equalsIgnoreCase("SET")) {
 		//レベルをセットする
-			TheLowLevelType type = null;
+			LevelType type = null;
 			OfflinePlayer target = null;
 			int value = 0;
 			switch (params.length) {
 			case 0:
 			case 1:
-				type = TheLowLevelType.fromJpName(params[1]);
+				type = LevelType.fromJpName(params[1]);
 			case 2:
 				value = JavaUtil.getInt(params[2], 0);
 			case 3:
@@ -88,7 +88,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 		TheLowPlayerManager.loadData(offlinePlayer);
 	}
 
-	protected void setLevel(TheLowLevelType type, int value, TheLowPlayer target, Player sender) {
+	protected void setLevel(LevelType type, int value, TheLowPlayer target, Player sender) {
 		target.setLevel(type, value);
 		sender.sendMessage(type.getName() + "が" + target.getLevel(type) + "(" + target.getExp(type) + "xp)になりました。");
 	}
@@ -98,7 +98,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 		if (paramArrayOfString.length == 1) {
 			return Arrays.asList(oprateName);
 		} else if (paramArrayOfString.length == 2 || !paramArrayOfString[0].equalsIgnoreCase("LOAD")) {
-			return TheLowLevelType.getNames();
+			return LevelType.getNames();
 		}
 		return null;
 	}

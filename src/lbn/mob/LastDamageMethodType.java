@@ -1,31 +1,31 @@
 package lbn.mob;
 
-import lbn.api.TheLowLevelType;
+import lbn.api.LevelType;
 import lbn.player.ItemType;
 
 /**
  * プレイヤーがモンスターに攻撃をした攻撃方法
  */
 public enum LastDamageMethodType {
-	SWORD("剣", TheLowLevelType.SWORD),	//剣で攻撃
-	BOW("弓", TheLowLevelType.BOW),		//弓で攻撃
-	MAGIC("魔法", TheLowLevelType.MAGIC),		//魔法で攻撃
-	SWORD_SUMMON("剣(Summon)", TheLowLevelType.SWORD),		//剣で召喚したSummonモンスターが攻撃
-	BOW_SUMMON("弓(Summon)", TheLowLevelType.BOW),			//弓で召喚したSummonモンスターが攻撃
-	MAGIC_SUMMON("魔法(Summon)", TheLowLevelType.MAGIC),		//魔法で召喚したSummonモンスターが攻撃
+	SWORD("剣", LevelType.SWORD),	//剣で攻撃
+	BOW("弓", LevelType.BOW),		//弓で攻撃
+	MAGIC("魔法", LevelType.MAGIC),		//魔法で攻撃
+	SWORD_SUMMON("剣(Summon)", LevelType.SWORD),		//剣で召喚したSummonモンスターが攻撃
+	BOW_SUMMON("弓(Summon)", LevelType.BOW),			//弓で召喚したSummonモンスターが攻撃
+	MAGIC_SUMMON("魔法(Summon)", LevelType.MAGIC),		//魔法で召喚したSummonモンスターが攻撃
 	BARE_HAND("素手"),				//素手
 	MELEE_ATTACK_WITH_OTHER("アイテムで殴る"),	//その他のアイテムを持って直接攻撃
 	USE_ITEM("アイテム使用"),		//アイテムを使って攻撃
 	OTHER("その他");				//その他の方法
 
 	String text;
-	TheLowLevelType levelType;
+	LevelType levelType;
 
 	private LastDamageMethodType(String text) {
 		this(text, null);
 	}
 
-	private LastDamageMethodType(String text, TheLowLevelType type) {
+	private LastDamageMethodType(String text, LevelType type) {
 		this.text = text;
 		this.levelType = type;
 	}
@@ -71,7 +71,7 @@ public enum LastDamageMethodType {
 	 * 攻撃方法に対応するLevelTypeを取得。どれにも当てはまらない場合はnullを返す
 	 * @return
 	 */
-	public TheLowLevelType getLevelType() {
+	public LevelType getLevelType() {
 		return levelType;
 	}
 }

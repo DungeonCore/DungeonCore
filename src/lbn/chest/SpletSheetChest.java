@@ -9,7 +9,7 @@ import java.util.Random;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.CommandBossMob;
-import lbn.player.player.PlayerChestTpManager;
+import lbn.player.customplayer.PlayerChestTpManager;
 import lbn.util.DungeonLogger;
 
 import org.bukkit.Bukkit;
