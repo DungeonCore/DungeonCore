@@ -12,7 +12,7 @@ import lbn.item.slot.AbstractSlot;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.ChatColor;
@@ -70,7 +70,7 @@ public class AttackItemStack {
 		return StrengthOperator.getLevel(item);
 	}
 
-	public AttackType getAttackType() {
+	public ItemType getItemType() {
 		return itemInterface.getAttackType();
 	}
 

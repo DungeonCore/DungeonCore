@@ -6,20 +6,18 @@ import java.util.List;
 
 import lbn.api.PlayerStatusType;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.ItemManager;
 import lbn.item.setItem.AbstractAbilitySetItem;
 import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.item.setItem.SetStrengthableItemParts;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
-import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class SetItemHealthCrystal extends AbstractAbilitySetItem{
+public class SetItemMagicPointCrystal extends AbstractAbilitySetItem{
 	@Override
 	public void doRutine(Player p, ItemStack[] itemStacks) {
 	}
@@ -43,16 +41,20 @@ public class SetItemHealthCrystal extends AbstractAbilitySetItem{
 
 	@Override
 	protected void addAbility(SetItemAbility emptyAbility, Player p, ItemStack... item) {
-		//ヒールクリスタル取得
-		HealthCystal customItem = (HealthCystal) ItemManager.getCustomItemByName(ItemStackUtil.getName(item[0]));
 		//効果をつける
-		emptyAbility.addData(PlayerStatusType.MAX_HP, customItem.getMaxHealth(StrengthOperator.getLevel(item[0])));
+		emptyAbility.addData(PlayerStatusType.MAX_MAGIC_POINT, getMaxMagicPoint(StrengthOperator.getLevel(item[0])));
+	}
+
+	public int getMaxMagicPoint(int level) {
+		return (1 + level) * 4;
 	}
 }
 
-class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate {
-	public HealthCystal() {
-		super(new SetItemHealthCrystal() );
+class MagicPointCystal extends SetStrengthableItemParts implements StrengthTemplate {
+	static SetItemMagicPointCrystal setItem = new SetItemMagicPointCrystal();
+
+	public MagicPointCystal() {
+		super(setItem);
 	}
 
 	@Override
@@ -67,11 +69,8 @@ class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate 
 
 	@Override
 	public String[] getStrengthDetail(int level) {
-		return new String[]{"最大体力+" + getMaxHealth(level)};
-	}
-
-	public int getMaxHealth(int level) {
-		return 1 + level;
+		int maxPoint = ((SetItemMagicPointCrystal)getBelongSetItem()).getMaxMagicPoint(level);
+		return new String[]{"最大マジックポイント+" + maxPoint};
 	}
 
 	@Override
@@ -111,16 +110,7 @@ class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate 
 
 	@Override
 	public Material getMaterial() {
-		return Material.INK_SACK;
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public ItemStack getItem() {
-		ItemStack item = super.getItem();
-		item.setDurability((short) 4);
-		item.getData().setData((byte) 4);
-		return item;
+		return Material.PRISMARINE_SHARD;
 	}
 
 	@Override

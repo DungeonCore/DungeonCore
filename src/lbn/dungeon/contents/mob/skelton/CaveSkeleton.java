@@ -3,8 +3,8 @@ package lbn.dungeon.contents.mob.skelton;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeon.contents.item.material.CaveStone;
 import lbn.dungeon.contents.item.questItem.Serum;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
-import lbn.player.AttackType;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -59,7 +59,7 @@ public class CaveSkeleton extends AbstractSkelton{
 
 
 	@Override
-	public int getExp(AttackType type) {
+	public int getExp(LastDamageMethodType type) {
 		return 7;
 	}
 }

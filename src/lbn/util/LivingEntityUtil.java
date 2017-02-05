@@ -5,9 +5,9 @@ import java.util.Collection;
 
 import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.customEntity1_7.CustomVillager;
-import lbn.player.AttackType;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityLightning;
 import net.minecraft.server.v1_8_R1.EntityMonster;
@@ -241,7 +241,7 @@ public class LivingEntityUtil {
 		e.setHealth(nextHealth);
 	}
 
-	public static void trueDamage(LivingEntity target, double val, LivingEntity damager, AttackType type) {
+	public static void trueDamage(LivingEntity target, double val, LivingEntity damager, LastDamageMethodType type) {
 		//攻撃を与えたのがPlayerの場合はLastDamageを登録する
 		if (damager.getType() == EntityType.PLAYER) {
 			LastDamageManager.onDamage(target, (Player) damager, type);

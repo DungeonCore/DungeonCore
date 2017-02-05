@@ -19,9 +19,9 @@ import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
-import lbn.player.AttackType;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
@@ -189,11 +189,16 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		super.onDamage(mob, damager, e);
 
+		//最後に攻撃したPlayerと攻撃方法を取得
 		Player player = LastDamageManager.getLastDamagePlayer(mob);
-		AttackType type = LastDamageManager.getLastDamageAttackType(mob);
-
 		TheLowPlayer p = TheLowPlayerManager.getTheLowPlayer(player);
-		if (p != null) {
+		LastDamageMethodType lastDamageType = LastDamageManager.getLastDamageAttackType(mob);
+
+		//攻撃方法を対応するステータスのTypeに変換
+		TheLowLevelType type = lastDamageType.getLevelType();
+
+		//攻撃者がいる　または　攻撃方法に対応するステータスが存在するならダメージを記録する
+		if (p != null && type != null) {
 			combatPlayerSet.put(p, System.currentTimeMillis());
 
 			//ダメージを記録
@@ -201,7 +206,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			if (combatDamagePlayerMap.contains(p, type)) {
 				doubleNowDamage = combatDamagePlayerMap.get(p, type);
 			}
-			combatDamagePlayerMap.put(p, type.getLevelType(), doubleNowDamage + e.getDamage());
+			combatDamagePlayerMap.put(p, type, doubleNowDamage + e.getDamage());
 		}
 
 		//ボスモブとして認識されていないなら再セットする
@@ -340,7 +345,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	}
 
 	@Override
-	public void addExp(LivingEntity entity, AttackType type, TheLowPlayer p) {
+	public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
 		int exp = getExp(type);
 		if (exp == -1) {
 			exp = (int) (((Damageable)entity).getMaxHealth() * 1.3);

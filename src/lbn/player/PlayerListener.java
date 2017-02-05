@@ -16,7 +16,9 @@ import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
+import lbn.mob.SummonPlayerManager;
 import lbn.money.GalionEditReason;
 import lbn.player.player.MagicPointManager;
 import lbn.player.player.PlayerChestTpManager;
@@ -24,6 +26,7 @@ import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.TitleSender;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -53,11 +56,19 @@ import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 public class PlayerListener implements Listener{
 
+	/**
+	 * ダメージを受けた時、LastDamageを登録する
+	 * @param e
+	 */
 	@EventHandler(priority=EventPriority.LOWEST)
 	public void onDamage(EntityDamageByEntityEvent e) {
-		LastDamageManager.setLastDamageStatic(e);
+		LastDamageManager.registLastDamageByEvent(e);
 	}
 
+	/**
+	 * 爆発によるダメージを軽減する
+	 * @param e
+	 */
 	@EventHandler(priority=EventPriority.LOWEST)
 	public void onDamage(EntityDamageEvent e) {
 		DamageCause cause = e.getCause();
@@ -66,6 +77,10 @@ public class PlayerListener implements Listener{
 		}
 	}
 
+	/**
+	 * mobを倒した際のお金の加算を行う
+	 * @param e
+	 */
 	@EventHandler
 	public void onDeathAddGalions(EntityDeathEvent e) {
 		//お金の計算
@@ -75,6 +90,7 @@ public class PlayerListener implements Listener{
 			return;
 		}
 
+		//最後に攻撃をしたPlayerを取得
 		Player p = LastDamageManager.getLastDamagePlayer(entity);
 		AbstractMob<?> mob = MobHolder.getMob(entity);
 		if (mob == null || p == null) {
@@ -88,6 +104,10 @@ public class PlayerListener implements Listener{
 		}
 	}
 
+	/**
+	 * Exp取得時のメッセージを表示
+	 * @param event
+	 */
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onGetExp(PlayerChangeStatusExpEvent event) {
 		OfflinePlayer player = event.getPlayer();
@@ -100,6 +120,20 @@ public class PlayerListener implements Listener{
 		}
 	}
 
+	/**
+	 * レベル変化時のメッセージをLogに残す
+	 * @param e
+	 */
+	@EventHandler(priority=EventPriority.MONITOR)
+	public void onChangeStatusLevel(PlayerChangeStatusLevelEvent e) {
+		String join = StringUtils.join(new Object[]{e.getOfflinePlayer().getName(), "の", e.getLevelType().getName(), "がレベル", e.getLevel(), "(" , e.getNowExp(), ")になりました。"});
+		SystemLog.addLog(join);
+	}
+
+	/**
+	 *レベル変化時のメッセージを表示
+	 * @param e
+	 */
 	@EventHandler()
 	public void onLevelUp(PlayerChangeStatusLevelEvent e) {
 		if (e.isOnline()) {
@@ -107,6 +141,10 @@ public class PlayerListener implements Listener{
 		}
 	}
 
+	/**
+	 * お金取得時のメッセージを表示、Logに記録を行う
+	 * @param event
+	 */
 	@EventHandler(priority=EventPriority.MONITOR)
 	public void onMoneyExp(PlayerChangeGalionsEvent event) {
 		//メッセージを表示
@@ -188,6 +226,10 @@ public class PlayerListener implements Listener{
 	}
 
 
+	/**
+	 * +2以上のインスタンスヒールの効果をつける
+	 * @param e
+	 */
 	@EventHandler
 	public void onAddInstantHealPot(PlayerItemConsumeEvent e) {
 		ItemStack item = e.getItem();
@@ -218,6 +260,10 @@ public class PlayerListener implements Listener{
 		}
 	}
 
+	/**
+	 * レベルアップ時の処理を行う
+	 * @param event
+	 */
 	@EventHandler
 	public void onLevelUp(PlayerLevelUpEvent event) {
 		Message.sendMessage(event, ChatColor.GREEN + " === LEVEL UP === ");
@@ -235,6 +281,50 @@ public class PlayerListener implements Listener{
 			//音を鳴らす
 			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
 		}
+	}
+
+	/**
+	 * Playerがモンスターを倒した時、Expを追加する
+	 * @param e
+	 */
+	@EventHandler
+	public void onDeath(EntityDeathEvent e) {
+		LivingEntity entity = e.getEntity();
+
+		//最後に倒したPlayerと攻撃方法を取得
+		Player p = LastDamageManager.getLastDamagePlayer(entity);
+		LastDamageMethodType type = LastDamageManager.getLastDamageAttackType(entity);
+
+		//倒したのがSummonの時はExpを与えない
+		if (SummonPlayerManager.isSummonMob(entity)) {
+			return;
+		}
+
+		//攻撃方法が不明な時はEventから取得
+		if (p == null || type == null) {
+			EntityDamageEvent event = entity.getLastDamageCause();
+			if (event instanceof EntityDamageByEntityEvent) {
+				LastDamageManager.registLastDamageByEvent((EntityDamageByEntityEvent) event);
+				p = LastDamageManager.getLastDamagePlayer(entity);
+				type = LastDamageManager.getLastDamageAttackType(entity);
+			}
+			//ここでも取得出来ない場合は無視する
+			if (p == null || type == null) {
+				return;
+			}
+			//Logを出しておく
+			new RuntimeException(MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName())).printStackTrace();
+		}
+
+		//データがロードされていないなら無視する
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer == null) {
+			return;
+		}
+
+		//mobを取得
+		AbstractMob<?> mob = MobHolder.getMob(entity);
+		mob.addExp(entity, type, theLowPlayer);
 	}
 
 	public static void updateSidebar(Player p) {

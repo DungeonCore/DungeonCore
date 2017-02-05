@@ -24,7 +24,6 @@ import lbn.dungeon.contents.item.material.ArmorMaterialItem;
 import lbn.dungeon.contents.item.material.CaveStone;
 import lbn.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
 import lbn.dungeon.contents.item.questItem.Serum;
-import lbn.dungeon.contents.item.setItem.crystal.AttackCrystal;
 import lbn.dungeon.contents.item.setItem.crystal.SetItemHealthCrystal;
 import lbn.dungeon.contents.item.shootbow.BowOfExplosion;
 import lbn.dungeon.contents.item.shootbow.DebugBow;
@@ -54,13 +53,11 @@ import lbn.dungeon.contents.slotStone.other.MagicStoneJade;
 import lbn.item.ItemManager;
 import lbn.item.attackitem.SpecialAttackItemSelector;
 import lbn.item.setItem.SetItemManager;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 
 public class ItemRegister {
 	public static void registItem() {
-//		SetItemManager.regist(new SetItemAttacker());
 		SetItemManager.regist(new SetItemHealthCrystal());
-		SetItemManager.regist(new AttackCrystal());
 
 		//防具
 		ItemManager.registItem(LeatherArmor.getAllArmor());
@@ -104,7 +101,7 @@ public class ItemRegister {
 		ItemManager.registItem(new SpecialAttackItemSelector(new SpecialSwordSoulSword()));
 		ItemManager.registItem(new AttributeLeafSword().getAllItem());
 		ItemManager.registItem(new SpecialAttackItemSelector(new AttributeLeafSword()));
-		ItemManager.registItem(new NormalAttackItemSelector(AttackType.SWORD));
+		ItemManager.registItem(new NormalAttackItemSelector(ItemType.SWORD));
 		ItemManager.registItem(new TutorialSword());
 
 		//弓
@@ -112,14 +109,14 @@ public class ItemRegister {
 		ItemManager.registItem(new LaserBow());
 		ItemManager.registItem(new BowOfExplosion());
 		ItemManager.registItem(new DebugBow());
-		ItemManager.registItem(new NormalAttackItemSelector(AttackType.BOW));
+		ItemManager.registItem(new NormalAttackItemSelector(ItemType.BOW));
 
 		//魔法
 //		ItemManager.registItem(new Level0MagicItem());
 //		ItemManager.registItem(new Level10MagicItem());
 //		ItemManager.registItem(new MagicStick());
 		ItemManager.registItem(NormalMagicItem.getAllItem());
-		ItemManager.registItem(new NormalAttackItemSelector(AttackType.MAGIC));
+		ItemManager.registItem(new NormalAttackItemSelector(ItemType.MAGIC));
 
 		//SLOT
 		ItemManager.registItem(new KillEffectTutorial());

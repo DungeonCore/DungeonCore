@@ -7,11 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public interface SetItemInterface {
-	public HashMap<SetItemPartsType, SetItemParts> getFullSetItem();
+	public HashMap<SetItemPartsType, SetItemPartable> getFullSetItem();
 
-	public SetItemParts getRandomSetItem();
-
-	 public SetItemParts getSetItem(SetItemPartsType parts);
+	 public SetItemPartable getSetItem(SetItemPartsType parts);
 
 	 public void doRutine(Player p, ItemStack[] itemStacks) ;
 

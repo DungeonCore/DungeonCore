@@ -10,11 +10,11 @@ import lbn.item.attackitem.SpecialAttackItemSelector;
 import lbn.item.itemInterface.SpecialAttackItemable;
 import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 
 public class NormalAttackItemSelector extends SpecialAttackItemSelector{
 
-	public NormalAttackItemSelector(AttackType type) {
+	public NormalAttackItemSelector(ItemType type) {
 		super(new SpecialAttackItemableForNormal(type));
 	}
 
@@ -26,7 +26,7 @@ public class NormalAttackItemSelector extends SpecialAttackItemSelector{
 }
 
 class SpecialAttackItemableForNormal implements SpecialAttackItemable {
-	protected SpecialAttackItemableForNormal(AttackType type) {
+	protected SpecialAttackItemableForNormal(ItemType type) {
 		this.type = type;
 		switch (type) {
 		case SWORD:
@@ -44,7 +44,7 @@ class SpecialAttackItemableForNormal implements SpecialAttackItemable {
 		}
 	}
 
-	AttackType type;
+	ItemType type;
 	Collection<ItemInterface> itemList;
 
 
@@ -69,7 +69,7 @@ class SpecialAttackItemableForNormal implements SpecialAttackItemable {
 	}
 
 	@Override
-	public AttackType getAttackType() {
+	public ItemType getAttackType() {
 		return type;
 	}
 

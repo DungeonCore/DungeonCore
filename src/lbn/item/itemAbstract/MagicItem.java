@@ -5,7 +5,7 @@ import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.RightClickItemable;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.player.player.MagicPointManager;
 import lbn.util.Message;
 
@@ -97,8 +97,8 @@ public abstract class MagicItem extends AbstractAttackItem implements RightClick
 	}
 
 	@Override
-	public AttackType getAttackType() {
-		return AttackType.MAGIC;
+	public ItemType getAttackType() {
+		return ItemType.MAGIC;
 	}
 
 	abstract public int getAvailableLevel();

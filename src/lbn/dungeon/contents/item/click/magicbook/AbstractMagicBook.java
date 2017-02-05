@@ -6,7 +6,7 @@ import java.util.List;
 import lbn.item.ItemInterface;
 import lbn.item.itemAbstract.RightClickItem;
 import lbn.mob.LastDamageManager;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;
@@ -35,7 +35,7 @@ public abstract class AbstractMagicBook extends RightClickItem{
 		//ダメージを与える
 		entity.damage(getDamageVal(), player);
 		//LastDamageを登録
-		LastDamageManager.onDamage(entity, player, AttackType.OTHER);
+		LastDamageManager.onDamage(entity, player, LastDamageMethodType.USE_ITEM);
 	}
 
 	abstract protected double getDamageVal();

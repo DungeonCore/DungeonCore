@@ -14,7 +14,7 @@ import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.item.itemInterface.SpecialAttackItemable;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.Message;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,7 +135,7 @@ public class SpecialAttackItemSelector extends AbstractItem implements RightClic
 	}
 
 	@Override
-	public AttackType getAttackType() {
+	public ItemType getAttackType() {
 		return specialItem.getAttackType();
 	}
 

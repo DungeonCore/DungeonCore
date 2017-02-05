@@ -8,7 +8,7 @@ import lbn.dungeoncore.Main;
 import lbn.item.Cooltimable;
 import lbn.item.CooltimeManager;
 import lbn.item.itemAbstract.BowItem;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.NoPlayerDamageExplotionForAttackType;
@@ -82,7 +82,7 @@ public class LaserBow extends BowItem implements Cooltimable{
 
 			//爆発させる
 			if (LivingEntityUtil.isFriendship((LivingEntity) shooter)) {
-				new NoPlayerDamageExplotionForAttackType(location, 3, (LivingEntity) shooter, AttackType.BOW).runExplosion();
+				new NoPlayerDamageExplotionForAttackType(location, 3, (LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
 			} else {
 				new NotMonsterDamageExplosion(location, 3).runExplosion();
 			}

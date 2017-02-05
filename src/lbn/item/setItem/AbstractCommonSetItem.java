@@ -1,10 +1,8 @@
 package lbn.item.setItem;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 
 import org.bukkit.entity.Player;
@@ -12,18 +10,10 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractCommonSetItem implements SetItemInterface{
 
-	static Random rnd = new Random();
-
-	@Override
-	public SetItemParts getRandomSetItem() {
-		Collection<SetItemParts> fullSetItem = getFullSetItem().values();
-		return fullSetItem.toArray(new SetItemParts[0])[rnd.nextInt(fullSetItem.size())];
-	}
-
 	@Override
 	public boolean isWearSetItem(Player p) {
 		//装備が必要な部分を全てチェックする
-		for (Entry<SetItemPartsType, SetItemParts> entry : getFullSetItem().entrySet()) {
+		for (Entry<SetItemPartsType, SetItemPartable> entry : getFullSetItem().entrySet()) {
 			ItemStack itemStackByParts = entry.getKey().getItemStackByParts(p);
 			//もし装備していなければFALSE
 			if (itemStackByParts == null) {
@@ -51,7 +41,7 @@ public abstract class AbstractCommonSetItem implements SetItemInterface{
 	}
 
 	@Override
-	public SetItemParts getSetItem(SetItemPartsType parts) {
+	public SetItemPartable getSetItem(SetItemPartsType parts) {
 		return getFullSetItem().get(parts);
 	}
 
@@ -70,7 +60,7 @@ public abstract class AbstractCommonSetItem implements SetItemInterface{
 	 * @return
 	 */
 	protected boolean isSetItem(ItemStack item, SetItemPartsType parts) {
-		SetItemParts setItem = getSetItem(parts);
+		SetItemPartable setItem = getSetItem(parts);
 		if (setItem == null) {
 			return false;
 		}
@@ -82,16 +72,16 @@ public abstract class AbstractCommonSetItem implements SetItemInterface{
 		return getName().toUpperCase().hashCode();
 	}
 
-	protected abstract List<SetItemParts> getAllItemParts();
+	protected abstract List<SetItemPartable> getAllItemParts();
 
-	HashMap<SetItemPartsType, SetItemParts> itemPartsMap = null;
+	HashMap<SetItemPartsType, SetItemPartable> itemPartsMap = null;
 
 	@Override
-	public HashMap<SetItemPartsType, SetItemParts> getFullSetItem() {
+	public HashMap<SetItemPartsType, SetItemPartable> getFullSetItem() {
 		//もしまだ生成されてないならMapを生成する
 		if (itemPartsMap == null) {
-			itemPartsMap = new HashMap<SetItemPartsType, SetItemParts>();
-			for (SetItemParts setItemParts : getAllItemParts()) {
+			itemPartsMap = new HashMap<SetItemPartsType, SetItemPartable>();
+			for (SetItemPartable setItemParts : getAllItemParts()) {
 				itemPartsMap.put(setItemParts.getItemSetPartsType(), setItemParts);
 			}
 		}

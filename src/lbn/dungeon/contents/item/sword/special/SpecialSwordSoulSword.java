@@ -10,7 +10,7 @@ import lbn.item.CooltimeManager;
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.LastDamageManager;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
@@ -70,13 +70,13 @@ public class SpecialSwordSoulSword extends AbstractSpecialSword implements Coolt
 			for (Entity entity : nearbyEntities) {
 				//もし敵ならダメージを与える
 				if (LivingEntityUtil.isEnemy(entity)) {
-					LastDamageManager.onDamage(((LivingEntity)entity), player, AttackType.SWORD);
+					LastDamageManager.onDamage(((LivingEntity)entity), player, LastDamageMethodType.SWORD);
 					((LivingEntity)entity).damage(getDamage(level));
 					clickParticle.run(entity.getLocation().add(0, 1, 0));
 				}
 			}
 			//自分にダメージを与える
-			LivingEntityUtil.trueDamage(player, 1.0 * getPlayerDamage(level), player, AttackType.SWORD);
+			LivingEntityUtil.trueDamage(player, 1.0 * getPlayerDamage(level), player, LastDamageMethodType.SWORD);
 			clickParticle.run(player.getLocation().add(0, 1, 0));
 			player.getWorld().playSound(player.getLocation(), Sound.BLAZE_DEATH, 1, 1);
 		} else {

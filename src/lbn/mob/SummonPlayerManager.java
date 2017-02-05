@@ -3,6 +3,7 @@ package lbn.mob;
 import java.util.HashMap;
 
 import lbn.dungeoncore.LbnRuntimeException;
+import lbn.player.ItemType;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -34,5 +35,9 @@ public class SummonPlayerManager {
 
 	public static boolean isSummonMob(Entity e) {
 		return entityOwnerMap.containsKey(e);
+	}
+
+	public static ItemType getItemType(Entity damage) {
+		return ItemType.MAGIC;
 	}
 }

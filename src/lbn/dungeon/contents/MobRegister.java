@@ -16,7 +16,6 @@ import lbn.dungeon.contents.mob.slime.FireCube;
 import lbn.dungeon.contents.mob.slime.HealCube;
 import lbn.dungeon.contents.mob.zombie.AbstractSummonZombie;
 import lbn.dungeon.contents.mob.zombie.BabyArthur;
-import lbn.dungeon.contents.mob.zombie.Bondage;
 import lbn.dungeon.contents.mob.zombie.CaveZombie;
 import lbn.dungeon.contents.mob.zombie.Hermit;
 import lbn.dungeon.contents.mob.zombie.Highwayman;
@@ -54,7 +53,6 @@ public class MobRegister {
 		MobHolder.registMob(new Saratoga_v1());
 //		MobHolder.registMob(new Book());
 //		MobHolder.registMob(new Ninja());
-		MobHolder.registMob(new Bondage());
 		MobHolder.registMob(new KumajyagaSkelton());
 
 		MobHolder.registMob(new SkeltonRider());

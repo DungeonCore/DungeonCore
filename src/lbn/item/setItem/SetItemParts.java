@@ -5,14 +5,14 @@ import java.util.List;
 
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class SetItemParts implements ItemInterface{
+public class SetItemParts implements SetItemPartable{
 	SetItemInterface belongSetItem;
 	Material material;
 	SetItemPartsType type;
@@ -29,14 +29,17 @@ public class SetItemParts implements ItemInterface{
 		this.type = type;
 	}
 
+	@Override
 	public SetItemInterface getBelongSetItem() {
 		return belongSetItem;
 	}
 
+	@Override
 	public Material getMaterial() {
 		return material;
 	}
 
+	@Override
 	public SetItemPartsType getItemSetPartsType() {
 		return type;
 	}
@@ -94,22 +97,9 @@ public class SetItemParts implements ItemInterface{
 		return getItemName().hashCode();
 	}
 
-	public static String getSetItemNameByItem(ItemStack item) {
-		List<String> lore = ItemStackUtil.getLore(item);
-		//説明が１行以上
-		if (lore.size() > 0) {
-			String nameTag = lore.get(0);
-			//"SET:"が含まれていたらsetitemとして処理する
-			if (nameTag.contains("SET:")) {
-				return nameTag.replace("SET:", "");
-			}
-		}
-		return null;
-	}
-
 	@Override
-	public AttackType getAttackType() {
-		return AttackType.IGNORE;
+	public ItemType getAttackType() {
+		return ItemType.IGNORE;
 	}
 
 	@Override

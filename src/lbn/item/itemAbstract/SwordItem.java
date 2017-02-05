@@ -4,7 +4,7 @@ import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.itemInterface.MeleeAttackItemable;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;
 
@@ -68,8 +68,8 @@ public abstract class SwordItem extends AbstractAttackItem implements MeleeAttac
 	abstract protected void excuteOnRightClick2(PlayerInteractEvent e);
 
 	@Override
-	public AttackType getAttackType() {
-		return AttackType.SWORD;
+	public ItemType getAttackType() {
+		return ItemType.SWORD;
 	}
 
 	abstract protected String[] getStrengthDetail2(int level);

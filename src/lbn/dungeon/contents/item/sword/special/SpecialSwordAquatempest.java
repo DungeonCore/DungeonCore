@@ -8,7 +8,7 @@ import lbn.item.Cooltimable;
 import lbn.item.CooltimeManager;
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.ParticleData;
@@ -76,11 +76,11 @@ public class SpecialSwordAquatempest extends AbstractSpecialSword implements Coo
 			if(LivingEntityUtil.isEnemy(entity)){
 				LivingEntityUtil.strikeLightningEffect(entity.getLocation(), player);
 				if(level >= 10){
-					LivingEntityUtil.trueDamage((LivingEntity) entity, 40, player, AttackType.SWORD);
+					LivingEntityUtil.trueDamage((LivingEntity) entity, 40, player, LastDamageMethodType.SWORD);
 				}else if(level >= 5){
-					LivingEntityUtil.trueDamage((LivingEntity) entity, 20, player, AttackType.SWORD);
+					LivingEntityUtil.trueDamage((LivingEntity) entity, 20, player, LastDamageMethodType.SWORD);
 				}else {
-					LivingEntityUtil.trueDamage((LivingEntity) entity, 10, player, AttackType.SWORD);
+					LivingEntityUtil.trueDamage((LivingEntity) entity, 10, player, LastDamageMethodType.SWORD);
 				}
 			}
 		}

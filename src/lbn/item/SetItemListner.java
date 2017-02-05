@@ -3,24 +3,19 @@ package lbn.item;
 import java.util.Collection;
 
 import lbn.dungeoncore.Main;
-import lbn.item.setItem.SetItemInterface;
 import lbn.item.setItem.SetItemManager;
-import lbn.item.setItem.SetItemParts;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -63,48 +58,12 @@ public class SetItemListner implements Listener{
 	}
 
 	@EventHandler
-	public void onDamage(final EntityDamageEvent e) {
-		//装備をきた後に処理を行う
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				if (isNeedOnBreakCheck(e)) {
-					SetItemManager.updateAllSetItem((Player) e.getEntity());
-				}
-			}
-		}.runTaskLater(Main.plugin, 1);
-		return;
-	}
-
-	private boolean isNeedOnBreakCheck(EntityDamageEvent e) {
-		boolean checkFlg = false;
-		Entity entity = e.getEntity();
-		if (entity.getType() != EntityType.PLAYER) {
-			return false;
+	public void onPlayerItemBreakEvent(PlayerItemBreakEvent e) {
+		//壊れたアイテムがセットアイテムならチェックする
+		ItemStack brokenItem = e.getBrokenItem();
+		if (SetItemManager.isSetItem(brokenItem)) {
+			SetItemManager.updateAllSetItem(e.getPlayer());
 		}
-
-		//装備系のセット装備をつけているかどうか調べる
-		Collection<SetItemInterface> setItemList = SetItemManager.getWearSetItemTypeNotCheck((Player) entity);
-		outerloop:
-		for (SetItemInterface setItemInterface : setItemList) {
-			for (SetItemPartsType partsType : setItemInterface.getFullSetItem().keySet()) {
-				ItemStack equipItem = partsType.getItemStackByParts((Player) entity);
-				if (ItemStackUtil.isEmpty(equipItem)) {
-					checkFlg = true;
-					break outerloop;
-			}
-		}
-
-			//1つでもパーツがかけている時だけチェックを行う
-			for (ItemStack item : ((Player)e.getEntity()).getInventory().getArmorContents()) {
-				if (item == null || item.getType() == Material.AIR) {
-					checkFlg = true;
-					break;
-				}
-			}
-
-		}
-		return checkFlg;
 	}
 
 	@EventHandler
@@ -112,6 +71,8 @@ public class SetItemListner implements Listener{
 		SetItemManager.removeAll(e.getPlayer());
 	}
 
+
+	//TODO 効率悪いので後で修正する
 	@EventHandler
 	public void click(final PlayerInteractEvent e) {
 		ItemStack item = e.getItem();
@@ -140,7 +101,7 @@ public class SetItemListner implements Listener{
 			return;
 		}
 
-		String setitemName = SetItemParts.getSetItemNameByItem(item);
+		String setitemName = SetItemManager.getSetItemName(item);
 		if (setitemName != null ) {
 			checkFlg = true;
 		}

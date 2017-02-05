@@ -16,7 +16,6 @@ import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
-import lbn.player.AttackType;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.PickItemQuest;
@@ -101,7 +100,7 @@ public abstract class AbstractMob<T extends Entity> {
 		}
 
 		Player player = LastDamageManager.getLastDamagePlayer(mob);
-		AttackType type = LastDamageManager.getLastDamageAttackType(mob);
+		LastDamageMethodType type = LastDamageManager.getLastDamageAttackType(mob);
 		if (player == null) {
 			return;
 		}
@@ -113,7 +112,7 @@ public abstract class AbstractMob<T extends Entity> {
 				double health = ((Damageable)mob).getHealth();
 				@Override
 				public void run() {
-					Message.sendMessage(player, "{0}:{1}ダメージ！！(もとのダメージの倍率:1.0)", type, JavaUtil.round(health - ((Damageable)mob).getHealth(), 2));
+					Message.sendMessage(player, "{0}:{1}ダメージ！！(もとのダメージの倍率:1.0)", type.getText(), JavaUtil.round(health - ((Damageable)mob).getHealth(), 2));
 				}
 			}.runTaskLater(Main.plugin, 2);
 		}
@@ -303,7 +302,7 @@ public abstract class AbstractMob<T extends Entity> {
 		return getName().hashCode();
 	}
 
-	public int getExp(AttackType type) {
+	public int getExp(LastDamageMethodType type) {
 		return -1;
 	}
 
@@ -317,7 +316,7 @@ public abstract class AbstractMob<T extends Entity> {
 	 * @param type
 	 * @param p
 	 */
-	public void addExp(LivingEntity entity, AttackType type, TheLowPlayer p) {
+	public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
 		//コウモリの場合は経験値を加算しない
 		if (entity.getType() == EntityType.BAT) {
 			return;

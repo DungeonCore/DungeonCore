@@ -1,10 +1,10 @@
 package lbn.item.setItem;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
+import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,22 +22,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.google.common.collect.HashMultimap;
 
+/**
+ * Set Itemの情報を管理するためのクラス
+ */
 public class SetItemManager{
-	public final static  String dataFolder = Main.dataFolder + File.separator + "data" + File.separator;
-
+	/**
+	 * Playerが装備しているセットアイテム一覧
+	 */
 	private static HashMultimap<UUID, SetItemInterface> playerUsingMap = HashMultimap.create();
 
 	private static HashMultimap<Material, SetItemPartsType> partsMaterialMap = HashMultimap.create();
 
 	private static Map<String, SetItemInterface> setItemMap = new HashMap<String, SetItemInterface>();
 
-	public static boolean isSetItem(ItemStack item) {
-		return SetItemParts.getSetItemNameByItem(item) != null;
-	}
-
 	public static void regist(SetItemInterface setitem) {
 		setItemMap.put(setitem.getName(), setitem);
-		for (SetItemParts item : setitem.getFullSetItem().values()) {
+		for (SetItemPartable item : setitem.getFullSetItem().values()) {
 			//itemとして登録する
 			ItemManager.registItem(item);
 			//partsとMaterialを登録
@@ -92,7 +93,8 @@ public class SetItemManager{
 			}
 
 			//アイテムからsetitem名を取得
-			String setItemName = SetItemParts.getSetItemNameByItem(setItemPartsItem);
+			String setItemName = getSetItemName(setItemPartsItem);
+			//setItemでないならスキップ
 			if (setItemName == null) {
 				continue;
 			}
@@ -101,8 +103,8 @@ public class SetItemManager{
 				continue;
 			}
 
-			//ITEM名からSetItemインスタンスを取得する
-			SetItemInterface setItemInterface = setItemMap.get(setItemName);
+			//SetItem名からSetItemインスタンスを取得する
+			SetItemInterface setItemInterface = getSetItem(setItemName);
 			if (setItemInterface != null) {
 				//checkを行う
 				if (setItemInterface.isWearSetItem(p)) {
@@ -172,6 +174,51 @@ public class SetItemManager{
 
 	public static Collection<SetItemPartsType> getPartsTypeListByMaterial(Material type) {
 		return partsMaterialMap.get(type);
+	}
+
+	/**
+	 * ItemStackからSetItem名を取得
+	 * @param item
+	 * @return
+	 */
+	public static String getSetItemName(ItemStack item) {
+		List<String> lore = ItemStackUtil.getLore(item);
+		for (String string : lore) {
+			//"SET:"が含まれていたらsetitemとして処理する
+			if (string.contains("SET:")) {
+				return string.replace("SET:", "");
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * ItemStackからSetItemを取得
+	 * @param item
+	 * @return
+	 */
+	public static SetItemInterface getSetItemFromItemStack(ItemStack item) {
+		if (item == null) {
+			return null;
+		}
+
+		//IDを取得
+		String setItemName = getSetItemName(item);
+		return getSetItem(setItemName);
+	}
+
+	/**
+	 * もしSetItemならTRUE
+	 * @param item
+	 * @return
+	 */
+	public static boolean isSetItem(ItemStack item) {
+		if (item == null) {
+			return false;
+		}
+		//IDを取得
+		String setItemName = getSetItemName(item);
+		return setItemMap.containsKey(setItemName);
 	}
 
 	/**

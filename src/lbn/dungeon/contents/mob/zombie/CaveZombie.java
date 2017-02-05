@@ -3,8 +3,8 @@ package lbn.dungeon.contents.mob.zombie;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeon.contents.item.material.CaveStone;
 import lbn.dungeon.contents.item.questItem.Serum;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.mob.abstractmob.AbstractZombie;
-import lbn.player.AttackType;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;
@@ -56,7 +56,7 @@ public class CaveZombie extends AbstractZombie{
 	}
 
 	@Override
-	public int getExp(AttackType type) {
+	public int getExp(LastDamageMethodType type) {
 		return 7;
 	}
 }

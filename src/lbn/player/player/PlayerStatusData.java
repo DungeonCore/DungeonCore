@@ -75,12 +75,12 @@ public class PlayerStatusData {
 		if (beforeAbility == null) {
 			return;
 		}
-		//今のを削除する
-		unsafeDeapplayAbility(ability);
+		//前のを削除する
+		unsafeDeapplayAbility(beforeAbility);
 
 		//データを削除する
-		abilityType.remove(ability.getAbilityType(), ability);
-		idMap.remove(ability.getId());
+		abilityType.remove(beforeAbility.getAbilityType(), beforeAbility);
+		idMap.remove(beforeAbility.getId());
 
 		//データを適応させる
 		applyAllAbility();

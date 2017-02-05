@@ -5,7 +5,7 @@ import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;
 
-public enum AttackType {
+public enum ItemType {
 	SWORD(TheLowLevelType.SWORD, 7, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
 	BOW(TheLowLevelType.BOW, 14, ItemStackUtil.getVanillaDamage(Material.BOW)),
 	MAGIC(TheLowLevelType.BOW, 9, 6),
@@ -13,14 +13,14 @@ public enum AttackType {
 	IGNORE();
 
 
-	private AttackType(TheLowLevelType type, double expectedValue, double level0MinDamage) {
+	private ItemType(TheLowLevelType type, double expectedValue, double level0MinDamage) {
 		this.levelType = type;
 		this.expectedValue = expectedValue;
 		this.level0MinDamage = level0MinDamage;
 		isDamageCaluculate = true;
 	}
 
-	private AttackType() {
+	private ItemType() {
 		this.levelType = TheLowLevelType.MAIN;
 	}
 

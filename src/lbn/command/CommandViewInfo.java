@@ -15,8 +15,6 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.player.appendix.PlayerAppendixManager;
-import lbn.player.appendix.appendixObject.AbstractPlayerAppendix;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.util.InOutputUtil;
 
@@ -70,9 +68,6 @@ public class CommandViewInfo implements CommandExecutor{
 		}
 
 		switch (param) {
-		case "appendix":
-			showAppendix(paramCommandSender, target);
-			break;
 		case "slot":
 			SlotSetTableOperation.openSlotTable(target);
 			break;
@@ -265,18 +260,6 @@ public class CommandViewInfo implements CommandExecutor{
 				paramCommandSender.sendMessage(world.getName() + ":" + c.getX() + "@" + c.getZ());
 			}
 		}
-	}
-
-
-	private void showAppendix(CommandSender paramCommandSender, Player target) {
-		if (target == null) {
-			paramCommandSender.sendMessage("playerが見つかりません。");
-			return;
-		}
-
-		AbstractPlayerAppendix sum = PlayerAppendixManager.getPlayerAppendix(target);
-
-		paramCommandSender.sendMessage(sum.getView().toArray(new String[0]));
 	}
 
 }

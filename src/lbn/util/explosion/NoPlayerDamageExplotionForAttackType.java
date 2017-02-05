@@ -1,8 +1,8 @@
 package lbn.util.explosion;
 
 import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.SummonPlayerManager;
-import lbn.player.AttackType;
 import net.minecraft.server.v1_8_R1.DamageSource;
 
 import org.bukkit.Location;
@@ -16,9 +16,9 @@ import org.bukkit.entity.Player;
 public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion{
 
 	LivingEntity sourceEntity;
-	AttackType type;
+	LastDamageMethodType type;
 
-	public NoPlayerDamageExplotionForAttackType(Location l, float f, LivingEntity p, AttackType type) {
+	public NoPlayerDamageExplotionForAttackType(Location l, float f, LivingEntity p, LastDamageMethodType type) {
 		super(l, f);
 		this.sourceEntity = p;
 		this.type = type;
@@ -31,14 +31,14 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
 			return;
 		}
 
-		if (target instanceof LivingEntity) {
-			if (sourceEntity.getType() == EntityType.PLAYER) {
-				LastDamageManager.onDamage((LivingEntity) target, (Player)sourceEntity, type);
-			}else if (sourceEntity instanceof LivingEntity) {
-				Player owner = SummonPlayerManager.getOwner(sourceEntity);
-				if (owner != null) {
-					LastDamageManager.onDamage((LivingEntity) target, owner, AttackType.MAGIC);
-				}
+		//爆発を起こしたのがPlayerのとき
+		if (sourceEntity.getType() == EntityType.PLAYER) {
+			LastDamageManager.onDamage((LivingEntity) target, (Player)sourceEntity, type);
+		//SummonMobのとき
+		}else if (SummonPlayerManager.isSummonMob(sourceEntity)) {
+			Player owner = SummonPlayerManager.getOwner(sourceEntity);
+			if (owner != null) {
+				LastDamageManager.onDamage((LivingEntity) target, owner, LastDamageMethodType.fromAttackType(SummonPlayerManager.getItemType(owner), true));
 			}
 		}
 		//プレイヤーによるダメージにする

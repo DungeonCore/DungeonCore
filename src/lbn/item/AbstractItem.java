@@ -5,7 +5,7 @@ import java.util.List;
 
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
@@ -98,8 +98,8 @@ public abstract class AbstractItem implements ItemInterface{
 	}
 
 	@Override
-	public AttackType getAttackType() {
-		return AttackType.IGNORE;
+	public ItemType getAttackType() {
+		return ItemType.IGNORE;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 import lbn.item.setItem.SetItemInterface;
 import lbn.item.setItem.SetItemManager;
-import lbn.item.setItem.SetItemParts;
+import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,8 +45,8 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter{
 			return true;
 		}
 
-		HashMap<SetItemPartsType, SetItemParts> fullSetItem = setitem.getFullSetItem();
-		for (SetItemParts setItemParts : fullSetItem.values()) {
+		HashMap<SetItemPartsType, SetItemPartable> fullSetItem = setitem.getFullSetItem();
+		for (SetItemPartable setItemParts : fullSetItem.values()) {
 			((Player)paramCommandSender).getInventory().addItem(setItemParts.getItem());
 		}
 

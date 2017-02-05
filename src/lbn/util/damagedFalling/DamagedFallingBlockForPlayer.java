@@ -3,7 +3,7 @@ package lbn.util.damagedFalling;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.mob.LastDamageManager;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Location;
@@ -67,8 +67,8 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
 		return false;
 	}
 
-	protected AttackType getAttackType() {
-		return AttackType.MAGIC;
+	protected LastDamageMethodType getAttackType() {
+		return LastDamageMethodType.MAGIC;
 	}
 
 	double[] range = new double[]{1, 1, 1};

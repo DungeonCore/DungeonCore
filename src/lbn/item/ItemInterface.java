@@ -1,6 +1,6 @@
 package lbn.item;
 
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -15,7 +15,7 @@ public interface ItemInterface{
 
 	boolean isThisItem(ItemStack item);
 
-	AttackType getAttackType();
+	ItemType getAttackType();
 
 	boolean isQuestItem();
 

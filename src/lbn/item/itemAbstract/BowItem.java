@@ -6,7 +6,7 @@ import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Material;
@@ -70,8 +70,8 @@ public abstract class BowItem extends AbstractAttackItem implements  ItemInterfa
 	abstract protected void excuteOnLeftClick2(PlayerInteractEvent e);
 
 	@Override
-	public AttackType getAttackType() {
-		return AttackType.BOW;
+	public ItemType getAttackType() {
+		return ItemType.BOW;
 	}
 
 	abstract public int getAvailableLevel();

@@ -9,6 +9,7 @@ import java.util.Set;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.attribute.Attribute;
@@ -16,7 +17,6 @@ import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
-import lbn.player.AttackType;
 import lbn.util.BlockUtil;
 import lbn.util.spawn.LbnNBTTag;
 import lbn.util.spawn.MobSpawnByCommand;
@@ -33,9 +33,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -341,7 +341,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 	}
 
 	 @Override
-	public int getExp(AttackType type) {
+	public int getExp(LastDamageMethodType type) {
 		 return exp;
 	}
 

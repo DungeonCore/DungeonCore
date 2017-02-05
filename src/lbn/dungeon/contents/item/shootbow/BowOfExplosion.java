@@ -8,7 +8,7 @@ import lbn.dungeoncore.Main;
 import lbn.item.itemAbstract.BowItem;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.NoPlayerDamageExplotionForAttackType;
 import lbn.util.explosion.NotMonsterDamageExplosion;
@@ -63,7 +63,7 @@ public class BowOfExplosion extends BowItem implements Strengthenable{
 		int level = StrengthOperator.getLevel(bow);
 
 		if (LivingEntityUtil.isFriendship((LivingEntity) shooter)) {
-			new NoPlayerDamageExplotionForAttackType(entity.getLocation(), getExplosionSize(level), (LivingEntity) shooter, AttackType.BOW).runExplosion();
+			new NoPlayerDamageExplotionForAttackType(entity.getLocation(), getExplosionSize(level), (LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
 		} else {
 			new NotMonsterDamageExplosion(entity.getLocation(), getExplosionSize(level)).runExplosion();
 		}

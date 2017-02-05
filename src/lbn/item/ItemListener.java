@@ -29,7 +29,8 @@ import lbn.item.strength.CraeteStrengthItemResultLater;
 import lbn.item.strength.StrengthLaterRunnable;
 import lbn.item.strength.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
-import lbn.player.AttackType;
+import lbn.mob.LastDamageMethodType;
+import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
@@ -117,8 +118,9 @@ public class ItemListener implements Listener{
 		if (item == null) {
 			return;
 		}
-		AttackType attackType = item.getAttackType();
-		entity.setMetadata("the_low_launched_projectile_attack_type", new FixedMetadataValue(Main.plugin, attackType));
+		ItemType attackType = item.getAttackType();
+
+		entity.setMetadata("the_low_launched_projectile_attack_type", new FixedMetadataValue(Main.plugin, LastDamageMethodType.fromAttackType(attackType)));
 		entity.setMetadata("the_low_launched_projectile_attack_entity", new FixedMetadataValue(Main.plugin, shooter));
 	}
 
@@ -175,7 +177,7 @@ public class ItemListener implements Listener{
 				List<MetadataValue> metadata1 = damager.getMetadata("the_low_launched_projectile_attack_type");
 				List<MetadataValue> metadata2 = damager.getMetadata("the_low_launched_projectile_attack_entity");
 				if (metadata1.size() != 0 || metadata2.size() != 0) {
-					AttackType type = (AttackType) metadata1.get(0).value();
+					LastDamageMethodType type = (LastDamageMethodType) metadata1.get(0).value();
 					LivingEntity shooter = (LivingEntity) metadata2.get(0).value();
 					if (shooter.getType() == EntityType.PLAYER) {
 						LastDamageManager.onDamage(entity, (Player) shooter, type);
@@ -315,17 +317,17 @@ public class ItemListener implements Listener{
 			return;
 		}
 
-		AttackType attackType = LastDamageManager.getLastDamageAttackType(entity);
+		LastDamageMethodType lastDamageMethod = LastDamageManager.getLastDamageAttackType(entity);
 		Player player = LastDamageManager.getLastDamagePlayer(entity);
 
 		//倒すときに使ったアイテム
 		ItemStack item = null;
 
 		//最後に倒したのが剣のとき
-		if (attackType == AttackType.SWORD) {
+		if (lastDamageMethod == LastDamageMethodType.SWORD) {
 			//手に持っているアイテムで倒したと判断
 			item = player.getItemInHand();
-		} else if (attackType == AttackType.BOW) {
+		} else if (lastDamageMethod == LastDamageMethodType.BOW) {
 			Entity damager = ((EntityDamageByEntityEvent)lastDamageCause).getDamager();
 			//最後に倒したのが矢なら
 			if (damager.getType() == EntityType.ARROW) {
