@@ -25,22 +25,28 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 	@Override
 	public String[] getTag() {
 
-		return new String[] { "name", "location", "difficulty", "id" };
+		return new String[] { "name", "startloc", "level", "id", "entranceloc"};
 	}
 
 	@Override
 	protected void excuteOnerow(String[] row) {
 		String name = row[0];
-		Location loc = getLocationByString(row[1]);
+		Location startLoc = getLocationByString(row[1]);
 		String difficulty = row[2];
 
 		if(name == null){
 			sender.sendMessage(ChatColor.RED+"不正なNameです。" + name);
 		}
 
-		if(loc == null){
-			sender.sendMessage(ChatColor.RED+"不正なLocationです。"+ name);
+		if(startLoc == null){
+			sender.sendMessage(ChatColor.RED+"不正なstartlocです。"+ name);
 		}
+
+		Location entrance = getLocationByString(row[4]);
+		if(startLoc == null){
+			sender.sendMessage(ChatColor.RED+"不正なentrancelocです。"+ name);
+		}
+
 		if(difficulty == null){
 			difficulty = DungeonData.DIFFICULTY_VERY_EASY;
 		}
@@ -49,7 +55,7 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 		int id = JavaUtil.getInt(row[3], -1);
 
 		if (id != -1) {
-			DungeonData dungeonData = new DungeonData(name, loc, difficulty, id);
+			DungeonData dungeonData = new DungeonData(name, startLoc, difficulty, id, entrance);
 			DungeonList.addDungeon(dungeonData);
 		} else {
 			sender.sendMessage("IDが不正です。" + row[3]);

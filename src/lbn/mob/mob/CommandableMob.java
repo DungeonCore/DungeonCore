@@ -18,7 +18,7 @@ import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.util.BlockUtil;
-import lbn.util.spawn.LbnNBTTag;
+import lbn.util.spawn.LbnMobTag;
 import lbn.util.spawn.MobSpawnByCommand;
 
 import org.bukkit.Location;
@@ -41,7 +41,7 @@ import org.bukkit.projectiles.ProjectileSource;
 
 public class CommandableMob extends AbstractMob<Entity>{
 
-	protected CommandableMob(LbnNBTTag nbtTag, String[] command, String name) {
+	protected CommandableMob(LbnMobTag nbtTag, String[] command, String name) {
 		this.command = command;
 		this.nbtTag = nbtTag;
 		this.name = name;
@@ -55,13 +55,14 @@ public class CommandableMob extends AbstractMob<Entity>{
 		return isRiding;
 	}
 
-	public LbnNBTTag getNbtTag() {
+	@Override
+	public LbnMobTag getLbnMobTag() {
 		return nbtTag;
 	}
 
 
 	public static CommandableMob getInstance(String[] command, String name, CommandSender sender) {
-		LbnNBTTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
+		LbnMobTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;
@@ -82,7 +83,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	String[] command;
 
-	LbnNBTTag nbtTag;
+	LbnMobTag nbtTag;
 
 	double health = -1;
 
@@ -252,7 +253,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	@Override
 	public EntityType getEntityType() {
-		return nbtTag.type;
+		return nbtTag.getType();
 	}
 
 	private int index = 0;

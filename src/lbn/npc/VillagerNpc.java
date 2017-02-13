@@ -15,6 +15,7 @@ import lbn.quest.quest.TouchVillagerQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.quest.viewer.QuestSelectorViewer;
+import lbn.util.QuestUtil;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCDamageEvent;
@@ -24,7 +25,6 @@ import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.LookClose;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -94,10 +94,7 @@ public class VillagerNpc {
 
 		//メッセージを出力する
 		if (!message.isEmpty()) {
-			p.sendMessage("");
-			for (String string : message) {
-				p.sendMessage(ChatColor.GOLD + string);
-			}
+			QuestUtil.sendMessageByVillager(p, message.toArray(new String[0]));
 		}
 	}
 

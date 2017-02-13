@@ -28,6 +28,8 @@ public class MenuSelectorManager {
 		MenuSelectorInterface selector = getSelector(title);
 		if (selector != null) {
 			selector.open(p);
+		} else {
+			new RuntimeException("menu not found:" + title).printStackTrace();
 		}
 	}
 

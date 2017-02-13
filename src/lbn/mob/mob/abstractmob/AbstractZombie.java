@@ -22,7 +22,7 @@ public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zom
 
 	@Override
 	public CustomZombie getInnerEntity(World w) {
-		return new CustomZombie(w, this);
+		return new CustomZombie(w, getLbnMobTag());
 	}
 
 	public double getNearingSpeed() {

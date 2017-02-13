@@ -8,18 +8,14 @@ import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttack;
 import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
-import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.PathfinderGoalFleeSun;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_8_R1.PathfinderGoalMeleeAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_8_R1.PathfinderGoalRestrictSun;
 import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
@@ -34,15 +30,12 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntity<Skeleton>{
 	boolean isUndead = true;
 	boolean isNonDayFire = true;
-	boolean isBatFly = false;
 
 	boolean isCustom = false;
 
 	public CustomSkeleton(World world) {
 		this(world.getWorld(), false);
 	}
-
-	private PathfinderGoalMeleeAttack bq = new PathfinderGoalMeleeAttack(this, EntityLiving.class, 1.2D, false);
 
 	public CustomSkeleton(org.bukkit.World bukkitWorld, boolean isSummon) {
 		super(((CraftWorld) bukkitWorld).getHandle());
@@ -66,8 +59,24 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 			field2.set(this, new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null));
 
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
-			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
+			//いらないと思うので一旦削除
+//			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
+//			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
+			//遠距離攻撃のAI
+			TheLoWPathfinderGoalArrowAttack theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(this, 1.25D, 20, 20.0F);
+			//テスト用なので一時的に削除
+//			theLoWPathfinderGoalArrowAttack.setNearAttackRange(7);
+//			theLoWPathfinderGoalArrowAttack.setShotTerm(3);
+			this.goalSelector.a(4, theLoWPathfinderGoalArrowAttack);
+			//テスト用なので一時的に削除
+			//近距離攻撃のAI
+//			TheLowPathfinderGoalMeleeAttack bq = new TheLowPathfinderGoalMeleeAttack(this, EntityLiving.class, new LbnMobTag(EntityType.SKELETON));
+//			bq.setAttackRange(7);
+//			bq.setAttackTerm(10);
+//			bq.setKillAura(true);
+//			bq.setJump(true);
+//			this.goalSelector.a(5, bq);
+
 			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
@@ -96,10 +105,6 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 //		} else {
 //			this.goalSelector.a(4, this.bq);
 //		}
-		TheLoWPathfinderGoalArrowAttack theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(this, 1.25D, 20, 10.0F);
-		theLoWPathfinderGoalArrowAttack.setNearAttackRange(5);
-			this.goalSelector.a(4, theLoWPathfinderGoalArrowAttack);
-			this.goalSelector.a(5, this.bq);
 	}
 
 	@Override

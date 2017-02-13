@@ -1,6 +1,8 @@
 package lbn.util;
 
 import java.text.MessageFormat;
+import java.util.HashSet;
+import java.util.UUID;
 
 import lbn.npc.NpcManager;
 import lbn.npc.VillagerNpc;
@@ -50,14 +52,42 @@ public class QuestUtil {
 		Bukkit.dispatchCommand(consoleSender, command);
 	}
 
+	static HashSet<UUID> inChatPlayer = new HashSet<>();
+
 	public static void sendMessageByVillager(Player p, String[] text) {
 		if (text == null || text.length == 0) {
 			return;
 		}
 
-		p.sendMessage("");
-		for (String string : text) {
-			p.sendMessage(ChatColor.GOLD + string);
+		//現在、チャット中なら何もしない
+		if (inChatPlayer.contains(p.getUniqueId())) {
+			return;
 		}
+
+		p.sendMessage("");
+		new LbnRunnable() {
+			@Override
+			public void run2() {
+				//Playerがオフラインなら終了
+				if (!p.isOnline()) {
+					cancel();
+					//チャット中から削除する
+					inChatPlayer.remove(p.getUniqueId());
+					return;
+				}
+
+				//もし現在のカウントがテキストの行以上ならストップ
+				if (text.length <= getRunCount()) {
+					cancel();
+					//チャット中から削除する
+					inChatPlayer.remove(p.getUniqueId());
+					return;
+				}
+				//逐次的にテキストを表示する
+				p.sendMessage(ChatColor.GOLD + text[getRunCount()]);
+				//チャット中ということを記録する
+				inChatPlayer.add(p.getUniqueId());
+			}
+		}.runTaskTimer(15);
 	}
 }

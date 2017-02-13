@@ -175,6 +175,14 @@ public abstract class AbstractNotDamageExplosion extends Explosion{
 			}
 	}
 
+	/**
+	 * 爆発のParticleありならTRUE
+	 * @return
+	 */
+	protected boolean isRunParticle() {
+		return true;
+	}
+
 	public void damageEntity(org.bukkit.entity.Entity craftEntity, float d10) {
 		((CraftEntity)craftEntity).getHandle().damageEntity(DamageSource.explosion(this), d10);
 	}

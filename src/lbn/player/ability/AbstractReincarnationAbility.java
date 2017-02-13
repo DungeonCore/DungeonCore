@@ -1,6 +1,5 @@
 package lbn.player.ability;
 
-import lbn.api.AbilityType;
 import lbn.api.player.AbilityInterface;
 
 

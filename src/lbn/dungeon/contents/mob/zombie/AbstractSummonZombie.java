@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.mob.zombie;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractZombie;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -70,13 +70,15 @@ public class AbstractSummonZombie extends AbstractZombie implements SummonMobabl
 		return 15 * 20;
 	}
 
-	public static boolean isSummon(LivingEntity e) {
-		AbstractMob<?> mob = MobHolder.getMob(e);
-		return mob instanceof SummonMobable;
-	}
-
 	@Override
 	public int getDropGalions() {
 		return 0;
+	}
+
+	@Override
+	public LbnMobTag getLbnMobTag() {
+		LbnMobTag lbnMobTag = super.getLbnMobTag();
+		lbnMobTag.setSummonMob(true);
+		return lbnMobTag;
 	}
 }

@@ -208,6 +208,9 @@ public class SystemListener implements Listener {
   @EventHandler
   public void PlayerPortalEvent(PlayerPortalEvent e) {
     Location to = e.getTo();
+    if (to == null) {
+    	return;
+    }
     if (to.getWorld() == null || to.getWorld().getName() == null) {
       return;
     }

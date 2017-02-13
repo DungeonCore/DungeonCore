@@ -10,7 +10,7 @@ import lbn.mob.mob.CommandBossMob;
 import lbn.mob.mob.CommandableMob;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-import lbn.util.spawn.LbnNBTTag;
+import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -89,7 +89,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			}
 
 			//LbnNbtTagを取得
-			LbnNBTTag nbtTag = instance.getNbtTag();
+			LbnMobTag nbtTag = instance.getLbnMobTag();
 			if (nbtTag == null) {
 				sendMessage("入力されたsummon commandが不正です。(1):" + name);
 				return;

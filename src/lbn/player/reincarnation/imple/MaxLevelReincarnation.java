@@ -20,7 +20,7 @@ public class MaxLevelReincarnation implements ReincarnationInterface{
 	}
 
 	@Override
-	public void addReincarnation(TheLowPlayer p, LevelType levelType, int count) {
+	public void addReincarnationEffect(TheLowPlayer p, LevelType levelType, int count) {
 		//最大Level取得
 		int maxLevel = p.getMaxLevel(levelType);
 		//最大レベルを更新

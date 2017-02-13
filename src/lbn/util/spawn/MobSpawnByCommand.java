@@ -37,7 +37,7 @@ public class MobSpawnByCommand {
 		new CommandSummon().execute(((CraftPlayer) p).getHandle(), comand);
 	}
 
-	public static org.bukkit.entity.Entity spawn(Location loc, String[] paramArrayOfString, LbnNBTTag nbtTag) {
+	public static org.bukkit.entity.Entity spawn(Location loc, String[] paramArrayOfString, LbnMobTag nbtTag) {
 		// summonがあったら取り除く
 		if (paramArrayOfString[0].equalsIgnoreCase("summon") || paramArrayOfString[0].equalsIgnoreCase("/summon")) {
 			String[] newParam = new String[paramArrayOfString.length - 1];
@@ -160,7 +160,7 @@ public class MobSpawnByCommand {
 		return entity;
 	}
 
-	public static LbnNBTTag getTBTTagByCommand(String[] paramArrayOfString, CommandSender sender) {
+	public static LbnMobTag getTBTTagByCommand(String[] paramArrayOfString, CommandSender sender) {
 		// summonがあったら取り除く
 		if (paramArrayOfString[0].equalsIgnoreCase("summon") || paramArrayOfString[0].equalsIgnoreCase("/summon")) {
 			String[] newParam = new String[paramArrayOfString.length - 1];
@@ -203,7 +203,7 @@ public class MobSpawnByCommand {
 							.getCompound("Riding");
 				}
 
-				LbnNBTTag lbnNBTTag = new LbnNBTTag(localObject1_1.getBukkitEntity());
+				LbnMobTag lbnNBTTag = new LbnMobTag(localObject1_1.getBukkitEntity());
 				lbnNBTTag.setRiding(isRiding);
 				return lbnNBTTag;
 			}

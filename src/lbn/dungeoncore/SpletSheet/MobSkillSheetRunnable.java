@@ -9,6 +9,7 @@ import lbn.mob.mobskill.MobSkillTargetingMethodType;
 import lbn.mob.mobskill.NormalMobSkill;
 import lbn.mob.mobskill.ParticleLocationType;
 import lbn.mob.mobskill.skillrunnable.MobSkillExplosion;
+import lbn.mob.mobskill.skillrunnable.MobSkillExplosionNoParticle;
 import lbn.mob.mobskill.skillrunnable.MobSkillHealMob;
 import lbn.mob.mobskill.skillrunnable.MobSkillKeepAwayTarget;
 import lbn.mob.mobskill.skillrunnable.MobSkillLightningEffect;
@@ -186,6 +187,8 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 			return new MobSkillHealMob(data);
 		case "対象の場所で爆発を起こす":
 			return new MobSkillExplosion(data);
+		case "対象の場所で爆発を起こす(パーティクルなし)":
+			return new MobSkillExplosionNoParticle(data);
 		case "モンスターを対象の場所にTPさせる":
 			return new MobSkillTpToTarget(data);
 		case "対象をモンスターの場所にTPさせる":

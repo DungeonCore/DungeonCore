@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import lbn.api.AbilityType;
 import lbn.api.PlayerStatusType;
 import lbn.api.player.AbilityInterface;
 import lbn.api.player.TheLowPlayer;
+import lbn.player.ability.AbilityType;
 
 import org.bukkit.entity.Player;
 

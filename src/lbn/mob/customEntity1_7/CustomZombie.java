@@ -4,10 +4,9 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
-import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttack;
-import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.mob.customEntity1_7.ai.TheLowPathfinderGoalMeleeAttack;
 import lbn.util.LivingEntityUtil;
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityMonster;
@@ -17,12 +16,9 @@ import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.MathHelper;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalAvoidTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_8_R1.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_8_R1.PathfinderGoalMoveThroughVillage;
 import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -35,6 +31,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
@@ -44,18 +41,18 @@ import org.bukkit.projectiles.ProjectileSource;
 import com.google.common.base.Predicate;
 
 public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>, IRangedEntity{
-    public CustomZombie(org.bukkit.World bukkitWorld, AbstractZombie zombie) {
-    	this(((CraftWorld)bukkitWorld).getHandle(), zombie);
+    public CustomZombie(org.bukkit.World bukkitWorld, LbnMobTag tag) {
+    	this(((CraftWorld)bukkitWorld).getHandle(), tag);
     }
 
     public CustomZombie(World world) {
-    	this(world, false, false, 1.0);
+    	this(world, new LbnMobTag(EntityType.ZOMBIE));
     }
 
-	public CustomZombie(World world, boolean isSummon, boolean isAvoidPlayer, double nearingSpeed) {
+	public CustomZombie(World world, LbnMobTag tag) {
     	super(world);
     	try {
-			this.isSummon = isSummon;
+    		isIgnoreWater = tag.isWaterMonster();
 
 			//targetSelectorを初期化
 			Field field = EntityInsentient.class.getDeclaredField("targetSelector");
@@ -63,7 +60,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			field.set(this, new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null));
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
 			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(isSummon);
+			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
 			this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 
 			//goalSelectorを初期化
@@ -71,20 +68,23 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			field2.setAccessible(true);
 			field2.set(this, new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null));
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
-//			プレイヤーから逃げる処理
-			if (isAvoidPlayer) {
+
+			//プレイヤーから逃げる処理
+			if (tag.isAvoidPlayer()) {
 				this.goalSelector.a(1, new PathfinderGoalAvoidTarget(this, new AvoidPlayer(), 6.0F, 2.0D, 1.2D));
 			}
 
-			this.goalSelector.a(2, new TheLoWPathfinderGoalArrowAttack(this, 1.25D, 20, 10.0F));
-			if (isSummon) {
-				this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityMonster.class, nearingSpeed, false));
+			//テスト用なので一時的に削除
+//			//弓を打つ処理
+//			this.goalSelector.a(2, new TheLoWPathfinderGoalArrowAttack(this, 1.25D, 20, 10.0F));
+			//近距離攻撃の処理
+			if (tag.isSummonMob()) {
+				this.goalSelector.a(3, new TheLowPathfinderGoalMeleeAttack(this, EntityMonster.class, tag));
 			} else {
-				this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityLiving.class, nearingSpeed, false));
+				this.goalSelector.a(3, new TheLowPathfinderGoalMeleeAttack(this, EntityLiving.class, tag));
 			}
-//			if (world.spigotConfig.zombieAggressiveTowardsVillager) this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0D, true));
 			this.goalSelector.a(5, new PathfinderGoalMoveTowardsRestriction(this, 1.0D));
-			this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
+//			this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
 			this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 1.0D));
 			this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 
@@ -129,12 +129,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 //		this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityIronGolem>(
 //				this, EntityIronGolem.class, true));
 //	}
-
-
-    boolean isSummon = false;
-	public CustomZombie(World world, AbstractZombie zombie) {
-		this(world, zombie instanceof SummonMobable, zombie.isAvoidPlayer(), zombie.getNearingSpeed());
-	}
 
 	@Override
 	public EnumMonsterType getMonsterType() {
@@ -207,12 +201,6 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
 		 return (Zombie) getBukkitEntity();
-	}
-
-	@Override
-	public void a(NBTTagCompound nbttagcompound) {
-		super.a(nbttagcompound);
-		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
 	}
 
 	boolean isIgnoreWater = false;

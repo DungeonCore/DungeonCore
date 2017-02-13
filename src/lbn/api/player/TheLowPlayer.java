@@ -1,9 +1,7 @@
 package lbn.api.player;
 
-import java.util.List;
 import java.util.UUID;
 
-import lbn.api.AbilityType;
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
 import lbn.common.other.DungeonData;
@@ -153,10 +151,10 @@ public interface TheLowPlayer {
 	public void removeAbility(AbilityInterface ablity);
 
 	/**
-	 * Abilityデータを適応させる
-	 * @param check TRUE：Abilityの整合性チェックを行ってから適応, FALSE：整合性チェックを行わないで適応
+	 * データの整合性をチェックする
+	 * @param level LEVEL1:チェックを行わないでPlayerステータスの適応を行う, LEVEL2:チェックを行いPlayerステータスの変更を行う
 	 */
-	public void applyAbilityData(boolean check);
+	public void fixIntegrity(CheckIntegrityLevel level);
 
 	/**
 	 * Playerの追加ステータス情報を取得する
@@ -187,15 +185,8 @@ public interface TheLowPlayer {
 	 */
 	public int getEachReincarnationCount(LevelType levelType);
 
-	/**
-	 * 全ての転生データを取得
-	 * @return
-	 */
-	public List<OneReincarnationData> getReincarnationData();
-
-	/**
-	 * 指定したAbilityTypeのAbilityデータを削除する
-	 * @param abilityType
-	 */
-	void clearAbilityData(AbilityType abilityType);
+	public static enum CheckIntegrityLevel {
+		LEVEL1, //チェックを行わないでPlayerステータスの変更を行う
+		LEVEL2,//チェックを行い、Playerステータスの変更を行う
+	}
 }

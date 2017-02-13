@@ -24,8 +24,8 @@ public class MenuSelecor implements MenuSelectorInterface{
 	protected String title;
 	protected Inventory createInventory;
 	public MenuSelecor(String title) {
-		this.title = ChatColor.WHITE + "-- " + title + " --";
-		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + "-- " + title + " --");
+		this.title = ChatColor.WHITE + title;
+		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE +  title);
 	}
 
 	protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();

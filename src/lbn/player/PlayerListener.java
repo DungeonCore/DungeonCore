@@ -6,6 +6,7 @@ import java.util.List;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
+import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
 import lbn.command.TpCutCommand;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
@@ -181,7 +182,7 @@ public class PlayerListener implements Listener{
 		//Abilityを適応
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e.getPlayer());
 		if (theLowPlayer != null) {
-			theLowPlayer.applyAbilityData(true);
+			theLowPlayer.fixIntegrity(CheckIntegrityLevel.LEVEL1);
 		}
 	}
 
@@ -196,7 +197,7 @@ public class PlayerListener implements Listener{
 			}
 			//Abilityを適応
 			TheLowPlayer theLowPlayer = e.getTheLowPlayer();
-			theLowPlayer.applyAbilityData(true);
+			theLowPlayer.fixIntegrity(CheckIntegrityLevel.LEVEL1);
 		} else {
 			//ロード失敗
 			//PlayerがオンラインならKickする

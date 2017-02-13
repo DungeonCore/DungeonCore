@@ -23,6 +23,7 @@ import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
+import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -57,6 +58,14 @@ public abstract class AbstractMob<T extends Entity> {
 
 	public boolean isSummonMob() {
 		return isSummon;
+	}
+
+	/**
+	 * LbnNBTTagを取得
+	 * @return
+	 */
+	public LbnMobTag getLbnMobTag() {
+		return new LbnMobTag(getEntityType());
 	}
 
 	abstract public String getName();
@@ -319,6 +328,11 @@ public abstract class AbstractMob<T extends Entity> {
 	public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
 		//コウモリの場合は経験値を加算しない
 		if (entity.getType() == EntityType.BAT) {
+			return;
+		}
+
+		//EXPを与える対象のLEVEL TYPEが存在しない時は無視
+		if (type.getLevelType() == null) {
 			return;
 		}
 

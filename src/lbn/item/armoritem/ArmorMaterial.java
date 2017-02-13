@@ -4,18 +4,24 @@ package lbn.item.armoritem;
 public enum ArmorMaterial {
 	LEATHER(0.06, 0.04, 0.04, 0.08), GOLD(0.07, 0.06, 0.04, 0.1), CHAINMAIL(0.08, 0.08, 0.04, 0.124), IRON(0.09, 0.1, 0.04, 0.159), DIAMOND(0.1, 0.12, 0.04, 0.212);
 
-	private ArmorMaterial(double baseDamageCut, double baseBossDamageCut,
-			double strengthTotalDamageCut, double strengthBossTotalDamageCut) {
-		this.baseDamageCut = baseDamageCut;
-		this.baseBossDamageCut = baseBossDamageCut;
-		this.strengthTotalDamageCut = strengthTotalDamageCut;
-		this.strengthBossTotalDamageCut = strengthBossTotalDamageCut;
+	/**
+	 * @param minDamageCut ダメージカットの最小値
+	 * @param minBossDamageCut ボスに対するダメージカット最小値
+	 * @param maxDamageCut ダメージカット最大値
+	 * @param maxBossDamageCut ボスに対するダメージカット最大値
+	 */
+	private ArmorMaterial(double minDamageCut, double minBossDamageCut,
+			double maxDamageCut, double maxBossDamageCut) {
+		this.minDamageCut = minDamageCut;
+		this.minBossDamageCut = minBossDamageCut;
+		this.maxDamageCut = maxDamageCut;
+		this.maxBossDamageCut = maxBossDamageCut;
 	}
 
-	double baseDamageCut;
-	double baseBossDamageCut;
-	double strengthTotalDamageCut;
-	double strengthBossTotalDamageCut;
+	double minDamageCut;
+	double minBossDamageCut;
+	double maxDamageCut;
+	double maxBossDamageCut;
 
 
 	/**
@@ -23,7 +29,7 @@ public enum ArmorMaterial {
 	 * @return
 	 */
 	public double getBaseDamageCut() {
-		return baseDamageCut;
+		return minDamageCut;
 	}
 
 	/**
@@ -31,7 +37,7 @@ public enum ArmorMaterial {
 	 * @return
 	 */
 	public double getBaseBossDamageCut() {
-		return baseBossDamageCut;
+		return minBossDamageCut;
 	}
 
 	/**
@@ -39,7 +45,7 @@ public enum ArmorMaterial {
 	 * @return
 	 */
 	public double getStrengthTotalDamageCut() {
-		return strengthTotalDamageCut;
+		return maxDamageCut;
 	}
 
 	/**
@@ -47,6 +53,6 @@ public enum ArmorMaterial {
 	 * @return
 	 */
 	public double getStrengthBossTotalDamageCut() {
-		return strengthBossTotalDamageCut;
+		return maxBossDamageCut;
 	}
 }

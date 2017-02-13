@@ -49,7 +49,7 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 
 		//転生できないなら開かない
 		if (!theLowPlayer.canReincarnation(type)) {
-			p.sendMessage(ChatColor.RED + "転生を行えません。");
+			p.sendMessage(ChatColor.RED + "リンカーできません。");
 			return;
 		}
 
@@ -151,13 +151,13 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 		//転生できないなら閉める
 		if (!theLowPlayer.canReincarnation(type)) {
 			p.closeInventory();
-			p.sendMessage(ChatColor.RED + "転生を行えませんでした。");
+			p.sendMessage(ChatColor.RED + "リンカーできませんでした。");
 			return;
 		}
 
 		//転生を行う
 		if (!theLowPlayer.doReincarnation(reincarnationInterface, type)) {
-			p.sendMessage(ChatColor.RED + "転生を行えませんでした。");
+			p.sendMessage(ChatColor.RED + "リンカーできませんでした。");
 		}
 		p.closeInventory();
 	}

@@ -11,7 +11,7 @@ import lbn.player.ability.impl.ReincarnationAbilityStatusWrapper;
  */
 public abstract class AbstractAbilityReincarnation implements ReincarnationInterface{
 	@Override
-	public void addReincarnation(TheLowPlayer p, LevelType levelType, int count) {
+	public void addReincarnationEffect(TheLowPlayer p, LevelType levelType, int count) {
 		//転生用のAbilityを取得
 		ReincarnationAbilityStatusWrapper statusWrapper = new ReincarnationAbilityStatusWrapper(getStatusType(), getAddValue(), levelType, count);
 		//Abilityを追加

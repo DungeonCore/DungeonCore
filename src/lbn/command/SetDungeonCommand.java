@@ -63,7 +63,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 			d_name += args[i] +" ";
 		}
 		d_name = d_name.trim();
-		DungeonData dungeonData = new DungeonData(d_name, loc.add(0, 1.5, 0), difficulty, DungeonList.getNextId());
+		DungeonData dungeonData = new DungeonData(d_name, loc.add(0, 1.5, 0), difficulty, DungeonList.getNextId(), null);
 		DungeonList.addDungeon(dungeonData);
 
 

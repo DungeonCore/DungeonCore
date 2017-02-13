@@ -20,10 +20,10 @@ public class DungeonData {
 	static public final String DIFFICULTY_VERY_HARD = "very_hard";
 	static public final String DIFFICULTY_IMPOSSIBLE = "impossible";
 
-	public DungeonData(String dungeonName, Location dungeonLoc, String difficulty, int id) {
+	public DungeonData(String dungeonName, Location startLoc, String difficulty, int id, Location entranceLoc) {
 		super();
 		this.dungeonName = dungeonName;
-		this.dungeonLoc = dungeonLoc;
+		this.dungeonLoc = startLoc;
 		this.difficulty = difficulty;
 		this.id = id;
 	}

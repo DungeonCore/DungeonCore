@@ -1,10 +1,7 @@
 package lbn.player.customplayer;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-import lbn.api.AbilityType;
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
 import lbn.api.player.AbilityInterface;
@@ -18,10 +15,13 @@ import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.other.DungeonData;
 import lbn.common.other.DungeonList;
+import lbn.item.setItem.SetItemManager;
 import lbn.money.GalionEditReason;
+import lbn.player.ability.AbilityType;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -56,14 +56,13 @@ public class CustomPlayer implements TheLowPlayer{
 	//現在いるダンジョンID
 	int inDungeonId = -1;
 
-	//最大マジックポイント
-	int maxMagicPointLevel = 100;
-
 	//PlayerStatusData
 	PlayerStatusData playerStatusData = new PlayerStatusData(this);
 
 	//転生データを管理するクラス
-	PlayerReincarnationData reincarnationData = new PlayerReincarnationData();
+	PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
+
+	Location lastOverWorldLocation = null;
 
 	@Override
 	public int getLevel(LevelType type) {
@@ -281,11 +280,9 @@ public class CustomPlayer implements TheLowPlayer{
 		}
 		//転生を行う
 		OneReincarnationData oneReincarnationData = reincarnationData.addReincarnation(reincarnationInterface, levelType);
-		//転生を行ったときの効果を追加する
-		reincarnationInterface.addReincarnation(this, levelType, oneReincarnationData.getCount());
+
 		//60レベル引いたレベルをセットする
 		setLevel(levelType, getLevel(levelType) - 60);
-
 		//Eventを発火させる
 		new PlayerCompleteReincarnationEvent(this, oneReincarnationData).callEvent();
 		return true;
@@ -307,25 +304,27 @@ public class CustomPlayer implements TheLowPlayer{
 	}
 
 	@Override
-	public void applyAbilityData(boolean check) {
-//		if (check) {
-//			playerStatusData.checkAbility();
-//		}
-		playerStatusData.applyAllAbility();
-		//TODO
-	}
+	public void fixIntegrity(CheckIntegrityLevel level) {
+		switch (level) {
+		case LEVEL2:
+			if (isOnline()) {
+				//ItemStackのAbilityをすべて消す
+				playerStatusData.clear(AbilityType.SET_ITEM_ABILITY);
+				//SetItemのAbilityをセットしなおす
+				SetItemManager.updateAllSetItem(getOnlinePlayer());
 
-	@Override
-	public void clearAbilityData(AbilityType abilityType) {
-		playerStatusData.clear(abilityType);
-	}
-
-	@Override
-	public List<OneReincarnationData> getReincarnationData() {
-		ArrayList<OneReincarnationData> allReincarnationData = new ArrayList<OneReincarnationData>();
-		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.SWORD));
-		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.BOW));
-		allReincarnationData.addAll(reincarnationData.getDataMap(LevelType.MAGIC));
-		return allReincarnationData;
+				//転生のAbilityをすべて消す
+				playerStatusData.clear(AbilityType.REINCARNATION_ABILITY);
+				for (OneReincarnationData oneReincarnationData : reincarnationData.getAllOneReincarnationDataList()) {
+					//転生を行ったときの効果を追加する
+					oneReincarnationData.getReincarnationInterface().addReincarnationEffect(this, oneReincarnationData.getLevelType(), oneReincarnationData.getCount());
+				}
+			}
+		case LEVEL1:
+			//データの適応を行う
+			playerStatusData.applyAllAbility();
+		default:
+			break;
+		}
 	}
 }

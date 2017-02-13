@@ -25,7 +25,7 @@ import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
-import lbn.util.spawn.LbnNBTTag;
+import lbn.util.spawn.LbnMobTag;
 import lbn.util.spawn.MobSpawnByCommand;
 
 import org.apache.commons.lang3.StringUtils;
@@ -50,14 +50,14 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 
 	static HashMap<String, LivingEntity> entityList = new HashMap<String, LivingEntity>();
 
-	protected CommandBossMob(LbnNBTTag nbtTag, String[] command, String name) {
+	protected CommandBossMob(LbnMobTag nbtTag, String[] command, String name) {
 		super(nbtTag, command, name);
 	}
 
 	long spawnTimeMill = -1;
 
 	public static CommandBossMob getInstance(String[] command, String name, CommandSender sender, Location locationByString) {
-		LbnNBTTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
+		LbnMobTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;
@@ -191,6 +191,9 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 
 		//最後に攻撃したPlayerと攻撃方法を取得
 		Player player = LastDamageManager.getLastDamagePlayer(mob);
+		if (player == null) {
+			return;
+		}
 		TheLowPlayer p = TheLowPlayerManager.getTheLowPlayer(player);
 		LastDamageMethodType lastDamageType = LastDamageManager.getLastDamageAttackType(mob);
 

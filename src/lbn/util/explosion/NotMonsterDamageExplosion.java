@@ -12,6 +12,21 @@ public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 		super(l, f);
 	}
 
+
+	boolean isRunParticle = true;
+	/**
+	 * 爆発のパーティクルを発生させるかどうかセットする
+	 * @param isRunParticle
+	 */
+	public void setRunParticle(boolean isRunParticle) {
+		this.isRunParticle = isRunParticle;
+	}
+
+	@Override
+	protected boolean isRunParticle() {
+		return isRunParticle;
+	}
+
 	@Override
 	boolean isNotDamage(Entity entity) {
 		return entity.getType() != EntityType.PLAYER && !SummonPlayerManager.isSummonMob(entity);

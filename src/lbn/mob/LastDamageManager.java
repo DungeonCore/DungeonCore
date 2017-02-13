@@ -7,6 +7,7 @@ import java.util.Queue;
 import lbn.util.DungeonLogger;
 import lbn.util.ItemStackUtil;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -19,7 +20,6 @@ import org.bukkit.projectiles.ProjectileSource;
 
 /**
  * Playerが最後に攻撃したMobを管理するためのクラス
- * @author KENSUKE
  *
  */
 public class LastDamageManager {
@@ -183,6 +183,10 @@ public class LastDamageManager {
 		// ダメージを与えたのが剣
 		if (ItemStackUtil.isSword(itemInHand)) {
 			LastDamageManager.onDamage(entity, p, LastDamageMethodType.SWORD);
+		} else if (itemInHand == null || itemInHand.getType() == Material.AIR) {
+			LastDamageManager.onDamage(entity, p, LastDamageMethodType.BARE_HAND);
+		} else {
+			LastDamageManager.onDamage(entity, p, LastDamageMethodType.MELEE_ATTACK_WITH_OTHER);
 		}
 	}
 }

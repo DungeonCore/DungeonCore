@@ -19,7 +19,7 @@ public interface ReincarnationInterface {
 	 * @param levelType 転生を行うLevelType
 	 * @param 対象のLevelTypeで何回目の転生か
 	 */
-	void addReincarnation(TheLowPlayer p, LevelType levelType, int count);
+	void addReincarnationEffect(TheLowPlayer p, LevelType levelType, int count);
 
 	/**
 	 * 表示するときのタイトル

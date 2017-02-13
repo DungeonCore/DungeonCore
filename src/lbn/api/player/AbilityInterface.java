@@ -2,8 +2,8 @@ package lbn.api.player;
 
 import java.util.HashMap;
 
-import lbn.api.AbilityType;
 import lbn.api.PlayerStatusType;
+import lbn.player.ability.AbilityType;
 
 /**
  *{@link PlayerStatusType}と値を指定してPlayerのAbilityを変更させる。 <br />

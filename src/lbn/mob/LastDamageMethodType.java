@@ -13,8 +13,8 @@ public enum LastDamageMethodType {
 	SWORD_SUMMON("剣(Summon)", LevelType.SWORD),		//剣で召喚したSummonモンスターが攻撃
 	BOW_SUMMON("弓(Summon)", LevelType.BOW),			//弓で召喚したSummonモンスターが攻撃
 	MAGIC_SUMMON("魔法(Summon)", LevelType.MAGIC),		//魔法で召喚したSummonモンスターが攻撃
-	BARE_HAND("素手"),				//素手
-	MELEE_ATTACK_WITH_OTHER("アイテムで殴る"),	//その他のアイテムを持って直接攻撃
+	BARE_HAND("素手", LevelType.SWORD),				//素手
+	MELEE_ATTACK_WITH_OTHER("アイテムで殴る", LevelType.SWORD),	//その他のアイテムを持って直接攻撃
 	USE_ITEM("アイテム使用"),		//アイテムを使って攻撃
 	OTHER("その他");				//その他の方法
 

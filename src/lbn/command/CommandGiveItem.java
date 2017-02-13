@@ -200,7 +200,7 @@ public class CommandGiveItem implements CommandExecutor {
 		menuSelecor.addMenu(itemStack5, 17, getRun(allItem.get(1000)));
 		MenuSelectorManager.regist(menuSelecor);
 
-		initFlg = false;
+		initFlg = true;
 	}
 
 	protected static TreeSet<ItemInterface> getTreeSet() {

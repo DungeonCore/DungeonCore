@@ -89,7 +89,7 @@ class UndefinedReincarnation implements ReincarnationInterface {
 	}
 
 	@Override
-	public void addReincarnation(TheLowPlayer p, LevelType levelType, int count) {
+	public void addReincarnationEffect(TheLowPlayer p, LevelType levelType, int count) {
 
 	}
 
