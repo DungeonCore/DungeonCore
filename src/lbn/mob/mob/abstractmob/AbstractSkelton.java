@@ -1,8 +1,8 @@
 package lbn.mob.mob.abstractmob;
 
 import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomEntityUtil;
-import lbn.mob.customEntity1_7.CustomSkeleton;
+import lbn.mob.customEntity1_8.CustomEntityUtil;
+import lbn.mob.customEntity1_8.CustomSkeleton;
 
 import org.bukkit.Location;
 import org.bukkit.World;

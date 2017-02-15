@@ -1,4 +1,4 @@
-package lbn.mob.customEntity1_7;
+package lbn.mob.customEntity1_8;
 
 import lbn.mob.AIType;
 import lbn.mob.customEntity.ICustomUndeadEntity;

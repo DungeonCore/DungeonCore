@@ -1,6 +1,6 @@
 package lbn.util;
 
-import lbn.mob.customEntity1_7.CustomVillager;
+import lbn.mob.customEntity1_8.CustomVillager;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;

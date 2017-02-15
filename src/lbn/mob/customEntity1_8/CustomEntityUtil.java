@@ -1,4 +1,4 @@
-package lbn.mob.customEntity1_7;
+package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntitySummonable;
 import net.minecraft.server.v1_8_R1.Entity;

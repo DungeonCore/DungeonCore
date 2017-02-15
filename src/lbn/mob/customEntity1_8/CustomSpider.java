@@ -1,4 +1,4 @@
-package lbn.mob.customEntity1_7;
+package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
 import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;

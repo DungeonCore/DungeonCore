@@ -1,54 +1,59 @@
-package lbn.mob.customEntity1_7;
+package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
-import net.minecraft.server.v1_8_R1.EntityEnderman;
+import lbn.mob.mob.abstractmob.AbstractWitch;
+import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Witch;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomEnderman extends EntityEnderman implements ICustomEntity<Enderman>{
+public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 
-	public CustomEnderman(World world) {
-		super(world);
+	public CustomWitch(World w) {
+		super(w);
 	}
 
-	int newBt = 0;
+	boolean isChangeItem = true;
 
-//	@Override
-//	protected Entity findTarget() {
-//		Entity findTarget = super.findTarget();
-//		if (findTarget == null) {
-//			newBt = 0;
-//			return findTarget;
-//		}
-//
-//		EntityHuman human = (EntityHuman)findTarget;
-//
-//		if (newBt == 0) {
-//			EndermanFindTargetEvent event = new EndermanFindTargetEvent((org.bukkit.entity.Entity)getBukkitEntity(), (Player)human.getBukkitEntity());
-//			Bukkit.getServer().getPluginManager().callEvent(event);
-//		} else if (newBt >= 5) {
-//			newBt = -1;
-//		}
-//		newBt++;
-//
-//		return findTarget;
-//	}
+	public CustomWitch(org.bukkit.World w, AbstractWitch mobInstance) {
+		super(((CraftWorld)w).getHandle());
+
+		isChangeItem = mobInstance.isChangeItem();
+	}
 
 	@Override
-	public Enderman spawn(Location loc) {
+	public Witch spawn(Location loc) {
 		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
 		//位置を指定
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Enderman) getBukkitEntity();
+		 return (Witch) getBukkitEntity();
 	}
+
+//	@Override
+//	public boolean N() {
+//		if (!isIgnoreWater) {
+//			return super.N();
+//		} else {
+//			inWater = false;
+//			return false;
+//		}
+//	}
+//
+//	@Override
+//	public boolean M() {
+//		if (!isIgnoreWater) {
+//			return super.M();
+//		} else {
+//			return false;
+//		}
+//	}
 
 	@Override
 	public void a(NBTTagCompound nbttagcompound) {
@@ -77,4 +82,14 @@ public class CustomEnderman extends EntityEnderman implements ICustomEntity<Ende
 
 	boolean isIgnoreWater = false;
 
+//	@Override
+//	public void e() {
+//		ItemStack itemstack = this.be();
+//		super.e();
+//		//持っているアイテムを戻す
+//		if (!isChangeItem) {
+//			setEquipment(0, itemstack);
+//		}
+//
+//	}
 }

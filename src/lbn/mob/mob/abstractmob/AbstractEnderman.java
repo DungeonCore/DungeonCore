@@ -2,7 +2,7 @@ package lbn.mob.mob.abstractmob;
 
 import lbn.common.event.EndermanFindTargetEvent;
 import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomEnderman;
+import lbn.mob.customEntity1_8.CustomEnderman;
 
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;

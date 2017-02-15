@@ -1,15 +1,15 @@
 package lbn.util.spawn;
 
 import lbn.dungeoncore.LbnRuntimeException;
-import lbn.mob.customEntity1_7.CustomEnderDragon;
-import lbn.mob.customEntity1_7.CustomEnderman;
-import lbn.mob.customEntity1_7.CustomGiant;
-import lbn.mob.customEntity1_7.CustomPig;
-import lbn.mob.customEntity1_7.CustomPigZombie;
-import lbn.mob.customEntity1_7.CustomSkeleton;
-import lbn.mob.customEntity1_7.CustomSpider;
-import lbn.mob.customEntity1_7.CustomWitch;
-import lbn.mob.customEntity1_7.CustomZombie;
+import lbn.mob.customEntity1_8.CustomEnderDragon;
+import lbn.mob.customEntity1_8.CustomEnderman;
+import lbn.mob.customEntity1_8.CustomGiant;
+import lbn.mob.customEntity1_8.CustomPig;
+import lbn.mob.customEntity1_8.CustomPigZombie;
+import lbn.mob.customEntity1_8.CustomSkeleton;
+import lbn.mob.customEntity1_8.CustomSpider;
+import lbn.mob.customEntity1_8.CustomWitch;
+import lbn.mob.customEntity1_8.CustomZombie;
 import lbn.util.DungeonLogger;
 import net.minecraft.server.v1_8_R1.CommandAbstract;
 import net.minecraft.server.v1_8_R1.CommandException;

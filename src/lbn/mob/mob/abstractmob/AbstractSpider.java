@@ -1,7 +1,7 @@
 package lbn.mob.mob.abstractmob;
 
 import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomSpider;
+import lbn.mob.customEntity1_8.CustomSpider;
 
 import org.bukkit.Location;
 import org.bukkit.World;

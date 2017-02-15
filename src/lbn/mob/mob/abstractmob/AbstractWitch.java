@@ -1,7 +1,7 @@
 package lbn.mob.mob.abstractmob;
 
 import lbn.mob.AbstractCustomMob;
-import lbn.mob.customEntity1_7.CustomWitch;
+import lbn.mob.customEntity1_8.CustomWitch;
 
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
