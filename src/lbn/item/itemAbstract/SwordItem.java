@@ -1,7 +1,8 @@
 package lbn.item.itemAbstract;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.old.AbstractAttackItem_Old;
+import lbn.item.attackitem.weaponSkill.MobSkillExecutor;
 import lbn.item.itemInterface.MeleeAttackItemable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
@@ -15,7 +16,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class SwordItem extends AbstractAttackItem implements MeleeAttackItemable{
+public abstract class SwordItem extends AbstractAttackItem_Old implements MeleeAttackItemable{
 	public int rank() {
 		return 0;
 	}
@@ -25,11 +26,13 @@ public abstract class SwordItem extends AbstractAttackItem implements MeleeAttac
 		super.excuteOnRightClick(e);
 		if (!e.getPlayer().isSneaking()) {
 			excuteOnRightClick2(e);
+			//スキルを発動
+			MobSkillExecutor.executeMobSkillOnClick(e, this);
 		}
 	}
 
 	@Override
-	protected double getNormalDamage() {
+	protected double getMaterialDamage() {
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 
@@ -54,12 +57,12 @@ public abstract class SwordItem extends AbstractAttackItem implements MeleeAttac
 			//eventを呼ぶ
 			//相殺されるはず(e.getDamage() - getNormalDamage() )
 			PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent(player, target, item,
-					e.getDamage() - getNormalDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
+					e.getDamage() - getMaterialDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
 			playerCombatEntityEvent.callEvent();
 			//ダメージの計算を行う
 			e.setDamage(playerCombatEntityEvent.getDamage());
 		} else {
-			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getNormalDamage());
+			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
 		}
 
 		excuteOnMeleeAttack2(item, owner, target, e);

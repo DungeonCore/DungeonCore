@@ -58,7 +58,7 @@ public abstract class AbstractSpecialSword extends LevelSword implements Special
 	abstract public int getDefaultSlotCount();
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return false;
 	}
 }

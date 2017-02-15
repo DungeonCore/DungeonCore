@@ -61,7 +61,6 @@ public class NpcManager {
 
 	public static void onNPCDamageEvent(NPCDamageEvent e) {
 		String name = e.getNPC().getName();
-		System.out.println("damage:" + name);
 		VillagerNpc villagerNpc = registedNpc.get(name);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCDamageEvent(e);
@@ -70,7 +69,6 @@ public class NpcManager {
 
 	public static void onNPCSpawnEvent(NPCSpawnEvent e) {
 		String name = e.getNPC().getName();
-		System.out.println("spawn:" + name);
 		//スポーン済みにセットする
 		spawned.put(name, e.getNPC());
 		VillagerNpc villagerNpc = registedNpc.get(name);
@@ -81,7 +79,6 @@ public class NpcManager {
 
 	public static void onNPCDespawnEvent(NPCDespawnEvent e) {
 		String name = e.getNPC().getName();
-		System.out.println("despawn:" + name);
 		//もしスポーン済み情報がセットされてるなら削除する
 		if (e.getNPC().equals(spawned.get(name))) {
 			spawned.remove(name);

@@ -145,7 +145,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 	}
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return true;
 	}
 

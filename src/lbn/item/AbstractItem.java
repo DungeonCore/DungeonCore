@@ -25,7 +25,7 @@ public abstract class AbstractItem implements ItemInterface{
 	}
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return true;
 	}
 

@@ -22,7 +22,7 @@ public abstract class AbstractSpider extends AbstractCustomMob<CustomSpider, Spi
 
 	@Override
 	protected CustomSpider getInnerEntity(World w) {
-		return new CustomSpider(w);
+		return new CustomSpider(w, getLbnMobTag());
 	}
 
 }

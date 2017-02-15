@@ -132,7 +132,7 @@ public class LeatherArmor extends AbstractItem implements ArmorItemable, Strengt
 	}
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return false;
 	}
 

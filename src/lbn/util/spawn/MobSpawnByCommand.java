@@ -60,23 +60,11 @@ public class MobSpawnByCommand {
 				}
 			}
 			localNBTTagCompound1.setString("id", str);
-			//オリジナルのTagをつける
+			//オリジナルのNBTTagをつける
 			localNBTTagCompound1.setBoolean("IsWaterMonster", nbtTag.isWaterMonster());
-			//NBTTag generic.attackDamageをとらないので一時的にコメントアウト
-//			//NBTTag generic.attackDamageをとる
-//			NBTTagList nbtBase = (NBTTagList) localNBTTagCompound1.get("Attributes");
-//			if (nbtBase != null) {
-//				for (int i = 0; i < nbtBase.size(); i++) {
-//					NBTBase g = nbtBase.g(i);
-//					if (g.toString().contains("generic.attackDamage")) {
-//						nbtBase.a(i);
-//						continue;
-//					}
-//				}
-//			}
 
 			WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
-			Entity localObject1_1 = getEntity(localNBTTagCompound1, world);
+			Entity localObject1_1 = getEntity(localNBTTagCompound1, world, nbtTag);
 			if (localObject1_1 != null) {
 				// spawn
 				((Entity) localObject1_1).setPositionRotation(loc.getX(), loc.getY(), loc.getZ(),
@@ -111,13 +99,17 @@ public class MobSpawnByCommand {
 		return null;
 	}
 
-	protected static Entity getEntity(NBTTagCompound paramNBTTagCompound,
-			WorldServer world) {
+	protected static Entity getEntity(NBTTagCompound paramNBTTagCompound, WorldServer world, LbnMobTag tag) {
 		Entity entity = EntityTypes.a(paramNBTTagCompound, world);
 		if (entity == null) {
 			throw new LbnRuntimeException("entity is null:" + paramNBTTagCompound.getString("id"));
 		}
 		EntityType type = entity.getBukkitEntity().getType();
+
+		//nullの場合はここで作成
+		if (tag == null) {
+			tag = new LbnMobTag(type);
+		}
 
 		boolean updateFlg = true;
 		switch (type) {
@@ -131,16 +123,16 @@ public class MobSpawnByCommand {
 				entity = new CustomPig(world);
 				break;
 			case SKELETON:
-				entity = new CustomSkeleton(world);
+				entity = new CustomSkeleton(world, tag);
 				break;
 			case SPIDER:
-				entity = new CustomSpider(world);
+				entity = new CustomSpider(world, tag);
 				break;
 			case WITCH:
 				entity = new CustomWitch(world);
 				break;
 			case ZOMBIE:
-				entity = new CustomZombie(world);
+				entity = new CustomZombie(world, tag);
 				break;
 			case PIG_ZOMBIE:
 				entity = new CustomPigZombie(world);
@@ -188,7 +180,7 @@ public class MobSpawnByCommand {
 			boolean isRiding = false;
 
 			WorldServer world = ((CraftWorld) Bukkit.getWorlds().get(0)).getHandle();
-			Entity localObject1_1 = getEntity(localNBTTagCompound1, world);
+			Entity localObject1_1 = getEntity(localNBTTagCompound1, world, null);
 			if (localObject1_1 != null) {
 				Entity localObject2 = localObject1_1;
 				NBTTagCompound localNBTTagCompound2 = localNBTTagCompound1;

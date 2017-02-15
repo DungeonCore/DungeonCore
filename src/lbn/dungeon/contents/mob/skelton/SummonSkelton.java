@@ -5,6 +5,7 @@ import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -56,6 +57,13 @@ public class SummonSkelton extends AbstractSkelton implements SummonMobable{
 
 	@Override
 	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	}
+
+	@Override
+	public LbnMobTag getLbnMobTag() {
+		LbnMobTag lbnMobTag = super.getLbnMobTag();
+		lbnMobTag.setSummonMob(true);
+		return lbnMobTag;
 	}
 
 }

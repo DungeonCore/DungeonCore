@@ -3,6 +3,7 @@ package lbn.util;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import lbn.common.citizenNpc.CitizenNpcManager;
 import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
@@ -34,7 +35,6 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 public class LivingEntityUtil {
 	public static boolean isEnemy(Entity e) {
@@ -68,7 +68,11 @@ public class LivingEntityUtil {
 				//狼でないならFALSE
 				return false;
 			}
+		}
 
+		//NPCならTRUE
+		if (CitizenNpcManager.isNpc(e)) {
+			return false;
 		}
 
 
@@ -138,29 +142,6 @@ public class LivingEntityUtil {
 	}
 
 	/**
-	 * mobをノーノックバック状態にする
-	 * @param entity
-	 */
-	public static void setNoKnockBack(final LivingEntity entity) {
-		new BukkitRunnable() {
-			int i = 0;
-			@Override
-			public void run() {
-				entity.setVelocity(new Vector(0, 0, 0));
-				if (i == 2) {
-					cancel();
-				}
-				i++;
-			}
-		}.runTaskTimer(Main.plugin, 0, 1);
-	}
-
-	public static void addFoodPoint(Player p, int point) {
-		p.setFoodLevel(Math.min(20, p.getFoodLevel() + point));
-	}
-
-
-	/**
 	 * 周りのプレイヤーを取得
 	 * @param e
 	 * @param x
@@ -179,7 +160,7 @@ public class LivingEntityUtil {
 	}
 
 	/**
-	 *周囲のプレイヤーに有効なモブを取得
+	 *指定したEntityの周囲にいるPlayerと友好的なmobを取得
 	 * @param e
 	 * @param x
 	 * @param y
@@ -190,6 +171,24 @@ public class LivingEntityUtil {
 		ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
 		for (Entity entity : e.getNearbyEntities(x, y, z)) {
 			if (isFriendship(entity)) {
+				rtn.add((LivingEntity) entity);
+			}
+		}
+		return rtn;
+	}
+
+	/**
+	 *指定したEntityの周囲にいるPlayerと敵対するmobを取得
+	 * @param e
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public static ArrayList<LivingEntity> getNearEnemy(Entity e, double x, double y, double z) {
+		ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
+		for (Entity entity : e.getNearbyEntities(x, y, z)) {
+			if (isEnemy(entity)) {
 				rtn.add((LivingEntity) entity);
 			}
 		}

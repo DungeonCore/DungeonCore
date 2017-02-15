@@ -121,7 +121,6 @@ public class JavaUtil {
 		try {
 			Field field = clazz.getDeclaredField(fieldName);
 			field.setAccessible(true);
-			System.out.println(field.getDeclaringClass());
 			return field.get(targetInstance);
 		} catch (Exception e) {
 			e.printStackTrace();

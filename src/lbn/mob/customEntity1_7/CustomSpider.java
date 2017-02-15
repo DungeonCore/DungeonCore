@@ -1,23 +1,68 @@
 package lbn.mob.customEntity1_7;
 
 import lbn.mob.customEntity.ICustomEntity;
+import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.util.spawn.LbnMobTag;
+import net.minecraft.server.v1_8_R1.Enchantment;
+import net.minecraft.server.v1_8_R1.EnchantmentManager;
+import net.minecraft.server.v1_8_R1.EntityArrow;
+import net.minecraft.server.v1_8_R1.EntityHuman;
+import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySpider;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
+import net.minecraft.server.v1_8_R1.IRangedEntity;
+import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalLeapAtTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
+import org.bukkit.event.entity.EntityCombustEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>{
+public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>, IRangedEntity{
+	static final LbnMobTag DEFAULT_TAG = new LbnMobTag(EntityType.SPIDER);
+
 	public CustomSpider(World world) {
-		super(world);
+		this(world, DEFAULT_TAG);
 	}
 
-	public CustomSpider(org.bukkit.World world) {
-		super(((CraftWorld)world).getHandle());
+	LbnMobTag tag;
+
+	public CustomSpider(World world, LbnMobTag tag) {
+		super(world);
+		this.tag = tag;
+		try {
+			AttackAISetter.removeAllAi(this);
+
+			this.goalSelector.a(1, new PathfinderGoalFloat(this));
+			this.goalSelector.a(2, this.a);
+			this.goalSelector.a(3, new PathfinderGoalLeapAtTarget(this, 0.4F));
+    		//戦闘AIをセットする
+    		AttackAISetter.setAttackAI(this, tag);
+			this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 0.8D));
+			this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+			this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+
+			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
+			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
+    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
+    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public CustomSpider(org.bukkit.World world, LbnMobTag tag) {
+		this(((CraftWorld)world).getHandle(), tag);
 	}
 
 //	@Override
@@ -36,14 +81,8 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>{
 	}
 
 	@Override
-	public void a(NBTTagCompound nbttagcompound) {
-		super.a(nbttagcompound);
-		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
-	}
-
-	@Override
 	public boolean W() {
-		if (!isIgnoreWater) {
+		if (!tag.isWaterMonster()) {
 			return super.W();
 		} else {
 			inWater = false;
@@ -53,12 +92,43 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>{
 
 	@Override
 	public boolean V() {
-		if (!isIgnoreWater) {
+		if (!tag.isWaterMonster()) {
 			return super.V();
 		} else {
 			return false;
 		}
 	}
 
-	boolean isIgnoreWater = false;
+
+	@Override
+	public void a(EntityLiving entityliving, float f) {
+		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, 14 - this.world.getDifficulty().a() * 4);
+		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bz());
+		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bz());
+
+		entityarrow.b(f * 2.0F + this.random.nextGaussian() * 0.25D + this.world.getDifficulty().a() * 0.11F);
+		if (i > 0) {
+			entityarrow.b(entityarrow.j() + i * 0.5D + 0.5D);
+		}
+		if (j > 0) {
+			entityarrow.setKnockbackStrength(j);
+		}
+		if ((EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bz()) > 0)) {
+			EntityCombustEvent event = new EntityCombustEvent(entityarrow.getBukkitEntity(), 100);
+			this.world.getServer().getPluginManager().callEvent(event);
+			if (!event.isCancelled()) {
+				entityarrow.setOnFire(event.getDuration());
+			}
+		}
+		EntityShootBowEvent event = CraftEventFactory.callEntityShootBowEvent(this, bz(), entityarrow, 0.8F);
+		if (event.isCancelled()) {
+			event.getProjectile().remove();
+			return;
+		}
+		if (event.getProjectile() == entityarrow.getBukkitEntity()) {
+			this.world.addEntity(entityarrow);
+		}
+		makeSound("random.bow", 1.0F, 1.0F / (bb().nextFloat() * 0.4F + 0.8F));
+	}
+
 }

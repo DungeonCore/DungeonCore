@@ -1,7 +1,8 @@
 package lbn.item.itemAbstract;
 
 import lbn.item.CooltimeManager;
-import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.old.AbstractAttackItem_Old;
+import lbn.item.attackitem.weaponSkill.MobSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.RightClickItemable;
@@ -13,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class MagicItem extends AbstractAttackItem implements RightClickItemable, LeftClickItemable{
+public abstract class MagicItem extends AbstractAttackItem_Old implements RightClickItemable, LeftClickItemable{
 
 	@Override
 	final public void excuteOnLeftClick(PlayerInteractEvent e) {
@@ -44,6 +45,8 @@ public abstract class MagicItem extends AbstractAttackItem implements RightClick
 
 		if (!player.isSneaking()) {
 			excuteMagic(e, player, e.getItem(), getRightClickMagic(e.getItem()));
+			//スキルを発動
+			MobSkillExecutor.executeMobSkillOnClick(e, this);
 		}
 	}
 
@@ -104,7 +107,7 @@ public abstract class MagicItem extends AbstractAttackItem implements RightClick
 	abstract public int getAvailableLevel();
 
 	@Override
-	protected double getNormalDamage() {
+	protected double getMaterialDamage() {
 		return 0;
 	}
 

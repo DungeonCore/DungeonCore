@@ -1,4 +1,4 @@
-package lbn.item.attackitem;
+package lbn.item.attackitem.old;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,10 +24,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SpecialAttackItemSelector extends AbstractItem implements RightClickItemable, LeftClickItemable{
+public class SpecialAttackItemSelectorOld extends AbstractItem implements RightClickItemable, LeftClickItemable{
 
 	SpecialAttackItemable specialItem;
-	public SpecialAttackItemSelector(SpecialAttackItemable specialItem) {
+	public SpecialAttackItemSelectorOld(SpecialAttackItemable specialItem) {
 		this.specialItem = specialItem;
 
 		MenuSelecor menuSelecor = new MenuSelecor(specialItem.getId() + " selector");

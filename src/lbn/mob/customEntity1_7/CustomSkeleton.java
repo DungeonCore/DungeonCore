@@ -1,27 +1,23 @@
 package lbn.mob.customEntity1_7;
 
-import java.lang.reflect.Field;
-
+import lbn.mob.AIType;
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
-import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttack;
-import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityHuman;
-import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -31,55 +27,40 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 	boolean isUndead = true;
 	boolean isNonDayFire = true;
 
-	boolean isCustom = false;
+	static LbnMobTag DEFAULT_TAG = new LbnMobTag(EntityType.SKELETON);
 
 	public CustomSkeleton(World world) {
-		this(world.getWorld(), false);
+		this(world.getWorld(), DEFAULT_TAG);
 	}
 
-	public CustomSkeleton(org.bukkit.World bukkitWorld, boolean isSummon) {
+	public CustomSkeleton(World world, LbnMobTag tag) {
+		this(world.getWorld(), tag);
+	}
+
+	LbnMobTag tag = null;
+
+	public CustomSkeleton(org.bukkit.World bukkitWorld, LbnMobTag tag) {
 		super(((CraftWorld) bukkitWorld).getHandle());
+		this.tag = tag;
 
-		isCustom = true;
 		isNonDayFire = true;
-
 		try {
-			// targetSelectorを初期化
-			Field field = EntityInsentient.class.getDeclaredField("targetSelector");
-			field.setAccessible(true);
-			field.set(this, new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null));
+			//AIを初期化する
+			AttackAISetter.removeAllAi(this);
+
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
 			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(isSummon);
+			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
 			this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 
-			// goalSelectorを初期化
-			Field field2 = EntityInsentient.class.getDeclaredField("goalSelector");
-			field2.setAccessible(true);
-			field2.set(this, new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null));
-
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
-			//いらないと思うので一旦削除
-//			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-//			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, 1.0D));
-			//遠距離攻撃のAI
-			TheLoWPathfinderGoalArrowAttack theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(this, 1.25D, 20, 20.0F);
-			//テスト用なので一時的に削除
-//			theLoWPathfinderGoalArrowAttack.setNearAttackRange(7);
-//			theLoWPathfinderGoalArrowAttack.setShotTerm(3);
-			this.goalSelector.a(4, theLoWPathfinderGoalArrowAttack);
-			//テスト用なので一時的に削除
-			//近距離攻撃のAI
-//			TheLowPathfinderGoalMeleeAttack bq = new TheLowPathfinderGoalMeleeAttack(this, EntityLiving.class, new LbnMobTag(EntityType.SKELETON));
-//			bq.setAttackRange(7);
-//			bq.setAttackTerm(10);
-//			bq.setKillAura(true);
-//			bq.setJump(true);
-//			this.goalSelector.a(5, bq);
 
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0D));
-			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
-			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
+    		//戦闘AIをセットする
+    		AttackAISetter.setAttackAI(this, tag);
+
+			this.goalSelector.a(8, new PathfinderGoalRandomStroll(this, 1.0D));
+			this.goalSelector.a(9, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+			this.goalSelector.a(9, new PathfinderGoalRandomLookaround(this));
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +71,8 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 
 	@Override
 	public void n() {
-		if (!isCustom) {
+		//AIが通常のものなら通常の処理を行う(tagがnullの時は無視する)
+		if (tag != null && tag.getAiType() == AIType.NORMAL) {
 			super.n();
 			return;
 		}
@@ -157,14 +139,8 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 	Player owner = null;
 
 	@Override
-	public void a(NBTTagCompound nbttagcompound) {
-		super.a(nbttagcompound);
-		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
-	}
-
-	@Override
 	public boolean W() {
-		if (!isIgnoreWater) {
+		if (!tag.isWaterMonster()) {
 			return super.W();
 		} else {
 			inWater = false;
@@ -174,7 +150,7 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 
 	@Override
 	public boolean V() {
-		if (!isIgnoreWater) {
+		if (!tag.isWaterMonster()) {
 			return super.V();
 		} else {
 			return false;

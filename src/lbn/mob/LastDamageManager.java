@@ -40,7 +40,11 @@ public class LastDamageManager {
 		}
 	}
 
-	protected static void addData(Player p, LastDamageMethodType type, int id) {
+	public static void addData(Player p, LastDamageMethodType type, Entity entity) {
+		addData(p, type, entity.getEntityId());
+	}
+
+	public static void addData(Player p, LastDamageMethodType type, int id) {
 		if (type == null) {
 			return;
 		}

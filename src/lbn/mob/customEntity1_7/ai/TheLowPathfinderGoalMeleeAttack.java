@@ -24,11 +24,13 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 	private double j;
 	private double k;
 
-	protected int attackTerm = 1;
+//	protected int attackTerm = 1;
+	protected int attackTerm = 10;
 
-	protected double attackRange = -1;
+//	protected double attackRange = -1;
+	protected double attackRange = 7;
 
-	protected boolean isJump = false;
+	protected boolean isJump = true;
 
 	public TheLowPathfinderGoalMeleeAttack(EntityCreature entitycreature, Class<?> oclass, LbnMobTag tag) {
 		this(entitycreature, tag.getNearingSpeed(), false);
@@ -60,7 +62,6 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 		} else if (this.g != null && !this.g.isAssignableFrom(entityliving.getClass())) {
 			return false;
 		} else {
-			System.out.println("移動１");
 			this.f = this.b.getNavigation().a((Entity) entityliving);
 			return this.f != null;
 		}
@@ -108,7 +109,6 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 
 			//キルオーラ発動中は攻撃が当たらないときだけ相手に近づく
 			if (!isKillAura || d0 > attackRange * attackRange) {
-				System.out.println("移動２");
 				if (!this.b.getNavigation().a((Entity) entityliving, this.d)) {
 					this.h += 15;
 				}
@@ -159,7 +159,7 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 		this.isJump = isJump;
 	}
 
-	boolean isKillAura = false;
+	boolean isKillAura = true;
 
 	/**
 	 * キルオーラかどうかをセットする

@@ -19,7 +19,7 @@ public class Fragment  extends AbstractKeyItem{
 	}
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return false;
 	}
 

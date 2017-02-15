@@ -18,13 +18,13 @@ import lbn.util.ItemStackUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * 武器のみ
- * @author KENSUKE
- *
- */
 public class AttackItemStack {
-	protected AttackItemStack(ItemStack item, AbstractAttackItem itemInterface) {
+	/**
+	 * インスタンスを取得、通常はクラス内からしか呼ばれない
+	 * @param item
+	 * @param itemInterface
+	 */
+	private AttackItemStack(ItemStack item, AbstractAttackItem itemInterface) {
 		this.item = item;
 		this.itemInterface = itemInterface;
 	}
@@ -34,11 +34,17 @@ public class AttackItemStack {
 
 	static HashMap<ItemStack, AttackItemStack> cache = new HashMap<ItemStack, AttackItemStack>();
 
+	/**
+	 * ItemStackから武器情報を取得する
+	 * @param item
+	 * @return
+	 */
 	public static AttackItemStack getInstance(ItemStack item) {
 		ItemInterface customItem = ItemManager.getCustomItem(item);
 		if (customItem == null) {
 			return null;
 		}
+		//武器でないなnullを返す
 		if (customItem instanceof AbstractAttackItem) {
 			AttackItemStack attackItemStack = getCache(item);
 			return attackItemStack;
@@ -47,46 +53,79 @@ public class AttackItemStack {
 	}
 
 	/**
-	 * キャッシュから取得する
+	 * キャッシュからインスタンスを取得する
 	 * @param item
 	 * @return
 	 */
 	private static AttackItemStack getCache(ItemStack item) {
+		//キャッシュがあるならそれを取得
 		if (cache.containsKey(item)) {
 			return cache.get(item);
 		}
 		return new AttackItemStack(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
 	}
 
+	/**
+	 * ItemStackを取得
+	 * @return
+	 */
 	public ItemStack getItem() {
 		return item;
 	}
 
+	/**
+	 * CustomItemを取得
+	 * @return
+	 */
 	public AbstractAttackItem getItemInterface() {
 		return itemInterface;
 	}
 
+	/**
+	 * 武器の強化レベルを取得
+	 * @return
+	 */
 	public int getStrengthLevel() {
 		return StrengthOperator.getLevel(item);
 	}
 
+	/**
+	 * 武器のアイテムタイプを取得
+	 * @return
+	 */
 	public ItemType getItemType() {
 		return itemInterface.getAttackType();
 	}
 
+	/**
+	 * 利用可能レベルを取得
+	 * @return
+	 */
 	public int getAvailableLevel() {
 		return itemInterface.getAvailableLevel();
 	}
 
 	ArrayList<SlotInterface> slotList = null;
 
+	/**
+	 * 使用している魔法石を取得
+	 * @return
+	 */
 	public ArrayList<SlotInterface> getUseSlot() {
 		initSlot();
 		return slotList;
 	}
 
+
+	//魔法石情報を初期化しているかどうか
+	boolean isInitSlot = false;
+
+	/**
+	 * 魔法石情報を取得
+	 */
 	protected void initSlot() {
-		if (slotList != null) {
+		//すでに初期化しているなら無視する
+		if (isInitSlot) {
 			return;
 		}
 
@@ -97,23 +136,32 @@ public class AttackItemStack {
 				slotList.add(slotByLore);
 			}
 		}
+		isInitSlot = true;
 	}
 
+	/**
+	 * 魔法石を取り除く
+	 * @param slot
+	 * @return
+	 */
 	public boolean removeSlot(SlotInterface slot) {
 		initSlot();
 		return slotList.remove(slotList.indexOf(slot)) != null;
 	}
 
+	/**
+	 * 空のスロットを追加する
+	 * @return
+	 */
 	public boolean addEmptySlot() {
-		initSlot();
-
-		if (slotList.size() < 5) {
-			slotList.add(new EmptySlot());
-			return true;
-		}
-		return false;
+		return addSlot(new EmptySlot());
 	}
 
+	/**
+	 * 魔法石を追加する
+	 * @param slot
+	 * @return
+	 */
 	public boolean addSlot(SlotInterface slot) {
 		initSlot();
 
@@ -124,12 +172,23 @@ public class AttackItemStack {
 		return false;
 	}
 
+	/**
+	 * 指定されたスロットが存在していたらTRUE
+	 * @param slot
+	 * @return
+	 */
 	public boolean hasSlot(AbstractSlot slot) {
 		initSlot();
 		return slotList.contains(slot);
 	}
 
+	/**
+	 * 武器情報を取得する
+	 */
 	public void updateItem() {
+		//Slotの初期化をする
+		initSlot();
+
 		List<String> lore = ItemStackUtil.getLore(item);
 		Iterator<String> iterator = lore.iterator();
 
@@ -159,7 +218,6 @@ public class AttackItemStack {
 		}
 		lore.add("");
 		ItemStackUtil.setLore(item, lore);
-
 	}
 
 }

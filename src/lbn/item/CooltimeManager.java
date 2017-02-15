@@ -44,11 +44,11 @@ public class CooltimeManager {
 		if (create.size() > 1000000) {
 			new LbnRuntimeException("cool time size is too big!!").printStackTrace();
 		}
-		create.put(new CooltimeKeyClass(p, cooltime, item), p.getTicksLived() + cooltime.getCooltimeTick(item));
+		create.put(new CooltimeKeyClass(p, cooltime), p.getTicksLived() + cooltime.getCooltimeTick(item));
 	}
 
 	public boolean canUse() {
-		CooltimeKeyClass cooltimeKeyClass = new CooltimeKeyClass(p, cooltime, item);
+		CooltimeKeyClass cooltimeKeyClass = new CooltimeKeyClass(p, cooltime);
 		if (create.containsKey(cooltimeKeyClass)) {
 			int canUseTickLive = create.get(cooltimeKeyClass);
 			boolean canUse = canUseTickLive < p.getTicksLived();
@@ -61,7 +61,7 @@ public class CooltimeManager {
 	}
 
 	public int getRemainTick() {
-		CooltimeKeyClass cooltimeKeyClass = new CooltimeKeyClass(p, cooltime, item);
+		CooltimeKeyClass cooltimeKeyClass = new CooltimeKeyClass(p, cooltime);
 		if (create.containsKey(cooltimeKeyClass)) {
 			int canUseTickLive = create.get(cooltimeKeyClass);
 			return Math.max(0, canUseTickLive - p.getTicksLived());
@@ -80,7 +80,7 @@ public class CooltimeManager {
 }
 
 class CooltimeKeyClass {
-	public CooltimeKeyClass(Player p, Cooltimable cooltime, ItemStack item) {
+	public CooltimeKeyClass(Player p, Cooltimable cooltime) {
 		this.cooltimeName = cooltime.getId();
 		this.playerName = p.getName();
 	}

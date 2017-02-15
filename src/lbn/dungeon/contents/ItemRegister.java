@@ -51,7 +51,7 @@ import lbn.dungeon.contents.slotStone.other.KillEffectTutorial;
 import lbn.dungeon.contents.slotStone.other.MagicHealMagicStone;
 import lbn.dungeon.contents.slotStone.other.MagicStoneJade;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.SpecialAttackItemSelector;
+import lbn.item.attackitem.old.SpecialAttackItemSelectorOld;
 import lbn.item.setItem.SetItemManager;
 import lbn.player.ItemType;
 
@@ -92,15 +92,15 @@ public class ItemRegister {
 		ItemManager.registItem(NormalSwordWrapper.getAllNormalItem());
 		ItemManager.registItem(new DebugSword());
 		ItemManager.registItem(new SpecialSwordIceAspect().getAllItem());
-		ItemManager.registItem(new SpecialAttackItemSelector(new SpecialSwordIceAspect()));
+		ItemManager.registItem(new SpecialAttackItemSelectorOld(new SpecialSwordIceAspect()));
 		ItemManager.registItem(new SpecialSwordMebiusSword().getAllItem());
-		ItemManager.registItem(new SpecialAttackItemSelector(new SpecialSwordMebiusSword()));
+		ItemManager.registItem(new SpecialAttackItemSelectorOld(new SpecialSwordMebiusSword()));
 		ItemManager.registItem(new SpecialSwordAquatempest().getAllItem());
-		ItemManager.registItem(new SpecialAttackItemSelector(new SpecialSwordAquatempest()));
+		ItemManager.registItem(new SpecialAttackItemSelectorOld(new SpecialSwordAquatempest()));
 		ItemManager.registItem(new SpecialSwordSoulSword().getAllItem());
-		ItemManager.registItem(new SpecialAttackItemSelector(new SpecialSwordSoulSword()));
+		ItemManager.registItem(new SpecialAttackItemSelectorOld(new SpecialSwordSoulSword()));
 		ItemManager.registItem(new AttributeLeafSword().getAllItem());
-		ItemManager.registItem(new SpecialAttackItemSelector(new AttributeLeafSword()));
+		ItemManager.registItem(new SpecialAttackItemSelectorOld(new AttributeLeafSword()));
 		ItemManager.registItem(new NormalAttackItemSelector(ItemType.SWORD));
 		ItemManager.registItem(new TutorialSword());
 

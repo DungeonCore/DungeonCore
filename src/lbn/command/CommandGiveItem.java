@@ -12,7 +12,7 @@ import lbn.common.menu.SelectRunnable;
 import lbn.dungeon.contents.item.key.KeyItemable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.old.AbstractAttackItem_Old;
 import lbn.item.itemAbstract.BowItem;
 import lbn.item.itemAbstract.MagicItem;
 import lbn.item.itemAbstract.SwordItem;
@@ -149,11 +149,11 @@ public class CommandGiveItem implements CommandExecutor {
 		count = 0;
 		// アイテムをグループごとに分類分けする
 		for (ItemInterface item : ItemManager.getAllItem()) {
-			if (!item.isDispList()) {
+			if (!item.isShowItemList()) {
 				continue;
 			}
 			int rtn;
-			if (item instanceof AbstractAttackItem) {
+			if (item instanceof AbstractAttackItem_Old) {
 				rtn = 1;
 			} else if (item instanceof SetItemParts) {
 				rtn = 2;

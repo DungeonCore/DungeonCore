@@ -160,7 +160,6 @@ public class CommandViewInfo implements CommandExecutor{
 				public void run() {
 					for (int z = location.getBlockZ() - 150; z < location.getBlockZ() + 150; z++) {
 						if (!new Location(location.getWorld(), xx, 3, z).getBlock().getType().equals(Material.GRASS)) {
-//							System.out.println("a:" + new Location(location.getWorld(), xx, 3, z).getBlock().getType() + "@" + xx + ", " + z);
 							continue;
 						}
 

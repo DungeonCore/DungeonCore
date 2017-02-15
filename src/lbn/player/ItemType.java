@@ -42,30 +42,30 @@ public enum ItemType {
 
 	/**
 	 * レベルに応じた武器の最大ダメージを取得
-	 * @param level
+	 * @param availableLevel 利用可能レベル
 	 * @return
 	 */
-	public double getMaxDamage(int level) {
+	public double getMaxDamage(int availableLevel) {
 		//キャッシュをするほうが遅くなるのでこのまま計算する
-		if (level <= 60) {
+		if (availableLevel <= 60) {
 			if (this == SWORD) {
-				return 9 + Math.pow(level / 10.0, 2) * 2.6;
+				return 9 + Math.pow(availableLevel / 10.0, 2) * 2.6;
 			} else if (this == BOW) {
-				return 12 + Math.pow(level / 10.0, 2.1) * 2.7;
+				return 12 + Math.pow(availableLevel / 10.0, 2.1) * 2.7;
 			} else if (this == MAGIC) {
-				return 12 + Math.pow(level / 10.0, 2) * 2.6;
+				return 12 + Math.pow(availableLevel / 10.0, 2) * 2.6;
 			}
 		} else {
 			if (this == SWORD) {
-				return 9 + level / 10.0 * 6.6 + 5;
+				return 9 + availableLevel / 10.0 * 6.6 + 5;
 			} else if (this == BOW) {
-				return 13 + Math.pow((level - 60) / 10.0, 1.1) * 6.7 + 5;
+				return 13 + Math.pow((availableLevel - 60) / 10.0, 1.1) * 6.7 + 5;
 			} else if (this == MAGIC) {
-				return 9 + level / 10.0 * 6.6 + 5;
+				return 9 + availableLevel / 10.0 * 6.6 + 5;
 			}
 		}
 
 		//その他の時は起こり得ないが剣にする
-		return 12 + Math.pow(level / 10.0, 2) * 2.6;
+		return 12 + Math.pow(availableLevel / 10.0, 2) * 2.6;
 	}
 }

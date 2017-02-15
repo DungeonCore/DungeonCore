@@ -32,7 +32,7 @@ public class CaveStone extends AbstractItem {
 	}
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return false;
 	}
 

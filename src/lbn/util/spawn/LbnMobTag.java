@@ -1,5 +1,7 @@
 package lbn.util.spawn;
 
+import lbn.mob.AIType;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
@@ -20,7 +22,9 @@ public class LbnMobTag {
 
 	int attackCountPerSec = 1;
 
-	int attackReach = -1;
+	float attackReach = -1;
+
+	int shotTarm = 1;
 
 	boolean isJumpAttack = false;
 
@@ -29,6 +33,8 @@ public class LbnMobTag {
 	double nearingSpeed = 1;
 
 	boolean isSummonMob = false;
+
+	AIType aiType = AIType.NORMAL;
 
 	public void setRiding(boolean isRiding) {
 		this.isRiding = isRiding;
@@ -82,7 +88,7 @@ public class LbnMobTag {
 	 * 攻撃範囲を取得
 	 * @return
 	 */
-	public int getAttackReach() {
+	public float getAttackReach() {
 		return attackReach;
 	}
 
@@ -90,7 +96,7 @@ public class LbnMobTag {
 	 * 攻撃範囲をセットする
 	 * @param attackReach
 	 */
-	public void setAttackReach(int attackReach) {
+	public void setAttackReach(float attackReach) {
 		this.attackReach = attackReach;
 	}
 
@@ -158,6 +164,37 @@ public class LbnMobTag {
 		this.isSummonMob = isSummonMob;
 	}
 
+	/**
+	 * AIのTypeをセットする
+	 * @param aiType
+	 */
+	public void setAiType(AIType aiType) {
+		if (aiType != null) {
+			this.aiType = aiType;
+		}
+	}
 
+	/**
+	 * AITypeを取得
+	 * @return
+	 */
+	public AIType getAiType() {
+		return aiType;
+	}
 
+	/**
+	 * 一秒間に何回打つかセットする
+	 * @param shotTarm
+	 */
+	public void setShotTarm(int shotTarm) {
+		this.shotTarm = shotTarm;
+	}
+
+	/**
+	 * 一秒間に何回打つか取得
+	 * @return
+	 */
+	public int getShotTarm() {
+		return shotTarm;
+	}
 }

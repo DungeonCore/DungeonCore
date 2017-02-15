@@ -2,6 +2,7 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.Arrays;
 
+import lbn.mob.AIType;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.attribute.Attribute;
@@ -45,7 +46,9 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 	public String[] getTag() {
 		return new String[]{"name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
 				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp",
-				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "attribute", "attackpoint", "defencePoint"};
+				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "attribute", "attackpoint", "defencePoint",//21
+				"aitype", "reach", "jumpattack", "cps", "sps"
+				};
 	}
 
 	@Override
@@ -69,6 +72,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 			boolean isBoss = false;
 
+			//mobのインスタンス作成
 			CommandableMob instance;
 			if (isEmpty(row, 7)) {
 				instance = CommandableMob.getInstance(command.split(" "), name, p);
@@ -94,11 +98,20 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				sendMessage("入力されたsummon commandが不正です。(1):" + name);
 				return;
 			}
-
 			//WaterMob化
-			boolean isWaterZombie = JavaUtil.getBoolean(row[2], false);
-			nbtTag.setWaterMonster(isWaterZombie);
+			nbtTag.setWaterMonster(JavaUtil.getBoolean(row[2], false));
+			//AI Type
+			nbtTag.setAiType(AIType.fromName(row[22]));
+			//腕の長さ
+			nbtTag.setAttackReach(JavaUtil.getFloat(row[23], 3f));
+			//ジャンプ斬り
+			nbtTag.setJumpAttack("ジャンプ斬りする".equals(row[24]));
+			//CPS
+			nbtTag.setAttackCountPerSec((int)JavaUtil.getDouble(row[25], 1));
+			//SPS
+			nbtTag.setShotTarm((int)JavaUtil.getDouble(row[26], 1));
 
+			//DROP ITEM の設定
 			if (row[3] != null && !row[3].isEmpty()) {
 				ItemStack item = ItemStackUtil.getItemStack(row[3]);
 				if (item == null) {

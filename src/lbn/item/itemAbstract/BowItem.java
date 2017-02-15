@@ -2,7 +2,8 @@ package lbn.item.itemAbstract;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.ItemInterface;
-import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.old.AbstractAttackItem_Old;
+import lbn.item.attackitem.weaponSkill.MobSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.strength.StrengthOperator;
@@ -18,7 +19,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class BowItem extends AbstractAttackItem implements  ItemInterface, BowItemable, LeftClickItemable{
+public abstract class BowItem extends AbstractAttackItem_Old implements  ItemInterface, BowItemable, LeftClickItemable{
 	@Override
 	protected Material getMaterial() {
 		return Material.BOW;
@@ -31,13 +32,13 @@ public abstract class BowItem extends AbstractAttackItem implements  ItemInterfa
 		if (owner.getType() == EntityType.PLAYER) {
 			//eventを呼ぶ
 			PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player)owner, target, item,
-					e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getNormalDamage());
+					e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
 			playerCombatEntityEvent.callEvent();
 			//eventからDamageを取得
 			e.setDamage(playerCombatEntityEvent.getDamage());
 		} else {
 			//通常通りの計算を行う
-			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getNormalDamage());
+			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
 		}
 	}
 
@@ -65,6 +66,11 @@ public abstract class BowItem extends AbstractAttackItem implements  ItemInterfa
 			return;
 		}
 		excuteOnLeftClick2(e);
+
+		if (!player.isSneaking()) {
+			//スキルを発動
+			MobSkillExecutor.executeMobSkillOnClick(e, this);
+		}
 	}
 
 	abstract protected void excuteOnLeftClick2(PlayerInteractEvent e);
@@ -77,7 +83,7 @@ public abstract class BowItem extends AbstractAttackItem implements  ItemInterfa
 	abstract public int getAvailableLevel();
 
 	@Override
-	protected double getNormalDamage() {
+	protected double getMaterialDamage() {
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 }

@@ -1,5 +1,6 @@
 package lbn.mob.customEntity1_7.ai;
 
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
@@ -9,10 +10,13 @@ import net.minecraft.server.v1_8_R1.PathfinderGoal;
 
 /**
  * 元の仕様：距離が引数のf以上離れていたら近づく、fより近かったら弓を打つ
+ *
+ * 近接攻撃範囲^2+5なら無視
+ * 距離が16から22の場合は近づく
  * @author KENSUKE
  *
  */
-public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
+public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoal {
 	protected final EntityInsentient a;
 	protected final IRangedEntity b;
 	protected EntityLiving c;
@@ -26,11 +30,11 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 
 	protected float nearAttackRange = 3 * 3;
 
-	public TheLoWPathfinderGoalArrowAttack(IRangedEntity irangedentity, double d0, int i, float f) {
-		this(irangedentity, d0, i, i, f);
+	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, float f, LbnMobTag tag) {
+		this(irangedentity, d0, i, i, f, tag);
 	}
 
-	public TheLoWPathfinderGoalArrowAttack(IRangedEntity irangedentity, double d0, int i, int j, float f) {
+	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, int j, float f, LbnMobTag tag) {
 		this.d = -1;
 		if (!(irangedentity instanceof EntityLiving)) {
 			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
@@ -42,6 +46,8 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 			this.h = j;
 			this.i = f;
 			this.j = f * f;
+			setNearAttackRange(tag.getAttackReach());
+			setShotTerm(tag.getShotTarm());
 			this.a(3);
 		}
 	}
@@ -58,7 +64,8 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 		} else {
 			this.c = entityliving;
 			double d0 = this.a.e(this.c.locX, this.c.getBoundingBox().b, this.c.locZ);
-			return d0 >= nearAttackRange;
+			//近距離攻撃^2+5より近い場合は無視する
+			return d0 >= nearAttackRange + 5;
 		}
 	}
 
@@ -82,16 +89,14 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 			this.f = 0;
 		}
 
-		// 近すぎる場合は遠距離攻撃しない
-		if (d0 < 9) {
+		// 敵との距離が16マス以下の場合はその場にいる
+		if (d0 <= 16 * 16) {
 			this.a.getNavigation().n(); // ターゲットを消す
-			//一定距離以上近づいたらそれ以上近づかない
-		} else if (d0 <= (double) this.j && this.f >= 20) {
-			this.a.getNavigation().n(); // ターゲットを消す
-		} else {
-			//ターゲットに近づく
-			System.out.println("移動３");
+		//距離が16 ~ 22の時は近づく
+		} else if (d0 <= 22 * 22) {
 			this.a.getNavigation().a((Entity) this.c, this.e);
+		} else {
+			this.a.getNavigation().n(); // ターゲットを消す
 		}
 
 		this.a.getControllerLook().a(this.c, 30.0F, 30.0F);
@@ -99,7 +104,7 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 
 		if (--this.d == 0) {
 			//一定距離以上離れていたら打たない
-			if (d0 > (double) this.j || !flag) {
+			if (d0 > (double) 22 * 22 || !flag) {
 				return;
 			}
 
@@ -107,26 +112,15 @@ public class TheLoWPathfinderGoalArrowAttack extends PathfinderGoal {
 			float f1 = MathHelper.a(f, 0.1F, 1.0F);
 
 			this.b.a(this.c, f1);// 発射
-			this.d = getShotTerm(f);
+			this.d = shotParSecound;
 		} else if (this.d < 0) {
 			f = MathHelper.sqrt(d0) / this.i;
-			this.d = getShotTerm(f);
+			this.d = shotParSecound;
 		}
 
 	}
 
 	int shotParSecound = 20;
-
-	/**
-	 * 一秒間に何発打つか
-	 * @param f
-	 * @return
-	 */
-	public int getShotTerm(float f) {
-		// どうせ２０なので計算を行わない
-		// return MathHelper.d(f * (float) (this.h - this.g) + (float) this.g);
-		return shotParSecound;
-	}
 
 	/**
 	 * 一秒間に何発打つかセットする

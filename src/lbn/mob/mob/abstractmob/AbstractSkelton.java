@@ -3,7 +3,6 @@ package lbn.mob.mob.abstractmob;
 import lbn.mob.AbstractCustomMob;
 import lbn.mob.customEntity1_7.CustomEntityUtil;
 import lbn.mob.customEntity1_7.CustomSkeleton;
-import lbn.mob.mob.SummonMobable;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -32,7 +31,7 @@ public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, 
 
 	@Override
 	protected CustomSkeleton getInnerEntity(World w) {
-		return new CustomSkeleton(w, this instanceof SummonMobable);
+		return new CustomSkeleton(w, getLbnMobTag());
 	}
 
 	@Override

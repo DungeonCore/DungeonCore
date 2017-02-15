@@ -1,7 +1,6 @@
 package lbn.dungeon.contents;
 
 import lbn.dungeon.contents.mob.skelton.Arthur;
-import lbn.dungeon.contents.mob.skelton.CaveSkeleton;
 import lbn.dungeon.contents.mob.skelton.SummonSkelton;
 import lbn.dungeon.contents.mob.zombie.AbstractSummonZombie;
 import lbn.dungeon.contents.mob.zombie.BabyArthur;
@@ -16,6 +15,5 @@ public class MobRegister {
 		MobHolder.registMob(new SummonSkelton());
 		MobHolder.registMob(new Arthur());
 		MobHolder.registMob(new BabyArthur());
-		MobHolder.registMob(new CaveSkeleton());
 	}
 }

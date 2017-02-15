@@ -50,7 +50,6 @@ public class VersionUtil {
 //			f2.setAccessible( true );
 //			@SuppressWarnings("unchecked")
 //			Map<String, PotionEffectType> byNames = (Map<String, PotionEffectType>) f2.get(null);
-//			System.out.println(byNames);
 //		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 //			e.printStackTrace();
 //		}

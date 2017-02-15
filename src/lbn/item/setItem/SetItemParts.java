@@ -18,7 +18,7 @@ public class SetItemParts implements SetItemPartable{
 	SetItemPartsType type;
 
 	@Override
-	public boolean isDispList() {
+	public boolean isShowItemList() {
 		return true;
 	}
 
