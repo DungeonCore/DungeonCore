@@ -85,6 +85,20 @@ public class LimitedListener implements Listener{
 	}
 
 	@EventHandler
+	public void onTouch(EntityDamageByEntityEvent e) {
+		Entity damager = e.getDamager();
+		if (damager.getType() != EntityType.PLAYER) {
+			return;
+		}
+		Player p = (Player) damager;
+
+		//クリエイティブでないならアーマースタンドをけさない
+		if (e.getEntity().getType() == EntityType.ARMOR_STAND && p.getGameMode() != GameMode.CREATIVE) {
+			e.setCancelled(true);
+		}
+	}
+
+	@EventHandler
 	public void BlockDamageEvent(BlockDamageEvent e) {
 		e.setCancelled(true);
 	}

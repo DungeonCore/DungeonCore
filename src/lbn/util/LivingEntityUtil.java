@@ -81,6 +81,10 @@ public class LivingEntityUtil {
 			return false;
 		}
 
+		if (type == EntityType.ARMOR_STAND) {
+			return false;
+		}
+
 
 		if (SummonPlayerManager.isSummonMob(e)) {
 			return false;
@@ -217,7 +221,7 @@ public class LivingEntityUtil {
 			return true;
 		}else if (e.getType() == EntityType.VILLAGER) {
 			return true;
-		} else if (e.getType() == EntityType.ZOMBIE) {
+		} else if (e.getType().isAlive()) {
 			return SummonPlayerManager.isSummonMob(e);
 		} else {
 			return false;

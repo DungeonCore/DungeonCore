@@ -3,7 +3,7 @@ package lbn.mob.customEntity1_8;
 import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomEntity;
-import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityIronGolem;

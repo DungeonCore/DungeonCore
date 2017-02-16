@@ -18,6 +18,8 @@ public abstract class MagicItem extends AbstractAttackItem_Old implements RightC
 
 	@Override
 	final public void excuteOnLeftClick(PlayerInteractEvent e) {
+		super.excuteOnLeftClick(e);
+		//レベルなどを確認する
 		e.setCancelled(true);
 		Player player = e.getPlayer();
 		ItemStack item = player.getItemInHand();

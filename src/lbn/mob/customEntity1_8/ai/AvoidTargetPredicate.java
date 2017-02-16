@@ -1,4 +1,4 @@
-package lbn.mob.customEntity1_7.ai;
+package lbn.mob.customEntity1_8.ai;
 
 import lbn.util.LivingEntityUtil;
 import net.minecraft.server.v1_8_R1.Entity;

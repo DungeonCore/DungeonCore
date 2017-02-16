@@ -2,11 +2,16 @@ package lbn.mob.customEntity1_8;
 
 import lbn.mob.AIType;
 import lbn.mob.customEntity.ICustomUndeadEntity;
-import lbn.mob.customEntity1_7.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.customEntity1_8.ai.TheLowPathfinderGoalMeleeAttack;
 import lbn.util.spawn.LbnMobTag;
+import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
+import net.minecraft.server.v1_8_R1.ItemStack;
+import net.minecraft.server.v1_8_R1.Items;
+import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
@@ -69,24 +74,34 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 		}
 	}
 
+	private PathfinderGoalArrowAttack b = new PathfinderGoalArrowAttack(this, 1.0D, 20, 60, 15.0F);
+	private TheLowPathfinderGoalMeleeAttack c = null;
+
 	@Override
 	public void n() {
-		//AIが通常のものなら通常の処理を行う(tagがnullの時は無視する)
-		if (tag != null && tag.getAiType() == AIType.NORMAL) {
+		//tagがnullのときは親クラスのコンストラクタが呼ばれる時だけで、その後AIは全てリセットされるのでここで別のAIをセットしても問題なし
+		if (tag == null) {
 			super.n();
 			return;
 		}
 
-		//テスト処理のため一旦コメントアウト
-//		this.goalSelector.a(this.bq);
-//		this.goalSelector.a(this.bp);
-//		ItemStack itemstack =  bz();
-//
-//		if ((itemstack != null) && (itemstack.getItem() == Items.BOW)) {
-//			this.goalSelector.a(4, this.bp);
-//		} else {
-//			this.goalSelector.a(4, this.bq);
-//		}
+		//tagがnullかもしれないのでここでセットする
+		if (c == null) {
+			c = new TheLowPathfinderGoalMeleeAttack((EntityCreature) e, AttackAISetter.getTargetEntityClass(tag.isSummonMob()), tag);
+		}
+
+		//AIが通常のものなら通常の処理を行う(tagがnullの時は無視する)
+		if (tag.getAiType() == AIType.NORMAL) {
+			this.goalSelector.a(this.c);
+			this.goalSelector.a(this.b);
+			ItemStack itemstack = bz();
+			if ((itemstack != null) && (itemstack.getItem() == Items.BOW)) {
+				this.goalSelector.a(4, this.b);
+			} else {
+				this.goalSelector.a(4, this.c);
+			}
+			return;
+		}
 	}
 
 	@Override

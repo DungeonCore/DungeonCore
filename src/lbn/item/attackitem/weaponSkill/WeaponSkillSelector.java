@@ -16,6 +16,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * 武器スキルを選択する
+ *
+ */
 public class WeaponSkillSelector implements MenuSelectorInterface{
 	static {
 		MenuSelectorManager.regist(new WeaponSkillSelector(ItemType.SWORD, 0));

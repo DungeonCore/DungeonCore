@@ -59,6 +59,8 @@ public abstract class BowItem extends AbstractAttackItem_Old implements  ItemInt
 
 	@Override
 	public void excuteOnLeftClick(PlayerInteractEvent e) {
+		super.excuteOnLeftClick(e);
+		//レベルなどを確認する
 		Player player = e.getPlayer();
 		if (!isAvilable(player)) {
 			sendNotAvailableMessage(player);

@@ -2,10 +2,10 @@ package lbn.mob.customEntity1_8;
 
 import java.lang.reflect.Field;
 
-import lbn.mob.customEntity1_7.ai.AvoidTargetPredicate;
-import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
-import lbn.mob.customEntity1_7.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
-import lbn.mob.customEntity1_7.ai.TheLowPathfinderGoalMeleeAttack;
+import lbn.mob.customEntity1_8.ai.AvoidTargetPredicate;
+import lbn.mob.customEntity1_8.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
+import lbn.mob.customEntity1_8.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
+import lbn.mob.customEntity1_8.ai.TheLowPathfinderGoalMeleeAttack;
 import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
@@ -118,7 +118,7 @@ public class AttackAISetter {
 	 * @param isSummon summon　mobならTRUE
 	 * @return
 	 */
-	private static Class<?> getTargetEntityClass(boolean isSummon) {
+	public static Class<?> getTargetEntityClass(boolean isSummon) {
 		if (isSummon) {
 			return EntityMonster.class;
 		} else {
