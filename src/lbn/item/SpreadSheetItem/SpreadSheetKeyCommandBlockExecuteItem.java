@@ -62,7 +62,7 @@ public class SpreadSheetKeyCommandBlockExecuteItem extends CommandBlockExceteKey
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		String[] detail = super.getDetail();
 		if (detail == null) {
 			return lore.toArray(new String[0]);

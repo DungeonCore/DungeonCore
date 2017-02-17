@@ -39,7 +39,7 @@ public class MagicBookFireLevel3 extends AbstractMagicBook{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"右クリックで広範囲の敵にダメージ極大を与える", "使用者と周囲のプレイヤーに火炎耐性を8秒間付与"};
 	}
 

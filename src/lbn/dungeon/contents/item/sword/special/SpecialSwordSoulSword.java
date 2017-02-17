@@ -93,7 +93,7 @@ public class SpecialSwordSoulSword extends AbstractSpecialSword implements Coolt
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"敵の魂を吸収する"};
 	}
 

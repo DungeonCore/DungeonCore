@@ -70,7 +70,7 @@ public class SpreadSheetKeyTpItem extends AbstractTeleportKey{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		String[] detail = super.getDetail();
 		if (detail == null) {
 			return lore.toArray(new String[0]);

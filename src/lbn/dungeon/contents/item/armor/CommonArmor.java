@@ -244,7 +244,7 @@ public class CommonArmor extends AbstractArmor implements StrengthChangeItemable
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 

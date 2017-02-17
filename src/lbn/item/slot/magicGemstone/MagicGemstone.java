@@ -37,7 +37,7 @@ public abstract class MagicGemstone extends AbstractItem implements RightClickIt
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"かまどで精錬することで", MessageFormat.format("レア度：{0}の魔法石になります。", getSlotLevel().getStar())};
 	}
 

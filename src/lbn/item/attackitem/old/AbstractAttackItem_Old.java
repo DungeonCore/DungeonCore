@@ -4,27 +4,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.strength.StrengthOperator;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
 import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
-
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	public boolean isAvilable(Player player) {
@@ -234,16 +230,4 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	}
 
 	abstract protected int getBaseBuyPrice();
-
-	@Override
-	public void onCombatEntity(PlayerCombatEntityEvent e) {
-		LivingEntity enemy = e.getEnemy();
-		AbstractMob<?> mob = MobHolder.getMob(enemy);
-		//属性のダメージを与える
-		if (mob != null && mob.getAttribute().isSame(getAttribute())) {
-			e.setDamage(e.getDamage() * (1 + getAttributeAddParcentDamage(e.getAttackItem().getStrengthLevel()) / 100));
-			return;
-		}
-	}
-
 }

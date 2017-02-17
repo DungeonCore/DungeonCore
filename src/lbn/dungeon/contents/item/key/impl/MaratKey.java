@@ -25,7 +25,7 @@ public class MaratKey extends Fragment{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Marat Assembly hallで使用可能", "x:630 y:12 z:168"};
 	}
 

@@ -71,7 +71,7 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"鍛冶屋の魔法石装着画面で", "使用不可のスロットを１つ削除する"};
 	}
 

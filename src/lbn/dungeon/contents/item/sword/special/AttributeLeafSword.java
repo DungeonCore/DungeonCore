@@ -86,7 +86,7 @@ public class AttributeLeafSword extends AbstractSpecialSword{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"森の力が宿りし剣"};
 	}
 

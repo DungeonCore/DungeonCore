@@ -100,7 +100,7 @@ public class LaserBow extends BowItem implements Cooltimable{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{
 				"一直線に飛んで、着地地点で",
 				"爆発します"

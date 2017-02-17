@@ -157,7 +157,7 @@ public class NormalMagicItem extends MagicItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"左クリックで遠距離攻撃", "右クリックでゾンビ召喚"};
 	}
 }

@@ -35,7 +35,7 @@ public abstract class StrengthBaseItem extends AbstractItem implements StrengthC
 	protected abstract ItemInterface getLastStrengthResultItem();
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return Message.getMessage("このアイテムを{0}回強化に成功すると, [{1}]になります。", getMaxStrengthCount(), getLastStrengthResultItem().getSimpleName()).split(",");
 	}
 

@@ -40,7 +40,7 @@ public class LeatherArmor extends AbstractItem implements ArmorItemable, Strengt
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"+5まで強化可能"};
 	}
 

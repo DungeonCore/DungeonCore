@@ -113,7 +113,7 @@ public class SpecialSwordIceAspect extends AbstractSpecialSword implements Coolt
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{Message.getMessage("敵を凍結させます。")};
 	}
 

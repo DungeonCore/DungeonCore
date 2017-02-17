@@ -34,7 +34,7 @@ public class SuikaCastle extends AbstractKeyItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Va Rometoで使用可能", loc};
 	}
 

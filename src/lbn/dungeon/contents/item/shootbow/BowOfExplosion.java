@@ -70,7 +70,7 @@ public class BowOfExplosion extends BowItem implements Strengthenable{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"着弾地点が爆発します"};
 	}
 

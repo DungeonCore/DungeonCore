@@ -71,7 +71,7 @@ public class AddEmptySlotItem extends AbstractItem implements SlotInterface{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"鍛冶屋の魔法石装着画面で", "武器に空のスロットを追加できます"};
 	}
 

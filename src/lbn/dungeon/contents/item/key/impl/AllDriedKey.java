@@ -19,7 +19,7 @@ public class AllDriedKey extends SuikaCastle{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"All Driedで使用可能", loc};
 	}
 

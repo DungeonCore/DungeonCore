@@ -82,7 +82,7 @@ public class DebugSword extends SwordItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 

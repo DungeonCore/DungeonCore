@@ -18,7 +18,7 @@ public class NativeUnderground extends CommandBlockExceteKey{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Native Undergroundで使用可能", "x:1534 y:38 z:243"};
 	}
 

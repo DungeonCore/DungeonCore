@@ -3,15 +3,20 @@ package lbn.item.attackitem;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
 import lbn.item.AbstractItem;
 import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.item.itemInterface.AvailableLevelItemable;
-import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.item.itemInterface.Strengthenable;
@@ -20,14 +25,7 @@ import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
-public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, AvailableLevelItemable, RightClickItemable, LeftClickItemable,  CombatItemable{
+public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, AvailableLevelItemable, RightClickItemable, LeftClickItemable{
 	/**
 	 * この武器が使用可能ならTRUE
 	 * @param player
@@ -158,7 +156,10 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	 * この武器のアイテムのデフォルトの攻撃力を取得
 	 * @return
 	 */
-	abstract protected double getMaterialDamage();
+	protected double getMaterialDamage() {
+		double vanillaDamage = ItemStackUtil.getVanillaDamage(getMaterial());
+		return vanillaDamage;
+	}
 
 	@Override
 	protected List<String> getAddDetail() {
@@ -210,9 +211,5 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	 */
 	public double getCriticalHitRate(int level) {
 		return 1.5 * level;
-	}
-
-	@Override
-	public void onCombatEntity(PlayerCombatEntityEvent e) {
 	}
 }

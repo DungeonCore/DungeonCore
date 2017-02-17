@@ -72,7 +72,7 @@ public class NormalBowWrapper extends LevelBow{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 

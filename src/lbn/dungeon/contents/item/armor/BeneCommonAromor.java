@@ -140,7 +140,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Bene装備", "ランダムで特殊効果が付与されます"};
 	}
 

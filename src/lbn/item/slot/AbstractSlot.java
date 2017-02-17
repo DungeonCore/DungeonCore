@@ -23,7 +23,7 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		if (getSlotDetail() == null) {
 			return new String[0];
 		}

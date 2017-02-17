@@ -69,7 +69,7 @@ public final class GalionItem extends AbstractItem {
   }
 
   @Override
-  protected String[] getDetail() {
+public String[] getDetail() {
     return new String[] { "+ " + galions + " galions" };
   }
 

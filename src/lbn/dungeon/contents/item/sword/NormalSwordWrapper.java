@@ -89,7 +89,7 @@ public class NormalSwordWrapper extends LevelSword{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 

@@ -26,7 +26,7 @@ public class KalgrusFinishKey extends SuikaCastle{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Kalgrusで使用可能", loc};
 	}
 

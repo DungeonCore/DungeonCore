@@ -71,7 +71,7 @@ public abstract class AbstractItem implements ItemInterface{
 
 	abstract protected Material getMaterial();
 
-	abstract protected String[] getDetail();
+	public abstract String[] getDetail();
 
 	protected List<String> getAddDetail() {
 		ArrayList<String> lore = new ArrayList<String>();

@@ -48,7 +48,7 @@ public class SpecialSwordMebiusSword extends AbstractSpecialSword{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"剣からいでる稲妻は神をも凌駕する"};
 	}
 

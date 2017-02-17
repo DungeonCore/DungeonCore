@@ -61,7 +61,7 @@ public class DungeonDirector extends AbstractItem implements RightClickItemable{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"自分の近くにある難易度が[" + getDifficulty() + "]な",
 				"ダンジョンを5つ順番に指し示します。"};
 	}

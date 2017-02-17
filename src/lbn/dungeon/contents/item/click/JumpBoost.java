@@ -47,7 +47,7 @@ public class JumpBoost extends RightClickItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"右クリックをすることで", "真上に飛べます。"};
 	}
 

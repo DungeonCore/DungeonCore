@@ -56,7 +56,7 @@ public class SpreadSheetOtherItem extends AbstractItem {
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return lore.toArray(new String[0]);
 	}
 }

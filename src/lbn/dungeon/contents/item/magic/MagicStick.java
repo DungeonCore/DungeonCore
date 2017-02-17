@@ -28,7 +28,7 @@ public class MagicStick extends MagicItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"右クリック:ゾンビを一体召喚", "左クリック:炎魔法"};
 	}
 

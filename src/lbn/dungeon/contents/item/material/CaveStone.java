@@ -17,7 +17,7 @@ public class CaveStone extends AbstractItem {
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"洞窟にあるただの石"};
 	}
 

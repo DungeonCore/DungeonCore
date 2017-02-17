@@ -63,7 +63,7 @@ public class DebugBow extends BowItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 

@@ -85,7 +85,7 @@ public class ArmorMaterialItem extends AbstractItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"Bene装備の強化に使用します。", "防具は最大強化時にBene装備へと進化します。"};
 	}
 

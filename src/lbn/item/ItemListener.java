@@ -3,38 +3,6 @@ package lbn.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.common.event.ChangeStrengthLevelItemEvent;
-import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.common.event.player.PlayerKillEntityEvent;
-import lbn.common.event.player.PlayerRightShiftClickEvent;
-import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
-import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeoncore.Main;
-import lbn.item.armoritem.ArmorBase;
-import lbn.item.attackitem.AttackItemStack;
-import lbn.item.itemInterface.BowItemable;
-import lbn.item.itemInterface.CombatItemable;
-import lbn.item.itemInterface.LeftClickItemable;
-import lbn.item.itemInterface.MeleeAttackItemable;
-import lbn.item.itemInterface.RightClickItemable;
-import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.slot.SlotInterface;
-import lbn.item.slot.slot.CombatSlot;
-import lbn.item.slot.slot.KillSlot;
-import lbn.item.slot.slot.ShiftRightClickSlot;
-import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.CraeteStrengthItemResultLater;
-import lbn.item.strength.StrengthLaterRunnable;
-import lbn.item.strength.StrengthTableOperation;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.player.ItemType;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -61,6 +29,34 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.common.event.ChangeStrengthLevelItemEvent;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.dungeoncore.Main;
+import lbn.item.armoritem.ArmorBase;
+import lbn.item.itemInterface.BowItemable;
+import lbn.item.itemInterface.LeftClickItemable;
+import lbn.item.itemInterface.MeleeAttackItemable;
+import lbn.item.itemInterface.RightClickItemable;
+import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.slot.SlotInterface;
+import lbn.item.slot.slot.CombatSlot;
+import lbn.item.slot.slot.KillSlot;
+import lbn.item.slot.table.SlotSetTableOperation;
+import lbn.item.strength.CraeteStrengthItemResultLater;
+import lbn.item.strength.StrengthLaterRunnable;
+import lbn.item.strength.StrengthTableOperation;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.player.ItemType;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+import net.md_5.bungee.api.ChatColor;
 
 public class ItemListener implements Listener{
 
@@ -374,29 +370,4 @@ public class ItemListener implements Listener{
 			}
 		}
 	}
-
-	@EventHandler
-	public void onShiftRightClick(PlayerRightShiftClickEvent e) {
-		ArrayList<SlotInterface> useSlot = e.getAttackItem().getUseSlot();
-		for (SlotInterface slot : useSlot) {
-			if (slot instanceof ShiftRightClickSlot) {
-				((ShiftRightClickSlot) slot).onPlayerRightShiftClick(e);
-			}
-		}
-	}
-
-	@EventHandler
-	public void PlayerCombatEntityEvent(PlayerCombatEntityEvent e) {
-		AttackItemStack attackItem = e.getAttackItem();
-		ItemStack item = attackItem.getItem();
-		if (item == null) {
-			return;
-		}
-
-		CombatItemable customItem = ItemManager.getCustomItem(CombatItemable.class, item);
-		if (customItem != null) {
-			customItem.onCombatEntity(e);
-		}
-	}
-
 }

@@ -29,7 +29,7 @@ public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"CLICK 7 POINT IN WATER", "水の中にある7つのポイントをクリックせよ"};
 	}
 

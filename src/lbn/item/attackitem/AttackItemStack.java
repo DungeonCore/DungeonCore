@@ -44,7 +44,7 @@ public class AttackItemStack {
 		if (customItem == null) {
 			return null;
 		}
-		//武器でないなnullを返す
+		//武器でないならnullを返す
 		if (customItem instanceof AbstractAttackItem) {
 			AttackItemStack attackItemStack = getCache(item);
 			return attackItemStack;
@@ -86,6 +86,10 @@ public class AttackItemStack {
 	 * @return
 	 */
 	public int getStrengthLevel() {
+		//すでに強化レベルをセットしたならそれを返す
+		if (strengthLevel != -1) {
+			return strengthLevel;
+		}
 		return StrengthOperator.getLevel(item);
 	}
 
@@ -182,10 +186,25 @@ public class AttackItemStack {
 		return slotList.contains(slot);
 	}
 
+	int strengthLevel = -1;
+
+	/**
+	 * 強化レベルをセットする
+	 * @param level
+	 */
+	public void setStrengthLevel(int level) {
+		this.strengthLevel = level;
+	}
+
 	/**
 	 * 武器情報を取得する
 	 */
 	public void updateItem() {
+		//強化レベルをセットしたなら更新する
+		if (strengthLevel != -1) {
+			StrengthOperator.updateLore(getItem(), strengthLevel);
+		}
+
 		//Slotの初期化をする
 		initSlot();
 

@@ -34,7 +34,7 @@ public class Fragment  extends AbstractKeyItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"クロキナコダンジョンで使用可能", "x:1223 y:13 z:375"};
 	}
 

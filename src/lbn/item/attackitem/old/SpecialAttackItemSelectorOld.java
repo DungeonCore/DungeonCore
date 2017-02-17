@@ -106,7 +106,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"右クリックして欲しいアイテムを選択してください"};
 	}
 

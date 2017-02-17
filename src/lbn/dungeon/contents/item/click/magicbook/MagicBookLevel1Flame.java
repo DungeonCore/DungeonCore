@@ -56,7 +56,7 @@ public class MagicBookLevel1Flame extends AbstractMagicBook{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[] {"右クリックで周囲の敵に火炎ダメージ中を与える", "使用者が延焼していた場合は火を消す"};
 	}
 

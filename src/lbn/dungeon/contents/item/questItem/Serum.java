@@ -29,7 +29,7 @@ public class Serum extends AbstractItem{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"モンスターの血清", "調剤師によって回復薬が作られる。"};
 	}
 

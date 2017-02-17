@@ -51,7 +51,7 @@ public class TutorialSword extends LevelSword{
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return new String[]{"チュートリアル用の剣です"};
 	}
 

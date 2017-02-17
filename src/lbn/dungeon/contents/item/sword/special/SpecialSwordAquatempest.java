@@ -88,7 +88,7 @@ public class SpecialSwordAquatempest extends AbstractSpecialSword implements Coo
 	}
 
 	@Override
-	protected String[] getDetail() {
+	public String[] getDetail() {
 		return null;
 	}
 
