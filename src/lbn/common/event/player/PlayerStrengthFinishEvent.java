@@ -11,21 +11,15 @@ import org.bukkit.inventory.ItemStack;
  *
  */
 public class PlayerStrengthFinishEvent extends PlayerEvent{
-	private int chance;
 	private ItemStack item;
 	private int level;
 	private boolean isSuccess;
 
-	public PlayerStrengthFinishEvent(Player who, int chance, int level, ItemStack item, boolean isSuccess) {
+	public PlayerStrengthFinishEvent(Player who, int level, ItemStack item, boolean isSuccess) {
 		super(who);
-		this.chance = chance;
 		this.level = level;
 		this.item = item;
 		this.isSuccess = isSuccess;
-	}
-
-	public int getChance() {
-		return chance;
 	}
 
 	public ItemStack getItem() {

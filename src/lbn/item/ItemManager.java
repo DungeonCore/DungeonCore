@@ -8,6 +8,8 @@ import java.util.Set;
 
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
+import lbn.item.strength.StrengthScrollArmor;
+import lbn.item.strength.StrengthScrollWeapon;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 
@@ -177,5 +179,10 @@ public class ItemManager {
 
 	public static void registItem(Collection<ItemInterface> itemList) {
 		registItem(itemList.toArray(new ItemInterface[0]));
+	}
+
+	static{
+		registItem(new StrengthScrollArmor());
+		registItem(new StrengthScrollWeapon());
 	}
 }

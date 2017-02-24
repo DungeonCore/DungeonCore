@@ -98,7 +98,7 @@ public class CraeteStrengthItemResultLater extends BukkitRunnable{
 			((Player)e.getWhoClicked()).updateInventory();
 		}
 		canStrength = true;
-		PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent((Player)e.getWhoClicked(), chance, nextLevel, item, isSuccess);
+		PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent((Player)e.getWhoClicked(), nextLevel, item, isSuccess);
 		Bukkit.getServer().getPluginManager().callEvent(playerStrengthItemEvent);
 	}
 

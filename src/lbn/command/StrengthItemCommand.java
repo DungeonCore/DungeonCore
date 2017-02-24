@@ -39,7 +39,7 @@ public class StrengthItemCommand implements CommandExecutor{
 
 			paramCommandSender.sendMessage(item.getItemName() +  "を" +  StrengthOperator.getLevel(p.getItemInHand()) + "に強化しました。");
 
-			PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent(p, 100, Integer.parseInt(paramArrayOfString[0]), p.getItemInHand(), true);
+			PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent(p, Integer.parseInt(paramArrayOfString[0]), p.getItemInHand(), true);
 			Bukkit.getServer().getPluginManager().callEvent(playerStrengthItemEvent);
 
 			return true;

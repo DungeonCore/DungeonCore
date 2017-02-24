@@ -2,24 +2,30 @@ package lbn.item.attackitem;
 
 import java.util.Map;
 
+import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
+import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 
-public abstract class SpreadSheetAttackItem extends AbstractAttackItem{
+public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable{
 	SpreadSheetWeaponData data;
 	public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
 		this.data = data;
 	}
 
+	static WeaponStrengthTemplate strengthTemplate = new WeaponStrengthTemplate();
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
-		return null;
+		return strengthTemplate;
 	}
 
 	@Override
@@ -110,5 +116,25 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem{
 	 */
 	public Map<ItemInterface, Integer> getCraftItemMap() {
 		return data.getCraftItem();
+	}
+
+	@Override
+	public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
+	}
+
+	@Override
+	public void onChangeStrengthLevelItemEvent(ChangeStrengthLevelItemEvent event) {
+	}
+
+	@Override
+	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
+		if (!event.isSuccess()) {
+			int level = event.getLevel();
+			//+6までの強化の時は失敗しても+0にしないで元にもどす
+			if (level <= 6) {
+				ItemStack item = event.getItem();
+				StrengthOperator.updateLore(item, Math.max(0, level - 1));
+			}
+		}
 	}
 }

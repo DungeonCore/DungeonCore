@@ -5,7 +5,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 強化完了時のLoreに変更される瞬間(失敗か成功かは問わない)
+ * 強化完了時のLoreが変更される瞬間に呼ばれるイベント(失敗か成功かは問わない)
  *
  */
 public class ChangeStrengthLevelItemEvent extends Event {
