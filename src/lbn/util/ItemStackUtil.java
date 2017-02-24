@@ -312,10 +312,21 @@ public class ItemStackUtil {
 		return item;
 	}
 
+	/**
+	 * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
+	 * @param command
+	 * @return
+	 */
 	public static ItemStack getItemStackByCommand(String command) {
 		return getItemStackByCommand(command, Bukkit.getConsoleSender());
 	}
 
+	/**
+	 * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
+	 * @param command
+	 * @param sender
+	 * @return
+	 */
 	@SuppressWarnings("deprecation")
 	public static ItemStack getItemStackByCommand(String command, CommandSender sender) {
 		command = command.trim();
@@ -324,11 +335,9 @@ public class ItemStackUtil {
 		}
 		String[] args = command.split(" ");
 
-
 		Material material = Material.matchMaterial(args[1]);
 		if (material == null) {
-			material = Bukkit.getUnsafe().getMaterialFromInternalName(
-					args[1]);
+			material = Bukkit.getUnsafe().getMaterialFromInternalName(args[1]);
 		}
 		if (material != null) {
 			//個数は絶対に１つ
@@ -345,11 +354,7 @@ public class ItemStackUtil {
 			ItemStack stack = new ItemStack(material, amount, data);
 			if (args.length >= 5) {
 				try {
-					stack = Bukkit.getUnsafe().modifyItemStack(
-							stack,
-							Joiner.on(' ').join(
-									Arrays.asList(args).subList(4,
-											args.length)));
+					stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
 				} catch (Throwable t) {
 					sender.sendMessage("コマンド解析中にエラーが発生しました。");
 					t.printStackTrace();
@@ -459,4 +464,31 @@ public class ItemStackUtil {
 		return nmsStack.getTag().getString(name);
 	}
 
+	/**
+	 * NTBTagをセットする
+	 * @param item
+	 * @param name
+	 * @param value
+	 */
+	public static void setNBTTag(ItemStack item, String name, short value) {
+		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		if (nmsStack.getTag() == null) {
+			nmsStack.setTag(new NBTTagCompound());
+		}
+		nmsStack.getTag().setShort(name, value);
+		item.setItemMeta(CraftItemStack.getItemMeta(nmsStack));
+	}
+
+	/**
+	 * NTBTagを取得する
+	 * @param item
+	 * @param name
+	 */
+	public static short getNBTTagShort(ItemStack item, String name) {
+		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		if (nmsStack.getTag() == null) {
+			return 0;
+		}
+		return nmsStack.getTag().getShort(name);
+	}
 }

@@ -2,7 +2,7 @@ package lbn.dungeon.contents.item.sword;
 
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
-import lbn.item.itemAbstract.SwordItem;
+import lbn.item.attackitem.old.SwordItemOld;
 import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.Bukkit;
@@ -13,8 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class DebugSword extends SwordItem{
-
+public class DebugSword extends SwordItemOld{
 	@Override
 	public String getItemName() {
 		return "デバックソード";
@@ -39,6 +38,10 @@ public class DebugSword extends SwordItem{
 				target.setNoDamageTicks(0);
 			}
 		}.runTaskLater(Main.plugin, 1);
+	}
+
+	@Override
+	public void excuteOnLeftClick(PlayerInteractEvent e) {
 	}
 
 	@Override

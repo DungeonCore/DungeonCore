@@ -96,9 +96,11 @@ public class ItemManager {
 		String id = ItemStackUtil.getId(item);
 		if (id != null && !id.isEmpty()) {
 			HashMap<String, T> hashMap = (HashMap<String, T>) allItemIdClassList.get(clazz);
-			T t = hashMap.get(id);
-			if (t != null) {
-				return t;
+			if (hashMap != null) {
+				T t = hashMap.get(id);
+				if (t != null) {
+					return t;
+				}
 			}
 		}
 

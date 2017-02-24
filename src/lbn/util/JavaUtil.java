@@ -66,6 +66,14 @@ public class JavaUtil {
 		}
 	}
 
+	public static short getShort(String data, short other) {
+		try {
+			return Short.parseShort(data);
+		} catch (Exception e) {
+			return other;
+		}
+	}
+
 	public static boolean getBoolean(String data, boolean other) {
 		if ("true".equalsIgnoreCase(data)) {
 			return true;
@@ -117,11 +125,12 @@ public class JavaUtil {
 		return senderLoc;
 	}
 
-	public static Object getField(Class<?> clazz, String fieldName, Object targetInstance) {
+	@SuppressWarnings("unchecked")
+	public static <T> T getField(Class<?> clazz, String fieldName, Object targetInstance) {
 		try {
-			Field field = clazz.getDeclaredField(fieldName);
+			Field field = clazz.getClass().getDeclaredField(fieldName);
 			field.setAccessible(true);
-			return field.get(targetInstance);
+			return (T) field.get(targetInstance);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

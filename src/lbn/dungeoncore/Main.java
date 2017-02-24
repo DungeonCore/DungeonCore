@@ -66,6 +66,15 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		try {
+			boolean isDebug = Boolean.parseBoolean(getConfig().getString("debug"));
+			MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
+
+			Main.debugging = isDebug;
+			DungeonLogger.info("Debug:" + isDebug);
+		} catch (Exception p) {
+			p.printStackTrace();
+		}
+		try {
 			dataFolder = getDataFolder().getAbsolutePath();
 			NMSUtils.registerEntity("Skeleton", 51, EntitySkeleton.class, CustomSkeleton.class);
 			NMSUtils.registerEntity("Zombie", 54, EntityZombie.class, CustomZombie.class);
@@ -104,12 +113,6 @@ public class Main extends JavaPlugin {
 
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
-
-		boolean isDebug = Boolean.parseBoolean(getConfig().getString("debug"));
-		MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
-
-		Main.debugging = isDebug;
-		DungeonLogger.info("Debug:" + isDebug);
 
 		WireLessChestManager.getInstance().loadManageData();
 		// 60分に一回のルーチンスタート

@@ -190,7 +190,7 @@ public class LastDamageManager {
 		} else if (itemInHand == null || itemInHand.getType() == Material.AIR) {
 			LastDamageManager.onDamage(entity, p, LastDamageMethodType.BARE_HAND);
 		} else {
-			LastDamageManager.onDamage(entity, p, LastDamageMethodType.MELEE_ATTACK_WITH_OTHER);
+//			LastDamageManager.onDamage(entity, p, LastDamageMethodType.MELEE_ATTACK_WITH_OTHER);
 		}
 	}
 }

@@ -18,8 +18,8 @@ import org.bukkit.command.ConsoleCommandSender;
  */
 public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> {
 
-  public AbstractSheetRunable(CommandSender p) {
-    this.p = p;
+  public AbstractSheetRunable(CommandSender sender) {
+    this.sender = sender;
   }
 
   static HashMap<Class<?>, Long> lastUpDate = new HashMap<Class<?>, Long>();
@@ -44,7 +44,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
   abstract protected String getQuery();
 
-  CommandSender p;
+  CommandSender sender;
 
   abstract public String getSheetName();
 
@@ -77,10 +77,10 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
     try {
       String[][] allData = submit.get();
       if (allData == null) {
-        p.sendMessage("内部でエラーが発生しました。" + getSheetName());
+        sender.sendMessage("内部でエラーが発生しました。" + getSheetName());
         return;
       }
-      p.sendMessage("処理を開始します。:" + getSheetName());
+      sender.sendMessage("処理を開始します。:" + getSheetName());
       int i = 0;
       for (String[] row : allData) {
         i++;
@@ -89,7 +89,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
         }
         excuteOnerow(row);
       }
-      p.sendMessage("更新が完了しました。" + getSheetName());
+      sender.sendMessage("更新が完了しました。" + getSheetName());
       lastUpDate.put(getClass(), System.currentTimeMillis());
     } finally {
       isTransaction = false;
@@ -104,10 +104,10 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
   abstract protected void excuteOnerow(String[] row);
 
   protected void sendMessage(String msg) {
-     if (p instanceof ConsoleCommandSender) {
+     if (sender instanceof ConsoleCommandSender) {
     	 return;
      }
-    p.sendMessage(msg);
+    sender.sendMessage(msg);
   }
 
   public static Location getLocationByString(String str) {

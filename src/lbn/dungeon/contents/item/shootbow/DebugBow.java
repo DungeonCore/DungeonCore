@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.item.shootbow;
 
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.itemAbstract.BowItem;
+import lbn.item.attackitem.old.BowItemOld;
 import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.Bukkit;
@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class DebugBow extends BowItem{
+public class DebugBow extends BowItemOld{
 
 	@Override
 	public String getItemName() {

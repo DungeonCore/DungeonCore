@@ -12,12 +12,12 @@ import lbn.common.menu.SelectRunnable;
 import lbn.dungeon.contents.item.key.KeyItemable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.old.AbstractAttackItem_Old;
-import lbn.item.itemAbstract.BowItem;
-import lbn.item.itemAbstract.MagicItem;
-import lbn.item.itemAbstract.SwordItem;
+import lbn.item.attackitem.old.BowItemOld;
+import lbn.item.attackitem.old.MagicItemOld;
+import lbn.item.attackitem.old.SwordItemOld;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.AvailableLevelItemable;
+import lbn.item.itemInterface.CombatItemable;
 import lbn.item.setItem.SetItemParts;
 import lbn.item.slot.SlotInterface;
 import lbn.util.DungeonLogger;
@@ -153,7 +153,7 @@ public class CommandGiveItem implements CommandExecutor {
 				continue;
 			}
 			int rtn;
-			if (item instanceof AbstractAttackItem_Old) {
+			if (item instanceof CombatItemable) {
 				rtn = 1;
 			} else if (item instanceof SetItemParts) {
 				rtn = 2;
@@ -250,11 +250,11 @@ public class CommandGiveItem implements CommandExecutor {
 				}
 
 				double rtn;
-				if (item instanceof SwordItem) {
+				if (item instanceof SwordItemOld) {
 					rtn = 1;
-				} else if (item instanceof BowItem) {
+				} else if (item instanceof BowItemOld) {
 					rtn = 2;
-				} else if (item instanceof MagicItem) {
+				} else if (item instanceof MagicItemOld) {
 					rtn = 3;
 				} else if (item instanceof KeyItemable) {
 					rtn = 4;

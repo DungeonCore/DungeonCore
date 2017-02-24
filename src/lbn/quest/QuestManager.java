@@ -60,7 +60,7 @@ public class QuestManager {
 		allQuestByName.put(ChatColor.stripColor(q.getName()).toUpperCase(), q);
 		allQuestById.put(ChatColor.stripColor(q.getId()).toUpperCase(), q);
 
-		AvailbleQuestHolder.regist(q);
+		NpcQuestHolder.regist(q);
 	}
 
 	public static QuestStartStatus getStartQuestStatus(Quest q, Player p) {
@@ -327,7 +327,7 @@ public class QuestManager {
 			return canStartIfForce;
 		}
 
-		public String canntMessage() {
+		public String getCanntMessage() {
 			return errorMessage;
 		}
 	}

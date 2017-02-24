@@ -3,6 +3,39 @@ package lbn.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.NbtTagConst;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.common.event.ChangeStrengthLevelItemEvent;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.dungeoncore.Main;
+import lbn.item.armoritem.ArmorBase;
+import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.itemInterface.BowItemable;
+import lbn.item.itemInterface.CombatItemable;
+import lbn.item.itemInterface.EquipItemable;
+import lbn.item.itemInterface.LeftClickItemable;
+import lbn.item.itemInterface.MeleeAttackItemable;
+import lbn.item.itemInterface.RightClickItemable;
+import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.slot.SlotInterface;
+import lbn.item.slot.slot.CombatSlot;
+import lbn.item.slot.slot.KillSlot;
+import lbn.item.slot.table.SlotSetTableOperation;
+import lbn.item.strength.CraeteStrengthItemResultLater;
+import lbn.item.strength.StrengthLaterRunnable;
+import lbn.item.strength.StrengthTableOperation;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.player.ItemType;
+import lbn.util.ItemStackUtil;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+import net.md_5.bungee.api.ChatColor;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -23,40 +56,14 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
-
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.common.event.ChangeStrengthLevelItemEvent;
-import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.common.event.player.PlayerKillEntityEvent;
-import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
-import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeoncore.Main;
-import lbn.item.armoritem.ArmorBase;
-import lbn.item.itemInterface.BowItemable;
-import lbn.item.itemInterface.LeftClickItemable;
-import lbn.item.itemInterface.MeleeAttackItemable;
-import lbn.item.itemInterface.RightClickItemable;
-import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.slot.SlotInterface;
-import lbn.item.slot.slot.CombatSlot;
-import lbn.item.slot.slot.KillSlot;
-import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.CraeteStrengthItemResultLater;
-import lbn.item.strength.StrengthLaterRunnable;
-import lbn.item.strength.StrengthTableOperation;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.player.ItemType;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
 
 public class ItemListener implements Listener{
 
@@ -369,5 +376,58 @@ public class ItemListener implements Listener{
 				((KillSlot) slot).onKill(e);
 			}
 		}
+	}
+
+	@EventHandler
+	public void onPlayerItemDamageEvent(PlayerItemDamageEvent e) {
+		ItemStack item = e.getItem();
+		//もし指定したアイテムDamageItemableでないなら無視
+		EquipItemable customItem = ItemManager.getCustomItem(EquipItemable.class, item);
+		if (customItem == null) {
+			return;
+		}
+
+		//現在の耐久を取得
+		short customDurability = ItemStackUtil.getNBTTagShort(item, NbtTagConst.THELOW_DURABILITY);
+		//耐久値を更新
+		customDurability += e.getDamage();
+
+		//設定した固有の最大耐久
+		int customMaxDurability = customItem.getMaxDurability(e.getItem());
+		//実際の素材の最大耐久
+		short itemMaxDurability = item.getType().getMaxDurability();
+
+		//耐久をセットする
+		ItemStackUtil.setNBTTag(item, NbtTagConst.THELOW_DURABILITY, customDurability);
+
+		short ItemDurability = (short) (itemMaxDurability * customDurability / customMaxDurability);
+		//耐久をセットする
+		item.setDurability(ItemDurability);
+
+		//アイテムの耐久がまだ残っているならここで耐久をセットしたので何もしない
+		if (ItemDurability < itemMaxDurability) {
+			//耐久をここでセットしたのでEvent後はセットしない
+			e.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onCombatEntity(PlayerCombatEntityEvent e) {
+		//もし指定したアイテムDamageItemableでないなら無視
+		AbstractAttackItem itemInterface = e.getAttackItem().getItemInterface();
+		if (itemInterface == null) {
+			return;
+		}
+		itemInterface.onCombatEntity(e);
+	}
+
+	@EventHandler
+	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
+		//もし指定したアイテムDamageItemableでないなら無視
+		CombatItemable customItem = ItemManager.getCustomItem(CombatItemable.class, e.getItemDrop().getItemStack());
+		if (customItem == null) {
+			return;
+		}
+		customItem.onPlayerDropItemEvent(e);
 	}
 }

@@ -75,7 +75,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			//mobのインスタンス作成
 			CommandableMob instance;
 			if (isEmpty(row, 7)) {
-				instance = CommandableMob.getInstance(command.split(" "), name, p);
+				instance = CommandableMob.getInstance(command.split(" "), name, sender);
 			} else {
 				//AbstractChestを取得
 				Location locationByString = getLocationByString(row[7]);
@@ -83,7 +83,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 					sendMessage("chest locationが不正です：" + name);
 					return;
 				}
-				instance = CommandBossMob.getInstance(command.split(" "), name, p, locationByString);
+				instance = CommandBossMob.getInstance(command.split(" "), name, sender, locationByString);
 				isBoss = true;
 			}
 

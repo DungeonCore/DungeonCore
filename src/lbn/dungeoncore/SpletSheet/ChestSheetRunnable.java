@@ -13,9 +13,9 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ChestSheetRunable extends AbstractComplexSheetRunable {
+public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
-	public ChestSheetRunable(CommandSender sender) {
+	public ChestSheetRunnable(CommandSender sender) {
 		super(sender);
 	}
 

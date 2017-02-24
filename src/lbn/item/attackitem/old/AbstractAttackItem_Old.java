@@ -2,25 +2,22 @@ package lbn.item.attackitem.old;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
+import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.AbstractAttackItem;
-import lbn.item.slot.slot.EmptySlot;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.attribute.Attribute;
 import lbn.mob.attribute.AttributeNormal;
-import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
+
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	public boolean isAvilable(Player player) {
@@ -44,6 +41,15 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	@Override
 	protected int getSkillLevel() {
 		return (int)(getAvailableLevel() / 10.0) + 1;
+	}
+
+	@Override
+	public short getMaxDurability(ItemStack item) {
+		return getMaterial().getMaxDurability();
+	}
+
+	@Override
+	public void onCombatEntity(PlayerCombatEntityEvent e) {
 	}
 
 	/**
@@ -143,36 +149,6 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	abstract protected double getMaterialDamage();
 
-	@Override
-	protected List<String> getAddDetail() {
-		List<String> lore = super.getAddDetail();
-		//使用可能レベル
-		lore.add(Message.getMessage("使用可能：{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel()));
-		lore.add("最大SLOT数：" + getMaxSlotCount() + "個");
-		return lore;
-	}
-
-	@Override
-	public ItemStack getItem() {
-		ItemStack item = super.getItem();
-		//属性の説明を追加
-		Attribute attribute = getAttribute();
-		if (!attribute.isNonAttribute()) {
-			ItemStackUtil.addLore(item, ChatColor.RED + Message.getMessage("属性特攻:{0}", attribute.getName()));
-		}
-
-		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add(ChatColor.GREEN + "[SLOT]");
-		EmptySlot slot = new EmptySlot();
-		for (int i = 0; i < getDefaultSlotCount(); i++) {
-			arrayList.add (StringUtils.join(new Object[]{slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId()}));
-		}
-		arrayList.add("");
-
-		ItemStackUtil.addLore(item, arrayList.toArray(new String[0]));
-		return item;
-	}
-
 	protected void sendNotAvailableMessage(Player p) {
 		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
 	}
@@ -197,7 +173,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 		}
 
 		double dispAddDamane = JavaUtil.round(getAttackItemDamage(level) - getMaterialDamage(), 2);
-		lores.add(Message.getMessage(Message.ADD_DAMAGE_DISP, (dispAddDamane >= 0 ? "+" : "")  + dispAddDamane));
+		lores.add(Message.getMessage(Message.ADD_DAMAGE_DISP, (dispAddDamane >= 0 ? "+" : "")  + dispAddDamane, ChatColor.GOLD));
 
 		if (!getAttribute().isNonAttribute()) {
 			lores.add(Message.getMessage("{0}に対してダメージ+{1}%", getAttribute().getName(), getAttributeAddParcentDamage(level)));

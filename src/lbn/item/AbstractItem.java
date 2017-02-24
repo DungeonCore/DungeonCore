@@ -78,7 +78,7 @@ public abstract class AbstractItem implements ItemInterface{
 		if (this instanceof Strengthenable) {
 			//最大強化
 			if (((Strengthenable)this).getMaxStrengthCount() != 0) {
-				lore.add(Message.getMessage("最大強化：+{0}", ((Strengthenable)this).getMaxStrengthCount()));
+				lore.add(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable)this).getMaxStrengthCount(), ChatColor.GOLD));
 			}
 		}
 		return lore;
@@ -116,4 +116,5 @@ public abstract class AbstractItem implements ItemInterface{
 	public String toString() {
 		return getItemName();
 	}
+
 }

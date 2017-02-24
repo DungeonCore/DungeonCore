@@ -1,8 +1,6 @@
-package lbn.item.itemAbstract;
+package lbn.item.attackitem.old;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.item.attackitem.SpreadSheetAttackItem;
-import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.MeleeAttackItemable;
 import lbn.item.strength.StrengthOperator;
@@ -17,11 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItemable{
-	public SwordItem(SpreadSheetWeaponData data) {
-		super(data);
-	}
-
+public abstract class SwordItemOld extends AbstractAttackItem_Old implements MeleeAttackItemable{
 	public int rank() {
 		return 0;
 	}
@@ -30,6 +24,7 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 	public void excuteOnRightClick(PlayerInteractEvent e) {
 		super.excuteOnRightClick(e);
 		if (!e.getPlayer().isSneaking()) {
+			excuteOnRightClick2(e);
 			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
@@ -40,10 +35,13 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 
+	abstract protected void excuteOnMeleeAttack2(ItemStack item, LivingEntity owner, LivingEntity target, EntityDamageByEntityEvent e);
+
 	@Override
 	public void excuteOnMeleeAttack(ItemStack item, LivingEntity owner, LivingEntity target, EntityDamageByEntityEvent e) {
 		//プレイヤーでないなら関係ない
 		if (owner.getType() != EntityType.PLAYER) {
+			excuteOnMeleeAttack2(item, owner, target, e);
 			return;
 		}
 
@@ -65,15 +63,17 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 		} else {
 			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
 		}
+
+		excuteOnMeleeAttack2(item, owner, target, e);
 	}
+
+	abstract protected void excuteOnRightClick2(PlayerInteractEvent e);
 
 	@Override
 	public ItemType getAttackType() {
 		return ItemType.SWORD;
 	}
 
-	@Override
-	public void excuteOnLeftClick(PlayerInteractEvent e) {
-	}
+	abstract protected String[] getStrengthDetail2(int level);
 
 }

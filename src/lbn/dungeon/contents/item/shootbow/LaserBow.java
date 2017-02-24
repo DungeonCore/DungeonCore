@@ -7,7 +7,7 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
 import lbn.item.Cooltimable;
 import lbn.item.CooltimeManager;
-import lbn.item.itemAbstract.BowItem;
+import lbn.item.attackitem.old.BowItemOld;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
@@ -33,7 +33,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class LaserBow extends BowItem implements Cooltimable{
+public class LaserBow extends BowItemOld implements Cooltimable{
 	@Override
 	public String getItemName() {
 		return "LASER BOW";

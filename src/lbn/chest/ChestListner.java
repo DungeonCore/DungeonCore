@@ -1,7 +1,7 @@
 package lbn.chest;
 
 import lbn.LimitedListener;
-import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
+import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 
@@ -42,7 +42,7 @@ public class ChestListner implements Listener{
 					e.setCancelled(true);
 					Message.sendMessage(e.getPlayer(), "Oops!");
 
-					if (ChestSheetRunable.complateRead) {
+					if (ChestSheetRunnable.complateRead) {
 						removeOopsChest(p, e.getClickedBlock());
 					}
 				}

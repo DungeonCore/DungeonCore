@@ -55,9 +55,9 @@ public class SoundSheetRunnable extends AbstractSheetRunable{
 		float vol = JavaUtil.getFloat(row[2], 1);
 		float pitch = JavaUtil.getFloat(row[3], 1);
 
-		SoundData soundData = new SoundData(id, valueOf, vol, pitch);
+		SoundData soundData = new SoundData(valueOf, vol, pitch);
 
-		SoundManager.regist(soundData);
+		SoundManager.regist(id, soundData);
 	}
 
 	public static void allReload() {

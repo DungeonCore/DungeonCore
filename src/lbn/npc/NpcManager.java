@@ -55,6 +55,7 @@ public class NpcManager {
 		String name = e.getNPC().getName();
 		VillagerNpc villagerNpc = registedNpc.get(name);
 		if (villagerNpc != null) {
+
 			villagerNpc.onNPCLeftClickEvent(e);
 		}
 	}

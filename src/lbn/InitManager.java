@@ -5,6 +5,7 @@ import lbn.command.MobCommand;
 import lbn.command.QuestCommand;
 import lbn.command.SpletSheetCommand;
 import lbn.command.VillagerCommand;
+import lbn.common.other.CitizenBugFixPatch;
 import lbn.common.other.DungeonList;
 import lbn.common.other.HolographicDisplaysManager;
 import lbn.common.other.SystemLog;
@@ -14,6 +15,7 @@ import lbn.dungeon.contents.SpawnMobGetterRegister;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;
@@ -51,8 +53,9 @@ public class InitManager {
 
 			SpletSheetCommand.allReload(null, "particle");
 
-			//			SystemSqlExecutor.execute();
+			SpletSheetExecutor.onExecute(new WeaponSheetRunnable(Bukkit.getConsoleSender()));
 
+			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {
 				@Override
 				public void run2() {
@@ -85,6 +88,9 @@ public class InitManager {
 			PlayerIODataManager.allLoad();
 			DungeonList.load(Bukkit.getConsoleSender());
 			MobSkillManager.reloadDataBySystem();
+
+			//Citizenのバグを治す
+			CitizenBugFixPatch.doPatch();
 
 //		SayTextCommand.reloadAlltext();
 

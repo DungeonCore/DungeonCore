@@ -68,6 +68,6 @@ public class Message {
 
 	public static String MP_SHORTAGE = ChatColor.RED + "MPが足りません。";
 
-	public static String ADD_DAMAGE_DISP = "ダメージ {0}";
+	public static String ADD_DAMAGE_DISP = "ダメージ {1}{0}";
 
 }

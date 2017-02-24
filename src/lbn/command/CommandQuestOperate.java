@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import lbn.npc.NpcManager;
+import lbn.npc.VillagerNpc;
+import lbn.quest.NpcQuestHolder;
 import lbn.quest.Quest;
 import lbn.quest.QuestInventory;
 import lbn.quest.QuestManager;
+import lbn.quest.QuestManager.QuestStartStatus;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -45,6 +50,12 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 			return false;
 		}
 
+		//一覧表示の場合はココで処理
+		if (arg3[0].equals("npc")) {
+			viewNpcQuestList(p, arg3[1]);
+			return true;
+		}
+
 		String questName = StringUtils.join(Arrays.copyOfRange(arg3, 1, isSelectPlayer ? arg3.length - 1 : arg3.length), " ");
 
 		Quest quest = null;
@@ -73,12 +84,28 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 		return true;
 	}
 
+	private void viewNpcQuestList(Player p, String string) {
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(string);
+		if (villagerNpc != null) {
+			Set<Quest> questList = NpcQuestHolder.getQuestList(villagerNpc, p);
+			for (Quest quest : questList) {
+				QuestStartStatus startQuestStatus = QuestManager.getStartQuestStatus(quest, p);
+				if (startQuestStatus == QuestStartStatus.CAN_START) {
+					p.sendMessage(quest.getId() + " : " + quest.getName() + "(クエストを開始出来ます。)");
+				} else {
+					p.sendMessage(quest.getId() + " : " + quest.getName() + "(" + startQuestStatus.getCanntMessage() + ")");
+				}
+			}
+		}
+	}
+
 	static HashSet<String> operateList = new HashSet<String>();
 	static{
 		operateList.add("start");
 		operateList.add("remove");
 		operateList.add("complate");
 		operateList.add("view");
+		operateList.add("npc");
 	}
 
 	@Override
@@ -87,7 +114,9 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 		if (arg3.length == 1) {
 			return (List<String>)StringUtil.copyPartialMatches(arg3[0], operateList, new ArrayList<String>(operateList.size()));
 		} else if (arg3.length == 2) {
-			return (List<String>)StringUtil.copyPartialMatches(arg3[1], QuestManager.getQuestId(), new ArrayList<String>(QuestManager.getQuestId().size()));
+			if (!arg3[0].equals("npc")) {
+				return (List<String>)StringUtil.copyPartialMatches(arg3[1], QuestManager.getQuestId(), new ArrayList<String>(QuestManager.getQuestId().size()));
+			}
 		}
 		return null;
 	}

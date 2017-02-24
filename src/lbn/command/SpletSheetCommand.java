@@ -13,7 +13,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.dungeoncore.SpletSheet.BuffSheetRunnable;
-import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
+import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MobSheetRunnable;
@@ -25,12 +25,13 @@ import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
+import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 
 public class SpletSheetCommand implements CommandExecutor{
 	static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
 	static {
 		ConsoleCommandSender sender = Bukkit.getConsoleSender();
-		regist(new ChestSheetRunable(sender));
+		regist(new ChestSheetRunnable(sender));
 		regist(new DungeonListRunnable(sender));
 		regist(new ItemSheetRunnable(sender));
 		regist(new MobSheetRunnable(sender));
@@ -41,6 +42,7 @@ public class SpletSheetCommand implements CommandExecutor{
 		regist(new SpawnPointSheetRunnable(sender));
 		regist(new BuffSheetRunnable(sender));
 		regist(new VillagerSheetRunnable(sender));
+		regist(new WeaponSheetRunnable(sender));
 	}
 
 	public static void regist(SheetRunnable<String[][]> sheet) {

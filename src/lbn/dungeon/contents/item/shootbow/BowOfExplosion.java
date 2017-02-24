@@ -5,7 +5,7 @@ import java.util.List;
 import lbn.dungeon.contents.strength_template.BowLevel12;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
-import lbn.item.itemAbstract.BowItem;
+import lbn.item.attackitem.old.BowItemOld;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.LastDamageMethodType;
@@ -24,7 +24,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class BowOfExplosion extends BowItem implements Strengthenable{
+public class BowOfExplosion extends BowItemOld implements Strengthenable{
 	@Override
 	public String getItemName() {
 		return "BOW OF EXPLOTSION";

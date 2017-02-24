@@ -138,7 +138,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		}
 	}
 
-	boolean isUndead = false;
+	boolean isUndead = true;
 
 	@Override
 	public void setUndead(boolean isUndead) {

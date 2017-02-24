@@ -16,9 +16,7 @@ import lbn.dungeon.contents.item.sword.special.SpecialSwordIceAspect;
 import lbn.dungeon.contents.slotStone.OneMobDamageUpSlot;
 import lbn.dungeon.contents.slotStone.level1.FireAspect1;
 import lbn.dungeon.contents.slotStone.level2.FireAspect2;
-import lbn.dungeon.contents.slotStone.level3.HealSlotStone;
 import lbn.dungeon.contents.slotStone.level4.CombatLightningStone;
-import lbn.dungeon.contents.slotStone.level4.HealSlotStone2;
 import lbn.item.attackitem.AttackItemStack;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.LivingEntityUtil;
@@ -201,7 +199,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		StrengthOperator.updateLore(sword, 6);
 		AttackItemStack instance = AttackItemStack.getInstance(sword);
 		instance.addSlot(new FireAspect2());
-		instance.addSlot(new HealSlotStone());
+//		instance.addSlot(new HealSlotStone());
 		instance.addSlot(OneMobDamageUpSlot.slotList.get(1));
 		instance.updateItem();
 		sword = instance.getItem();
@@ -251,7 +249,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		StrengthOperator.updateLore(sword, 10);
 		AttackItemStack instance = AttackItemStack.getInstance(sword);
 		instance.addSlot(new FireAspect2());
-		instance.addSlot(new HealSlotStone2());
+//		instance.addSlot(new HealSlotStone2());
 		instance.addSlot(OneMobDamageUpSlot.slotList.get(2));
 		instance.addSlot(OneMobDamageUpSlot.slotList.get(7));
 		instance.updateItem();
@@ -306,7 +304,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		StrengthOperator.updateLore(sword, 5);
 		AttackItemStack instance = AttackItemStack.getInstance(sword);
 		instance.addSlot(new FireAspect2());
-		instance.addSlot(new HealSlotStone2());
+//		instance.addSlot(new HealSlotStone2());
 		instance.addSlot(OneMobDamageUpSlot.slotList.get(2));
 		instance.addSlot(OneMobDamageUpSlot.slotList.get(7));
 		instance.updateItem();

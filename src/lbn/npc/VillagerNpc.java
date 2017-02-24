@@ -149,7 +149,7 @@ public class VillagerNpc {
 	}
 
 	public void updateNpc() {
-		if (npc == null) {
+		if (npc == null || npc.getEntity() == null) {
 			return;
 		}
 

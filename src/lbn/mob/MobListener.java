@@ -13,6 +13,7 @@ import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractEnderman;
 import lbn.npc.NpcManager;
+import lbn.player.PlayerChecker;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
@@ -126,6 +127,11 @@ public class MobListener implements Listener {
 
 		if (entity.getType() == EntityType.VILLAGER) {
 			e.setCancelled(true);
+		} else if (entity.getType() == EntityType.ARMOR_STAND) {
+			//管理者でないなら攻撃をキャンセルする
+			if (!PlayerChecker.isNormalNonPlayer(e.getDamager())) {
+				e.setCancelled(true);
+			}
 		}
 	}
 

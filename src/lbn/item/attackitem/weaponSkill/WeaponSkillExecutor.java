@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class MobSkillExecutor {
-	public static void executeMobSkillOnClick(PlayerInteractEvent e, AbstractAttackItem customItem) {
+public class WeaponSkillExecutor {
+	public static void executeWeaponSkillOnClick(PlayerInteractEvent e, AbstractAttackItem customItem) {
 		Player player = e.getPlayer();
 
 		//武器スキルを取得

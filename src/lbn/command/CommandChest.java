@@ -10,7 +10,7 @@ import lbn.chest.CustomChestManager;
 import lbn.chest.EachPlayerContentChest;
 import lbn.chest.SpletSheetChest;
 import lbn.chest.wireless.RepositoryType;
-import lbn.dungeoncore.SpletSheet.ChestSheetRunable;
+import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 import org.bukkit.Bukkit;
@@ -38,7 +38,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 	//command x y z [refuel_time, allPlayerSameFlg, min, max, x y z]
 	@Override
 	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] params) {
-		ChestSheetRunable chestSheetRunable = new ChestSheetRunable(paramCommandSender);
+		ChestSheetRunnable chestSheetRunable = new ChestSheetRunnable(paramCommandSender);
 
 		if (chestSheetRunable.isTransaction()) {
 			paramCommandSender.sendMessage("現在別の人が実行中です。");
@@ -59,7 +59,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 	}
 
 	private boolean addRepository(CommandSender paramCommandSender, String[] params,
-			ChestSheetRunable chestSheetRunable) {
+			ChestSheetRunnable chestSheetRunable) {
 		Player p = (Player) paramCommandSender;
 		Location chestLoc = getChestLoc(p);
 		if (chestLoc == null) {
@@ -96,12 +96,12 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 	}
 
 	public static void allReload() {
-		ChestSheetRunable chest = new ChestSheetRunable(Bukkit.getConsoleSender());
+		ChestSheetRunnable chest = new ChestSheetRunnable(Bukkit.getConsoleSender());
 		chest.getData(null);
 		SpletSheetExecutor.onExecute(chest);
 	}
 
-	protected boolean delete(CommandSender paramCommandSender, ChestSheetRunable chestSheetRunable) {
+	protected boolean delete(CommandSender paramCommandSender, ChestSheetRunnable chestSheetRunable) {
 		paramCommandSender.sendMessage("現在この機能は使えません。");
 		boolean result;
 		//		Player p = (Player) paramCommandSender;
@@ -116,7 +116,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		return result;
 	}
 
-	protected boolean add(CommandSender paramCommandSender, String[] params, ChestSheetRunable chestSheetRunable) {
+	protected boolean add(CommandSender paramCommandSender, String[] params, ChestSheetRunnable chestSheetRunable) {
 		double x = 0;
 		double y = 0;
 		double z = 0;
@@ -191,8 +191,8 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		chestClickMap.remove(p);
 		if (CustomChestManager.containts(chestLoc)) {
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
-			hashMap.put("contentlocation", ChestSheetRunable.getLocationString(contentsLoc));
-			chestSheetRunable.updateData(hashMap, "chestlocation=\"" + ChestSheetRunable.getLocationString(chestLoc) + "\"");
+			hashMap.put("contentlocation", ChestSheetRunnable.getLocationString(contentsLoc));
+			chestSheetRunable.updateData(hashMap, "chestlocation=\"" + ChestSheetRunnable.getLocationString(chestLoc) + "\"");
 		} else {
 			SpletSheetChest chest;
 			if (allPlayerSameFlg) {
@@ -205,7 +205,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 			//バグるのでなし
 			//		chestSheetRunable.deleteData("chestlocation=" + ChestSheetRunable.getLocationString(chestLoc));
 			chestSheetRunable.addData(
-					ChestSheetRunable.createDataMap(chestLoc, contentsLoc, refuelTime, allPlayerSameFlg, moveLoc, minItemCount, maxItemCount));
+					ChestSheetRunnable.createDataMap(chestLoc, contentsLoc, refuelTime, allPlayerSameFlg, moveLoc, minItemCount, maxItemCount));
 
 		}
 		SpletSheetExecutor.onExecute(chestSheetRunable);
@@ -213,7 +213,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		return true;
 	}
 
-	protected boolean reload(CommandSender paramCommandSender, String[] params, ChestSheetRunable chestSheetRunable) {
+	protected boolean reload(CommandSender paramCommandSender, String[] params, ChestSheetRunnable chestSheetRunable) {
 		chestSheetRunable.getData(null);
 		SpletSheetExecutor.onExecute(chestSheetRunable);
 		return true;

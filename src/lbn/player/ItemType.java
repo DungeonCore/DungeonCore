@@ -36,9 +36,12 @@ public enum ItemType {
 	 * @return
 	 */
 	public double getMinDamage(int level) {
-		return level0MinDamage + level / 20.0;
+		if (this == BOW) {
+			return 9 + Math.pow(level / 10,1.6) *1.9;
+		} else {
+			return 4 + Math.pow(level / 10,1.6) *1.3;
+		}
 	}
-
 
 	/**
 	 * レベルに応じた武器の最大ダメージを取得

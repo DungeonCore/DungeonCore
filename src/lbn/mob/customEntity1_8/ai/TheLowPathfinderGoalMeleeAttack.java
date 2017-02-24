@@ -28,14 +28,18 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 	protected int attackTerm = 10;
 
 //	protected double attackRange = -1;
-	protected double attackRange = 7;
+	protected double attackRange = 3;
 
 	protected boolean isJump = true;
 
 	public TheLowPathfinderGoalMeleeAttack(EntityCreature entitycreature, Class<?> oclass, LbnMobTag tag) {
 		this(entitycreature, tag.getNearingSpeed(), false);
 		// 攻撃範囲
-		setAttackRange(tag.getAttackReach());
+		if (tag.getAttackReach() != -1) {
+			setAttackRange(tag.getAttackReach());
+		} else {
+			setAttackRange(this.b.width * 2.0F);
+		}
 		// 攻撃速度
 		setAttackTerm(tag.getAttackCountPerSec());
 		// ジャンプ斬りをするかどうか

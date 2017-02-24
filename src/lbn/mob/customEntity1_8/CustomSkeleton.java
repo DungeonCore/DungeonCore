@@ -87,7 +87,7 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 
 		//tagがnullかもしれないのでここでセットする
 		if (c == null) {
-			c = new TheLowPathfinderGoalMeleeAttack((EntityCreature) e, AttackAISetter.getTargetEntityClass(tag.isSummonMob()), tag);
+			c = new TheLowPathfinderGoalMeleeAttack((EntityCreature) this, AttackAISetter.getTargetEntityClass(tag.isSummonMob()), tag);
 		}
 
 		//AIが通常のものなら通常の処理を行う(tagがnullの時は無視する)

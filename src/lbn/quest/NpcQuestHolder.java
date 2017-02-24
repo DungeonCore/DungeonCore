@@ -10,7 +10,10 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
-public class AvailbleQuestHolder {
+/**
+ * NPCとクエストの情報を管理するクラス
+ */
+public class NpcQuestHolder {
 	static HashMultimap<String, Quest> villagerNameQuestMap = HashMultimap.create();
 
 	public static void regist(Quest q) {
@@ -26,7 +29,16 @@ public class AvailbleQuestHolder {
 				availableQuestList.add(quest);
 			}
 		}
-
 		return availableQuestList;
+	}
+
+	/**
+	 * 村人から全てのクエストを取得
+	 * @param npc
+	 * @param p
+	 * @return
+	 */
+	public static Set<Quest> getQuestList(VillagerNpc npc, Player p) {
+		return villagerNameQuestMap.get(npc.getName());
 	}
 }
