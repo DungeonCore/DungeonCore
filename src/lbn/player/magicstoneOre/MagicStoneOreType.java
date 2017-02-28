@@ -8,8 +8,13 @@ import org.bukkit.Material;
  *
  */
 public enum MagicStoneOreType {
-	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE), AAAA("aaa", Material.APPLE);
-
+	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE),
+	REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE),
+	IRON_ORE("鉄鉱石", Material.IRON_ORE),
+	EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE),
+	GOLD_ORE("金鉱石", Material.GOLD_ORE),
+	COAL_ORE("石炭鉱石", Material.COAL_ORE);
+	
 	//日本語名
 	String jpName;
 
