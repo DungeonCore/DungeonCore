@@ -1,7 +1,7 @@
 package lbn.item.attackitem.weaponSkill;
 
-import lbn.item.Cooltimable;
-import lbn.item.CooltimeManager;
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;

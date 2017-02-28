@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.slotStone.level3;
 
-import lbn.item.Cooltimable;
+import lbn.common.cooltime.Cooltimable;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.UnUseSlot;
 import lbn.item.strength.StrengthOperator;

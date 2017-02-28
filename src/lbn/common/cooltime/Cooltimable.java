@@ -1,4 +1,4 @@
-package lbn.item;
+package lbn.common.cooltime;
 
 import org.bukkit.inventory.ItemStack;
 

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 
 import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.quest.Quest;
@@ -11,6 +12,10 @@ import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.quest.QuestType;
 import lbn.util.JavaUtil;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
@@ -24,6 +29,24 @@ public class PlayerQuestSession {
 	long lastUpdate = -1;
 	{
 		lastUpdate = new QuestSheetRunnable(null).getLastUpdate();
+	}
+
+	OfflinePlayer offlinePlayer;
+
+	public PlayerQuestSession(UUID uniqueId) {
+		this.offlinePlayer = Bukkit.getOfflinePlayer(uniqueId);
+	}
+
+	/**
+	 * オンラインのPlayerを取得
+	 * @return
+	 */
+	public Player getOnlinePlayer() {
+		return offlinePlayer.getPlayer();
+	}
+
+	public OfflinePlayer getOfflinePlayer() {
+		return offlinePlayer;
 	}
 
 	private boolean isDoing(Quest q) {
@@ -146,9 +169,8 @@ public class PlayerQuestSession {
 			return QuestProcessingStatus.NOT_START;
 		}
 
-		int questData = getQuestData(q);
 		//終了条件を満たしていないならPROCESSING
-		if (!q.isComplate(questData)) {
+		if (!q.isComplate(getQuestData(q))) {
 			return QuestProcessingStatus.PROCESSING;
 		}
 		return QuestProcessingStatus.PROCESS_END;

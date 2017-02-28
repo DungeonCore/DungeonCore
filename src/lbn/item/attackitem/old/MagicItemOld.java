@@ -1,6 +1,6 @@
 package lbn.item.attackitem.old;
 
-import lbn.item.CooltimeManager;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;

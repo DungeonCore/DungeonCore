@@ -9,8 +9,8 @@ import java.util.Set;
 
 import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.dungeoncore.Main;
-import lbn.item.CooltimeManager;
 import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;

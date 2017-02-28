@@ -1,15 +1,14 @@
-package lbn.item.slot.slot;
+package lbn.item.implementation;
 
 import lbn.item.slot.SlotLevel;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-
-public class AddEmptySlotItem2 extends AddEmptySlotItem{
+public class RemoveUnavailableSlot2 extends RemoveUnavailableSlot{
 	@Override
 	public String getItemName() {
-		return "シーグル";
+		return "除石具";
 	}
 
 	@Override
@@ -19,7 +18,7 @@ public class AddEmptySlotItem2 extends AddEmptySlotItem{
 
 	@Override
 	public SlotLevel getLevel() {
-		return SlotLevel.ADD_EMPTY2;
+		return SlotLevel.REMOVE_UNAVAILABLE2;
 	}
 
 	@Override

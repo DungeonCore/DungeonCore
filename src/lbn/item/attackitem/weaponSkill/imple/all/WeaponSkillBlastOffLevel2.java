@@ -1,4 +1,4 @@
-package lbn.item.attackitem.weaponSkill.imple;
+package lbn.item.attackitem.weaponSkill.imple.all;
 
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.mob.LastDamageManager;

@@ -18,7 +18,7 @@ public class TouchVillagerQuest extends AbstractQuest{
 
 	protected TouchVillagerQuest(String id, String name, String[] talk) {
 		super(id);
-		name = villagerName;
+		villagerName = name;
 		this.talk = talk;
 		targetVillagerNameQuestList.put(getTargetVillagerName().toLowerCase(), this);
 	}

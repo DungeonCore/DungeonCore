@@ -10,7 +10,7 @@ public class PlayerQuestSessionManager {
 
 	public static PlayerQuestSession getQuestSession(Player p) {
 		if (!hashMap.containsKey(p.getUniqueId())) {
-			hashMap.put(p.getUniqueId(), new PlayerQuestSession());
+			hashMap.put(p.getUniqueId(), new PlayerQuestSession(p.getUniqueId()));
 		}
 		PlayerQuestSession playerQuestSession = hashMap.get(p.getUniqueId());
 		return playerQuestSession;

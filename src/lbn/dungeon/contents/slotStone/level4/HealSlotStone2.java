@@ -3,7 +3,7 @@ package lbn.dungeon.contents.slotStone.level4;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-import lbn.item.Cooltimable;
+import lbn.common.cooltime.Cooltimable;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.UnUseSlot;
 import lbn.item.strength.StrengthOperator;

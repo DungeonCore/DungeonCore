@@ -1,4 +1,4 @@
-package lbn.item;
+package lbn.common.cooltime;
 
 import java.util.HashMap;
 

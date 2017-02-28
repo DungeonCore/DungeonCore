@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.Main;
-import lbn.item.GalionItem;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.item.implementation.GalionItem;
 import lbn.player.CraftTableViewManager;
 import lbn.player.crafttable.CraftTableType;
 

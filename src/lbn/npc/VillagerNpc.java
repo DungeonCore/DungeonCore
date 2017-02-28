@@ -11,6 +11,7 @@ import lbn.money.BuyerShopSelector;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
+import lbn.quest.quest.TakeItemQuest;
 import lbn.quest.quest.TouchVillagerQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
@@ -190,6 +191,11 @@ public class VillagerNpc {
 				continue;
 			}
 
+			//アイテムを持ってくるクエストなら処理を行う
+			if (TakeItemQuest.isTakeItemQuest(quest)) {
+				((TakeItemQuest)quest).onTouchVillager(p, e.getNPC().getEntity(), session);
+			}
+
 			//もし処理を全て終わらせていないなら無視
 			if (session.getProcessingStatus(quest) != QuestProcessingStatus.PROCESS_END) {
 				continue;
@@ -219,7 +225,7 @@ public class VillagerNpc {
 	}
 
 	public void onNPCDamageEvent(NPCDamageEvent e) {
-		e.setCancelled(true);
+//		e.setCancelled(true);
 	}
 
 	public Location getLocation() {

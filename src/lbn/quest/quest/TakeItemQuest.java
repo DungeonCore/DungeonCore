@@ -1,46 +1,64 @@
 package lbn.quest.quest;
 
 import java.text.MessageFormat;
+import java.util.HashSet;
 
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.ItemStackUtil;
-import lbn.util.QuestUtil;
+import lbn.util.JavaUtil;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class TakeItemQuest extends TouchVillagerQuest{
+public class TakeItemQuest extends AbstractQuest{
+	static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<TakeItemQuest>();
 
-	String itemId;
-	String npcName;
-
-	protected TakeItemQuest(String id, String itemId, String npcName) {
-		super(id, npcName, new String[0]);
+	protected TakeItemQuest(String id, String itemId, int count) {
+		super(id);
+		this.itemId = itemId;
+		this.count = count;
+		takeItemQuestMap.add(this);
 	}
 
-	@Override
+
+	/**
+	 * 指定されたクエストからTakeItemQuestならTrue
+	 * @param quest
+	 * @return
+	 */
+	public static boolean isTakeItemQuest(Quest quest) {
+		return takeItemQuestMap.contains(quest);
+	}
+
+	String itemId;
+	int count;
+
 	public void onTouchVillager(Player p, Entity entity, PlayerQuestSession session) {
+		if (entity == null) {
+			return;
+		}
 		//NPCが同じかチェック
 		String name = entity.getCustomName();
-		if (!name.equalsIgnoreCase(getTargetVillagerName())) {
+		if (!name.equalsIgnoreCase(getEndVillagerName())) {
 			return;
 		}
 
+		ItemStack item = getNeedItem().getItem();
+		item.setAmount(count);
 		//アイテムを持っているか確認
 		PlayerInventory inventory = p.getInventory();
-		if (!inventory.contains(getNeedItem().getItem())) {
+		if (!inventory.contains(item)) {
 			return;
 		}
 		//アイテムを削除する
 		inventory.remove(getNeedItem().getItem());
-
-		QuestUtil.sendMessageByVillager(p, new String[]{"届けてくれてありがとう"});
-
 		session.setQuestData(this, 1);
 	}
 
@@ -57,14 +75,14 @@ public class TakeItemQuest extends TouchVillagerQuest{
 	public String getComplateCondition() {
 		ItemInterface needItem = getNeedItem();
 		if (needItem == null) {
-			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", npcName, itemId);
+			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", getEndVillagerName(), itemId);
 		} else {
-			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", npcName, needItem.getItemName());
+			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", getEndVillagerName(), needItem.getItemName());
 		}
 	}
 
-	public static TakeItemQuest getInstance(String id, String deta1, String deta2) {
-		return new TakeItemQuest(id, deta1, deta2);
+	public static TakeItemQuest getInstance(String id, String data1, String data2) {
+		return new TakeItemQuest(id, data1, JavaUtil.getInt(data2, 1));
 	}
 
 	@Override
@@ -83,7 +101,16 @@ public class TakeItemQuest extends TouchVillagerQuest{
 			e.setCancelled(true);
 			return;
 		}
-
 		e.getPlayer().getInventory().addItem(needItem.getItem());
+	}
+
+	@Override
+	public boolean isComplate(int data) {
+		return data == 1;
+	}
+
+	@Override
+	public String getCurrentInfo(Player p) {
+		return "達成度(0/1)";
 	}
 }

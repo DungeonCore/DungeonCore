@@ -1,4 +1,4 @@
-package lbn.item.slot.slot;
+package lbn.item.implementation;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,9 +1,10 @@
-package lbn.item;
+package lbn.item.implementation;
 
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import lbn.item.AbstractItem;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.ChatColor;

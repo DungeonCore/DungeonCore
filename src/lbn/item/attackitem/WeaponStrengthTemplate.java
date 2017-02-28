@@ -3,7 +3,7 @@ package lbn.item.attackitem;
 import org.bukkit.inventory.ItemStack;
 
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.strength.StrengthScrollWeapon;
+import lbn.item.implementation.StrengthScrollWeapon;
 
 public class WeaponStrengthTemplate implements StrengthTemplate{
 	static StrengthScrollWeapon strengthScrollWeapon = new StrengthScrollWeapon();

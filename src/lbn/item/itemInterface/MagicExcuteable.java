@@ -1,6 +1,6 @@
 package lbn.item.itemInterface;
 
-import lbn.item.Cooltimable;
+import lbn.common.cooltime.Cooltimable;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;

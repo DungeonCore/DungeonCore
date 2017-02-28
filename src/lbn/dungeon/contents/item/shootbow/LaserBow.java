@@ -2,11 +2,11 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.Random;
 
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.dungeon.contents.strength_template.NotSrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
-import lbn.item.Cooltimable;
-import lbn.item.CooltimeManager;
 import lbn.item.attackitem.old.BowItemOld;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LbnRunnable;

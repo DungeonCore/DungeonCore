@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import lbn.item.implementation.GalionItem;
+import lbn.item.implementation.StrengthScrollArmor;
+import lbn.item.implementation.StrengthScrollWeapon;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
-import lbn.item.strength.StrengthScrollArmor;
-import lbn.item.strength.StrengthScrollWeapon;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 

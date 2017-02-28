@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
-import lbn.item.GalionItem;
+import lbn.item.implementation.GalionItem;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 

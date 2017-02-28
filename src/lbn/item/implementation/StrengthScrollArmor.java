@@ -1,20 +1,20 @@
-package lbn.item.strength;
+package lbn.item.implementation;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import lbn.item.AbstractItem;
 
-public class StrengthScrollWeapon extends AbstractItem{
+public class StrengthScrollArmor extends AbstractItem{
 
 	@Override
 	public String getItemName() {
-		return "強化スクロール (武器)";
+		return "強化スクロール (防具)";
 	}
 
 	@Override
 	public String getId() {
-		return "strength_scroll_w";
+		return "strength_scroll_a";
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class StrengthScrollWeapon extends AbstractItem{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"武器の強化の際に使うアイテム"};
+		return new String[]{"防具の強化の際に使うアイテム"};
 	}
 
 }

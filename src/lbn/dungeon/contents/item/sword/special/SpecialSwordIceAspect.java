@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import lbn.item.Cooltimable;
-import lbn.item.CooltimeManager;
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.LivingEntityUtil;

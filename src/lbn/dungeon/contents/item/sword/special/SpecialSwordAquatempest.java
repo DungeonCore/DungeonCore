@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.item.Cooltimable;
-import lbn.item.CooltimeManager;
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
 import lbn.item.ItemInterface;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.LastDamageMethodType;

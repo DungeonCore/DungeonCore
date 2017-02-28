@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import lbn.item.implementation.AddEmptySlotItem;
+import lbn.item.implementation.AddEmptySlotItem2;
+import lbn.item.implementation.RemoveUnavailableSlot;
+import lbn.item.implementation.RemoveUnavailableSlot2;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
-import lbn.item.slot.slot.AddEmptySlotItem;
-import lbn.item.slot.slot.AddEmptySlotItem2;
 import lbn.item.slot.slot.EmptySlot;
-import lbn.item.slot.slot.RemoveUnavailableSlot;
-import lbn.item.slot.slot.RemoveUnavailableSlot2;
 import lbn.item.slot.slot.UnavailableSlot;
 
 import org.apache.commons.lang.StringUtils;

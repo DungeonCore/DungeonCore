@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import lbn.item.attackitem.weaponSkill.imple.WeaponSkillBlastOff;
-import lbn.item.attackitem.weaponSkill.imple.WeaponSkillBlastOffLevel2;
+import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOff;
+import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOffLevel2;
 
 public class WeaponSkillFactory {
 	private static HashMap<String, WeaponSkillInterface> skillMap = new HashMap<String, WeaponSkillInterface>();
