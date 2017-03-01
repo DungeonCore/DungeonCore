@@ -2,7 +2,6 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
 import lbn.player.magicstoneOre.MagicStoneFactor;
@@ -36,19 +35,19 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 		String oreType = row[0];
 		String location = row[1];
 		
+		System.out.print(row[0]);
+		System.out.println(row[1]);
+		
 		if(oreType == null){
 			sendMessage("鉱石タイプが無効です。");
 			return;
 		}
-		if(location == null || location.isEmpty()){
+		if(location == null){
 			sendMessage("座標が無効です。");
 			return;
 		}
 		
-		Location loc = getLocationByString(row[1]);
-		MagicStoneOreType type = MagicStoneOreType.FromJpName(row[0]);
-		
-		MagicStoneFactor.regist(loc, type);
+		MagicStoneFactor.magicStoneOres.put(getLocationByString(location), MagicStoneOreType.FromJpName(oreType));
 		
 	}
 	
