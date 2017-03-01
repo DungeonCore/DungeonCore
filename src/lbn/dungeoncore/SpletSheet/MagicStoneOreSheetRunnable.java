@@ -55,8 +55,8 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 	@Override
 	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
 		isComplete = true;
-	//1	MagicStoneOreScheduler.resetMagicOres(isComplete);
 		super.onCallbackFunction(submit);
+		MagicStoneOreScheduler.resetMagicOres(isComplete);
 	}
 	
 }

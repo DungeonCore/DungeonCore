@@ -4,40 +4,13 @@ import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
-import lbn.command.TpCutCommand;
-import lbn.common.event.player.PlayerChangeGalionsEvent;
-import lbn.common.event.player.PlayerChangeStatusExpEvent;
-import lbn.common.event.player.PlayerChangeStatusLevelEvent;
-import lbn.common.event.player.PlayerCompleteReincarnationEvent;
-import lbn.common.event.player.PlayerJoinDungeonGameEvent;
-import lbn.common.event.player.PlayerLevelUpEvent;
-import lbn.common.event.player.PlayerLoadedDataEvent;
-import lbn.common.other.SystemLog;
-import lbn.dungeoncore.Main;
-import lbn.mob.AbstractMob;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.mob.MobHolder;
-import lbn.mob.SummonPlayerManager;
-import lbn.money.GalionEditReason;
-import lbn.player.customplayer.MagicPointManager;
-import lbn.player.customplayer.PlayerChestTpManager;
-import lbn.util.LbnRunnable;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
-import lbn.util.TitleSender;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
@@ -45,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -61,6 +35,37 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.command.TpCutCommand;
+import lbn.common.event.player.PlayerChangeGalionsEvent;
+import lbn.common.event.player.PlayerChangeStatusExpEvent;
+import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerCompleteReincarnationEvent;
+import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.common.event.player.PlayerLevelUpEvent;
+import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.common.other.SystemLog;
+import lbn.dungeoncore.Main;
+import lbn.item.implementation.MagicStoneOre;
+import lbn.mob.AbstractMob;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.mob.MobHolder;
+import lbn.mob.SummonPlayerManager;
+import lbn.money.GalionEditReason;
+import lbn.player.customplayer.MagicPointManager;
+import lbn.player.customplayer.PlayerChestTpManager;
+import lbn.player.magicstoneOre.MagicStoneOreScheduler;
+import lbn.player.magicstoneOre.MagicStoneOreType;
+import lbn.util.LbnRunnable;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+import lbn.util.TitleSender;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleType;
 
 public class PlayerListener implements Listener{
 
@@ -397,6 +402,33 @@ public class PlayerListener implements Listener{
 		//mobを取得
 		AbstractMob<?> mob = MobHolder.getMob(entity);
 		mob.addExp(entity, type, theLowPlayer);
+	}
+	
+	/**
+	 * Playerが鉱石を壊した際にその鉱石がSpletSheetに登録されていたら
+	 * 直接Inventoryに入れる。
+	 */
+	@EventHandler(ignoreCancelled=true)
+	public void onPlayerMagicStoneOreBreak(BlockBreakEvent event){
+		Block block = event.getBlock();
+		Player player = event.getPlayer();
+		Material m = block.getType();
+		
+		player.sendMessage("AAA");
+		
+		switch (block.getType()) {
+			case DIAMOND_ORE:
+			case REDSTONE_ORE:
+			case IRON_ORE:
+			case EMERALD_ORE:
+			case GOLD_ORE:
+			case COAL_ORE:
+				ItemStack item = MagicStoneOre.getMagicStoneOre(MagicStoneOreType.FromMaterial(m)).getItem();
+				MagicStoneOreScheduler.giveOreItem(block, item, player);
+				break;
+			default:
+				break;
+		}
 	}
 
 	public static void updateSidebar(Player p) {
