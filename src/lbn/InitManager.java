@@ -13,6 +13,7 @@ import lbn.dungeon.contents.ItemRegister;
 import lbn.dungeon.contents.MobRegister;
 import lbn.dungeon.contents.SpawnMobGetterRegister;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
+import lbn.dungeoncore.SpletSheet.MagicStoneOreSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
@@ -54,6 +55,8 @@ public class InitManager {
 			SpletSheetCommand.allReload(null, "particle");
 
 			SpletSheetExecutor.onExecute(new WeaponSheetRunnable(Bukkit.getConsoleSender()));
+			
+			SpletSheetExecutor.onExecute(new MagicStoneOreSheetRunnable(Bukkit.getConsoleSender()));
 
 			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {
