@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.item.implementation.GalionItem;
+import lbn.item.implementation.MagicStoneOre;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
+import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 
@@ -185,5 +187,11 @@ public class ItemManager {
 	static{
 		registItem(new StrengthScrollArmor());
 		registItem(new StrengthScrollWeapon());
+		registItem(new MagicStoneOre(MagicStoneOreType.DIAOMOD_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.IRON_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.GOLD_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.EMERALD_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.COAL_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.REDSTONE_ORE));
 	}
 }
