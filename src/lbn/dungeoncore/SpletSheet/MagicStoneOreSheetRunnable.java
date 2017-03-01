@@ -49,15 +49,13 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 		MagicStoneOreType type = MagicStoneOreType.FromJpName(row[0]);
 		
 		MagicStoneFactor.regist(loc, type);
-		MagicStoneFactor.addLocations(loc);
 		
-		System.out.println(row[0]);
 	}
 	
 	@Override
 	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
 		isComplete = true;
-		MagicStoneOreScheduler.resetMagicOres(isComplete);
+	//1	MagicStoneOreScheduler.resetMagicOres(isComplete);
 		super.onCallbackFunction(submit);
 	}
 	

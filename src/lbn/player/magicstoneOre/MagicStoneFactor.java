@@ -37,10 +37,4 @@ public class MagicStoneFactor {
 		magicStoneOres.put(loc, type);
 	}
 	
-	/**
-	 * Locationを取得する。
-	 */
-	public static void addLocations(Location loc) {
-		locations.add(loc);
-	}
 }

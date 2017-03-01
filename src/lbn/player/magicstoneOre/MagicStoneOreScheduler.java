@@ -1,7 +1,6 @@
 package lbn.player.magicstoneOre;
 
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,10 +8,9 @@ import org.bukkit.block.Block;
 public class MagicStoneOreScheduler {
 	
 	public static void resetMagicOres(boolean bool){
-		Bukkit.broadcastMessage("SUCCEFUL CALLED");
 		if(bool){
-			Bukkit.broadcastMessage("ARG WAS TRUE");
-			for(Location location: MagicStoneFactor.locations) {
+			System.out.println("鉱石　再配置");
+			for(Location location: MagicStoneFactor.magicStoneOres.keySet()) {
 			
 				Block locationBlock = location.getBlock();
 				Material material = MagicStoneFactor.magicStoneOres.get(location).getMaterial();
