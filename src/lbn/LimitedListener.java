@@ -391,7 +391,7 @@ public class LimitedListener implements Listener{
 		e.setCancelled(true);
 	}
 
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGH)
 	public void onBreakBlock(BlockBreakEvent e) {
 		Player player = e.getPlayer();
 		if (player.getGameMode() != GameMode.CREATIVE) {
