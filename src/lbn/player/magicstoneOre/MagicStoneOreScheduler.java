@@ -19,7 +19,7 @@ public class MagicStoneOreScheduler {
 	 */
 	public static void resetMagicOres(boolean bool){
 		Bukkit.getLogger().info("全ての鉱石を再配置");
-		if(bool){
+		if(true){
 			for(Location location: MagicStoneFactor.magicStoneOres.keySet()) {
 				Block locationBlock = location.getBlock();
 				Material material = MagicStoneFactor.magicStoneOres.get(location).getMaterial();
@@ -37,16 +37,9 @@ public class MagicStoneOreScheduler {
 	 * @param player
 	 */
 	public static void giveOreItem(Block block,ItemStack ore,Player player){
-		
-		for(int i=0;i<MagicStoneFactor.magicStoneOres.size();i++){
-			MagicStoneOreType magicStoneOreType = MagicStoneFactor.magicStoneOres.get(i);
-			player.sendMessage(magicStoneOreType.getJpName());
-			System.out.println(MagicStoneFactor.magicStoneOres.size());
-		}
-		
 		if(MagicStoneFactor.magicStoneOres.containsKey(block.getLocation())){
 			long tick = MagicStoneOreType.getRespawnTickFromMaterial(block.getType());
-			player.sendMessage("loc true");
+			
 			player.getInventory().addItem(ore);
 			block.setType(Material.COBBLESTONE);
 			magicStoneRespawnScheduler(tick*20*60, block);

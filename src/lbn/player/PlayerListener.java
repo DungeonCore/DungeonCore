@@ -58,7 +58,6 @@ import lbn.mob.SummonPlayerManager;
 import lbn.money.GalionEditReason;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.player.customplayer.PlayerChestTpManager;
-import lbn.player.magicstoneOre.MagicStoneFactor;
 import lbn.player.magicstoneOre.MagicStoneOreScheduler;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.LbnRunnable;
@@ -409,16 +408,15 @@ public class PlayerListener implements Listener{
 	 * Playerが鉱石を壊した際にその鉱石がSpletSheetに登録されていたら
 	 * 直接Inventoryに入れる。
 	 */
-	@EventHandler
+	@EventHandler(ignoreCancelled=true)
 	public void onPlayerMagicStoneOreBreak(BlockBreakEvent event){
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		Material m = block.getType();
 		
 		player.sendMessage("AAA");
-		System.out.println(MagicStoneFactor.magicStoneOres.size());
-		switch (block.getType()) {
 		
+		switch (block.getType()) {
 			case DIAMOND_ORE:
 			case REDSTONE_ORE:
 			case IRON_ORE:
@@ -427,7 +425,6 @@ public class PlayerListener implements Listener{
 			case COAL_ORE:
 				ItemStack item = MagicStoneOre.getMagicStoneOre(MagicStoneOreType.FromMaterial(m)).getItem();
 				MagicStoneOreScheduler.giveOreItem(block, item, player);
-				player.sendMessage("ORE TRUE");
 				break;
 			default:
 				break;
