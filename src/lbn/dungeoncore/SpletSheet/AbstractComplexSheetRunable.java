@@ -157,7 +157,11 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
 
         sender.sendMessage("処理を開始します。:" + getSheetName());
         for (String[] row : allData) {
-          excuteOnerow(row);
+        	try {
+        		excuteOnerow(row);
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        	}
         }
         sender.sendMessage(allData.length + "行の更新が完了しました。:" + getSheetName());
       } else {

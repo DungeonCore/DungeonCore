@@ -20,7 +20,6 @@ import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.player.magicstoneOre.MagicStoneOreScheduler;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.playerIO.PlayerLastSaveType;
 import lbn.util.LbnRunnable;
@@ -56,10 +55,12 @@ public class InitManager {
 			SpletSheetCommand.allReload(null, "particle");
 
 			SpletSheetExecutor.onExecute(new WeaponSheetRunnable(Bukkit.getConsoleSender()));
-			
-			SpletSheetExecutor.onExecute(new MagicStoneOreSheetRunnable(Bukkit.getConsoleSender()));
-			
-			MagicStoneOreScheduler.resetMagicOres(MagicStoneOreSheetRunnable.isComplete);
+
+			MagicStoneOreSheetRunnable magicStoneOreSheetRunnable = new MagicStoneOreSheetRunnable(Bukkit.getConsoleSender());
+			magicStoneOreSheetRunnable.getData(null);
+			SpletSheetExecutor.onExecute(magicStoneOreSheetRunnable);
+
+//			MagicStoneOreScheduler.resetMagicOres(MagicStoneOreSheetRunnable.isComplete);
 
 			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {
