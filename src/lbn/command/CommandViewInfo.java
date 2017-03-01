@@ -50,9 +50,9 @@ public class CommandViewInfo implements CommandExecutor{
 			return false;
 		}
 
-		if (!((Player)paramCommandSender).isOp()) {
-			return false;
-		}
+//		if (!((Player)paramCommandSender).isOp()) {
+//			return false;
+//		}
 
 		if (paramArrayOfString[0].equals("chunk")) {
 			showLoadedChunk(paramCommandSender);

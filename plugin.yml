@@ -236,6 +236,12 @@ commands:
       permission:  main.lbnDungeonUtil.command.builder.jumpboost
       usage: /<command> player n (向いている方向にnだけとばす) or /<command> player x y z (x y z方向にとばす)
       permission-message: You don't have <permission>
+   open:
+      description: メニューを開く
+      permission:  main.lbnDungeonUtil.command.admin.open
+      usage: /<command> param
+      permission-message: You don't have <permission>
+
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

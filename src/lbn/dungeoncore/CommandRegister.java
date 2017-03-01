@@ -20,6 +20,7 @@ import lbn.command.JumpCommand;
 import lbn.command.MobCommand;
 import lbn.command.MobSkillExecuteCommand;
 import lbn.command.MoneyCommand;
+import lbn.command.OpenCommand;
 import lbn.command.PlayerStatusCommand;
 import lbn.command.QuestCommand;
 import lbn.command.SetDungeonCommand;
@@ -104,6 +105,7 @@ public class CommandRegister {
 		registCommand(new LoopCommand(), "loop");
 		registCommand(new RandomExecuteCommand(), "randomExec");
 		registCommand(new JumpCommand(), "jumpboost");
+		registCommand(new OpenCommand(), "open");
 
 		new ExecuteMobSkillCommand().regist();
 		new CustomKillCommand().regist();
