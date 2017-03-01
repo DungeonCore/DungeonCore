@@ -100,7 +100,9 @@ public class LimitedListener implements Listener{
 
 	@EventHandler
 	public void BlockDamageEvent(BlockDamageEvent e) {
-		e.setCancelled(true);
+		if (!Config.getDamageAllowBlock().contains(e.getBlock())) {
+			e.setCancelled(true);
+		}
 	}
 
 //

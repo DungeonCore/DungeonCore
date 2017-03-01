@@ -17,6 +17,7 @@ public class Config {
    */
   public static final String DEVELOPER_TWITTER_ID = "@namiken1993";
 
+  private static Set<Material> damageIgnoredBlocks = new HashSet<>();
   private static Set<Material> clickIgnoredBlocks = new HashSet<>();
   private static Set<Material> clickCancelledItems = new HashSet<>();
   private static Set<EntityType> clickCancelledEntityTypes = new HashSet<>();
@@ -35,6 +36,14 @@ public class Config {
     clickIgnoredBlocks.add(Material.HOPPER_MINECART);
     clickIgnoredBlocks.add(Material.FIRE);
 
+    damageIgnoredBlocks.add(Material.DIAMOND_ORE);
+    damageIgnoredBlocks.add(Material.IRON_ORE);
+    damageIgnoredBlocks.add(Material.GOLD_ORE);
+    damageIgnoredBlocks.add(Material.REDSTONE_ORE);
+    damageIgnoredBlocks.add(Material.LAPIS_ORE);
+    damageIgnoredBlocks.add(Material.EMERALD_ORE);
+    damageIgnoredBlocks.add(Material.COAL_ORE);
+
     clickCancelledItems.add(Material.EYE_OF_ENDER);
     clickCancelledItems.add(Material.ENDER_PEARL);
     clickCancelledItems.add(Material.BUCKET);
@@ -52,6 +61,14 @@ public class Config {
 
   public static Set<Material> getClickCancelItems() {
     return clickCancelledItems;
+  }
+
+  /**
+   * ブロックが殴られるのを許可するブロックの種類を取得
+   * @return
+   */
+  public static Set<Material> getDamageAllowBlock() {
+	  return damageIgnoredBlocks;
   }
 
   public static Set<EntityType> getClickCancelEntityTypes() {

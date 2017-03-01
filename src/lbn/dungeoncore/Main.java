@@ -128,8 +128,8 @@ public class Main extends JavaPlugin {
 
 
 	public void registLintener() {
-		getServer().getPluginManager().registerEvents(new SystemListener(), this);
 		getServer().getPluginManager().registerEvents(new LimitedListener(), this);
+		getServer().getPluginManager().registerEvents(new SystemListener(), this);
 		getServer().getPluginManager().registerEvents(new MobListener(), this);
 		getServer().getPluginManager().registerEvents(new ChestListner(), this);
 		getServer().getPluginManager().registerEvents(new ItemListener(), this);
