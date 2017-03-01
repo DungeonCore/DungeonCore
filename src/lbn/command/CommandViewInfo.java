@@ -15,6 +15,7 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.reincarnation.ReincarnationTypeMune;
 import lbn.util.InOutputUtil;
@@ -118,6 +119,9 @@ public class CommandViewInfo implements CommandExecutor{
 			break;
 		case "reinc":
 			new ReincarnationTypeMune().open((Player) paramCommandSender);
+			break;
+		case "trade":
+			MagicStoneTrade.open((Player) paramCommandSender);
 			break;
 //		case "dungeonCheck":
 //			makeDungeonGround((Player)paramCommandSender);
