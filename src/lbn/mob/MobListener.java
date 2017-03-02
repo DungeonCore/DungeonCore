@@ -129,7 +129,7 @@ public class MobListener implements Listener {
 			e.setCancelled(true);
 		} else if (entity.getType() == EntityType.ARMOR_STAND) {
 			//管理者でないなら攻撃をキャンセルする
-			if (!PlayerChecker.isNormalNonPlayer(e.getDamager())) {
+			if (!PlayerChecker.isNonNormalPlayer(e.getDamager())) {
 				e.setCancelled(true);
 			}
 		}

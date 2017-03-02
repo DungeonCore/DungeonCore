@@ -22,6 +22,7 @@ public class ReincarnationFactor {
 	static HashMap<String, ReincarnationInterface> reincarnationMap = new HashMap<String, ReincarnationInterface>();
 
 	public static void openReincarnationInv(Player p) {
+		new ReincarnationTypeMune().open(p);
 	}
 
 	/**

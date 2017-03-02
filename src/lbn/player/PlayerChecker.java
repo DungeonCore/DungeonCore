@@ -24,7 +24,7 @@ public class PlayerChecker {
 	 * @param p
 	 * @return
 	 */
-	public static boolean isNormalNonPlayer(Entity entity) {
+	public static boolean isNonNormalPlayer(Entity entity) {
 		if (entity.getType() == EntityType.PLAYER) {
 			return !isNormalPlayer(entity);
 		}

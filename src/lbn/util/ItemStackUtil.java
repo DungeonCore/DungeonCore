@@ -367,7 +367,12 @@ public class ItemStackUtil {
 		return null;
 	}
 
-	public static ItemStack getDecrement(ItemStack item) {
+	/**
+	 * アイテムの個数を1つ減少させる
+	 * @param item
+	 * @return
+	 */
+	public static ItemStack getDecremented(ItemStack item) {
 		if (item == null) {
 			return new ItemStack(Material.AIR);
 		}
@@ -427,9 +432,17 @@ public class ItemStackUtil {
 		return false;
 	}
 
+	/**
+	 * 手に持っているアイテムを1つ消費する
+	 * @param player
+	 */
 	public static void consumeItemInHand(Player player) {
+		ItemStack itemInHand = player.getItemInHand();
+		if (itemInHand == null) {
+			return;
+		}
 		//消費させる
-		if (player.getItemInHand().getAmount() == 1) {
+		if (player.getItemInHand().getAmount() <= 1) {
 			player.getInventory().clear(player.getInventory().getHeldItemSlot());
 		} else {
 			player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);

@@ -1,5 +1,7 @@
 package lbn.player.magicstoneOre;
 
+import java.util.Random;
+
 import org.bukkit.Material;
 
 /**
@@ -8,31 +10,32 @@ import org.bukkit.Material;
  *
  */
 public enum MagicStoneOreType {
-	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 180,60),
-	REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 90,40),
-	GOLD_ORE("金鉱石", Material.GOLD_ORE, 90,30),
-	EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE, 15,10),
-	IRON_ORE("鉄鉱石", Material.IRON_ORE, 30,10),
-	COAL_ORE("石炭鉱石", Material.COAL_ORE, 30,10);
-	
+	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 60 * 60 * 1, 60 * 60 * 3),
+	REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 60 * 40, (long)(60 * 60 * 1.5)),
+	GOLD_ORE("金鉱石", Material.GOLD_ORE,  20 * 30, (long)(20 * 60 * 1.5)),
+	EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE, 60 * 30, (long)(60 * 60 * 1.5)),
+	IRON_ORE("鉄鉱石", Material.IRON_ORE, 60 * 10, 60 * 30),
+	COAL_ORE("石炭鉱石", Material.COAL_ORE, 60 * 10, 60 * 30),
+	LAPIS_ORE("ラピス鉱石", Material.LAPIS_ORE,  60 * 10, 60 * 30);
+
 	//日本語名
 	String jpName;
 
 	//鉱石のブロックの素材
 	Material m;
-	
-	//復活する最大時間
-	long maxMin;
-	
-	//復活する最小時間
-	long minMin;
 
-	private MagicStoneOreType(String jpName, Material m, long maxMin,long minMin) {
+	//復活する最大時間
+	long maxMinTick;
+
+	//復活する最小時間
+	long minMinTick;
+
+	private MagicStoneOreType(String jpName, Material m, long minMinSec, long maxMinSec) {
 		this.jpName = jpName;
 		this.m = m;
-		this.maxMin = maxMin;
-		this.minMin = minMin;
-		
+		this.maxMinTick = maxMinSec * 20;
+		this.minMinTick = minMinSec * 20;
+
 	}
 
 	/**
@@ -54,31 +57,29 @@ public enum MagicStoneOreType {
 	 * 鉱石の最大復活時間を取得
 	 * @return
 	 */
-	public long getMaxRespawnTick() {
-		return maxMin;
+	public long getMaxRelocationTick() {
+		return maxMinTick;
 	}
-	
+
 	/**
 	 * 鉱石の最小復活時間を取得
 	 * @return
 	 */
-	public long getMinRespawnTick() {
-		return minMin;
+	public long getMinRelocationTick() {
+		return minMinTick;
 	}
-	
+
+	static Random random = new Random();
+
 	/**
-	 * マテリアルから復活する時間を取得
-	 * @param material
+	 * 再配置される時間をランダムに取得
 	 * @return
 	 */
-	public static long getRespawnTickFromMaterial(Material m) {
-		for(MagicStoneOreType tick: values()){
-			if(tick.getMaterial().equals(m)){
-				return tick.getMinRespawnTick();
-			}
-		}
-		return -1;
+	public long getRelocationTick () {
+//		return random.nextInt((int) (getMaxRelocationTick() - getMinRelocationTick())) + getMinRelocationTick();
+		return 3 * 20;
 	}
+
 	/**
 	 * マテリアルから魔法鉱石を取得。もし存在しない日本語名の時はnullを返す
 	 * @param m
@@ -90,6 +91,10 @@ public enum MagicStoneOreType {
 				return type;
 			}
 		}
+
+		if (m == Material.GLOWING_REDSTONE_ORE) {
+			return REDSTONE_ORE;
+		}
 		return null;
 	}
 
@@ -99,6 +104,10 @@ public enum MagicStoneOreType {
 	 * @return
 	 */
 	public static MagicStoneOreType FromJpName(String jpName) {
+		if (jpName == null) {
+			return null;
+		}
+
 		for (MagicStoneOreType type : values()) {
 			//日本語名が同じならそれを返す
 			if (type.getJpName().equals(jpName)) {

@@ -7,6 +7,7 @@ import lbn.NbtTagConst;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
+import lbn.common.event.PlayerBreakMagicOreEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
@@ -18,6 +19,7 @@ import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.EquipItemable;
 import lbn.item.itemInterface.LeftClickItemable;
+import lbn.item.itemInterface.MagicPickaxeable;
 import lbn.item.itemInterface.MeleeAttackItemable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
@@ -429,5 +431,20 @@ public class ItemListener implements Listener{
 			return;
 		}
 		customItem.onPlayerDropItemEvent(e);
+	}
+
+	@EventHandler
+	public void onPlayerBreakMagicOreEvent(PlayerBreakMagicOreEvent e) {
+		Player player = e.getPlayer();
+		//所持しているアイテムを取得
+		ItemStack itemInHand = player.getItemInHand();
+
+		//登録されているアイテム以外なら鉱石を掘らせない
+		MagicPickaxeable customItem = ItemManager.getCustomItem(MagicPickaxeable.class, itemInHand);
+		if (customItem == null) {
+			e.setCancelled(true);
+		} else {
+			customItem.onPlayerBreakMagicOreEvent(e);
+		}
 	}
 }

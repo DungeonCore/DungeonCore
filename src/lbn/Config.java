@@ -43,6 +43,7 @@ public class Config {
     damageIgnoredBlocks.add(Material.LAPIS_ORE);
     damageIgnoredBlocks.add(Material.EMERALD_ORE);
     damageIgnoredBlocks.add(Material.COAL_ORE);
+    damageIgnoredBlocks.add(Material.GLOWING_REDSTONE_ORE);
 
     clickCancelledItems.add(Material.EYE_OF_ENDER);
     clickCancelledItems.add(Material.ENDER_PEARL);

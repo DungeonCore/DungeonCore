@@ -187,6 +187,10 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
 
   public static Location getLocationByString(String str) {
     try {
+    	if (str == null) {
+    		return null;
+    	}
+
       String[] split = str.split(":");
       World w = Bukkit.getWorld(split[0]);
 

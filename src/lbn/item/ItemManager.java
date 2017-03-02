@@ -10,6 +10,11 @@ import lbn.item.implementation.GalionItem;
 import lbn.item.implementation.MagicStoneOre;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
+import lbn.item.implementation.pic.DiamondPickaxe;
+import lbn.item.implementation.pic.GoldPickaxe;
+import lbn.item.implementation.pic.IronPickaxe;
+import lbn.item.implementation.pic.StonePickaxe;
+import lbn.item.implementation.pic.WoodPickAxe;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
 import lbn.player.magicstoneOre.MagicStoneOreType;
@@ -193,5 +198,11 @@ public class ItemManager {
 		registItem(new MagicStoneOre(MagicStoneOreType.EMERALD_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.COAL_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.REDSTONE_ORE));
+		registItem(new MagicStoneOre(MagicStoneOreType.LAPIS_ORE));
+		registItem(new WoodPickAxe());
+		registItem(new StonePickaxe());
+		registItem(new GoldPickaxe());
+		registItem(new IronPickaxe());
+		registItem(new DiamondPickaxe());
 	}
 }

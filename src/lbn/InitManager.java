@@ -13,14 +13,12 @@ import lbn.dungeon.contents.ItemRegister;
 import lbn.dungeon.contents.MobRegister;
 import lbn.dungeon.contents.SpawnMobGetterRegister;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
-import lbn.dungeoncore.SpletSheet.MagicStoneOreSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.player.magicstoneOre.MagicStoneOreScheduler;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.playerIO.PlayerLastSaveType;
 import lbn.util.LbnRunnable;
@@ -51,15 +49,13 @@ public class InitManager {
 
 			SoundSheetRunnable.allReload();
 
-			SpletSheetCommand.allReload(null, "buff");
+			SpletSheetCommand.reloadSheet(null, "buff");
 
-			SpletSheetCommand.allReload(null, "particle");
+			SpletSheetCommand.reloadSheet(null, "particle");
 
 			SpletSheetExecutor.onExecute(new WeaponSheetRunnable(Bukkit.getConsoleSender()));
-			
-			SpletSheetExecutor.onExecute(new MagicStoneOreSheetRunnable(Bukkit.getConsoleSender()));
-			
-			MagicStoneOreScheduler.resetMagicOres(MagicStoneOreSheetRunnable.isComplete);
+
+			SpletSheetCommand.reloadSheet(null, "magicore");
 
 			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {

@@ -42,8 +42,8 @@ public class StrengthTableOperation {
 		}
 
 		//アイテムを１つ減少させる
-		inv.setItem(4, ItemStackUtil.getDecrement(inv.getItem(4)));
-		inv.setItem(6, ItemStackUtil.getDecrement(inv.getItem(6)));
+		inv.setItem(4, ItemStackUtil.getDecremented(inv.getItem(4)));
+		inv.setItem(6, ItemStackUtil.getDecremented(inv.getItem(6)));
 	}
 
 	public static boolean isOpenStrengthTable(HumanEntity humanEntity) {
