@@ -5,7 +5,7 @@ import lbn.item.ItemManager;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.util.damagedFalling.DamagedFallingBlockForPlayer;
+import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;

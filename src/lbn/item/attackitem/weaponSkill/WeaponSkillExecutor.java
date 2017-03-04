@@ -2,7 +2,9 @@ package lbn.item.attackitem.weaponSkill;
 
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.AttackItemStack;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.ItemStackUtil;
@@ -14,17 +16,24 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class WeaponSkillExecutor {
+	/**
+	 * 右クリックした時の武器スキルの発動
+	 * @param e
+	 * @param customItem
+	 */
 	public static void executeWeaponSkillOnClick(PlayerInteractEvent e, AbstractAttackItem customItem) {
 		Player player = e.getPlayer();
+		//武器を取得
+		ItemStack item = e.getItem();
 
 		//武器スキルを取得
-		WeaponSkillInterface skill = getWeaponSkill(e.getItem());
+		WeaponSkillInterface skill = getWeaponSkill(item);
 		//武器スキルが登録されていない場合は何もしない
 		if (skill == null) {
 			return;
 		}
 
-		CooltimeManager cooltimeManager = new CooltimeManager(e, new CooltimeImpl(customItem.getAttackType(), skill.getCooltime()));
+		CooltimeManager cooltimeManager = new CooltimeManager(player, new CooltimeImpl(customItem.getAttackType(), skill.getCooltime()), item);
 		//クールタイムが残っていないか確認
 		if (!cooltimeManager.canUse()) {
 			cooltimeManager.sendCooltimeMessage(player);
@@ -37,12 +46,33 @@ public class WeaponSkillExecutor {
 			Message.sendMessage(player, ChatColor.RED + "マジックポイントが不足しています");
 			return;
 		}
+		boolean onExecute = skill.onClick(player, item, customItem);
+		if (onExecute) {
+			//クールタイムをセット
+			cooltimeManager.setCoolTime();
+		}
+	}
+
+	/**
+	 * 攻撃をした時、スキルを発動
+	 */
+	public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
+		AttackItemStack attackItem = e.getAttackItem();
+		ItemStack item = attackItem.getItem();
+		Player player = e.getPlayer();
+		AbstractAttackItem customItem = attackItem.getItemInterface();
+
+		//武器スキルを取得
+		WeaponSkillInterface skill = getWeaponSkill(item);
+		//武器スキルが登録されていない場合は何もしない
+		if (skill == null) {
+			return;
+		}
 
 		//スキルを発動
-		skill.onClick(player, e.getItem(), customItem);
-		//クールタイムをセット
-		cooltimeManager.setCoolTime();
+		skill.onCombat(player, item, customItem, e.getEnemy(), e);
 	}
+
 
 
 	/**

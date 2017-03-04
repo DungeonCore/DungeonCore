@@ -1,68 +1,32 @@
 package lbn.dungeon.contents.item.sword;
 
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeoncore.Main;
-import lbn.item.attackitem.old.SwordItemOld;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.item.attackitem.SpreadSheetWeaponData;
+import lbn.item.itemAbstract.SwordItem;
+import lbn.item.itemInterface.EntityKillable;
+import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.strength.StrengthOperator;
+import lbn.player.ItemType;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
-public class DebugSword extends SwordItemOld{
-	@Override
-	public String getItemName() {
-		return "デバックソード";
+public class DebugSword extends SwordItem implements StrengthChangeItemable, EntityKillable{
+	public DebugSword() {
+		super(new SpreadSheetWeaponDataForDebug());
 	}
 
-	@Override
-	public String getId() {
-		return "DebugSword";
-	}
+	int availableLevel = 0;
 
 	@Override
-	public StrengthTemplate getStrengthTemplate() {
-		return null;
+	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
+		super.onPlayerStrengthFinishEvent(event);
+
+		availableLevel = event.getLevel();
 	}
-
-	@Override
-	protected void excuteOnMeleeAttack2(ItemStack item, LivingEntity owner,
-			LivingEntity target, EntityDamageByEntityEvent e) {
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				target.setNoDamageTicks(0);
-			}
-		}.runTaskLater(Main.plugin, 1);
-	}
-
-	@Override
-	public void excuteOnLeftClick(PlayerInteractEvent e) {
-	}
-
-	@Override
-	protected void excuteOnRightClick2(PlayerInteractEvent e) {
-		e.getPlayer().sendMessage("平均:" + (getMaxAttackDamage() + getMinAttackDamage()) / 2);
-
-		ItemStack item = e.getItem();
-		int level = StrengthOperator.getLevel(item);
-		availableLevel = level;
-
-		if (e.getPlayer().isSneaking()) {
-			Bukkit.dispatchCommand(e.getPlayer(), "statusCommand MAIN_LEVEL set " + level);
-		}
-	}
-
-	@Override
-	protected String[] getStrengthDetail2(int level) {
-		return null;
-	}
-
-	public static int availableLevel = 0;
 
 	@Override
 	public int getAvailableLevel() {
@@ -70,28 +34,54 @@ public class DebugSword extends SwordItemOld{
 	}
 
 	@Override
-	public double getAttackItemDamage(int strengthLevel) {
-		return (getMaxAttackDamage() + getMinAttackDamage()) / 2;
+	public void excuteOnRightClick(PlayerInteractEvent e) {
+		super.excuteOnRightClick(e);
+
+		ItemStack item = e.getItem();
+
+		availableLevel = StrengthOperator.getLevel(item);
+
+		e.getPlayer().sendMessage("ランク１５　攻撃力:" + getAttackItemDamage(0));
 	}
 
 	@Override
-	protected Material getMaterial() {
-		return Material.WOOD_SWORD;
+	public void onCombatEntity(PlayerCombatEntityEvent e) {
+		super.onCombatEntity(e);
+		e.getPlayer().sendMessage("debug sword:onCombatEntity");
 	}
 
 	@Override
-	public int getMaxStrengthCount() {
-		return 8;
+	public void onKillEvent(PlayerKillEntityEvent e) {
+		e.getPlayer().sendMessage("debug sword:onKillEvent");
+	}
+}
+
+class SpreadSheetWeaponDataForDebug extends SpreadSheetWeaponData {
+	public SpreadSheetWeaponDataForDebug() {
 	}
 
 	@Override
-	public String[] getDetail() {
-		return null;
+	public String getId() {
+		return "debug_sword";
 	}
 
 	@Override
-	protected int getBaseBuyPrice() {
-		return 0;
+	public String getName() {
+		return "デバック用ソード";
 	}
 
+	@Override
+	public int getRank() {
+		return 15;
+	}
+
+	@Override
+	public ItemType getItemType() {
+		return ItemType.SWORD;
+	}
+
+	@Override
+	public ItemStack getItemStack() {
+		return new ItemStack(Material.WOOD_SWORD);
+	}
 }

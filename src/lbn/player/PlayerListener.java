@@ -8,7 +8,7 @@ import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.command.TpCutCommand;
-import lbn.common.event.PlayerBreakMagicOreEvent;
+import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
@@ -203,7 +203,7 @@ public class PlayerListener implements Listener{
 			}
 			//Abilityを適応
 			TheLowPlayer theLowPlayer = e.getTheLowPlayer();
-			theLowPlayer.fixIntegrity(CheckIntegrityLevel.LEVEL1);
+			theLowPlayer.fixIntegrity(CheckIntegrityLevel.LEVEL2);
 		} else {
 			//ロード失敗
 			//PlayerがオンラインならKickする
@@ -419,10 +419,8 @@ public class PlayerListener implements Listener{
 		//登録されている鉱石ブロックの種類を取得
 		MagicStoneOreType registedType = MagicStoneFactor.getMagicStoneByLocation(block.getLocation());
 
-		System.out.println("aa@" + brokenType + ", " + registedType);
 		//登録されている鉱石の種類と、実際に破壊したブロックの鉱石の種類が同じなら鉱石を入手する
 		if (brokenType != null && registedType != null && registedType == brokenType) {
-			System.out.println("aa1");
 			//取得する鉱石
 			ItemStack item = MagicStoneOre.getMagicStoneOre(brokenType).getItem();
 			//イベントを呼び出す

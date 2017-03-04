@@ -11,7 +11,6 @@ import lbn.chest.wireless.WireLessChestManager;
 import lbn.common.OtherCommonListener;
 import lbn.common.other.HolographicDisplaysManager;
 import lbn.common.other.SystemLog;
-import lbn.dungeon.contents.ContentsListner;
 import lbn.item.ItemListener;
 import lbn.item.SetItemListner;
 import lbn.mob.MobListener;
@@ -108,7 +107,6 @@ public class Main extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		new InitManager().init();
 
 		getConfig().options().copyDefaults(true);
@@ -138,7 +136,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new OtherCommonListener(), this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		getServer().getPluginManager().registerEvents(new QuestListener(), this);
-		getServer().getPluginManager().registerEvents(new ContentsListner(), this);
 		getServer().getPluginManager().registerEvents(new MoneyListener(), this);
 	}
 

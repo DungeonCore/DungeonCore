@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import lbn.common.projectile.ProjectileInterface;
+import lbn.common.projectile.ProjectileManager;
 import lbn.item.implementation.GalionItem;
 import lbn.item.implementation.MagicStoneOre;
 import lbn.item.implementation.StrengthScrollArmor;
@@ -59,6 +61,10 @@ public class ItemManager {
 
 		if (item instanceof SlotInterface) {
 			SlotManager.registSlot((SlotInterface) item);
+		}
+
+		if (item instanceof ProjectileInterface) {
+			ProjectileManager.regist((ProjectileInterface) item);
 		}
 	}
 

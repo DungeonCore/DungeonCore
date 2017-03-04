@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.projectile.ProjectileManager;
 import lbn.dungeon.contents.strength_template.NotSrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
@@ -27,6 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -69,7 +71,7 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 	}
 
 	@Override
-	public void excuteOnProjectileHit(ProjectileHitEvent e, ItemStack item) {
+	public void onProjectileHit(ProjectileHitEvent e, ItemStack item) {
 		Projectile entity = e.getEntity();
 
 		if (!entity.hasMetadata("bow_date_lbn_doungeon_laserbow_attack")) {
@@ -152,6 +154,10 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 		return 5000;
 	}
 
+	@Override
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {
+	}
+
 }
 
 class LaserBowRunner extends LbnRunnable{
@@ -189,13 +195,9 @@ class LaserBowRunner extends LbnRunnable{
 		spawnArrow.setShooter(player);
 		spawnArrow.setBounce(false);
 
-		//弓の情報を削除する
-		spawnArrow.removeMetadata("bow_date_lbn_doungeon_itemstack", Main.plugin);
-		spawnArrow.removeMetadata("bow_date_lbn_doungeon_customitem", Main.plugin);
-		//弓の情報をつける
-		spawnArrow.setMetadata("bow_date_lbn_doungeon_itemstack", new FixedMetadataValue(Main.plugin, item));
-		//弓のアイテム情報をつける
-		spawnArrow.setMetadata("bow_date_lbn_doungeon_customitem", new FixedMetadataValue(Main.plugin, bow));
+		//矢の情報を付与する
+		ProjectileManager.launchProjectile(spawnArrow, bow, item);
+
 		//弓のアイテム情報をつける
 		spawnArrow.setMetadata("bow_date_lbn_doungeon_laserbow_attack", new FixedMetadataValue(Main.plugin, "1"));
 

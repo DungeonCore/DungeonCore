@@ -1,22 +1,24 @@
 package lbn.item;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lbn.NbtTagConst;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
-import lbn.common.event.PlayerBreakMagicOreEvent;
+import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.common.projectile.ProjectileManager;
 import lbn.dungeoncore.Main;
 import lbn.item.armoritem.ArmorBase;
 import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.CombatItemable;
+import lbn.item.itemInterface.EntityKillable;
 import lbn.item.itemInterface.EquipItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicPickaxeable;
@@ -32,7 +34,6 @@ import lbn.item.strength.StrengthLaterRunnable;
 import lbn.item.strength.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
-import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
@@ -52,7 +53,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -63,8 +63,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class ItemListener implements Listener{
@@ -96,52 +94,26 @@ public class ItemListener implements Listener{
 		//発射されたものに対して弓の情報をつけておく
 		if (bowItem != null) {
 			bowItem.excuteOnShootBow(event);
-			//弓の情報を削除する
-			event.getProjectile().removeMetadata("bow_date_lbn_doungeon_customitem", Main.plugin);
-			event.getProjectile().removeMetadata("bow_date_lbn_doungeon_itemstack", Main.plugin);
-			//弓の情報をつける
-			event.getProjectile().setMetadata("bow_date_lbn_doungeon_customitem", new FixedMetadataValue(Main.plugin, bowItem));
-			//弓のアイテム情報をつける
-			event.getProjectile().setMetadata("bow_date_lbn_doungeon_itemstack", new FixedMetadataValue(Main.plugin, bow));
 		}
 	}
 
 	@EventHandler
 	public void onLunchProjectile(ProjectileLaunchEvent e) {
 		Projectile entity = e.getEntity();
-		if (entity.getType() == EntityType.ARROW) {
-			return;
-		}
 
+		//打った瞬間、手に持ったものからProjectileIDを取得
 		ProjectileSource shooter = entity.getShooter();
 		if (!(shooter instanceof LivingEntity)) {
 			return;
 		}
 		ItemStack itemInHand = ((LivingEntity) shooter).getEquipment().getItemInHand();
 		//custom itemでないなら何もしない
-		ItemInterface item = ItemManager.getCustomItem(itemInHand);
+		BowItemable item = ItemManager.getCustomItem(BowItemable.class, itemInHand);
 		if (item == null) {
 			return;
 		}
-		ItemType attackType = item.getAttackType();
-
-		entity.setMetadata("the_low_launched_projectile_attack_type", new FixedMetadataValue(Main.plugin, LastDamageMethodType.fromAttackType(attackType)));
-		entity.setMetadata("the_low_launched_projectile_attack_entity", new FixedMetadataValue(Main.plugin, shooter));
+		ProjectileManager.launchProjectile(entity, item, itemInHand);
 	}
-
-	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event) {
-		Projectile entity = event.getEntity();
-		List<MetadataValue> metadata = entity.getMetadata("bow_date_lbn_doungeon_customitem");
-		List<MetadataValue> metadataBow = entity.getMetadata("bow_date_lbn_doungeon_itemstack");
-		//着地したものに弓の情報がある確認する
-		if (metadata.size() != 0 || metadataBow.size() != 0) {
-			BowItemable bowItem = (BowItemable)metadata.get(0).value();
-			ItemStack bow = (ItemStack)metadataBow.get(0).value();
-			bowItem.excuteOnProjectileHit(event, bow);
-		}
-	}
-
 
 	/**
 	 * プレイヤーが敵にダメージを与える
@@ -158,48 +130,16 @@ public class ItemListener implements Listener{
 			return;
 		}
 
-		LivingEntity entity = (LivingEntity) e.getEntity();
-
 		Entity damager = e.getDamager();
-		if (damager instanceof LivingEntity && ((LivingEntity)damager).getEquipment() != null ) {
+		//直接の攻撃の時
+		if (damager.getType().isAlive() && ((LivingEntity)damager).getEquipment() != null ) {
 			//手に持っているアイテムの情報を取得する
 			ItemStack itemInHand = ((LivingEntity)damager).getEquipment().getItemInHand();
 			MeleeAttackItemable customItem = ItemManager.getCustomItem(MeleeAttackItemable.class, itemInHand);
 			if (customItem != null) {
 				customItem.excuteOnMeleeAttack(itemInHand, (LivingEntity)e.getDamager(), (LivingEntity)e.getEntity(), e);
 			}
-		} else if (damager instanceof Projectile) {
-			if (damager.getType() == EntityType.ARROW) {
-				List<MetadataValue> metadata = damager.getMetadata("bow_date_lbn_doungeon_customitem");
-				List<MetadataValue> metadataBow = damager.getMetadata("bow_date_lbn_doungeon_itemstack");
-				//着地したものに弓の情報がある確認する
-				if (metadata.size() != 0 || metadataBow.size() != 0) {
-					BowItemable bowItem = (BowItemable)metadata.get(0).value();
-					ItemStack bow = (ItemStack)metadataBow.get(0).value();
-					bowItem.excuteOnProjectileDamage(e, bow, (LivingEntity)((Projectile)damager).getShooter(), entity);
-				}
-			} else {
-				List<MetadataValue> metadata1 = damager.getMetadata("the_low_launched_projectile_attack_type");
-				List<MetadataValue> metadata2 = damager.getMetadata("the_low_launched_projectile_attack_entity");
-				if (metadata1.size() != 0 || metadata2.size() != 0) {
-					LastDamageMethodType type = (LastDamageMethodType) metadata1.get(0).value();
-					LivingEntity shooter = (LivingEntity) metadata2.get(0).value();
-					if (shooter.getType() == EntityType.PLAYER) {
-						LastDamageManager.onDamage(entity, (Player) shooter, type);
-					}
-				}
-			}
 		}
-//		else if (e.getEntity() instanceof LivingEntity) {
-//			LivingEntity target = (LivingEntity) e.getEntity();
-//			EntityEquipment equipment = target.getEquipment();
-//			for (ItemStack armor : equipment.getArmorContents()) {
-//				ArmorItemable customItem = ItemManager.getCustomItem(ArmorItemable.class, armor);
-//				if (customItem != null) {
-//					customItem.excuteOnDefenceEntity(e.getDamager(), (LivingEntity)e.getEntity(), e, armor);
-//				}
-//			}
-//		}
 	}
 
 	/**
@@ -328,24 +268,21 @@ public class ItemListener implements Listener{
 		//倒すときに使ったアイテム
 		ItemStack item = null;
 
-		//最後に倒したのが剣のとき
-		if (lastDamageMethod == LastDamageMethodType.SWORD) {
-			//手に持っているアイテムで倒したと判断
-			item = player.getItemInHand();
-		} else if (lastDamageMethod == LastDamageMethodType.BOW) {
-			Entity damager = ((EntityDamageByEntityEvent)lastDamageCause).getDamager();
-			//最後に倒したのが矢なら
-			if (damager.getType() == EntityType.ARROW) {
-				//メタデータを取得
-				List<MetadataValue> metadataBow = damager.getMetadata("bow_date_lbn_doungeon_itemstack");
-				if (metadataBow.size() != 0) {
-					item = (ItemStack)metadataBow.get(0).value();
-				}
+		//最後に攻撃をしたEntityを取得
+		Entity damager = ((EntityDamageByEntityEvent)lastDamageCause).getDamager();
+
+		if (lastDamageMethod == LastDamageMethodType.SWORD || lastDamageMethod == LastDamageMethodType.BOW) {
+			//攻撃をしたのが生き物なら
+			if (damager.getType().isAlive()) {
+				//手に持っているアイテムで倒したと判断
+				item = player.getItemInHand();
+			} else {
+				//攻撃したのがProjectileならその情報からItemを取得
+				item = ProjectileManager.getItemStack(damager);
 			}
-		} else {
-			//魔法に関しては別処理でやっているためここではやらない
 		}
 
+		//攻撃につかったアイテムが不明な時は無視する
 		if (item == null) {
 			return;
 		}
@@ -354,6 +291,12 @@ public class ItemListener implements Listener{
 		//カスタムアイテムでないなら何もしない
 		if (customItem == null) {
 			return;
+		}
+
+		//もしLastDamageManagerの攻撃手段と、使ったアイテムの攻撃手段が異なるならエラーにする
+		if (LastDamageMethodType.fromAttackType(customItem.getAttackType()) != lastDamageMethod) {
+			new RuntimeException("Player:" + player.getCustomName() + "がモンスターを倒した際にエラーが発生しました。(manager:" + lastDamageMethod + "と item:" + LastDamageMethodType.fromAttackType(customItem.getAttackType())
+			+ "が一致しません").printStackTrace();;
 		}
 
 		PlayerKillEntityEvent playerKillEntityEvent = new PlayerKillEntityEvent(player, entity, item);
@@ -368,6 +311,9 @@ public class ItemListener implements Listener{
 				((CombatSlot) slot).onCombat(e);
 			}
 		}
+
+		//武器スキルを実行
+		WeaponSkillExecutor.executeWeaponSkillOnCombat(e);
 	}
 
 	@EventHandler
@@ -378,6 +324,9 @@ public class ItemListener implements Listener{
 				((KillSlot) slot).onKill(e);
 			}
 		}
+
+		EntityKillable customItem = ItemManager.getCustomItem(EntityKillable.class, e.getAttackItem().getItem());
+		customItem.onKillEvent(e);
 	}
 
 	@EventHandler

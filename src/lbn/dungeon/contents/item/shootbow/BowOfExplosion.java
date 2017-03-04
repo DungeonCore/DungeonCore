@@ -18,6 +18,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -43,7 +44,7 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 	}
 
 	@Override
-	public void excuteOnProjectileHit(ProjectileHitEvent e, ItemStack bow) {
+	public void onProjectileHit(ProjectileHitEvent e, ItemStack bow) {
 		Projectile entity = e.getEntity();
 		ProjectileSource shooter = entity.getShooter();
 
@@ -133,6 +134,10 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 	@Override
 	protected int getBaseBuyPrice() {
 		return 2000;
+	}
+
+	@Override
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {
 	}
 
 }

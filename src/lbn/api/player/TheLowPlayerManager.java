@@ -24,6 +24,11 @@ public class TheLowPlayerManager {
 		if (loadingNow.contains(p)) {
 			return;
 		}
+
+		//すでにロードされているなら何もしない
+		if (loadedPlayerMap.containsKey(p.getUniqueId())) {
+			return;
+		}
 		//TODO ロードする
 		CustomPlayer customPlayer = new CustomPlayer(p);
 		customPlayer.init();

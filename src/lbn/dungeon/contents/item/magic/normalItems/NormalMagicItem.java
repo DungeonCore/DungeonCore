@@ -13,14 +13,13 @@ import lbn.item.attackitem.old.MagicItemOld;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.AbstractMob;
-import lbn.util.damagedFalling.DamagedFallingBlockForPlayer;
+import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -105,7 +104,7 @@ public class NormalMagicItem extends MagicItemOld{
 					}
 
 					@Override
-					public void removedRutine(FallingBlock spawnEntity) {
+					public void removedRutine(Entity spawnEntity) {
 						particleData.run(spawnEntity.getLocation());
 					}
 

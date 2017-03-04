@@ -11,7 +11,7 @@ import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.CommandableMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
-import lbn.util.damagedFalling.DamageFallingblockForMonsterSkill;
+import lbn.util.dropingEntity.DamageFallingblockForMonsterSkill;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleManager;
 

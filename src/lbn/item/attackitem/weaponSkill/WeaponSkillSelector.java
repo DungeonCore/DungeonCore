@@ -72,7 +72,7 @@ public class WeaponSkillSelector implements MenuSelectorInterface{
 			return cacheViewItem;
 		}
 		//アイテムを生成
-		ItemStack itemStack = skill.getItemStackData().toItemStack();
+		ItemStack itemStack = skill.getViewItemStackData().toItemStack();
 		//名前をセットする
 		ItemStackUtil.setDispName(itemStack, ChatColor.AQUA + skill.getName());
 

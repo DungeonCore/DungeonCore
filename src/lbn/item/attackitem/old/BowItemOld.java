@@ -25,7 +25,7 @@ public abstract class BowItemOld extends AbstractAttackItem_Old implements  Item
 	}
 
 	@Override
-	public void excuteOnProjectileDamage(EntityDamageByEntityEvent e,
+	public void onProjectileDamage(EntityDamageByEntityEvent e,
 			ItemStack item, LivingEntity owner, LivingEntity target) {
 
 		if (owner.getType() == EntityType.PLAYER) {

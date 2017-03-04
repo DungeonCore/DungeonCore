@@ -2,7 +2,6 @@ package lbn.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import lbn.command.CommandChest;
@@ -17,7 +16,8 @@ import lbn.common.other.GetItemSign;
 import lbn.common.other.InHandItemClickSign;
 import lbn.common.other.SoulBound;
 import lbn.common.other.Stun;
-import lbn.dungeoncore.Main;
+import lbn.common.projectile.ProjectileInterface;
+import lbn.common.projectile.ProjectileManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.util.ItemStackUtil;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
@@ -25,10 +25,12 @@ import net.citizensnpcs.api.event.NPCSpawnEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -42,18 +44,15 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class OtherCommonListener implements Listener{
 	@EventHandler
@@ -85,49 +84,6 @@ public class OtherCommonListener implements Listener{
 	public void StopClicking(InventoryClickEvent event) {
 		//soulboundの処理
 		SoulBound.onInventoryClick(event);
-	}
-
-	/**
-	 * 高レベルエンチャントを付与する
-	 * @param event
-	 */
-	@EventHandler
-	public void testClicking(InventoryClickEvent event) {
-		final Inventory inv = event.getView().getTopInventory();
-		if (inv == null || inv.getType() != InventoryType.ANVIL) {
-			return;
-		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				//エンチャントを行うアイテム
-				ItemStack material = inv.getItem(0);
-				//エンチャントブック
-				ItemStack enchant = inv.getItem(1);
-				//エンチャント後のアイテム
-				ItemStack product = inv.getItem(2);
-
-				if (needExtraEnchant(enchant, material, product)) {
-					EnchantmentStorageMeta itemMeta = (EnchantmentStorageMeta) enchant.getItemMeta();
-					Map<Enchantment, Integer> storedEnchants = itemMeta.getStoredEnchants();
-					product.addUnsafeEnchantments(storedEnchants);
-				}
-			}
-		}.runTaskLater(Main.plugin, 1);
-	}
-
-	private boolean needExtraEnchant(ItemStack enchant, ItemStack material, ItemStack product) {
-		if (material == null || enchant == null || product == null) {
-			return false;
-		}
-		if (enchant.getType() != Material.ENCHANTED_BOOK) {
-			return false;
-		}
-		EnchantmentStorageMeta itemMeta = (EnchantmentStorageMeta) enchant.getItemMeta();
-		if (!ItemStackUtil.isUnsafeEnchant(itemMeta)) {
-			return false;
-		}
-		return true;
 	}
 
 	@EventHandler
@@ -299,6 +255,31 @@ public class OtherCommonListener implements Listener{
 	@EventHandler
 	public void onNPCSpawnEvent(NPCSpawnEvent e) {
 		CitizenNpcManager.NPCSpawnEvent(e);
+	}
+
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent e) {
+		ProjectileManager.onProjectileLaunchEvent(e);
+	}
+
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onProjectileHit(ProjectileHitEvent e){
+		ProjectileManager.onProjectileHit(e);
+	}
+
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onDamage2(EntityDamageByEntityEvent e) {
+		Entity damager = e.getDamager();
+		Entity entity = e.getEntity();
+
+		if (entity.getType().isAlive()) {
+			//ProjectileInterfaceを取得
+			ProjectileInterface projectileInterface = ProjectileManager.getProjectileInterface(damager);
+			ItemStack itemstack = ProjectileManager.getItemStack(damager);
+			if (projectileInterface != null && itemstack != null) {
+				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity)((Projectile)damager).getShooter(), (LivingEntity) entity);
+			}
+		}
 	}
 
 }

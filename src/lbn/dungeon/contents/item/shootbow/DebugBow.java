@@ -1,16 +1,25 @@
 package lbn.dungeon.contents.item.shootbow;
 
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.attackitem.old.BowItemOld;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.item.attackitem.SpreadSheetWeaponData;
+import lbn.item.itemAbstract.BowItem;
+import lbn.item.itemInterface.EntityKillable;
+import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.strength.StrengthOperator;
+import lbn.player.ItemType;
 
 import org.bukkit.Bukkit;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class DebugBow extends BowItemOld{
+public class DebugBow extends BowItem implements StrengthChangeItemable, EntityKillable{
+
+	public DebugBow() {
+		super(new SpreadSheetWeaponDataForDebug());
+	}
 
 	@Override
 	public String getItemName() {
@@ -23,13 +32,17 @@ public class DebugBow extends BowItemOld{
 	}
 
 	@Override
-	public StrengthTemplate getStrengthTemplate() {
-		return null;
+	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
+		super.onPlayerStrengthFinishEvent(event);
+
+		availableLevel = event.getLevel();
 	}
 
 	@Override
-	protected void excuteOnLeftClick2(PlayerInteractEvent e) {
-		e.getPlayer().sendMessage("平均:" + (getMaxAttackDamage() + getMinAttackDamage()) / 2);
+	public void excuteOnLeftClick(PlayerInteractEvent e) {
+		super.excuteOnLeftClick(e);
+
+		e.getPlayer().sendMessage("ランク１５ ダメージ：" + getAttackItemDamage(0));
 
 		ItemStack item = e.getItem();
 		int level = StrengthOperator.getLevel(item);
@@ -40,11 +53,6 @@ public class DebugBow extends BowItemOld{
 		}
 	}
 
-	@Override
-	protected String[] getStrengthDetail2(int level) {
-		return null;
-	}
-
 	public static int availableLevel = 0;
 
 	@Override
@@ -53,32 +61,43 @@ public class DebugBow extends BowItemOld{
 	}
 
 	@Override
-	public double getAttackItemDamage(int strengthLevel) {
-		return (getMaxAttackDamage() + getMinAttackDamage()) / 2;
+	public void onCombatEntity(PlayerCombatEntityEvent e) {
+		super.onCombatEntity(e);
+		e.getPlayer().sendMessage("debug bow:onCombatEntity");
 	}
 
 	@Override
-	public int getMaxStrengthCount() {
-		return 8;
+	public void onKillEvent(PlayerKillEntityEvent e) {
+		e.getPlayer().sendMessage("debug bow:onKillEvent");
+	}
+}
+
+class SpreadSheetWeaponDataForDebug extends SpreadSheetWeaponData {
+	public SpreadSheetWeaponDataForDebug() {
 	}
 
 	@Override
-	public String[] getDetail() {
-		return null;
+	public String getId() {
+		return "debug_bow";
 	}
 
 	@Override
-	public void excuteOnProjectileHit(ProjectileHitEvent e, ItemStack bow) {
-
+	public String getName() {
+		return "デバック用弓";
 	}
 
 	@Override
-	protected void excuteOnShootBow2(EntityShootBowEvent e) {
+	public int getRank() {
+		return 15;
 	}
 
 	@Override
-	protected int getBaseBuyPrice() {
-		return 0;
+	public ItemType getItemType() {
+		return ItemType.BOW;
 	}
 
+	@Override
+	public ItemStack getItemStack() {
+		return new ItemStack(Material.BOW);
+	}
 }

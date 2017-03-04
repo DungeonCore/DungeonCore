@@ -2,6 +2,7 @@ package lbn.item.attackitem.weaponSkill.imple.all;
 
 import java.util.ArrayList;
 
+import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.other.ItemStackData;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.WeaponSkillInterface;
@@ -46,7 +47,7 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface{
 	CircleParticleData circleParticleData = new CircleParticleData(new ParticleData(ParticleType.smoke, 3), 7);
 
 	@Override
-	public void onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
 		Vector vector = p.getLocation().toVector();
 
 		//周囲の敵対モブを取得
@@ -63,6 +64,8 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface{
 
 		//音を鳴らす
 		p.getWorld().playSound(p.getLocation(), Sound.BAT_LOOP, 0.4f, 2f);
+
+		return true;
 	}
 
 	/**
@@ -88,13 +91,18 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface{
 	}
 
 	@Override
-	public ItemStackData getItemStackData() {
+	public ItemStackData getViewItemStackData() {
 		return new ItemStackData(Material.FEATHER);
 	}
 
 	@Override
 	public boolean canUse(ItemType type) {
 		return true;
+	}
+
+	@Override
+	public boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+		return false;
 	}
 
 }

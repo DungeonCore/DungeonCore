@@ -1,4 +1,4 @@
-package lbn.common.event;
+package lbn.common.event.player;
 
 import lbn.player.magicstoneOre.MagicStoneOreType;
 

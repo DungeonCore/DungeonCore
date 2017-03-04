@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -86,7 +87,7 @@ public class NormalBowWrapper extends LevelBow{
 	}
 
 	@Override
-	public void excuteOnProjectileHit(ProjectileHitEvent e, ItemStack bow) {
+	public void onProjectileHit(ProjectileHitEvent e, ItemStack bow) {
 
 	}
 
@@ -102,6 +103,10 @@ public class NormalBowWrapper extends LevelBow{
 	@Override
 	protected int getBaseBuyPrice() {
 		return 100;
+	}
+
+	@Override
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {
 	}
 
 }

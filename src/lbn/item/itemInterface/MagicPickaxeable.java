@@ -1,6 +1,6 @@
 package lbn.item.itemInterface;
 
-import lbn.common.event.PlayerBreakMagicOreEvent;
+import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.item.ItemInterface;
 
 public interface MagicPickaxeable extends ItemInterface{

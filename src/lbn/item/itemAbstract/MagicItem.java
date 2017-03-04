@@ -14,14 +14,13 @@ import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;
-import lbn.util.damagedFalling.DamagedFallingBlockForPlayer;
+import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -140,7 +139,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 					}
 
 					@Override
-					public void removedRutine(FallingBlock spawnEntity) {
+					public void removedRutine(Entity spawnEntity) {
 						particleData.run(spawnEntity.getLocation());
 					}
 

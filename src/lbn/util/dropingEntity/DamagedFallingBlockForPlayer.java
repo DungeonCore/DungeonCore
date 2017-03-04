@@ -1,4 +1,4 @@
-package lbn.util.damagedFalling;
+package lbn.util.dropingEntity;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
@@ -9,7 +9,6 @@ import lbn.util.LivingEntityUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -78,7 +77,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
 	}
 
 	abstract public void tickRutine(int count);
-	abstract public void removedRutine(FallingBlock spawnEntity);
+	abstract public void removedRutine(Entity spawnEntity);
 	abstract public void damagedEntityRutine(Entity target);
 	abstract public void startEntityRutine(Player p);
 }

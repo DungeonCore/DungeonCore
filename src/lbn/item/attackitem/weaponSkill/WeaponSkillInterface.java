@@ -1,9 +1,11 @@
 package lbn.item.attackitem.weaponSkill;
 
+import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.other.ItemStackData;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.player.ItemType;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,8 +39,19 @@ public interface WeaponSkillInterface {
 	 * @param p 実行者のPlayer
 	 * @param item クリックしたアイテム
 	 * @param customItem クリックしたアイテムのカスタムアイテム
+	 * @return スキル発動完了処理を行うならTRUE
 	 */
-	void onClick(Player p, ItemStack item, AbstractAttackItem customItem);
+	boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem);
+
+	/**
+	 * スキル選択後に戦闘をした時の処理
+	 * @param p
+	 * @param item
+	 * @param customItem
+	 * @param livingEntity
+	 * @return スキル発動完了処理を行うならTRUE
+	 */
+	boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event);
 
 	/**
 	 * スキルのクールタイムを取得
@@ -53,10 +66,10 @@ public interface WeaponSkillInterface {
 	int getNeedMagicPoint();
 
 	/**
-	 * ItemStackDataを取得
+	 * 一覧を表示するためのItemStackDataを取得
 	 * @return
 	 */
-	ItemStackData getItemStackData();
+	ItemStackData getViewItemStackData();
 
 	/**
 	 * もし指定したタイプの武器で使えるならTRUE

@@ -1,4 +1,4 @@
-package lbn.util.damagedFalling;
+package lbn.util.dropingEntity;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 public abstract class AbstractDamageFallingblock extends LbnRunnable{
-	protected FallingBlock spawnEntity;
+	protected Entity spawnEntity;
 
 	Location end;
 
@@ -21,8 +21,11 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 	public AbstractDamageFallingblock(Vector direction, Location start, Material m, byte data) {
 		spawnEntity = start.getWorld().spawnFallingBlock(start, m, data);
 		spawnEntity.setVelocity(direction.normalize().multiply(2));
-		spawnEntity.setDropItem(false);
-		direction = spawnEntity.getVelocity();
+		((FallingBlock)spawnEntity).setDropItem(false);
+	}
+
+	public AbstractDamageFallingblock(Entity spawnedEntity) {
+		spawnEntity = spawnedEntity;
 	}
 
 	public synchronized BukkitTask runTaskTimer() throws IllegalArgumentException, IllegalStateException {
@@ -78,10 +81,10 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 
 	abstract public void tickRutine(int count);
 
-	abstract public void removedRutine(FallingBlock spawnEntity);
+	abstract public void removedRutine(Entity spawnEntity);
 	abstract public void damagedEntityRutine(Entity target);
 
-	protected void removeEntity(FallingBlock spawnEntity) {
+	protected void removeEntity(Entity spawnEntity) {
 		spawnEntity.remove();
 		removedRutine(spawnEntity);
 		cancel();

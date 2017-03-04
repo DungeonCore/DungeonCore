@@ -1,5 +1,6 @@
 package lbn.player.customplayer;
 
+import java.util.Set;
 import java.util.UUID;
 
 import lbn.api.LevelType;
@@ -18,6 +19,7 @@ import lbn.common.other.DungeonList;
 import lbn.item.setItem.SetItemManager;
 import lbn.money.GalionEditReason;
 import lbn.player.ability.AbilityType;
+import lbn.player.ability.AbstractTimeLimitAbility;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.Bukkit;
@@ -319,6 +321,10 @@ public class CustomPlayer implements TheLowPlayer{
 					//転生を行ったときの効果を追加する
 					oneReincarnationData.getReincarnationInterface().addReincarnationEffect(this, oneReincarnationData.getLevelType(), oneReincarnationData.getCount());
 				}
+
+				//時間制限付きのAbilityをチェックする
+				Set<AbilityInterface> ablitys = playerStatusData.getApplyedAbility(AbilityType.TIME_LIMIT_ABILITY);
+				AbstractTimeLimitAbility.fixIntegrity(this, ablitys);
 			}
 		case LEVEL1:
 			//データの適応を行う

@@ -39,6 +39,9 @@ public class PlayerStatusData {
 	public PlayerStatusData(TheLowPlayer player) {
 		dataMapDouble.put(PlayerStatusType.MAX_HP, 20.0);
 		dataMapDouble.put(PlayerStatusType.MAX_MAGIC_POINT, 100.0);
+		dataMapDouble.put(PlayerStatusType.MULTIPLY_SWORD_ATTACK, 1.0);
+		dataMapDouble.put(PlayerStatusType.MULTIPLY_BOW_ATTACK, 1.0);
+		dataMapDouble.put(PlayerStatusType.MULTIPLY_MAGIC_ATTACK, 1.0);
 		this.player = player;
 	}
 
@@ -104,7 +107,13 @@ public class PlayerStatusData {
 		for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
 			//もしすでにデータがある場合はそれに追加する
 			if (dataMapDouble.containsKey(entry.getKey())) {
-				dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
+				//割合で表している時はかけていく
+				if (entry.getKey().isPercentage()) {
+					dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) * entry.getValue());
+				} else {
+				//直接の値の時は加算する
+					dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
+				}
 			} else {
 				dataMapDouble.put(entry.getKey(), entry.getValue());
 			}
@@ -125,7 +134,12 @@ public class PlayerStatusData {
 
 		//1つずつ効果を削除していく
 		for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
-			dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) - entry.getValue());
+			//割合で表している時は割る
+			if (entry.getKey().isPercentage()) {
+				dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) / entry.getValue());
+			} else {
+				dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) - entry.getValue());
+			}
 		}
 	}
 
@@ -170,6 +184,15 @@ public class PlayerStatusData {
 		for (AbilityInterface abilityInterface : set) {
 			removeData(abilityInterface);
 		}
+	}
+
+	/**
+	 *適応中のAbilityを取得する
+	 * @param type
+	 * @return
+	 */
+	public Set<AbilityInterface> getApplyedAbility(AbilityType type){
+		return abilityType.get(type);
 	}
 
 //	/**

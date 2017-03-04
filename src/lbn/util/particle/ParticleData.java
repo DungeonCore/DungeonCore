@@ -9,6 +9,7 @@ import net.minecraft.server.v1_8_R1.EnumParticle;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 /**
@@ -133,5 +134,31 @@ public class ParticleData {
 	@Override
 	public String toString() {
 		return "name:" + getParticleName() + ", amount:" + amount + ", dispersion:" + Arrays.asList(dx, dy, dz);
+	}
+
+	static ParticleData particleDataLava = new ParticleData(ParticleType.lava, 40);
+
+	/**
+	 * マグマのパーティクルを発生させる
+	 * @param loc
+	 */
+	public static void runLava(Location loc) {
+		particleDataLava.run(loc);
+	}
+
+	/**
+	 * パーティクルを発生させる
+	 * @param entity
+	 */
+	public static void runParticle(Entity entity, ParticleType type, int amount) {
+		runParticle(entity.getLocation(), type, amount);
+	}
+
+	/**
+	 * パーティクルを発生させる
+	 * @param loc
+	 */
+	public static void runParticle(Location loc, ParticleType type, int amount) {
+		new ParticleData(type, amount).run(loc);
 	}
 }

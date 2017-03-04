@@ -10,11 +10,14 @@ import java.util.TimeZone;
 import lbn.item.implementation.GalionItem;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.CraftSound;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class JavaUtil {
@@ -37,16 +40,6 @@ public class JavaUtil {
 	}
 
 	public static String getLocationString(Location loc) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append(loc.getWorld().getName());
-//		sb.append("(");
-//		sb.append(loc.getBlockX());
-//		sb.append(", ");
-//		sb.append(loc.getBlockY());
-//		sb.append(", ");
-//		sb.append(loc.getBlockZ());
-//		sb.append(")");
-//		return sb.toString();
 	  return String.format("(%d, %d, %d)", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
@@ -91,14 +84,6 @@ public class JavaUtil {
 		}
 	}
 
-//	public static double getRelativeDouble(String deta, double other) {
-//		try {
-//			CommandAbstract.b(paramDouble, paramString, paramInt1, paramInt2, paramBoolean)
-//		} catch (Exception e) {
-//			return other;
-//		}
-//	}
-
 	static ParticleData particleData = new ParticleData(ParticleType.fireworksSpark, 100);
 
 	public static void addBonusGold(Player p, Location l) {
@@ -134,6 +119,34 @@ public class JavaUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	/**
+	 *
+		//http://wiki.vg/Protocol#Sound_Effect
+	 * @param center
+	 * @param sound
+	 * @param volume
+	 * @param pitch
+	 * @param range
+	 */
+	public static void sendSound(Location center, Sound sound, float volume, float pitch, double range) {
+		//packetを送信
+		for (Player p : center.getWorld().getPlayers()) {
+			if (!p.isOnline()) {
+				continue;
+			}
+			Location loc = p.getLocation();
+
+
+			//聞こえるが遠い場所
+			if (loc.distance(center) <= range && loc.distance(center) > (range / 2)) {
+				volume = volume * 0.7f;
+			}
+
+			PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect( CraftSound.getSound(sound), center.getX(), center.getY(), center.getZ(), volume, pitch);
+			((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
 		}
 	}
 }

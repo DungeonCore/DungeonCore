@@ -46,11 +46,11 @@ public class AttackDamageReincarnation extends AbstractAbilityReincarnation{
 	protected PlayerStatusType getStatusType() {
 		switch (levelType) {
 		case SWORD:
-			return PlayerStatusType.SWORD_ATTACK;
+			return PlayerStatusType.ADD_SWORD_ATTACK;
 		case MAGIC:
-			return PlayerStatusType.MAGIC_ATTACK;
+			return PlayerStatusType.ADD_MAGIC_ATTACK;
 		case BOW:
-			return PlayerStatusType.BOW_ATTACK;
+			return PlayerStatusType.ADD_BOW_ATTACK;
 		default:
 			throw new RuntimeException("invaild Level type:" + levelType);
 		}

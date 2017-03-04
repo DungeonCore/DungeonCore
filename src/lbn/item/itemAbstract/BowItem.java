@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,7 +27,7 @@ public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftC
 	}
 
 	@Override
-	public void excuteOnProjectileDamage(EntityDamageByEntityEvent e,
+	public void onProjectileDamage(EntityDamageByEntityEvent e,
 			ItemStack item, LivingEntity owner, LivingEntity target) {
 
 		if (owner.getType() == EntityType.PLAYER) {
@@ -81,7 +82,13 @@ public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftC
 	}
 
 	@Override
-	public void excuteOnProjectileHit(ProjectileHitEvent e, ItemStack bow) {
+	public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {
 
 	}
+
+	@Override
+	public void onProjectileHit(ProjectileHitEvent event, ItemStack item) {
+
+	}
+
 }

@@ -19,23 +19,27 @@ public class PlayerAbilityListener implements Listener{
 		ItemType attackType = e.getAttackItem().getItemType();
 
 		//武器に対応するStatusのタイプを取得
-		PlayerStatusType statusType = null;
+		PlayerStatusType addType = null;
+		PlayerStatusType multiplyType = null;
 		switch (attackType) {
 		case SWORD:
-			statusType = PlayerStatusType.SWORD_ATTACK;
+			addType = PlayerStatusType.ADD_SWORD_ATTACK;
+			multiplyType = PlayerStatusType.MULTIPLY_SWORD_ATTACK;
 			break;
 		case BOW:
-			statusType = PlayerStatusType.BOW_ATTACK;
+			addType = PlayerStatusType.ADD_BOW_ATTACK;
+			multiplyType = PlayerStatusType.MULTIPLY_BOW_ATTACK;
 			break;
 		case MAGIC:
-			statusType = PlayerStatusType.MAGIC_ATTACK;
+			addType = PlayerStatusType.ADD_MAGIC_ATTACK;
+			multiplyType = PlayerStatusType.MULTIPLY_MAGIC_ATTACK;
 			break;
 		default:
 			break;
 		}
 
 		//対応するステータスが存在しない時は無視する
-		if (statusType == null) {
+		if (addType == null) {
 			return;
 		}
 
@@ -46,10 +50,11 @@ public class PlayerAbilityListener implements Listener{
 		}
 
 		//攻撃力の増加値を取得
-		double statusData = theLowPlayer.getStatusData(statusType);
+		double addStatusData = theLowPlayer.getStatusData(addType);
+		double multiplyStatusData = theLowPlayer.getStatusData(multiplyType);
 
 		//攻撃力を増加させる
-		e.setDamage(e.getDamage() + statusData);
+		e.setDamage(e.getDamage() * (1 + multiplyStatusData) + addStatusData);
 	}
 
 	@EventHandler
