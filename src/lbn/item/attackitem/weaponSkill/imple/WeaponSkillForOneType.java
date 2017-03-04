@@ -1,14 +1,15 @@
 package lbn.item.attackitem.weaponSkill.imple;
 
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.other.ItemStackData;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.WeaponSkillData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillInterface;
 import lbn.player.ItemType;
+
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class WeaponSkillForOneType implements WeaponSkillInterface{
 	ItemType type;
@@ -74,5 +75,10 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface{
 
 	protected double getData(int i) {
 		return data.getData(i);
+	}
+
+	@Override
+	public ItemStackData getViewItemStackData() {
+		return new ItemStackData(data.getMaterial(), data.getMaterialdata());
 	}
 }

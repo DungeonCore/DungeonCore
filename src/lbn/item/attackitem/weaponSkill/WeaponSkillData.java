@@ -1,5 +1,7 @@
 package lbn.item.attackitem.weaponSkill;
 
+import org.bukkit.Material;
+
 import lbn.player.ItemType;
 
 public class WeaponSkillData {
@@ -23,6 +25,28 @@ public class WeaponSkillData {
 	String id;
 
 	ItemType type;
+
+	Material material = Material.STONE;
+
+	byte materialdata = 0;
+
+	public void setMaterial(Material material) {
+		if (material != null) {
+			this.material = material;
+		}
+	}
+
+	public void setMaterialdata(byte materialdata) {
+		this.materialdata = materialdata;
+	}
+
+	public Material getMaterial() {
+		return material;
+	}
+
+	public byte getMaterialdata() {
+		return materialdata;
+	}
 
 	public String getId() {
 		return id;
