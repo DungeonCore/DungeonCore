@@ -7,7 +7,6 @@ import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
 
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 
 public class WeaponSkillSpletRunnable extends AbstractSheetRunable{
@@ -74,7 +73,7 @@ public class WeaponSkillSpletRunnable extends AbstractSheetRunable{
 		weaponSkillData.setData(data3, 3);
 		weaponSkillData.setData(data4, 4);
 
-		weaponSkillData.setMaterial(Material.getMaterial(row[12]));
+		weaponSkillData.setMaterial(JavaUtil.getInt(row[12], 1));
 		weaponSkillData.setMaterialdata((byte) JavaUtil.getInt( (row[13]), 0));
 
 		WeaponSkillInterface weaponSkill = WeaponSkillFactory.getWeaponSkill(weaponSkillData.getId());

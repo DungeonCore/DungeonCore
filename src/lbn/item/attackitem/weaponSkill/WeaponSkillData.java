@@ -30,9 +30,11 @@ public class WeaponSkillData {
 
 	byte materialdata = 0;
 
-	public void setMaterial(Material material) {
-		if (material != null) {
-			this.material = material;
+	public void setMaterial(int materialId) {
+		@SuppressWarnings("deprecation")
+		Material material2 = Material.getMaterial(materialId);
+		if (material2 != null) {
+			material = material2;
 		}
 	}
 
