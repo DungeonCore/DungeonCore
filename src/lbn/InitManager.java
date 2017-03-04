@@ -57,6 +57,10 @@ public class InitManager {
 
 			SpletSheetCommand.reloadSheet(null, "magicore");
 
+			SpletSheetCommand.reloadSheet(null, "weaponskill");
+
+			SpletSheetCommand.reloadSheet(null, "food");
+
 			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {
 				@Override

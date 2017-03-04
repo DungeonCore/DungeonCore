@@ -9,9 +9,9 @@ import lbn.util.JavaUtil;
 
 import org.bukkit.command.CommandSender;
 
-public class WeaponSkillSpletRunnable extends AbstractSheetRunable{
+public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 
-	public WeaponSkillSpletRunnable(CommandSender sender) {
+	public WeaponSkillSheetRunnable(CommandSender sender) {
 		super(sender);
 	}
 

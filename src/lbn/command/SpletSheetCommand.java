@@ -11,6 +11,7 @@ import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.dungeoncore.SpletSheet.BuffSheetRunnable;
 import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
+import lbn.dungeoncore.SpletSheet.FoodSheetRunnable;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MagicStoneOreSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MobSheetRunnable;
@@ -23,6 +24,7 @@ import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
+import lbn.dungeoncore.SpletSheet.WeaponSkillSheetRunnable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -50,6 +52,8 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter{
 		regist(new VillagerSheetRunnable(sender));
 		regist(new WeaponSheetRunnable(sender));
 		regist(new MagicStoneOreSheetRunnable(sender));
+		regist(new WeaponSkillSheetRunnable(sender));
+		regist(new FoodSheetRunnable(sender));
 	}
 
 	public static void regist(SheetRunnable<String[][]> sheet) {

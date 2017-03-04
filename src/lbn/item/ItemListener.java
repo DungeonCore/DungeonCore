@@ -20,6 +20,7 @@ import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.EntityKillable;
 import lbn.item.itemInterface.EquipItemable;
+import lbn.item.itemInterface.FoodItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicPickaxeable;
 import lbn.item.itemInterface.MeleeAttackItemable;
@@ -60,6 +61,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
@@ -245,6 +247,15 @@ public class ItemListener implements Listener{
 			} else {
 				e.setCancelled(true);
 			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerItemConsumeEvent(PlayerItemConsumeEvent e) {
+		ItemStack item = e.getItem();
+		FoodItemable customItem = ItemManager.getCustomItem(FoodItemable.class, item);
+		if (customItem != null) {
+			customItem.onPlayerItemConsumeEvent(e);
 		}
 	}
 

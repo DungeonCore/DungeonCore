@@ -7,13 +7,13 @@ import org.bukkit.potion.PotionEffectType;
 public class BuffData {
 	private String id;
 	private PotionEffectType effect;
-	private int second;
+	private int tick;
 	private int level = 1;
 
 	public BuffData(String id, PotionEffectType effect, int second, int level) {
 		this.id = id;
 		this.effect = effect;
-		this.second = second * 20;
+		this.tick = second * 20;
 		if (level >= 1) {
 			this.level = level + 1;
 		}
@@ -27,8 +27,8 @@ public class BuffData {
 		return effect;
 	}
 
-	public int getSecond() {
-		return second;
+	public int getTick() {
+		return tick;
 	}
 
 	public int getLevel() {
@@ -36,7 +36,7 @@ public class BuffData {
 	}
 
 	public void addBuff(LivingEntity e) {
-		e.addPotionEffect(new PotionEffect(effect, second, level), false);
+		e.addPotionEffect(new PotionEffect(effect, tick, level), false);
 	}
 
 }

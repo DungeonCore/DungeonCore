@@ -30,7 +30,11 @@ public class BuffDataFactory {
 	}
 
 	public static BuffData getBuffFromId(String id) {
-		return buffs.get(id);
+		if (id == null || id.isEmpty()) {
+			return null;
+		} else {
+			return buffs.get(id);
+		}
 	}
 
 	public static void clear() {
