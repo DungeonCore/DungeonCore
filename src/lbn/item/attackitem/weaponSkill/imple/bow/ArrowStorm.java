@@ -1,6 +1,5 @@
 package lbn.item.attackitem.weaponSkill.imple.bow;
 
-import lbn.common.other.ItemStackData;
 import lbn.common.other.Stun;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
@@ -9,7 +8,6 @@ import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.LbnRunnable;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -28,11 +26,6 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 	@Override
 	public String getId() {
 		return "skill8";
-	}
-
-	@Override
-	public ItemStackData getViewItemStackData() {
-		return new ItemStackData(Material.ARROW, 0);
 	}
 
 	@Override

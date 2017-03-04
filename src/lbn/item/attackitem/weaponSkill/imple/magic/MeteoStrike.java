@@ -2,7 +2,6 @@ package lbn.item.attackitem.weaponSkill.imple.magic;
 
 import java.util.List;
 
-import lbn.common.other.ItemStackData;
 import lbn.dungeoncore.Main;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
@@ -30,40 +29,10 @@ public class MeteoStrike extends WeaponSkillForOneType{
 	public MeteoStrike() {
 		super(ItemType.MAGIC);
 	}
-
-	@Override
-	public int getSkillLevel() {
-		return 60;
-	}
-
-	@Override
-	public String getName() {
-		return "メテオストライク";
-	}
-
+	
 	@Override
 	public String getId() {
-		return "meteo strike";
-	}
-
-	@Override
-	public String[] getDetail() {
-		return new String[]{"隕石を落とし、着地地点付近の敵に大ダメージを与える"};
-	}
-
-	@Override
-	public int getCooltime() {
-		return 360;
-	}
-
-	@Override
-	public int getNeedMagicPoint() {
-		return 80;
-	}
-
-	@Override
-	public ItemStackData getViewItemStackData() {
-		return new ItemStackData(Material.OBSIDIAN);
+		return "skill3";
 	}
 
 	@Override
@@ -72,7 +41,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 		return true;
 	}
 
-	public static void executeMeteo(Entity centerEntity, AbstractAttackItem customItem) {
+	public void executeMeteo(Entity centerEntity, AbstractAttackItem customItem) {
 		//落下地点
 		final Location target = centerEntity.getLocation();
 
@@ -136,9 +105,9 @@ public class MeteoStrike extends WeaponSkillForOneType{
 						entity.setVelocity(getMoveVector(entity, entity, 2));
 					}
 					//2倍のダメージを与える
-					entity.damage(item.getAttackItemDamage(0), entity);
+					entity.damage(item.getAttackItemDamage(0)* getData(0), entity);
 					//15秒燃やす
-					entity.setFireTicks(20 * 15);
+					entity.setFireTicks((int) (20 * getData(1)));
 				}
 			}
 
@@ -174,4 +143,5 @@ public class MeteoStrike extends WeaponSkillForOneType{
 		}
 
 	}
+
 }
