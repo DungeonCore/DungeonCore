@@ -1,5 +1,7 @@
 package lbn.item.attackitem.weaponSkill;
 
+import java.util.Arrays;
+
 import org.bukkit.Material;
 
 import lbn.player.ItemType;
@@ -59,10 +61,19 @@ public class WeaponSkillData {
 	}
 
 	public void setDetail(String detail) {
-		this.detail = detail.split(",");
+		if (detail == null) {
+			this.detail = new String[0];
+		} else {
+			this.detail = detail.split(",");
+		}
+
+		System.out.println(detail + "⇨" + Arrays.toString(this.detail));
 	}
 
 	public String[] getDetail() {
+		if (detail == null) {
+			return new String[0];
+		}
 		return detail;
 	}
 

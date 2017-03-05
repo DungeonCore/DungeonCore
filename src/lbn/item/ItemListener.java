@@ -337,7 +337,9 @@ public class ItemListener implements Listener{
 		}
 
 		EntityKillable customItem = ItemManager.getCustomItem(EntityKillable.class, e.getAttackItem().getItem());
-		customItem.onKillEvent(e);
+		if (customItem != null) {
+			customItem.onKillEvent(e);
+		}
 	}
 
 	@EventHandler

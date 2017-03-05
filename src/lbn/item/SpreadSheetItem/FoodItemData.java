@@ -112,11 +112,18 @@ public class FoodItemData {
 	}
 
 	public String[] getDetail() {
+		if (detail == null) {
+			return new String[0];
+		}
 		return detail;
 	}
 
 	public void setDetail(String detail) {
-		this.detail = detail.split(",");
+		if (detail == null) {
+			this.detail = new String[0];
+		} else {
+			this.detail = detail.split(",");
+		}
 	}
 
 	public String getId() {

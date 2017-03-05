@@ -44,14 +44,17 @@ public class WeaponSkillSelector implements MenuSelectorInterface{
 		//武器スキルを全て取得
 		Collection<WeaponSkillInterface> sortedSkillList = WeaponSkillFactory.getSortedSkillList();
 		for (WeaponSkillInterface weaponSkillInterface : sortedSkillList) {
+			System.out.println(weaponSkillInterface.getName() + "@1");
 			//スキルレベルを確認
 			if (weaponSkillLevel < weaponSkillInterface.getSkillLevel()) {
 				continue;
 			}
+			System.out.println(weaponSkillInterface.getName() + "@2@" +weaponSkillInterface.getSkillLevel());
 			//ItemTypeを確認
 			if (!weaponSkillInterface.canUse(type)) {
 				continue;
 			}
+			System.out.println(weaponSkillInterface.getName() + "@3");
 
 			//アイテムを配置する
 			createInventory.addItem(getViewItemStack(weaponSkillInterface));

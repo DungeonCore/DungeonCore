@@ -45,7 +45,6 @@ public class Config {
     damageIgnoredBlocks.add(Material.COAL_ORE);
     damageIgnoredBlocks.add(Material.GLOWING_REDSTONE_ORE);
 
-    clickCancelledItems.add(Material.EYE_OF_ENDER);
     clickCancelledItems.add(Material.ENDER_PEARL);
     clickCancelledItems.add(Material.BUCKET);
     clickCancelledItems.add(Material.LAVA_BUCKET);

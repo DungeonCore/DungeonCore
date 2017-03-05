@@ -34,8 +34,8 @@ public class FoodSheetRunnable extends AbstractSheetRunable{
 		foodItemData.setName(row[1]);
 		foodItemData.setCommand(row[2]);
 		foodItemData.setBuff1(row[3]);
-		foodItemData.setBuff1(row[4]);
-		foodItemData.setBuff1(row[5]);
+		foodItemData.setBuff2(row[4]);
+		foodItemData.setBuff3(row[5]);
 		foodItemData.setSound(row[6]);
 		foodItemData.setParticle(row[7]);
 		foodItemData.setPrice(JavaUtil.getInt(row[8], 0));

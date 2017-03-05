@@ -87,7 +87,11 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
         if (startRow() >= i) {
           continue;
         }
-        excuteOnerow(row);
+        try {
+        	excuteOnerow(row);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
       }
       sender.sendMessage("更新が完了しました。" + getSheetName());
       lastUpDate.put(getClass(), System.currentTimeMillis());

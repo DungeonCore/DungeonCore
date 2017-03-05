@@ -2,8 +2,6 @@ package lbn.dungeoncore.SpletSheet;
 
 import lbn.item.attackitem.weaponSkill.WeaponSkillData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillFactory;
-import lbn.item.attackitem.weaponSkill.WeaponSkillInterface;
-import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
 
@@ -22,7 +20,7 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String getSheetName() {
-		return "weaponsheet";
+		return "weaponskill";
 	}
 
 	@Override
@@ -52,12 +50,12 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 		double data3 = JavaUtil.getDouble(row[9], 0);
 		double data4 = JavaUtil.getDouble(row[10], 0);
 
-		String detail = row[5];
-		detail = detail.replace("{0}", row[6]).
-				replace("{1}", row[7]).
-				replace("{2}", row[8]).
-				replace("{3}", row[9]).
-				replace("{4}", row[10]);
+		String detail = getNull(row[5]);
+		detail = detail.replace("{0}", getNull(row[6])).
+				replace("{1}", getNull(row[7])).
+				replace("{2}", getNull(row[8])).
+				replace("{3}", getNull(row[9])).
+				replace("{4}", getNull(row[10]));
 
 		if (level == -1 || cooltime == -1 || needMp == -1) {
 			sendMessage("level, cooltime, needMpが不正です(name:" + name + ")" );
@@ -66,7 +64,9 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 
 		WeaponSkillData weaponSkillData = new WeaponSkillData(name, itemType, row[11]);
 		weaponSkillData.setCooltime(cooltime);
-		weaponSkillData.setSkillLevel(cooltime);
+		weaponSkillData.setSkillLevel(level);
+		weaponSkillData.setNeedMp(needMp);;
+		weaponSkillData.setDetail(detail);
 		weaponSkillData.setData(data0, 0);
 		weaponSkillData.setData(data1, 1);
 		weaponSkillData.setData(data2, 2);
@@ -76,10 +76,13 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 		weaponSkillData.setMaterial(JavaUtil.getInt(row[12], 1));
 		weaponSkillData.setMaterialdata((byte) JavaUtil.getInt( (row[13]), 0));
 
-		WeaponSkillInterface weaponSkill = WeaponSkillFactory.getWeaponSkill(weaponSkillData.getId());
-		if (weaponSkill instanceof WeaponSkillForOneType) {
-			((WeaponSkillForOneType) weaponSkill).setData(weaponSkillData);
-		}
+
+		System.out.println(weaponSkillData.getName());
+		WeaponSkillFactory.regist(weaponSkillData);
+	}
+
+	public String getNull(String val) {
+		return val == null ? "": val;
 	}
 
 	/**

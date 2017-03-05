@@ -12,6 +12,7 @@ import lbn.common.citizenNpc.CitizenNpcManager;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.other.BookshelfCommandRunner;
 import lbn.common.other.DungeonList;
+import lbn.common.other.EndPortalOperator;
 import lbn.common.other.GetItemSign;
 import lbn.common.other.InHandItemClickSign;
 import lbn.common.other.SoulBound;
@@ -36,6 +37,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
+import org.bukkit.event.block.BlockMultiPlaceEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -101,9 +103,13 @@ public class OtherCommonListener implements Listener{
 		//stun処理
 		Stun.onClick(event);
 
+		//ダンジョン情報
 		if (event.getClickedBlock() != null && event.getClickedBlock().getType() == Material.LAPIS_BLOCK) {
 			DungeonList.sendDungeonInfo(event.getClickedBlock().getLocation(), event.getPlayer());
 		}
+
+		//エンダーアイの処理
+		EndPortalOperator.onClick(event);
 	}
 
 	static boolean notItemFlg = false;
@@ -280,6 +286,11 @@ public class OtherCommonListener implements Listener{
 				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity)((Projectile)damager).getShooter(), (LivingEntity) entity);
 			}
 		}
+	}
+
+	@EventHandler
+	public void onBlockMultiPlaceEvent(BlockMultiPlaceEvent event) {
+		EndPortalOperator.onBlockMultiPlaceEvent(event);
 	}
 
 }
