@@ -1,7 +1,9 @@
 package lbn.item.implementation.pic;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lbn.item.ItemInterface;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 
 import org.bukkit.Material;
@@ -9,7 +11,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class GoldPickaxe extends AbstractPickaxe{
 
-	private static final IronPickaxe IRON_PICKAXE = new IronPickaxe();
+	public GoldPickaxe(int level) {
+		super(level);
+	}
+
+	private static final IronPickaxe IRON_PICKAXE = new IronPickaxe(1);
 
 	@Override
 	public int getBuyPrice(ItemStack item) {
@@ -23,11 +29,18 @@ public class GoldPickaxe extends AbstractPickaxe{
 
 	@Override
 	public AbstractPickaxe getNextPickAxe() {
-		return IRON_PICKAXE;
+		int nextLevel = level + 1;
+
+		if (nextLevel >= 11) {
+			return IRON_PICKAXE;
+		} else {
+			return new GoldPickaxe(nextLevel);
+		}
 	}
 
+
 	@Override
-	public short getMaxLevel() {
+	public short getMaxExp() {
 		return 40;
 	}
 
@@ -74,5 +87,12 @@ public class GoldPickaxe extends AbstractPickaxe{
 //	protected ItemStack getItemStackBase() {
 //		return ItemStackUtil.getItemStackByCommand("give @p minecraft:gold_pickaxe 1 0 {Unbreakable:1,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\"]}");
 //	}
+	public List<ItemInterface> getAllLevelPick(){
+		ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
+		for (int i = 1; i <= 10; i++) {
+			woodPicks.add(new GoldPickaxe(i));
+		}
+		return woodPicks;
+	}
 
 }

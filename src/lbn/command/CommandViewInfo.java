@@ -15,10 +15,11 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.playerIO.PlayerIODataManager;
-import lbn.player.reincarnation.ReincarnationTypeMune;
 import lbn.util.InOutputUtil;
+import lbn.util.LivingEntityUtil;
+import lbn.util.particle.ParticleData;
+import lbn.util.particle.ParticleManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -117,15 +118,15 @@ public class CommandViewInfo implements CommandExecutor{
 				buffFromId.addBuff((Player) paramCommandSender);
 			}
 			break;
-		case "reinc":
-			new ReincarnationTypeMune().open((Player) paramCommandSender);
+		case "particle":
+			ParticleData particle = ParticleManager.getParticleData(paramArrayOfString[1]);
+			if (particle != null) {
+				particle.run(((Player)paramCommandSender).getLocation());
+			}
 			break;
-		case "trade":
-			MagicStoneTrade.open((Player) paramCommandSender);
+		case "kaminari":
+			LivingEntityUtil.strikeLightningEffect(((Player)paramCommandSender).getLocation(), (Player)paramCommandSender);
 			break;
-//		case "dungeonCheck":
-//			makeDungeonGround((Player)paramCommandSender);
-//			break;
 			default :
 				paramCommandSender.sendMessage("unknown param");
 		}

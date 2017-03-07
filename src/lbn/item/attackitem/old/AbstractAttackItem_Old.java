@@ -40,7 +40,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	@Override
 	protected int getSkillLevel() {
-		return (int)(getAvailableLevel() / 10.0) + 1;
+		return getAvailableLevel() + 1;
 	}
 
 	@Override

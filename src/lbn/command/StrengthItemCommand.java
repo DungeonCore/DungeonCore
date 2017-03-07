@@ -41,7 +41,7 @@ public class StrengthItemCommand implements CommandExecutor{
 				PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent(p, Integer.parseInt(paramArrayOfString[0]), p.getItemInHand(), true);
 				Bukkit.getServer().getPluginManager().callEvent(playerStrengthItemEvent);
 			} else if (item instanceof AbstractPickaxe) {
-				((AbstractPickaxe)item).updatePickLevel(p.getItemInHand(), Short.parseShort(paramArrayOfString[0]));
+				((AbstractPickaxe)item).updatePickExp(p.getItemInHand(), Short.parseShort(paramArrayOfString[0]));
 				paramCommandSender.sendMessage(item.getItemName() +  "のピッケルレベルを" +  paramArrayOfString[0] + "に変更しました");
 			} else {
 				paramCommandSender.sendMessage("今持っているアイテムは強化できません。");

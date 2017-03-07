@@ -1,21 +1,40 @@
 package lbn.item.implementation.pic;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.item.AbstractItem;
+import lbn.item.ItemInterface;
 import lbn.item.itemInterface.MagicPickaxeable;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
-import net.md_5.bungee.api.ChatColor;
+import lbn.util.TitleSender;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractPickaxe extends AbstractItem implements MagicPickaxeable{
 
-	private static final String MAGIC_PICKAXE_LEVEL = "magic_pickaxe_level";
+	int level = 1;
+
+	public AbstractPickaxe(int level) {
+		this.level = level;
+	}
+
+	/**
+	 * ピッケルのレベルを取得
+	 * @return
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	private static final String MAGIC_PICKAXE_EXP = "magic_pickaxe_exp";
 
 	/**
 	 * ピッケルの素材の日本語名
@@ -25,12 +44,12 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	@Override
 	public String getItemName() {
-		return getMaterialName() + "のピッケル";
+		return getMaterialName() + "のピッケル  [レベル " + getLevel() + "]";
 	}
 
 	@Override
 	public String getId() {
-		return "magic_" + getMaterial().toString().toLowerCase();
+		return "magic_" + getMaterial().toString().toLowerCase() + "_" + getLevel();
 	}
 
 	Random random = new Random();
@@ -42,13 +61,13 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 		}
 		ItemStack useItem = e.getUseItem();
 		//次のレベルを取得
-		short nextLevel = (short) (getPickLevel(useItem) + 1);
+		short nextExp = (short) (getPickExp(useItem) + e.getBrokenType().getExp());
 
 		//ラピスの個数処理
 		if (e.getBrokenType() == MagicStoneOreType.LAPIS_ORE) {
 			//個数をセットする
-			if (getLapisCount(nextLevel) > 1) {
-				int nextInt = random.nextInt(getLapisCount(nextLevel) - 1) + 1;
+			if (getLapisCount(nextExp) > 1) {
+				int nextInt = random.nextInt(getLapisCount(nextExp) - 1) + 1;
 				e.getAcquisition().setAmount(nextInt);
 			} else {
 				e.getAcquisition().setAmount(1);
@@ -56,19 +75,30 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 		}
 
 		//最大レベル未満の時はレベルを追加する
-		if (nextLevel < getMaxLevel()) {
-			updatePickLevel(useItem, nextLevel);
+		if (nextExp < getMaxExp()) {
+			updatePickExp(useItem, nextExp);
 		} else {
 			//次のピッケルがない場合は最大レベルまでしか追加しない
 			if (getNextPickAxe() == null) {
-				updatePickLevel(useItem, getMaxLevel());
+				updatePickExp(useItem, getMaxExp());
 				return;
 			}
 			//進化後のピッケルをセットする
 			ItemStack nextPickAxe = getNextPickAxe().getItem();
+			//余った経験値をセットする
+			updatePickExp(nextPickAxe, (short) (nextExp - getMaxExp()));
 			e.getPlayer().setItemInHand(nextPickAxe);
 			//メッセージを送信する
-			e.getPlayer().sendMessage(ChatColor.GREEN + "ピッケルが" + getNextPickAxe().getItemName() + "に進化した。");
+			e.getPlayer().sendMessage(ChatColor.GREEN + "ピッケルが" + org.bukkit.ChatColor.GOLD + getNextPickAxe().getItemName() + ChatColor.GREEN + "に進化した。");
+
+			//タイトルを表示
+			TitleSender titleSender = new TitleSender();
+			titleSender.setTitle("ピッケル レベルアップ", ChatColor.GREEN, false);
+			titleSender.setSubTitle(getNextPickAxe().getItemName() + "に進化した", ChatColor.YELLOW, false);
+			titleSender.execute(e.getPlayer());
+
+			//音をだす
+			e.getLocation().getWorld().playSound(e.getLocation(), Sound.ORB_PICKUP, 1, (float) 0.1);
 		}
 	}
 
@@ -78,7 +108,14 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	public ItemStack getItem() {
 		ItemStack item = super.getItem();
 		//0レベルにセットする
-		updatePickLevel(item, (short) 0);
+		updatePickExp(item, (short) 0);
+
+		//効率強化のレベルを取得
+		int effecientLevel = level / 2;
+		if (effecientLevel != 0) {
+			//効率強化のエンチャントをつける
+			item.addEnchantment(Enchantment.DIG_SPEED, effecientLevel);
+		}
 		return item;
 	}
 
@@ -92,7 +129,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	 * このアイテムの最大レベルを取得
 	 * @return
 	 */
-	abstract public short getMaxLevel();
+	abstract public short getMaxExp();
 
 	abstract public boolean canDestory(MagicStoneOreType type);
 
@@ -101,8 +138,8 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	 * @param item
 	 * @return
 	 */
-	public static short getPickLevel(ItemStack item) {
-		short nbtTagShort = ItemStackUtil.getNBTTagShort(item, MAGIC_PICKAXE_LEVEL);
+	public static short getPickExp(ItemStack item) {
+		short nbtTagShort = ItemStackUtil.getNBTTagShort(item, MAGIC_PICKAXE_EXP);
 		return nbtTagShort;
 	}
 
@@ -111,9 +148,9 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	 * @param item
 	 * @param level
 	 */
-	public void updatePickLevel(ItemStack item, short level) {
+	public void updatePickExp(ItemStack item, short level) {
 		//NBTTagを設定
-		ItemStackUtil.setNBTTag(item, MAGIC_PICKAXE_LEVEL, level);
+		ItemStackUtil.setNBTTag(item, MAGIC_PICKAXE_EXP, level);
 
 		List<String> lore = ItemStackUtil.getLore(item);
 		Iterator<String> iterator = lore.iterator();
@@ -125,7 +162,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 			}
 		}
 		//レベルを記載
-		lore.add(ChatColor.GREEN + "ピッケルレベル " + level + "/" + getMaxLevel());
+		lore.add(ChatColor.GREEN + "ピッケルレベル " + level + "/" + getMaxExp());
 
 		ItemStackUtil.setLore(item, lore);
 	}
@@ -134,7 +171,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	protected List<String> getAddDetail() {
 		List<String> addDetail = super.getAddDetail();
 		if (getNextPickAxe() != null) {
-			addDetail.add(getMaxLevel() + "レベルで" + getNextPickAxe().getItemName() + "に進化する");
+			addDetail.add(getMaxExp() + "レベルで" + getNextPickAxe().getItemName() + "に進化する");
 		}
 		if (getLapisCount((short) 0) != 1) {
 			addDetail.add("一定確率でラピスを" + getLapisCount((short) 0) + "個まで取得");
@@ -152,5 +189,26 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	 * @return
 	 */
 	abstract public String getGiveItemId();
+
+	/**
+	 *全てのレベルのピッケルを取得する
+	 * @return
+	 */
+	abstract public List<ItemInterface> getAllLevelPick();
+
+	/**
+	 * 関係のあるアイテムを全て取得
+	 * @return
+	 */
+	 public List<ItemInterface> getAllRelativeItem() {
+		 ArrayList<ItemInterface> itemList = new ArrayList<>(getAllLevelPick());
+		 itemList.add(new PickaxeSelector(this));
+		 return itemList;
+	 }
+
+	 @Override
+	public boolean isShowItemList() {
+		return false;
+	}
 
 }

@@ -1,46 +1,60 @@
 package lbn.item.attackitem.weaponSkill.imple;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.UUID;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.dungeoncore.Main;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.player.ItemType;
+import lbn.util.LbnRunnable;
 
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 	public WeaponSkillWithCombat(ItemType type) {
 		super(type);
 	}
 
-	HashSet<UUID> executePlayer = new HashSet<UUID>();
+	HashMap<UUID, BukkitTask> executePlayer = new HashMap<>();
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
 		//クリックしたPlayerを保存する
 		UUID uniqueId = p.getUniqueId();
-		executePlayer.add(uniqueId);
-		//５秒後に削除する
-		new BukkitRunnable() {
+
+		//5tickに一度、パーティクルを発生させる
+		BukkitTask runTaskTimer = new LbnRunnable() {
 			@Override
-			public void run() {
-				executePlayer.remove(uniqueId);
+			public void run2() {
+				long ageTick = getAgeTick();
+				if (ageTick > 20 * 5) {
+					cancel();
+				}
+				runWaitParticleData(p.getLocation().add(0, 1, 0), getRunCount());
 			}
-		}.runTaskLater(Main.plugin, 20 * 5);
+		}.runTaskTimer(5);
+		executePlayer.put(uniqueId, runTaskTimer);
 
 		return true;
 	}
 
+	/**
+	 * 攻撃待機中のパーティクル
+	 * @param loc
+	 * @param i
+	 */
+	abstract protected void runWaitParticleData(Location loc, int i);
+
 	@Override
 	public boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
-		if (executePlayer.contains(p.getUniqueId())) {
+		if (executePlayer.containsKey(p.getUniqueId())) {
 			onCombat2(p, item, customItem, livingEntity, event);
-			executePlayer.remove(p.getUniqueId());
+			BukkitTask remove = executePlayer.remove(p.getUniqueId());
+			remove.cancel();
 		}
 		return false;
 	}
@@ -51,7 +65,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 	 * @param item
 	 * @param customItem
 	 * @param livingEntity
-	 * @param e TODO
+	 * @param e
 	 */
 	abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e);
 }

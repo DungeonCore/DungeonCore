@@ -198,6 +198,7 @@ public class ItemManager {
 	static{
 		registItem(new StrengthScrollArmor());
 		registItem(new StrengthScrollWeapon());
+		//鉱石
 		registItem(new MagicStoneOre(MagicStoneOreType.DIAOMOD_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.IRON_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.GOLD_ORE));
@@ -205,10 +206,11 @@ public class ItemManager {
 		registItem(new MagicStoneOre(MagicStoneOreType.COAL_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.REDSTONE_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.LAPIS_ORE));
-		registItem(new WoodPickAxe());
-		registItem(new StonePickaxe());
-		registItem(new GoldPickaxe());
-		registItem(new IronPickaxe());
-		registItem(new DiamondPickaxe());
+		//ピッケル
+		registItem(new WoodPickAxe(0).getAllRelativeItem());
+		registItem(new StonePickaxe(0).getAllRelativeItem());
+		registItem(new GoldPickaxe(0).getAllRelativeItem());
+		registItem(new IronPickaxe(0).getAllRelativeItem());
+		registItem(new DiamondPickaxe(0).getAllRelativeItem());
 	}
 }

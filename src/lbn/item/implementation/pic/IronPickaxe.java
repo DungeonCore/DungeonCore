@@ -1,5 +1,9 @@
 package lbn.item.implementation.pic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import lbn.item.ItemInterface;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 
 import org.bukkit.Material;
@@ -7,7 +11,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class IronPickaxe extends AbstractPickaxe{
 
-	private static final DiamondPickaxe DIAMOND_PICKAXE = new DiamondPickaxe();
+	public IronPickaxe(int level) {
+		super(level);
+	}
+
+	private static final DiamondPickaxe DIAMOND_PICKAXE = new DiamondPickaxe(1);
 
 	@Override
 	public int getBuyPrice(ItemStack item) {
@@ -21,11 +29,18 @@ public class IronPickaxe extends AbstractPickaxe{
 
 	@Override
 	public AbstractPickaxe getNextPickAxe() {
-		return DIAMOND_PICKAXE;
+		int nextLevel = level + 1;
+
+		if (nextLevel >= 11) {
+			return DIAMOND_PICKAXE;
+		} else {
+			return new IronPickaxe(nextLevel);
+		}
 	}
 
+
 	@Override
-	public short getMaxLevel() {
+	public short getMaxExp() {
 		return 50;
 	}
 
@@ -62,5 +77,13 @@ public class IronPickaxe extends AbstractPickaxe{
 	@Override
 	public String getGiveItemId() {
 		return "iron_pickaxe";
+	}
+
+	public List<ItemInterface> getAllLevelPick(){
+		ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
+		for (int i = 1; i <= 10; i++) {
+			woodPicks.add(new IronPickaxe(i));
+		}
+		return woodPicks;
 	}
 }

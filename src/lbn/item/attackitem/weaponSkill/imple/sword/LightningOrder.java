@@ -7,7 +7,10 @@ import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
+import lbn.util.particle.ParticleType;
+import lbn.util.particle.Particles;
 
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -38,6 +41,11 @@ public class LightningOrder extends WeaponSkillWithCombat{
 				livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(2)), 1), true);
 			}
 		}.runTaskLater(Main.plugin, (long) (20 * getData(1)+0.1));
+	}
+
+	@Override
+	protected void runWaitParticleData(Location loc, int count) {
+		Particles.runParticle(loc, ParticleType.flame);
 	}
 
 }

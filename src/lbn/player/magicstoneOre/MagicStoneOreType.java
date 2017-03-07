@@ -10,13 +10,13 @@ import org.bukkit.Material;
  *
  */
 public enum MagicStoneOreType {
-	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 60 * 60 * 1, 60 * 60 * 3),
-	REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 60 * 40, (long)(60 * 60 * 1.5)),
-	GOLD_ORE("金鉱石", Material.GOLD_ORE,  20 * 30, (long)(20 * 60 * 1.5)),
-	EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE, 60 * 30, (long)(60 * 60 * 1.5)),
-	IRON_ORE("鉄鉱石", Material.IRON_ORE, 60 * 10, 60 * 30),
-	COAL_ORE("石炭鉱石", Material.COAL_ORE, 60 * 10, 60 * 30),
-	LAPIS_ORE("ラピス鉱石", Material.LAPIS_ORE,  60 * 10, 60 * 30);
+	DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 60 * 60 * 1, 60 * 60 * 3, 10),
+	REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 60 * 40, (long)(60 * 60 * 1.5), 75),
+	GOLD_ORE("金鉱石", Material.GOLD_ORE,  20 * 30, (long)(20 * 60 * 1.5), 50),
+	EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE, 60 * 30, (long)(60 * 60 * 1.5), 0),
+	IRON_ORE("鉄鉱石", Material.IRON_ORE, 60 * 10, 60 * 30, 30),
+	COAL_ORE("石炭鉱石", Material.COAL_ORE, 60 * 10, 60 * 30, 10),
+	LAPIS_ORE("ラピス鉱石", Material.LAPIS_ORE,  60 * 10, 60 * 30, 15);
 
 	//日本語名
 	String jpName;
@@ -30,12 +30,23 @@ public enum MagicStoneOreType {
 	//復活する最小時間
 	long minMinTick;
 
-	private MagicStoneOreType(String jpName, Material m, long minMinSec, long maxMinSec) {
+	//掘ったときに取得する経験値
+	int exp;
+
+	private MagicStoneOreType(String jpName, Material m, long minMinSec, long maxMinSec, int exp) {
 		this.jpName = jpName;
 		this.m = m;
 		this.maxMinTick = maxMinSec * 20;
 		this.minMinTick = minMinSec * 20;
+		this.exp = exp;
+	}
 
+	/**
+	 * 掘ったときに取得する経験値
+	 * @return
+	 */
+	public int getExp() {
+		return exp;
 	}
 
 	/**
