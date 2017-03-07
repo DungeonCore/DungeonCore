@@ -2,7 +2,6 @@ package lbn.util.particle;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -31,9 +30,6 @@ public class CircleParticleData extends ParticleData{
 			runCircle(location);
 		}
 	}
-
-
-	static HashMap<Double,  ArrayList<Vector>> cache = new HashMap<Double,  ArrayList<Vector>>();
 
 	Vector centerVec = null;
 
