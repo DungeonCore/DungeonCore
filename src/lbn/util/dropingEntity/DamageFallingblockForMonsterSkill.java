@@ -67,7 +67,7 @@ public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFa
 	}
 
 	@Override
-	public void damagedEntityRutine(Entity target) {
+	public void onHitDamagedEntity(Entity target) {
 	}
 
 }

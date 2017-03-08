@@ -49,9 +49,8 @@ public interface WeaponSkillInterface {
 	 * @param item
 	 * @param customItem
 	 * @param livingEntity
-	 * @return スキル発動完了処理を行うならTRUE
 	 */
-	boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event);
+	void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event);
 
 	/**
 	 * スキルのクールタイムを取得

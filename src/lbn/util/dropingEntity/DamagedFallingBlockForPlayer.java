@@ -78,6 +78,6 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
 
 	abstract public void tickRutine(int count);
 	abstract public void removedRutine(Entity spawnEntity);
-	abstract public void damagedEntityRutine(Entity target);
+	abstract public void onHitDamagedEntity(Entity target);
 	abstract public void startEntityRutine(Player p);
 }

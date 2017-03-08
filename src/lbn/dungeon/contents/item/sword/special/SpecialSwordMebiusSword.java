@@ -14,7 +14,6 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -75,7 +74,7 @@ public class SpecialSwordMebiusSword extends AbstractSpecialSword{
 		Location location = target.getLocation();
 		e.setDamage(8.0 + e.getDamage());
 		if (owner.getType() == EntityType.PLAYER) {
-			LivingEntityUtil.strikeLightningEffect(location, (Player)owner);
+			LivingEntityUtil.strikeLightningEffect(location);
 		}
 		target.setFireTicks(20 * 6);
 	}

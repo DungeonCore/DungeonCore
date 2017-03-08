@@ -101,8 +101,7 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface{
 	}
 
 	@Override
-	public boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
-		return false;
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
 	}
 
 }

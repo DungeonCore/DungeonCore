@@ -144,7 +144,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 					}
 
 					@Override
-					public void damagedEntityRutine(Entity target) {
+					public void onHitDamagedEntity(Entity target) {
 						soundData.playSoundAllPlayer(target.getLocation());
 					}
 

@@ -31,7 +31,7 @@ public class LightningOrder extends WeaponSkillWithCombat{
 
 	@Override
 	public void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e) {
-		LivingEntityUtil.strikeLightningEffect(livingEntity.getLocation(), p);
+		LivingEntityUtil.strikeLightningEffect(livingEntity.getLocation());
 
 		Stun.addStun(livingEntity, (int) (20 * getData(1)));
 

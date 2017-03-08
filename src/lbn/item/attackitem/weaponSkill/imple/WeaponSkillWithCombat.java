@@ -31,15 +31,25 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 			@Override
 			public void run2() {
 				long ageTick = getAgeTick();
-				if (ageTick > 20 * 5) {
+				if (ageTick > 20 * getTimeLimit()) {
+					executePlayer.remove(uniqueId);
 					cancel();
 				}
 				runWaitParticleData(p.getLocation().add(0, 1, 0), getRunCount());
 			}
+
 		}.runTaskTimer(5);
 		executePlayer.put(uniqueId, runTaskTimer);
 
 		return true;
+	}
+
+	/**
+	 * 効果が続く時間
+	 * @return
+	 */
+	public double getTimeLimit() {
+		return 5;
 	}
 
 	/**
@@ -50,13 +60,21 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 	abstract protected void runWaitParticleData(Location loc, int i);
 
 	@Override
-	public boolean onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
-		if (executePlayer.containsKey(p.getUniqueId())) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+		if (isWaitingSkill(p)) {
 			onCombat2(p, item, customItem, livingEntity, event);
 			BukkitTask remove = executePlayer.remove(p.getUniqueId());
 			remove.cancel();
 		}
-		return false;
+	}
+
+	/**
+	 * スキル発動待機中ならTRUE
+	 * @param p
+	 * @return
+	 */
+	public boolean isWaitingSkill(Player p) {
+		return executePlayer.containsKey(p.getUniqueId());
 	}
 
 	/**

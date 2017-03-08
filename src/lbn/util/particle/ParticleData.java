@@ -40,6 +40,19 @@ public class ParticleData {
 		this.dx = data.dx;
 		this.dy = data.dy;
 		this.dz = data.dz;
+		this.isFar = data.isFar;
+	}
+
+	boolean isFar = false;
+
+	/**
+	 * 遠くまで表示させるならTRUE
+	 * @param isFar
+	 * @return
+	 */
+	public ParticleData setFarParticle(boolean isFar) {
+		this.isFar = isFar;
+		return this;
 	}
 
 	public ParticleData setParticle(ParticleType particle) {
@@ -115,7 +128,7 @@ public class ParticleData {
 	}
 
 	protected void runParticle(World w, double x, double y, double z) {
-		((CraftWorld) w).getHandle().a(particleEnum, x, y, z, amount, dx, dy, dz, lastArgument);
+		((CraftWorld) w).getHandle().a(particleEnum, isFar, x, y, z, amount, dx, dy, dz, lastArgument);
 	}
 
 	final protected void run(World w, List<Vector> v) {

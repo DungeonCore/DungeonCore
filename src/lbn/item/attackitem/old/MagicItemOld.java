@@ -44,7 +44,7 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 		}
 
 		if (!player.isSneaking()) {
-			excuteMagic(e, player, e.getItem(), getRightClickMagic(e.getItem()));
+//			excuteMagic(e, player, e.getItem(), getRightClickMagic(e.getItem()));
 			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}

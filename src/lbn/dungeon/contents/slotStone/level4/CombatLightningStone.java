@@ -43,7 +43,7 @@ public class CombatLightningStone extends CombatSlot{
 		int nextInt = rnd.nextInt(4);
 		if (nextInt == 0) {
 			LivingEntity enemy = e.getEnemy();
-			LivingEntityUtil.strikeLightningEffect(enemy.getLocation(), e.getPlayer());
+			LivingEntityUtil.strikeLightningEffect(enemy.getLocation());
 			enemy.damage(4.0);
 			enemy.setFireTicks(3 * 20);
 		}

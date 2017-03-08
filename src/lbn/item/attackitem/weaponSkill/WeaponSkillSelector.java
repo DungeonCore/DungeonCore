@@ -83,6 +83,7 @@ public class WeaponSkillSelector implements MenuSelectorInterface{
 
 		ItemStackUtil.addLore(itemStack, "");
 		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[INFO]");
+		ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    スキルレベル:" + skill.getSkillLevel());
 		ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    消費MP:" + skill.getNeedMagicPoint());
 		ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    クールタイム:" + skill.getCooltime() + "秒");
 
@@ -116,4 +117,12 @@ public class WeaponSkillSelector implements MenuSelectorInterface{
 		return "weapon skill";
 	}
 
+
+	/**
+	 * キャッシュをクリア
+	 */
+	public static void clearCache() {
+		viewItemCache.clear();
+		viewItemIdCache.clear();
+	}
 }

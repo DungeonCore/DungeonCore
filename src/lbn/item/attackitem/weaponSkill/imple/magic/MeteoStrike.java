@@ -29,7 +29,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 	public MeteoStrike() {
 		super(ItemType.MAGIC);
 	}
-	
+
 	@Override
 	public String getId() {
 		return "skill3";
@@ -61,9 +61,9 @@ public class MeteoStrike extends WeaponSkillForOneType{
 			Location nowLocation = start.clone();
 			Location beforeLocation = start.clone();
 
-			ParticleData nowData = new ParticleData(ParticleType.lava, 200).setDispersion(0.8, 1, 0.8);
-			ParticleData fireData = new ParticleData(ParticleType.largesmoke, 70).setDispersion(0.2, 0.2, 0.2);
-			ParticleData beforeData = new ParticleData(ParticleType.lava, 70).setDispersion(0.5, 1, 0.5);
+			ParticleData nowData = new ParticleData(ParticleType.lava, 200).setDispersion(0.8, 1, 0.8).setFarParticle(true);
+			ParticleData fireData = new ParticleData(ParticleType.largesmoke, 70).setDispersion(0.2, 0.2, 0.2).setFarParticle(true);
+			ParticleData beforeData = new ParticleData(ParticleType.lava, 70).setDispersion(0.5, 1, 0.5).setFarParticle(true);
 
 			int time = 0;
 			@Override
@@ -92,7 +92,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 			 */
 			protected void explode(AbstractAttackItem item, Entity centerEntity) {
 				//爆発パーティクル
-				new ParticleData(ParticleType.hugeexplosion, 10).run(target);
+				new ParticleData(ParticleType.hugeexplosion, 10).setFarParticle(true).run(target);
 				//爆発音
 				JavaUtil.sendSound(target, Sound.EXPLODE, 3f, 0.1f, 50);
 

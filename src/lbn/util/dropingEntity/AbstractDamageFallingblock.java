@@ -45,7 +45,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 				isAttack = isAttack || damaged;
 				if (damaged) {
 					//ダメージ時の特殊処理
-					damagedEntityRutine((LivingEntity)entity);
+					onHitDamagedEntity((LivingEntity)entity);
 				}
 			}
 
@@ -82,7 +82,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 	abstract public void tickRutine(int count);
 
 	abstract public void removedRutine(Entity spawnEntity);
-	abstract public void damagedEntityRutine(Entity target);
+	abstract public void onHitDamagedEntity(Entity target);
 
 	protected void removeEntity(Entity spawnEntity) {
 		spawnEntity.remove();

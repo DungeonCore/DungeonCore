@@ -125,7 +125,7 @@ public class CommandViewInfo implements CommandExecutor{
 			}
 			break;
 		case "kaminari":
-			LivingEntityUtil.strikeLightningEffect(((Player)paramCommandSender).getLocation(), (Player)paramCommandSender);
+			LivingEntityUtil.strikeLightningEffect(((Player)paramCommandSender).getLocation());
 			break;
 			default :
 				paramCommandSender.sendMessage("unknown param");

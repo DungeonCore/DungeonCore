@@ -109,7 +109,7 @@ public class NormalMagicItem extends MagicItemOld{
 					}
 
 					@Override
-					public void damagedEntityRutine(Entity target) {
+					public void onHitDamagedEntity(Entity target) {
 						playSoundWhenFaillingBlockHit(target);
 					}
 
@@ -157,7 +157,7 @@ public class NormalMagicItem extends MagicItemOld{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"左クリックで遠距離攻撃", "右クリックでゾンビ召喚"};
+		return new String[]{"左クリックで遠距離攻撃"};
 	}
 }
 

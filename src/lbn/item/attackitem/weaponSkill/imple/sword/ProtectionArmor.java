@@ -3,7 +3,10 @@ package lbn.item.attackitem.weaponSkill.imple.sword;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
+import lbn.util.particle.ParticleType;
+import lbn.util.particle.Particles;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -27,6 +30,8 @@ public class ProtectionArmor extends WeaponSkillForOneType{
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+		p.playSound(p.getLocation(), Sound.DONKEY_HIT, 1, (float) 0.1);
+		Particles.runCircleParticle(p.getLocation().add(0, 1, 0), ParticleType.portal, 1.5, 10);
 		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, (int) (20 * getData(0)), 6));
 		return true;
 	}

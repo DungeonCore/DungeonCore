@@ -1,5 +1,8 @@
 package lbn.item.attackitem.weaponSkill;
 
+import java.text.MessageFormat;
+import java.util.List;
+
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
@@ -11,6 +14,7 @@ import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -48,8 +52,32 @@ public class WeaponSkillExecutor {
 		}
 		boolean onExecute = skill.onClick(player, item, customItem);
 		if (onExecute) {
+			//メッセージを表示
+			sendMessage(player, skill);
 			//クールタイムをセット
 			cooltimeManager.setCoolTime();
+		}
+	}
+
+	/**
+	 * 周囲のPlayerにメッセージを表示する
+	 * @param player
+	 * @param skill
+	 */
+	private static void sendMessage(Player p, WeaponSkillInterface skill) {
+		List<Player> players = p.getWorld().getPlayers();
+		Location location = p.getLocation();
+		for (Player player : players) {
+			//自分にはメッセージを表示しない
+			if (player.equals(p)) {
+				continue;
+			}
+			double x = player.getLocation().getX() - location.getX();
+			double y = player.getLocation().getY() - location.getY();
+			double z = player.getLocation().getZ() - location.getZ();
+			if ((x * x) + (y * y) + (z * z) < 30 * 30) {
+				p.sendMessage(MessageFormat.format("{0}[武器スキル] {1}{2}が{3}を発動", ChatColor.RED, ChatColor.GREEN, p.getCustomName(), skill.getName()));
+			}
 		}
 	}
 

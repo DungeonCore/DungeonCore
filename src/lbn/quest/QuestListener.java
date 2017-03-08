@@ -50,9 +50,12 @@ public class QuestListener implements Listener{
 
 		Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 		for (PickItemQuest pickItemQuest : quest) {
+			boolean isProcessing = session.getProcessingStatus(pickItemQuest) == QuestProcessingStatus.PROCESSING;
 			pickItemQuest.onPickUp(e, session);
 			//終了条件を満たしているなら終了する
-			onSatisfyCondition(player, pickItemQuest);
+			if (isProcessing) {
+				onSatisfyCondition(player, pickItemQuest);
+			}
 		}
 	}
 
@@ -63,9 +66,13 @@ public class QuestListener implements Listener{
 		//今実行中のクエスト中からStrengthItemQuestを探しだす
 		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.STRENGTH_ITEM_QUEST);
 		for (Quest quest : doingQuest) {
-			((StrengthItemQuest)quest).onStrength(e, questSession);
-			//終了条件を満たしているなら終了する
-			onSatisfyCondition(player, quest);
+			//実行中ならクエストの処理を行う
+			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
+				((StrengthItemQuest)quest).onStrength(e, questSession);
+				//終了条件を満たしているなら終了する
+				onSatisfyCondition(player, quest);
+			}
+
 		}
 	}
 
@@ -93,9 +100,13 @@ public class QuestListener implements Listener{
 		//今実行中のクエスト中からStrengthItemQuestを探しだす
 		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.KILL_MOB_QUEST);
 		for (Quest quest : doingQuest) {
-			((KillMobQuest)quest).onDeath(e, questSession);
-			//終了条件を満たしたなら村人の場所へ帰らせる
-			onSatisfyCondition(p, quest);
+			//実行中ならクエストの処理を行う
+			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
+				((KillMobQuest)quest).onDeath(e, questSession);
+				//終了条件を満たしたなら村人の場所へ帰らせる
+				onSatisfyCondition(p, quest);
+			}
+
 		}
 	}
 

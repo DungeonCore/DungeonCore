@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 public class Particles {
-	static ParticleData particleDataLava = new ParticleData(ParticleType.lava, 40);
 	static HashMap<ParticleType, ParticleData> cacheParticle = new HashMap<ParticleType, ParticleData>();
 
 	/**
@@ -37,5 +36,24 @@ public class Particles {
 	 */
 	public static void runParticle(Location loc, ParticleType type, int amount) {
 		new ParticleData(type, amount).run(loc);
+	}
+
+
+	/**
+	 * 円のパーティクルを発生させる
+	 * @param loc
+	 * @param type
+	 */
+	public static void runCircleParticle(Entity entity, ParticleType type, double radius, int amount) {
+		runCircleParticle(entity.getLocation(), type, radius, amount);
+	}
+		/**
+		 * 円のパーティクルを発生させる
+		 * @param loc
+		 * @param type
+		 */
+		public static void runCircleParticle(Location loc, ParticleType type, double radius, int amount) {
+			CircleParticleData circleParticleData = new CircleParticleData(new ParticleData(ParticleType.portal, 2), radius);
+			circleParticleData.run(loc);
 	}
 }

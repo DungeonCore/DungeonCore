@@ -1,6 +1,5 @@
 package lbn.item.attackitem.weaponSkill.imple.bow;
 
-import lbn.common.other.Stun;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.attackitem.AbstractAttackItem;
@@ -30,7 +29,7 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		new SkillRunnable(this, p, item).runTaskTimer((long) (20 * 0.3));
+		new SkillRunnable(this, p, item).runTaskTimer((long) (20 * 0.2));
 		return true;
 	}
 
@@ -69,6 +68,5 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 
 	@Override
 	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
-		Stun.addStun(target, (int) (20 * getData(1)));
 	}
 }

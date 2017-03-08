@@ -41,7 +41,7 @@ public class BossChest extends SpletSheetChest{
 		for (TheLowPlayer p : e.getCombatPlayer()) {
 			if (p != null) {
 				Player onlinePlayer = p.getOnlinePlayer();
-				if (onlinePlayer == null) {
+				if (onlinePlayer != null) {
 					rewordInventoryMap.put(onlinePlayer, getNewInventory(onlinePlayer));
 				}
 			}

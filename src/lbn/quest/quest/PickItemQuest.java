@@ -54,6 +54,12 @@ public class PickItemQuest extends AbstractQuest{
 		return needCount;
 	}
 
+	/**
+	 * クエストアイテムを拾ったときの処理
+	 * @param e
+	 * @param session
+	 * @return もし完了メッセージを出力するならTRUE
+	 */
 	public void onPickUp(PlayerPickupItemEvent e, PlayerQuestSession session) {
 		ItemStack pickItem = e.getItem().getItemStack();
 		if (pickItem == null) {

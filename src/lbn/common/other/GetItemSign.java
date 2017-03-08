@@ -1,24 +1,16 @@
 package lbn.common.other;
 
-import lbn.item.itemInterface.GettingItemable;
+import lbn.util.ItemStackUtil;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class GetItemSign extends InHandItemClickSign{
 
-	GettingItemable gettingItem;
-
 	public GetItemSign(PlayerInteractEvent e) {
 		super(e);
-
-		if (isSuccess) {
-			if (signItem instanceof GettingItemable) {
-				gettingItem = (GettingItemable) signItem;
-				return;
-			} else {
-				isSuccess = false;
-			}
-		}
 	}
 
 	@Override
@@ -28,7 +20,14 @@ public class GetItemSign extends InHandItemClickSign{
 
 	@Override
 	public void doClick(PlayerInteractEvent e) {
-		gettingItem.onClickForGetting(e, lines);
+		Player player = e.getPlayer();
+		if (player.getItemInHand() == null || player.getItemInHand().getType() == Material.AIR) {
+			ItemStackUtil.removeAll(player.getInventory(), signItem.getItem());
+			player.setItemInHand(signItem.getItem());
+			player.updateInventory();
+		} else {
+			player.sendMessage(ChatColor.RED + "何も持たないでクリックしてください。");
+		}
 	}
 
 }

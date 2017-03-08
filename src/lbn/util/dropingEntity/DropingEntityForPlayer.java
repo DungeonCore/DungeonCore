@@ -49,7 +49,7 @@ public class DropingEntityForPlayer extends AbstractDamageFallingblock{
 	}
 
 	@Override
-	public void damagedEntityRutine(Entity target) {
+	public void onHitDamagedEntity(Entity target) {
 	}
 
 }

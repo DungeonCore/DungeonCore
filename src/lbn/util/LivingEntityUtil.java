@@ -2,6 +2,7 @@ package lbn.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import lbn.common.citizenNpc.CitizenNpcManager;
 import lbn.dungeoncore.Main;
@@ -18,6 +19,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftAnimals;
@@ -296,6 +298,24 @@ public class LivingEntityUtil {
 		public static void setNoDamageTickZero(LivingEntity entity) {
 			setNoDamageTick(entity, 0);
 	}
+
+		/**
+		 * 雷のエフェクトを周囲のPlayerの知らせる
+		 * @param location
+		 */
+		public static void strikeLightningEffect(Location location) {
+			World world = location.getWorld();
+			List<Player> players = world.getPlayers();
+			for (Player player : players) {
+				double x = player.getLocation().getX() - location.getX();
+				double y = player.getLocation().getY() - location.getY();
+				double z = player.getLocation().getZ() - location.getZ();
+				if ((x * x) + (y * y) + (z * z) < 30 * 30) {
+					((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
+					player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
+				}
+			}
+		}
 
 		public static void strikeLightningEffect(Location location, Player...p) {
 			if (p == null) {

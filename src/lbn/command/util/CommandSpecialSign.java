@@ -5,7 +5,6 @@ import java.util.HashMap;
 import lbn.dungeon.contents.item.key.KeyItemable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.itemInterface.GettingItemable;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.ChatColor;
@@ -43,8 +42,8 @@ public class CommandSpecialSign implements CommandExecutor{
 		Class<?> clazz = null;
 		ItemInterface customItem;
 		if (paramArrayOfString.length == 1 && paramArrayOfString[0].equalsIgnoreCase("get")) {
-			customItem = ItemManager.getCustomItem(GettingItemable.class, itemInHand);
-			clazz = GettingItemable.class;
+			customItem = ItemManager.getCustomItem(itemInHand);
+			clazz = ItemInterface.class;
 		} else {
 			clazz = KeyItemable.class;
 			customItem = ItemManager.getCustomItem(KeyItemable.class, itemInHand);
@@ -74,12 +73,11 @@ public class CommandSpecialSign implements CommandExecutor{
 		if (clazz.equals(KeyItemable.class)) {
 			lastLine =  ((KeyItemable)customItem).getLastLine(p, paramArrayOfString);
 			line2 = "IN HAND";
-		} else if (clazz.equals(GettingItemable.class)) {
-			lastLine =  ((GettingItemable)customItem).getLastLine(p, paramArrayOfString);
+		} else if (paramArrayOfString[0].equalsIgnoreCase("get")) {
 			line2 = "FOR GETTING";
 		}
 
-		if (lastLine == null || line2 == null) {
+		if (line2 == null) {
 			return false;
 		}
 

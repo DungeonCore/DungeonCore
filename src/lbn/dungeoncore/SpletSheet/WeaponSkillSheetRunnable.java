@@ -1,7 +1,10 @@
 package lbn.dungeoncore.SpletSheet;
 
+import java.util.concurrent.Future;
+
 import lbn.item.attackitem.weaponSkill.WeaponSkillData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillFactory;
+import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
 
@@ -76,8 +79,6 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 		weaponSkillData.setMaterial(JavaUtil.getInt(row[12], 1));
 		weaponSkillData.setMaterialdata((byte) JavaUtil.getInt( (row[13]), 0));
 
-
-		System.out.println(weaponSkillData.getName());
 		WeaponSkillFactory.regist(weaponSkillData);
 	}
 
@@ -102,5 +103,12 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 			break;
 		}
 		return null;
+	}
+
+	@Override
+	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
+		//キャッシュをクリアする
+		WeaponSkillSelector.clearCache();
+		super.onCallbackFunction(submit);
 	}
 }

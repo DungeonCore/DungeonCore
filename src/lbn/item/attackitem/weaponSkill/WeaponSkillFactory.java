@@ -11,11 +11,16 @@ import lbn.item.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOff;
 import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOffLevel2;
 import lbn.item.attackitem.weaponSkill.imple.bow.ArrowStorm;
+import lbn.item.attackitem.weaponSkill.imple.bow.BlindEye;
 import lbn.item.attackitem.weaponSkill.imple.bow.IceArrow;
+import lbn.item.attackitem.weaponSkill.imple.magic.Explosion;
 import lbn.item.attackitem.weaponSkill.imple.magic.HealRain;
 import lbn.item.attackitem.weaponSkill.imple.magic.MeteoStrike;
 import lbn.item.attackitem.weaponSkill.imple.sword.BloodyHeal;
+import lbn.item.attackitem.weaponSkill.imple.sword.BurstFlame;
 import lbn.item.attackitem.weaponSkill.imple.sword.LightningOrder;
+import lbn.item.attackitem.weaponSkill.imple.sword.Lump;
+import lbn.item.attackitem.weaponSkill.imple.sword.ProtectionArmor;
 import lbn.util.DungeonLogger;
 
 public class WeaponSkillFactory {
@@ -52,13 +57,11 @@ public class WeaponSkillFactory {
 
 		if (weaponSkill instanceof WeaponSkillForOneType) {
 			((WeaponSkillForOneType) weaponSkill).setData(data);
-			System.out.println("データセット：" + weaponSkill.getName());
 		}
 		regist(weaponSkill);
 	}
 
 	public static void regist(WeaponSkillInterface weaponSkill) {
-		System.out.println("登録：" + weaponSkill.getName());
 		skillMap.put(weaponSkill.getId(), weaponSkill);
 		skillLevelSkillMap.add(weaponSkill);
 
@@ -91,5 +94,10 @@ public class WeaponSkillFactory {
 		registTempData(new MeteoStrike());
 		registTempData(new IceArrow());
 		registTempData(new HealRain());
+		registTempData(new ProtectionArmor());
+		registTempData(new Explosion());
+		registTempData(new Lump());
+		registTempData(new BlindEye());
+		registTempData(new BurstFlame());
 	}
 }

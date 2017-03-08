@@ -74,7 +74,7 @@ public class SpecialSwordAquatempest extends AbstractSpecialSword implements Coo
 		List<Entity> nearbyEntities = player.getNearbyEntities(5, 5, 5);
 		for (Entity entity : nearbyEntities) {
 			if(LivingEntityUtil.isEnemy(entity)){
-				LivingEntityUtil.strikeLightningEffect(entity.getLocation(), player);
+				LivingEntityUtil.strikeLightningEffect(entity.getLocation());
 				if(level >= 10){
 					LivingEntityUtil.trueDamage((LivingEntity) entity, 40, player, LastDamageMethodType.SWORD);
 				}else if(level >= 5){
