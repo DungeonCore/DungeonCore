@@ -18,18 +18,18 @@ import org.bukkit.entity.EntityType;
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
 
-	public static void registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin) {
-		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin);
+	public static void registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
+		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id);
 		if (villagerData.isError) {
 			if (!(p instanceof ConsoleCommandSender)) {
 				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, texts}, ",") + "]");
 			}
 			return;
 		}
-		villagerMap.put(name, villagerData);
+		villagerMap.put(id, villagerData);
 
 		//もしまだNPCが登録されていなければ新しく登録する
-		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(name);
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpcById(id);
 		if (villagerNpc == null) {
 			NpcManager.regist(new VillagerNpc(villagerData));
 		} else {
@@ -40,8 +40,8 @@ public class VillagerData {
 		}
 	}
 
-	public static VillagerData getInstance(String name) {
-		return villagerMap.get(name);
+	public static VillagerData getInstance(String id) {
+		return villagerMap.get(id);
 	}
 
 	String name;
@@ -50,16 +50,24 @@ public class VillagerData {
 	String[] texts;
 	boolean isAdult = true;
 
+	String id;
+
 	EntityType entityType = EntityType.VILLAGER;
 
 	String skin = null;
 
 	boolean isError = false;
 
-	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin) {
+	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
 		this.name = name;
 		if (name == null || name.isEmpty()) {
 			sendMsg(p, "名前は絶対必要です。");
+			isError = true;
+		}
+
+		this.id = id;
+		if (id == null || id.isEmpty()) {
+			sendMsg(p, "IDは絶対必要です。");
 			isError = true;
 		}
 
@@ -131,6 +139,10 @@ public class VillagerData {
 
 	public String getSkin() {
 		return skin;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public EntityType getEntityType() {

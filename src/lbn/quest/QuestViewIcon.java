@@ -58,8 +58,8 @@ public class QuestViewIcon {
 		ItemStackUtil.addLore(itemStack, ChatColor.BLACK + "quest_viewer_item");
 		ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[進行状況]");
 		ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getCurrentInfo(p)));
-		if (status == QuestProcessingStatus.PROCESS_END && quest.getEndVillagerName() != null) {
-			ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getEndVillagerName() + "のところへ報告へ行こう"));
+		if (status == QuestProcessingStatus.PROCESS_END && quest.getEndVillagerId() != null) {
+			ItemStackUtil.addLore(itemStack, MessageFormat.format(" {0}{1}", ChatColor.WHITE, quest.getEndVillagerId() + "のところへ報告へ行こう"));
 		}
 
 		//破棄の許可・不許可を追加

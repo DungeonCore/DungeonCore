@@ -69,7 +69,7 @@ public interface Quest{
 
 	public String getStartVillagerName();
 
-	public String getEndVillagerName();
+	public String getEndVillagerId();
 
 	public void onStartQuestEvent(StartQuestEvent e);
 }

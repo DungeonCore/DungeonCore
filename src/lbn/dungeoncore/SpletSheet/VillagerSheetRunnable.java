@@ -17,12 +17,12 @@ public class VillagerSheetRunnable extends AbstractComplexSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"name", "type","text", "location", "adult", "data", "mobtype", "skin"};
+		return new String[]{"name", "type","text", "location", "adult", "data", "mobtype", "skin", "id"};
 	}
 
 	@Override
 	protected void excuteOnerow(String[] row) {
-		VillagerData.registSpletsheetVillager(sender, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]);
+		VillagerData.registSpletsheetVillager(sender, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]);
 	}
 
 }

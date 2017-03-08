@@ -325,7 +325,7 @@ public abstract class AbstractQuest implements Quest{
 
 	String endVillager = null;
 	@Override
-	public String getEndVillagerName() {
+	public String getEndVillagerId() {
 		return endVillager;
 	}
 

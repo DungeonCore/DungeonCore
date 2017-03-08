@@ -20,12 +20,13 @@ public class QuestUtil {
 	 * @param villagerName
 	 * @param p
 	 */
-	public static void sendSatisfyComplateForVillager(String villagerName, Player p) {
+	public static void sendSatisfyComplateForVillager(String villagerId, Player p) {
 		//TODO 音追加
 
-		VillagerNpc npc = NpcManager.getVillagerNpc(villagerName);
+		VillagerNpc npc = NpcManager.getVillagerNpcById(villagerId);
+		//NPCが登録されていなければIDをそのまま返す
 		if (npc == null) {
-			p.sendMessage("クエストクリア!!!  " + villagerName + "のところに戻ろう！！");
+			p.sendMessage("クエストクリア!!!  " + villagerId + "のところに戻ろう！！");
 			return;
 		}
 

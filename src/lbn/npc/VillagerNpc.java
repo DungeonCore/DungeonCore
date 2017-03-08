@@ -187,7 +187,7 @@ public class VillagerNpc {
 		Collection<Quest> doingQuestList = session.getDoingQuestList();
 		for (Quest quest : doingQuestList) {
 			//もし終了の村人がこの村人でないなら無視
-			if (!getName().equals(quest.getEndVillagerName())) {
+			if (!getName().equals(quest.getEndVillagerId())) {
 				continue;
 			}
 
@@ -214,7 +214,7 @@ public class VillagerNpc {
 		if (data.getType() == VillagerType.NORMAL) {
 			QuestSelectorViewer.openSelector(this, p);
 		} else if (data.getType() == VillagerType.SHOP) {
-			BuyerShopSelector.onOpen(p, getName());
+			BuyerShopSelector.onOpen(p, NpcManager.getId(e.getNPC().getEntity()));
 		} if (data.getType() == VillagerType.BLACKSMITH) {
 			MenuSelectorManager.open(p, "blacksmith menu");
 		}
@@ -237,6 +237,10 @@ public class VillagerNpc {
 
 	public VillagerData getVillagerData() {
 		return data;
+	}
+
+	public String getId() {
+		return data.getId();
 	}
 
 }

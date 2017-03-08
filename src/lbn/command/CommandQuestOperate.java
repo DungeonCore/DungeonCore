@@ -85,7 +85,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 	}
 
 	private void viewNpcQuestList(Player p, String string) {
-		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(string);
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpcById(string);
 		if (villagerNpc != null) {
 			Set<Quest> questList = NpcQuestHolder.getQuestList(villagerNpc, p);
 			for (Quest quest : questList) {

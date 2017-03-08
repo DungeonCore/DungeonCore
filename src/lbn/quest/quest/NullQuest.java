@@ -159,7 +159,7 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public String getEndVillagerName() {
+	public String getEndVillagerId() {
 		return null;
 	}
 

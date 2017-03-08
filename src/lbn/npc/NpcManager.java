@@ -1,6 +1,7 @@
 package lbn.npc;
 
 import java.util.HashMap;
+import java.util.List;
 
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
@@ -14,20 +15,21 @@ import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.metadata.MetadataValue;
 
 public class NpcManager {
-	static HashMap<String, VillagerNpc> registedNpc = new HashMap<String, VillagerNpc>();
+	static HashMap<String, VillagerNpc> registedNpcIdMap = new HashMap<String, VillagerNpc>();
 
-	static HashMap<String, NPC> spawned = new HashMap<String, NPC>();
+	static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
 
-	public static VillagerNpc getVillagerNpc(String name) {
-		return registedNpc.get(name);
+	public static VillagerNpc getVillagerNpcById(String name) {
+		return registedNpcIdMap.get(name);
 	}
 
 	public static void regist(VillagerNpc villagerNpc) {
-		registedNpc.put(villagerNpc.getName(), villagerNpc);
+		registedNpcIdMap.put(villagerNpc.getId(), villagerNpc);
 		//NPCをセットする
-		villagerNpc.setNpc(spawned.get(villagerNpc.getName()));
+		villagerNpc.setNpc(spawnedNPCIDMap.get(villagerNpc.getId()));
 	}
 
 	public static boolean isNpc(Entity entity) {
@@ -39,52 +41,65 @@ public class NpcManager {
 			return null;
 		}
 
-		String customName = entity.getCustomName();
-		return getVillagerNpc(customName);
+		String id = getId(entity);
+		return getVillagerNpcById(id);
+	}
+
+	/**
+	 * VillagerIdを取得
+	 * @param entity
+	 * @return
+	 */
+	public static String getId(Entity entity) {
+		List<MetadataValue> metadata = entity.getMetadata("thelow_villager_id");
+		if (metadata.size() > 0) {
+			return metadata.get(0).asString();
+		}
+		return null;
 	}
 
 	public static void onNPCRightClickEvent(NPCRightClickEvent e) {
-		String name = e.getNPC().getName();
-		VillagerNpc villagerNpc = registedNpc.get(name);
+		String id = getId(e.getNPC().getEntity());
+		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCRightClickEvent(e);
 		}
 	}
 
 	public static void onNPCLeftClickEvent(NPCLeftClickEvent e) {
-		String name = e.getNPC().getName();
-		VillagerNpc villagerNpc = registedNpc.get(name);
+		String id = getId(e.getNPC().getEntity());
+		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
-
 			villagerNpc.onNPCLeftClickEvent(e);
 		}
 	}
 
 	public static void onNPCDamageEvent(NPCDamageEvent e) {
-		String name = e.getNPC().getName();
-		VillagerNpc villagerNpc = registedNpc.get(name);
+		String id = getId(e.getNPC().getEntity());
+		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCDamageEvent(e);
 		}
 	}
 
 	public static void onNPCSpawnEvent(NPCSpawnEvent e) {
-		String name = e.getNPC().getName();
+		String id = getId(e.getNPC().getEntity());
 		//スポーン済みにセットする
-		spawned.put(name, e.getNPC());
-		VillagerNpc villagerNpc = registedNpc.get(name);
+		spawnedNPCIDMap.put(id, e.getNPC());
+		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onSpawn(e);
 		}
 	}
 
 	public static void onNPCDespawnEvent(NPCDespawnEvent e) {
-		String name = e.getNPC().getName();
+		String id = getId(e.getNPC().getEntity());
 		//もしスポーン済み情報がセットされてるなら削除する
-		if (e.getNPC().equals(spawned.get(name))) {
-			spawned.remove(name);
+		if (e.getNPC().equals(spawnedNPCIDMap.get(id))) {
+			spawnedNPCIDMap.remove(id);
 		}
 	}
+
 
 	public static void allReload(CommandSender sender) {
 		if (sender == null) {

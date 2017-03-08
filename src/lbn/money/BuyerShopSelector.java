@@ -20,8 +20,8 @@ import org.bukkit.inventory.ItemStack;
 public class BuyerShopSelector {
 	private static final String SHOP_MENU = "- Shop - ";
 
-	public static void onOpen(Player p, String villagerName) {
-		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + SHOP_MENU + villagerName);
+	public static void onOpen(Player p, String villagerID) {
+		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + SHOP_MENU + villagerID);
 		createInventory.setItem(11, getShopButton(p));
 		createInventory.setItem(15, getBuyerButton(p));
 		p.openInventory(createInventory);
@@ -40,7 +40,7 @@ public class BuyerShopSelector {
 			return;
 		}
 
-		String villagerName = title.replace(SHOP_MENU, "");
+		String villagerID = title.replace(SHOP_MENU, "");
 
 		InventoryClickEvent event = (InventoryClickEvent) e;
 
@@ -50,7 +50,7 @@ public class BuyerShopSelector {
 		if (currentItem != null && currentItem.equals(getBuyerButton(p))) {
 			Buyer.onOpen(p);
 		} else if (currentItem != null && currentItem.equals(getShopButton(p))) {
-			CustomShop customShop = new CustomShop(villagerName);
+			CustomShop customShop = new CustomShop(villagerID);
 			customShop.openShop(p);
 		}
 	}

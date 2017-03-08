@@ -14,13 +14,13 @@ import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
 
 public class CustomShop extends Shop{
-	public CustomShop(String villagerName) {
+	public CustomShop(String villagerID) {
 		//dataからLocationを取得しショップを作成する
-		VillagerNpc villager = NpcManager.getVillagerNpc(villagerName);
+		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerID);
 		String data = villager.getData();
 		Location locationByString = AbstractSheetRunable.getLocationByString(data);
 		this.loc = locationByString;
-		this.name = villagerName;
+		this.name = villagerID;
 	}
 
 	@Override

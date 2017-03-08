@@ -26,17 +26,17 @@ public class VillagerCommand implements CommandExecutor{
 			return false;
 		}
 
-		String targetName = null;
+		String targetID = null;
 		if (arg3.length >= 2) {
-			targetName = arg3[1];
+			targetID = arg3[1];
 		}
 
 		if (arg3[0].equalsIgnoreCase("spawn")) {
-			spawnVillager(arg0, targetName);
+			spawnVillager(arg0, targetID);
 		} else if (arg3[0].equalsIgnoreCase("remove")) {
-			removeVillager(arg0, targetName);
+			removeVillager(arg0, targetID);
 		} else if (arg3[0].equalsIgnoreCase("reload")) {
-			reloadVillager(arg0, targetName);
+			reloadVillager(arg0, targetID);
 		} else {
 			arg0.sendMessage(arg3[0] + "は認められていません。[spawn, remove, reload, reset]のみ可能です。");
 			return false;
@@ -124,15 +124,15 @@ public class VillagerCommand implements CommandExecutor{
 		}
 	}
 
-	protected void spawnVillager(CommandSender arg0, String targetName) {
-		if (targetName == null) {
+	protected void spawnVillager(CommandSender arg0, String targetID) {
+		if (targetID == null) {
 			arg0.sendMessage("spawn対象の村人が選択されていません。\n /villager spawn 村人名");
 			return;
 		}
 
-		VillagerNpc villagerNpc = NpcManager.getVillagerNpc(targetName);
+		VillagerNpc villagerNpc = NpcManager.getVillagerNpcById(targetID);
 		if (villagerNpc == null) {
-			arg0.sendMessage(targetName + "という名前の村人が存在しません。");
+			arg0.sendMessage(targetID + "という名前の村人が存在しません。");
 			return;
 		}
 
@@ -152,7 +152,7 @@ public class VillagerCommand implements CommandExecutor{
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("location", AbstractComplexSheetRunable.getLocationString(((Player)arg0).getLocation()));
-		villagerSheetRunnable.updateData(map, "name=" + targetName);
+		villagerSheetRunnable.updateData(map, "name=" + targetID);
 		try {
 			SpletSheetExecutor.onExecute(villagerSheetRunnable);
 		} catch (Exception e) {

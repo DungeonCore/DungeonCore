@@ -3,19 +3,20 @@ package lbn.quest.quest;
 import java.text.MessageFormat;
 import java.util.HashSet;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.npc.VillagerNpcs;
 import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class TakeItemQuest extends AbstractQuest{
 	static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<TakeItemQuest>();
@@ -46,7 +47,7 @@ public class TakeItemQuest extends AbstractQuest{
 		}
 		//NPCが同じかチェック
 		String name = entity.getCustomName();
-		if (!name.equalsIgnoreCase(getEndVillagerName())) {
+		if (!name.equalsIgnoreCase(getEndVillagerId())) {
 			return;
 		}
 
@@ -74,10 +75,13 @@ public class TakeItemQuest extends AbstractQuest{
 	@Override
 	public String getComplateCondition() {
 		ItemInterface needItem = getNeedItem();
+
+		String villagerName = VillagerNpcs.getVillagerName(getEndVillagerId());
+
 		if (needItem == null) {
-			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", getEndVillagerName(), itemId);
+			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", villagerName, itemId);
 		} else {
-			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", getEndVillagerName(), needItem.getItemName());
+			return MessageFormat.format("{0}のところへアイテム[{1}]を持っていく", villagerName, needItem.getItemName());
 		}
 	}
 
