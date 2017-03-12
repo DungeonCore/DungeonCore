@@ -49,7 +49,12 @@ public class PlayerQuestSession {
 		return offlinePlayer;
 	}
 
-	private boolean isDoing(Quest q) {
+	/**
+	 * 指定したクエストを受けていたらTRUE
+	 * @param q
+	 * @return
+	 */
+	public boolean isDoing(Quest q) {
 		return doingQuest.containsValue(q);
 	}
 

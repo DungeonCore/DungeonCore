@@ -1,6 +1,5 @@
 package lbn.dungeoncore.SpletSheet;
 
-import lbn.common.buff.BuffType;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillExcuteTimingType;
 import lbn.mob.mobskill.MobSkillManager;
@@ -26,7 +25,6 @@ import lbn.mob.mobskill.skillrunnable.MobSkillUpperTargetHight;
 import lbn.util.JavaUtil;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.potion.PotionEffect;
 
 public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
@@ -46,8 +44,8 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "debuffeffect", "debuffsecond",
-				"debufflevel", "data", "particleId", "dummy1", "dummy2", "particlelocation", "targeting",
+		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "buffid1", "bufftarget1",
+				"dummy3", "data", "particleId", "dummy1", "dummy2", "particlelocation", "targeting",
 				"targetingdata", "latersecond", "chain", "skilltalk", "soundid", "soundtarget"};
 	}
 
@@ -82,15 +80,9 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		int fireTick = (int) (getDouble(row[6]) * 20);
 
-		PotionEffect potionEffect = null;
 
-		BuffType debuffType = BuffType.getDebuffType(row[7]);
-		int debuffTick = (int)(getDouble(row[8]) * 20);
-		int debuffLevel = (int) getDouble(row[9]);
-
-		if (!(debuffType == null || debuffTick == 0 || debuffLevel == 0)) {
-			potionEffect = new PotionEffect(debuffType.getType(), debuffTick, debuffLevel * debuffType.getNum());
-		}
+		String buffId = row[7];
+		boolean isMobBuffTerget = "対象Player".equals(row[8]);
 
 		//パーティクルの設置
 //		ParticleType type = ParticleType.getType(row[11]);
@@ -121,9 +113,9 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		String soundId = "".equals(row[20]) ? null : row[20];
 
-		NormalMobSkill normalMobSkill = new NormalMobSkill(potionEffect, damage, fireTick, skill, timing,
-				condition, id, rate, row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18],
-				row[19], soundId, isOnePlayerSoundTarget);
+		NormalMobSkill normalMobSkill = new NormalMobSkill(damage, fireTick, skill, timing, condition,
+				id, rate, row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19],
+				soundId, isOnePlayerSoundTarget, buffId, isMobBuffTerget);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}

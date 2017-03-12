@@ -76,7 +76,6 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable{
 			for (ItemInterface itemInterface : allLevelPick) {
 				createInventory.addItem(itemInterface.getItem());
 			}
-			System.out.println(createInventory);
 			p.openInventory(createInventory);
 		}
 

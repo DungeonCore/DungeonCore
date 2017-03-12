@@ -76,7 +76,7 @@ public class WeaponSkillExecutor {
 			double y = player.getLocation().getY() - location.getY();
 			double z = player.getLocation().getZ() - location.getZ();
 			if ((x * x) + (y * y) + (z * z) < 30 * 30) {
-				p.sendMessage(MessageFormat.format("{0}[武器スキル] {1}{2}が{3}を発動", ChatColor.RED, ChatColor.GREEN, p.getCustomName(), skill.getName()));
+				player.sendMessage(MessageFormat.format("{0}[武器スキル] {1}{2}が{3}を発動", ChatColor.RED, ChatColor.GREEN, p.getName(), skill.getName()));
 			}
 		}
 	}

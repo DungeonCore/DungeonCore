@@ -76,16 +76,8 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 			//アイテムを生成
 			ItemInterface item;
 			if (row[3].startsWith("1.")) {
-				if (dungeonLoc == null) {
-					sendMessage("使用する看板の座標が不正です");
-					return;
-				}
 				item = new SpreadSheetKeyCommandBlockExecuteItem(name, id, price, command, dungeonName, dungeonLoc);
 			} else if (row[3].startsWith("2.")) {
-				if (dungeonLoc == null) {
-					sendMessage("使用する看板の座標が不正です");
-					return;
-				}
 				Location tpLoc = getLocationByString(data);
 				if (tpLoc == null) {
 					sendMessage("TP先の座標が不正です。(dataで指定してください)");

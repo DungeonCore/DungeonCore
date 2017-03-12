@@ -116,7 +116,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 	}
 
 	@Override
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		return 0;
 	}
 

@@ -39,7 +39,11 @@ public abstract class AbstractQuest implements Quest{
 	@Override
 	public void onSatisfyComplateCondtion(Player p) {
 		if (endVillager != null) {
+			//最後に報告する村人がいる場合は村人に報告するようにPlayerに伝える
 			QuestUtil.sendSatisfyComplateForVillager(endVillager, p);
+		} else {
+			//最後に報告する村人がいない場合はこの場所で終了にする
+			QuestManager.complateQuest(this, p, true);
 		}
 	}
 

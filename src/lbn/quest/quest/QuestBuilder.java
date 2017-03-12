@@ -48,8 +48,6 @@ public class QuestBuilder {
 			quest.startVillager = values[20];
 			if (values[21] != null && !values[21].isEmpty()) {
 				quest.endVillager = values[21];
-			} else {
-				quest.endVillager = quest.startVillager;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

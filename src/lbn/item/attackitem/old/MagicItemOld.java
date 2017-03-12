@@ -107,7 +107,7 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 	abstract public int getAvailableLevel();
 
 	@Override
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		return 0;
 	}
 

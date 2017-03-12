@@ -103,7 +103,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			//AI Type
 			nbtTag.setAiType(AIType.fromName(row[22]));
 			//腕の長さ
-			nbtTag.setAttackReach(JavaUtil.getFloat(row[23], 3f));
+			nbtTag.setAttackReach(JavaUtil.getFloat(row[23], -1f));
 			//ジャンプ斬り
 			nbtTag.setJumpAttack("ジャンプ斬りする".equals(row[24]));
 			//CPS

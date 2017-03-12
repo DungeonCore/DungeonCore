@@ -5,6 +5,7 @@ import lbn.command.MobCommand;
 import lbn.command.QuestCommand;
 import lbn.command.SpletSheetCommand;
 import lbn.command.VillagerCommand;
+import lbn.common.book.BookManager;
 import lbn.common.other.CitizenBugFixPatch;
 import lbn.common.other.DungeonList;
 import lbn.common.other.HolographicDisplaysManager;
@@ -20,6 +21,7 @@ import lbn.item.attackitem.weaponSkill.WeaponSkillFactory;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.npc.NpcManager;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.playerIO.PlayerLastSaveType;
 import lbn.util.LbnRunnable;
@@ -63,6 +65,10 @@ public class InitManager {
 			SpletSheetCommand.reloadSheet(null, "weaponskill");
 
 			SpletSheetCommand.reloadSheet(null, "food");
+
+			BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
+
+			NpcManager.init();
 
 			//	SystemSqlExecutor.execute();
 			new LbnRunnable() {

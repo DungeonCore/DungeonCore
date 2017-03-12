@@ -176,6 +176,8 @@ public class Main extends JavaPlugin {
 
 		HolographicDisplaysManager.removeAllHologram();
 
+//		NpcManager.allRemove();
+
 		// 全てのプレイヤーのインベントリを閉じる
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.closeInventory();

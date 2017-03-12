@@ -3,6 +3,7 @@ package lbn.dungeoncore;
 import lbn.command.CommandAddBene;
 import lbn.command.CommandAnnounce;
 import lbn.command.CommandAttention;
+import lbn.command.CommandBook;
 import lbn.command.CommandChest;
 import lbn.command.CommandEquipPlayer;
 import lbn.command.CommandExecuteLockByTimeCommand;
@@ -31,9 +32,9 @@ import lbn.command.StrengthItemCommand;
 import lbn.command.TpCutCommand;
 import lbn.command.VillagerCommand;
 import lbn.command.notUsually.command.CustomEffectCommand;
+import lbn.command.notUsually.command.CustomKillCommand;
 import lbn.command.notUsually.command.CustomSetBlockCommand;
 import lbn.command.notUsually.command.ExecuteMobSkillCommand;
-import lbn.command.notUsually.command.CustomKillCommand;
 import lbn.command.util.ChangeBiomeCommand;
 import lbn.command.util.CommandSavePlayer;
 import lbn.command.util.CommandSpecialSign;
@@ -106,6 +107,7 @@ public class CommandRegister {
 		registCommand(new RandomExecuteCommand(), "randomExec");
 		registCommand(new JumpCommand(), "jumpboost");
 		registCommand(new OpenCommand(), "open");
+		registCommand(new CommandBook(), "book");
 
 		new ExecuteMobSkillCommand().regist();
 		new CustomKillCommand().regist();

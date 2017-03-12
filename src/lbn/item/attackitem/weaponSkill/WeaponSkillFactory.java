@@ -12,12 +12,14 @@ import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOff;
 import lbn.item.attackitem.weaponSkill.imple.all.WeaponSkillBlastOffLevel2;
 import lbn.item.attackitem.weaponSkill.imple.bow.ArrowStorm;
 import lbn.item.attackitem.weaponSkill.imple.bow.BlindEye;
+import lbn.item.attackitem.weaponSkill.imple.bow.Finale;
 import lbn.item.attackitem.weaponSkill.imple.bow.IceArrow;
 import lbn.item.attackitem.weaponSkill.imple.magic.Explosion;
 import lbn.item.attackitem.weaponSkill.imple.magic.HealRain;
 import lbn.item.attackitem.weaponSkill.imple.magic.MeteoStrike;
 import lbn.item.attackitem.weaponSkill.imple.sword.BloodyHeal;
 import lbn.item.attackitem.weaponSkill.imple.sword.BurstFlame;
+import lbn.item.attackitem.weaponSkill.imple.sword.GrandSpike;
 import lbn.item.attackitem.weaponSkill.imple.sword.LightningOrder;
 import lbn.item.attackitem.weaponSkill.imple.sword.Lump;
 import lbn.item.attackitem.weaponSkill.imple.sword.ProtectionArmor;
@@ -99,5 +101,7 @@ public class WeaponSkillFactory {
 		registTempData(new Lump());
 		registTempData(new BlindEye());
 		registTempData(new BurstFlame());
+		registTempData(new GrandSpike());
+		registTempData(new Finale());
 	}
 }

@@ -2,6 +2,8 @@ package lbn.mob.mobskill;
 
 import java.util.ArrayList;
 
+import lbn.common.buff.BuffData;
+import lbn.common.buff.BuffDataFactory;
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
 import lbn.dungeoncore.Main;
@@ -21,18 +23,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class NormalMobSkill implements MobSkillInterface{
 
-	public NormalMobSkill(PotionEffect potionEffect, double damage,
-			int fireTick, MobSkillRunnable runnable,
-			MobSkillExcuteTimingType timing,
-			MobSkillExcuteConditionType condition, String id, int percent, String particleId,
-			ParticleLocationType particleLocType, MobSkillTargetingMethodType targetingMethod,
-			String targetingMethodData, int laterTick, String chainId, String skillTalk, String soundId, boolean isSoundTargetOnePlayer) {
-		this.potionEffect = potionEffect;
+	public NormalMobSkill(double damage, int fireTick,
+			MobSkillRunnable runnable, MobSkillExcuteTimingType timing,
+			MobSkillExcuteConditionType condition,
+			String id, int percent, String particleId, ParticleLocationType particleLocType,
+			MobSkillTargetingMethodType targetingMethod, String targetingMethodData,
+			int laterTick, String chainId, String skillTalk, String soundId, boolean isSoundTargetOnePlayer, String buffId1, boolean isTargetMobBuff) {
 		this.damage = damage;
 		this.fireTick = fireTick;
 		this.runnable = runnable;
@@ -49,11 +49,12 @@ public class NormalMobSkill implements MobSkillInterface{
 		this.skillTalk = skillTalk;
 		this.soundId = soundId;
 		this.isSoundTargetOnePlayer = isSoundTargetOnePlayer;
+		this.buffId1 = buffId1;
+		this.isTargetMobBuff1 = isTargetMobBuff;
 	}
 
 	protected MobSkillTargetingMethodType targetingMethod;
 	protected String targetingDeta = null;
-	protected PotionEffect potionEffect;
 	protected double damage;
 	protected int fireTick;
 	protected MobSkillRunnable runnable;
@@ -68,6 +69,9 @@ public class NormalMobSkill implements MobSkillInterface{
 	String skillTalk;
 	String soundId;
 	boolean isSoundTargetOnePlayer;
+
+	String buffId1;
+	boolean isTargetMobBuff1 = true;
 
 	@Override
 	public void execute(Entity condtionTarget, Entity mob) {
@@ -163,14 +167,6 @@ public class NormalMobSkill implements MobSkillInterface{
 			executeOneTarget(livingEntity, mob);
 		}
 
-		//周囲に対して実行の場合はここで一回だけ音を鳴らす
-		if (!isSoundTargetOnePlayer) {
-			SoundData fromId = SoundManager.fromId(soundId);
-			if (fromId != null) {
-				fromId.playSoundAllPlayer(mob.getLocation());
-			}
-		}
-
 		//次のスキルが設定されている場合は実行
 		if (chainId != null && !chainId.equals(id)) {
 			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
@@ -180,7 +176,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 
 		//パーティクルを発動
-		executeParticle(targetList, mob);
+		executeOneTime(targetList, mob);
 	}
 
 	/**
@@ -217,14 +213,6 @@ public class NormalMobSkill implements MobSkillInterface{
 				executeOneTarget(target, mob);
 				damagedList.add(target);
 
-				//周囲に対して実行の場合はここで一回だけ音を鳴らす
-				if (!isSoundTargetOnePlayer) {
-					SoundData fromId = SoundManager.fromId(soundId);
-					if (fromId != null) {
-						fromId.playSoundAllPlayer(mob.getLocation());
-					}
-				}
-
 				//次のスキルが設定されている場合は実行
 				if (chainId != null && !chainId.equals(id)) {
 					MobSkillInterface fromId = MobSkillManager.fromId(chainId);
@@ -236,7 +224,10 @@ public class NormalMobSkill implements MobSkillInterface{
 			@Override
 			public synchronized void cancel() throws IllegalStateException {
 				super.cancel();
-				executeParticle(damagedList, mob);
+
+				if (damagedList.size() != 0) {
+					executeOneTime(damagedList, mob);
+				}
 			}
 		};
 		damageFallingblockForMonsterSkill.runTaskTimer();
@@ -252,11 +243,12 @@ public class NormalMobSkill implements MobSkillInterface{
 	}
 
 	/**
-	 * パーティクルを実行
+	 * スキル発動成功時、一回だけ実行される
 	 * @param targetList
 	 * @param mob
 	 */
-	protected void executeParticle(ArrayList<Entity> targetList, Entity mob) {
+	protected void executeOneTime(ArrayList<Entity> targetList, Entity mob) {
+		//パーティクルを実行
 		ParticleData particleData = ParticleManager.getParticleData(particleId);
 		if (particleData != null) {
 			//軽量化のため、順次実行
@@ -273,6 +265,22 @@ public class NormalMobSkill implements MobSkillInterface{
 				}
 			}.runTaskTimer(Main.plugin, 0, 1);
 		}
+
+		//周囲に対して実行の場合はここで一回だけ音を鳴らす
+		if (!isSoundTargetOnePlayer) {
+			SoundData fromId = SoundManager.fromId(soundId);
+			if (fromId != null) {
+				fromId.playSoundAllPlayer(mob.getLocation());
+			}
+		}
+
+		//バフのターゲットがモンスターの場合はここで実行
+		if (isTargetMobBuff1) {
+			BuffData buffFromId = BuffDataFactory.getBuffFromId(buffId1);
+			if (buffFromId != null) {
+				buffFromId.addBuff((LivingEntity) mob);
+			}
+		}
 	}
 
 	/**
@@ -285,9 +293,13 @@ public class NormalMobSkill implements MobSkillInterface{
 			condtionTarget.setFireTicks(fireTick);
 		}
 
+		//ターゲットがPlayerのときはバフ効果を発動する
 		if (condtionTarget.getType().isAlive()) {
-			if (potionEffect != null) {
-				((LivingEntity) condtionTarget).addPotionEffect(potionEffect);
+			if (!isTargetMobBuff1) {
+				BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
+				if (buff1 != null) {
+					buff1.addBuff((LivingEntity) condtionTarget);
+				}
 			}
 
 			if (damage > 0) {

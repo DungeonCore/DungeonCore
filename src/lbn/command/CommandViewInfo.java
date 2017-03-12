@@ -15,6 +15,7 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.npc.NpcManager;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.util.InOutputUtil;
 import lbn.util.LivingEntityUtil;
@@ -111,6 +112,9 @@ public class CommandViewInfo implements CommandExecutor{
 //			break;
 		case "dungeon":
 			makeDungeonGround((Player)paramCommandSender);
+			break;
+		case "npc":
+			NpcManager.onTest();
 			break;
 		case "buff":
 			BuffData buffFromId = BuffDataFactory.getBuffFromId(paramArrayOfString[1]);

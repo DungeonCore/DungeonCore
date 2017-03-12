@@ -2,14 +2,19 @@ package lbn.command;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.npc.NpcManager;
 import lbn.npc.VillagerNpc;
+import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.npc.NPCRegistry;
 
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -37,11 +42,39 @@ public class VillagerCommand implements CommandExecutor{
 			removeVillager(arg0, targetID);
 		} else if (arg3[0].equalsIgnoreCase("reload")) {
 			reloadVillager(arg0, targetID);
+		} else if (arg3[0].equalsIgnoreCase("fix")) {
+			fixVillager(arg0, targetID);
 		} else {
 			arg0.sendMessage(arg3[0] + "は認められていません。[spawn, remove, reload, reset]のみ可能です。");
 			return false;
 		}
 		return true;
+	}
+
+	private void fixVillager(CommandSender arg0, String targetID) {
+		HashSet<String> names = new HashSet<String>();
+
+		Map<String, VillagerNpc> npcIdMap = NpcManager.getNpcIdMap();
+		for (VillagerNpc npc : npcIdMap.values()) {
+			names.add(npc.getName());
+		}
+
+		HashSet<NPC> deleteNpc = new HashSet<NPC>();
+
+		NPCRegistry npcRegistry = CitizensAPI.getNPCRegistry();
+		Iterator<NPC> iterator = npcRegistry.iterator();
+		while (iterator.hasNext()) {
+			NPC npc = iterator.next();
+			String name = npc.getName();
+			if (names.contains(name)) {
+				deleteNpc.add(npc);
+			}
+		}
+
+		for (NPC npc : deleteNpc) {
+			npc.destroy();
+			arg0.sendMessage("npc:" + npc.getName() + "を削除しました");
+		}
 	}
 
 	public static void reloadAllVillager(CommandSender arg0, boolean init) {
@@ -136,28 +169,20 @@ public class VillagerCommand implements CommandExecutor{
 			return;
 		}
 
-		//前スポーンしたものを削除する
-		NPC npc = villagerNpc.getNpc();
-		if (npc != null) {
-			villagerNpc.remove();
-		}
-
 		Location location = ((Player)arg0).getLocation();
 		location.setX(location.getBlockX() + 0.5);
 		location.setY(location.getBlockY());
 		location.setZ(location.getBlockZ() + 0.5);
-		//スポーンさせる
-		villagerNpc.spawn(location);
+
+
+		//NPCが存在してないとき
+		NpcManager.spawnNpc(villagerNpc);
+
 		//スプレットシートに書きこむ
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("location", AbstractComplexSheetRunable.getLocationString(((Player)arg0).getLocation()));
-		villagerSheetRunnable.updateData(map, "name=" + targetID);
-		try {
-			SpletSheetExecutor.onExecute(villagerSheetRunnable);
-		} catch (Exception e) {
-			e.printStackTrace();
-			arg0.sendMessage("エラーが発生しました。");
-		}
+		map.put("location", AbstractComplexSheetRunable.getLocationString(location));
+		villagerSheetRunnable.updateData(map, "name=" + villagerNpc.getId());
+		SpletSheetExecutor.onExecute(villagerSheetRunnable);
 	}
 }

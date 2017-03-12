@@ -1,6 +1,7 @@
 package lbn.npc;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 
@@ -18,13 +19,13 @@ import org.bukkit.entity.EntityType;
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
 
-	public static void registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
-		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id);
-		if (villagerData.isError) {
-			if (!(p instanceof ConsoleCommandSender)) {
+	public static VillagerNpc registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id, String uuid) {
+		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id, uuid);
+		if (villagerData.isError()) {
+			if (villagerData.getType() != null && !(p instanceof ConsoleCommandSender)) {
 				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, texts}, ",") + "]");
 			}
-			return;
+			return null;
 		}
 		villagerMap.put(id, villagerData);
 
@@ -33,11 +34,13 @@ public class VillagerData {
 		if (villagerNpc == null) {
 			NpcManager.regist(new VillagerNpc(villagerData));
 		} else {
-		//登録されている時はデータを上書きする
+			//登録されている時はデータを上書きする
 			villagerNpc.data = villagerData;
 			//NPCを更新する
 			villagerNpc.updateNpc();
 		}
+
+		return villagerNpc;
 	}
 
 	public static VillagerData getInstance(String id) {
@@ -50,7 +53,11 @@ public class VillagerData {
 	String[] texts;
 	boolean isAdult = true;
 
+	Location location;
+
 	String id;
+
+	UUID uuid;
 
 	EntityType entityType = EntityType.VILLAGER;
 
@@ -58,7 +65,7 @@ public class VillagerData {
 
 	boolean isError = false;
 
-	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
+	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id, String uuid) {
 		this.name = name;
 		if (name == null || name.isEmpty()) {
 			sendMsg(p, "名前は絶対必要です。");
@@ -86,6 +93,12 @@ public class VillagerData {
 				this.data = data;
 			}
 		}
+
+		if (uuid != null) {
+			this.uuid = UUID.fromString(uuid);
+		}
+
+		this.location = AbstractSheetRunable.getLocationByString(location);
 
 		if (texts != null) {
 			this.texts = texts.split(",");
@@ -129,6 +142,10 @@ public class VillagerData {
 		return isError;
 	}
 
+	public UUID getUuid() {
+		return uuid;
+	}
+
 	public boolean isAdult() {
 		return isAdult;
 	}
@@ -150,6 +167,10 @@ public class VillagerData {
 			return EntityType.VILLAGER;
 		}
 		return entityType;
+	}
+
+	public Location getLocation() {
+		return location;
 	}
 
 	@Override

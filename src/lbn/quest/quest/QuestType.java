@@ -7,6 +7,7 @@ public enum QuestType {
 	KILL_MOB_QUEST("モンスター討伐"),
 	TOUCH_VILLAGER_QUEST("会話"),
 	STRENGTH_ITEM_QUEST("アイテム強化"),
+	REACH_QUEST("特定の場所に行く"),
 	TAKE_ITEM_QUEST("特定のアイテムを特定のNPCに渡す"),
 	UnknownQuest("未定義");
 

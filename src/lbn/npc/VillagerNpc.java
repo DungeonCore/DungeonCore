@@ -8,6 +8,7 @@ import java.util.Set;
 
 import lbn.common.menu.MenuSelectorManager;
 import lbn.money.BuyerShopSelector;
+import lbn.npc.citizens.TheLowIdTrail;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
@@ -17,7 +18,6 @@ import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.quest.viewer.QuestSelectorViewer;
 import lbn.util.QuestUtil;
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
@@ -48,12 +48,13 @@ public class VillagerNpc {
 
 	NPC npc;
 
-	public NPC getNpc() {
-		return npc;
-	}
+//	public NPC getNpc() {
+//		return npc;
+//	}
 
 	public void setNpc(NPC npc) {
 		this.npc = npc;
+		this.data.uuid = npc.getUniqueId();
 		//NPCを更新する
 		updateNpc();
 	}
@@ -99,21 +100,21 @@ public class VillagerNpc {
 		}
 	}
 
-	/**
-	 * NPCをスポーンさせる
-	 * @param loc
-	 * @return
-	 */
-	public NPC spawn(Location loc) {
-		NPC npc = CitizensAPI.getNPCRegistry().createNPC(getEntityType(), getName());
-		npc.spawn(loc);
-		if (npc != null) {
-			remove();
-		}
-		this.npc = npc;
-		updateNpc();
-		return npc;
-	}
+//	/**
+//	 * NPCをスポーンさせる
+//	 * @param loc
+//	 * @return
+//	 */
+//	public NPC spawn(Location loc) {
+//		NPC npc = CitizensAPI.getNPCRegistry().createNPC(getEntityType(), getName());
+//		npc.spawn(loc);
+//		if (npc != null) {
+//			remove();
+//		}
+//		this.npc = npc;
+//		updateNpc();
+//		return npc;
+//	}
 
 	/**
 	 * デスポーンさせる
@@ -154,6 +155,10 @@ public class VillagerNpc {
 			return;
 		}
 
+		//IDを挿入
+		npc.removeTrait(TheLowIdTrail.class);
+		npc.addTrait(TheLowIdTrail.fromId(getId()));
+
 		VillagerData villagerData = getVillagerData();
 		if (villagerData == null) {
 			return;
@@ -161,7 +166,7 @@ public class VillagerNpc {
 		if (villagerData.getEntityType() != npc.getEntity().getType()) {
 			npc.setBukkitEntityType(villagerData.getEntityType());
 		}
-		if (getEntityType() == EntityType.PLAYER) {
+		if (getEntityType() == EntityType.PLAYER && villagerData.getSkin() != null) {
 			//skinの適用
 			npc.data().setPersistent("player-skin-name", villagerData.getSkin());
 		}
@@ -187,23 +192,22 @@ public class VillagerNpc {
 		Collection<Quest> doingQuestList = session.getDoingQuestList();
 		for (Quest quest : doingQuestList) {
 			//もし終了の村人がこの村人でないなら無視
-			if (!getName().equals(quest.getEndVillagerId())) {
+			if (!getId().equals(quest.getEndVillagerId())) {
 				continue;
 			}
 
 			//アイテムを持ってくるクエストなら処理を行う
 			if (TakeItemQuest.isTakeItemQuest(quest)) {
 				((TakeItemQuest)quest).onTouchVillager(p, e.getNPC().getEntity(), session);
+				existTouchQuest = true;
 			}
 
-			//もし処理を全て終わらせていないなら無視
-			if (session.getProcessingStatus(quest) != QuestProcessingStatus.PROCESS_END) {
-				continue;
+			//もし処理を全て終わらせているなら完了にする
+			if (session.getProcessingStatus(quest) == QuestProcessingStatus.PROCESS_END) {
+				QuestManager.complateQuest(quest, p, false);
+				existTouchQuest = true;
 			}
 
-			//完了にする
-			QuestManager.complateQuest(quest, p);
-			existTouchQuest = true;
 		}
 
 		//村人タッチのクエストが存在したらここで終了
@@ -214,7 +218,7 @@ public class VillagerNpc {
 		if (data.getType() == VillagerType.NORMAL) {
 			QuestSelectorViewer.openSelector(this, p);
 		} else if (data.getType() == VillagerType.SHOP) {
-			BuyerShopSelector.onOpen(p, NpcManager.getId(e.getNPC().getEntity()));
+			BuyerShopSelector.onOpen(p, NpcManager.getId(e.getNPC()));
 		} if (data.getType() == VillagerType.BLACKSMITH) {
 			MenuSelectorManager.open(p, "blacksmith menu");
 		}
@@ -230,7 +234,7 @@ public class VillagerNpc {
 
 	public Location getLocation() {
 		if (npc == null) {
-			return null;
+			return data.getLocation();
 		}
 		return npc.getStoredLocation();
 	}

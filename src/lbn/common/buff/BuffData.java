@@ -36,7 +36,9 @@ public class BuffData {
 	}
 
 	public void addBuff(LivingEntity e) {
-		e.addPotionEffect(new PotionEffect(effect, tick, level), false);
+		if (e.isValid()) {
+			e.addPotionEffect(new PotionEffect(effect, tick, level), false);
+		}
 	}
 
 }

@@ -12,6 +12,7 @@ import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.BlockCommandSender;
@@ -147,6 +148,12 @@ public class JavaUtil {
 
 			PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect( CraftSound.getSound(sound), center.getX(), center.getY(), center.getZ(), volume, pitch);
 			((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+		}
+	}
+
+	public static void chunkLoadIfUnload(Chunk c) {
+		if (!c.isLoaded()) {
+			c.load();
 		}
 	}
 }

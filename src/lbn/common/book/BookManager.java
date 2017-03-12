@@ -1,12 +1,9 @@
 package lbn.common.book;
 
 import java.util.HashMap;
+import java.util.Set;
 
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
+import lbn.command.SpletSheetCommand;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemAbstract.BookItem;
@@ -23,8 +20,24 @@ import net.minecraft.server.v1_8_R1.NBTTagString;
 import net.minecraft.server.v1_8_R1.PacketPlayOutSetSlot;
 import net.minecraft.server.v1_8_R1.Slot;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 public class BookManager {
 	static HashMap<String, BookData> bookMap = new HashMap<String, BookData>();
+
+	public static void reloadSpletSheet(CommandSender command) {
+		bookMap.clear();
+		SpletSheetCommand.reloadSheet(command, "book");
+		SpletSheetCommand.reloadSheet(command, "book2");
+	}
+
+	public static Set<String> getNames() {
+		return bookMap.keySet();
+	}
 
 	/**
 	 * 本の情報を登録する
@@ -38,7 +51,7 @@ public class BookManager {
 	}
 
 	public static ItemInterface getItem(String id) {
-		ItemInterface customItemById = ItemManager.getCustomItemById("book_" + id);
+		ItemInterface customItemById = ItemManager.getCustomItemById(id);
 		return customItemById;
 	}
 

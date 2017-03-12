@@ -93,7 +93,6 @@ public class ItemListener implements Listener{
 	public void onShootBow(EntityShootBowEvent event) {
 		ItemStack bow = event.getBow();
 		BowItemable bowItem = ItemManager.getCustomItem(BowItemable.class, bow);
-		//発射されたものに対して弓の情報をつけておく
 		if (bowItem != null) {
 			bowItem.excuteOnShootBow(event);
 		}
@@ -306,7 +305,7 @@ public class ItemListener implements Listener{
 
 		//もしLastDamageManagerの攻撃手段と、使ったアイテムの攻撃手段が異なるならエラーにする
 		if (LastDamageMethodType.fromAttackType(customItem.getAttackType()) != lastDamageMethod) {
-			new RuntimeException("Player:" + player.getCustomName() + "がモンスターを倒した際にエラーが発生しました。(manager:" + lastDamageMethod + "と item:" + LastDamageMethodType.fromAttackType(customItem.getAttackType())
+			new RuntimeException("Player:" + player.getName() + "がモンスターを倒した際にエラーが発生しました。(manager:" + lastDamageMethod + "と item:" + LastDamageMethodType.fromAttackType(customItem.getAttackType())
 			+ "が一致しません").printStackTrace();;
 		}
 

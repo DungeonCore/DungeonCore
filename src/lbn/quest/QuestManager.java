@@ -206,9 +206,10 @@ public class QuestManager {
 	 * クエストを完了する
 	 * @param q
 	 * @param p
+	 * @param force 強制的にクエストを終了させる
 	 */
-	public static void complateQuest(Quest q, Player p) {
-		if (!q.canGetRewordItem(p)) {
+	public static void complateQuest(Quest q, Player p, boolean force) {
+		if (!force && !q.canGetRewordItem(p)) {
 			QuestAnnouncement.sendQuestError(p, "インベントリに空きが無いため、報酬を受け取れません。");
 			return;
 		}

@@ -39,7 +39,6 @@ public class Stun {
 		final UUID id = e.getUniqueId();
 		stunList.add(id);
 
-		e.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, tick, 128), true);
 		e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, tick, 127), true);
 
 		e.getWorld().playSound(e.getLocation(), Sound.ENDERDRAGON_HIT, 1f, 0.5f);

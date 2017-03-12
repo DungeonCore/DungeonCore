@@ -14,16 +14,16 @@ import com.google.common.collect.HashMultimap;
  * NPCとクエストの情報を管理するクラス
  */
 public class NpcQuestHolder {
-	static HashMultimap<String, Quest> villagerNameQuestMap = HashMultimap.create();
+	static HashMultimap<String, Quest> villagerIDQuestMap = HashMultimap.create();
 
 	public static void regist(Quest q) {
-		villagerNameQuestMap.put(q.getEndVillagerId(), q);
+		villagerIDQuestMap.put(q.getEndVillagerId(), q);
 	}
 
 	public static List<Quest> getAvailableQuestList(VillagerNpc npc, Player p) {
 		ArrayList<Quest> availableQuestList = new ArrayList<Quest>();
 
-		Set<Quest> set = villagerNameQuestMap.get(npc.getName());
+		Set<Quest> set = villagerIDQuestMap.get(npc.getId());
 		for (Quest quest : set) {
 			if (QuestManager.getStartQuestStatus(quest, p).canStart()) {
 				availableQuestList.add(quest);
@@ -39,6 +39,6 @@ public class NpcQuestHolder {
 	 * @return
 	 */
 	public static Set<Quest> getQuestList(VillagerNpc npc, Player p) {
-		return villagerNameQuestMap.get(npc.getName());
+		return villagerIDQuestMap.get(npc.getId());
 	}
 }

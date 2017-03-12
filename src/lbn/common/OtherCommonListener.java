@@ -9,6 +9,7 @@ import lbn.command.CommandGiveItem;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.SimplySetSpawnPointCommand;
 import lbn.common.citizenNpc.CitizenNpcManager;
+import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.other.BookshelfCommandRunner;
 import lbn.common.other.DungeonList;
@@ -19,6 +20,9 @@ import lbn.common.other.SoulBound;
 import lbn.common.other.Stun;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
+import lbn.item.ItemManager;
+import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.strength.StrengthOperator;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.util.ItemStackUtil;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
@@ -31,6 +35,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -276,14 +281,32 @@ public class OtherCommonListener implements Listener{
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onDamage2(EntityDamageByEntityEvent e) {
 		Entity damager = e.getDamager();
-		Entity entity = e.getEntity();
+		Entity target = e.getEntity();
 
-		if (entity.getType().isAlive()) {
+		if (target.getType().isAlive()) {
 			//ProjectileInterfaceを取得
 			ProjectileInterface projectileInterface = ProjectileManager.getProjectileInterface(damager);
 			ItemStack itemstack = ProjectileManager.getItemStack(damager);
+
+
 			if (projectileInterface != null && itemstack != null) {
-				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity)((Projectile)damager).getShooter(), (LivingEntity) entity);
+				LivingEntity owner = (LivingEntity)((Projectile) damager).getShooter();
+
+				AbstractAttackItem attackItem = (AbstractAttackItem)ItemManager.getCustomItem(itemstack);
+
+				if (owner != null && owner.getType() == EntityType.PLAYER) {
+					//eventを呼ぶ
+					PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player)owner, (LivingEntity)target, itemstack,
+							e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
+					playerCombatEntityEvent.callEvent();
+					//eventからDamageを取得
+					e.setDamage(playerCombatEntityEvent.getDamage());
+				} else {
+					//通常通りの計算を行う
+					e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
+				}
+
+				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity)((Projectile)damager).getShooter(), (LivingEntity) target);
 			}
 		}
 	}

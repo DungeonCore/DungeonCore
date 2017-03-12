@@ -19,7 +19,7 @@ public class BookItem extends AbstractItem implements RightClickItemable{
 	public BookItem(BookData data) {
 		this.data = data;
 
-		ItemStack itemStack = data.getItem();
+		itemStack = data.getItem();
 		if (itemStack == null) {
 			itemStack = new ItemStack(Material.WRITTEN_BOOK);
 		}
@@ -38,7 +38,7 @@ public class BookItem extends AbstractItem implements RightClickItemable{
 
 	@Override
 	public String getId() {
-		return "book_" + data.getId();
+		return data.getId();
 	}
 
 	@Override

@@ -78,11 +78,17 @@ public class BookData {
 		return contents.toArray(new String[0]);
 	}
 
-	public void setContents(String page, int i) {
+	public void setContents(String page, int index) {
 		if (isNull(page)) {
 			return;
 		}
-		contents.set(i, page);
+
+		if (contents.size() <= index) {
+			for (int i = contents.size(); i <= index; i++) {
+				contents.add("");
+			}
+		}
+		contents.set(index, page);
 	}
 
 	ItemStack cacheBookItem = null;

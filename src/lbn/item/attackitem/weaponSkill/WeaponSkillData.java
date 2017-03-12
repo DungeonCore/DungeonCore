@@ -1,10 +1,8 @@
 package lbn.item.attackitem.weaponSkill;
 
-import java.util.Arrays;
+import lbn.player.ItemType;
 
 import org.bukkit.Material;
-
-import lbn.player.ItemType;
 
 public class WeaponSkillData {
 	double[] data = new double[5];
@@ -66,8 +64,6 @@ public class WeaponSkillData {
 		} else {
 			this.detail = detail.split(",");
 		}
-
-		System.out.println(detail + "⇨" + Arrays.toString(this.detail));
 	}
 
 	public String[] getDetail() {

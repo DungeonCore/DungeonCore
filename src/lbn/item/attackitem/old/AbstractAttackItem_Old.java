@@ -147,7 +147,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 		return true;
 	}
 
-	abstract protected double getMaterialDamage();
+	public abstract double getMaterialDamage();
 
 	protected void sendNotAvailableMessage(Player p) {
 		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());

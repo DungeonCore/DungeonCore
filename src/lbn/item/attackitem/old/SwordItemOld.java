@@ -31,7 +31,7 @@ public abstract class SwordItemOld extends AbstractAttackItem_Old implements Mel
 	}
 
 	@Override
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 

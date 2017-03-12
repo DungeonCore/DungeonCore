@@ -36,7 +36,7 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 	}
 
 	@Override
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 

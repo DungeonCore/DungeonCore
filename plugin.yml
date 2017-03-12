@@ -216,6 +216,7 @@ commands:
       permission:  main.lbnDungeonUtil.command.mod.sheet_reload
       usage: /<command> sheet_name | list
       permission-message: You don't have <permission>
+      aliases: [sr]
    setredstone:
       description: 指定した座標に一瞬だけredstoneを置く
       permission:  main.lbnDungeonUtil.command.builder.setredstone
@@ -241,7 +242,11 @@ commands:
       permission:  main.lbnDungeonUtil.command.admin.open
       usage: /<command> param
       permission-message: You don't have <permission>
-
+   book:
+      description: 書籍を管理するコマンド
+      permission:  main.lbnDungeonUtil.command.admin.open
+      usage: /<command> [open/item]
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

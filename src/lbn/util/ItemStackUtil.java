@@ -329,6 +329,9 @@ public class ItemStackUtil {
 	 */
 	@SuppressWarnings("deprecation")
 	public static ItemStack getItemStackByCommand(String command, CommandSender sender) {
+		if (command == null) {
+			return null;
+		}
 		command = command.trim();
 		if (command.startsWith("/give ") || command.startsWith("give ")) {
 			command = command.substring(command.indexOf(" ") + 1);

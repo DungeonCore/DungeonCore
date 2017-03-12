@@ -20,7 +20,11 @@ public abstract class AbstractKeyItem extends AbstractItem implements KeyItemabl
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{getDungeonName() + "で使用可能", StringUtils.join(new Object[]{"x:", (int)getDungeonLocation().getBlockX(), " y:", (int)getDungeonLocation().getBlockY(), " z:", (int)getDungeonLocation().getBlockZ()})};
+		if (getDungeonLocation() != null) {
+			return new String[]{getDungeonName() + "で使用可能", StringUtils.join(new Object[]{"x:", (int)getDungeonLocation().getBlockX(), " y:", (int)getDungeonLocation().getBlockY(), " z:", (int)getDungeonLocation().getBlockZ()})};
+		} else {
+			return new String[]{getDungeonName() + "で使用可能"};
+		}
 	}
 
 	abstract protected String getDungeonName();

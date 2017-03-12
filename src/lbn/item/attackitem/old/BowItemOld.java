@@ -1,11 +1,9 @@
 package lbn.item.attackitem.old;
 
-import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.ItemInterface;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.LeftClickItemable;
-import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 
@@ -24,21 +22,10 @@ public abstract class BowItemOld extends AbstractAttackItem_Old implements  Item
 		return Material.BOW;
 	}
 
+
 	@Override
 	public void onProjectileDamage(EntityDamageByEntityEvent e,
 			ItemStack item, LivingEntity owner, LivingEntity target) {
-
-		if (owner.getType() == EntityType.PLAYER) {
-			//eventを呼ぶ
-			PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player)owner, target, item,
-					e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
-			playerCombatEntityEvent.callEvent();
-			//eventからDamageを取得
-			e.setDamage(playerCombatEntityEvent.getDamage());
-		} else {
-			//通常通りの計算を行う
-			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
-		}
 	}
 
 	abstract protected void excuteOnShootBow2(EntityShootBowEvent e);
@@ -83,7 +70,7 @@ public abstract class BowItemOld extends AbstractAttackItem_Old implements  Item
 	abstract public int getAvailableLevel();
 
 	@Override
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 }

@@ -129,7 +129,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	 * この武器のアイテムのデフォルトの攻撃力を取得
 	 * @return
 	 */
-	protected double getMaterialDamage() {
+	public double getMaterialDamage() {
 		double vanillaDamage = ItemStackUtil.getVanillaDamage(getMaterial());
 		return vanillaDamage;
 	}
