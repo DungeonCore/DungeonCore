@@ -299,6 +299,14 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	HashSet<String> skillNameSet = new HashSet<String>();
 
+	/**
+	 * このモブが持っているSkillIDを取得する
+	 * @return
+	 */
+	public HashSet<String> getSkillIdList() {
+		return skillNameSet;
+	}
+
 	public void addSkill(String skillName) {
 		skillNameSet.add(skillName);
 	}

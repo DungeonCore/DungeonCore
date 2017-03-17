@@ -8,6 +8,7 @@ import java.util.Set;
 
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
+import lbn.dungeoncore.SpletSheet.ArmorSheetRunnable;
 import lbn.dungeoncore.SpletSheet.Book2SheetRunnable;
 import lbn.dungeoncore.SpletSheet.BookSheetRunnable;
 import lbn.dungeoncore.SpletSheet.BuffSheetRunnable;
@@ -58,6 +59,7 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter{
 		regist(new FoodSheetRunnable(sender));
 		regist(new BookSheetRunnable(sender));
 		regist(new Book2SheetRunnable(sender));
+		regist(new ArmorSheetRunnable(sender));
 	}
 
 	public static void regist(SheetRunnable<String[][]> sheet) {

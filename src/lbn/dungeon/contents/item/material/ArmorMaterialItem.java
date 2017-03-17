@@ -5,7 +5,7 @@ import java.util.List;
 
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
-import lbn.item.armoritem.ArmorMaterial;
+import lbn.item.armoritem.old.ArmorMaterial;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

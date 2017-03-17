@@ -14,9 +14,10 @@ public class BuffData {
 		this.id = id;
 		this.effect = effect;
 		this.tick = second * 20;
-		if (level >= 1) {
-			this.level = level + 1;
+		if (level < 1) {
+			this.level = 1;
 		}
+		this.level--;
 	}
 
 	public String getId() {

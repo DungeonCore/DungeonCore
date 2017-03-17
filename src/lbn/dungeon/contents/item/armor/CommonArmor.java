@@ -10,8 +10,8 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.CommonArmorTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
-import lbn.item.armoritem.ArmorMaterial;
-import lbn.item.itemAbstract.AbstractArmor;
+import lbn.item.armoritem.old.ArmorMaterial;
+import lbn.item.itemAbstract.OldAbstractArmor;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.JavaUtil;
@@ -24,7 +24,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CommonArmor extends AbstractArmor implements StrengthChangeItemable{
+public class CommonArmor extends OldAbstractArmor implements StrengthChangeItemable{
 
 	public CommonArmor(Material m) {
 		this.m = m;
@@ -263,6 +263,11 @@ public class CommonArmor extends AbstractArmor implements StrengthChangeItemable
 	public void extraDamageCut(Player me, EntityDamageEvent e,
 			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
 			LivingEntity mob) {
+	}
+
+	@Override
+	public boolean isShowItemList() {
+		return false;
 	}
 
 }

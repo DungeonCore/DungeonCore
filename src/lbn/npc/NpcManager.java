@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import lbn.dungeoncore.Main;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.npc.citizens.RemoveNearNpcOnSpawnTrait;
@@ -18,11 +19,13 @@ import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
+import net.citizensnpcs.trait.LookClose;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class NpcManager {
 	static HashMap<String, VillagerNpc> registedNpcIdMap = new HashMap<String, VillagerNpc>();
@@ -44,7 +47,7 @@ public class NpcManager {
 				continue;
 			}
 			DungeonLogger.debug(value.getName() + " is spawned");
-			spawnNpc(value);
+			spawnNpc(value, location);
 		}
 	}
 
@@ -65,25 +68,32 @@ public class NpcManager {
 	 * NPCをスポーンする
 	 * @param villagerNpc
 	 */
-	public static void spawnNpc(VillagerNpc villagerNpc) {
+	public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
 		try {
 			//CitizenNPC作成
 			NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(),villagerNpc.getName());
 			createNPC.addTrait(TheLowIdTrail.fromId(villagerNpc.getId()));
 
-			Location location = villagerNpc.getLocation();
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					//振り向くようにする
+					LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class) : new LookClose();
+					paramTrait.lookClose(true);
+					createNPC.addTrait(paramTrait);
+				}
+			}.runTaskLater(Main.plugin, 20 * 1);
 
-			if (location != null && location.getWorld() != null) {
+			if (loc != null && loc.getWorld() != null) {
 				//チャンクがロードされてなければロードする
-				if (!location.getChunk().isLoaded()) {
+				if (!loc.getChunk().isLoaded()) {
 					//チャンクをロードする
-					location.getChunk().load(true);
+					loc.getChunk().load(true);
 				}
 
 				if (!createNPC.isSpawned()) {
 					//スポーンさせる
-					createNPC.spawn(location);
-					//IDをつける
+					createNPC.spawn(loc);
 				}
 			}
 			villagerNpc.setNpc(createNPC);

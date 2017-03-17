@@ -1,4 +1,4 @@
-package lbn.item.armoritem;
+package lbn.item.armoritem.old;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

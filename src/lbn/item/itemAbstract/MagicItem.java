@@ -4,7 +4,7 @@ import lbn.common.cooltime.CooltimeManager;
 import lbn.common.other.ItemStackData;
 import lbn.common.sound.SoundData;
 import lbn.dungeon.contents.item.magic.normalItems.magicExcutor.FallingBlockMagicExcutor;
-import lbn.item.attackitem.SpreadSheetAttackItem;
+import lbn.item.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
@@ -18,11 +18,13 @@ import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class MagicItem extends SpreadSheetAttackItem implements RightClickItemable, LeftClickItemable{
@@ -93,6 +95,14 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 		cooltime.setCoolTime();
 		//マジックポイントを消費する
 		MagicPointManager.consumeMagicPoint(player, magic.getNeedMagicPoint());
+
+		PlayerItemDamageEvent event = new PlayerItemDamageEvent(player, item, 1);
+		Bukkit.getServer().getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			int damage = event.getDamage();
+			item.setDurability((short) (item.getDurability() + damage));
+		}
+
 	}
 
 	/**

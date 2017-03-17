@@ -53,6 +53,7 @@ public class VillagerNpc {
 //	}
 
 	public void setNpc(NPC npc) {
+		this.data.location = npc.getStoredLocation();
 		this.npc = npc;
 		this.data.uuid = npc.getUniqueId();
 		//NPCを更新する

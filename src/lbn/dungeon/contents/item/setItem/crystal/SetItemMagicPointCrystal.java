@@ -123,4 +123,9 @@ class MagicPointCystal extends SetStrengthableItemParts implements StrengthTempl
 		return 100 + 50 * level;
 	}
 
+	@Override
+	public boolean isStrengthItem() {
+		return true;
+	}
+
 }

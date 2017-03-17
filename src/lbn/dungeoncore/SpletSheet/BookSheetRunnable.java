@@ -40,7 +40,7 @@ public class BookSheetRunnable extends AbstractSheetRunable{
 		bookData.setAuther(row[2]);
 
 		for (int i = 0; i < 10; i++) {
-			bookData.setContents(row[4 + i], i);
+			bookData.addContents(row[4 + i]);
 		}
 		BookManager.regist(bookData);
 	}

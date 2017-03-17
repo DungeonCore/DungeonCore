@@ -7,8 +7,8 @@ import java.util.List;
 import lbn.dungeon.contents.item.armor.Beneable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.armoritem.BeneEffectManager;
-import lbn.item.armoritem.BeneEffectType;
+import lbn.item.armoritem.old.BeneEffectManager;
+import lbn.item.armoritem.old.BeneEffectType;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

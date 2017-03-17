@@ -1,9 +1,7 @@
 package lbn.item.implementation;
 
-import java.util.Arrays;
-import java.util.List;
-
 import lbn.item.AbstractItem;
+import lbn.item.ItemLoreToken;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;
@@ -36,8 +34,10 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		return Arrays.asList( "装着成功確率 : " + getLevel().getSucessPer() + "% ");
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		loreToken.addLore( "装着成功確率 : " + getLevel().getSucessPer() + "% ");
+		return loreToken;
 	}
 
 	@Override

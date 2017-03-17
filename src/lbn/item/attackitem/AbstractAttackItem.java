@@ -1,13 +1,13 @@
 package lbn.item.attackitem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
 import lbn.item.AbstractItem;
+import lbn.item.ItemLoreToken;
 import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.LeftClickItemable;
@@ -135,14 +135,14 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> lore = super.getAddDetail();
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
 		//使用可能レベル
-		lore.add(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
-		lore.add("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
+		loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
+		loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
 		//武器は耐久とレベルが関係ないのでnullでも問題ない
-		lore.add("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
-		return lore;
+		loreToken.addLore("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
+		return loreToken;
 	}
 
 	@Override

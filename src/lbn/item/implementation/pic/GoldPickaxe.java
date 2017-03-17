@@ -68,12 +68,6 @@ public class GoldPickaxe extends AbstractPickaxe{
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
-		return addDetail;
-	}
-
-	@Override
 	public int getLapisCount(short level) {
 		return 2;
 	}

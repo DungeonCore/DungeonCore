@@ -22,13 +22,19 @@ public class CommandBook implements CommandExecutor, TabCompleter{
 	@Override
 	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
+
+		if (paramArrayOfString.length == 1 && paramArrayOfString[0].equals("list")) {
+			paramCommandSender.sendMessage(BookManager.getNames().toString());
+			return true;
+		}
+
 		if (paramArrayOfString.length < 2) {
 			return false;
 		}
 
 		String opeName = paramArrayOfString[0];
 		String bookid = paramArrayOfString[1];
-		Player player = (Player)paramCommandSender;
+		Player player = null;
 
 		if (paramArrayOfString.length >= 3) {
 			player = Bukkit.getPlayerExact(paramArrayOfString[2]);
@@ -37,6 +43,15 @@ public class CommandBook implements CommandExecutor, TabCompleter{
 				paramCommandSender.sendMessage("Player:" + paramArrayOfString[2] + "が存在しません。");
 				return true;
 			}
+		}
+
+		if (paramCommandSender instanceof Player && player == null) {
+			player = (Player)paramCommandSender;
+		}
+
+		if (player == null) {
+			paramCommandSender.sendMessage("Playerを指定してください");
+			return false;
 		}
 
 		ItemInterface item2 = BookManager.getItem(bookid);

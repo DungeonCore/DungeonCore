@@ -1,6 +1,6 @@
 package lbn.item.itemAbstract;
 
-import lbn.item.attackitem.SpreadSheetAttackItem;
+import lbn.item.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;

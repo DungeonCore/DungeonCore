@@ -2,12 +2,6 @@ package lbn.item.SpreadSheetItem;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.List;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
 
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
@@ -16,11 +10,17 @@ import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
+import lbn.item.ItemLoreToken;
 import lbn.item.itemAbstract.FoodItem;
 import lbn.player.status.StatusAddReason;
 import lbn.util.ItemStackUtil;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleManager;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetFoodItem extends FoodItem{
 
@@ -99,7 +99,7 @@ public class SpreadSheetFoodItem extends FoodItem{
 		if (itemStackByCommand == null) {
 			itemStackByCommand = ItemStackUtil.getItemStackByCommand(data.getCommand());
 		}
-		return itemStackByCommand;
+		return itemStackByCommand.clone();
 	}
 
 	@Override
@@ -113,8 +113,8 @@ public class SpreadSheetFoodItem extends FoodItem{
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
 
 		String buffId1 = data.getBuff1();
 		String buffId2 = data.getBuff2();
@@ -122,17 +122,17 @@ public class SpreadSheetFoodItem extends FoodItem{
 
 		BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
 		if (buff1 != null && (int)(buff1.getTick() / 20.0) > 0) {
-			addDetail.add(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getPotionEffectType().getName(), (buff1.getLevel() + 1), (int)(buff1.getTick() / 20.0)));
+			loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getPotionEffectType().getName(), (buff1.getLevel() + 1), (int)(buff1.getTick() / 20.0)));
 		}
 		BuffData buff2 = BuffDataFactory.getBuffFromId(buffId2);
 		if (buff2 != null && (int)(buff2.getTick() / 20.0) > 0) {
-			addDetail.add(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getPotionEffectType().getName(), (buff2.getLevel() + 1), (int)(buff2.getTick() / 20.0)));
+			loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getPotionEffectType().getName(), (buff2.getLevel() + 1), (int)(buff2.getTick() / 20.0)));
 		}
 		BuffData buff3 = BuffDataFactory.getBuffFromId(buffId3);
 		if (buff3 != null && (int)(buff3.getTick() / 20.0) > 0) {
-			addDetail.add(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getPotionEffectType().getName(), (buff3.getLevel() + 1), (int)(buff3.getTick() / 20.0)));
+			loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getPotionEffectType().getName(), (buff3.getLevel() + 1), (int)(buff3.getTick() / 20.0)));
 		}
-		return addDetail;
+		return loreToken;
 	}
 
 }

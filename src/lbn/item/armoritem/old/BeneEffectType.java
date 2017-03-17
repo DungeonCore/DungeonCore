@@ -1,4 +1,4 @@
-package lbn.item.armoritem;
+package lbn.item.armoritem.old;
 
 import java.util.HashMap;
 import java.util.Random;

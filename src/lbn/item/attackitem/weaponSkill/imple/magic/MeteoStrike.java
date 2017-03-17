@@ -41,7 +41,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 		return true;
 	}
 
-	public void executeMeteo(Entity centerEntity, AbstractAttackItem customItem) {
+	public void executeMeteo(Entity centerEntity, AbstractAttackItem customItem, Player p) {
 		//落下地点
 		final Location target = centerEntity.getLocation();
 
@@ -79,7 +79,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 				time++;
 				if (time >= 20 * 2) {
 					//爆発を起こす
-					explode(customItem, centerEntity);
+					explode(customItem, centerEntity, p);
 					cancel();
 					//アイテムを消す
 					centerEntity.remove();
@@ -90,7 +90,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 			 * @param e
 			 * @param centerEntity
 			 */
-			protected void explode(AbstractAttackItem item, Entity centerEntity) {
+			protected void explode(AbstractAttackItem item, Entity centerEntity, Player p) {
 				//爆発パーティクル
 				new ParticleData(ParticleType.hugeexplosion, 10).setFarParticle(true).run(target);
 				//爆発音
@@ -105,7 +105,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 						entity.setVelocity(getMoveVector(entity, entity, 2));
 					}
 					//2倍のダメージを与える
-					entity.damage(item.getAttackItemDamage(0)* getData(0), entity);
+					entity.damage(item.getAttackItemDamage(0)* getData(0), p);
 					//15秒燃やす
 					entity.setFireTicks((int) (20 * getData(1)));
 				}
@@ -124,13 +124,15 @@ public class MeteoStrike extends WeaponSkillForOneType{
 		public DropItemImplement(Player p, AbstractAttackItem customItem) {
 			super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(), Material.NETHER_STAR, (byte) 0);
 			this.customItem = customItem;
+			this.p = p;
 		}
+		Player p;
 
 		ParticleData particleDataLava = new ParticleData(ParticleType.lava, 5);
 
 		@Override
 		public void onGround(Entity spawnEntity) {
-			executeMeteo(spawnEntity, customItem);
+			executeMeteo(spawnEntity, customItem, p);
 		}
 
 		@Override

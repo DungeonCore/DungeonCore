@@ -3,8 +3,9 @@ package lbn.item.itemAbstract;
 import java.util.List;
 
 import lbn.item.AbstractItem;
-import lbn.item.armoritem.ArmorMaterial;
-import lbn.item.itemInterface.ArmorItemable;
+import lbn.item.ItemLoreToken;
+import lbn.item.armoritem.old.ArmorMaterial;
+import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 
@@ -13,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractArmor extends AbstractItem implements ArmorItemable, Strengthenable{
+public abstract class OldAbstractArmor extends AbstractItem implements OldArmorItemable, Strengthenable{
 
 	@Override
 	public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e,
@@ -25,11 +26,12 @@ public abstract class AbstractArmor extends AbstractItem implements ArmorItemabl
 		return 0;
 	}
 
+
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
-		addDetail.addAll(getBaseDefanceDetail());
-		return addDetail;
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		loreToken.addAllLore(getBaseDefanceDetail());
+		return loreToken;
 	}
 
 	abstract protected List<String> getBaseDefanceDetail();

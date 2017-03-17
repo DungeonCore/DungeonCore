@@ -1,4 +1,4 @@
-package lbn.item.armoritem;
+package lbn.item.armoritem.old;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +83,7 @@ public class BeneEffectManager {
 		return arrayList;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void updateBeneLore(ItemStack item, List<BeneEffectType> types) {
 		ArrayList<String> beneLore = BeneEffectManager.getBeneLore(types, StrengthOperator.getLevel(item));
 		List<String> lore = ItemStackUtil.getLore(item);

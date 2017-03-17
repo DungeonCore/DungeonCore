@@ -82,7 +82,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 
 		String buffId = row[7];
-		boolean isMobBuffTerget = "対象Player".equals(row[8]);
+		boolean isMobBuffTerget = "モンスター".equals(row[8]);
 
 		//パーティクルの設置
 //		ParticleType type = ParticleType.getType(row[11]);

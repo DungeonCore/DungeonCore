@@ -2,6 +2,7 @@ package lbn.npc.citizens;
 
 import java.util.List;
 
+import lbn.npc.NpcManager;
 import lbn.util.DungeonLogger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -30,14 +31,24 @@ public class RemoveNearNpcOnSpawnTrait extends Trait{
 			return;
 		}
 
-		List<Entity> nearbyEntities = bukkitEntity.getNearbyEntities(10, 10, 10);
+		String id = NpcManager.getId(npc);
+		if (id == null) {
+			return;
+		}
+
+		List<Entity> nearbyEntities = bukkitEntity.getNearbyEntities(100, 50, 100);
 		for (Entity target : nearbyEntities) {
 			if (bukkitEntity.getType() == target.getType() && npc.getName().equals(target.getName())) {
 				if (!target.equals(bukkitEntity)) {
 					NPC targetNpc = CitizensAPI.getNPCRegistry().getNPC(target);
 					if (targetNpc != null) {
 						//同じなら何もしない
-						if (targetNpc.getId() != npc.getId()) {
+						if (targetNpc.getId() == npc.getId()) {
+							continue;
+						}
+						String id2 = NpcManager.getId(targetNpc);
+						//IDが同じなら削除
+						if (id2 != null && id2.equals(id2)) {
 							targetNpc.destroy();
 							DungeonLogger.development("npc:" + npc.getName() + " is destoried(1)");
 						}

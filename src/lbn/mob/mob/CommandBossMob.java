@@ -114,10 +114,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	@Override
 	public void onSpawn(PlayerCustomMobSpawnEvent e) {
 		super.onSpawn(e);
-		this.e = e.getEntity();
-
-		//保存する
-		entityList.put(getName(), getEntity());
+		setEntity(e.getEntity());
 
 		spawnTimeMill = System.currentTimeMillis();
 
@@ -264,8 +261,8 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			//ランダムで一番近くのプレイヤー
 			for (LivingEntity entity : LivingEntityUtil.getNearFrendly(getEntity(), 30, 20, 30)) {
 				//combatプレイやーでないなら無視
-				if (entity.getType() == EntityType.PLAYER) {
-					if (!combatPlayerSet.containsKey(entity)) {
+				if (entity.getType() == EntityType.PLAYER && TheLowPlayerManager.isLoaded((Player) entity)) {
+					if (!combatPlayerSet.containsKey(TheLowPlayerManager.getTheLowPlayer((Player) entity))) {
 						continue;
 					}
 				}

@@ -8,8 +8,10 @@ import lbn.util.LivingEntityUtil;
 import lbn.util.dropingEntity.DropingEntityForPlayer;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
+import lbn.util.particle.Particles;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -68,6 +70,9 @@ public class Explosion extends WeaponSkillForOneType{
 				entity.damage(customItem.getAttackItemDamage(0) * getData(0), p);
 				entity.setFireTicks((int) (20 * getData(1)));
 				Stun.addStun(entity, (int) (20 * getData(2)));
+
+				Particles.runParticle(target, ParticleType.hugeexplosion, 1);
+				target.getWorld().playSound(entity.getLocation(), Sound.EXPLODE, 1, 1);
 			}
 		}
 	}

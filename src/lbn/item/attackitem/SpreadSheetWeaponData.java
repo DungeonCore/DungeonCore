@@ -2,11 +2,7 @@ package lbn.item.attackitem;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
@@ -61,6 +57,9 @@ public class SpreadSheetWeaponData {
 
 	//エラーかどうか
 	boolean isCraftItemError = false;
+
+	//メインのクラフト素材
+	String mainCraftMaterial;
 
 	/**
 	 * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
@@ -137,7 +136,7 @@ public class SpreadSheetWeaponData {
 	}
 
 	/**
-	 * アイテムの素材, またはコマンドをセットする
+	 * アイテム自体の素材, またはコマンドをセットする
 	 * @param item
 	 */
 	public void setItemMaterial(String item, CommandSender sender) {
@@ -289,35 +288,28 @@ public class SpreadSheetWeaponData {
 		craftMaterial.put(itemid, JavaUtil.getInt(count, 1));
 	}
 
-	long cacheData = -1;
-
-	Map<ItemInterface, Integer> craftCache = new HashMap<ItemInterface, Integer>();;
-
 	/**
-	 * 制作に必要なアイテムを取得
+	 * 制作に必要なアイテムIDと個数を取得
 	 * @return
 	 */
-	public Map<ItemInterface, Integer> getCraftItem() {
-		//キャッシュしていない、またはキャッシュ後に更新が会った場合はキャッシュを消す
-		if (cacheData == -1 || cacheData < new ItemSheetRunnable(null).getLastUpdate()) {
-			//クラフトに必要なアイテム
-			HashMap<ItemInterface, Integer> craftMap = new HashMap<ItemInterface, Integer>();
+	public Map<String, Integer> getCraftItem() {
+		return craftMaterial;
+	}
 
-			for (Entry<String, Integer> entry : craftMaterial.entrySet()) {
-				ItemInterface customItemById = ItemManager.getCustomItemById(entry.getKey());
-				if (customItemById != null) {
-					craftMap.put(customItemById, entry.getValue());
-				} else {
-					//エラーにする
-					isCraftItemError = true;
-				}
-			}
-			//キャッシュをセットする
-			craftCache = craftMap;
-			cacheData = System.currentTimeMillis();
-			return craftMap;
-		}
-		return craftCache;
+	/**
+	 * メインのクラフト素材をセットする
+	 * @param mainCraftMaterial
+	 */
+	public void setMainCraftMaterial(String mainCraftMaterial) {
+		this.mainCraftMaterial = mainCraftMaterial;
+	}
+
+	/**
+	 * メインのクラフト素材を取得する
+	 * @return
+	 */
+	public String getMainCraftMaterial() {
+		return mainCraftMaterial;
 	}
 
 	/**

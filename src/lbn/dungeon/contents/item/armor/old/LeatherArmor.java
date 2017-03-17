@@ -3,7 +3,7 @@ package lbn.dungeon.contents.item.armor.old;
 import lbn.dungeon.contents.strength_template.AromorLevel5;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.AbstractItem;
-import lbn.item.itemInterface.ArmorItemable;
+import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.Message;
@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class LeatherArmor extends AbstractItem implements ArmorItemable, Strengthenable{
+public class LeatherArmor extends AbstractItem implements OldArmorItemable, Strengthenable{
 	@Override
 	public String getItemName() {
 		return getMaterialName() + " " + getParts();

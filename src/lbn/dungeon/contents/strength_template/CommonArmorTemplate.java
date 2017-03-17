@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.strength_template;
 
-import lbn.item.armoritem.ArmorMaterial;
+import lbn.item.armoritem.old.ArmorMaterial;
 
 import org.bukkit.inventory.ItemStack;
 

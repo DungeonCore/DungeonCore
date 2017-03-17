@@ -176,7 +176,7 @@ public class VillagerCommand implements CommandExecutor{
 
 
 		//NPCが存在してないとき
-		NpcManager.spawnNpc(villagerNpc);
+		NpcManager.spawnNpc(villagerNpc, location);
 
 		//スプレットシートに書きこむ
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);

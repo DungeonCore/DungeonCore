@@ -10,4 +10,9 @@ public class NbtTagConst {
 	 * NPCのID
 	 */
 	public static final String THELOW_NPC_ID = "thelow_npc_id";
+
+	/**
+	 * ItemのID
+	 */
+	public static final String THELOW_ITEM_ID = "thelow_item_id";
 }

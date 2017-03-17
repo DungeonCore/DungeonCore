@@ -6,6 +6,8 @@ import java.util.List;
 
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.item.ItemInterface;
+import lbn.item.ItemLoreData;
+import lbn.item.ItemLoreToken;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.util.ItemStackUtil;
@@ -52,7 +54,7 @@ public class StrengthOperator {
 
 		ItemInterface customItem = ItemManager.getCustomItem(item);
 		//強化できないアイテムなら何もしない
-		if (customItem == null || !(customItem instanceof Strengthenable)) {
+		if (customItem == null || !customItem.isStrengthItem()) {
 			return;
 		}
 		Strengthenable strength = (Strengthenable) customItem;
@@ -64,18 +66,11 @@ public class StrengthOperator {
 			toLevel = strength.getMaxStrengthCount();
 		}
 
-		List<String> lore = ItemStackUtil.getLore(item);
-		//強化の情報を削除する
-		removedStrengthLore(lore);
 
-		//強化の情報を追加する
-		if (strength.getStrengthDetail(toLevel) == null) {
-			addStrengthLore(null, lore);
-		} else {
-			addStrengthLore(Arrays.asList(strength.getStrengthDetail(toLevel)), lore);
-		}
+		ItemLoreData itemLoreData = new ItemLoreData(item);
+		itemLoreData.addLore(getStrengthLoreToken(strength, toLevel));
 
-		ItemStackUtil.setLore(item, lore);
+		ItemStackUtil.setLore(item, itemLoreData.getLore());
 
 		//nameを変更する
 		if (toLevel == 0) {
@@ -89,7 +84,35 @@ public class StrengthOperator {
 		Bukkit.getServer().getPluginManager().callEvent(event);
 	}
 
-	public static void addStrengthLore(List<String> strengthLore, List<String> lore) {
+	/**
+	 * 強化性能のLoreを取得
+	 * @param strength
+	 * @param level
+	 * @return
+	 */
+	public static ItemLoreToken getStrengthLoreToken(Strengthenable strength, int level) {
+		String[] strengthDetail = strength.getStrengthDetail(level);
+		if (strengthDetail == null) {
+			strengthDetail = new String[0];
+		}
+		List<String> strengthLore = Arrays.asList(strengthDetail);
+		ItemLoreToken itemLoreToken = new ItemLoreToken(ItemLoreToken.TITLE_STRENGTH);
+		if (strengthLore == null || strengthLore.size() == 0) {
+			itemLoreToken.addLore("なし");
+		} else {
+			for (String detail : strengthLore) {
+				if (detail.contains("ADD:")) {
+					itemLoreToken.addLore(detail);
+				} else {
+					itemLoreToken.addLore("ADD:" + detail);
+				}
+			}
+		}
+		return itemLoreToken;
+	}
+
+	@Deprecated
+		public static void addStrengthLore(List<String> strengthLore, List<String> lore) {
 		lore.add(ChatColor.GREEN + "[強化性能]");
 		if (strengthLore == null || strengthLore.size() == 0) {
 			lore.add(ChatColor.YELLOW + "    なし");
@@ -132,7 +155,7 @@ public class StrengthOperator {
 			return item;
 		}
 
-		if (itemInterface instanceof Strengthenable) {
+		if (itemInterface.isStrengthItem()) {
 			updateLore(item, level);
 		}
 		return item;

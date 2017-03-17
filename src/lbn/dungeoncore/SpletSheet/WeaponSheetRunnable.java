@@ -1,7 +1,7 @@
 package lbn.dungeoncore.SpletSheet;
 
 import lbn.item.ItemManager;
-import lbn.item.attackitem.SpreadSheetAttackItem;
+import lbn.item.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.itemAbstract.BowItem;
 import lbn.item.itemAbstract.MagicItem;
@@ -28,7 +28,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable{
 	@Override
 	public String[] getTag() {
 		return new String[]{"id", "name", "material", "detail", "damageparcent", "type", "skilllevel", "defaultslot", "maxslot", "rank", "uselevel", //10
-				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial2", "craftcount2", "durability"//17
+				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial2", "craftcount2", "durability", "maincraftmaterial"//18
 				};
 	}
 
@@ -50,6 +50,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable{
 		data.setCraftItem(row[13], row[14]);
 		data.setCraftItem(row[15], row[16]);
 		data.setMaxDurability(row[17]);
+		data.setMainCraftMaterial(row[18]);
 
 		if (!data.check(sender)) {
 			return;

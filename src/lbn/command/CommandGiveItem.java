@@ -18,6 +18,7 @@ import lbn.item.attackitem.old.SwordItemOld;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.CombatItemable;
+import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.setItem.SetItemParts;
 import lbn.item.slot.SlotInterface;
 import lbn.util.DungeonLogger;
@@ -157,6 +158,8 @@ public class CommandGiveItem implements CommandExecutor {
 				rtn = 1;
 			} else if (item instanceof SetItemParts) {
 				rtn = 2;
+			} else if (item instanceof OldArmorItemable) {
+				rtn = 2;
 			} else if (item instanceof ArmorItemable) {
 				rtn = 2;
 			} else if (item instanceof SlotInterface) {
@@ -260,8 +263,10 @@ public class CommandGiveItem implements CommandExecutor {
 					rtn = 4;
 				} else if (item instanceof SetItemParts) {
 					rtn = 5;
+				} else if (item instanceof OldArmorItemable) {
+					rtn = 5;
 				} else if (item instanceof ArmorItemable) {
-					rtn = 7;
+					rtn = 5;
 				} else if (item instanceof SlotInterface) {
 					rtn = 8;
 				} else if (item.isQuestItem()) {

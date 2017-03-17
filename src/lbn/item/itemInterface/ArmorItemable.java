@@ -1,18 +1,31 @@
 package lbn.item.itemInterface;
 
-import lbn.item.ItemInterface;
-
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
-public interface ArmorItemable extends ItemInterface {
 
-	public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
-	public double getBaseBossDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
+public interface ArmorItemable extends EquipItemable, Strengthenable, CraftItemable {
+	/**
+	 * このアイテムを装備しているときの通常モンスターに対するガードポイント
+	 * @return
+	 */
+	double getArmorPointForNormalMob();
 
-	public double getStrengthDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob);
+	/**
+	 * このアイテムを装備しているときのボスモンスターに対するガードポイント
+	 * @return
+	 */
+	double getArmorPointForBossMob();
 
-	public void extraDamageCut(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob);
+	/**
+	 * ダメージを受けたときの特別処理があればここで修正し、修正後のダメージを返す
+	 * @param damage 実際のダメージ値
+	 * @param me 装備しているPlayer
+	 * @param e Event
+	 * @param isBoss ダメージを与えたものが生き物でかつ、BossならTrue
+	 * @param mob ダメージを与えたものが生き物(もし生き物以外ならNull)
+	 * @return 修正後のダメージ
+	 */
+	double getModifiedDamage(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob);
 }

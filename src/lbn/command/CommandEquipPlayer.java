@@ -189,7 +189,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 				new BeneCommonAromor(Material.CHAINMAIL_BOOTS).getItem(),
 				new BeneCommonAromor(Material.CHAINMAIL_CHESTPLATE).getItem(),
 				new BeneCommonAromor(Material.CHAINMAIL_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.CHAINMAIL_BOOTS).getItem(),
+				new BeneCommonAromor(Material.CHAINMAIL_HELMET).getItem(),
 				0f);
 
 		Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);

@@ -1,9 +1,7 @@
 package lbn.item.slot;
 
-import java.util.Arrays;
-import java.util.List;
-
 import lbn.item.AbstractItem;
+import lbn.item.ItemLoreToken;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
@@ -31,8 +29,11 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		return Arrays.asList("レア度 : " + getLevel().getStar(), "装着成功確率 : " + getLevel().getSucessPer() + "% ");
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		loreToken.addLore("レア度 : " + getLevel().getStar());
+		loreToken.addLore("装着成功確率 : " + getLevel().getSucessPer() + "% ");
+		return loreToken;
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.projectile.ProjectileManager;
 import lbn.dungeoncore.Main;
 import lbn.item.armoritem.ArmorBase;
+import lbn.item.armoritem.old.OldArmorBase;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
@@ -154,6 +155,9 @@ public class ItemListener implements Listener{
 			return;
 		}
 
+		//しばらくは両方で処理を行う
+		//TODO 後で消す
+		OldArmorBase.onArmor(e);
 		ArmorBase.onArmor(e);
 
 //		Player p = (Player) e.getEntity();

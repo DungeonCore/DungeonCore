@@ -275,7 +275,7 @@ public class NormalMobSkill implements MobSkillInterface{
 		}
 
 		//バフのターゲットがモンスターの場合はここで実行
-		if (isTargetMobBuff1) {
+		if (isTargetMobBuff1 && mob.getType().isAlive()) {
 			BuffData buffFromId = BuffDataFactory.getBuffFromId(buffId1);
 			if (buffFromId != null) {
 				buffFromId.addBuff((LivingEntity) mob);

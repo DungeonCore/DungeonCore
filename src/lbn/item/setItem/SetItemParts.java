@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbn.item.ItemInterface;
+import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
@@ -120,5 +121,12 @@ public class SetItemParts implements SetItemPartable{
 	@Override
 	public int getBuyPrice(ItemStack item) {
 		return 200 * (StrengthOperator.getLevel(item) + 1);
+	}
+
+	boolean isStrength = this instanceof Strengthenable;
+
+	@Override
+	public boolean isStrengthItem() {
+		return isStrength;
 	}
 }

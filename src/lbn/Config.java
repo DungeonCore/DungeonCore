@@ -50,6 +50,7 @@ public class Config {
     clickCancelledItems.add(Material.LAVA_BUCKET);
     clickCancelledItems.add(Material.WATER_BUCKET);
     clickCancelledItems.add(Material.FLINT_AND_STEEL);
+    clickCancelledItems.add(Material.ARMOR_STAND);
 
     clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
     damageCancelledEntityType.add(EntityType.ITEM_FRAME);

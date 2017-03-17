@@ -1,7 +1,7 @@
 package lbn.item.itemAbstract;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.item.attackitem.SpreadSheetAttackItem;
+import lbn.item.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.MeleeAttackItemable;
@@ -29,6 +29,13 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
 		super.excuteOnRightClick(e);
+		//レベルなどを確認する
+		Player player = e.getPlayer();
+		if (!isAvilable(player)) {
+			sendNotAvailableMessage(player);
+			e.setCancelled(true);
+			return;
+		}
 		if (!e.getPlayer().isSneaking()) {
 			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
@@ -46,6 +53,8 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 		if (owner.getType() != EntityType.PLAYER) {
 			return;
 		}
+
+		owner.sendMessage(getAttackItemDamage(0) + "");
 
 		Player player = (Player) owner;
 		if (!isAvilable(player)) {

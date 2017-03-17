@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,8 +12,14 @@ import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.dungeoncore.Main;
+import lbn.item.ItemManager;
+import lbn.item.armoritem.ArmorBase;
+import lbn.item.craft.CraftViewer;
+import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.mob.mobskill.MobSkillManager;
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.mob.mob.CommandableMob;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.npc.NpcManager;
@@ -33,6 +40,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -78,14 +86,14 @@ public class CommandViewInfo implements CommandExecutor{
 		case "cooltime":
 			CooltimeManager.clear();
 			break;
-		case "mobskill":
-			MobSkillManager.reloadDataByCommand(paramCommandSender);
-			break;
 		case "chunk":
 			sendChunkInfo(target);
 			break;
 		case "save":
 			PlayerIODataManager.saveAsZip();
+			break;
+		case "craft":
+			CraftViewer.openTest((Player)paramCommandSender, "エルドール商人");
 			break;
 		case "status":
 			sendPlayerStatus(target);
@@ -95,6 +103,9 @@ public class CommandViewInfo implements CommandExecutor{
 			break;
 		case "version":
 			paramCommandSender.sendMessage("1.1");
+			break;
+		case "mobskill":
+			showMobSkill(paramArrayOfString[1], paramCommandSender);
 			break;
 		case "zipworld":
 			File file = new File(Main.dataFolder);
@@ -131,11 +142,54 @@ public class CommandViewInfo implements CommandExecutor{
 		case "kaminari":
 			LivingEntityUtil.strikeLightningEffect(((Player)paramCommandSender).getLocation());
 			break;
+		case "armor":
+			sendArmorData((Player)paramCommandSender);
+			break;
 			default :
 				paramCommandSender.sendMessage("unknown param");
 		}
 		return true;
 
+	}
+
+
+	private void sendArmorData(Player p) {
+		double normalMobArmorPoint = 0;
+		double bossArmorPoint = 0;
+
+		ItemStack[] armorContents = p.getEquipment().getArmorContents();
+		for (ItemStack itemStack : armorContents) {
+			ArmorItemable customItem = ItemManager.getCustomItem(ArmorItemable.class, itemStack);
+			if (customItem == null) {
+				continue;
+			}
+			normalMobArmorPoint += customItem.getArmorPointForNormalMob();
+			bossArmorPoint += customItem.getArmorPointForBossMob();
+		}
+
+		p.sendMessage(ChatColor.GOLD + "=========================");
+		p.sendMessage(ChatColor.GREEN + "合計防具ポイント");
+		p.sendMessage("    通常モンスター：" + normalMobArmorPoint);
+		p.sendMessage("    ボスモンスター：" + bossArmorPoint);
+		p.sendMessage(ChatColor.GREEN + "ダメージカット率");
+		p.sendMessage("    通常モンスター：" + (100 - ArmorBase.getDamageCutParcent(normalMobArmorPoint) * 100) + "%カット");
+		p.sendMessage("    ボスモンスター：" + (100 - ArmorBase.getDamageCutParcent(bossArmorPoint) * 100) + "%カット");
+		p.sendMessage(ChatColor.GOLD + "=========================");
+	}
+
+
+	private void showMobSkill(String string, CommandSender paramCommandSender) {
+		AbstractMob<?> mob = MobHolder.getMob(string);
+		if (mob == null) {
+			return;
+		}
+
+		if (mob instanceof CommandableMob) {
+			HashSet<String> skillIdList = ((CommandableMob) mob).getSkillIdList();
+			for (String skill : skillIdList) {
+				paramCommandSender.sendMessage(skill);
+			}
+		}
 	}
 
 

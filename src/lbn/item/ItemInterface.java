@@ -22,4 +22,6 @@ public interface ItemInterface{
 	String getId();
 
 	int getBuyPrice(ItemStack item);
+
+	boolean isStrengthItem();
 }

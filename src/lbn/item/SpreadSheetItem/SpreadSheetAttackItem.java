@@ -1,22 +1,29 @@
-package lbn.item.attackitem;
+package lbn.item.SpreadSheetItem;
 
-import java.util.Map;
+import java.util.Map.Entry;
 
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.ItemInterface;
+import lbn.item.ItemLoreToken;
+import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.attackitem.SpreadSheetWeaponData;
+import lbn.item.attackitem.WeaponStrengthTemplate;
+import lbn.item.craft.TheLowCraftRecipeInterface;
+import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
+import lbn.util.Message;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 
-public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable{
+public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable{
 	SpreadSheetWeaponData data;
 	public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
 		this.data = data;
@@ -55,6 +62,17 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 		} else {
 			return getMaterial().getMaxDurability();
 		}
+	}
+
+	@Override
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		//使用可能レベル
+		loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
+		loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
+		//武器は耐久とレベルが関係ないのでnullでも問題ない
+		loreToken.addLore("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
+		return loreToken;
 	}
 
 	@Override
@@ -107,15 +125,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
 	@Override
 	protected ItemStack getItemStackBase() {
-		return data.getItemStack();
-	}
-
-	/**
-	 * クラフトに使うアイテムをセットする
-	 * @return
-	 */
-	public Map<ItemInterface, Integer> getCraftItemMap() {
-		return data.getCraftItem();
+		return data.getItemStack().clone();
 	}
 
 	@Override
@@ -137,4 +147,21 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 			}
 		}
 	}
+
+	TheLowCraftRecipeInterface recipe;
+
+	@Override
+	public TheLowCraftRecipeInterface getCraftRecipe() {
+		if (recipe == null) {
+			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.getInstance(data.getMainCraftMaterial());
+			//素材を追加する
+			for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
+				recipe.addMaterial(entry.getKey(), entry.getValue());
+			}
+			this.recipe = recipe;
+		}
+		return recipe;
+	}
+
+
 }

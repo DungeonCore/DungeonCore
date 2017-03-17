@@ -1,8 +1,8 @@
 package lbn.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import lbn.NbtTagConst;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
@@ -12,7 +12,6 @@ import lbn.util.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public abstract class AbstractItem implements ItemInterface{
 	@Override
@@ -29,39 +28,65 @@ public abstract class AbstractItem implements ItemInterface{
 		return true;
 	}
 
+	boolean isStrength = false;
+	{
+		isStrength = this instanceof Strengthenable;
+	}
+
+	public boolean isStrengthItem() {
+		return isStrength;
+	}
+
 	@Override
 	public ItemStack getItem() {
 		ItemStack itemStack = getItemStackBase();
 
-		ItemStackUtil.addLore(itemStack, ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
 		//アイテム名
 		ItemStackUtil.setDispName(itemStack, ChatColor.RESET + getItemName());
 
 		//アイテムの説明
-		ItemMeta data = itemStack.getItemMeta();
-		ArrayList<String> lore = new ArrayList<String>();
+		List<String> lore = ItemStackUtil.getLore(itemStack);
 		//id付与
-		lore.add(ChatColor.GRAY + ItemStackUtil.getLoreForIdLine(getId()));
+		lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
 		if (getDetail() != null) {
 			for (String string :  getDetail()) {
 				lore.add(ChatColor.AQUA + string);
 			}
 		}
 
-		lore.add("");
-		if (getAddDetail() != null && getAddDetail().size() != 0) {
-			lore.add(ChatColor.GREEN + "[基本性能]");
-			for (String string : getAddDetail()) {
-				lore.add("    " + ChatColor.YELLOW + string);
-			}
-			lore.add("");
-		}
+		//IDを付与
+		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
 
-		data.setLore(lore);
-		itemStack.setItemMeta(data);
+		//Loreを生成
+		ItemLoreData itemLoreData = new ItemLoreData();
+		itemLoreData.setBefore(lore);
+
+		//スタンダートLoreTokenを取得
+		itemLoreData.addLore(getStandardLoreToken());
+
+//		if (isStrengthItem()) {
+//			itemLoreData.addLore(StrengthOperator.getStrengthLoreToken((Strengthenable) this, 0));
+//		}
+
+		ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
 		StrengthOperator.updateLore(itemStack, 0);
 		return itemStack;
+	}
+
+	/**
+	 * 基本性能のLoreTokenを取得する
+	 * @return
+	 */
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = new ItemLoreToken(ItemLoreToken.TITLE_STANDARD);
+		if (this instanceof Strengthenable) {
+			//最大強化
+			if (((Strengthenable)this).getMaxStrengthCount() != 0) {
+				loreToken.addLore(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable)this).getMaxStrengthCount(), ChatColor.GOLD));
+			}
+		}
+		return loreToken;
 	}
 
 	protected ItemStack getItemStackBase() {
@@ -72,17 +97,6 @@ public abstract class AbstractItem implements ItemInterface{
 	abstract protected Material getMaterial();
 
 	public abstract String[] getDetail();
-
-	protected List<String> getAddDetail() {
-		ArrayList<String> lore = new ArrayList<String>();
-		if (this instanceof Strengthenable) {
-			//最大強化
-			if (((Strengthenable)this).getMaxStrengthCount() != 0) {
-				lore.add(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable)this).getMaxStrengthCount(), ChatColor.GOLD));
-			}
-		}
-		return lore;
-	}
 
 	@Override
 	public boolean equals(Object paramObject) {

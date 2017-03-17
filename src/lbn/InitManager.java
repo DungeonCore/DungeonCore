@@ -66,6 +66,8 @@ public class InitManager {
 
 			SpletSheetCommand.reloadSheet(null, "food");
 
+			SpletSheetCommand.reloadSheet(null, "armor");
+
 			BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
 
 			NpcManager.init();

@@ -1,4 +1,4 @@
-package lbn.item.armoritem;
+package lbn.item.armoritem.old;
 
 
 public enum ArmorMaterial {

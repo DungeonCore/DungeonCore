@@ -3,13 +3,13 @@ package lbn.item.attackitem.old;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import lbn.common.menu.MenuSelecor;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
+import lbn.item.ItemLoreToken;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.RightClickItemable;
@@ -111,14 +111,14 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
-		addDetail.add(Message.getMessage("レア度：{0}", getRarityStart()));
-		addDetail.add(Message.getMessage("タイプ：{0}", specialItem.getAttackType()));
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		loreToken.addLore(Message.getMessage("レア度：{0}", getRarityStart()));
+		loreToken.addLore(Message.getMessage("タイプ：{0}", specialItem.getAttackType()));
 		if (!specialItem.getAttribute().isNonAttribute()) {
-			addDetail.add(Message.getMessage("属性：{0}特攻", specialItem.getAttribute().getName()));
+			loreToken.addLore(Message.getMessage("属性：{0}特攻", specialItem.getAttribute().getName()));
 		}
-		return addDetail;
+		return loreToken;
 	}
 
 	protected String getRarityStart() {

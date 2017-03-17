@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbn.item.ItemInterface;
+import lbn.item.ItemLoreToken;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 
 import org.bukkit.Material;
@@ -57,10 +58,10 @@ public class DiamondPickaxe extends AbstractPickaxe{
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
-		addDetail.add("最大レベル時、ラピスを7個まで取得できる");
-		return addDetail;
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
+		loreToken.addLore("最大レベル時、ラピスを7個まで取得できる");
+		return loreToken;
 	}
 
 	@Override

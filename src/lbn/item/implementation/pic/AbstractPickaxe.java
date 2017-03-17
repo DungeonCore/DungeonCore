@@ -8,6 +8,7 @@ import java.util.Random;
 import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
+import lbn.item.ItemLoreToken;
 import lbn.item.itemInterface.MagicPickaxeable;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
@@ -168,15 +169,15 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	}
 
 	@Override
-	protected List<String> getAddDetail() {
-		List<String> addDetail = super.getAddDetail();
+	public ItemLoreToken getStandardLoreToken() {
+		ItemLoreToken loreToken = super.getStandardLoreToken();
 		if (getNextPickAxe() != null) {
-			addDetail.add(getMaxExp() + "レベルで" + getNextPickAxe().getItemName() + "に進化する");
+			loreToken.addLore(getMaxExp() + "レベルで" + getNextPickAxe().getItemName() + "に進化する");
 		}
 		if (getLapisCount((short) 0) != 1) {
-			addDetail.add("一定確率でラピスを" + getLapisCount((short) 0) + "個まで取得");
+			loreToken.addLore("一定確率でラピスを" + getLapisCount((short) 0) + "個まで取得");
 		}
-		return addDetail;
+		return loreToken;
 	}
 
 	@Override

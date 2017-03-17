@@ -78,17 +78,38 @@ public class BookData {
 		return contents.toArray(new String[0]);
 	}
 
-	public void setContents(String page, int index) {
+	int index = 0;
+	public void addContents(String page) {
 		if (isNull(page)) {
+			index++;
 			return;
 		}
 
-		if (contents.size() <= index) {
-			for (int i = contents.size(); i <= index; i++) {
-				contents.add("");
+		page = page.replace("　", "");
+
+		if (page.length() < 150) {
+			updateRange();
+			contents.set(index, page);
+			index++;
+		} else {
+			while (page.length() > 150) {
+				String onePage = page.substring(0, 150);
+				updateRange();
+				contents.set(index, onePage);
+				index++;
+
+				page = page.replace(onePage, "");
 			}
+			updateRange();
+			contents.set(index, page);
+			index++;
 		}
-		contents.set(index, page);
+	}
+
+	private void updateRange() {
+		while (index >= contents.size()) {
+			contents.add("");
+		}
 	}
 
 	ItemStack cacheBookItem = null;

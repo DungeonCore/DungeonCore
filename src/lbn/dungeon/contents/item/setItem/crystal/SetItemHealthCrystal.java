@@ -133,4 +133,9 @@ class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate 
 		return 100 + 50 * level;
 	}
 
+	@Override
+	public boolean isStrengthItem() {
+		return true;
+	}
+
 }

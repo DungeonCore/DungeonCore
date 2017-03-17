@@ -11,9 +11,9 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.BeneArmorStrengthTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
-import lbn.item.armoritem.ArmorMaterial;
-import lbn.item.armoritem.BeneEffectManager;
-import lbn.item.armoritem.BeneEffectType;
+import lbn.item.armoritem.old.ArmorMaterial;
+import lbn.item.armoritem.old.BeneEffectManager;
+import lbn.item.armoritem.old.BeneEffectType;
 import lbn.item.strength.StrengthOperator;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
@@ -146,7 +146,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 
 	@Override
 	public boolean isShowItemList() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -161,6 +161,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
 		ArrayList<BeneEffectType> beneEffectList = BeneEffectManager.getBeneEffectList(ItemStackUtil.getLore(event.getItem()));
@@ -188,6 +189,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onChangeStrengthLevelItemEvent(
 			ChangeStrengthLevelItemEvent event) {
