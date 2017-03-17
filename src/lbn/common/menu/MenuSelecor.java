@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import lbn.item.repair.newrepair.RepairUi;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.StrengthTableOperation;
+import lbn.item.strength.old.StrengthTableOperation;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 

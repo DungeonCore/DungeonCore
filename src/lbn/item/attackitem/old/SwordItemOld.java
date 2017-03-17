@@ -3,7 +3,7 @@ package lbn.item.attackitem.old;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.MeleeAttackItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;

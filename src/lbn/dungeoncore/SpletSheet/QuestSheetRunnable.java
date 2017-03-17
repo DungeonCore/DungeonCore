@@ -4,7 +4,7 @@ import java.util.concurrent.Future;
 
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
-import lbn.quest.quest.QuestBuilder;
+import lbn.quest.abstractQuest.QuestBuilder;
 
 import org.bukkit.command.CommandSender;
 

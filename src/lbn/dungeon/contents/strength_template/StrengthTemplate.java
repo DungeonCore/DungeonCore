@@ -3,7 +3,7 @@ package lbn.dungeon.contents.strength_template;
 import org.bukkit.inventory.ItemStack;
 
 public interface StrengthTemplate {
-	public ItemStack[] getStrengthMaterials(int level);
+	public ItemStack getStrengthMaterials(int level);
 
 	public int getStrengthGalions(int level);
 

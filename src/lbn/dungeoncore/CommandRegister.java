@@ -1,6 +1,5 @@
 package lbn.dungeoncore;
 
-import lbn.command.CommandAddBene;
 import lbn.command.CommandAnnounce;
 import lbn.command.CommandAttention;
 import lbn.command.CommandBook;
@@ -16,7 +15,6 @@ import lbn.command.CommandQuestOperate;
 import lbn.command.CommandStatusView;
 import lbn.command.CommandTpOtherWorld;
 import lbn.command.CommandViewInfo;
-import lbn.command.DeleteMonster;
 import lbn.command.JumpCommand;
 import lbn.command.MobCommand;
 import lbn.command.MobSkillExecuteCommand;
@@ -82,7 +80,6 @@ public class CommandRegister {
 		registCommand(new TmCommand(), "tm");
 		registCommand(new MoneyCommand(), "galion");
 		registCommand(new ShopCommand(), "shop");
-		registCommand(new DeleteMonster(), "deletemob");
 		registCommand(new VillagerCommand(), "villager");
 		registCommand(new CommandChest(), "chest");
 		registCommand(new RemoveMobCommand(), "removemob");
@@ -100,7 +97,6 @@ public class CommandRegister {
 		registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
 		registCommand(new CommandTpOtherWorld(), "tpworld");
 		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
-		registCommand(new CommandAddBene(), "addBene");
 		registCommand(new SpletSheetCommand(), "sheet_reload");
 		registCommand(new SetRedStoneBlockCommand(), "setredstone");
 		registCommand(new LoopCommand(), "loop");

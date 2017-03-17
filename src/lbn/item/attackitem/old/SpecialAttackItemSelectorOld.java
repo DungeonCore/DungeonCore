@@ -115,9 +115,6 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 		ItemLoreToken loreToken = super.getStandardLoreToken();
 		loreToken.addLore(Message.getMessage("レア度：{0}", getRarityStart()));
 		loreToken.addLore(Message.getMessage("タイプ：{0}", specialItem.getAttackType()));
-		if (!specialItem.getAttribute().isNonAttribute()) {
-			loreToken.addLore(Message.getMessage("属性：{0}特攻", specialItem.getAttribute().getName()));
-		}
 		return loreToken;
 	}
 

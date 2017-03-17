@@ -1,11 +1,11 @@
 package lbn.dungeon.contents.item.armor.old;
 
-import lbn.dungeon.contents.strength_template.AromorLevel5;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.AbstractItem;
+import lbn.item.armoritem.ArmorStrengthTemplate;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.util.Message;
 
 import org.bukkit.ChatColor;
@@ -46,7 +46,7 @@ public class LeatherArmor extends AbstractItem implements OldArmorItemable, Stre
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
-		return AromorLevel5.getInstance();
+		return new ArmorStrengthTemplate();
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import lbn.mob.AIType;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.attribute.Attribute;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.CommandBossMob;
 import lbn.mob.mob.CommandableMob;
@@ -46,7 +45,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 	public String[] getTag() {
 		return new String[]{"name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
 				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp",
-				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "attribute", "attackpoint", "defencePoint",//21
+				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "dummy1", "attackpoint", "defencePoint",//21
 				"aitype", "reach", "jumpattack", "cps", "sps"
 				};
 	}
@@ -175,9 +174,6 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				sendMessage("redstonelocationが不正です");
 			}
 			instance.setRedstoneLocation(locationByString);
-
-			//属性を設定
-			instance.setAttribute(Attribute.getAttribute(row[19]));
 
 			instance.setAttackPoint(JavaUtil.getDouble(row[20], 1));
 			instance.setDefencePoint(JavaUtil.getDouble(row[21], 1));

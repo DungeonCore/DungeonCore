@@ -51,7 +51,7 @@ public class TheLowMerchantRecipe {
 	}
 
 	public MerchantRecipe toMerchantRecipe() {
-		return new MerchantRecipe(CraftItemStack.asNMSCopy(buy1), CraftItemStack.asNMSCopy(buy2), CraftItemStack.asNMSCopy(result));
+		return new MerchantRecipe(CraftItemStack.asNMSCopy(buy1), CraftItemStack.asNMSCopy(buy2), CraftItemStack.asNMSCopy(result), 0 , 2000);
 	}
 
 }

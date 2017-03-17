@@ -15,8 +15,8 @@ public class ChangeStrengthItemTemplate implements StrengthTemplate{
 	}
 
 	@Override
-	public ItemStack[] getStrengthMaterials(int level) {
-		return new ItemStack[]{material};
+	public ItemStack getStrengthMaterials(int level) {
+		return material;
 	}
 
 	@Override

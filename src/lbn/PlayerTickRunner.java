@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import lbn.dungeoncore.Main;
 import lbn.quest.QuestProcessingStatus;
-import lbn.quest.quest.ReachQuest;
+import lbn.quest.abstractQuest.ReachQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 

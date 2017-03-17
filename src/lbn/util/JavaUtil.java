@@ -114,7 +114,7 @@ public class JavaUtil {
 	@SuppressWarnings("unchecked")
 	public static <T> T getField(Class<?> clazz, String fieldName, Object targetInstance) {
 		try {
-			Field field = clazz.getClass().getDeclaredField(fieldName);
+			Field field = clazz.getDeclaredField(fieldName);
 			field.setAccessible(true);
 			return (T) field.get(targetInstance);
 		} catch (Exception e) {

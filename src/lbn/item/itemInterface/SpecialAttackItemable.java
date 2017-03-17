@@ -3,7 +3,6 @@ package lbn.item.itemInterface;
 import java.util.Collection;
 
 import lbn.item.ItemInterface;
-import lbn.mob.attribute.Attribute;
 import lbn.player.ItemType;
 
 public interface SpecialAttackItemable {
@@ -12,5 +11,4 @@ public interface SpecialAttackItemable {
 	public int getRank();
 	public String getId();
 	public ItemType getAttackType();
-	public Attribute getAttribute();
 }

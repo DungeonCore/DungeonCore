@@ -5,9 +5,9 @@ import java.util.Random;
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.common.projectile.ProjectileManager;
-import lbn.dungeon.contents.strength_template.NotSrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
+import lbn.item.attackitem.WeaponStrengthTemplate;
 import lbn.item.attackitem.old.BowItemOld;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LbnRunnable;
@@ -146,7 +146,7 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
-		return new NotSrengthItemTemplate();
+		return new WeaponStrengthTemplate();
 	}
 
 	@Override

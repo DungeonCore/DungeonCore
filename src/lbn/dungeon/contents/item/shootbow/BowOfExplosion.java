@@ -2,12 +2,12 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.List;
 
-import lbn.dungeon.contents.strength_template.BowLevel12;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
+import lbn.item.attackitem.WeaponStrengthTemplate;
 import lbn.item.attackitem.old.BowItemOld;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.NoPlayerDamageExplotionForAttackType;
@@ -75,7 +75,7 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 		return new String[]{"着弾地点が爆発します"};
 	}
 
-	static StrengthTemplate template = new BowLevel12();
+	static StrengthTemplate template = new WeaponStrengthTemplate();
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {

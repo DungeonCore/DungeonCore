@@ -7,7 +7,7 @@ import java.util.List;
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;

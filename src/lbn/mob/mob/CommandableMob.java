@@ -12,8 +12,6 @@ import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
@@ -275,10 +273,13 @@ public class CommandableMob extends AbstractMob<Entity>{
 		}
 		Random random = new Random();
 		for (int i = 0; i < index; i++) {
+			//確率を調べる
 			if (random.nextInt(1000) < dropPerList[i] * 10) {
 				dropItem.add(dropItemList[i]);
 			}
 		}
+		//関係のないクエストのアイテムを削除する
+		removeOtherQuestItem(lastDamagePlayer, dropItem);
 		return dropItem;
 	}
 
@@ -395,18 +396,6 @@ public class CommandableMob extends AbstractMob<Entity>{
 	Location redstone = null;
 	public void setRedstoneLocation(Location loc) {
 		redstone = loc;
-	}
-
-	Attribute attribute = new AttributeNormal();
-	public void setAttribute(Attribute attribute) {
-		if (attribute != null) {
-			this.attribute = attribute;
-		}
-	}
-
-	@Override
-	public Attribute getAttribute() {
-		return attribute;
 	}
 
 	double attackPoint = 1;

@@ -10,7 +10,7 @@ import lbn.item.setItem.AbstractAbilitySetItem;
 import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.item.setItem.SetStrengthableItemParts;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
 
 import org.bukkit.Material;
@@ -74,8 +74,8 @@ class MagicPointCystal extends SetStrengthableItemParts implements StrengthTempl
 	}
 
 	@Override
-	public ItemStack[] getStrengthMaterials(int level) {
-		return new ItemStack[0];
+	public ItemStack getStrengthMaterials(int level) {
+		return null;
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.common.event.quest.StartQuestEvent;
-import lbn.quest.quest.QuestType;
+import lbn.quest.abstractQuest.QuestType;
 
 import org.bukkit.entity.Player;
 

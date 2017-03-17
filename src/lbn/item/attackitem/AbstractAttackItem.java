@@ -6,6 +6,7 @@ import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.AbstractItem;
 import lbn.item.ItemLoreToken;
 import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
@@ -49,6 +50,12 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 			return false;
 		}
 		return true;
+	}
+
+	static WeaponStrengthTemplate strengthTemplate = new WeaponStrengthTemplate();
+	@Override
+	public StrengthTemplate getStrengthTemplate() {
+		return strengthTemplate;
 	}
 
 	@Override

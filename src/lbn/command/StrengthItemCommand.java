@@ -5,8 +5,8 @@ import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.implementation.pic.AbstractPickaxe;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.StrengthOperator;
-import lbn.item.strength.StrengthTableOperation;
+import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.old.StrengthTableOperation;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;

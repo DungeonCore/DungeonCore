@@ -15,10 +15,18 @@ public class MerchantRecipeListImplemention extends MerchantRecipeList{
 		this.merchant = merchant;
 	}
 
+	@SuppressWarnings("unchecked")
+	public void addTheLowRecipe(TheLowMerchantRecipe recipe) {
+		add(recipe.toMerchantRecipe());
+	}
+
 	@Override
 	public MerchantRecipe a(ItemStack paramItemStack1, ItemStack paramItemStack2, int paramInt) {
 		for (int i = 0; i < size(); i++) {
 			MerchantRecipe localMerchantRecipe2 = (MerchantRecipe) get(i);
+			System.out.println((ItemStack.c(paramItemStack1, localMerchantRecipe2.getBuyItem1())));
+			System.out.println((paramItemStack1.count >= localMerchantRecipe2.getBuyItem1().count) );
+			System.out.println( (((!localMerchantRecipe2.hasSecondItem()) && (paramItemStack2 == null)) || ((localMerchantRecipe2.hasSecondItem()) && (ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2())) && (paramItemStack2.count >= localMerchantRecipe2.getBuyItem2().count))));
 			if ((ItemStack.c(paramItemStack1, localMerchantRecipe2.getBuyItem1())) && (paramItemStack1.count >= localMerchantRecipe2.getBuyItem1().count) && (((!localMerchantRecipe2.hasSecondItem()) && (paramItemStack2 == null)) || ((localMerchantRecipe2.hasSecondItem()) && (ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2())) && (paramItemStack2.count >= localMerchantRecipe2.getBuyItem2().count)))) {
 				TheLowMerchantRecipe recipe = new TheLowMerchantRecipe(localMerchantRecipe2);
 				merchant.onShowResult(recipe);

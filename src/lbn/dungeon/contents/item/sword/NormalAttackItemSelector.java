@@ -8,8 +8,6 @@ import lbn.dungeon.contents.item.shootbow.NormalBowWrapper;
 import lbn.item.ItemInterface;
 import lbn.item.attackitem.old.SpecialAttackItemSelectorOld;
 import lbn.item.itemInterface.SpecialAttackItemable;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeNormal;
 import lbn.player.ItemType;
 
 public class NormalAttackItemSelector extends SpecialAttackItemSelectorOld{
@@ -71,11 +69,6 @@ class SpecialAttackItemableForNormal implements SpecialAttackItemable {
 	@Override
 	public ItemType getAttackType() {
 		return type;
-	}
-
-	@Override
-	public Attribute getAttribute() {
-		return AttributeNormal.getInstance();
 	}
 
 }

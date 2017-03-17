@@ -6,11 +6,11 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.implementation.StrengthScrollWeapon;
 
 public class WeaponStrengthTemplate implements StrengthTemplate{
-	static StrengthScrollWeapon strengthScrollWeapon = new StrengthScrollWeapon();
+	static ItemStack strengthScrollWeapon = new StrengthScrollWeapon().getItem();
 
 	@Override
-	public ItemStack[] getStrengthMaterials(int level) {
-		return new ItemStack[]{strengthScrollWeapon.getItem()};
+	public ItemStack getStrengthMaterials(int level) {
+		return strengthScrollWeapon;
 	}
 
 	@Override

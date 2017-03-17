@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.common.citizenNpc.CitizenNpcManager;
 import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.customEntity1_8.CustomVillager;
+import lbn.npc.NpcManager;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityLightning;
 import net.minecraft.server.v1_8_R1.EntityMonster;
@@ -73,10 +73,9 @@ public class LivingEntityUtil {
 		}
 
 		//NPCならTRUE
-		if (CitizenNpcManager.isNpc(e)) {
+		if (NpcManager.isNpc(e)) {
 			return false;
 		}
-
 
 		//スノーゴーレムならFALSE
 		if (type == EntityType.SNOWMAN) {

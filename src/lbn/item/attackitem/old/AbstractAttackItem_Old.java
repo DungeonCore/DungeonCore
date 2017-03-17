@@ -8,9 +8,7 @@ import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.attackitem.AbstractAttackItem;
-import lbn.item.strength.StrengthOperator;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeNormal;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 
@@ -50,14 +48,6 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	@Override
 	public void onCombatEntity(PlayerCombatEntityEvent e) {
-	}
-
-	/**
-	 * 属性を取得
-	 * @return
-	 */
-	public Attribute getAttribute() {
-		return AttributeNormal.getInstance();
 	}
 
 	@Override
@@ -175,26 +165,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 		double dispAddDamane = JavaUtil.round(getAttackItemDamage(level) - getMaterialDamage(), 2);
 		lores.add(Message.getMessage(Message.ADD_DAMAGE_DISP, (dispAddDamane >= 0 ? "+" : "")  + dispAddDamane, ChatColor.GOLD));
 
-		if (!getAttribute().isNonAttribute()) {
-			lores.add(Message.getMessage("{0}に対してダメージ+{1}%", getAttribute().getName(), getAttributeAddParcentDamage(level)));
-		}
-
 		return lores.toArray(new String[0]);
-	}
-
-	/**
-	 * 属性で追加されるダメージ
-	 * @param level
-	 * @return
-	 */
-	protected double getAttributeAddParcentDamage(int level) {
-		if (getAttribute().isNonAttribute()) {
-			return 0;
-		}
-
-		int maxStrengthCount = getMaxStrengthCount();
-		//maxが+200%
-		return 200.0 * level / maxStrengthCount;
 	}
 
 	abstract protected String[] getStrengthDetail2(int level);

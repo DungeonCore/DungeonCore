@@ -6,15 +6,13 @@ import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemLoreToken;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
-import lbn.item.attackitem.WeaponStrengthTemplate;
 import lbn.item.craft.TheLowCraftRecipeInterface;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.Message;
 
@@ -27,12 +25,6 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 	SpreadSheetWeaponData data;
 	public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
 		this.data = data;
-	}
-
-	static WeaponStrengthTemplate strengthTemplate = new WeaponStrengthTemplate();
-	@Override
-	public StrengthTemplate getStrengthTemplate() {
-		return strengthTemplate;
 	}
 
 	@Override

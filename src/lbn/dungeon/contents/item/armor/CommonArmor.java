@@ -7,13 +7,13 @@ import java.util.Random;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeon.contents.strength_template.CommonArmorTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
+import lbn.item.armoritem.ArmorStrengthTemplate;
 import lbn.item.armoritem.old.ArmorMaterial;
 import lbn.item.itemAbstract.OldAbstractArmor;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 
@@ -107,7 +107,7 @@ public class CommonArmor extends OldAbstractArmor implements StrengthChangeItema
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
-		return new CommonArmorTemplate(getMaxStrengthCount(), getArmorMaterial());
+		return new ArmorStrengthTemplate();
 	}
 
 	@Override

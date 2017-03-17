@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 

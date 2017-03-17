@@ -4,6 +4,9 @@ import io.netty.buffer.Unpooled;
 
 import java.util.List;
 
+import lbn.common.trade.nms.MerchantRecipeListImplemention;
+import lbn.util.JavaUtil;
+import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 import net.minecraft.server.v1_8_R1.PacketDataSerializer;
 import net.minecraft.server.v1_8_R1.PacketPlayOutCustomPayload;
@@ -13,12 +16,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 
 public abstract class TheLowMerchant {
-	Player p;
+	protected Player p;
 	int containerCounter;
 
-	public TheLowMerchant(Player p, int containerCounter) {
+	public TheLowMerchant(Player p) {
 		this.p = p;
-		this.containerCounter = containerCounter;
+		this.containerCounter = JavaUtil.getField(EntityPlayer.class, "containerCounter", ((CraftPlayer) p).getHandle());
 	}
 
 	public int getContainerCounter() {
@@ -66,7 +69,7 @@ public abstract class TheLowMerchant {
 		// リストを作成
 		MerchantRecipeList merchantrecipelist = new MerchantRecipeList();
 		for (TheLowMerchantRecipe recipe : recipeList) {
-			merchantrecipelist.add(recipe);
+			merchantrecipelist.add(recipe.toMerchantRecipe());
 		}
 
 		//パケットを送信する
@@ -75,4 +78,12 @@ public abstract class TheLowMerchant {
 		merchantrecipelist.a(packetdataserializer);
 		((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
 	}
+
+	/**
+	 * 一番最初に表示されるレシピを取得する
+	 * @return
+	 */
+	abstract public List<TheLowMerchantRecipe> getInitRecipes();
+
+	abstract public MerchantRecipeListImplemention getNowRecipeList();
 }

@@ -10,7 +10,7 @@ import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.RightClickItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;

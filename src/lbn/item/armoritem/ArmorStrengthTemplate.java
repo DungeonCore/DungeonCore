@@ -6,11 +6,11 @@ import lbn.item.implementation.StrengthScrollArmor;
 import org.bukkit.inventory.ItemStack;
 
 public class ArmorStrengthTemplate implements StrengthTemplate{
-	static StrengthScrollArmor strengthScrollArmor = new StrengthScrollArmor();
+	static ItemStack strengthScrollArmor = new StrengthScrollArmor().getItem();
 
 	@Override
-	public ItemStack[] getStrengthMaterials(int level) {
-		return new ItemStack[]{strengthScrollArmor.getItem()};
+	public ItemStack getStrengthMaterials(int level) {
+		return strengthScrollArmor;
 	}
 
 	@Override

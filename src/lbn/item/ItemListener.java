@@ -3,8 +3,6 @@ package lbn.item;
 import java.util.ArrayList;
 
 import lbn.NbtTagConst;
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
@@ -12,7 +10,6 @@ import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.projectile.ProjectileManager;
-import lbn.dungeoncore.Main;
 import lbn.item.armoritem.ArmorBase;
 import lbn.item.armoritem.old.OldArmorBase;
 import lbn.item.attackitem.AbstractAttackItem;
@@ -31,17 +28,12 @@ import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.CombatSlot;
 import lbn.item.slot.slot.KillSlot;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.CraeteStrengthItemResultLater;
-import lbn.item.strength.StrengthLaterRunnable;
-import lbn.item.strength.StrengthTableOperation;
+import lbn.item.strength.old.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -56,15 +48,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -212,45 +201,45 @@ public class ItemListener implements Listener{
 
 	@EventHandler
 	public void inventoryClick (final InventoryClickEvent e) {
-		SlotSetTableOperation.inventoryClick(e);
-
-		if (!StrengthTableOperation.isOpenStrengthTable(e.getWhoClicked())) {
-			return;
-		}
-
-		//絶対に作業台が開いているはず
-		if (!(e.getView().getTopInventory() instanceof CraftingInventory)) {
-			return;
-		}
-
-		//黄色のガラスと赤のガラスはクリックしてもキャンセルする
-		ItemStack currentItem = e.getCurrentItem();
-		if (StrengthTableOperation.isRedGlass(currentItem) || StrengthTableOperation.isYellowGlass(currentItem)) {
-			e.setCancelled(true);
-		}
-
-		//Playerデータがロードされていないので何もしない
-		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)e.getWhoClicked());
-		if (theLowPlayer == null) {
-			Message.sendMessage((Player)e.getWhoClicked(), ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
-			return;
-		}
-
-		CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
-		//強化を行う
-		if (e.getSlotType() != SlotType.RESULT){
-			new StrengthLaterRunnable(top, e, theLowPlayer).runTaskLater(Main.plugin, 1);
-		} else {
-			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
-				if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
-					e.setCancelled(true);
-					return;
-				}
-				new CraeteStrengthItemResultLater(e, theLowPlayer).runTaskLater(Main.plugin);
-			} else {
-				e.setCancelled(true);
-			}
-		}
+//		SlotSetTableOperation.inventoryClick(e);
+//
+//		if (!StrengthTableOperation.isOpenStrengthTable(e.getWhoClicked())) {
+//			return;
+//		}
+//
+//		//絶対に作業台が開いているはず
+//		if (!(e.getView().getTopInventory() instanceof CraftingInventory)) {
+//			return;
+//		}
+//
+//		//黄色のガラスと赤のガラスはクリックしてもキャンセルする
+//		ItemStack currentItem = e.getCurrentItem();
+//		if (StrengthTableOperation.isRedGlass(currentItem) || StrengthTableOperation.isYellowGlass(currentItem)) {
+//			e.setCancelled(true);
+//		}
+//
+//		//Playerデータがロードされていないので何もしない
+//		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)e.getWhoClicked());
+//		if (theLowPlayer == null) {
+//			Message.sendMessage((Player)e.getWhoClicked(), ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+//			return;
+//		}
+//
+//		CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
+//		//強化を行う
+//		if (e.getSlotType() != SlotType.RESULT){
+//			new StrengthLaterRunnable(top, e, theLowPlayer).runTaskLater(Main.plugin, 1);
+//		} else {
+//			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
+//				if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
+//					e.setCancelled(true);
+//					return;
+//				}
+//				new CraeteStrengthItemResultLater(e, theLowPlayer).runTaskLater(Main.plugin);
+//			} else {
+//				e.setCancelled(true);
+//			}
+//		}
 	}
 
 	@EventHandler

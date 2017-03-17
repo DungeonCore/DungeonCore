@@ -10,7 +10,7 @@ public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTe
 	}
 
 	@Override
-	public ItemStack[] getStrengthMaterials(int level) {
+	public ItemStack getStrengthMaterials(int level) {
 		return null;
 	}
 

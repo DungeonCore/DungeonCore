@@ -1,7 +1,6 @@
 package lbn.mob;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -12,13 +11,11 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeNormal;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.QuestProcessingStatus;
-import lbn.quest.quest.PickItemQuest;
+import lbn.quest.abstractQuest.PickItemQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
@@ -38,8 +35,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.entity.EntityTeleportEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
@@ -73,8 +68,6 @@ public abstract class AbstractMob<T extends Entity> {
 	abstract public void onSpawn(PlayerCustomMobSpawnEvent e);
 
 	public void onAttackBefore(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
-		//属性適用
-		getAttribute().onAttack(mob, target, e);
 	}
 
 	public boolean isRiding() {
@@ -84,11 +77,6 @@ public abstract class AbstractMob<T extends Entity> {
 	abstract public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e);
 
 	abstract public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e);
-
-	Attribute attribute = new AttributeNormal();
-	public Attribute getAttribute() {
-		return attribute;
-	}
 
 	public int getDropGalions() {
 		return 10;
@@ -101,9 +89,6 @@ public abstract class AbstractMob<T extends Entity> {
 	 * @param e
 	 */
 	public void onDamageBefore(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
-		//属性適用
-		getAttribute().onDamage(mob, damager, e);
-
 		if (isSummonMob()) {
 			return;
 		}
@@ -130,6 +115,7 @@ public abstract class AbstractMob<T extends Entity> {
 	abstract public void onOtherDamage(EntityDamageEvent e);
 
 	public void onDeath(EntityDeathEvent e) {
+		//もしモンスターの上にモンスターが載っているとして上のモンスターが死んだら下のモンスターも殺す
 		if (isRiding()) {
 			List<Entity> nearbyEntities = e.getEntity().getNearbyEntities(1, 1, 1);
 			for (Entity entity : nearbyEntities) {
@@ -152,35 +138,35 @@ public abstract class AbstractMob<T extends Entity> {
 
 	}
 
-	 public void onTeleport(EntityTeleportEvent e) {
-		 if (e.getEntityType() == EntityType.ENDERMAN) {
-			 e.setCancelled(true);
-		 }
-	 }
-
+	 /**
+	  * モンスターがProjectileを発射した時
+	  * @param mob
+	  * @param target
+	  * @param e
+	  */
 	 public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
 	}
 
+	 /**
+	  * Null mobならTRUE
+	  * @return
+	  */
 	public boolean isNullMob() {
 		return false;
 	}
 
-	public void onProjectileHit(ProjectileHitEvent e) {
-	}
-
+	/**
+	 * モンスターがターゲットを定めた時
+	 * @param event
+	 */
 	public void onTarget(EntityTargetLivingEntityEvent event) {
-		//多分いらないのでコメントアウト
-//		if (event.getTarget().getType() != EntityType.PLAYER) {
-//			List<Entity> nearbyEntities = event.getEntity().getNearbyEntities(50, 10, 50);
-//			for (Entity entity : nearbyEntities) {
-//				if (entity.getType() == EntityType.PLAYER) {
-//					event.setTarget(entity);
-//					return;
-//				}
-//			}
-//		}
 	}
 
+	/**
+	 * モンスターをスポーンさせる
+	 * @param loc
+	 * @return
+	 */
 	final public T spawn(Location loc) {
 		T entity = spawnPrivate(loc);
 		if (entity == null) {
@@ -188,7 +174,7 @@ public abstract class AbstractMob<T extends Entity> {
 		}
 
 		if ((getName() != null || !getName().isEmpty()) && entity.getType().isAlive()) {
-			((LivingEntity)entity).setCustomName(getAttribute().getPrefix() + getName());
+			((LivingEntity)entity).setCustomName(getName());
 		}
 
 		//ボスと召喚モブの時は名前をずっと表示する
@@ -225,45 +211,42 @@ public abstract class AbstractMob<T extends Entity> {
 		return false;
 	}
 
+	/**
+	 * ドロップするアイテムを取得する
+	 * @param lastDamagePlayer
+	 * @return
+	 */
 	public List<ItemStack> getDropItem(Player lastDamagePlayer) {
-		ArrayList<ItemStack> arrayList = new ArrayList<ItemStack>();
+		return new ArrayList<>();
+	}
 
-		if (isNormalDropChance(lastDamagePlayer)) {
-			ItemStack[] normalItem = getNormalItem(lastDamagePlayer);
-			if (normalItem != null) {
-				arrayList.addAll(Arrays.asList(normalItem));
-			}
-		}
-		if (isRareDropChance(lastDamagePlayer)) {
-			ItemStack[] rarelItem = getRareItem(lastDamagePlayer);
-			if (rarelItem != null) {
-				arrayList.addAll(Arrays.asList(rarelItem));
-			}
+	/**
+	 *	現在の指定されたアイテムの中で現在受けていないクエストアイテムを削除する
+	 * @param p
+	 * @param itemList
+	 */
+	public static void removeOtherQuestItem(Player p, List<ItemStack> itemList) {
+		//DropItemが存在しないなら何もしない
+		if (itemList.isEmpty()) {
+			return;
 		}
 
-		PlayerQuestSession questSession = null;
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p.getPlayer());;
 
 		//DROPするのがクエストアイテムの場合、クエスト進行中でないからドロップさせない
-		Iterator<ItemStack> iterator = arrayList.iterator();
+		Iterator<ItemStack> iterator = itemList.iterator();
 		label1:
 		while (iterator.hasNext()) {
-			//quest sessionインスタンスを作成
-			if (questSession == null) {
-				questSession = PlayerQuestSessionManager.getQuestSession(lastDamagePlayer.getPlayer());
-			}
-
 			ItemStack next = iterator.next();
 			ItemInterface customItem = ItemManager.getCustomItem(next);
 			//カスタムアイテムでないなら何もしない
 			if (customItem == null) {
 				continue;
 			}
-
 			//クエストアイテムでないなら何もしない
 			if (!customItem.isQuestItem()) {
 				continue;
 			}
-
 			//クエスト実行中か調べる
 			Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 			for (PickItemQuest pickItemQuest : quest) {
@@ -275,26 +258,12 @@ public abstract class AbstractMob<T extends Entity> {
 			//一つも関連クエストが実行されていないなら許可しない
 			iterator.remove();
 		}
-		return arrayList;
 	}
 
-	protected ItemStack[] getNormalItem(Player lastDamagePlayer) {
-		return null;
-	}
-
-	protected boolean isNormalDropChance(Player lastDamagePlayer) {
-		return rnd.nextInt(20) == 0;
-	}
-
-
-	protected ItemStack[] getRareItem(Player lastDamagePlayer) {
-		return null;
-	}
-
-	protected boolean isRareDropChance(Player lastDamagePlayer) {
-		return rnd.nextInt(100) == 0;
-	}
-
+	/**
+	 * モンスターの名前を更新
+	 * @param islater
+	 */
 	public void updateName(boolean islater) {
 	}
 

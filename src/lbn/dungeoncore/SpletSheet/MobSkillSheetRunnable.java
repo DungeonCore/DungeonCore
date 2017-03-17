@@ -5,7 +5,7 @@ import lbn.mob.mobskill.MobSkillExcuteTimingType;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.mob.mobskill.MobSkillTargetingMethodType;
-import lbn.mob.mobskill.NormalMobSkill;
+import lbn.mob.mobskill.OldNormalMobSkill;
 import lbn.mob.mobskill.ParticleLocationType;
 import lbn.mob.mobskill.skillrunnable.MobSkillExplosion;
 import lbn.mob.mobskill.skillrunnable.MobSkillExplosionNoParticle;
@@ -113,7 +113,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		String soundId = "".equals(row[20]) ? null : row[20];
 
-		NormalMobSkill normalMobSkill = new NormalMobSkill(damage, fireTick, skill, timing, condition,
+		OldNormalMobSkill normalMobSkill = new OldNormalMobSkill(damage, fireTick, skill, timing, condition,
 				id, rate, row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19],
 				soundId, isOnePlayerSoundTarget, buffId, isMobBuffTerget);
 

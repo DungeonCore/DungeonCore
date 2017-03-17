@@ -2,7 +2,7 @@ package lbn.dungeon.contents.item.magic.normalItems.magicExcutor;
 
 import lbn.dungeon.contents.mob.zombie.NormalMagicSummonZombie;
 import lbn.item.itemInterface.MagicExcuteable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.mob.AbstractMob;
 import lbn.mob.SummonPlayerManager;
 

@@ -6,12 +6,10 @@ import java.util.Random;
 import java.util.Set;
 
 import lbn.chest.CustomChestManager;
-import lbn.common.event.EndermanFindTargetEvent;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractEnderman;
 import lbn.npc.NpcManager;
 import lbn.player.PlayerChecker;
 import net.citizensnpcs.api.event.NPCDamageEvent;
@@ -37,7 +35,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -165,7 +162,6 @@ public class MobListener implements Listener {
 			e.getDrops().addAll(dropItem);
 		}
 
-
 		//もしボスの場合はチェストを設置する
 		if (mob.isBoss()) {
 			CustomChestManager.setBossRewardChest((BossMobable) mob);
@@ -187,17 +183,6 @@ public class MobListener implements Listener {
 	}
 
 	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent e) {
-		Projectile entity = e.getEntity();
-		ProjectileSource shooter = entity.getShooter();
-
-		if (shooter instanceof LivingEntity) {
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity) shooter);
-			mob.onProjectileHit(e);
-		}
-	}
-
-	@EventHandler
 	public void onChangeTarget(EntityTargetLivingEntityEvent event) {
 		AbstractMob<?> mob = MobHolder.getMob(event);
 		mob.onTarget(event);
@@ -205,16 +190,9 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onTeleport(EntityTeleportEvent e) {
-		AbstractMob<?> mob = MobHolder.getMob(e);
-		mob.onTeleport(e);
-	}
-
-	@EventHandler
-	public void onFindPlayer(EndermanFindTargetEvent e) {
-		AbstractMob<?> mob = MobHolder.getMob(e);
-		if (mob instanceof AbstractEnderman) {
-			((AbstractEnderman) mob).onFindPlayer(e);
-		}
+		 if (e.getEntityType() == EntityType.ENDERMAN) {
+			 e.setCancelled(true);
+		 }
 	}
 
 	@EventHandler

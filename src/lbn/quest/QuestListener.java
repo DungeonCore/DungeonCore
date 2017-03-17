@@ -11,10 +11,10 @@ import lbn.item.ItemManager;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.MobHolder;
-import lbn.quest.quest.KillMobQuest;
-import lbn.quest.quest.PickItemQuest;
-import lbn.quest.quest.QuestType;
-import lbn.quest.quest.StrengthItemQuest;
+import lbn.quest.abstractQuest.KillMobQuest;
+import lbn.quest.abstractQuest.PickItemQuest;
+import lbn.quest.abstractQuest.QuestType;
+import lbn.quest.abstractQuest.StrengthItemQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 

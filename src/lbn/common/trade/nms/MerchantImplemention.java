@@ -16,7 +16,6 @@ public class MerchantImplemention implements IMerchant{
 	public MerchantImplemention(TheLowMerchant merchant) {
 		this.containerCounter = merchant.getContainerCounter();
 		this.merchant = merchant;
-		this.recipeList = new MerchantRecipeListImplemention(merchant);
 	}
 
 	public int getContainerCounter() {
@@ -39,14 +38,16 @@ public class MerchantImplemention implements IMerchant{
 		merchant.onSetItem();
 	}
 
-	MerchantRecipeList recipeList;
 	@Override
 	public MerchantRecipeList getOffers(EntityHuman paramEntityHuman) {
-		return recipeList;
+		return merchant.getNowRecipeList();
 	}
 
 	@Override
 	public IChatBaseComponent getScoreboardDisplayName() {
+		if (merchant.getName() == null) {
+			return new ChatMessage("", new Object[0]);
+		}
 		return new ChatMessage(merchant.getName(), new Object[0]);
 	}
 

@@ -324,7 +324,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			if (entity != null) {
 				double maxHealth = ((Damageable)entity).getMaxHealth();
 				double nowHealth = ((Damageable)entity).getHealth();
-				entity.setCustomName(StringUtils.join(getAttribute().getPrefix(), getName(), ChatColor.RED , " [" , (int)nowHealth , "/" , (int)maxHealth, "]"));
+				entity.setCustomName(StringUtils.join(getName(), ChatColor.RED , " [" , (int)nowHealth , "/" , (int)maxHealth, "]"));
 
 				if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
 					for (TheLowPlayer p : combatPlayerSet.keySet()) {

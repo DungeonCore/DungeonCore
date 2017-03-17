@@ -5,10 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import lbn.dungeon.contents.mob.NormalMob;
-import lbn.mob.attribute.Attribute;
 import lbn.mob.mob.NullMob;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -38,25 +36,6 @@ public class MobHolder{
 			return e.getType() != EntityType.PLAYER;
 		}
 		return false;
-	}
-
-	protected static String getRealName(String name) {
-		if (name == null) {
-			return "";
-		}
-		name = ChatColor.stripColor(name).toUpperCase();
-		if (name.contains("[") && name.contains("]") ) {
-			name = name.substring(0, name.lastIndexOf("[")).trim();
-		}
-		//属性タグ削除
-		name = Attribute.removePrefix(name);
-		return name;
-	}
-	protected static String getRealName(Entity e) {
-		if (e == null) {
-			return "";
-		}
-		return getRealName(((LivingEntity)e).getCustomName());
 	}
 
 	/**
@@ -103,20 +82,6 @@ public class MobHolder{
 	 * @return
 	 */
 	public static AbstractMob<?> getMobWithNormal(String name) {
-//		try {
-//			//もしLivingEntity名と一致するならそれを返す
-//			EntityType valueOf = EntityType.valueOf(name.toUpperCase());
-//			if (valueOf != null && valueOf.isAlive()) {
-//				return new NormalMob(valueOf);
-//			}
-//		} catch (Exception e) {
-//		}
-//
-//		AbstractMob<?> mob = MobHolder.getMob(name);
-//		if (mob != null && !mob.getClass().equals(NullMob.class)) {
-//			return mob;
-//		}
-//		return null;
 		if (name == null || name.isEmpty()) {
 			return null;
 		}
@@ -156,7 +121,11 @@ public class MobHolder{
 	 * @return
 	 */
 	public static AbstractMob<?> getMob(String name) {
-		name = getRealName(name);
+		if (name == null) {
+			return NULL_MOB;
+		}
+		//大文字にする
+		name = name.toUpperCase();
 		if (mobs.containsKey(name)) {
 			return mobs.get(name);
 		} else {
@@ -175,20 +144,13 @@ public class MobHolder{
 		if (e.getCustomName() == null) {
 			return NULL_MOB;
 		}
-		AbstractMob<?> mob = mobs.get(getRealName(e));
+		AbstractMob<?> mob = getMob(e.getCustomName());
 		if (mob == null) {
 			return NULL_MOB;
 		}
 
 		if (mob.getEntityType() == e.getType()) {
 			return mob;
-		}
-		return NULL_MOB;
-	}
-
-	public static AbstractMob<?> getMobByProjectile(ProjectileSource souce) {
-		if (souce instanceof LivingEntity) {
-			return getMob((LivingEntity)souce);
 		}
 		return NULL_MOB;
 	}

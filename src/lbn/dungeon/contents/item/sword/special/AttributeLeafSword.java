@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import lbn.item.ItemInterface;
-import lbn.mob.attribute.Attribute;
-import lbn.mob.attribute.AttributeTree;
 
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -89,10 +87,4 @@ public class AttributeLeafSword extends AbstractSpecialSword{
 	public String[] getDetail() {
 		return new String[]{"森の力が宿りし剣"};
 	}
-
-	@Override
-	public Attribute getAttribute() {
-		return new AttributeTree();
-	}
-
 }

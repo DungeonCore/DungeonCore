@@ -8,7 +8,7 @@ import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;

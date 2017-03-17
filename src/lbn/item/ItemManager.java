@@ -8,7 +8,6 @@ import java.util.Set;
 
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
-import lbn.item.implementation.GalionItem;
 import lbn.item.implementation.MagicStoneOre;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
@@ -18,7 +17,6 @@ import lbn.item.implementation.pic.IronPickaxe;
 import lbn.item.implementation.pic.StonePickaxe;
 import lbn.item.implementation.pic.WoodPickAxe;
 import lbn.item.slot.SlotInterface;
-import lbn.item.slot.magicGemstone.MagicGemstoneWrapper;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
@@ -33,11 +31,6 @@ public class ItemManager {
 	static HashMap<Class<?>, HashMap<String, ItemInterface>> allItemNameClassList = new HashMap<>();
 
 	static HashMap<Class<?>, HashMap<String, ItemInterface>> allItemIdClassList = new HashMap<>();
-
-	static {
-		registItem(GalionItem.getInstance(0));
-		registItem(MagicGemstoneWrapper.getAllItem());
-	}
 
 	public static void registItem(ItemInterface[] item) {
 		for (ItemInterface itemInterface : item) {

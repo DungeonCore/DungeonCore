@@ -8,15 +8,11 @@ import java.util.Random;
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.dungeon.contents.strength_template.BeneArmorStrengthTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
+import lbn.item.armoritem.ArmorStrengthTemplate;
 import lbn.item.armoritem.old.ArmorMaterial;
-import lbn.item.armoritem.old.BeneEffectManager;
 import lbn.item.armoritem.old.BeneEffectType;
-import lbn.item.strength.StrengthOperator;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -72,7 +68,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
-		return new BeneArmorStrengthTemplate(getArmorMaterial());
+		return new ArmorStrengthTemplate();
 	}
 
 	@Override
@@ -93,29 +89,7 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 
 	@Override
 	protected List<String> getBaseDefanceDetail() {
-		int base = 2;
-		int boss = 4;
-		switch (getArmorMaterial()) {
-		case DIAMOND:
-			base++;
-			boss++;
-		case IRON:
-			base++;
-			boss++;
-		case CHAINMAIL:
-			base++;
-			boss++;
-		case GOLD:
-			base++;
-			boss++;
-		case LEATHER:
-			base++;
-			boss++;
-		default:
-			break;
-		}
-
-		return Arrays.asList(Message.getMessage("防御力: ● × {0}", base), Message.getMessage("ボスに対しての防御力: ● × {0}", boss));
+		return new ArrayList<String>();
 	}
 
 	@Override
@@ -161,61 +135,15 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
-		ArrayList<BeneEffectType> beneEffectList = BeneEffectManager.getBeneEffectList(ItemStackUtil.getLore(event.getItem()));
-
-		//unknownが付いている時はランダムで付与する
-		if (beneEffectList.contains(BeneEffectType.BENE_EFFECT_UNKNOW)) {
-			List<String> newLore = ItemStackUtil.getLore(event.getItem());
-			//全ての強化情報を削除
-			StrengthOperator.removedStrengthLore(newLore);
-			int beneSize = 1;
-			int nextInt = rnd.nextInt(100);
-			if (nextInt < 80) {
-				beneSize = 1;
-			} else if (nextInt < 95){
-				beneSize = 2;
-			} else {
-				beneSize = 3;
-			}
-			ArrayList<String> newEffectLore = BeneEffectManager.getNewEffectLore(beneSize);
-			//強化情報(Bene)を付与
-			StrengthOperator.addStrengthLore(newEffectLore, newLore);
-
-			//Loreを更新
-			ItemStackUtil.setLore(event.getItem(), newLore);
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public void onChangeStrengthLevelItemEvent(
-			ChangeStrengthLevelItemEvent event) {
-		List<String> newLore = ItemStackUtil.getLore(event.getAfter());
-		//beforeのbeneを取得
-		ArrayList<BeneEffectType> beforeBeneList = BeneEffectManager.getBeneEffectList(ItemStackUtil.getLore(event.getBefore()));
-
-		//bene情報が付いている時はつける
-		if (!beforeBeneList.isEmpty()) {
-			//全ての強化情報を削除
-			StrengthOperator.removedStrengthLore(newLore);
-			//強化情報(Bene)を付与
-			StrengthOperator.addStrengthLore(BeneEffectManager.getBeneLore(beforeBeneList, event.getNextLevel()), newLore);
-		}
-
-
-		ItemStackUtil.setLore(event.getAfter(), newLore);
 	}
 
 	@Override
-	public void extraDamageCut(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
-			LivingEntity mob) {
-		ArrayList<BeneEffectType> beneEffectList = BeneEffectManager.getBeneEffectList(ItemStackUtil.getLore(armor));
-		for (BeneEffectType beneEffectType : beneEffectList) {
-			beneEffectType.execute(me, e, armor, isArmorCutDamage, isBoss, mob, StrengthOperator.getLevel(armor));
-		}
+	public void onChangeStrengthLevelItemEvent(ChangeStrengthLevelItemEvent event) {
+	}
+
+	@Override
+	public void extraDamageCut(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob) {
 	}
 }

@@ -3,7 +3,7 @@ package lbn.item.craft;
 import lbn.item.ItemLoreToken;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 
 import org.bukkit.inventory.ItemStack;
 

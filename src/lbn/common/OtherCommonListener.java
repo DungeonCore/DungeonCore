@@ -8,7 +8,6 @@ import lbn.command.CommandChest;
 import lbn.command.CommandGiveItem;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.SimplySetSpawnPointCommand;
-import lbn.common.citizenNpc.CitizenNpcManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.other.BookshelfCommandRunner;
@@ -22,10 +21,9 @@ import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
 import lbn.item.attackitem.AbstractAttackItem;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.old.StrengthOperator;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.util.ItemStackUtil;
-import net.citizensnpcs.api.event.NPCSpawnEvent;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -261,11 +259,6 @@ public class OtherCommonListener implements Listener{
 	@EventHandler
 	public void onBrakeSponge(BlockBreakEvent e) {
 		MobSpawnerPointManager.onBrakeSponge(e);
-	}
-
-	@EventHandler
-	public void onNPCSpawnEvent(NPCSpawnEvent e) {
-		CitizenNpcManager.NPCSpawnEvent(e);
 	}
 
 	@EventHandler(priority=EventPriority.HIGHEST)

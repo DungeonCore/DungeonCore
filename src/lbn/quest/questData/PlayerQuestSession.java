@@ -10,7 +10,7 @@ import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
-import lbn.quest.quest.QuestType;
+import lbn.quest.abstractQuest.QuestType;
 import lbn.util.JavaUtil;
 
 import org.bukkit.Bukkit;
