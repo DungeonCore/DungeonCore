@@ -52,23 +52,9 @@ public class SpawnRunnable extends BukkitRunnable{
 
 			ArrayList<MobSpawnerPoint> spawnPointList = scheduler.getCurrentSpawnPoint();
 			for (MobSpawnerPoint spawnPoint : spawnPointList) {
-//				HashSet<String> maxSpawnedName = new HashSet<String>();
-				//指定されたスポーンポイントがロードされたチャンクに含まれていたらそのチャンク内のモブを調べる
 				if (loadedChunk.contains(new ChunkWrapper(spawnPoint))) {
 					spawnPointCount++;
-					//おそらくいらないので一旦コメントアウト
-//					//すでに限界に達していたらスポーンしない
-//					if (maxSpawnedName.contains(spawnPoint.getName())) {
-//						continue;
-//					}
-					//mobをスポーンさせる
-//					int spawnCount =
 					spawnMpbCount += spawnPoint.spawnMob();
-					//おそらくいらないので一旦コメントアウト
-//					//スポーンしたMobが０ならこれ以上スポーンしないと考える
-//					if (spawnCount == 0) {
-//						maxSpawnedName.add(spawnPoint.getName());
-//					}
 				}
 			}
 			schedulerDetail.put(level, StringUtils.join(new Object[]{"TRUE:spawnpoint(", spawnPointCount, "), spawnmob(", spawnMpbCount, ")"}));

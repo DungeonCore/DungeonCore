@@ -2,6 +2,8 @@ package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
 import lbn.mob.mob.abstractmob.AbstractWitch;
+import lbn.util.JavaUtil;
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
@@ -9,13 +11,21 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 
+	private LbnMobTag tag;
+
 	public CustomWitch(World w) {
+		this(w, new LbnMobTag(EntityType.WITCH));
+	}
+
+	public CustomWitch(World w, LbnMobTag tag) {
 		super(w);
+		this.tag = tag;
 	}
 
 	boolean isChangeItem = true;
@@ -33,8 +43,10 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
+		 spawnLocation = loc;
 		 return (Witch) getBukkitEntity();
 	}
+	Location spawnLocation = null;
 
 //	@Override
 //	public boolean N() {
@@ -81,6 +93,39 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 	}
 
 	boolean isIgnoreWater = false;
+
+	@Override
+	public LbnMobTag getMobTag() {
+		return tag;
+	}
+
+	int spawnCount = 0;
+
+	@Override
+	protected void D() {
+		super.D();
+
+		if (getMobTag() == null) {
+			return;
+		}
+
+		//指定した距離以上離れていたら殺す
+		spawnCount++;
+		if (spawnCount >= 60) {
+			spawnCount = 0;
+			if (spawnLocation == null) {
+				return;
+			}
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < 100 * 100) {
+				return;
+			}
+			if (getMobTag().isBoss()) {
+				getBukkitEntity().teleport(spawnLocation);
+			} else {
+				die();
+			}
+		}
+	}
 
 //	@Override
 //	public void e() {

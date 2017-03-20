@@ -47,7 +47,7 @@ public class SpawnScheduler {
 	}
 
 	/**
-	 * スポーンポイントをセットする
+	 * スケジューラにスポーンポイントをセットする
 	 * @param spawnPoint
 	 */
 	public void addSpawnPoint(MobSpawnerPoint spawnPoint) {
@@ -97,5 +97,11 @@ public class SpawnScheduler {
 
 	public int getSize() {
 		return spawnPointList.size() - willDeleteList.size();
+	}
+
+	public void clear() {
+		spawnPointList.clear();
+		currentSpawnPointList.clear();
+		willDeleteList.clear();
 	}
 }

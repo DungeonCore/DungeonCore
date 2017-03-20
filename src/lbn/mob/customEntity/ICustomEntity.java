@@ -1,7 +1,12 @@
 package lbn.mob.customEntity;
 
-import org.bukkit.Location;
+import lbn.util.spawn.LbnMobTag;
 
-public interface ICustomEntity<T> {
+import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
+
+public interface ICustomEntity<T extends LivingEntity> {
 	public T spawn(Location loc);
+
+	public LbnMobTag getMobTag();
 }

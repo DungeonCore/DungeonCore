@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomEntity;
 import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.util.JavaUtil;
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityIronGolem;
@@ -23,13 +25,21 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Spider>{
 
+	private LbnMobTag tag;
+
 	public CustomPigZombie(World world) {
+		this(world, new LbnMobTag(EntityType.PIG_ZOMBIE));
+	}
+
+	public CustomPigZombie(World world, LbnMobTag tag) {
 		super(world);
+		this.tag = tag;
 		Field field2;
 		try {
 			field2 = EntityInsentient.class.getDeclaredField("goalSelector");
@@ -60,8 +70,10 @@ public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Sp
 
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
+		 spawnLocation = loc;
 		 return (Spider) getBukkitEntity();
 	}
+	Location spawnLocation = null;
 
 	protected void n() {
 		this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
@@ -105,5 +117,38 @@ public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Sp
 	}
 
 	boolean isIgnoreWater = false;
+
+	@Override
+	public LbnMobTag getMobTag() {
+		return tag;
+	}
+
+	int spawnCount = 0;
+
+	@Override
+	protected void D() {
+		super.D();
+
+		if (getMobTag() == null) {
+			return;
+		}
+
+		//指定した距離以上離れていたら殺す
+		spawnCount++;
+		if (spawnCount >= 60) {
+			spawnCount = 0;
+			if (spawnLocation == null) {
+				return;
+			}
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+				return;
+			}
+			if (getMobTag().isBoss()) {
+				getBukkitEntity().teleport(spawnLocation);
+			} else {
+				die();
+			}
+		}
+	}
 
 }

@@ -54,11 +54,12 @@ public abstract class TheLowMerchant {
 	abstract public String getName();
 
 	/**
-	 * Result欄にアイテムが表示された時の処理
+	 * Result欄にアイテムが表示された時の処理。nullなら取引できない
 	 *
 	 * @param recipe
+	 * @return TODO
 	 */
-	abstract public void onShowResult(TheLowMerchantRecipe recipe);
+	abstract public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe);
 
 	/**
 	 * レシピのパケットを送信する
@@ -85,5 +86,14 @@ public abstract class TheLowMerchant {
 	 */
 	abstract public List<TheLowMerchantRecipe> getInitRecipes();
 
+	/**
+	 * 現在開いているレシピのリストを取得
+	 * @return
+	 */
 	abstract public MerchantRecipeListImplemention getNowRecipeList();
+
+	/**
+	 * 取引が終了した時
+	 */
+	abstract public void onFinishTrade(TheLowMerchantRecipe recipe);
 }

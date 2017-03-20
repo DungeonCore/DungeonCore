@@ -1,6 +1,7 @@
 package lbn.util.spawn;
 
 import lbn.mob.AIType;
+import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -34,7 +35,27 @@ public class LbnMobTag {
 
 	boolean isSummonMob = false;
 
-	AIType aiType = AIType.NORMAL;
+	AIType aiType = null;
+
+	boolean isBoss = false;
+
+	double removeDistance = 100;
+
+	public double getRemoveDistance() {
+		return removeDistance;
+	}
+
+	public boolean isBoss() {
+		return isBoss;
+	}
+
+	public void setRemoveDistance(double removeDistance) {
+		this.removeDistance = removeDistance;
+	}
+
+	public void setBoss(boolean isBoss) {
+		this.isBoss = isBoss;
+	}
 
 	public void setRiding(boolean isRiding) {
 		this.isRiding = isRiding;
@@ -179,6 +200,13 @@ public class LbnMobTag {
 	 * @return
 	 */
 	public AIType getAiType() {
+		if (aiType == null) {
+			if (LivingEntityUtil.isAnimal(getType())) {
+				aiType =  AIType.NO_ATACK;
+			} else {
+				aiType= AIType.NORMAL;
+			}
+		}
 		return aiType;
 	}
 

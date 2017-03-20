@@ -27,6 +27,8 @@ import org.bukkit.entity.EntityType;
 public class AttackAISetter {
 	public static void setAttackAI(EntityInsentient e, LbnMobTag tag) {
 		switch (tag.getAiType()) {
+		case NO_ATACK:
+			break;
 		case NORMAL:
 			setNormalAI(e, tag);
 			break;

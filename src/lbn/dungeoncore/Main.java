@@ -14,12 +14,14 @@ import lbn.common.other.SystemLog;
 import lbn.item.ItemListener;
 import lbn.item.SetItemListner;
 import lbn.mob.MobListener;
+import lbn.mob.customEntity1_8.CustomBat;
 import lbn.mob.customEntity1_8.CustomEnderman;
 import lbn.mob.customEntity1_8.CustomGiant;
 import lbn.mob.customEntity1_8.CustomGuardian;
 import lbn.mob.customEntity1_8.CustomPig;
 import lbn.mob.customEntity1_8.CustomPigZombie;
 import lbn.mob.customEntity1_8.CustomSkeleton;
+import lbn.mob.customEntity1_8.CustomSlime;
 import lbn.mob.customEntity1_8.CustomSpider;
 import lbn.mob.customEntity1_8.CustomVillager;
 import lbn.mob.customEntity1_8.CustomWitch;
@@ -33,12 +35,14 @@ import lbn.quest.QuestListener;
 import lbn.util.DungeonLogger;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
+import net.minecraft.server.v1_8_R1.EntityBat;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.EntityGuardian;
 import net.minecraft.server.v1_8_R1.EntityPig;
 import net.minecraft.server.v1_8_R1.EntityPigZombie;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
+import net.minecraft.server.v1_8_R1.EntitySlime;
 import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
@@ -85,6 +89,8 @@ public class Main extends JavaPlugin {
 			NMSUtils.registerEntity("PigZombie", 57, EntityPigZombie.class, CustomPigZombie.class);
 			NMSUtils.registerEntity("Giant", 53, EntityGiantZombie.class, CustomGiant.class);
 			NMSUtils.registerEntity("Guardian", 68, EntityGuardian.class, CustomGuardian.class);
+			NMSUtils.registerEntity("Slime", 55, EntitySlime.class, CustomSlime.class);
+			NMSUtils.registerEntity("Bat", 65, EntityBat.class, CustomBat.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -16,6 +16,7 @@ import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerJoinDungeonGameEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
 import lbn.item.implementation.MagicStoneOre;
@@ -459,7 +460,23 @@ public class PlayerListener implements Listener{
 				}
 			}
 		}
+
 	}
+	@EventHandler
+	public void onPlayerStrengthFinishEvent2 (PlayerStrengthFinishEvent e) {
+		//成功
+		Player p = e.getPlayer();
+		if (e.isSuccess()) {
+			//成功の時は何もしない
+			p.sendMessage(ChatColor.BLUE + "強化に成功しました");
+			p.playSound(p.getLocation(), Sound.ANVIL_USE, 1, 1);
+		//失敗
+		} else {
+			p.sendMessage(ChatColor.RED + "強化に失敗しました");
+			p.playSound(p.getLocation(), Sound.ITEM_BREAK, 1f, 1f);
+		}
+	}
+
 
 	public static void updateSidebar(Player p) {
 //		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();

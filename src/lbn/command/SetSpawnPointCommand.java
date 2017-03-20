@@ -149,31 +149,6 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter{
 	}
 
 	protected boolean listOperate(CommandSender arg0, String[] arg3, Location loc) {
-		//試験用に出力を変えるためにコメントアウト
-//		String range = "all";
-//		if (arg3.length >= 2) {
-//			range = arg3[1];
-//		}
-//
-//		Collection<MobSpawnerPoint> spawnerPointList = null;
-//		if ("all".equalsIgnoreCase(range)) {
-//			spawnerPointList = MobSpawnerPointManager.getAllSpawnerPointList();
-//		} else if ("here".equalsIgnoreCase(range)){
-//			spawnerPointList = MobSpawnerPointManager.getSpawnerPointListByChunk(loc.getChunk());
-//		} else if ("loadedChunk".equalsIgnoreCase(range)) {
-//			spawnerPointList = MobSpawnerPointManager.getSpawnerPointListByLoadedChunk();
-//		}
-//
-//		if (spawnerPointList == null) {
-//			arg0.sendMessage(ChatColor.RED + "指定された範囲が不正です:" + range);
-//			return false;
-//		}
-//
-//		arg0.sendMessage(ChatColor.GREEN + "========spwan point list========");
-//		for (MobSpawnerPoint spawnerPoint : MobSpawnerPointManager.getAllSpawnerPointList()) {
-//			arg0.sendMessage(MobSpawnerPointManager.getSerialNumber(spawnerPoint) + ", " + spawnerPoint.getView());
-//		}
-//		arg0.sendMessage(ChatColor.GREEN + "========spwan point list========");
 		arg0.sendMessage(ChatColor.GREEN + "========spwan point info========");
 		arg0.sendMessage("全スポーンポイント : " + MobSpawnerPointManager.getAllSpawnerPointList().size());
 		arg0.sendMessage("ロード済みスポーンポイント : " + MobSpawnerPointManager.getSpawnerPointListByLoadedChunk().size());

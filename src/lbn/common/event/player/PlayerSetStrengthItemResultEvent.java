@@ -15,10 +15,13 @@ public class PlayerSetStrengthItemResultEvent extends PlayerEvent{
 
 	int nextLevel;
 
-	public PlayerSetStrengthItemResultEvent(Player who, ItemStack item, int nextLevel) {
+	private boolean isSuccess;
+
+	public PlayerSetStrengthItemResultEvent(Player who, ItemStack item, int nextLevel, boolean isSuccess) {
 		super(who);
 		this.item = item;
 		this.nextLevel = nextLevel;
+		this.isSuccess = isSuccess;
 	}
 
 	public ItemStack getItem() {
@@ -42,5 +45,9 @@ public class PlayerSetStrengthItemResultEvent extends PlayerEvent{
 
 	public static HandlerList getHandlerList() {
 		return handlers;
+	}
+
+	public boolean isSuccess() {
+		return isSuccess;
 	}
 }

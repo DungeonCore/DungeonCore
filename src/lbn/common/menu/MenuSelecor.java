@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import lbn.item.repair.newrepair.RepairUi;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.old.StrengthTableOperation;
+import lbn.item.strength.StrengthTables;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
@@ -98,7 +98,7 @@ public class MenuSelecor implements MenuSelectorInterface{
 				new SelectRunnable() {
 			@Override
 			public void run(Player p, ItemStack item) {
-				StrengthTableOperation.openStrengthTable(p);
+				StrengthTables.openStrengthTable(p);
 			}
 		});
 

@@ -133,6 +133,10 @@ public class CommandViewInfo implements CommandExecutor{
 				buffFromId.addBuff((Player) paramCommandSender);
 			}
 			break;
+		case "xyz":
+			String command = "tellraw " + target.getName() +" {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + target.getLocation().getBlockX() + " " + target.getLocation().getBlockY()+ " " + target.getLocation().getBlockZ() + "\"}}";
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+			break;
 		case "particle":
 			ParticleData particle = ParticleManager.getParticleData(paramArrayOfString[1]);
 			if (particle != null) {

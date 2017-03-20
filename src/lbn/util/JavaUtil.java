@@ -124,6 +124,24 @@ public class JavaUtil {
 	}
 
 	/**
+	 * Privateなメソッドに値を挿入する
+	 * @param target_object
+	 * @param field_name
+	 * @param value
+	 * @throws Exception
+	 */
+	public static void setPrivateField(Object target_object, String field_name, Object value){
+		try {
+			Class<?> c = target_object.getClass();
+			Field fld = c.getDeclaredField(field_name);
+			fld.setAccessible(true);
+			fld.set(target_object, value);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 *
 		//http://wiki.vg/Protocol#Sound_Effect
 	 * @param center
@@ -155,6 +173,18 @@ public class JavaUtil {
 		if (!c.isLoaded()) {
 			c.load();
 		}
+	}
+
+	/**
+	 * 指定された座標間の距離の2乗を返す
+	 * @param loc
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public static double getDistanceSquared(Location loc, double x, double y, double z) {
+		return loc.getX() * x + loc.getY() * y + loc.getZ() * z;
 	}
 }
 

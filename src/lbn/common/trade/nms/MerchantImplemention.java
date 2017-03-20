@@ -1,6 +1,7 @@
 package lbn.common.trade.nms;
 
 import lbn.common.trade.TheLowMerchant;
+import lbn.common.trade.TheLowMerchantRecipe;
 import net.minecraft.server.v1_8_R1.ChatMessage;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
@@ -23,9 +24,10 @@ public class MerchantImplemention implements IMerchant{
 	}
 
 	EntityHuman e;
+
 	@Override
 	public void a(MerchantRecipe paramMerchantRecipe) {
-		//取引完了
+		merchant.onFinishTrade(new TheLowMerchantRecipe(paramMerchantRecipe));
 	}
 
 	@Override

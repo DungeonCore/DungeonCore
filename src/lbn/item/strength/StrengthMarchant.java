@@ -1,120 +1,102 @@
 package lbn.item.strength;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
+import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.trade.TheLowMerchant;
 import lbn.common.trade.TheLowMerchantRecipe;
 import lbn.common.trade.nms.MerchantRecipeListImplemention;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.ItemManager;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
-import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.old.StrengthOperator;
+import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
+import lbn.util.JavaUtil;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class StrengthMarchant extends TheLowMerchant{
+	public StrengthMarchant(Player p, TheLowPlayer thelowPlayer) {
+		super(p);
+		this.theLowPlayer = thelowPlayer;
+	}
+	TheLowPlayer theLowPlayer;
+
+	StrengthData strengthData = null;
 
 	//武器の強化スクロール
 	private static final ItemStack WEAPON_SCROLL = new StrengthScrollWeapon().getItem();
 	//防具の強化スクロール
 	private static final ItemStack ARMOR_SCROLL = new StrengthScrollArmor().getItem();
 
-	public StrengthMarchant(Player p) {
-		super(p);
-	}
-
 	@Override
 	protected void onSetItem(InventoryView inv) {
-		ItemStack item1 = inv.getItem(0);
+		Inventory topInventory = inv.getTopInventory();
 
-		Strengthenable customItem = ItemManager.getCustomItem(Strengthenable.class, item1);
-		//強化出来ないアイテムなら何もしない
-		if (customItem == null) {
-			sendRecipeList(getInitRecipes());
-			return;
-		}
-
-		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-		if (theLowPlayer == null) {
-			//ロードされていない時は何もしない
-			return;
-		}
-
-		//現在のレベル
-		int nowLevel = StrengthOperator.getLevel(item1);
-		ItemStack item2 = inv.getItem(1);
-
-		//もし強化できるならレシピをセットする
-		if (canStrength(customItem, theLowPlayer, nowLevel + 1, item2, item1)) {
-			ItemStack result = item1.clone();
-			//強化後のアイテムを取得する
-			StrengthOperator.updateLore(result, nowLevel + 1);
-			TheLowMerchantRecipe newRecipe = new TheLowMerchantRecipe(item1, customItem.getStrengthTemplate().getStrengthMaterials(nowLevel + 1), result);
-			//レシピをセットする
-			sendRecipeList(Arrays.asList(newRecipe));
-			nowRecipeType = NowRecipeType.ITEM;
+		//強化データをセットする
+		if (strengthData == null) {
+			strengthData = new StrengthData(topInventory.getItem(0));
 		} else {
-			//初期レシピをセットする
+			strengthData.setItem1(topInventory.getItem(0));
+		}
+
+		//表示するレシピを取得する
+		MerchantRecipeCreator merchantRecipeCreator = new MerchantRecipeCreator(topInventory.getItem(0), topInventory.getItem(1), theLowPlayer, strengthData);
+		List<TheLowMerchantRecipe> strengthItemRecipe = merchantRecipeCreator.getStrengthItemRecipe();
+		if (strengthItemRecipe == null) {
 			sendRecipeList(getInitRecipes());
-			nowRecipeType = NowRecipeType.INIT;
-		}
-	}
-
-	NowRecipeType nowRecipeType = NowRecipeType.INIT;
-
-	/**
-	 * 強化できるならTRUEを返す
-	 * @param customItem 強化するアイテム
-	 * @param theLowPlayer 強化しているPlayer
-	 * @param nextLevel 強化後のレベル
-	 * @param item2 強化素材アイテムとしてセットされているアイテム
-	 * @return
-	 */
-	public boolean canStrength(Strengthenable customItem, TheLowPlayer theLowPlayer, int nextLevel, ItemStack item2, ItemStack item1) {
-		//最大強化回数を取得
-		if (nextLevel > customItem.getMaxStrengthCount()) {
-			return false;
+		} else {
+			sendRecipeList(strengthItemRecipe);
 		}
 
-		StrengthTemplate strengthTemplate = customItem.getStrengthTemplate();
-		//お金を調べる
-		if (theLowPlayer.getGalions() < strengthTemplate.getStrengthGalions(nextLevel)) {
-			return false;
-		}
-
-		//強化に必要なアイテムを取得
-		ItemStack strengthMaterial = strengthTemplate.getStrengthMaterials(nextLevel);
-
-		//素材アイテムが必要なく、また素材アイテムがセットされていないなら問題なし
-		if (ItemStackUtil.isEmpty(strengthMaterial) && ItemStackUtil.isEmpty(item2)) {
-			return true;
-		}
-
-		//同じアイテム　かつ　個数が必要以上ある場合
-		if (strengthMaterial.isSimilar(item2) && strengthMaterial.getAmount() <= item2.getAmount()) {
-			return true;
-		}
-		return false;
+		p.updateInventory();
 	}
 
 	@Override
 	public String getName() {
-		return "strength";
+		return "アイテム強化";
 	}
 
+
 	@Override
-	public void onShowResult(TheLowMerchantRecipe recipe) {
-		//ランダムにする
+	public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe) {
+		if (!strengthData.isCanStrength()) {
+			return null;
+		}
+
+		//念のため、バリアブロックならTRUE
+		if (recipe.getResult() != null && recipe.getResult().getType() == Material.BARRIER) {
+			return null;
+		}
+
+		//成功率
+		int successChance = strengthData.getSuccessChance();
+		boolean isSuccess = JavaUtil.isRandomTrue(successChance);
+		strengthData.setSuccessStrength(isSuccess);
+
+		ItemStack result2 = recipe.getBuy1();
+		int nextLevel = StrengthOperator.getLevel(result2) + 1;
+		if (isSuccess) {
+			//成功
+			StrengthOperator.updateLore(result2, nextLevel);
+		} else {
+			//失敗
+			StrengthOperator.updateLore(result2, 0);
+		}
+
+		PlayerSetStrengthItemResultEvent event = new PlayerSetStrengthItemResultEvent(p, result2, nextLevel, isSuccess);
+		Bukkit.getPluginManager().callEvent(event);
+
+		recipe.setResult(event.getItem());
+		return recipe;
 	}
 
 	@Override
@@ -154,8 +136,14 @@ public class StrengthMarchant extends TheLowMerchant{
 			nowRecipeList.addTheLowRecipe(theLowMerchantRecipe);
 		}
 	}
+
+	@Override
+	public void onFinishTrade(TheLowMerchantRecipe recipe) {
+		//お金を消費する
+		theLowPlayer.setGalions(theLowPlayer.getGalions() - strengthData.getNeedMoney(), GalionEditReason.consume_strength);
+		//Eventを発生させる
+		PlayerStrengthFinishEvent playerStrengthFinishEvent = new PlayerStrengthFinishEvent(getPlayer(), strengthData.getNextLevel(), recipe.getResult(), strengthData.isSuccessStrength());
+		Bukkit.getPluginManager().callEvent(playerStrengthFinishEvent);
+	}
 }
 
-enum NowRecipeType {
-	INIT, ITEM
-}

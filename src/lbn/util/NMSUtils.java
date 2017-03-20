@@ -10,8 +10,17 @@ import net.minecraft.server.v1_8_R1.BiomeBase;
 import net.minecraft.server.v1_8_R1.BiomeMeta;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityTypes;
+import net.minecraft.server.v1_8_R1.ItemStack;
+import net.minecraft.server.v1_8_R1.MerchantRecipe;
 
 public class NMSUtils {
+	/**
+	 * オリジナルのEntityを登録する
+	 * @param name
+	 * @param id
+	 * @param nmsClass
+	 * @param customClass
+	 */
 	public static void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
 		try {
 			List<Map<?, ?>> dataMaps = new ArrayList<Map<?, ?>>();
@@ -56,6 +65,36 @@ public class NMSUtils {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *MerchantRecipeのPrivateフィールドにItemをセットする。<br />
+	 *index = 0 : buy1  <br />
+	 *index = 1 : buy2  <br />
+	 *index = 2 : result  <br />
+	 * @param recipe
+	 * @param item
+	 */
+	public static void setMerchantRecipe(MerchantRecipe recipe, ItemStack item, int index) {
+		String fieldName = null;
+		switch (index) {
+		case 0:
+			fieldName = "buyingItem1";
+			break;
+		case 1:
+			fieldName = "buyingItem2";
+			break;
+		case 2:
+			fieldName = "sellingItem";
+			break;
+		default:
+			break;
+		}
+		if (fieldName != null) {
+			JavaUtil.setPrivateField(recipe, fieldName, item);
+		} else {
+			throw new RuntimeException("index is invaild : "+ index);
 		}
 	}
 }

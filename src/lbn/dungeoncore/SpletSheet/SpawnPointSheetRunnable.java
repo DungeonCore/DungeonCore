@@ -120,6 +120,8 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
+	  MobSpawnerPointManager.clear();
+
     super.onCallbackFunction(submit);
 
     for (World world : Bukkit.getWorlds()) {

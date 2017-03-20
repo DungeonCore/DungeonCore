@@ -68,6 +68,8 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 		CommandableMob commandableMob = new CommandableMob(nbtTag, command, name);
 
+		nbtTag.setBoss(false);
+
 		AbstractMob<?> mob2 = MobHolder.getMob(name);
 		if (mob2 != null && !mob2.isNullMob() && !(mob2 instanceof CommandableMob)) {
 			commandableMob.mob = mob2;

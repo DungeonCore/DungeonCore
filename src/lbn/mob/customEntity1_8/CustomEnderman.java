@@ -1,6 +1,8 @@
 package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
+import lbn.util.JavaUtil;
+import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
@@ -9,12 +11,20 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomEnderman extends EntityEnderman implements ICustomEntity<Enderman>{
 
-	public CustomEnderman(World world) {
+	private LbnMobTag tag;
+
+	public CustomEnderman(World world, LbnMobTag tag) {
 		super(world);
+		this.tag = tag;
+
+	}
+	public CustomEnderman(World world) {
+		this(world, new LbnMobTag(EntityType.ENDERMAN));
 	}
 
 	int newBt = 0;
@@ -47,8 +57,11 @@ public class CustomEnderman extends EntityEnderman implements ICustomEntity<Ende
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
+		 spawnLocation = loc;
 		 return (Enderman) getBukkitEntity();
 	}
+
+	Location spawnLocation = null;
 
 	@Override
 	public void a(NBTTagCompound nbttagcompound) {
@@ -76,5 +89,38 @@ public class CustomEnderman extends EntityEnderman implements ICustomEntity<Ende
 	}
 
 	boolean isIgnoreWater = false;
+
+	@Override
+	public LbnMobTag getMobTag() {
+		return tag;
+	}
+
+	int spawnCount = 0;
+
+	@Override
+	protected void D() {
+		super.D();
+
+		if (getMobTag() == null) {
+			return;
+		}
+
+		//指定した距離以上離れていたら殺す
+		spawnCount++;
+		if (spawnCount >= 60) {
+			spawnCount = 0;
+			if (spawnLocation == null) {
+				return;
+			}
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+				return;
+			}
+			if (getMobTag().isBoss()) {
+				getBukkitEntity().teleport(spawnLocation);
+			} else {
+				die();
+			}
+		}
+	}
 
 }

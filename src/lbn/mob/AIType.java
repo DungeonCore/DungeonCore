@@ -1,7 +1,7 @@
 package lbn.mob;
 
 public enum AIType {
-	NORMAL("通常AI"), SHORT_LONG("近遠両方"), LONG1("遠距離(弱)"), LONG2("遠距離(強)");
+	NO_ATACK("攻撃しない"), NORMAL("通常AI"), SHORT_LONG("近遠両方"), LONG1("遠距離(弱)"), LONG2("遠距離(強)");
 
 	String name;
 

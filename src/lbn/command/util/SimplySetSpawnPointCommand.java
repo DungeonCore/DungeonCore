@@ -157,6 +157,9 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 			p.sendMessage("これ以上、UNDOできません。");
 			return;
 		}
+
+		//ピンク羊毛を削除する
+		mobLocation.setBlock(Material.AIR, 0);
 		create.remove(p, mobLocation);
 		lastSet.remove(p);
 		p.sendMessage("一件undoしました。");
@@ -198,6 +201,9 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 	}
 
 	protected void clear(Player p) {
+		for (MobLocation spawnLoc : create.get(p)) {
+			spawnLoc.setBlock(Material.AIR, 0);
+		}
 		create.removeAll(p);
 		lastSet.remove(p);
 		begin.remove(p);
@@ -296,7 +302,6 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 			return;
 		}
 
-
 		MobLocation mobLocation = new MobLocation(e.getEntity().getLocation());
 		//mobの存在チェック
 		List<String> lore = ItemStackUtil.getLore(itemInHand);
@@ -313,6 +318,8 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		}
 
 		create.put(p, mobLocation);
+		//仮登録した場所にはピンクの羊毛を置く
+		mobLocation.setBlock(Material.WOOL, 6);
 		int size = create.get(p).size();
 
 		lastSet.put(p, mobLocation);
@@ -376,5 +383,11 @@ class MobLocation {
 
 	public  List<AbstractMob<?>> getMobList() {
 		return mobList;
+	}
+
+	@SuppressWarnings("deprecation")
+	public void setBlock(Material m, int data) {
+		loc.getBlock().setType(m);
+		loc.getBlock().setData((byte) data);;
 	}
 }

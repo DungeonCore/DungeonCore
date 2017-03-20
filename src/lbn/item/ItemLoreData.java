@@ -104,6 +104,18 @@ public class ItemLoreData {
 		beforeDetail = new ArrayList<String>(line);
 	}
 
+	public void addAfter(String line) {
+		afterDetail.add(line);
+	}
+
+	public void addAfter(List<String> line) {
+		afterDetail.addAll(line);
+	}
+
+	public void setAfter(List<String> line) {
+		afterDetail = new ArrayList<String>(line);
+	}
+
 	/**
 	 * Loreを取得する
 	 * @param item

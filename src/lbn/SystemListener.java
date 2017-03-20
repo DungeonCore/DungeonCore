@@ -72,9 +72,9 @@ public class SystemListener implements Listener {
     Player player = e.getPlayer();
     PlayerIODataManager.load(player);
 
-    if (!MobSpawnerPointManager.isRunSpawnManage()) {
-      MobSpawnerPointManager.startSpawnManage();
-    }
+//    if (!MobSpawnerPointManager.isRunSpawnManage()) {
+//      MobSpawnerPointManager.startSpawnManage();
+//    }
   }
 
   @EventHandler

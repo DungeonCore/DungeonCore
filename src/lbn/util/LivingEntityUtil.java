@@ -26,14 +26,12 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftAnimals;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftMonster;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.Animals;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -59,18 +57,18 @@ public class LivingEntityUtil {
 			}
 		}
 
-		//動物ならFALSE
-		if (e instanceof Animals) {
-			//狼で怒っていないならFALSE
-			if (type == EntityType.WOLF) {
-				if (!((Wolf)e).isAngry()) {
-					return false;
-				}
-			} else {
-				//狼でないならFALSE
-				return false;
-			}
-		}
+//		//動物ならFALSE
+//		if (e instanceof Animals) {
+//			//狼で怒っていないならFALSE
+//			if (type == EntityType.WOLF) {
+//				if (!((Wolf)e).isAngry()) {
+//					return false;
+//				}
+//			} else {
+//				//狼でないならFALSE
+//				return false;
+//			}
+//		}
 
 		//NPCならTRUE
 		if (NpcManager.isNpc(e)) {
@@ -343,4 +341,27 @@ public class LivingEntityUtil {
 				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}
 		}
+
+	public static boolean isAnimal(EntityType type) {
+		if (type == null) {
+			return false;
+		}
+
+		switch (type) {
+		case COW:
+		case BAT:
+		case SHEEP:
+		case PIG:
+		case CHICKEN:
+		case SQUID:
+		case WOLF:
+		case MUSHROOM_COW:
+		case OCELOT:
+		case HORSE:
+		case RABBIT:
+			return true;
+		default:
+			return false;
+		}
+	}
 }

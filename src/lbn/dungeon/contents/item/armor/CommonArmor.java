@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
@@ -246,11 +245,6 @@ public class CommonArmor extends OldAbstractArmor implements StrengthChangeItema
 	@Override
 	public String[] getDetail() {
 		return null;
-	}
-
-	@Override
-	public void onChangeStrengthLevelItemEvent(
-			ChangeStrengthLevelItemEvent event) {
 	}
 
 	Random rnd = new Random();

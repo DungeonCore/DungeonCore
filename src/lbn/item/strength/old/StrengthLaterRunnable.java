@@ -3,22 +3,16 @@ package lbn.item.strength.old;
 import java.util.ArrayList;
 
 import lbn.api.player.TheLowPlayer;
-import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeoncore.Main;
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.Strengthenable;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class StrengthLaterRunnable extends BukkitRunnable{
@@ -34,77 +28,77 @@ public class StrengthLaterRunnable extends BukkitRunnable{
 
 	@Override
 	public void run() {
-		ItemStack item1 = top.getItem(4);
-		ItemStack item2 = top.getItem(6);
-
-		ItemStack strengthItem = null;
-		if (StrengthOperator.allowWithStrength(item1) && StrengthOperator.canStrength(item2))  {
-			//item2を強化するとき
-			strengthItem = item2;
-		} else if (StrengthOperator.allowWithStrength(item2)&& StrengthOperator.canStrength(item1))  {
-			//item1を強化するとき
-			strengthItem = item1;
-		}
-
-		//強化対象のアイテム以外がセットされている場合は何もしない
-		if (strengthItem == null) {
-			top.setItem(5, StrengthTableOperation.redGlass);
-			return;
-		}
-		int nowLevel = StrengthOperator.getLevel(strengthItem);
-
-		//完成形のアイテム
-		ItemStack item = StrengthOperator.getItem(getCloneItem(strengthItem), nowLevel + 1);
-
-		//完成形のアイテムが存在しないなら何もしない
-		if (item == null) {
-			return;
-		}
-		//個数は必ず1
-		item.setAmount(1);
-
-		Strengthenable customItem = ItemManager.getCustomItem(Strengthenable.class, item);
-		if (customItem == null) {
-			//起こりえないが念のため
-			return;
-		}
-
-		StrengthTemplate template = customItem.getStrengthTemplate();
-		//最大レベルを上回っているかどうか確認
-		if (nowLevel + 1 > customItem.getMaxStrengthCount()) {
-			top.setItem(5, getMaxLevelRedGlass());
-			return;
-		}
-
-		//強化素材のチェック
-		MaterialCheck materialCheck = new MaterialCheck((Player) e.getWhoClicked(), template, nowLevel + 1, theLowPlayer);
-
-		ItemStack updateRedGlass = getUpdateRedGlass(template, StrengthOperator.getLevel(item), materialCheck);
-		top.setItem(5, updateRedGlass);
-
-		//材料が足りない時は強化できない
-		if (!materialCheck.canStrength()) {
-			return;
-		}
-
-		PlayerSetStrengthItemResultEvent event = new PlayerSetStrengthItemResultEvent((Player) e.getWhoClicked(), item, nowLevel + 1);
-		Bukkit.getServer().getPluginManager().callEvent(event);
-
-		//アイテムをセットする
-		top.setResult(event.getItem());
-
-		//メタデータをいれておく
-		ItemStack clone = strengthItem.clone();
-		clone.setAmount(1);
-		e.getWhoClicked().setMetadata("material_strength_item", new FixedMetadataValue(Main.plugin, clone));
-		e.getWhoClicked().setMetadata("next_strength_level", new FixedMetadataValue(Main.plugin, nowLevel + 1));
-		//完成形を表示させる
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				((Player)e.getWhoClicked()).updateInventory();
-			}
-		}.runTaskLater(Main.plugin, 3);
+//		ItemStack item1 = top.getItem(4);
+//		ItemStack item2 = top.getItem(6);
+//
+//		ItemStack strengthItem = null;
+//		if (StrengthOperator.allowWithStrength(item1) && StrengthOperator.canStrength(item2))  {
+//			//item2を強化するとき
+//			strengthItem = item2;
+//		} else if (StrengthOperator.allowWithStrength(item2)&& StrengthOperator.canStrength(item1))  {
+//			//item1を強化するとき
+//			strengthItem = item1;
+//		}
+//
+//		//強化対象のアイテム以外がセットされている場合は何もしない
+//		if (strengthItem == null) {
+//			top.setItem(5, StrengthTableOperation.redGlass);
+//			return;
+//		}
+//		int nowLevel = StrengthOperator.getLevel(strengthItem);
+//
+//		//完成形のアイテム
+//		ItemStack item = StrengthOperator.getItem(getCloneItem(strengthItem), nowLevel + 1);
+//
+//		//完成形のアイテムが存在しないなら何もしない
+//		if (item == null) {
+//			return;
+//		}
+//		//個数は必ず1
+//		item.setAmount(1);
+//
+//		Strengthenable customItem = ItemManager.getCustomItem(Strengthenable.class, item);
+//		if (customItem == null) {
+//			//起こりえないが念のため
+//			return;
+//		}
+//
+//		StrengthTemplate template = customItem.getStrengthTemplate();
+//		//最大レベルを上回っているかどうか確認
+//		if (nowLevel + 1 > customItem.getMaxStrengthCount()) {
+//			top.setItem(5, getMaxLevelRedGlass());
+//			return;
+//		}
+//
+//		//強化素材のチェック
+//		MaterialCheck materialCheck = new MaterialCheck((Player) e.getWhoClicked(), template, nowLevel + 1, theLowPlayer);
+//
+//		ItemStack updateRedGlass = getUpdateRedGlass(template, StrengthOperator.getLevel(item), materialCheck);
+//		top.setItem(5, updateRedGlass);
+//
+//		//材料が足りない時は強化できない
+//		if (!materialCheck.canStrength()) {
+//			return;
+//		}
+//
+//		PlayerSetStrengthItemResultEvent event = new PlayerSetStrengthItemResultEvent((Player) e.getWhoClicked(), item, nowLevel + 1);
+//		Bukkit.getServer().getPluginManager().callEvent(event);
+//
+//		//アイテムをセットする
+//		top.setResult(event.getItem());
+//
+//		//メタデータをいれておく
+//		ItemStack clone = strengthItem.clone();
+//		clone.setAmount(1);
+//		e.getWhoClicked().setMetadata("material_strength_item", new FixedMetadataValue(Main.plugin, clone));
+//		e.getWhoClicked().setMetadata("next_strength_level", new FixedMetadataValue(Main.plugin, nowLevel + 1));
+//		//完成形を表示させる
+//		new BukkitRunnable() {
+//			@Override
+//			public void run() {
+//				((Player)e.getWhoClicked()).updateInventory();
+//			}
+//		}.runTaskLater(Main.plugin, 3);
 	}
 
 	protected ItemStack getCloneItem(ItemStack strengthItem) {

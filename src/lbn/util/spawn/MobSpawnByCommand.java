@@ -1,12 +1,14 @@
 package lbn.util.spawn;
 
 import lbn.dungeoncore.LbnRuntimeException;
+import lbn.mob.customEntity1_8.CustomBat;
 import lbn.mob.customEntity1_8.CustomEnderDragon;
 import lbn.mob.customEntity1_8.CustomEnderman;
 import lbn.mob.customEntity1_8.CustomGiant;
 import lbn.mob.customEntity1_8.CustomPig;
 import lbn.mob.customEntity1_8.CustomPigZombie;
 import lbn.mob.customEntity1_8.CustomSkeleton;
+import lbn.mob.customEntity1_8.CustomSlime;
 import lbn.mob.customEntity1_8.CustomSpider;
 import lbn.mob.customEntity1_8.CustomWitch;
 import lbn.mob.customEntity1_8.CustomZombie;
@@ -117,10 +119,10 @@ public class MobSpawnByCommand {
 				entity = new CustomEnderDragon(world);
 				break;
 			case ENDERMAN:
-				entity = new CustomEnderman(world);
+				entity = new CustomEnderman(world, tag);
 				break;
 			case PIG:
-				entity = new CustomPig(world);
+				entity = new CustomPig(world, tag);
 				break;
 			case SKELETON:
 				entity = new CustomSkeleton(world, tag);
@@ -129,7 +131,7 @@ public class MobSpawnByCommand {
 				entity = new CustomSpider(world, tag);
 				break;
 			case WITCH:
-				entity = new CustomWitch(world);
+				entity = new CustomWitch(world, tag);
 				break;
 			case ZOMBIE:
 				entity = new CustomZombie(world, tag);
@@ -138,7 +140,13 @@ public class MobSpawnByCommand {
 				entity = new CustomPigZombie(world);
 				break;
 			case GIANT:
-				entity = new CustomGiant(world);
+				entity = new CustomGiant(world, tag);
+				break;
+			case SLIME:
+				entity = new CustomSlime(world, tag);
+				break;
+			case BAT:
+				entity = new CustomBat(world, tag);
 				break;
 			default:
 				updateFlg = false;

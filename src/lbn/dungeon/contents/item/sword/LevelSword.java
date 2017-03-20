@@ -1,7 +1,5 @@
 package lbn.dungeon.contents.item.sword;
 
-import lbn.dungeon.contents.strength_template.NormalWeaponStrengthTemplate;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.attackitem.old.SwordItemOld;
 import lbn.item.strength.old.StrengthOperator;
 

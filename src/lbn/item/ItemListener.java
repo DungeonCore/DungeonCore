@@ -3,7 +3,6 @@ package lbn.item;
 import java.util.ArrayList;
 
 import lbn.NbtTagConst;
-import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerKillEntityEvent;
@@ -182,16 +181,6 @@ public class ItemListener implements Listener{
 			customItem.onPlayerStrengthFinishEvent(event);
 		}
 	}
-
-	@EventHandler
-	public void onChangeStrengthLevelItemEvente(ChangeStrengthLevelItemEvent event) {
-		ItemStack item = event.getBefore();
-		StrengthChangeItemable customItem = ItemManager.getCustomItem(StrengthChangeItemable.class, item);
-		if (customItem != null) {
-			customItem.onChangeStrengthLevelItemEvent(event);
-		}
-	}
-
 
 	@EventHandler
 	public void closeCraftingTable(InventoryCloseEvent e) {

@@ -24,6 +24,7 @@ commands:
       usage: /<command> [command]
       permission: debug.viewinfo.view
       permission-message: You don't have <permission>
+      aliases: [tl]
    statusview:
       description: This is to show status.
       usage: /<command> [player]

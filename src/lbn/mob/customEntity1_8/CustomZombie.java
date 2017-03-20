@@ -2,6 +2,7 @@ package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.util.JavaUtil;
 import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
@@ -36,9 +37,13 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
     	this(world, new LbnMobTag(EntityType.ZOMBIE));
     }
 
+    LbnMobTag tag;
+
 	public CustomZombie(World world, LbnMobTag tag) {
     	super(world);
     	try {
+    		this.tag = tag;
+
     		isIgnoreWater = tag.isWaterMonster();
 
     		//全てのAIを取り除く
@@ -171,8 +176,10 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
+		 spawnLocation = loc;
 		 return (Zombie) getBukkitEntity();
 	}
+	Location spawnLocation = null;
 
 	boolean isIgnoreWater = false;
 
@@ -226,5 +233,37 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		makeSound("random.bow", 1.0F, 1.0F / (bb().nextFloat() * 0.4F + 0.8F));
 	}
 
+	@Override
+	public LbnMobTag getMobTag() {
+		return tag;
+	}
+
+	int spawnCount = 0;
+
+	@Override
+	protected void D() {
+		super.D();
+
+		if (getMobTag() == null) {
+			return;
+		}
+
+		//指定した距離以上離れていたら殺す
+		spawnCount++;
+		if (spawnCount >= 60) {
+			spawnCount = 0;
+			if (spawnLocation == null) {
+				return;
+			}
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+				return;
+			}
+			if (getMobTag().isBoss()) {
+				getBukkitEntity().teleport(spawnLocation);
+			} else {
+				die();
+			}
+		}
+	}
 }
 

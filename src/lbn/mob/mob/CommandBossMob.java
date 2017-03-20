@@ -82,6 +82,8 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			}
 		}
 
+		nbtTag.setBoss(true);
+
 		return commandableMob;
 	}
 

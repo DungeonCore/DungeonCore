@@ -4,6 +4,7 @@ import lbn.mob.AIType;
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.mob.customEntity1_8.ai.TheLowPathfinderGoalMeleeAttack;
+import lbn.util.JavaUtil;
 import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityHuman;
@@ -179,8 +180,44 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
+		 spawnLocation = loc;
 		 return (Skeleton) getBukkitEntity();
 	}
 
+	Location spawnLocation = null;
+
 	boolean isIgnoreWater = false;
+
+	@Override
+	public LbnMobTag getMobTag() {
+		return tag;
+	}
+
+	int spawnCount = 0;
+
+	@Override
+	protected void D() {
+		super.D();
+
+		if (getMobTag() == null) {
+			return;
+		}
+
+		//指定した距離以上離れていたら殺す
+		spawnCount++;
+		if (spawnCount >= 60) {
+			spawnCount = 0;
+			if (spawnLocation == null) {
+				return;
+			}
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+				return;
+			}
+			if (getMobTag().isBoss()) {
+				getBukkitEntity().teleport(spawnLocation);
+			} else {
+				die();
+			}
+		}
+	}
 }

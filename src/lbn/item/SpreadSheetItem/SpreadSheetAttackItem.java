@@ -2,7 +2,6 @@ package lbn.item.SpreadSheetItem;
 
 import java.util.Map.Entry;
 
-import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
@@ -122,22 +121,19 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
 	@Override
 	public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
-	}
-
-	@Override
-	public void onChangeStrengthLevelItemEvent(ChangeStrengthLevelItemEvent event) {
-	}
-
-	@Override
-	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
 		if (!event.isSuccess()) {
-			int level = event.getLevel();
+			int level = event.getNextLevel();
 			//+6までの強化の時は失敗しても+0にしないで元にもどす
 			if (level <= 6) {
 				ItemStack item = event.getItem();
 				StrengthOperator.updateLore(item, Math.max(0, level - 1));
+				event.setItem(item);
 			}
 		}
+	}
+
+	@Override
+	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
 	}
 
 	TheLowCraftRecipeInterface recipe;
