@@ -2,7 +2,7 @@ package lbn.chest.wireless;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.money.GalionEditReason;
@@ -30,7 +30,7 @@ public class RepositoryChest extends WireLessChest{
 		}
 
 		//メニューセレクトターを作成
-		MenuSelecor menuSelecor = new MenuSelecor("Repository Menu:" + type);
+		MenuSelector menuSelecor = new MenuSelector("Repository Menu:" + type);
 		menuSelecor.addMenu(ItemStackUtil.getItem("倉庫を購入する", Material.WOOL, (byte)5,
 				Message.getMessage("{0}Galionで倉庫を購入する", type.price)), 11, new SelectRunnable() {
 			@Override

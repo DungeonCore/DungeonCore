@@ -15,4 +15,9 @@ public class NbtTagConst {
 	 * ItemのID
 	 */
 	public static final String THELOW_ITEM_ID = "thelow_item_id";
+
+	/**
+	 * クラフト時のViewerのItemのID
+	 */
+	public static final String THELOW_ITEM_ID_FOR_CRAFT = "thelow_item_id_for_craft";
 }

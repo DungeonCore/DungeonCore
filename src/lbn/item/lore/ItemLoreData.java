@@ -1,4 +1,4 @@
-package lbn.item;
+package lbn.item.lore;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,22 +18,37 @@ public class ItemLoreData {
 
 	ArrayList<String> afterDetail = new ArrayList<>();
 
-	TreeMap<String, ItemLoreToken> loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
+	TreeMap<String, ItemLoreToken> loreMap = null;
 
 	public ItemLoreData() {
+		loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
 	}
 
+//テスト用
 //	public static void main(String[] args) {
-//		String[] aa = new String[]{"§8id:level60Bow", "", "§a[機能性能]§ctitle", "    §e最大強化 ： §6+11", "    §e使用可能 ： §6弓レベル60以上", "    §eスキルレベル ：§661レベル", "    §e耐久値 ： §6384", "", "", "§a[強化性能]§ctitle", "    §eADD:ダメージ §6+34.9", "", "§a[SLOT]  §b最大3個", "§f    ■ 空のスロット§0id:epty", ""};
-//		List<String> asList = Arrays.asList(aa);
+//	String[] aa = new String[]{"§8id:pvp2", "", "§a機能性能§ctitle", "    §e最大強化 ： §6+10", "    §e使用可能 ： §6弓レベル0以上", "    §eスキルレベル ： §660レベル", "    §e耐久値 ： §6120", "    §e使用可能 ： §6弓レベル0以上", "    §eスキルレベル ： §660レベル", "§e耐久値 ： §6120", "", "", "§a強化性能§ctitle", "    §eADD:ダメージ §6+1.8", "", "§aSLOT  §b最大1個", "§f    ■ 空のスロット§0id:empty", ""};
+//		List<String> asList = java.util.Arrays.asList(aa);
 //		new ItemLoreData(asList);
 //	}
 
 	public ItemLoreData(ItemStack stack) {
-		this(ItemStackUtil.getLore(stack));
+		this(stack, null);
 	}
 
-	public ItemLoreData(List<String> lore) {
+	public ItemLoreData(ItemStack stack, Comparator<String> comparator) {
+		this(ItemStackUtil.getLore(stack), comparator);
+	}
+
+	public ItemLoreData(List<String> lore, Comparator<String> comparator) {
+		if (comparator == null) {
+			loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
+		} else {
+			loreMap = new TreeMap<String, ItemLoreToken>(comparator);
+		}
+
+//		テスト用
+//		 lbn.util.DungeonLogger.debug("String[] aa = new String[]{\"" + lore.toString().replace("\"", "\\\"").replace("[", "").replace("]", "").replace(", ", "\", \"") + "\"};");
+
 		LorePoint point = LorePoint.BEFORE;
 
 		ItemLoreToken nowToken = null;
@@ -52,8 +67,8 @@ public class ItemLoreData {
 				if (nowToken == null) {
 					//タイトルだった場合はLoreTokenを生成する
 					if (ItemLoreToken.isTitle(line)) {
-						nowToken = new ItemLoreToken(line, false);
-					//タイトルでなければ次に進む
+						nowToken = createLoreTokenInstance(line);
+						//タイトルでなければ次に進む
 						break;
 					} else if (line.equals("")) {
 						//空白の時はミスかもしれないので何もしない
@@ -90,6 +105,23 @@ public class ItemLoreData {
 				afterDetail.remove(afterDetail.size() - 1);
 			}
 		}
+
+	}
+
+	public ItemLoreData(List<String> lore) {
+		this(lore, null);
+	}
+
+	/**
+	 * タイトルからLoreTokenを生成する
+	 * @param line
+	 * @return
+	 */
+	public static ItemLoreToken createLoreTokenInstance(String line) {
+		if (line.contains(ItemLoreToken.TITLE_SLOT)) {
+			return new ItemLoreSlotToken(line);
+		}
+		return new ItemLoreToken(line, false);
 	}
 
 	public void addBefore(String line) {
@@ -117,6 +149,23 @@ public class ItemLoreData {
 	}
 
 	/**
+	 * 指定したタイトルのLoreを削除する
+	 * @param title
+	 */
+	public void removeLore(String title) {
+		loreMap.remove(title);
+	}
+
+	/**
+	 * 指定したLoreTokenを取得する。もし存在しない場合は新規作成して生成する
+	 * @param title
+	 * @return
+	 */
+	public ItemLoreToken getLoreToken(String title) {
+		return loreMap.getOrDefault(title, createLoreTokenInstance(title));
+	}
+
+	/**
 	 * Loreを取得する
 	 * @param item
 	 */
@@ -124,7 +173,7 @@ public class ItemLoreData {
 		List<String> lore = new ArrayList<String>();
 		lore.addAll(beforeDetail);
 		for (Entry<String, ItemLoreToken> entry : loreMap.entrySet()) {
-			lore.addAll(entry.getValue().getLore());
+			lore.addAll(entry.getValue().getLoreToken());
 			lore.add("");
 		}
 		lore.addAll(afterDetail);

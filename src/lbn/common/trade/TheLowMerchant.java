@@ -78,7 +78,34 @@ public abstract class TheLowMerchant {
 		packetdataserializer.writeInt(getContainerCounter());
 		merchantrecipelist.a(packetdataserializer);
 		((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
+
+		//一旦全て削除し、入れ直す
+		if (nowRecipeList != null) {
+			nowRecipeList.clear();
+		} else {
+			nowRecipeList = new MerchantRecipeListImplemention(this);
+		}
+		for (TheLowMerchantRecipe theLowMerchantRecipe : recipeList) {
+			nowRecipeList.addTheLowRecipe(theLowMerchantRecipe);
+		}
 	}
+
+	MerchantRecipeListImplemention nowRecipeList = null;
+
+	/**
+	 * 現在開いているレシピリストを取得
+	 * @return
+	 */
+	public MerchantRecipeListImplemention getNowRecipeList() {
+		if (nowRecipeList == null) {
+			nowRecipeList = new MerchantRecipeListImplemention(this);
+			for (TheLowMerchantRecipe recipe : getInitRecipes()) {
+				nowRecipeList.addTheLowRecipe(recipe);
+			}
+		}
+		return nowRecipeList;
+	}
+
 
 	/**
 	 * 一番最初に表示されるレシピを取得する
@@ -86,11 +113,6 @@ public abstract class TheLowMerchant {
 	 */
 	abstract public List<TheLowMerchantRecipe> getInitRecipes();
 
-	/**
-	 * 現在開いているレシピのリストを取得
-	 * @return
-	 */
-	abstract public MerchantRecipeListImplemention getNowRecipeList();
 
 	/**
 	 * 取引が終了した時

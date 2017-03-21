@@ -2,7 +2,7 @@ package lbn.item.repair.newrepair;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.money.GalionEditReason;
@@ -21,7 +21,7 @@ public class RepairUi {
 
 	}
 	public static void onOpenUi(Player p) {
-		MenuSelecor menuSelecor = new MenuSelecor("Repair Menu");
+		MenuSelector menuSelecor = new MenuSelector("Repair Menu");
 		menuSelecor.addMenu(ItemStackUtil.getItem(Message.getMessage("全て修理"), Material.ANVIL,
 				ChatColor.GREEN + Message.getMessage("全ての保持しているアイテムを修理する"), ChatColor.GREEN + Message.getMessage("必要金額: {0} Galions", getNeedGalion(p.getInventory().getContents()) + getNeedGalion(p.getInventory().getArmorContents()))),
 				11,

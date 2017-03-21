@@ -1,7 +1,7 @@
 package lbn.item.implementation;
 
 import lbn.item.AbstractItem;
-import lbn.item.ItemLoreToken;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;

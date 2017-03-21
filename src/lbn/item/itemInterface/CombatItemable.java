@@ -16,4 +16,16 @@ public interface CombatItemable extends RightClickItemable, EquipItemable{
 	 * @param e
 	 */
 	void onPlayerDropItemEvent(PlayerDropItemEvent e);
+
+	/**
+	 * デフォルトのスロットの数
+	 * @return
+	 */
+	int getDefaultSlotCount();
+
+	/**
+	 * デフォルトのスロットの数
+	 * @return
+	 */
+	int getMaxSlotCount();
 }

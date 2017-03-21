@@ -35,16 +35,16 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 		String difficulty = row[2];
 
 		if(name == null){
-			sender.sendMessage(ChatColor.RED+"不正なNameです。" + name);
+			sendMessage(ChatColor.RED+"不正なNameです。" + name);
 		}
 
 		if(startLoc == null){
-			sender.sendMessage(ChatColor.RED+"不正なstartlocです。"+ name);
+			sendMessage(ChatColor.RED+"不正なstartlocです。"+ name);
 		}
 
 		Location entrance = getLocationByString(row[4]);
 		if(startLoc == null){
-			sender.sendMessage(ChatColor.RED+"不正なentrancelocです。"+ name);
+			sendMessage(ChatColor.RED+"不正なentrancelocです。"+ name);
 		}
 
 		if(difficulty == null){

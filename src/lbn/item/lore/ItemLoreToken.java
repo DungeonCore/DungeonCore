@@ -1,4 +1,4 @@
-package lbn.item;
+package lbn.item.lore;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -96,8 +96,16 @@ public class ItemLoreToken {
 	 * 登録したLoreを取得
 	 * @return
 	 */
-	public List<String> getLore() {
+	public List<String> getLoreToken() {
 		return lore;
+	}
+
+	/**
+	 * 追加したLoreを取得する(タイトルは含まない)
+	 * @return
+	 */
+	public List<String> getLore() {
+			return lore.subList(2, lore.size());
 	}
 
 	/**

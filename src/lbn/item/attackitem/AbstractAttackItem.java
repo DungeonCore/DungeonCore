@@ -8,11 +8,11 @@ import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerRightShiftClickEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.AbstractItem;
-import lbn.item.ItemLoreToken;
 import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
@@ -86,18 +86,6 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	abstract protected int getSkillLevel();
 
 	/**
-	 * デフォルトのスロットの数
-	 * @return
-	 */
-	abstract public int getDefaultSlotCount();
-
-	/**
-	 * デフォルトのスロットの数
-	 * @return
-	 */
-	abstract public int getMaxSlotCount();
-
-	/**
 	 * 武器のダメージを取得 (武器本体のダメージも含まれます)
 	 * @param p
 	 * @param strengthLevel 強化レベル
@@ -157,7 +145,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 		ItemStack item = super.getItem();
 		//SLOTを追加
 		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個");
+		arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個" + ItemLoreToken.TITLE_TAG);
 		EmptySlot slot = new EmptySlot();
 		for (int i = 0; i < getDefaultSlotCount(); i++) {
 			arrayList.add (StringUtils.join(new Object[]{slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId()}));

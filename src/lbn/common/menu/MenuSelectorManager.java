@@ -42,22 +42,21 @@ public class MenuSelectorManager {
 		}
 		e.setCancelled(true);
 		//クリックでないなら何もしない
-		if (!(e instanceof InventoryClickEvent)) {
-			return;
+		if (e instanceof InventoryClickEvent) {
+			InventoryClickEvent event = (InventoryClickEvent) e;
+
+			//クリックしたのが上のインベントリでないなら無視
+			if (event.getClickedInventory() != view.getTopInventory()) {
+				return;
+			}
+
+			Player p = (Player) event.getWhoClicked();
+
+			MenuSelectorInterface selector = getSelector(title);
+
+			ItemStack currentItem = event.getCurrentItem();
+			selector.onSelectItem(p, currentItem, event);
 		}
 
-		InventoryClickEvent event = (InventoryClickEvent) e;
-
-		//クリックしたのが上のインベントリでないなら無視
-		if (event.getClickedInventory() != view.getTopInventory()) {
-			return;
-		}
-
-		Player p = (Player) event.getWhoClicked();
-
-		MenuSelectorInterface selector = getSelector(title);
-
-		ItemStack currentItem = event.getCurrentItem();
-		selector.onSelectItem(p, currentItem);
 	}
 }

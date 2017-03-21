@@ -2,16 +2,17 @@ package lbn.quest.viewer;
 
 import java.util.List;
 
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelector;
 import lbn.common.menu.SelectRunnable;
 import lbn.quest.Quest;
 import lbn.util.Message;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class QuestMenuSelector extends MenuSelecor{
+public class QuestMenuSelector extends MenuSelector{
 	public static QuestMenuSelectorRunnable run = new QuestMenuSelectorRunnable();
 
 	static {
@@ -38,16 +39,16 @@ public class QuestMenuSelector extends MenuSelecor{
 	}
 
 	@Override
-	public void onSelectItem(Player p, ItemStack item) {
+	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		run.run(p, item);
 	}
 }
 
 class QuestMenuSelectorRunnable implements SelectRunnable{
 	static {
-		MenuSelecor menuSelecor = new MenuSelecor("quest_confirm");
+		MenuSelector menuSelecor = new MenuSelector("quest_confirm");
 		menuSelecor.regist();
-		new MenuSelecor("quest_confirm").regist();
+		new MenuSelector("quest_confirm").regist();
 	}
 
 	@Override
@@ -68,7 +69,7 @@ class QuestMenuSelectorRunnable implements SelectRunnable{
 			return;
 		}
 
-		MenuSelecor menuSelecor = new QuestConfirmMenu(questByItem);
+		MenuSelector menuSelecor = new QuestConfirmMenu(questByItem);
 		menuSelecor.open(p);
 	}
 }

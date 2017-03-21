@@ -1,15 +1,9 @@
 package lbn.money;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.dungeoncore.Main;
-import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.implementation.GalionItem;
+import lbn.item.itemInterface.MoneyItemable;
 import lbn.money.buyer.Buyer;
 import lbn.money.shop.CustomShop;
 import lbn.money.shop.ShopItem;
@@ -17,8 +11,6 @@ import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,11 +18,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class MoneyListener implements Listener{
 
@@ -104,62 +96,49 @@ public class MoneyListener implements Listener{
 	}
 
 	@EventHandler
-	public void onPickupMoney(PlayerPickupItemEvent e) {
-		Player player = e.getPlayer();
-		ItemStack item = e.getItem().getItemStack();
-		if (item.getType() == Material.GOLD_INGOT) {
-			executeGalionItem(player);
+	public void onDropMoney(PlayerDropItemEvent e){
+		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItemDrop().getItemStack());
+		if (customItem != null) {
+			//ドロップさせないで消す
+			e.setCancelled(true);
+			customItem.applyGalionItem(e.getPlayer());
+		}
+	}
+
+	@EventHandler
+	public void onPickupMoney(PlayerPickupItemEvent e){
+		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItem().getItemStack());
+		if (customItem != null) {
+			customItem.applyGalionItem(e.getPlayer());
 		}
 	}
 
 	@EventHandler
 	public void onClickMoney(InventoryClickEvent e) {
-		Player player = (Player) e.getWhoClicked();
-		if (e.getCurrentItem() != null && e.getCurrentItem().getType() == Material.GOLD_INGOT) {
-			executeGalionItem(player);
-		} else if (e.getCursor() != null && e.getCursor().getType() == Material.GOLD_INGOT) {
-			executeGalionItem(player);
+		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getCurrentItem());
+		if (customItem != null) {
+			customItem.applyGalionItem((Player) e.getWhoClicked());
+			return;
+		}
+		MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
+		if (customItem2 != null) {
+			customItem2.applyGalionItem((Player) e.getWhoClicked());
+			return;
 		}
 	}
 
 	@EventHandler
 	public void onDragMoney(InventoryDragEvent e) {
-		Player player = (Player) e.getWhoClicked();
-		if ((e.getCursor() != null && e.getCursor().getType() == Material.GOLD_INGOT ) ||
-				(e.getOldCursor().getType() != null && e.getOldCursor().getType() == Material.GOLD_INGOT)) {
-			executeGalionItem(player);
-		}
-	}
-
-	protected void executeGalionItem(Player player) {
-		if (player.getGameMode() == GameMode.CREATIVE) {
+		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getOldCursor());
+		if (customItem != null) {
+			customItem.applyGalionItem((Player) e.getWhoClicked());
 			return;
 		}
-
-		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
-		if (theLowPlayer == null) {
+		MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
+		if (customItem2 != null) {
+			customItem2.applyGalionItem((Player) e.getWhoClicked());
 			return;
 		}
-
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				HashMap<Integer, ? extends ItemStack> all = player.getInventory().all(Material.GOLD_INGOT);
-				ArrayList<Integer> indexList = new ArrayList<Integer>();
-				for (Entry<Integer, ? extends ItemStack> entry : all.entrySet()) {
-					ItemInterface customItem = ItemManager.getCustomItem(entry.getValue());
-					if (customItem != null && customItem instanceof GalionItem) {
-						int galions = new GalionItem(entry.getValue()).getGalions();
-						indexList.add(entry.getKey());
-						theLowPlayer.addGalions(galions * entry.getValue().getAmount(), GalionEditReason.get_money_item);
-					}
-				}
-
-				for (Integer integer : indexList) {
-					player.getInventory().clear(integer);
-				}
-			}
-		}.runTaskLater(Main.plugin, 2);
 	}
 
 	@EventHandler

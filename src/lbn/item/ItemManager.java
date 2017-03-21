@@ -8,6 +8,7 @@ import java.util.Set;
 
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
+import lbn.item.implementation.GalionItem;
 import lbn.item.implementation.MagicStoneOre;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
@@ -63,12 +64,12 @@ public class ItemManager {
 
 	private static void registItem(Class<?> clazz, ItemInterface item) {
 		if (!allItemNameClassList.containsKey(clazz)) {
-			allItemNameClassList.put(clazz, new HashMap<String, ItemInterface>());
+			allItemNameClassList.put(clazz,  new HashMap<String, ItemInterface>());
 		}
 		allItemNameClassList.get(clazz).put(ChatColor.stripColor(item.getItemName()).toUpperCase(), item);
 
 		if (!allItemIdClassList.containsKey(clazz)) {
-			allItemIdClassList.put(clazz, new HashMap<String, ItemInterface>());
+			allItemIdClassList.put(clazz,  new HashMap<String, ItemInterface>());
 		}
 		allItemIdClassList.get(clazz).put(item.getId(), item);
 	}
@@ -144,6 +145,21 @@ public class ItemManager {
 		return null;
 	}
 
+	/**
+	 * 指定したItemが指定したInterfaceを実装しているかどうかを調べる。(instanceOfの高速版)
+	 * @param clazz
+	 * @param item
+	 * @return
+	 */
+	public static boolean isImplemental(Class<? extends ItemInterface> clazz, ItemInterface item) {
+		HashMap<String, ItemInterface> hashMap = allItemIdClassList.get(clazz);
+		//指定したInterfaceを実装しているItemがない場合はfalse
+		if (hashMap == null) {
+			return false;
+		}
+		return hashMap.containsKey(item.getId());
+	}
+
 	public static ItemInterface getCustomItem(ItemStack item) {
 		if (item == null) {
 			return null;
@@ -160,6 +176,9 @@ public class ItemManager {
 	}
 
 	public static ItemInterface getCustomItemById(String id) {
+		if (id == null) {
+			return null;
+		}
 		id = ChatColor.stripColor(id).toUpperCase();
 		return allItemIdList.get(id);
 	}
@@ -188,6 +207,19 @@ public class ItemManager {
 		registItem(itemList.toArray(new ItemInterface[0]));
 	}
 
+	/**
+	 * 同じCustomItemならTRUE
+	 * @param item1
+	 * @param item2
+	 * @return
+	 */
+	public static boolean equals(ItemStack item1, ItemStack item2) {
+		String id1 = ItemStackUtil.getId(item1);
+		String id2 = ItemStackUtil.getId(item2);
+
+		return id1 != null && id1.equals(id2);
+	}
+
 	static{
 		registItem(new StrengthScrollArmor());
 		registItem(new StrengthScrollWeapon());
@@ -205,5 +237,7 @@ public class ItemManager {
 		registItem(new GoldPickaxe(0).getAllRelativeItem());
 		registItem(new IronPickaxe(0).getAllRelativeItem());
 		registItem(new DiamondPickaxe(0).getAllRelativeItem());
+		//お金
+		registItem(GalionItem.getInstance(0));
 	}
 }

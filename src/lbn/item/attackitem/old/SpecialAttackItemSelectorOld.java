@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
-import lbn.item.ItemLoreToken;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.item.itemInterface.SpecialAttackItemable;
+import lbn.item.lore.ItemLoreToken;
 import lbn.player.ItemType;
 import lbn.util.Message;
 
@@ -30,7 +30,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 	public SpecialAttackItemSelectorOld(SpecialAttackItemable specialItem) {
 		this.specialItem = specialItem;
 
-		MenuSelecor menuSelecor = new MenuSelecor(specialItem.getId() + " selector");
+		MenuSelector menuSelecor = new MenuSelector(specialItem.getId() + " selector");
 
 		//レベルごとにソートする
 		ArrayList<ItemInterface> allItem = new ArrayList<ItemInterface>(specialItem.getAllItem());

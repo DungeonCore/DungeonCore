@@ -8,7 +8,6 @@ import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.trade.TheLowMerchant;
 import lbn.common.trade.TheLowMerchantRecipe;
-import lbn.common.trade.nms.MerchantRecipeListImplemention;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
 import lbn.item.strength.old.StrengthOperator;
@@ -109,33 +108,6 @@ public class StrengthMarchant extends TheLowMerchant{
 		return recipes;
 	}
 
-	MerchantRecipeListImplemention nowRecipeList = null;
-
-	@Override
-	public MerchantRecipeListImplemention getNowRecipeList() {
-		if (nowRecipeList == null) {
-			nowRecipeList = new MerchantRecipeListImplemention(this);
-			for (TheLowMerchantRecipe recipe : getInitRecipes()) {
-				nowRecipeList.addTheLowRecipe(recipe);
-			}
-		}
-		return nowRecipeList;
-	}
-
-	@Override
-	protected void sendRecipeList(List<TheLowMerchantRecipe> recipeList) {
-		super.sendRecipeList(recipeList);
-
-		//一旦全て削除し、入れ直す
-		if (nowRecipeList != null) {
-			nowRecipeList.clear();
-		} else {
-			nowRecipeList = new MerchantRecipeListImplemention(this);
-		}
-		for (TheLowMerchantRecipe theLowMerchantRecipe : recipeList) {
-			nowRecipeList.addTheLowRecipe(theLowMerchantRecipe);
-		}
-	}
 
 	@Override
 	public void onFinishTrade(TheLowMerchantRecipe recipe) {

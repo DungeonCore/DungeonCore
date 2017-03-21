@@ -18,10 +18,10 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class BuyerShopSelector {
-	private static final String SHOP_MENU = "- Shop - ";
+	private static final String SHOP_MENU = ChatColor.WHITE + "- Shop - ";
 
 	public static void onOpen(Player p, String villagerID) {
-		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + SHOP_MENU + villagerID);
+		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, SHOP_MENU + villagerID);
 		createInventory.setItem(11, getShopButton(p));
 		createInventory.setItem(15, getBuyerButton(p));
 		p.openInventory(createInventory);

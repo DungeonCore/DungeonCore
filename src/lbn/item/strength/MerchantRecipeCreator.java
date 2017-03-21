@@ -5,10 +5,10 @@ import java.util.List;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.common.trade.TheLowMerchantRecipe;
-import lbn.item.ItemLoreData;
-import lbn.item.ItemLoreToken;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.lore.ItemLoreData;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.strength.old.StrengthOperator;
 import lbn.util.ItemStackUtil;
 

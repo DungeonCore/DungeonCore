@@ -3,6 +3,7 @@ package lbn.money.shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.AvailableLevelItemable;
@@ -48,8 +49,12 @@ public class ShopItem {
 		dispItem = item.clone();
 		ArrayList<String> lore = new ArrayList<String>();
 		//IDがあればプラグイン用のアイテムなのでIDを記載する
-		if (ItemStackUtil.getId(item) != null) {
-			lore.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(ItemStackUtil.getId(item)));
+		String id = ItemStackUtil.getId(item);
+		if (id != null) {
+			//IDを付与
+			ItemStackUtil.setNBTTag(dispItem, NbtTagConst.THELOW_ITEM_ID, id);
+			lore.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(id));
+
 			//IDがなければプラグイン用ではないのでloreをそのまま記載する
 		} else {
 			List<String> lore2 = ItemStackUtil.getLore(item);

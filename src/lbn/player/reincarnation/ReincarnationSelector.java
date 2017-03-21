@@ -16,6 +16,7 @@ import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -131,7 +132,7 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 	}
 
 	@Override
-	public void onSelectItem(Player p, ItemStack item) {
+	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		String nbtTag = ItemStackUtil.getNBTTag(item, REINCARNATION_ID);
 		//NBTTagがないなら転生を行わない
 		if (nbtTag == null || nbtTag.isEmpty()) {

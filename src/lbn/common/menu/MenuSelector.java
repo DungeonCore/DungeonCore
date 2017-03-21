@@ -13,17 +13,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuSelecor implements MenuSelectorInterface{
+public class MenuSelector implements MenuSelectorInterface{
 	public void regist() {
 		MenuSelectorManager.regist(this);
 	}
 
 	protected String title;
 	protected Inventory createInventory;
-	public MenuSelecor(String title) {
+	public MenuSelector(String title) {
 		this.title = ChatColor.WHITE + title;
 		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE +  title);
 	}
@@ -37,7 +38,7 @@ public class MenuSelecor implements MenuSelectorInterface{
 	 * @param run
 	 * @return
 	 */
-	public MenuSelecor addMenu(ItemStack item, int index, SelectRunnable run) {
+	public MenuSelector addMenu(ItemStack item, int index, SelectRunnable run) {
 		createInventory.setItem(index, item);
 		runMap.put(item, run);
 		return this;
@@ -56,7 +57,7 @@ public class MenuSelecor implements MenuSelectorInterface{
 	 * @param p
 	 * @param item
 	 */
-	public void onSelectItem(Player p, ItemStack item) {
+	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		if (runMap.containsKey(item)) {
 			runMap.get(item).run(p, item);
 		}
@@ -69,7 +70,7 @@ public class MenuSelecor implements MenuSelectorInterface{
 
 
 	static {
-		MenuSelecor menuSelecor = new MenuSelecor("blacksmith menu");
+		MenuSelector menuSelecor = new MenuSelector("blacksmith menu");
 		//魔法石装着
 		ItemStack itemStack = new ItemStack(Material.BEACON);
 		ItemStackUtil.setDispName(itemStack, ChatColor.WHITE + "" + ChatColor.BOLD + Message.getMessage("魔法石装着"));

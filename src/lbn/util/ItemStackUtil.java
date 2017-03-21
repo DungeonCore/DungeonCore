@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
@@ -262,6 +263,16 @@ public class ItemStackUtil {
 	}
 
 	public static String getId(ItemStack item) {
+		if (isEmpty(item)) {
+			return null;
+		}
+
+		//nbt tagから取得
+		String nbtTag = getNBTTag(item, NbtTagConst.THELOW_ITEM_ID);
+		if (nbtTag != null && !nbtTag.isEmpty()) {
+			return nbtTag;
+		}
+
 		List<String> lore = getLore(item);
 		for (String string : lore) {
 			string = ChatColor.stripColor(string).trim();
@@ -273,21 +284,21 @@ public class ItemStackUtil {
 	}
 
 	/**
-	 * 名前からアイテムを取得
-	 * @param name
+	 * IDからアイテムを取得
+	 * @param id
 	 * @return
 	 */
-	public static ItemStack getItemStack(String name) {
-		if (name == null || name.isEmpty()) {
+	public static ItemStack getItemStack(String id) {
+		if (id == null || id.isEmpty()) {
 			return null;
 		}
 		//最初はMaterialから調べる
-		Material material = Material.getMaterial(name.toUpperCase());
+		Material material = Material.getMaterial(id.toUpperCase());
 		if (material != null) {
 			return new ItemStack(material);
 		}
 
-		ItemInterface customItemById = ItemManager.getCustomItemById(name);
+		ItemInterface customItemById = ItemManager.getCustomItemById(id);
 		if (customItemById != null) {
 			return customItemById.getItem();
 		}
@@ -473,9 +484,12 @@ public class ItemStackUtil {
 	 * @param name
 	 */
 	public static String getNBTTag(ItemStack item, String name) {
+		if (isEmpty(item)) {
+			return null;
+		}
 		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
 		if (nmsStack.getTag() == null) {
-			return "";
+			return null;
 		}
 		return nmsStack.getTag().getString(name);
 	}

@@ -3,6 +3,7 @@ package lbn.item.setItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.old.StrengthOperator;
@@ -77,6 +78,9 @@ public class SetItemParts implements SetItemPartable{
 		lore.addAll(getBelongSetItem().getLore());
 
 		ItemStackUtil.addLore(itemStack, lore.toArray(new String[0]));
+
+		//IDを付与
+		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
 		return itemStack;
 	}
 

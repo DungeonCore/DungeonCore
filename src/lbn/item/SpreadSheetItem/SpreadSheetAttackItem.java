@@ -5,12 +5,12 @@ import java.util.Map.Entry;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.item.ItemLoreToken;
 import lbn.item.attackitem.AbstractAttackItem;
 import lbn.item.attackitem.SpreadSheetWeaponData;
 import lbn.item.craft.TheLowCraftRecipeInterface;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.Message;
@@ -141,7 +141,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 	@Override
 	public TheLowCraftRecipeInterface getCraftRecipe() {
 		if (recipe == null) {
-			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.getInstance(data.getMainCraftMaterial());
+			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
 			//素材を追加する
 			for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
 				recipe.addMaterial(entry.getKey(), entry.getValue());

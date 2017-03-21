@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import lbn.common.menu.MenuSelecor;
+import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
 import lbn.dungeon.contents.item.key.KeyItemable;
@@ -144,7 +144,7 @@ public class CommandGiveItem implements CommandExecutor {
 
 	protected static void init() {
 		DungeonLogger.development("item list init!!");
-		MenuSelecor menuSelecor = new MenuSelecor("item nemu");
+		MenuSelector menuSelecor = new MenuSelector("item nemu");
 		Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<Integer, TreeSet<ItemInterface>>();
 
 		count = 0;

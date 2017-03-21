@@ -2,6 +2,7 @@ package lbn.command;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +41,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -93,7 +95,9 @@ public class CommandViewInfo implements CommandExecutor{
 			PlayerIODataManager.saveAsZip();
 			break;
 		case "craft":
-			CraftViewer.openTest((Player)paramCommandSender, "エルドール商人");
+			Block block = new Location(Bukkit.getWorld("thelow"), -23, 70, 0).getBlock();
+			Inventory inventory = CraftViewer.getInventory(block);
+			CraftViewer.open((Player)paramCommandSender, Arrays.asList(inventory), 0);
 			break;
 		case "status":
 			sendPlayerStatus(target);

@@ -1,6 +1,10 @@
 package lbn.item.craft;
 
-import lbn.item.ItemLoreToken;
+import java.util.Map;
+
+import lbn.item.ItemInterface;
+
+import org.bukkit.entity.Player;
 
 public interface TheLowCraftRecipeInterface {
 
@@ -12,21 +16,40 @@ public interface TheLowCraftRecipeInterface {
 	public abstract void addMaterial(String itemid, int amount);
 
 	/**
-	 *一覧に表示されるLoreを取得
+	 * 必要素材を取得する。もし登録された素材が不正、もしくはクラフトできないならnullを返す
 	 * @return
 	 */
-	public abstract ItemLoreToken getViewLore();
-
+	public abstract Map<ItemInterface, Integer> getMaterialMap();
 
 	/**
-	 * インスタンスを取得する
+	 * 新しいインスタンスを生成する
 	 * @param mainItemId
 	 * @return
 	 */
-	public static TheLowCraftRecipeInterface getInstance(String mainItemId) {
+	public static TheLowCraftRecipeInterface createNewInstance(String mainItemId) {
 		if (mainItemId == null) {
 			return new TheLowCraftRecipeWithMaterial();
 		}
 		return new TheLowCraftRecipeWithMainItem(mainItemId);
 	}
+
+	/**
+	 * クラフトに使うもとのアイテムを取得する。存在しないならnull
+	 * @return
+	 */
+	public ItemInterface getMainItem();
+
+	/**
+	 * メインアイテムが存在するならTRUE
+	 * @return
+	 */
+	public boolean hasMainItem();
+
+
+	/**
+	 * 指定されたPlayerが全てのクラフト素材を持っているか確認する
+	 * @param p
+	 * @return
+	 */
+	public boolean hasAllMaterial(Player p);
 }

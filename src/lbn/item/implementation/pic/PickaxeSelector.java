@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -80,7 +81,7 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable{
 		}
 
 		@Override
-		public void onSelectItem(Player p, ItemStack item) {
+		public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 			//もし、Playerなら何もしない
 			if (PlayerChecker.isNormalPlayer(p)) {
 				return;

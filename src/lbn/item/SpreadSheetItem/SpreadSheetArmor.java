@@ -77,7 +77,7 @@ public class SpreadSheetArmor extends AbstractArmorItem{
 	@Override
 	public TheLowCraftRecipeInterface getCraftRecipe() {
 		if (recipe == null) {
-			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.getInstance(data.getMainCraftMaterial());
+			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
 			//素材を追加する
 			for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
 				recipe.addMaterial(entry.getKey(), entry.getValue());

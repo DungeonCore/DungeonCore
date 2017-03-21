@@ -3,10 +3,10 @@ package lbn.item.itemAbstract;
 import java.util.List;
 
 import lbn.item.AbstractItem;
-import lbn.item.ItemLoreToken;
 import lbn.item.armoritem.old.ArmorMaterial;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.strength.old.StrengthOperator;
 
 import org.bukkit.entity.LivingEntity;

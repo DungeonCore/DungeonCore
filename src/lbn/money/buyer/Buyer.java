@@ -175,8 +175,8 @@ public class Buyer {
 					if (buyPrice == -1) {
 						continue;
 					}
-					//今は1つだけ売れるようにする
-//					buyPrice *= itemStack.getAmount();
+					//TODO バグで１つしかアイテムが減らないことがあるので要注意。その場合は下の処理をコメントアウトする
+					buyPrice *= itemStack.getAmount();
 					galions += buyPrice;
 				}
 

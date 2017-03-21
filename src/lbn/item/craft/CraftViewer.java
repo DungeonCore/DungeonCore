@@ -3,12 +3,15 @@ package lbn.item.craft;
 import java.util.Arrays;
 import java.util.List;
 
+import lbn.NbtTagConst;
 import lbn.common.menu.MenuSelectorInterface;
+import lbn.common.menu.MenuSelectorManager;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.npc.NpcManager;
 import lbn.npc.VillagerNpc;
+import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,6 +20,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
@@ -25,6 +29,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class CraftViewer implements MenuSelectorInterface{
 	private static final String TITLE = "アイテム制作";
+
+	static {
+		MenuSelectorManager.regist(new CraftViewer());
+	}
 
 	public static void openTest(Player p, String villagerID) {
 		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerID);
@@ -51,10 +59,11 @@ public class CraftViewer implements MenuSelectorInterface{
 
 			//クラフトできるアイテムを取得する
 			CraftItemable customItem = ItemManager.getCustomItem(CraftItemable.class, contents[i]);
+			//クラフト出来るアイテムでないなら無視
 			if (customItem == null) {
-				return;
+				continue;
 			}
-			itemViewer.setItem(i, contents[i]);
+			itemViewer.setItem(i, CraftViewerItems.getViewItem(customItem));
 		}
 
 		p.openInventory(itemViewer);
@@ -77,12 +86,35 @@ public class CraftViewer implements MenuSelectorInterface{
 
 	@Override
 	public void open(Player p) {
-
+		//直接は開けられない
+		p.sendMessage("この操作はサポートされていません");
 	}
 
 	@Override
-	public void onSelectItem(Player p, ItemStack item) {
+	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
+		String nbtTag = ItemStackUtil.getNBTTag(item, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT);
+		//クラフトできないアイテムを選択しているので何もしない
+		if (nbtTag == null) {
+			return;
+		}
 
+		CraftItemable customItem = ItemManager.getCustomItem(CraftItemable.class, item);
+		//nullはありえないが念のため
+		if (customItem == null){
+			new RuntimeException("このアイテムはクラフト出来ません。id:" + nbtTag).printStackTrace();
+			return;
+		}
+
+		TheLowCraftRecipeInterface craftRecipe = customItem.getCraftRecipe();
+		//素材を持っているか確認
+		if (craftRecipe.hasAllMaterial(p)) {
+			p.sendMessage("GUI開きます");
+		} else {
+			//書き換える
+			CraftViewerItems.addDontHasMaterial(item);
+			e.setCurrentItem(item);
+			p.updateInventory();
+		}
 	}
 
 	@Override

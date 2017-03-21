@@ -1,49 +1,58 @@
 package lbn.item.craft;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import lbn.item.ItemInterface;
-import lbn.item.ItemLoreToken;
+import lbn.item.ItemManager;
 
-import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
-public class TheLowCraftRecipeWithMainItem implements TheLowCraftRecipeInterface {
+public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
 	//ItemId
-	String itemId;
+	String mainItemId;
 	HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
 
-	//ItemInterface
-	ItemInterface centerItem = null;
-	HashMap<String, Integer> materialNameMap = new HashMap<String, Integer>();
-
-	//材料を表示するLore
-	ItemLoreToken itemLoreToken = new ItemLoreToken("材料");
-
 	public TheLowCraftRecipeWithMainItem(String mainItemId) {
-		this.itemId = mainItemId;
+		this.mainItemId = mainItemId;
 	}
 
 	@Override
-	public void addMaterial(String itemid, int amount) {
-		materialMap.put(itemid, amount);
+	public ItemInterface getMainItem() {
+		return ItemManager.getCustomItemById(mainItemId);
 	}
+
+	@Override
+	public boolean hasMainItem() {
+		return true;
+	}
+
+	@Override
+	public boolean hasAllMaterial(Player p) {
+		if (!super.hasAllMaterial(p)) {
+			return false;
+		}
+		return contains(p.getInventory(), getMainItem());
+	}
+
 
 	/**
-	 * updateをする
+	 * 指定されたアイテムが指定されたインベントリに入っていたらTRUE
+	 * @param inv
+	 * @param item
+	 * @return
 	 */
-	protected void updateItem() {
-		itemLoreToken.addLore(centerItem.getItemName(), ChatColor.GOLD);
-		for (Entry<String, Integer> entry : materialNameMap.entrySet()) {
-			itemLoreToken.addLore(entry + "   " + entry.getValue() + "個");
+	private boolean contains(Inventory inv, ItemInterface item) {
+		if (item == null) {
+			return false;
 		}
-	}
-
-	@Override
-	public ItemLoreToken getViewLore() {
-		//TODO cache化する
-		updateItem();
-		return itemLoreToken;
+		for (ItemStack i : inv.getContents()) {
+			if (item.isThisItem(i)) {
+					return true;
+			}
+		}
+		return false;
 	}
 
 }

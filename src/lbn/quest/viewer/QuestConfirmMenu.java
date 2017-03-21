@@ -2,7 +2,8 @@ package lbn.quest.viewer;
 
 import java.util.ArrayList;
 
-import lbn.common.menu.MenuSelecor;
+import lbn.NbtTagConst;
+import lbn.common.menu.MenuSelector;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestManager.QuestStartStatus;
@@ -11,9 +12,10 @@ import lbn.util.ItemStackUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class QuestConfirmMenu extends MenuSelecor {
+public class QuestConfirmMenu extends MenuSelector {
 	static {
 		new QuestConfirmMenu().regist();
 	}
@@ -36,6 +38,9 @@ public class QuestConfirmMenu extends MenuSelecor {
 			arrayList.add(ChatColor.YELLOW + "   " + detail);
 		}
 		arrayList.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(q.getId()));
+		//IDを付与
+		ItemStackUtil.setNBTTag(reciveItem, NbtTagConst.THELOW_ITEM_ID, q.getId());
+
 		ItemStackUtil.setLore(reciveItem, arrayList);
 
 		createInventory.setItem(11, reciveItem);
@@ -43,7 +48,7 @@ public class QuestConfirmMenu extends MenuSelecor {
 	}
 
 	@Override
-	public void onSelectItem(Player p, ItemStack item) {
+	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		if (item == null || item.getType() != Material.WOOL) {
 			return;
 		}

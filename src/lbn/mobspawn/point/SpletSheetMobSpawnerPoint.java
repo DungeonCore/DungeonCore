@@ -7,7 +7,7 @@ import org.bukkit.Location;
 
 public class SpletSheetMobSpawnerPoint extends MobSpawnerPoint{
 
-	int id;
+	protected int id;
 
 	public SpletSheetMobSpawnerPoint(int id, Location loc,
 			SpawnMobGetterInterface mobGetter, int maxMobCount, SpawnLevel level) {

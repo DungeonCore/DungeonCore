@@ -5,9 +5,9 @@ import org.bukkit.ChatColor;
 import lbn.api.LevelType;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.AbstractItem;
-import lbn.item.ItemLoreToken;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.lore.ItemLoreToken;
 import lbn.util.Message;
 
 public abstract class AbstractArmorItem extends AbstractItem implements ArmorItemable, StrengthChangeItemable{

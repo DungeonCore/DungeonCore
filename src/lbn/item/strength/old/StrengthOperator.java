@@ -6,10 +6,10 @@ import java.util.List;
 
 import lbn.common.event.ChangeStrengthLevelItemEvent;
 import lbn.item.ItemInterface;
-import lbn.item.ItemLoreData;
-import lbn.item.ItemLoreToken;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.lore.ItemLoreData;
+import lbn.item.lore.ItemLoreToken;
 import lbn.util.ItemStackUtil;
 
 import org.apache.commons.lang.math.NumberUtils;

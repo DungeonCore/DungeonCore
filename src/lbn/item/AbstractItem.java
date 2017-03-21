@@ -4,6 +4,8 @@ import java.util.List;
 
 import lbn.NbtTagConst;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.lore.ItemLoreData;
+import lbn.item.lore.ItemLoreToken;
 import lbn.item.strength.old.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
@@ -19,8 +21,7 @@ public abstract class AbstractItem implements ItemInterface{
 		if (ItemStackUtil.isEmpty(item)) {
 			return false;
 		}
-		return item.getType() == getMaterial()
-				&& ChatColor.stripColor(getId()).equals(ItemStackUtil.getId(item));
+		return getId().equals(ItemStackUtil.getId(item));
 	}
 
 	@Override

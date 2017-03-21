@@ -76,7 +76,7 @@ public class SpreadSheetWeaponData {
 			sendError(sender, "名前が不正です");
 			isError = true;
 		}
-		if (name == null || name.isEmpty()) {
+		if (id == null || id.isEmpty()) {
 			sendError(sender, "IDが不正です");
 			isError = true;
 		}
