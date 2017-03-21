@@ -9,7 +9,6 @@ import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.lore.ItemLoreData;
 import lbn.item.lore.ItemLoreToken;
-import lbn.item.strength.old.StrengthOperator;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.ChatColor;

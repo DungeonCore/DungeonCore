@@ -10,7 +10,6 @@ import lbn.common.trade.TheLowMerchant;
 import lbn.common.trade.TheLowMerchantRecipe;
 import lbn.item.implementation.StrengthScrollArmor;
 import lbn.item.implementation.StrengthScrollWeapon;
-import lbn.item.strength.old.StrengthOperator;
 import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;

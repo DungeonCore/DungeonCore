@@ -7,7 +7,7 @@ import lbn.item.armoritem.old.ArmorMaterial;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.lore.ItemLoreToken;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

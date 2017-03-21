@@ -3,7 +3,7 @@ package lbn.dungeon.contents.item.other.strengthBase;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.slotStone.other.MagicStoneJade;
 import lbn.item.ItemInterface;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

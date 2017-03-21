@@ -21,7 +21,7 @@ import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
 import lbn.item.attackitem.AbstractAttackItem;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.util.ItemStackUtil;
 

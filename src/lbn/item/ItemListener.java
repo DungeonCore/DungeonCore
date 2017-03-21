@@ -27,7 +27,6 @@ import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.CombatSlot;
 import lbn.item.slot.slot.KillSlot;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.old.StrengthTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.ItemStackUtil;
@@ -184,7 +183,6 @@ public class ItemListener implements Listener{
 
 	@EventHandler
 	public void closeCraftingTable(InventoryCloseEvent e) {
-		StrengthTableOperation.removeGlass(e);
 		SlotSetTableOperation.removeGlass(e);
 	}
 

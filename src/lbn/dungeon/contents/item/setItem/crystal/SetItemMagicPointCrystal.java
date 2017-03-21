@@ -10,7 +10,7 @@ import lbn.item.setItem.AbstractAbilitySetItem;
 import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.item.setItem.SetStrengthableItemParts;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
 
 import org.bukkit.Material;

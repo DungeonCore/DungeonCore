@@ -5,8 +5,8 @@ import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.implementation.pic.AbstractPickaxe;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.old.StrengthOperator;
-import lbn.item.strength.old.StrengthTableOperation;
+import lbn.item.strength.StrengthOperator;
+import lbn.item.strength.StrengthTables;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
@@ -48,7 +48,7 @@ public class StrengthItemCommand implements CommandExecutor{
 			}
 			return true;
 		} else if (paramArrayOfString.length == 1 && paramArrayOfString[0].equals("set") ) {
-			StrengthTableOperation.openStrengthTable(p);
+			StrengthTables.openStrengthTable(p);
 			return true;
 		}
 

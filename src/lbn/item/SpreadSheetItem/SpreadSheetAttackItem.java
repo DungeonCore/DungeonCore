@@ -11,7 +11,7 @@ import lbn.item.craft.TheLowCraftRecipeInterface;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.lore.ItemLoreToken;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.Message;
 

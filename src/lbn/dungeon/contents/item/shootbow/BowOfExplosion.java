@@ -7,7 +7,7 @@ import lbn.dungeoncore.Main;
 import lbn.item.attackitem.WeaponStrengthTemplate;
 import lbn.item.attackitem.old.BowItemOld;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.explosion.NoPlayerDamageExplotionForAttackType;

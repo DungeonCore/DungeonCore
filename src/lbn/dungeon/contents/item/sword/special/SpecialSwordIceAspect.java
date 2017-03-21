@@ -8,7 +8,7 @@ import java.util.Random;
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.item.ItemInterface;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.particle.CircleParticleData;

@@ -7,7 +7,7 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.armoritem.AbstractArmorItem;
 import lbn.item.armoritem.SpreadSheetArmorData;
 import lbn.item.craft.TheLowCraftRecipeInterface;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

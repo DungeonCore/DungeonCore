@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import lbn.common.cooltime.Cooltimable;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.UnUseSlot;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 
 public class HealSlotStone2 extends UnUseSlot implements Cooltimable{
 

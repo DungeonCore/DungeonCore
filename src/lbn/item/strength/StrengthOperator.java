@@ -1,4 +1,4 @@
-package lbn.item.strength.old;
+package lbn.item.strength;
 
 import java.util.Arrays;
 import java.util.Iterator;

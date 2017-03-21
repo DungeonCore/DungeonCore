@@ -11,7 +11,7 @@ import lbn.item.SlotManager;
 import lbn.item.slot.AbstractSlot;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.EmptySlot;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 

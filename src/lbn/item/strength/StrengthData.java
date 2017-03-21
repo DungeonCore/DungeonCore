@@ -3,7 +3,6 @@ package lbn.item.strength;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.old.StrengthOperator;
 
 import org.bukkit.inventory.ItemStack;
 

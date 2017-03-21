@@ -6,7 +6,7 @@ import java.util.List;
 import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.old.StrengthOperator;
+import lbn.item.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 
