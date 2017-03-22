@@ -3,9 +3,9 @@ package lbn.common.other;
 import java.util.HashSet;
 import java.util.UUID;
 
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeoncore.Main;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;

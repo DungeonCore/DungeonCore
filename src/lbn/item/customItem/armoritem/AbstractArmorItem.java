@@ -7,7 +7,7 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.lore.ItemLoreToken;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.Message;
 
 public abstract class AbstractArmorItem extends AbstractItem implements ArmorItemable, StrengthChangeItemable{

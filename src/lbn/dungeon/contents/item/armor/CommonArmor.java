@@ -12,7 +12,7 @@ import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.customItem.armoritem.old.ArmorMaterial;
 import lbn.item.customItem.itemAbstract.OldAbstractArmor;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import lbn.command.util.TaskManager;
 import lbn.util.JavaUtil;
+import lbn.util.MinecraftUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -27,7 +28,7 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 		}
 
 		//実行者の座標を取得
-		Location blockLoc = JavaUtil.getSenderLocation(paramCommandSender);
+		Location blockLoc = MinecraftUtil.getSenderLocation(paramCommandSender);
 		if (blockLoc == null) {
 			return false;
 		}

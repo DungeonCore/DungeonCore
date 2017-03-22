@@ -1,8 +1,8 @@
 package lbn.item.customItem.key;
 
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

@@ -5,13 +5,13 @@ import java.util.Map.Entry;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.item.craft.TheLowCraftRecipeInterface;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.lore.ItemLoreToken;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.craft.TheLowCraftRecipeInterface;
+import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.Message;
 

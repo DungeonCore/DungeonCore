@@ -1,10 +1,10 @@
 package lbn.dungeon.contents.item.click;
 
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.item.customItem.itemAbstract.RightClickItem;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

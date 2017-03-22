@@ -3,7 +3,7 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.item.strength.StrengthTables;
+import lbn.item.system.strength.StrengthTables;
 import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.reincarnation.ReincarnationFactor;
 

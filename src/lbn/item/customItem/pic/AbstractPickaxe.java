@@ -9,7 +9,7 @@ import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.item.ItemInterface;
 import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.MagicPickaxeable;
-import lbn.item.lore.ItemLoreToken;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import lbn.util.TitleSender;

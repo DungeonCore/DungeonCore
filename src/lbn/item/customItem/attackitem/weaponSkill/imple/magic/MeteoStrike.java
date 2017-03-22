@@ -2,17 +2,17 @@ package lbn.item.customItem.attackitem.weaponSkill.imple.magic;
 
 import java.util.List;
 
+import lbn.common.dropingEntity.DropingEntityForPlayer;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeoncore.Main;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.player.ItemType;
-import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
-import lbn.util.dropingEntity.DropingEntityForPlayer;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
+import lbn.util.MinecraftUtil;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,7 +55,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 		final double stepSize = target.clone().distance(start) / (20 * 2);
 
 		//音を鳴らす
-		JavaUtil.sendSound(target, Sound.GHAST_FIREBALL, 3f, 0.2f, 50);
+		MinecraftUtil.sendSound(target, Sound.GHAST_FIREBALL, 3f, 0.2f, 50);
 
 		new BukkitRunnable() {
 			Location nowLocation = start.clone();
@@ -94,7 +94,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 				//爆発パーティクル
 				new ParticleData(ParticleType.hugeexplosion, 10).setFarParticle(true).run(target);
 				//爆発音
-				JavaUtil.sendSound(target, Sound.EXPLODE, 3f, 0.1f, 50);
+				MinecraftUtil.sendSound(target, Sound.EXPLODE, 3f, 0.1f, 50);
 
 				//敵にダメージを与え吹っ飛ばす
 				List<LivingEntity> nearEmemy = LivingEntityUtil.getNearEnemy(centerEntity, 15, 15, 15);

@@ -5,9 +5,9 @@ import java.util.List;
 import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.lore.ItemLoreData;
-import lbn.item.lore.ItemLoreToken;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.lore.ItemLoreData;
+import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
@@ -48,8 +48,11 @@ public abstract class AbstractItem implements ItemInterface{
 
 		//アイテムの説明
 		List<String> lore = ItemStackUtil.getLore(itemStack);
+
 		//id付与
 		lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
+		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
+
 		if (getDetail() != null) {
 			for (String string :  getDetail()) {
 				lore.add(ChatColor.AQUA + string);
@@ -57,7 +60,6 @@ public abstract class AbstractItem implements ItemInterface{
 		}
 
 		//IDを付与
-		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
 
 		//Loreを生成
 		ItemLoreData itemLoreData = new ItemLoreData();

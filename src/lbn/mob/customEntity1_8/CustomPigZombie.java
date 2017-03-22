@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customEntity.ICustomEntity;
 import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.mob.LbnMobTag;
 import lbn.util.JavaUtil;
-import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityIronGolem;

@@ -21,9 +21,9 @@ import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.ItemStackUtil;
+import lbn.util.TheLowUtil;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -73,7 +73,7 @@ public class OtherCommonListener implements Listener{
 	@EventHandler
 	public void onDeathPlayer(PlayerDeathEvent e) {
 		for (ItemStack s : new ArrayList<>(e.getDrops())) {
-			if (ItemStackUtil.isSoulBound(s)) {
+			if (TheLowUtil.isSoulBound(s)) {
 				e.getDrops().remove(s);
 			}
 		}

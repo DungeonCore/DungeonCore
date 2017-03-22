@@ -13,7 +13,7 @@ import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.item.itemInterface.SpecialAttackItemable;
-import lbn.item.lore.ItemLoreToken;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.ItemType;
 import lbn.util.Message;
 

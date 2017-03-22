@@ -3,7 +3,7 @@ package lbn.command.util;
 import java.util.Arrays;
 
 import lbn.dungeoncore.Main;
-import lbn.util.JavaUtil;
+import lbn.util.MinecraftUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -37,7 +37,7 @@ public class DelayCommand implements CommandExecutor, UsageCommandable{
 		}
 
 		//実行者の座標を取得
-		Location blockLoc = JavaUtil.getSenderLocation(arg0);
+		Location blockLoc = MinecraftUtil.getSenderLocation(arg0);
 
 		if (blockLoc == null) {
 			return false;

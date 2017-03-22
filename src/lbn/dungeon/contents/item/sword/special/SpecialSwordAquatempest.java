@@ -6,14 +6,14 @@ import java.util.List;
 
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.common.particle.SpringParticleData;
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.SpringParticleData;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

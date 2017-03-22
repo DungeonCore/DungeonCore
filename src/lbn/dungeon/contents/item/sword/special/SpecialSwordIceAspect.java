@@ -7,13 +7,13 @@ import java.util.Random;
 
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.particle.CircleParticleData;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
-import lbn.util.particle.CircleParticleData;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

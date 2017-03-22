@@ -21,12 +21,11 @@ import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
+import lbn.mob.MobSpawnerFromCommand;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
-import lbn.util.spawn.LbnMobTag;
-import lbn.util.spawn.MobSpawnByCommand;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
@@ -57,7 +56,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 	long spawnTimeMill = -1;
 
 	public static CommandBossMob getInstance(String[] command, String name, CommandSender sender, Location locationByString) {
-		LbnMobTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
+		LbnMobTag nbtTag = MobSpawnerFromCommand.getTBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;

@@ -1,7 +1,10 @@
 package lbn.item.customItem.itemAbstract;
 
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.common.other.ItemStackData;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.common.sound.SoundData;
 import lbn.dungeon.contents.item.magic.normalItems.magicExcutor.FallingBlockMagicExcutor;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
@@ -10,13 +13,10 @@ import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.itemInterface.RightClickItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;
-import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

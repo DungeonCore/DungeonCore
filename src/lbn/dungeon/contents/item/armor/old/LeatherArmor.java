@@ -5,7 +5,7 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.util.Message;
 
 import org.bukkit.ChatColor;

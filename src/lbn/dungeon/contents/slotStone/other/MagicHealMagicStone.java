@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.particle.CircleParticleData;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.item.ItemInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
 import lbn.player.customplayer.MagicPointManager;
-import lbn.util.particle.CircleParticleData;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

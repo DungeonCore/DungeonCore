@@ -4,10 +4,10 @@ import java.util.Map.Entry;
 
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.item.craft.TheLowCraftRecipeInterface;
 import lbn.item.customItem.armoritem.AbstractArmorItem;
 import lbn.item.customItem.armoritem.SpreadSheetArmorData;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.craft.TheLowCraftRecipeInterface;
+import lbn.item.system.strength.StrengthOperator;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

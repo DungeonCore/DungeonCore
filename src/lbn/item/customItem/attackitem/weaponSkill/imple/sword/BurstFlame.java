@@ -6,11 +6,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.particle.ParticleType;
+import lbn.common.particle.Particles;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
 import lbn.player.ItemType;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.Particles;
 
 public class BurstFlame extends WeaponSkillWithCombat{
 

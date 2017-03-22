@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.item.magic;
 
 import lbn.item.itemInterface.MagicExcuteable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 
 import org.bukkit.inventory.ItemStack;
 

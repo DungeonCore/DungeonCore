@@ -1,6 +1,6 @@
 package lbn.common.other;
 
-import lbn.util.ItemStackUtil;
+import lbn.util.TheLowUtil;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
@@ -26,14 +26,14 @@ public class SoulBound {
 
 		boolean isSoulBound = false;
 		for (ItemStack itemStack : matrix) {
-			if (ItemStackUtil.isSoulBound(itemStack)) {
+			if (TheLowUtil.isSoulBound(itemStack)) {
 				isSoulBound = true;
 			}
 		}
 
 		if (isSoulBound) {
 			ItemStack result = inventory.getResult();
-			ItemStackUtil.addSoulBound(result);
+			TheLowUtil.addSoulBound(result);
 			inventory.setResult(result);
 
 			for (HumanEntity p : e.getViewers()) {
@@ -66,7 +66,7 @@ public class SoulBound {
 				return;
 			}
 
-			if (ItemStackUtil.isSoulBound(stack)) {
+			if (TheLowUtil.isSoulBound(stack)) {
 				event.setCancelled(true);
 			}
 		}
@@ -84,7 +84,7 @@ public class SoulBound {
 			return;
 		}
 
-		if (ItemStackUtil.isSoulBound(itemStack)) {
+		if (TheLowUtil.isSoulBound(itemStack)) {
 			itemDrop.remove();
 		}
 	}

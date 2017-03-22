@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbn.item.ItemInterface;
-import lbn.item.lore.ItemLoreToken;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 
 import org.bukkit.Material;

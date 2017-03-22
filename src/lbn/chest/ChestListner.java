@@ -2,8 +2,8 @@ package lbn.chest;
 
 import lbn.LimitedListener;
 import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
-import lbn.util.JavaUtil;
 import lbn.util.Message;
+import lbn.util.TheLowUtil;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -95,7 +95,7 @@ public class ChestListner implements Listener{
 
 		if (!containsItem) {
 			clickedBlock.setType(Material.AIR);
-			JavaUtil.addBonusGold(p, clickedBlock.getLocation());
+			TheLowUtil.addBonusGold(p, clickedBlock.getLocation());
 		}
 	}
 }

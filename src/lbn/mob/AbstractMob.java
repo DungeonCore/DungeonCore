@@ -12,6 +12,7 @@ import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.mob.mob.BossMobable;
+import lbn.mob.mob.LbnMobTag;
 import lbn.mob.mob.SummonMobable;
 import lbn.player.status.StatusAddReason;
 import lbn.quest.QuestProcessingStatus;
@@ -20,7 +21,6 @@ import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
-import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

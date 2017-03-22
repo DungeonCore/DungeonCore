@@ -11,13 +11,12 @@ import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
+import lbn.mob.MobSpawnerFromCommand;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.util.BlockUtil;
-import lbn.util.spawn.LbnMobTag;
-import lbn.util.spawn.MobSpawnByCommand;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -60,7 +59,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 
 	public static CommandableMob getInstance(String[] command, String name, CommandSender sender) {
-		LbnMobTag nbtTag = MobSpawnByCommand.getTBTTagByCommand(command, sender);
+		LbnMobTag nbtTag = MobSpawnerFromCommand.getTBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;
@@ -89,7 +88,7 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	@EventHandler
 	protected Entity spawnPrivate(Location loc) {
-		Entity spawn = MobSpawnByCommand.spawn(loc, command, nbtTag);
+		Entity spawn = MobSpawnerFromCommand.spawn(loc, command, nbtTag);
 
 		if (health == -1) {
 			if (spawn.getType().isAlive()) {

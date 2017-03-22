@@ -8,9 +8,9 @@ import lbn.mob.MobHolder;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.CommandBossMob;
 import lbn.mob.mob.CommandableMob;
+import lbn.mob.mob.LbnMobTag;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-import lbn.util.spawn.LbnMobTag;
 
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;

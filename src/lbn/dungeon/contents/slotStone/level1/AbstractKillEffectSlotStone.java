@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.slotStone.level1;
 
 import lbn.common.event.player.PlayerKillEntityEvent;
+import lbn.common.particle.ParticleData;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
-import lbn.util.particle.ParticleData;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

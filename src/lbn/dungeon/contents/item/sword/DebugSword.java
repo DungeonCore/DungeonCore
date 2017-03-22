@@ -7,7 +7,7 @@ import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
 import lbn.item.customItem.itemAbstract.SwordItem;
 import lbn.item.itemInterface.EntityKillable;
 import lbn.item.itemInterface.StrengthChangeItemable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 
 import org.bukkit.Material;

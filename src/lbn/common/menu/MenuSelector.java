@@ -3,9 +3,9 @@ package lbn.common.menu;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import lbn.item.repair.newrepair.RepairUi;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.strength.StrengthTables;
+import lbn.item.system.repair.RepairUi;
+import lbn.item.system.strength.StrengthTables;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 

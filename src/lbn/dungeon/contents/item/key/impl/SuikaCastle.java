@@ -1,8 +1,8 @@
 package lbn.dungeon.contents.item.key.impl;
 
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

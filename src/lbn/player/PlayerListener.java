@@ -18,6 +18,8 @@ import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.event.player.PlayerLoadedDataEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.other.SystemLog;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeoncore.Main;
 import lbn.item.customItem.other.MagicStoneOre;
 import lbn.mob.AbstractMob;
@@ -34,8 +36,6 @@ import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.TitleSender;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;

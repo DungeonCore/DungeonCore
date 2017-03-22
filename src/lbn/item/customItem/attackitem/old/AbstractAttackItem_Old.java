@@ -8,7 +8,7 @@ import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 

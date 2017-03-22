@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.slotStone.level1;
 
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;

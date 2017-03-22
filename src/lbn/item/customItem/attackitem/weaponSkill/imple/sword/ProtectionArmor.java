@@ -1,10 +1,10 @@
 package lbn.item.customItem.attackitem.weaponSkill.imple.sword;
 
+import lbn.common.particle.ParticleType;
+import lbn.common.particle.Particles;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.Particles;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

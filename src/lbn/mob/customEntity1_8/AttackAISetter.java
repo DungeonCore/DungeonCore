@@ -6,7 +6,7 @@ import lbn.mob.customEntity1_8.ai.AvoidTargetPredicate;
 import lbn.mob.customEntity1_8.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
 import lbn.mob.customEntity1_8.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import lbn.mob.customEntity1_8.ai.TheLowPathfinderGoalMeleeAttack;
-import lbn.util.spawn.LbnMobTag;
+import lbn.mob.mob.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;

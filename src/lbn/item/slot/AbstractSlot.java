@@ -1,7 +1,7 @@
 package lbn.item.slot;
 
 import lbn.item.customItem.AbstractItem;
-import lbn.item.lore.ItemLoreToken;
+import lbn.item.system.lore.ItemLoreToken;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

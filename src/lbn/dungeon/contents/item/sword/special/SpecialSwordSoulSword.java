@@ -6,16 +6,16 @@ import java.util.List;
 
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

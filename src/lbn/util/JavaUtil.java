@@ -7,19 +7,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
-import lbn.item.customItem.other.GalionItem;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
-
-import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.command.BlockCommandSender;
-import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R1.CraftSound;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 
 public class JavaUtil {
 	public static Set<Class<?>> getInterface(Class<?> clazz) {
@@ -38,10 +26,6 @@ public class JavaUtil {
 	public static double round(double val, int digits) {
 		double pow = Math.pow(10, digits);
 		return Math.round(pow * val) / pow;
-	}
-
-	public static String getLocationString(Location loc) {
-	  return String.format("(%d, %d, %d)", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
 	public static int getInt(String data, int other) {
@@ -85,30 +69,12 @@ public class JavaUtil {
 		}
 	}
 
-	static ParticleData particleData = new ParticleData(ParticleType.fireworksSpark, 100);
-
-	public static void addBonusGold(Player p, Location l) {
-		l.getWorld().dropItem(l, GalionItem.getInstance(20).getItem());
-		particleData.run(l);
-		l.getWorld().playSound(l, Sound.FIREWORK_BLAST, 1, 1);
-	}
-
 	static TimeZone timeZone = TimeZone.getTimeZone("Asia/Tokyo");
 
 	public static long getJapanTimeInMillis() {
 		 Calendar cal1 = Calendar.getInstance(timeZone);
 		 long timeInMillis = cal1.getTimeInMillis();
 		 return timeInMillis;
-	}
-
-	public static Location getSenderLocation (CommandSender sender){
-		Location senderLoc = null;
-		if ((sender instanceof BlockCommandSender)) {
-			senderLoc = ((BlockCommandSender) sender).getBlock().getLocation();
-		} else if (sender instanceof Player) {
-			senderLoc = ((Player) sender).getLocation();
-		}
-		return senderLoc;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -138,40 +104,6 @@ public class JavaUtil {
 			fld.set(target_object, value);
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
-		}
-	}
-
-	/**
-	 *
-		//http://wiki.vg/Protocol#Sound_Effect
-	 * @param center
-	 * @param sound
-	 * @param volume
-	 * @param pitch
-	 * @param range
-	 */
-	public static void sendSound(Location center, Sound sound, float volume, float pitch, double range) {
-		//packetを送信
-		for (Player p : center.getWorld().getPlayers()) {
-			if (!p.isOnline()) {
-				continue;
-			}
-			Location loc = p.getLocation();
-
-
-			//聞こえるが遠い場所
-			if (loc.distance(center) <= range && loc.distance(center) > (range / 2)) {
-				volume = volume * 0.7f;
-			}
-
-			PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect( CraftSound.getSound(sound), center.getX(), center.getY(), center.getZ(), volume, pitch);
-			((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
-		}
-	}
-
-	public static void chunkLoadIfUnload(Chunk c) {
-		if (!c.isLoaded()) {
-			c.load();
 		}
 	}
 

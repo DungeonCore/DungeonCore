@@ -1,6 +1,6 @@
 package lbn.mob.customEntity;
 
-import lbn.util.spawn.LbnMobTag;
+import lbn.mob.mob.LbnMobTag;
 
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;

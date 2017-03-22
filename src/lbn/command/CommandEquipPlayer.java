@@ -18,7 +18,7 @@ import lbn.dungeon.contents.slotStone.level1.FireAspect1;
 import lbn.dungeon.contents.slotStone.level2.FireAspect2;
 import lbn.dungeon.contents.slotStone.level4.CombatLightningStone;
 import lbn.item.customItem.attackitem.AttackItemStack;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Material;

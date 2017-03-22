@@ -1,7 +1,7 @@
 package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
-import lbn.util.spawn.LbnMobTag;
+import lbn.mob.mob.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;

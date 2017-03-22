@@ -3,6 +3,9 @@ package lbn.dungeon.contents.item.magic.normalItems;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.common.dropingEntity.DamagedFallingBlockForPlayer;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.dungeon.contents.item.magic.normalItems.magicExcutor.FallingBlockMagicExcutor;
 import lbn.dungeon.contents.item.magic.normalItems.magicExcutor.SummonMagicExcutor;
 import lbn.dungeon.contents.mob.zombie.NormalSummonZombie;
@@ -11,11 +14,8 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
 import lbn.item.customItem.attackitem.old.MagicItemOld;
 import lbn.item.itemInterface.MagicExcuteable;
-import lbn.item.strength.StrengthOperator;
+import lbn.item.system.strength.StrengthOperator;
 import lbn.mob.AbstractMob;
-import lbn.util.dropingEntity.DamagedFallingBlockForPlayer;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

@@ -1,10 +1,10 @@
 package lbn.item.customItem.other;
 
 import lbn.item.customItem.AbstractItem;
-import lbn.item.lore.ItemLoreToken;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;
+import lbn.item.system.lore.ItemLoreToken;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

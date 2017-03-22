@@ -3,10 +3,10 @@ package lbn.dungeon.contents.mob.animal;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.LivingEntity;

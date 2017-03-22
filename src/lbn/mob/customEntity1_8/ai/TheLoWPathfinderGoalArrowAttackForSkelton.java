@@ -1,6 +1,6 @@
 package lbn.mob.customEntity1_8.ai;
 
-import lbn.util.spawn.LbnMobTag;
+import lbn.mob.mob.LbnMobTag;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.ItemStack;

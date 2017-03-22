@@ -1,8 +1,8 @@
 package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomEntity;
+import lbn.mob.mob.LbnMobTag;
 import lbn.util.JavaUtil;
-import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityBat;

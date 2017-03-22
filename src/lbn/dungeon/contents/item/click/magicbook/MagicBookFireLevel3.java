@@ -2,9 +2,9 @@ package lbn.dungeon.contents.item.click.magicbook;
 
 import java.util.List;
 
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
-import lbn.util.particle.SpringParticleData;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.common.particle.SpringParticleData;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

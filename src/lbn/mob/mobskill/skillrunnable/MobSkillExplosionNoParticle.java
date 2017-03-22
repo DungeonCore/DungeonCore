@@ -1,8 +1,8 @@
 package lbn.mob.mobskill.skillrunnable;
 
+import lbn.common.explosion.NotMonsterDamageExplosion;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.JavaUtil;
-import lbn.util.explosion.NotMonsterDamageExplosion;
 
 import org.bukkit.entity.Entity;
 

@@ -1,12 +1,12 @@
 package lbn.dungeon.contents.slotStone.other;
 
 import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.CombatSlot;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

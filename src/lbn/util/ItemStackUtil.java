@@ -27,53 +27,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.google.common.base.Joiner;
 
 public class ItemStackUtil {
-	public static final String SOUL_BOUND = "soulbound";
-
-	public static void addSoulBound(ItemStack item) {
-		if (item == null) {
-			return;
-		}
-		if (!isSoulBound(item)) {
-
-			ItemMeta itemMeta = item.getItemMeta();
-			List<String> lore = itemMeta.getLore();
-
-			if (lore == null) {
-				lore = new ArrayList<String>();
-			}
-			lore.add(SOUL_BOUND);
-			itemMeta.setLore(lore);
-
-			item.setItemMeta(itemMeta);
-		}
-	}
-
-	public static boolean isSoulBound(ItemStack item) {
-		if (item == null) {
-			return false;
-		}
-
-		ItemMeta itemMeta = item.getItemMeta();
-
-		if (itemMeta == null) {
-			return false;
-		}
-
-		List<String> lore = itemMeta.getLore();
-
-		if (lore == null) {
-			return false;
-		}
-
-		for (String str : lore) {
-			if (str.contains(SOUL_BOUND)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	public static ItemMeta getItemMeta(ItemStack item) {
 		if (item == null) {
 			return null;
@@ -420,6 +373,12 @@ public class ItemStackUtil {
 		return slots;
 	}
 
+	/**
+	 * 指定したアイテムを追加できるならTRUE
+	 * @param p
+	 * @param item
+	 * @return
+	 */
 	public static boolean canGiveItem(Player p, ItemStack item) {
 		if (!p.isOnline()) {
 			return false;

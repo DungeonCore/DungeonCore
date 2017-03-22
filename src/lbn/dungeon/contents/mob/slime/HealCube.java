@@ -3,10 +3,10 @@ package lbn.dungeon.contents.mob.slime;
 import java.util.List;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
 import lbn.mob.AbstractMob;
 import lbn.util.LivingEntityUtil;
-import lbn.util.particle.ParticleData;
-import lbn.util.particle.ParticleType;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

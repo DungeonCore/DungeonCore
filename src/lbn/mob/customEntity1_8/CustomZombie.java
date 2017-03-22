@@ -2,8 +2,8 @@ package lbn.mob.customEntity1_8;
 
 import lbn.mob.customEntity.ICustomUndeadEntity;
 import lbn.mob.customEntity1_8.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
+import lbn.mob.mob.LbnMobTag;
 import lbn.util.JavaUtil;
-import lbn.util.spawn.LbnMobTag;
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
 import net.minecraft.server.v1_8_R1.EntityArrow;
