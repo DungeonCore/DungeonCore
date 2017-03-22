@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import lbn.common.other.DungeonData;
-import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
+import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
 
 import org.bukkit.Material;

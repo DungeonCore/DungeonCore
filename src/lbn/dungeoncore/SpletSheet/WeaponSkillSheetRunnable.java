@@ -2,9 +2,9 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
-import lbn.item.attackitem.weaponSkill.WeaponSkillData;
-import lbn.item.attackitem.weaponSkill.WeaponSkillFactory;
-import lbn.item.attackitem.weaponSkill.WeaponSkillSelector;
+import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillData;
+import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
+import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
 

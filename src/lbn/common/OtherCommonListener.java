@@ -20,7 +20,7 @@ import lbn.common.other.Stun;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.AbstractAttackItem;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.strength.StrengthOperator;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.util.ItemStackUtil;

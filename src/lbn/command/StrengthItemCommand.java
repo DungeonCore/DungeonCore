@@ -3,7 +3,7 @@ package lbn.command;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.implementation.pic.AbstractPickaxe;
+import lbn.item.customItem.pic.AbstractPickaxe;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.item.strength.StrengthTables;

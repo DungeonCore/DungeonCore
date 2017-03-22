@@ -1,7 +1,7 @@
 package lbn.item.repair.repairTable;
 
 import lbn.dungeoncore.Main;
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.util.Message;
 

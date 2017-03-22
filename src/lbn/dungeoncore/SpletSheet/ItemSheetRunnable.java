@@ -6,10 +6,10 @@ import java.util.concurrent.Future;
 import lbn.command.CommandGiveItem;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.SpreadSheetItem.SpreadSheetKeyCommandBlockExecuteItem;
-import lbn.item.SpreadSheetItem.SpreadSheetKeyTpItem;
-import lbn.item.SpreadSheetItem.SpreadSheetOtherItem;
-import lbn.item.SpreadSheetItem.SpreadSheetQuestItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetKeyCommandBlockExecuteItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetKeyTpItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetOtherItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetQuestItem;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 

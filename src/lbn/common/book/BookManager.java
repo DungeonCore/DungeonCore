@@ -6,7 +6,7 @@ import java.util.Set;
 import lbn.command.SpletSheetCommand;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.itemAbstract.BookItem;
+import lbn.item.customItem.itemAbstract.BookItem;
 import net.minecraft.server.v1_8_R1.ChatComponentText;
 import net.minecraft.server.v1_8_R1.ChatComponentUtils;
 import net.minecraft.server.v1_8_R1.ChatSerializer;

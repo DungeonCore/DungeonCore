@@ -4,7 +4,7 @@ import java.util.Random;
 
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.Main;
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 
 import org.bukkit.ChatColor;

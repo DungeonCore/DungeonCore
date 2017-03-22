@@ -3,6 +3,7 @@ package lbn.mob;
 import java.util.HashMap;
 
 import lbn.dungeoncore.LbnRuntimeException;
+import lbn.mob.mob.SummonMobable;
 import lbn.player.ItemType;
 
 import org.bukkit.entity.Entity;
@@ -38,6 +39,10 @@ public class SummonPlayerManager {
 	}
 
 	public static ItemType getItemType(Entity damage) {
-		return ItemType.MAGIC;
+		AbstractMob<?> mob = MobHolder.getMob(damage);
+		if (mob.isSummonMob()) {
+			return ((SummonMobable)mob).getUseItemType();
+		}
+		return ItemType.IGNORE;
 	}
 }

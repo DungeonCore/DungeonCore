@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.item.key.impl;
 
-import lbn.item.key.CommandBlockExceteKey;
+import lbn.item.customItem.key.CommandBlockExceteKey;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

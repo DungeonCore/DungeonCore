@@ -11,9 +11,18 @@ public class LoreLine {
 	String subTitle;
 	Object value;
 
+	ChatColor subTitleColor = ChatColor.YELLOW;
+	ChatColor valueColor = ChatColor.GOLD;
+
 	@Override
 	public String toString() {
-		return getLoreLine(subTitle, value);
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(subTitleColor);
+		stringBuilder.append(subTitle);
+		stringBuilder.append(" ：");
+		stringBuilder.append(valueColor);
+		stringBuilder.append(value);
+		return stringBuilder.toString();
 	}
 
 	/**

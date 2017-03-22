@@ -2,7 +2,7 @@ package lbn.command;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.item.implementation.GalionItem;
+import lbn.item.customItem.other.GalionItem;
 import lbn.money.GalionEditReason;
 import lbn.util.Message;
 

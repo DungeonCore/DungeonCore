@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 
-public class AbstractSummonZombie extends AbstractZombie implements SummonMobable{
+public abstract class AbstractSummonZombie extends AbstractZombie implements SummonMobable{
 
 	@Override
 	public String getName() {

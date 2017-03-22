@@ -3,7 +3,7 @@ package lbn.item.slot.table;
 import java.util.ArrayList;
 
 import lbn.dungeoncore.Main;
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;

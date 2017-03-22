@@ -1,8 +1,8 @@
 package lbn.dungeoncore.SpletSheet;
 
 import lbn.item.ItemManager;
-import lbn.item.SpreadSheetItem.SpreadSheetArmor;
-import lbn.item.armoritem.SpreadSheetArmorData;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetArmor;
+import lbn.item.customItem.armoritem.SpreadSheetArmorData;
 
 import org.bukkit.command.CommandSender;
 

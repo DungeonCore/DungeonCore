@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 
-import lbn.item.implementation.GalionItem;
+import lbn.item.customItem.other.GalionItem;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;

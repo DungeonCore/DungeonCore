@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;

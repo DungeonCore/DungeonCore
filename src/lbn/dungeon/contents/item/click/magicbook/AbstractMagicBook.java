@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbn.item.ItemInterface;
-import lbn.item.itemAbstract.RightClickItem;
+import lbn.item.customItem.itemAbstract.RightClickItem;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LivingEntityUtil;

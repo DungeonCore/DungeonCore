@@ -3,6 +3,7 @@ package lbn.dungeon.contents.mob.skelton;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.mob.mob.SummonMobable;
 import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.player.ItemType;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
 import lbn.util.spawn.LbnMobTag;
@@ -64,6 +65,11 @@ public class SummonSkelton extends AbstractSkelton implements SummonMobable{
 		LbnMobTag lbnMobTag = super.getLbnMobTag();
 		lbnMobTag.setSummonMob(true);
 		return lbnMobTag;
+	}
+
+	@Override
+	public ItemType getUseItemType() {
+		return ItemType.BOW;
 	}
 
 }

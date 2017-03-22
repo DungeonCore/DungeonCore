@@ -51,7 +51,7 @@ import lbn.dungeon.contents.slotStone.other.KillEffectTutorial;
 import lbn.dungeon.contents.slotStone.other.MagicHealMagicStone;
 import lbn.dungeon.contents.slotStone.other.MagicStoneJade;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.old.SpecialAttackItemSelectorOld;
+import lbn.item.customItem.attackitem.old.SpecialAttackItemSelectorOld;
 import lbn.item.setItem.SetItemManager;
 import lbn.player.ItemType;
 

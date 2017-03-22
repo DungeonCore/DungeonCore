@@ -5,7 +5,7 @@ import java.util.Arrays;
 import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.player.CraftTableViewManager;
 import lbn.player.crafttable.CraftTableType;

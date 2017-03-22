@@ -4,6 +4,7 @@ import java.util.List;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
+import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Location;
@@ -89,5 +90,10 @@ public class NormalSummonZombie extends AbstractSummonZombie{
 			LivingEntityUtil.setEquipment(e, new ItemStack(Material.PUMPKIN), new ItemStack(Material.DIAMOND_CHESTPLATE), new ItemStack(Material.IRON_LEGGINGS), new ItemStack(Material.IRON_BOOTS), 0);
 			LivingEntityUtil.setItemInHand(e, new ItemStack(Material.IRON_SWORD), 0);
 		}
+	}
+
+	@Override
+	public ItemType getUseItemType() {
+		return ItemType.MAGIC;
 	}
 }

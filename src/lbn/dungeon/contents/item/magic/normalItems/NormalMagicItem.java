@@ -9,7 +9,7 @@ import lbn.dungeon.contents.mob.zombie.NormalSummonZombie;
 import lbn.dungeon.contents.strength_template.NormalWeaponStrengthTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
-import lbn.item.attackitem.old.MagicItemOld;
+import lbn.item.customItem.attackitem.old.MagicItemOld;
 import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.AbstractMob;

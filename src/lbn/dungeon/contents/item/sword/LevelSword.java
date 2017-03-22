@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.item.sword;
 
-import lbn.item.attackitem.old.SwordItemOld;
+import lbn.item.customItem.attackitem.old.SwordItemOld;
 import lbn.item.strength.StrengthOperator;
 
 import org.bukkit.entity.LivingEntity;

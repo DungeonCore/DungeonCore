@@ -18,7 +18,7 @@ import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
-import lbn.item.attackitem.weaponSkill.WeaponSkillFactory;
+import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.mobspawn.point.MobSpawnerPointManager;

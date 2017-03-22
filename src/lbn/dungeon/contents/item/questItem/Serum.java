@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.item.questItem;
 
-import lbn.item.AbstractItem;
+import lbn.item.customItem.AbstractItem;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

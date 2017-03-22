@@ -9,10 +9,10 @@ import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.projectile.ProjectileManager;
-import lbn.item.armoritem.ArmorBase;
-import lbn.item.armoritem.old.OldArmorBase;
-import lbn.item.attackitem.AbstractAttackItem;
-import lbn.item.attackitem.weaponSkill.WeaponSkillExecutor;
+import lbn.item.customItem.armoritem.ArmorBase;
+import lbn.item.customItem.armoritem.old.OldArmorBase;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
 import lbn.item.itemInterface.CombatItemable;
 import lbn.item.itemInterface.EntityKillable;
@@ -188,45 +188,7 @@ public class ItemListener implements Listener{
 
 	@EventHandler
 	public void inventoryClick (final InventoryClickEvent e) {
-//		SlotSetTableOperation.inventoryClick(e);
-//
-//		if (!StrengthTableOperation.isOpenStrengthTable(e.getWhoClicked())) {
-//			return;
-//		}
-//
-//		//絶対に作業台が開いているはず
-//		if (!(e.getView().getTopInventory() instanceof CraftingInventory)) {
-//			return;
-//		}
-//
-//		//黄色のガラスと赤のガラスはクリックしてもキャンセルする
-//		ItemStack currentItem = e.getCurrentItem();
-//		if (StrengthTableOperation.isRedGlass(currentItem) || StrengthTableOperation.isYellowGlass(currentItem)) {
-//			e.setCancelled(true);
-//		}
-//
-//		//Playerデータがロードされていないので何もしない
-//		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)e.getWhoClicked());
-//		if (theLowPlayer == null) {
-//			Message.sendMessage((Player)e.getWhoClicked(), ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
-//			return;
-//		}
-//
-//		CraftingInventory top = (CraftingInventory) e.getView().getTopInventory();
-//		//強化を行う
-//		if (e.getSlotType() != SlotType.RESULT){
-//			new StrengthLaterRunnable(top, e, theLowPlayer).runTaskLater(Main.plugin, 1);
-//		} else {
-//			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
-//				if (top.getResult() == null || top.getResult().getType() == Material.AIR) {
-//					e.setCancelled(true);
-//					return;
-//				}
-//				new CraeteStrengthItemResultLater(e, theLowPlayer).runTaskLater(Main.plugin);
-//			} else {
-//				e.setCancelled(true);
-//			}
-//		}
+		SlotSetTableOperation.inventoryClick(e);
 	}
 
 	@EventHandler

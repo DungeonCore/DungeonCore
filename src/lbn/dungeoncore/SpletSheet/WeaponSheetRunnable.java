@@ -1,11 +1,11 @@
 package lbn.dungeoncore.SpletSheet;
 
 import lbn.item.ItemManager;
-import lbn.item.SpreadSheetItem.SpreadSheetAttackItem;
-import lbn.item.attackitem.SpreadSheetWeaponData;
-import lbn.item.itemAbstract.BowItem;
-import lbn.item.itemAbstract.MagicItem;
-import lbn.item.itemAbstract.SwordItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
+import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
+import lbn.item.customItem.itemAbstract.BowItem;
+import lbn.item.customItem.itemAbstract.MagicItem;
+import lbn.item.customItem.itemAbstract.SwordItem;
 
 import org.bukkit.command.CommandSender;
 

@@ -3,7 +3,7 @@ package lbn.item.repair.repairTable;
 import java.util.ArrayList;
 
 import lbn.dungeoncore.LbnRuntimeException;
-import lbn.item.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotType;
 import lbn.item.slot.slot.EmptySlot;

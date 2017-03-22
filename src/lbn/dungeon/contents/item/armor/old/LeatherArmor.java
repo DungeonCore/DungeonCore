@@ -1,8 +1,8 @@
 package lbn.dungeon.contents.item.armor.old;
 
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.AbstractItem;
-import lbn.item.armoritem.ArmorStrengthTemplate;
+import lbn.item.customItem.AbstractItem;
+import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;

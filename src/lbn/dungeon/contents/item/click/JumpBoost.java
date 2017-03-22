@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.item.click;
 
-import lbn.item.itemAbstract.RightClickItem;
+import lbn.item.customItem.itemAbstract.RightClickItem;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 import lbn.util.particle.ParticleData;

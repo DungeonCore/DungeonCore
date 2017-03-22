@@ -3,9 +3,9 @@ package lbn.dungeon.contents.item.material;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
-import lbn.item.armoritem.old.ArmorMaterial;
+import lbn.item.customItem.AbstractItem;
+import lbn.item.customItem.armoritem.old.ArmorMaterial;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

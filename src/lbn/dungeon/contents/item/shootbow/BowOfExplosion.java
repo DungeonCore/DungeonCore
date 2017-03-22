@@ -4,8 +4,8 @@ import java.util.List;
 
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.dungeoncore.Main;
-import lbn.item.attackitem.WeaponStrengthTemplate;
-import lbn.item.attackitem.old.BowItemOld;
+import lbn.item.customItem.attackitem.WeaponStrengthTemplate;
+import lbn.item.customItem.attackitem.old.BowItemOld;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.strength.StrengthOperator;
 import lbn.mob.LastDamageMethodType;

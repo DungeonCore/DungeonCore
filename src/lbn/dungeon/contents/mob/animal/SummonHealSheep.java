@@ -3,6 +3,7 @@ package lbn.dungeon.contents.mob.animal;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 import lbn.util.particle.ParticleData;
 import lbn.util.particle.ParticleType;
@@ -55,6 +56,11 @@ public class SummonHealSheep extends SummonSheep{
 		} else {
 			return 2;
 		}
+	}
+
+	@Override
+	public ItemType getUseItemType() {
+		return ItemType.MAGIC;
 	}
 
 }

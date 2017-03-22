@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import lbn.item.implementation.AddEmptySlotItem;
-import lbn.item.implementation.AddEmptySlotItem2;
-import lbn.item.implementation.RemoveUnavailableSlot;
-import lbn.item.implementation.RemoveUnavailableSlot2;
+import lbn.item.customItem.other.AddEmptySlotItem;
+import lbn.item.customItem.other.AddEmptySlotItem2;
+import lbn.item.customItem.other.RemoveUnavailableSlot;
+import lbn.item.customItem.other.RemoveUnavailableSlot2;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.EmptySlot;

@@ -9,9 +9,9 @@ import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
-import lbn.item.armoritem.ArmorStrengthTemplate;
-import lbn.item.armoritem.old.ArmorMaterial;
-import lbn.item.armoritem.old.BeneEffectType;
+import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
+import lbn.item.customItem.armoritem.old.ArmorMaterial;
+import lbn.item.customItem.armoritem.old.BeneEffectType;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

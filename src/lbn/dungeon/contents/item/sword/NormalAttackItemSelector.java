@@ -6,7 +6,7 @@ import java.util.Collection;
 import lbn.dungeon.contents.item.magic.normalItems.NormalMagicItem;
 import lbn.dungeon.contents.item.shootbow.NormalBowWrapper;
 import lbn.item.ItemInterface;
-import lbn.item.attackitem.old.SpecialAttackItemSelectorOld;
+import lbn.item.customItem.attackitem.old.SpecialAttackItemSelectorOld;
 import lbn.item.itemInterface.SpecialAttackItemable;
 import lbn.player.ItemType;
 

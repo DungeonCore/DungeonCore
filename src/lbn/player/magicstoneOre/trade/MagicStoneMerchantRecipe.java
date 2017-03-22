@@ -1,6 +1,6 @@
 package lbn.player.magicstoneOre.trade;
 
-import lbn.item.implementation.MagicStoneOre;
+import lbn.item.customItem.other.MagicStoneOre;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;

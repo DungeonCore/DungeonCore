@@ -1,6 +1,6 @@
 package lbn.dungeon.contents.item.key;
 
-import lbn.item.AbstractItem;
+import lbn.item.customItem.AbstractItem;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

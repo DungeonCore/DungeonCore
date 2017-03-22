@@ -8,7 +8,7 @@ import java.util.Random;
 import lbn.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
 import lbn.item.ItemInterface;
 import lbn.item.SlotManager;
-import lbn.item.implementation.SimpleStone;
+import lbn.item.customItem.other.SimpleStone;
 import lbn.item.slot.AbstractSlot;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;

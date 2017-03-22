@@ -19,7 +19,7 @@ import lbn.common.event.player.PlayerLoadedDataEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.other.SystemLog;
 import lbn.dungeoncore.Main;
-import lbn.item.implementation.MagicStoneOre;
+import lbn.item.customItem.other.MagicStoneOre;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;

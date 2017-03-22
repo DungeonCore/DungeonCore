@@ -3,8 +3,8 @@ package lbn.dungeon.contents.item.other.strengthBase;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.dungeon.contents.strength_template.ChangeStrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.item.AbstractItem;
 import lbn.item.ItemInterface;
+import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.util.Message;
 

@@ -24,7 +24,7 @@ import static org.bukkit.Material.LEATHER_LEGGINGS;
 import java.util.Arrays;
 
 import lbn.dungeon.contents.item.material.ArmorMaterialItem;
-import lbn.item.armoritem.old.ArmorMaterial;
+import lbn.item.customItem.armoritem.old.ArmorMaterial;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
