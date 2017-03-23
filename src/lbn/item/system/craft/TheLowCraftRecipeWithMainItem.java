@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.item.itemInterface.CraftItemable;
+import lbn.item.system.craft.craftingViewer.CraftViewerForMainItemRecipe;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -29,11 +31,11 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
 	}
 
 	@Override
-	public boolean hasAllMaterial(Player p) {
-		if (!super.hasAllMaterial(p)) {
+	public boolean hasAllMaterial(Player p, boolean withMainItem) {
+		if (!super.hasAllMaterial(p, withMainItem)) {
 			return false;
 		}
-		return contains(p.getInventory(), getMainItem());
+		return !withMainItem || contains(p.getInventory(), getMainItem());
 	}
 
 
@@ -55,4 +57,8 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
 		return false;
 	}
 
+	@Override
+	public void openCraftingViewer(Player p, CraftItemable craftingItem) {
+		CraftViewerForMainItemRecipe.open(p, craftingItem);
+	}
 }

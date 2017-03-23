@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
+import lbn.item.itemInterface.CraftItemable;
+import lbn.item.system.craft.craftingViewer.CraftViewerForOnlyMaterialRecipe;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
 
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
 	//ItemId
@@ -50,18 +52,31 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 	}
 
 	@Override
-	public boolean hasAllMaterial(Player p) {
+	public boolean hasAllMaterial(Player p, boolean withMainItem) {
 		PlayerInventory inventory = p.getInventory();
 		for (Entry<String, Integer> entry : materialMap.entrySet()) {
-			ItemStack itemStack = ItemStackUtil.getItemStack(entry.getKey());
-			if (itemStack == null) {
+			if (entry.getKey() == null) {
 				continue;
 			}
 			//1つでも持ってなかったらFALSE
-			if (!inventory.contains(itemStack, entry.getValue())) {
+			if (!ItemStackUtil.containsCustomItem(inventory, entry.getKey(), entry.getValue())) {
 				return false;
 			}
 		}
 		return true;
 	}
+
+
+	@Override
+	public void removeMaterial(Inventory inv) {
+		for (Entry<ItemInterface, Integer> entry : getMaterialMap().entrySet()) {
+			ItemStackUtil.removeCustomItem(inv, entry.getKey().getId(), entry.getValue());
+		}
+	}
+
+	@Override
+	public void openCraftingViewer(Player p, CraftItemable craftingItem) {
+		CraftViewerForOnlyMaterialRecipe.open(p, craftingItem);
+	}
 }
+

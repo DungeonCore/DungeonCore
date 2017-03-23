@@ -3,8 +3,10 @@ package lbn.item.system.craft;
 import java.util.Map;
 
 import lbn.item.ItemInterface;
+import lbn.item.itemInterface.CraftItemable;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 public interface TheLowCraftRecipeInterface {
 
@@ -49,7 +51,21 @@ public interface TheLowCraftRecipeInterface {
 	/**
 	 * 指定されたPlayerが全てのクラフト素材を持っているか確認する
 	 * @param p
+	 * @param withMainItem メインアイテムも含めて考えるならTRUE
 	 * @return
 	 */
-	public boolean hasAllMaterial(Player p);
+	public boolean hasAllMaterial(Player p, boolean withMainItem);
+
+	/**
+	 * インベントリから素材を削除する
+	 * @param inv
+	 */
+	public void removeMaterial(Inventory inv);
+
+	/**
+	 * クラフト画面を開く
+	 * @param p
+	 * @param craftingItem
+	 */
+	public void openCraftingViewer(Player p, CraftItemable craftingItem);
 }

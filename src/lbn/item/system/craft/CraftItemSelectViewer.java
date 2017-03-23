@@ -1,5 +1,6 @@
 package lbn.item.system.craft;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,11 +28,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class CraftViewer implements MenuSelectorInterface{
+public class CraftItemSelectViewer implements MenuSelectorInterface{
 	private static final String TITLE = "アイテム制作";
 
 	static {
-		MenuSelectorManager.regist(new CraftViewer());
+		MenuSelectorManager.regist(new CraftItemSelectViewer());
 	}
 
 	public static void openTest(Player p, String villagerID) {
@@ -42,9 +43,56 @@ public class CraftViewer implements MenuSelectorInterface{
 		Inventory inventory = getInventory(block);
 		open(p, Arrays.asList(inventory), 0);
 	}
+	/**
+	 * 指定したクラフト後のアイテムが入ったインベントリを開く
+	 * @param p
+	 * @param invList
+	 * @param index
+	 */
+	public static void open(Player p, String villagerId, int index) {
+		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerId);
+		if (villager == null) {
+			p.sendMessage("指定された村人がいません。" + villagerId);
+			return;
+		}
+		String dataList = villager.getData();
+		if (dataList == null) {
+			p.sendMessage("指定された村人のデータがありません。村人：" + villagerId);
+			return;
+		}
+
+		ArrayList<Inventory> validInvList = new ArrayList<Inventory>();
+
+		//正しいインベントを取得する
+		for (String data : dataList.split("&")) {
+			Location location = AbstractSheetRunable.getLocationByString(data.trim());
+			if (location == null) {
+				continue;
+			}
+			Block block = location.getBlock();
+			Inventory inventory = getInventory(block);
+			if (inventory == null) {
+				continue;
+			}
+			validInvList.add(inventory);
+		}
+
+		if (validInvList.size() == 0) {
+			p.sendMessage("開けるクラフト画面が存在しません。村人：" + villagerId);
+			return;
+		}
+
+		open(p, validInvList, index % validInvList.size());
+	}
 
 	static ItemStack AIR = new ItemStack(Material.AIR);
 
+	/**
+	 * 指定したクラフト後のアイテムが入ったインベントリを開く
+	 * @param p
+	 * @param invList
+	 * @param index
+	 */
 	public static void open(Player p, List<Inventory> invList, int index) {
 		//設定したインベントリ
 		Inventory inventory = invList.get(index);
@@ -63,12 +111,17 @@ public class CraftViewer implements MenuSelectorInterface{
 			if (customItem == null) {
 				continue;
 			}
-			itemViewer.setItem(i, CraftViewerItems.getViewItem(customItem));
+			itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem(customItem));
 		}
 
 		p.openInventory(itemViewer);
 	}
 
+	/**
+	 * 指定したチェストのインベントリを開く。もしダブルチェストならダブルチェストで開く
+	 * @param b
+	 * @return
+	 */
 	public static Inventory getInventory(Block b) {
 		if (b.getType().equals(Material.CHEST)) {
 			Chest c = (Chest) b.getState();
@@ -94,7 +147,7 @@ public class CraftViewer implements MenuSelectorInterface{
 	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		String nbtTag = ItemStackUtil.getNBTTag(item, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT);
 		//クラフトできないアイテムを選択しているので何もしない
-		if (nbtTag == null) {
+		if (nbtTag == null || item.getType() == Material.BARRIER) {
 			return;
 		}
 
@@ -107,11 +160,11 @@ public class CraftViewer implements MenuSelectorInterface{
 
 		TheLowCraftRecipeInterface craftRecipe = customItem.getCraftRecipe();
 		//素材を持っているか確認
-		if (craftRecipe.hasAllMaterial(p)) {
-			p.sendMessage("GUI開きます");
+		if (craftRecipe.hasAllMaterial(p, true)) {
+			craftRecipe.openCraftingViewer(p, customItem);
 		} else {
 			//書き換える
-			CraftViewerItems.addDontHasMaterial(item);
+			CraftItemSelectViewerItems.addDontHasMaterial(item);
 			e.setCurrentItem(item);
 			p.updateInventory();
 		}

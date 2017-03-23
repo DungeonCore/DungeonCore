@@ -116,7 +116,19 @@ public class JavaUtil {
 	 * @return
 	 */
 	public static double getDistanceSquared(Location loc, double x, double y, double z) {
-		return loc.getX() * x + loc.getY() * y + loc.getZ() * z;
+		return (loc.getX() - x) * (loc.getX() - x) + (loc.getY() - y) * (loc.getY() - y) + (loc.getZ() - z) * (loc.getZ() - z);
+	}
+
+	/**
+	 * 指定された座標間の距離の2乗を返す
+	 * @param loc
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public static double getDistanceSquared(double x, double y, double z, double x1, double y1, double z1) {
+		return x * x1 + y * y1 + z * z1;
 	}
 }
 

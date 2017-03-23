@@ -176,9 +176,15 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
-		 spawnLocation = loc;
 		 return (Zombie) getBukkitEntity();
 	}
+
+	@Override
+	public void setPosition(double d0, double d1, double d2) {
+		super.setPosition(d0, d1, d2);
+		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
+	}
+
 	Location spawnLocation = null;
 
 	boolean isIgnoreWater = false;
@@ -258,6 +264,11 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
 				return;
 			}
+
+			if (dead) {
+				return;
+			}
+
 			if (getMobTag().isBoss()) {
 				getBukkitEntity().teleport(spawnLocation);
 			} else {

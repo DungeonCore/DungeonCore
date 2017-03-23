@@ -21,8 +21,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class StrengthMarchant extends TheLowMerchant{
-	public StrengthMarchant(Player p, TheLowPlayer thelowPlayer) {
+public class StrengthMerchant extends TheLowMerchant{
+	public StrengthMerchant(Player p, TheLowPlayer thelowPlayer) {
 		super(p);
 		this.theLowPlayer = thelowPlayer;
 	}
@@ -47,7 +47,8 @@ public class StrengthMarchant extends TheLowMerchant{
 		}
 
 		//表示するレシピを取得する
-		MerchantRecipeCreator merchantRecipeCreator = new MerchantRecipeCreator(topInventory.getItem(0), topInventory.getItem(1), theLowPlayer, strengthData);
+		ItemStack dispItem1 = topInventory.getItem(0) == null ? null : topInventory.getItem(0).clone();
+		MerchantRecipeCreator merchantRecipeCreator = new MerchantRecipeCreator(dispItem1, strengthData.getMaterial(), theLowPlayer, strengthData);
 		List<TheLowMerchantRecipe> strengthItemRecipe = merchantRecipeCreator.getStrengthItemRecipe();
 		if (strengthItemRecipe == null) {
 			sendRecipeList(getInitRecipes());
@@ -94,6 +95,7 @@ public class StrengthMarchant extends TheLowMerchant{
 		Bukkit.getPluginManager().callEvent(event);
 
 		recipe.setResult(event.getItem());
+
 		return recipe;
 	}
 

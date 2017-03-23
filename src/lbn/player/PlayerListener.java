@@ -13,6 +13,7 @@ import lbn.common.event.player.PlayerChangeGalionsEvent;
 import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.event.player.PlayerCompleteReincarnationEvent;
+import lbn.common.event.player.PlayerCraftCustomItemEvent;
 import lbn.common.event.player.PlayerJoinDungeonGameEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.event.player.PlayerLoadedDataEvent;
@@ -32,6 +33,7 @@ import lbn.player.customplayer.MagicPointManager;
 import lbn.player.customplayer.PlayerChestTpManager;
 import lbn.player.magicstoneOre.MagicStoneFactor;
 import lbn.player.magicstoneOre.MagicStoneOreType;
+import lbn.util.ItemStackUtil;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
@@ -475,6 +477,12 @@ public class PlayerListener implements Listener{
 			p.sendMessage(ChatColor.RED + "強化に失敗しました");
 			p.playSound(p.getLocation(), Sound.ITEM_BREAK, 1f, 1f);
 		}
+	}
+
+	@EventHandler
+	public void onPlayerCraftCustomItemEvent(PlayerCraftCustomItemEvent event) {
+		event.getPlayer().sendMessage(MessageFormat.format("{0}アイテム{1}[{2}]{3}を作成しました", ChatColor.GREEN, ChatColor.LIGHT_PURPLE, ChatColor.stripColor(ItemStackUtil.getName(event.getCraftedItem())), ChatColor.GREEN));
+		event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ANVIL_USE, (float) 0.8, 1);
 	}
 
 

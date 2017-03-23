@@ -78,8 +78,13 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
-		 spawnLocation = loc;
 		 return (Spider) getBukkitEntity();
+	}
+
+	@Override
+	public void setPosition(double d0, double d1, double d2) {
+		super.setPosition(d0, d1, d2);
+		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
 	}
 
 	Location spawnLocation = null;

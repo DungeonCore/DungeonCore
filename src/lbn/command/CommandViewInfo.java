@@ -19,7 +19,7 @@ import lbn.item.ItemManager;
 import lbn.item.customItem.armoritem.ArmorBase;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.slot.table.SlotSetTableOperation;
-import lbn.item.system.craft.CraftViewer;
+import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.CommandableMob;
@@ -96,8 +96,8 @@ public class CommandViewInfo implements CommandExecutor{
 			break;
 		case "craft":
 			Block block = new Location(Bukkit.getWorld("thelow"), -23, 70, 0).getBlock();
-			Inventory inventory = CraftViewer.getInventory(block);
-			CraftViewer.open((Player)paramCommandSender, Arrays.asList(inventory), 0);
+			Inventory inventory = CraftItemSelectViewer.getInventory(block);
+			CraftItemSelectViewer.open((Player)paramCommandSender, Arrays.asList(inventory), 0);
 			break;
 		case "status":
 			sendPlayerStatus(target);

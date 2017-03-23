@@ -10,7 +10,7 @@ public class StrengthTables {
 	public static void  openStrengthTable(Player p) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
-			TheLowTrades.open(new StrengthMarchant(p,theLowPlayer), p);
+			TheLowTrades.open(new StrengthMerchant(p,theLowPlayer), p);
 		} else {
 			TheLowPlayerManager.sendLoingingMessage(p);
 		}

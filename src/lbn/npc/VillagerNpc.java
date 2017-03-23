@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import lbn.common.menu.MenuSelectorManager;
 import lbn.money.BuyerShopSelector;
 import lbn.npc.citizens.TheLowIdTrail;
+import lbn.npc.gui.StrengthMenu;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
@@ -221,7 +221,7 @@ public class VillagerNpc {
 		} else if (data.getType() == VillagerType.SHOP) {
 			BuyerShopSelector.onOpen(p, NpcManager.getId(e.getNPC()));
 		} if (data.getType() == VillagerType.BLACKSMITH) {
-			MenuSelectorManager.open(p, "blacksmith menu");
+			StrengthMenu.open(p, this);
 		}
 	}
 

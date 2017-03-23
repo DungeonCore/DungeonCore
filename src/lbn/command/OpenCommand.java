@@ -3,7 +3,7 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.item.system.strength.StrengthTables;
+import lbn.npc.gui.StrengthMenu;
 import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.reincarnation.ReincarnationFactor;
 
@@ -26,7 +26,7 @@ public class OpenCommand implements CommandExecutor, TabCompleter{
 
 		switch (params[0].toLowerCase()) {
 		case "kajiya":
-			StrengthTables.openStrengthTable(p);
+			StrengthMenu.open(p, null);
 			break;
 		case "reinc":
 			ReincarnationFactor.openReincarnationInv(p);

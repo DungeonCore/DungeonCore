@@ -7,6 +7,7 @@ import java.util.HashMap;
 import lbn.dungeon.contents.mob.NormalMob;
 import lbn.mob.mob.NullMob;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -44,7 +45,7 @@ public class MobHolder{
 	 */
 	public static void registMob(AbstractMob<?> mob) {
 		if (mob != null) {
-			mobs.put(mob.getName().toUpperCase(), mob);
+			mobs.put(ChatColor.stripColor(mob.getName().toUpperCase()), mob);
 		}
 	}
 
@@ -125,7 +126,15 @@ public class MobHolder{
 			return NULL_MOB;
 		}
 		//大文字にする
-		name = name.toUpperCase();
+		name = ChatColor.stripColor(name.toUpperCase());
+
+		//[があったら消す
+		if (name.contains("[") && name.contains("]")) {
+			if (name.contains("[") && name.contains("]") ) {
+				name = name.substring(0, name.lastIndexOf("[")).trim();
+			}
+		}
+
 		if (mobs.containsKey(name)) {
 			return mobs.get(name);
 		} else {

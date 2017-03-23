@@ -77,7 +77,11 @@ public class StrengthData {
 	 * @return
 	 */
 	public ItemStack getMaterial() {
-		return material;
+		if (material != null) {
+			return material.clone();
+		} else {
+			return null;
+		}
 	}
 
 	/**

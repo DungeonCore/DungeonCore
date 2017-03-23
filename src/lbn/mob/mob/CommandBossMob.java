@@ -307,9 +307,7 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 		if (isNullMob()) {
 			return;
 		}
-		if (this instanceof BossMobable) {
-			new UpdateNameLater().runTaskLater(Main.plugin, 1);
-		}
+		new UpdateNameLater().runTaskLater(Main.plugin, 1);
 	}
 
 	@Override

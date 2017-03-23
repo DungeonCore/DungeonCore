@@ -14,10 +14,7 @@ import lbn.dungeon.contents.ItemRegister;
 import lbn.dungeon.contents.MobRegister;
 import lbn.dungeon.contents.SpawnMobGetterRegister;
 import lbn.dungeoncore.Main;
-import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.SoundSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import lbn.item.setItem.SetItemManager;
 import lbn.mob.mobskill.MobSkillManager;
@@ -67,6 +64,11 @@ public class InitManager {
 	}
 
 	public void reloadSpreadSheet() {
+		SpletSheetCommand.reloadSheet(null, "weapon");
+
+		SpletSheetCommand.reloadSheet(null, "armor");
+
+		SpletSheetCommand.reloadSheet(null, "item");
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
@@ -82,17 +84,13 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "particle");
 
-		SpletSheetExecutor.onExecute(new WeaponSheetRunnable(Bukkit.getConsoleSender()));
+		SpletSheetCommand.reloadSheet(null, "weaponskill");
 
 		SpletSheetCommand.reloadSheet(null, "magicore");
 
 		WeaponSkillFactory.allRegist();
 
-		SpletSheetCommand.reloadSheet(null, "weaponskill");
-
 		SpletSheetCommand.reloadSheet(null, "food");
-
-		SpletSheetCommand.reloadSheet(null, "armor");
 
 		BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
 
@@ -103,7 +101,6 @@ public class InitManager {
 				int count = getRunCount();
 				switch (count) {
 				case 0:
-					SpletSheetExecutor.onExecute(new ItemSheetRunnable(Bukkit.getConsoleSender()));
 					break;
 				case 3:
 					VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);

@@ -23,7 +23,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 
-public class CraftViewerItems {
+public class CraftItemSelectViewerItems {
 	private static final String NOT_CRAFT_LINE = ChatColor.RED + "" + ChatColor.BOLD + "素材が足りないためアイテムを作成出来ません";
 	private static final String CRAFT_MATERIAL_LORE_TITLE = "クラフト素材";
 
@@ -37,30 +37,9 @@ public class CraftViewerItems {
 		//LoreDataを生成
 		ItemLoreData itemLoreData = new ItemLoreData(itemstack, new CraftViewerLoreComparator());
 
-		ItemLoreToken materialLore = new ItemLoreToken(CRAFT_MATERIAL_LORE_TITLE);
-		//メインアイテムがあるならTRUE
-		if (craftRecipe.hasMainItem()) {
-			//メインアイテムがないならエラーとする
-			ItemInterface mainItem = craftRecipe.getMainItem();
-			if (mainItem != null) {
-				materialLore.addLore(mainItem.getItemName(), ChatColor.LIGHT_PURPLE);
-			} else {
-				isValid = false;
-			}
-		}
-
-		//材料を追加する
-		Map<ItemInterface, Integer> materialMap = craftRecipe.getMaterialMap();
-		if (materialMap != null) {
-			for (Entry<ItemInterface, Integer> entry : materialMap.entrySet()) {
-				ItemInterface materialItem = entry.getKey();
-				if (materialItem != null) {
-					materialLore.addLore(MessageFormat.format("{0}  {1}個", materialItem.getItemName(), entry.getValue()));
-				} else {
-					isValid = false;
-				}
-			}
-		} else {
+		//素材のLoreを取得
+		ItemLoreToken materialLore = getLoreTokenFromRecipe(craftRecipe);
+		if (materialLore == null) {
 			isValid = false;
 		}
 
@@ -94,6 +73,41 @@ public class CraftViewerItems {
 	}
 
 	/**
+	 * レシピからLoreTokenを取得。もしエラーがあるならnullを返す
+	 * @param craftRecipe
+	 * @return
+	 */
+	public static ItemLoreToken getLoreTokenFromRecipe(TheLowCraftRecipeInterface craftRecipe) {
+		ItemLoreToken materialLore = new ItemLoreToken(CRAFT_MATERIAL_LORE_TITLE);
+		//メインアイテムがあるならTRUE
+		if (craftRecipe.hasMainItem()) {
+			//メインアイテムがないならエラーとする
+			ItemInterface mainItem = craftRecipe.getMainItem();
+			if (mainItem != null) {
+				materialLore.addLore(mainItem.getItemName(), ChatColor.LIGHT_PURPLE);
+			} else {
+				return null;
+			}
+		}
+
+		//材料を追加する
+		Map<ItemInterface, Integer> materialMap = craftRecipe.getMaterialMap();
+		if (materialMap != null) {
+			for (Entry<ItemInterface, Integer> entry : materialMap.entrySet()) {
+				ItemInterface materialItem = entry.getKey();
+				if (materialItem != null) {
+					materialLore.addLore(MessageFormat.format("{0}  {1}個", materialItem.getItemName(), entry.getValue()));
+				} else {
+					return null;
+				}
+			}
+		} else {
+			return null;
+		}
+		return materialLore;
+	}
+
+	/**
 	 * 素材が足りないからクラフトできないという文をLoreに追加する
 	 * @param item
 	 */
@@ -104,7 +118,7 @@ public class CraftViewerItems {
 		ArrayList<String> newLore = new ArrayList<String>();
 		newLore.add(NOT_CRAFT_LINE);
 		newLore.addAll(lore);
-		ItemStackUtil.setLore(item, lore);
+		ItemStackUtil.setLore(item, newLore);
 	}
 
 	/**

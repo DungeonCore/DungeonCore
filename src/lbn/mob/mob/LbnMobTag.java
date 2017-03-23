@@ -39,7 +39,7 @@ public class LbnMobTag {
 
 	boolean isBoss = false;
 
-	double removeDistance = 100;
+	double removeDistance = 75;
 
 	public double getRemoveDistance() {
 		return removeDistance;

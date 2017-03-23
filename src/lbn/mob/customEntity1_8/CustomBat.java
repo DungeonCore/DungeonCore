@@ -19,7 +19,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 
 	private LbnMobTag tag;
-	private Location spawnLocation;
 
 	public CustomBat(World world) {
 		this(world, new LbnMobTag(EntityType.PIG));
@@ -47,7 +46,6 @@ public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
 		// ワールドにentityを追加
 		world.addEntity(this, SpawnReason.CUSTOM);
-		spawnLocation = loc;
 		return (Bat) getBukkitEntity();
 	}
 
@@ -90,6 +88,15 @@ public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 			}
 		}
 	}
+
+	@Override
+	public void setPosition(double d0, double d1, double d2) {
+		super.setPosition(d0, d1, d2);
+		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
+	}
+
+	Location spawnLocation = null;
+
 
 	@Override
 	public boolean r(Entity entity) {

@@ -28,7 +28,7 @@ public class TheLowTrades {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void openTrade(MerchantImplemention imerchant, EntityPlayer p, TheLowMerchant merchant) {
+	private static void openTrade(MerchantImplemention imerchant, EntityPlayer p, TheLowMerchant merchant) {
 		Container container = CraftEventFactory.callInventoryOpenEvent(p, new ContainerMerchant(p.inventory, imerchant, p.world));
 		if (container == null) {
 			return;
@@ -47,6 +47,7 @@ public class TheLowTrades {
 		IChatBaseComponent ichatbasecomponent = imerchant.getScoreboardDisplayName();
 
 		p.playerConnection.sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager", ichatbasecomponent, inventorymerchant.getSize()));
+		System.out.println("aaa222222");
 
 		//レシピを登録する
 		MerchantRecipeList merchantrecipelist = new MerchantRecipeListImplemention(merchant);
@@ -60,5 +61,6 @@ public class TheLowTrades {
 		merchantrecipelist.a(packetdataserializer);
 		p.playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
 
+		System.out.println("aaa");
 	}
 }

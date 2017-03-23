@@ -480,4 +480,65 @@ public class ItemStackUtil {
 		}
 		return nmsStack.getTag().getShort(name);
 	}
+
+	/**
+	 * インベントリから指定したCustomアイテムを指定した数量削除する
+	 * @param inv
+	 * @param itemId
+	 * @param deleteAmount 数量
+	 */
+	public static void removeCustomItem(Inventory inv ,String itemId, int deleteAmount) {
+		ItemStack[] items = inv.getContents();
+		for (int i = 0; i < items.length; i++) {
+			//IDを比較する
+			String id = ItemStackUtil.getId(items[i]);
+			if (!itemId.equals(id)) {
+				continue;
+			}
+
+			if (deleteAmount <= 0) {
+				return;
+			}
+
+			int itemAmount = items[i].getAmount();
+			//個数が同じ場合は削除する
+			if (deleteAmount >= itemAmount) {
+				inv.clear(i);
+				deleteAmount -= itemAmount;
+			} else if (deleteAmount < itemAmount) {
+				items[i].setAmount(itemAmount - deleteAmount);
+			}
+		}
+	}
+
+	/**
+	 * 指定したIDのアイテムが指定した個数持っていた場合はTRUE
+	 * @param inv
+	 * @param itemId
+	 * @param amount
+	 * @return
+	 */
+	public static boolean containsCustomItem(Inventory inv, String itemId, int amount) {
+		ItemStack[] items = inv.getContents();
+		for (int i = 0; i < items.length; i++) {
+			//IDを比較する
+			String id = ItemStackUtil.getId(items[i]);
+			if (!itemId.equals(id)) {
+				continue;
+			}
+
+			if (amount <= 0) {
+				return true;
+			}
+
+			int itemAmount = items[i].getAmount();
+			//持っているアイテムの個数の方が多い場合はTRUE
+			if (amount <= itemAmount) {
+				return true;
+			} else if (amount > itemAmount) {
+				amount -= itemAmount;
+			}
+		}
+		return false;
+	}
 }
