@@ -1,7 +1,7 @@
 package lbn.npc;
 
 public enum VillagerType {
-	NORMAL, SHOP, BLACKSMITH;
+	NORMAL, SHOP, BLACKSMITH, REINC, MAGIC_ORE;
 
 
 	public static VillagerType getValue(String type) {

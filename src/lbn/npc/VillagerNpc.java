@@ -9,6 +9,8 @@ import java.util.Set;
 import lbn.money.BuyerShopSelector;
 import lbn.npc.citizens.TheLowIdTrail;
 import lbn.npc.gui.StrengthMenu;
+import lbn.player.magicstoneOre.trade.MagicStoneTrade;
+import lbn.player.reincarnation.ReincarnationFactor;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestProcessingStatus;
@@ -17,6 +19,7 @@ import lbn.quest.abstractQuest.TouchVillagerQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.quest.viewer.QuestSelectorViewer;
+import lbn.util.JavaUtil;
 import lbn.util.QuestUtil;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCDamageEvent;
@@ -216,12 +219,24 @@ public class VillagerNpc {
 			return;
 		}
 
-		if (data.getType() == VillagerType.NORMAL) {
+		switch (JavaUtil.getNull(data.getType(), VillagerType.NORMAL)) {
+		case NORMAL:
 			QuestSelectorViewer.openSelector(this, p);
-		} else if (data.getType() == VillagerType.SHOP) {
+			break;
+		case SHOP:
 			BuyerShopSelector.onOpen(p, NpcManager.getId(e.getNPC()));
-		} if (data.getType() == VillagerType.BLACKSMITH) {
+			break;
+		case BLACKSMITH:
 			StrengthMenu.open(p, this);
+			break;
+		case REINC:
+			ReincarnationFactor.openReincarnationInv(p);
+			break;
+		case MAGIC_ORE:
+			MagicStoneTrade.open(p);
+			break;
+		default:
+			break;
 		}
 	}
 

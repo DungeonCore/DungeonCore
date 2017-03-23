@@ -130,6 +130,19 @@ public class JavaUtil {
 	public static double getDistanceSquared(double x, double y, double z, double x1, double y1, double z1) {
 		return x * x1 + y * y1 + z * z1;
 	}
+
+	/**
+	 * NullならnullValueを返す。nullじゃないならそのままvalueを返す
+	 * @param value
+	 * @param nullValue
+	 * @return
+	 */
+	public static <T> T getNull(T value, T nullValue) {
+		if (value == null) {
+			return nullValue;
+		}
+		return value;
+	}
 }
 
 class InterfaceGetter {
