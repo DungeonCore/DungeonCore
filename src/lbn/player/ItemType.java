@@ -36,11 +36,19 @@ public enum ItemType {
 	 * @return
 	 */
 	public double getMinDamage(int level) {
-		if (this == BOW) {
-			return 9 + Math.pow(level / 10,1.6) *1.9;
-		} else {
-			return 4 + Math.pow(level / 10,1.6) *1.3;
+		return getMaxDamage(level) + getDecreaseDamage(level);
+	}
+
+	private double getDecreaseDamage(int level) {
+		if (level <= 15) {
+			return -4;
 		}
+
+		if (level <= 60) {
+			return - level / 10.0 * 2.0 - 4;
+		}
+
+		return -16;
 	}
 
 	/**

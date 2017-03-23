@@ -49,7 +49,6 @@ public class CraftItemSelectViewerItems {
 			return ItemStackUtil.getItem(craftItem.getItemName(), Material.BARRIER, "エラーがあるので生成出来ません");
 		}
 		//材料のLoreを追加する
-		materialLore.addLore("材料！！！");
 		itemLoreData.addLore(materialLore);
 
 		//SlotのLoreを削除する

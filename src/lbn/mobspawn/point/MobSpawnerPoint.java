@@ -134,12 +134,10 @@ public class MobSpawnerPoint {
 
 		existNearPlayer = false;
 
-		int count = getNearEntity(getChunk());
-		if (lookNearChunk) {
-			//周囲のチャンクも調べる
-			for (ChunkWrapper chunk : nearChunkList) {
-				count += getNearEntity(chunk.getChunk());
-			}
+		int count = getNearEntity(getChunk(), true);
+		//周囲のチャンクも調べる
+		for (ChunkWrapper chunk : nearChunkList) {
+			count += getNearEntity(chunk.getChunk(), lookNearChunk);
 		}
 
 		//残り召喚できるモブの数(maxMobCount - count)だけ召喚する
@@ -175,9 +173,10 @@ public class MobSpawnerPoint {
 	/**
 	 * このGetterに該当するMobを取得する
 	 * @param c
+	 * @param このチャンクのモンスターを調べるならTRUE
 	 * @return
 	 */
-	protected int getNearEntity(Chunk c) {
+	protected int getNearEntity(Chunk c, boolean isSearch) {
 		if (!c.isLoaded()) {
 			return 0;
 		}
@@ -185,23 +184,25 @@ public class MobSpawnerPoint {
 
 		Entity[] entities = c.getEntities();
 		for (Entity entity : entities) {
-			//モブの種類を調べる
 			if (entity.getType().isAlive() && entity.getType() != EntityType.PLAYER) {
-				//モブの名前を調べる
-				String name = ((LivingEntity) entity).getCustomName();
-				if (name == null || name.isEmpty()) {
-					name = "normal:" + entity.getType();
-				}
-				//mobの名前が一致しなければ別のモブとする
-				if (!mobNameList.contains(name)) {
-					continue;
-				}
+				//モブの種類を調べる
+				if (isSearch) {
+					//モブの名前を調べる
+					String name = ((LivingEntity) entity).getCustomName();
+					if (name == null || name.isEmpty()) {
+						name = "normal:" + entity.getType();
+					}
+					//mobの名前が一致しなければ別のモブとする
+					if (!mobNameList.contains(name)) {
+						continue;
+					}
 
-				//yがスポーンポイントから１６以上はなれていたら別のGetterのモブとする
-				if (Math.abs(entity.getLocation().getY() - locY) >= dungeonHight) {
-					continue;
+					//yがスポーンポイントから１６以上はなれていたら別のGetterのモブとする
+					if (Math.abs(entity.getLocation().getY() - locY) >= dungeonHight) {
+						continue;
+					}
+					nearMob.add((LivingEntity) entity);
 				}
-				nearMob.add((LivingEntity) entity);
 			} else if (entity.getType() == EntityType.PLAYER) {
 				if (Math.abs(entity.getLocation().getY() - locY) <= 30) {
 					existNearPlayer = true;

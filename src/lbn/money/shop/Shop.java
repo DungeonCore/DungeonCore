@@ -27,6 +27,9 @@ public class Shop {
 	public Inventory getShopInventory() {
 		ArrayList<ShopItem> arrayList = getShopItemList();
 
+		if (arrayList == null) {
+			return null;
+		}
 		Inventory createInventory = Bukkit.createInventory(null, ((int)(arrayList.size() / 9) + 1) * 9, getName() + " shop");
 
 		int i = 0;
@@ -84,7 +87,12 @@ public class Shop {
 	}
 
 	public void openShop(Player p) {
-		p.openInventory(getShopInventory());
+		Inventory shopInventory = getShopInventory();
+		if (shopInventory == null) {
+			p.sendMessage("何も売ってません。");
+			return;
+		}
+		p.openInventory(shopInventory);
 	}
 
 	/**

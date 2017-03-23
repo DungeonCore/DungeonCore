@@ -134,7 +134,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	@Override
 	public boolean isShowItemList() {
-		return true;
+		return false;
 	}
 
 	public abstract double getMaterialDamage();

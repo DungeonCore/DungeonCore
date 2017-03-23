@@ -8,6 +8,7 @@ import lbn.NbtTagConst;
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
+import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.npc.NpcManager;
@@ -106,12 +107,17 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 			}
 
 			//クラフトできるアイテムを取得する
-			CraftItemable customItem = ItemManager.getCustomItem(CraftItemable.class, contents[i]);
+			ItemInterface customItem = ItemManager.getCustomItem(contents[i]);
 			//クラフト出来るアイテムでないなら無視
 			if (customItem == null) {
-				continue;
+				//オリジナルアイテムでないならそのまま入れる
+				itemViewer.setItem(i, contents[i]);
+			} else {
+				//クラフト出来るアイテムならセットする
+				if (ItemManager.isImplemental(CraftItemable.class, customItem)) {
+					itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem((CraftItemable) customItem));
+				}
 			}
-			itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem(customItem));
 		}
 
 		p.openInventory(itemViewer);
@@ -147,7 +153,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		String nbtTag = ItemStackUtil.getNBTTag(item, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT);
 		//クラフトできないアイテムを選択しているので何もしない
-		if (nbtTag == null || item.getType() == Material.BARRIER) {
+		if (nbtTag == null  || nbtTag.isEmpty() || item.getType() == Material.BARRIER) {
 			return;
 		}
 

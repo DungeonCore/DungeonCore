@@ -34,7 +34,7 @@ public class CustomShop extends Shop{
 	@Override
 	protected ArrayList<ShopItem> getShopItemList() {
 		if (loc == null) {
-			return super.getShopItemList();
+			return null;
 		}
 
 		Block block = loc.getBlock();

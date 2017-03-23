@@ -86,13 +86,7 @@ public class VillagerData {
 		}
 
 		//データ処理
-		if (this.type == VillagerType.SHOP) {
-			//座標があるか確認する
-			Location locationByString = AbstractSheetRunable.getLocationByString(data);
-			if (locationByString != null) {
-				this.data = data;
-			}
-		}
+		this.data = data;
 
 		if (uuid != null) {
 			this.uuid = UUID.fromString(uuid);
