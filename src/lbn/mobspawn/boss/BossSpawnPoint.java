@@ -77,10 +77,19 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
 
   private boolean existMobInNear() {
     ExperienceOrb spawn = spawnPointLoc.getWorld().spawn(spawnPointLoc, ExperienceOrb.class);
-    for (Entity livingEntity : spawn.getNearbyEntities(50, 10, 50)) {
+    for (Entity livingEntity : spawn.getNearbyEntities(60, 20, 60)) {
       if (!boss.getEntityType().equals(livingEntity.getType())) {
         continue;
       }
+
+      if (!livingEntity.getType().isAlive()) {
+    	  continue;
+      }
+
+      if (!livingEntity.isValid()) {
+    	  continue;
+      }
+
       if (((LivingEntity) livingEntity).getCustomName() != null
           && ((LivingEntity) livingEntity).getCustomName().contains(boss.getName())) {
         if (boss.getEntity() == null) {

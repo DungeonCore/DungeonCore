@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.common.other.DungeonData;
-import lbn.common.other.DungeonList;
+import lbn.common.place.dungeon.DungeonData;
+import lbn.common.place.dungeon.DungeonList;
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
@@ -20,23 +20,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
 public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 
-	static ArrayList<String> difficulties = new ArrayList<>();
-	static{
-		difficulties.add(DungeonData.DIFFICULTY_VERY_EASY);
-		difficulties.add(DungeonData.DIFFICULTY_EASY);
-		difficulties.add(DungeonData.DIFFICULTY_NORMAL);
-		difficulties.add(DungeonData.DIFFICULTY_HARD);
-		difficulties.add(DungeonData.DIFFICULTY_VERY_HARD);
-		difficulties.add(DungeonData.DIFFICULTY_IMPOSSIBLE);
-
-	}
-	static boolean isLook = true;
+	static boolean isLook = false;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -102,9 +91,6 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 
 	@Override
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		if (arg3.length == 1) {
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], difficulties, new ArrayList<String>(difficulties.size()));
-		}
 		return ImmutableList.of();
 	}
 

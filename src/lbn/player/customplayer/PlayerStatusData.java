@@ -39,9 +39,6 @@ public class PlayerStatusData {
 	public PlayerStatusData(TheLowPlayer player) {
 		dataMapDouble.put(PlayerStatusType.MAX_HP, 20.0);
 		dataMapDouble.put(PlayerStatusType.MAX_MAGIC_POINT, 100.0);
-		dataMapDouble.put(PlayerStatusType.MULTIPLY_SWORD_ATTACK, 1.0);
-		dataMapDouble.put(PlayerStatusType.MULTIPLY_BOW_ATTACK, 1.0);
-		dataMapDouble.put(PlayerStatusType.MULTIPLY_MAGIC_ATTACK, 1.0);
 		this.player = player;
 	}
 

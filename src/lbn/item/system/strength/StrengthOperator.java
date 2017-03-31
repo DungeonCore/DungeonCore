@@ -1,6 +1,5 @@
 package lbn.item.system.strength;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -91,22 +90,12 @@ public class StrengthOperator {
 	 * @return
 	 */
 	public static ItemLoreToken getStrengthLoreToken(Strengthenable strength, int level) {
-		String[] strengthDetail = strength.getStrengthDetail(level);
-		if (strengthDetail == null) {
-			strengthDetail = new String[0];
-		}
-		List<String> strengthLore = Arrays.asList(strengthDetail);
 		ItemLoreToken itemLoreToken = new ItemLoreToken(ItemLoreToken.TITLE_STRENGTH);
-		if (strengthLore == null || strengthLore.size() == 0) {
+		//Loreをセットする
+		strength.setStrengthDetail(level, itemLoreToken);
+
+		if (itemLoreToken.size() == 0) {
 			itemLoreToken.addLore("なし");
-		} else {
-			for (String detail : strengthLore) {
-				if (detail.contains("ADD:")) {
-					itemLoreToken.addLore(detail);
-				} else {
-					itemLoreToken.addLore("ADD:" + detail);
-				}
-			}
 		}
 		return itemLoreToken;
 	}

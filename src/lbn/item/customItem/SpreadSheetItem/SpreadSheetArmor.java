@@ -7,9 +7,10 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.customItem.armoritem.AbstractArmorItem;
 import lbn.item.customItem.armoritem.SpreadSheetArmorData;
 import lbn.item.system.craft.TheLowCraftRecipeInterface;
+import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -64,8 +65,8 @@ public class SpreadSheetArmor extends AbstractArmorItem{
 
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		return new String[]{"最大耐久値 ： " + ChatColor.GOLD + (data.getMaxDurability() + getAddDurability(level))};
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		loreToken.addLore(LoreLine.getLoreLine("最大耐久力", (data.getMaxDurability() + getAddDurability(level))));
 	}
 
 	@Override

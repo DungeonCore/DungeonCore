@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
-import lbn.common.other.DungeonData;
+import lbn.common.place.dungeon.DungeonData;
 import lbn.money.GalionEditReason;
 import lbn.player.status.StatusAddReason;
 

@@ -15,7 +15,6 @@ import lbn.item.itemInterface.Strengthenable;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.ItemStackUtil;
-import lbn.util.JavaUtil;
 import lbn.util.Message;
 
 import org.apache.commons.lang.StringUtils;
@@ -91,29 +90,13 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	 * @param strengthLevel 強化レベル
 	 * @return
 	 */
-	public double getAttackItemDamage(int strengthLevel) {
-		//キャッシュになければ作成
-		if (damageCache == -1) {
-			double minDamage = getAttackType().getMinDamage(getAvailableLevel());
-			double maxDamage = getAttackType().getMaxDamage(getAvailableLevel());
-			damageCache = minDamage + (maxDamage - minDamage) / 20.0 * (getCraftLevel() + 1);
-		}
-
-		//クリティカルなら1.25倍にする
-		if (JavaUtil.isRandomTrue((int) getCriticalHitRate(strengthLevel))) {
-			return damageCache * 1.25;
-		} else {
-			return damageCache;
-		}
-	}
-
-	double damageCache = -1;
+	abstract public double getAttackItemDamage(int strengthLevel);
 
 	/**
 	 * クラフトレベルを取得する
 	 * @return
 	 */
-	abstract public int getCraftLevel();
+	abstract public int getWeaponLevel();
 
 	@Override
 	public boolean isShowItemList() {
@@ -161,32 +144,6 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	 */
 	protected void sendNotAvailableMessage(Player p) {
 		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
-	}
-
-	/**
-	 * 強化レベルによって変化するLoreを取得
-	 */
-	public String[] getStrengthDetail(int level) {
-		String[] lore;
-		if (level == 0) {
-			lore = new String[1];
-		} else {
-			lore = new String[2];
-			lore[1] = "クリティカル率 " + ChatColor.GOLD + getCriticalHitRate(level) + "%";
-		}
-		double dispAddDamane = JavaUtil.round(getAttackItemDamage(level) - getMaterialDamage(), 2);
-		lore[0] = Message.getMessage(Message.ADD_DAMAGE_DISP, (dispAddDamane >= 0 ? "+" : "")  + dispAddDamane, ChatColor.GOLD);
-
-		return lore;
-	}
-
-	/**
-	 * クリティカル確率
-	 * @param level
-	 * @return
-	 */
-	public double getCriticalHitRate(int level) {
-		return 1.5 * level;
 	}
 
 	@Override

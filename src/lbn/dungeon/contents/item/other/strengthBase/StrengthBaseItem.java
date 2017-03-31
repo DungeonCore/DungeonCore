@@ -6,6 +6,7 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
 import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.Message;
 
 import org.bukkit.inventory.ItemStack;
@@ -13,8 +14,7 @@ import org.bukkit.inventory.ItemStack;
 public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable{
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		return null;
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
 	}
 
 

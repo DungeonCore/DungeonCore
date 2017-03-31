@@ -1,4 +1,4 @@
-package lbn.common.other;
+package lbn.common.place.dungeon;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -8,20 +8,12 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 
 public class DungeonData {
 	String dungeonName;
-	Location dungeonLoc;
-	String difficulty;
+	public Location dungeonLoc;
+	public String difficulty;
 	int id;
 	Hologram hologram;
 
-	static public final String DIFFICULTY_VERY_EASY = "very_easy";
-	static public final String DIFFICULTY_EASY = "easy";
-	static public final String DIFFICULTY_NORMAL = "normal";
-	static public final String DIFFICULTY_HARD = "hard";
-	static public final String DIFFICULTY_VERY_HARD = "very_hard";
-	static public final String DIFFICULTY_IMPOSSIBLE = "impossible";
-
 	public DungeonData(String dungeonName, Location startLoc, String difficulty, int id, Location entranceLoc) {
-		super();
 		this.dungeonName = dungeonName;
 		this.dungeonLoc = startLoc;
 		this.difficulty = difficulty;

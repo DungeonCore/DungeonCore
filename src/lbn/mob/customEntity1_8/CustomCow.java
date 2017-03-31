@@ -7,8 +7,8 @@ import lbn.mob.mob.LbnMobTag;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.Entity;
+import net.minecraft.server.v1_8_R1.EntityCow;
 import net.minecraft.server.v1_8_R1.EntityHuman;
-import net.minecraft.server.v1_8_R1.EntityPig;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
 import net.minecraft.server.v1_8_R1.Items;
 import net.minecraft.server.v1_8_R1.PathfinderGoalBreed;
@@ -17,7 +17,6 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalFollowParent;
 import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalPanic;
-import net.minecraft.server.v1_8_R1.PathfinderGoalPassengerCarrotStick;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTempt;
@@ -26,20 +25,18 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Pig;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
+public class CustomCow extends EntityCow implements ICustomEntity<Cow>{
 
 	private LbnMobTag tag;
 
-	private PathfinderGoalPassengerCarrotStick bk;
-
-	public CustomPig(World world) {
+	public CustomCow(World world) {
 		this(world, new LbnMobTag(EntityType.PIG));
 	}
-	public CustomPig(World world, LbnMobTag tag) {
+	public CustomCow(World world, LbnMobTag tag) {
 		super(world);
 		this.tag = tag;
 
@@ -59,15 +56,13 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 
 			if (tag.getAiType() == AIType.NO_ATACK) {
 				this.goalSelector.a(1, new PathfinderGoalPanic(this, 1.25D));
-				this.goalSelector.a(3, new PathfinderGoalBreed(this, 1.0D));
-				this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, Items.CARROT_ON_A_STICK, false));
-				this.goalSelector.a(4, new PathfinderGoalTempt(this, 1.2D, Items.CARROT, false));
-				this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.1D));
+				this.goalSelector.a(2, new PathfinderGoalBreed(this, 1.0D));
+				this.goalSelector.a(3, new PathfinderGoalTempt(this, 1.25D, Items.WHEAT, false));
+				this.goalSelector.a(4, new PathfinderGoalFollowParent(this, 1.25D));
 			}
 
 			//戦闘AIをセットする
 			AttackAISetter.setAttackAI(this, tag);
-			this.goalSelector.a(7, this.bk = new PathfinderGoalPassengerCarrotStick(this, 0.3F));
 			this.goalSelector.a(11, new PathfinderGoalRandomStroll(this, 1.0D));
 			this.goalSelector.a(12, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
 			this.goalSelector.a(13, new PathfinderGoalRandomLookaround(this));
@@ -80,18 +75,13 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 	}
 
 	@Override
-	public PathfinderGoalPassengerCarrotStick ck() {
-		return bk;
-	}
-
-	@Override
-		public Pig spawn(Location loc) {
+		public Cow spawn(Location loc) {
 		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
 		//位置を指定
 		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
 		 //ワールドにentityを追加
 		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Pig) getBukkitEntity();
+		 return (Cow) getBukkitEntity();
 	}
 
 	@Override

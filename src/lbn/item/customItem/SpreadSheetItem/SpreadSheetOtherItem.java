@@ -1,16 +1,18 @@
 package lbn.item.customItem.SpreadSheetItem;
 
+import java.util.Arrays;
 import java.util.List;
 
 import lbn.item.customItem.AbstractItem;
 import lbn.util.ItemStackUtil;
+import lbn.util.JavaUtil;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetOtherItem extends AbstractItem {
 	public SpreadSheetOtherItem(String name, String id, int price,
-			String command) {
+			String command, String detail) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -19,7 +21,12 @@ public class SpreadSheetOtherItem extends AbstractItem {
 
 		ItemStack itemStackByCommand = ItemStackUtil.getItemStackByCommand(command);
 		m = itemStackByCommand.getType();
-		lore = ItemStackUtil.getLore(itemStackByCommand);
+
+		if (JavaUtil.getNull(detail, "").equals("")) {
+			lore = ItemStackUtil.getLore(itemStackByCommand);
+		} else {
+			lore = Arrays.asList(detail.split(","));
+		}
 	}
 
 	String name;

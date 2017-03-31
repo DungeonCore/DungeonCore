@@ -11,6 +11,8 @@ import lbn.item.setItem.AbstractAbilitySetItem;
 import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.item.setItem.SetStrengthableItemParts;
+import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
 import lbn.util.ItemStackUtil;
@@ -66,8 +68,8 @@ class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate 
 	}
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		return new String[]{"最大体力+" + getMaxHealth(level)};
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		loreToken.addLore(LoreLine.getLoreLine("最大体力", getMaxHealth(level)));
 	}
 
 	public int getMaxHealth(int level) {

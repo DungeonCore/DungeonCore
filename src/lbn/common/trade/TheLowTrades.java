@@ -47,7 +47,6 @@ public class TheLowTrades {
 		IChatBaseComponent ichatbasecomponent = imerchant.getScoreboardDisplayName();
 
 		p.playerConnection.sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager", ichatbasecomponent, inventorymerchant.getSize()));
-		System.out.println("aaa222222");
 
 		//レシピを登録する
 		MerchantRecipeList merchantrecipelist = new MerchantRecipeListImplemention(merchant);
@@ -60,7 +59,5 @@ public class TheLowTrades {
 		packetdataserializer.writeInt(containerCounter);
 		merchantrecipelist.a(packetdataserializer);
 		p.playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
-
-		System.out.println("aaa");
 	}
 }

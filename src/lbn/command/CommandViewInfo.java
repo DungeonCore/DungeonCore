@@ -91,6 +91,13 @@ public class CommandViewInfo implements CommandExecutor{
 		case "chunk":
 			sendChunkInfo(target);
 			break;
+		case "stop":
+			try {
+				Thread.sleep(1000 * 20);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "save":
 			PlayerIODataManager.saveAsZip();
 			break;

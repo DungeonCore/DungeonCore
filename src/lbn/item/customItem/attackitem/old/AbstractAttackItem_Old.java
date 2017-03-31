@@ -1,18 +1,14 @@
 package lbn.item.customItem.attackitem.old;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.strength.StrengthOperator;
-import lbn.util.JavaUtil;
 import lbn.util.Message;
 
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -128,7 +124,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	}
 
 	@Override
-	public int getCraftLevel() {
+	public int getWeaponLevel() {
 		return 0;
 	}
 
@@ -151,21 +147,8 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 		return getAttackType().getMinDamage(getAvailableLevel());
 	}
 
-	public String[] getStrengthDetail(int level) {
-		//追加ダメージを記載
-		String[] detail = getStrengthDetail2(level);
-
-		ArrayList<String> lores;
-		if (detail == null) {
-			lores = new ArrayList<String>();
-		} else {
-			lores = new ArrayList<String>(Arrays.asList(detail));
-		}
-
-		double dispAddDamane = JavaUtil.round(getAttackItemDamage(level) - getMaterialDamage(), 2);
-		lores.add(Message.getMessage(Message.ADD_DAMAGE_DISP, (dispAddDamane >= 0 ? "+" : "")  + dispAddDamane, ChatColor.GOLD));
-
-		return lores.toArray(new String[0]);
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		//もう使わないので記載しない
 	}
 
 	abstract protected String[] getStrengthDetail2(int level);

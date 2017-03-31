@@ -10,7 +10,6 @@ import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.customItem.armoritem.ArmorBase;
-import lbn.item.customItem.armoritem.old.OldArmorBase;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.BowItemable;
@@ -144,7 +143,7 @@ public class ItemListener implements Listener{
 
 		//しばらくは両方で処理を行う
 		//TODO 後で消す
-		OldArmorBase.onArmor(e);
+//		OldArmorBase.onArmor(e);
 		ArmorBase.onArmor(e);
 
 //		Player p = (Player) e.getEntity();

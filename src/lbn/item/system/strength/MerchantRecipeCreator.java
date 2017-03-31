@@ -16,6 +16,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class MerchantRecipeCreator {
+	/**
+	 * @param item1 Playerが置いたアイテム1
+	 * @param item2 Playerが置いたアイテム2
+	 * @param player
+	 * @param strengthData
+	 */
 	public MerchantRecipeCreator(ItemStack item1, ItemStack item2, TheLowPlayer player, StrengthData strengthData) {
 		this.item1 = item1;
 		this.item2 = item2;
@@ -26,7 +32,9 @@ public class MerchantRecipeCreator {
 		this.strengthData = strengthData;
 	}
 
+	/** 置いたアイテム1 */
 	ItemStack item1;
+	/** 置いたアイテム2 */
 	ItemStack item2;
 	TheLowPlayer player;
 
@@ -60,17 +68,20 @@ public class MerchantRecipeCreator {
 		//強化できるかどうかセットする
 		strengthData.setCanStrength(isSufficientMoney && isSufficientMaterial);
 
+		//従来の強化のレシピ
 		TheLowMerchantRecipe recipe1 = new TheLowMerchantRecipe(getDummyItem(item1.clone()),
 				strengthData.getMaterial(),
 				StrengthOperator.getItem(item1.clone(), nextLevel));
 
+		//強化できるかどうかの情報をセットする
 		ItemStack recipe2Result = getShowResult(isSufficientMoney, isSufficientMaterial);
 		TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, item2, recipe2Result);
 
-		if (isSufficientMaterial) {
-			return Arrays.asList(recipe2, recipe1);
-		} else {
+		//素材が違っている　かつ　素材が置かれていないなら本来のレシピを表示
+		if (!isSufficientMaterial && ItemStackUtil.isEmpty(item2)) {
 			return Arrays.asList(recipe1, recipe2);
+		} else {
+			return Arrays.asList(recipe2, recipe1);
 		}
 	}
 

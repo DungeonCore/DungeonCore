@@ -6,24 +6,33 @@ import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.customItem.attackitem.AttackDamageValue;
 import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
-import lbn.util.Message;
+import lbn.util.JavaUtil;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 
 public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable{
-	SpreadSheetWeaponData data;
+	protected SpreadSheetWeaponData data;
 	public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
 		this.data = data;
+	}
+
+	/**
+	 *	同じレベルのMobを倒すのにかかる攻撃回数
+	 * @return
+	 */
+	public double getCombatLoad() {
+		return AttackDamageValue.getCombatLoad(getWeaponLevel(), getAttackType());
 	}
 
 	@Override
@@ -38,7 +47,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
 	@Override
 	public int getBuyPrice(ItemStack item) {
-		return Math.max(getCraftLevel() * 100, 10);
+		return Math.max(getWeaponLevel() * 100, 10);
 	}
 
 	@Override
@@ -58,12 +67,52 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 	@Override
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = super.getStandardLoreToken();
-		//使用可能レベル
-		loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
-		loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
-		//武器は耐久とレベルが関係ないのでnullでも問題ない
-		loreToken.addLore("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
+		//通常ダメージ
+		loreToken.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(getAttackItemDamage(0) - getMaterialDamage(), 2)));
 		return loreToken;
+	}
+
+	@Override
+	public double getAttackItemDamage(int strengthLevel) {
+		double combatLoad = getCombatLoad();
+		if (JavaUtil.isRandomTrue((int) getCriticalHitRate(strengthLevel))) {
+			combatLoad -= getMinusCombatLoadForCritical();
+		}
+		double attackDamageValue = AttackDamageValue.getAttackDamageValue(combatLoad, getAvailableLevel());
+		return attackDamageValue * data.getDamageParcent();
+	}
+
+	/**
+	 * クリティカル時、減算される戦闘負荷量
+	 * @return
+	 */
+	public double getMinusCombatLoadForCritical() {
+		return 0.3;
+	}
+
+	/**
+	 * 強化レベルによって変化するLoreを取得
+	 */
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		if (level != 0) {
+			loreToken.addLore(LoreLine.getLoreLine("クリティカル率", getCriticalHitRate(level) + "%"));
+		}
+
+		double normalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad(), getAvailableLevel());
+		double criticalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad() - getMinusCombatLoadForCritical() , getAvailableLevel());
+
+		if (criticalDamage > normalDamage) {
+			loreToken.addLore(LoreLine.getLoreLine("クリティカル追加ダメージ", JavaUtil.round(criticalDamage - normalDamage, 2)));
+		}
+	}
+
+	/**
+	 * クリティカル確率
+	 * @param level
+	 * @return
+	 */
+	public double getCriticalHitRate(int level) {
+		return 1.5 * level;
 	}
 
 	@Override
@@ -77,7 +126,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 	}
 
 	@Override
-	public int getCraftLevel() {
+	public int getWeaponLevel() {
 		return data.getRank();
 	}
 
@@ -107,11 +156,6 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 	@Override
 	public int getMaxStrengthCount() {
 		return 10;
-	}
-
-	@Override
-	public double getAttackItemDamage(int strengthLevel) {
-		return super.getAttackItemDamage(strengthLevel) * data.getDamageParcent();
 	}
 
 	@Override

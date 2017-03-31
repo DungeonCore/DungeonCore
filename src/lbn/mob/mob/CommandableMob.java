@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.item.customItem.attackitem.AttackDamageValue;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
@@ -16,13 +17,13 @@ import lbn.mob.SummonPlayerManager;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
+import lbn.player.ItemType;
 import lbn.util.BlockUtil;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -84,17 +85,21 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	LbnMobTag nbtTag;
 
-	double health = -1;
-
 	@EventHandler
 	protected Entity spawnPrivate(Location loc) {
 		Entity spawn = MobSpawnerFromCommand.spawn(loc, command, nbtTag);
 
-		if (health == -1) {
+		if (nbtTag.isAutoFixHp() && nbtTag.getLevel() >= 0) {
 			if (spawn.getType().isAlive()) {
-				health = ((Damageable)spawn).getHealth();
+				double oldHp = ((LivingEntity)spawn).getMaxHealth();
+				((LivingEntity)spawn).setMaxHealth(
+						AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(nbtTag.getLevel(), ItemType.SWORD), nbtTag.getLevel())
+						/ AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(9, ItemType.SWORD), 9) * oldHp
+						);
+				((LivingEntity)spawn).setHealth(((LivingEntity)spawn).getMaxHealth());
 			}
 		}
+
 		return spawn;
 	}
 

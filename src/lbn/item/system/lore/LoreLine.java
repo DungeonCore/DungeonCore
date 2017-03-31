@@ -19,7 +19,7 @@ public class LoreLine {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(subTitleColor);
 		stringBuilder.append(subTitle);
-		stringBuilder.append(" ：");
+		stringBuilder.append(" ： ");
 		stringBuilder.append(valueColor);
 		stringBuilder.append(value);
 		return stringBuilder.toString();

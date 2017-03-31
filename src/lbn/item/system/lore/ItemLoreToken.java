@@ -93,10 +93,10 @@ public class ItemLoreToken {
 	}
 
 	/**
-	 * 登録したLoreを取得
+	 * 登録したLoreをタイトル付きで取得
 	 * @return
 	 */
-	public List<String> getLoreToken() {
+	public List<String> getLoreWithTitle() {
 		return lore;
 	}
 

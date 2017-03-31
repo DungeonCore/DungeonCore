@@ -1,7 +1,8 @@
-package lbn.common.other;
+package lbn.common.place;
 
 import java.util.Collection;
 
+import lbn.common.place.dungeon.DungeonData;
 import lbn.dungeoncore.Main;
 
 import org.bukkit.ChatColor;

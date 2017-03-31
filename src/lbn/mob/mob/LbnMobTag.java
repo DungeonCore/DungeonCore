@@ -41,6 +41,26 @@ public class LbnMobTag {
 
 	double removeDistance = 75;
 
+	int level = 0;
+
+	boolean autoFixHp = false;
+
+	public void setAutoFixHp(boolean autoFixHp) {
+		this.autoFixHp = autoFixHp;
+	}
+
+	public boolean isAutoFixHp() {
+		return autoFixHp;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
 	public double getRemoveDistance() {
 		return removeDistance;
 	}

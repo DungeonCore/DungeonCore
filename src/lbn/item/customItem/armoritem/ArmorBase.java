@@ -92,10 +92,12 @@ public class ArmorBase {
 			AbstractMob<?> customMob = MobHolder.getMob(mob);
 			isBoss = customMob.isNullMob() || !customMob.isBoss();
 		}
+		System.out.println("@1");
 
 		//装備を取得
 		EntityEquipment equipment = p.getEquipment();
 
+		System.out.println("@2");
 		double totalArmorPoint = 0;
 		// 防具を取得
 		for (ItemStack armor : equipment.getArmorContents()) {
@@ -126,6 +128,7 @@ public class ArmorBase {
 		double cutParcent = getDamageCutParcent(totalArmorPoint);
 		damage = damage * cutParcent;
 
+		System.out.println("@3@" + damage + "@" + cutParcent);
 		//ダメージをセット
 		e.setDamage(Math.max(damage, 0));
 	}

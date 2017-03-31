@@ -14,12 +14,13 @@ import lbn.common.event.player.PlayerChangeStatusExpEvent;
 import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
-import lbn.common.other.DungeonData;
-import lbn.common.other.DungeonList;
+import lbn.common.place.dungeon.DungeonData;
+import lbn.common.place.dungeon.DungeonList;
 import lbn.item.setItem.SetItemManager;
 import lbn.money.GalionEditReason;
 import lbn.player.ability.AbilityType;
 import lbn.player.ability.AbstractTimeLimitAbility;
+import lbn.player.ability.impl.LevelUpAbility;
 import lbn.player.status.StatusAddReason;
 
 import org.bukkit.Bukkit;
@@ -321,6 +322,10 @@ public class CustomPlayer implements TheLowPlayer{
 					//転生を行ったときの効果を追加する
 					oneReincarnationData.getReincarnationInterface().addReincarnationEffect(this, oneReincarnationData.getLevelType(), oneReincarnationData.getCount());
 				}
+
+				//転生のAbilityをすべて消す
+				playerStatusData.clear(AbilityType.LEVEL_UP);
+				addAbility(new LevelUpAbility(getLevel(LevelType.MAIN)));
 
 				//時間制限付きのAbilityをチェックする
 				Set<AbilityInterface> ablitys = playerStatusData.getApplyedAbility(AbilityType.TIME_LIMIT_ABILITY);

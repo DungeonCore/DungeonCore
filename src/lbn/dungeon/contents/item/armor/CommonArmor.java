@@ -12,8 +12,8 @@ import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.customItem.armoritem.old.ArmorMaterial;
 import lbn.item.customItem.itemAbstract.OldAbstractArmor;
 import lbn.item.itemInterface.StrengthChangeItemable;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.strength.StrengthOperator;
-import lbn.util.JavaUtil;
 import lbn.util.Message;
 
 import org.bukkit.Material;
@@ -134,25 +134,8 @@ public class CommonArmor extends OldAbstractArmor implements StrengthChangeItema
 	}
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		int mobStar = 0;
-		double bossStar = 0;
-		switch (getArmorMaterial()) {
-		case LEATHER:
-		case GOLD:
-		case CHAINMAIL:
-		case IRON:
-			mobStar = 1 * level;
-			bossStar = 1.25 * level;
-			break;
-		case DIAMOND:
-			bossStar = 1.75 * level;
-			break;
-		default:
-			break;
-		}
-		bossStar = JavaUtil.round(bossStar, 1);
-		return new String[]{Message.getMessage("防御力: ☆ × {0}", mobStar) , Message.getMessage("ボスに対して防御力: ☆ × {0}", bossStar)};
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		//もう使わないので何もしない
 	}
 
 	@Override

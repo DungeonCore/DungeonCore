@@ -9,16 +9,20 @@ import lbn.common.event.player.PlayerCraftCustomItemEvent;
 import lbn.common.trade.TheLowMerchant;
 import lbn.common.trade.TheLowMerchantRecipe;
 import lbn.common.trade.TheLowTrades;
+import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.craft.TheLowCraftRecipeWithMainItem;
 import lbn.item.system.strength.StrengthOperator;
+import lbn.util.ItemStackUtil;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 
@@ -39,9 +43,13 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 	protected void onSetItem(InventoryView inv) {
 		Inventory topInventory = inv.getTopInventory();
 		ItemStack baseItem = topInventory.getItem(0);
-		//クラフト予定のアイテムと同じアイテムでないなら初期画面を表示
-		if (!mainItem.isThisItem(baseItem)) {
+		//アイテムが置かれてないなら初期画面を表示
+		if (ItemStackUtil.isEmpty(baseItem)) {
 			sendRecipeList(getInitRecipes());
+			return;
+		//別のアイテムを置いてあったらバリアブロックを置く
+		} else if (!mainItem.isThisItem(baseItem)) {
+			sendRecipeList(Arrays.asList(new TheLowMerchantRecipe(mainItem.getItem(), ItemStackUtil.getItem("アイテムが違います", Material.BARRIER))));
 			return;
 		}
 
@@ -79,6 +87,10 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 			p.sendMessage("アイテムが足りないため取引出来ません");
 			return null;
 		}
+
+		if (recipe.getResult() != null && recipe.getResult().getType() == Material.BARRIER) {
+			return null;
+		}
 		p.updateInventory();
 		return recipe;
 	}
@@ -91,6 +103,15 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 	@Override
 	public void onFinishTrade(TheLowMerchantRecipe recipe) {
 		craftRecipe.removeMaterial(p.getInventory());
+
+		//取引欄に0個のアイテムが残るので2tick後に実行する
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				p.updateInventory();
+			}
+		}.runTaskLater(Main.plugin, 2);
+
 		new PlayerCraftCustomItemEvent(thelowPlayer, craftItem, recipe.getResult()).callEvent();
 	}
 

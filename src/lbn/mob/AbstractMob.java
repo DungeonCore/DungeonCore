@@ -100,15 +100,19 @@ public abstract class AbstractMob<T extends Entity> {
 		}
 		e.setDamage(e.getDamage() );
 
-		//クエリの時だけダメージを表示させる
-		if (player.getGameMode() == GameMode.CREATIVE) {
-			new BukkitRunnable() {
-				double health = ((Damageable)mob).getHealth();
-				@Override
-				public void run() {
-					Message.sendMessage(player, "{0}:{1}ダメージ！！(もとのダメージの倍率:1.0)", type.getText(), JavaUtil.round(health - ((Damageable)mob).getHealth(), 2));
-				}
-			}.runTaskLater(Main.plugin, 2);
+		if (mob.getType().isAlive()) {
+			//クエリの時だけダメージを表示させる
+			if (player.getGameMode() == GameMode.CREATIVE) {
+				new BukkitRunnable() {
+					double health = ((Damageable)mob).getHealth();
+					@Override
+					public void run() {
+						Message.sendMessage(player, "{0}:{1}ダメージ！！(MobHP : {2}/{3})",
+								type.getText(), JavaUtil.round(health - ((Damageable)mob).getHealth(), 2),
+								JavaUtil.round(((Damageable)mob).getHealth(), 2), JavaUtil.round(((Damageable)mob).getMaxHealth(), 2));
+					}
+				}.runTaskLater(Main.plugin, 2);
+			}
 		}
 	}
 

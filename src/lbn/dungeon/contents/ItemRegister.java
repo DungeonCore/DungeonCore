@@ -9,7 +9,6 @@ import lbn.dungeon.contents.item.armor.old.DiamondArmor;
 import lbn.dungeon.contents.item.armor.old.GoldArmor;
 import lbn.dungeon.contents.item.armor.old.IronArmor;
 import lbn.dungeon.contents.item.armor.old.LeatherArmor;
-import lbn.dungeon.contents.item.click.DungeonDirector;
 import lbn.dungeon.contents.item.click.JumpBoost;
 import lbn.dungeon.contents.item.click.magicbook.AbstractMagicBook;
 import lbn.dungeon.contents.item.key.impl.AllDriedKey;
@@ -79,7 +78,6 @@ public class ItemRegister {
 		//rightClick
 		ItemManager.registItem(AbstractMagicBook.getAllItem());
 		ItemManager.registItem(new JumpBoost());
-		ItemManager.registItem(DungeonDirector.getItemList());
 
 		//material
 		ItemManager.registItem(new CaveStone());

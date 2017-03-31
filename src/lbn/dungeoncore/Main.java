@@ -9,12 +9,14 @@ import lbn.SystemListener;
 import lbn.chest.ChestListner;
 import lbn.chest.wireless.WireLessChestManager;
 import lbn.common.OtherCommonListener;
-import lbn.common.other.HolographicDisplaysManager;
 import lbn.common.other.SystemLog;
+import lbn.common.place.HolographicDisplaysManager;
 import lbn.item.ItemListener;
 import lbn.item.SetItemListner;
 import lbn.mob.MobListener;
 import lbn.mob.customEntity1_8.CustomBat;
+import lbn.mob.customEntity1_8.CustomChicken;
+import lbn.mob.customEntity1_8.CustomCow;
 import lbn.mob.customEntity1_8.CustomEnderman;
 import lbn.mob.customEntity1_8.CustomGiant;
 import lbn.mob.customEntity1_8.CustomGuardian;
@@ -35,7 +37,10 @@ import lbn.quest.QuestListener;
 import lbn.util.DungeonLogger;
 import lbn.util.LbnRunnable;
 import lbn.util.NMSUtils;
+import net.minecraft.server.v1_8_R1.AttributeRanged;
 import net.minecraft.server.v1_8_R1.EntityBat;
+import net.minecraft.server.v1_8_R1.EntityChicken;
+import net.minecraft.server.v1_8_R1.EntityCow;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.EntityGuardian;
@@ -47,6 +52,7 @@ import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
+import net.minecraft.server.v1_8_R1.GenericAttributes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -91,6 +97,8 @@ public class Main extends JavaPlugin {
 			NMSUtils.registerEntity("Guardian", 68, EntityGuardian.class, CustomGuardian.class);
 			NMSUtils.registerEntity("Slime", 55, EntitySlime.class, CustomSlime.class);
 			NMSUtils.registerEntity("Bat", 65, EntityBat.class, CustomBat.class);
+			NMSUtils.registerEntity("Cow", 92, EntityCow.class, CustomCow.class);
+			NMSUtils.registerEntity("Chicken", 93, EntityChicken.class, CustomChicken.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,6 +107,13 @@ public class Main extends JavaPlugin {
 			registLintener();
 			CommandRegister.registCommand();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			//最大攻撃力書き換え
+			((AttributeRanged) GenericAttributes.maxHealth).b = Double.MAX_VALUE;
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 

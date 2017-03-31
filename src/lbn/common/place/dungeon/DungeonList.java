@@ -1,10 +1,11 @@
-package lbn.common.other;
+package lbn.common.place.dungeon;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
+import lbn.common.place.HolographicDisplaysManager;
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 

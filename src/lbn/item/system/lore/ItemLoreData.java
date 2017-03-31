@@ -173,9 +173,9 @@ public class ItemLoreData {
 		List<String> lore = new ArrayList<String>();
 		lore.addAll(beforeDetail);
 		for (Entry<String, ItemLoreToken> entry : loreMap.entrySet()) {
-			lore.addAll(entry.getValue().getLoreToken());
-			lore.add("");
+			lore.addAll(entry.getValue().getLoreWithTitle());
 		}
+		lore.add("");
 		lore.addAll(afterDetail);
 
 		return lore;

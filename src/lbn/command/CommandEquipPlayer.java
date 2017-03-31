@@ -1,26 +1,19 @@
 package lbn.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
-import lbn.common.other.DungeonData;
-import lbn.dungeon.contents.item.armor.BeneCommonAromor;
-import lbn.dungeon.contents.item.armor.CommonArmor;
-import lbn.dungeon.contents.item.magic.normalItems.NormalMagicItem;
-import lbn.dungeon.contents.item.shootbow.NormalBowWrapper;
-import lbn.dungeon.contents.item.sword.NormalSwordWrapper;
-import lbn.dungeon.contents.item.sword.special.SpecialSwordIceAspect;
-import lbn.dungeon.contents.slotStone.OneMobDamageUpSlot;
-import lbn.dungeon.contents.slotStone.level1.FireAspect1;
-import lbn.dungeon.contents.slotStone.level2.FireAspect2;
-import lbn.dungeon.contents.slotStone.level4.CombatLightningStone;
-import lbn.item.customItem.attackitem.AttackItemStack;
-import lbn.item.system.strength.StrengthOperator;
+import lbn.item.customItem.armoritem.TestArmorItem;
+import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
+import lbn.item.customItem.attackitem.test.TestBowWeaponItem;
+import lbn.item.customItem.attackitem.test.TestMagicWeaponItem;
+import lbn.item.customItem.attackitem.test.TestSwordWeaponItem;
+import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,7 +24,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
-import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
@@ -46,178 +38,34 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 			return false;
 		}
 
-		Player p = (Player) paramCommandSender;
-		p.getInventory().clear();
-		switch (paramArrayOfString[0]) {
-		case DungeonData.DIFFICULTY_VERY_EASY:
-			equipVeryEasy(p);
-			updatePlayerLevel(p, 0);
-			break;
-		case DungeonData.DIFFICULTY_EASY:
-			equipEasy(p);
-			updatePlayerLevel(p, 5);
-			break;
-		case DungeonData.DIFFICULTY_NORMAL:
-			equipNormal(p);
-			updatePlayerLevel(p, 20);
-			break;
-		case DungeonData.DIFFICULTY_HARD:
-			equipHard(p);
-			updatePlayerLevel(p, 40);
-			break;
-		case DungeonData.DIFFICULTY_VERY_HARD:
-			equipVeryHard(p);
-			updatePlayerLevel(p, 48);
-			break;
-		case DungeonData.DIFFICULTY_IMPOSSIBLE:
-			equipImpossible(p);
-			updatePlayerLevel(p, 60);
-			break;
-		default:
+		int level = JavaUtil.getInt(paramArrayOfString[0], -1);
+		if (level == -1) {
 			return false;
 		}
-		p.updateInventory();
-		return true;
-	}
 
-	private void equipVeryEasy(Player p) {
-		LivingEntityUtil.setEquipment(p, new CommonArmor(Material.LEATHER_HELMET).getItem(),
-				new CommonArmor(Material.LEATHER_CHESTPLATE).getItem(),
-				new CommonArmor(Material.LEATHER_LEGGINGS).getItem(),
-				new CommonArmor(Material.LEATHER_BOOTS).getItem(),
-				0f);
+		Player p = (Player) paramCommandSender;
+		updatePlayerLevel(p, 0);
+		p.getInventory().clear();
 
-		Potion potion = new Potion(PotionType.INSTANT_HEAL);
+		boolean isMobTest = false;
 
-		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(NormalSwordWrapper.getAllNormalItem().get(0).getItem(),
-				NormalMagicItem.getAllItem().get(0).getItem(),
-				NormalBowWrapper.getAllNormalItem().get(0).getItem(),
-				new ItemStack(Material.ARROW, 64),
-				potion.toItemStack(1),
-				potion.toItemStack(1),
-				potion.toItemStack(1),
-				potion.toItemStack(1),
-				new ItemStack(Material.MELON, 64)
-				);
-
-
-	}
-
-	private void equipEasy(Player p) {
-		LivingEntityUtil.setEquipment(p, new BeneCommonAromor(Material.LEATHER_HELMET).getItem(),
-				new BeneCommonAromor(Material.LEATHER_CHESTPLATE).getItem(),
-				new BeneCommonAromor(Material.LEATHER_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.LEATHER_BOOTS).getItem(),
-				0f);
-
-		Potion potion = new Potion(PotionType.INSTANT_HEAL);
-		potion.setSplash(true);
-
-		ItemStack sword = NormalSwordWrapper.getAllNormalItem().get(0).getItem();
-		StrengthOperator.updateLore(sword, 3);
-		ItemStack magic = NormalMagicItem.getAllItem().get(0).getItem();
-		StrengthOperator.updateLore(magic, 3);
-		ItemStack bow = NormalBowWrapper.getAllNormalItem().get(0).getItem();
-		StrengthOperator.updateLore(bow, 3);
-
-		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(sword,
-				magic,
-				bow,
-				new ItemStack(Material.ARROW, 64),
-				new ItemStack(Material.MELON, 64)
-			);
-		for (int i = 0; i < 20; i++) {
-			inventory.addItem(potion.toItemStack(1));
-		}
-	}
-
-	private void equipNormal(Player p) {
-		LivingEntityUtil.setEquipment(p,
-				new BeneCommonAromor(Material.GOLD_HELMET).getItem(),
-				new BeneCommonAromor(Material.GOLD_CHESTPLATE).getItem(),
-				new BeneCommonAromor(Material.GOLD_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.GOLD_BOOTS).getItem(),
-				0f);
-
-
-		ItemStack sword = NormalSwordWrapper.getAllNormalItem().get(2).getItem();
-		StrengthOperator.updateLore(sword, 5);
-		AttackItemStack instance = AttackItemStack.getInstance(sword);
-		instance.addSlot(new FireAspect1());
-		sword = instance.getItem();
-
-		ItemStack magic = NormalMagicItem.getAllItem().get(2).getItem();
-		AttackItemStack instance1 = AttackItemStack.getInstance(magic);
-		StrengthOperator.updateLore(magic, 5);
-		instance1.addSlot(OneMobDamageUpSlot.slotList.get(0));
-		magic = instance1.getItem();
-
-		ItemStack bow = NormalBowWrapper.getAllNormalItem().get(2).getItem();
-		AttackItemStack instance2 = AttackItemStack.getInstance(bow);
-		StrengthOperator.updateLore(bow, 5);
-		instance2.addSlot(new FireAspect1());
-		bow = instance2.getItem();
-
-		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(sword,
-				magic,
-				bow,
-				new ItemStack(Material.ARROW, 64),
-				new ItemStack(Material.APPLE, 64)
-				);
-
-		Potion potion = new Potion(PotionType.INSTANT_HEAL);
-		potion.setSplash(true);
-		for (int i = 0; i < 10; i++) {
-			inventory.addItem(potion.toItemStack(1));
+		if (paramArrayOfString.length == 2) {
+			if (paramArrayOfString[1].equals("mob")) {
+				isMobTest = true;
+			}
 		}
 
-		Potion potion2 = new Potion(PotionType.INSTANT_HEAL, 2);
-		potion2.setSplash(true);
-		for (int i = 0; i < 10; i++) {
-			inventory.addItem(potion2.toItemStack(1));
-		}
-
-		ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 2);
-		inventory.addItem(itemStack);
-	}
-
-	private void equipHard(Player p) {
-		LivingEntityUtil.setEquipment(p,
-				new BeneCommonAromor(Material.CHAINMAIL_BOOTS).getItem(),
-				new BeneCommonAromor(Material.CHAINMAIL_CHESTPLATE).getItem(),
-				new BeneCommonAromor(Material.CHAINMAIL_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.CHAINMAIL_HELMET).getItem(),
+		LivingEntityUtil.setEquipment(p, new TestArmorItem(level, Material.LEATHER_HELMET).getItem(),
+				new TestArmorItem(level, Material.LEATHER_CHESTPLATE).getItem(),
+				new TestArmorItem(level, Material.LEATHER_LEGGINGS).getItem(),
+				new TestArmorItem(level, Material.LEATHER_BOOTS).getItem(),
 				0f);
 
-		Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
-		potion.setSplash(true);
+		int weaponLevel = isMobTest ? 9 : level;
 
-		ItemStack sword = NormalSwordWrapper.getAllNormalItem().get(3).getItem();
-		StrengthOperator.updateLore(sword, 6);
-		AttackItemStack instance = AttackItemStack.getInstance(sword);
-		instance.addSlot(new FireAspect2());
-//		instance.addSlot(new HealSlotStone());
-		instance.addSlot(OneMobDamageUpSlot.slotList.get(1));
-		instance.updateItem();
-		sword = instance.getItem();
-
-		ItemStack magic = NormalMagicItem.getAllItem().get(3).getItem();
-		AttackItemStack instance2 = AttackItemStack.getInstance(magic);
-		StrengthOperator.updateLore(magic, 6);
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(1));
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(5));
-		instance2.updateItem();
-		magic = instance2.getItem();
-
-		ItemStack bow = NormalBowWrapper.getAllNormalItem().get(3).getItem();
-		AttackItemStack instance3 = AttackItemStack.getInstance(bow);
-		StrengthOperator.updateLore(bow, 6);
-		instance3.addSlot(new FireAspect1());
-		instance3.updateItem();
-		bow = instance3.getItem();
+		ItemStack sword = new TestSwordWeaponItem(getWeaponData(weaponLevel, "SWORD", Material.IRON_SWORD)).getItem();
+		ItemStack magic = new TestBowWeaponItem(getWeaponData(weaponLevel, "BOW", Material.BOW)).getItem();
+		ItemStack bow = new TestMagicWeaponItem(getWeaponData(weaponLevel, "MAGIC", Material.IRON_HOE)).getItem();
 
 		PlayerInventory inventory = p.getInventory();
 		inventory.addItem(sword,
@@ -226,113 +74,10 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 				new ItemStack(Material.ARROW, 64),
 				new ItemStack(Material.BREAD, 64)
 				);
-		for (int i = 0; i < 20; i++) {
-			inventory.addItem(potion.toItemStack(1));
-		}
-
-		ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 5);
-		inventory.addItem(itemStack);
-	}
-
-	private void equipVeryHard(Player p) {
-		LivingEntityUtil.setEquipment(p,
-				new BeneCommonAromor(Material.IRON_HELMET).getItem(),
-				new BeneCommonAromor(Material.IRON_CHESTPLATE).getItem(),
-				new BeneCommonAromor(Material.IRON_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.IRON_BOOTS).getItem(),
-				0f);
 
 		Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
 		potion.setSplash(true);
 
-		ItemStack sword = new SpecialSwordIceAspect(48).getItem();
-		StrengthOperator.updateLore(sword, 10);
-		AttackItemStack instance = AttackItemStack.getInstance(sword);
-		instance.addSlot(new FireAspect2());
-//		instance.addSlot(new HealSlotStone2());
-		instance.addSlot(OneMobDamageUpSlot.slotList.get(2));
-		instance.addSlot(OneMobDamageUpSlot.slotList.get(7));
-		instance.updateItem();
-		sword = instance.getItem();
-
-		ItemStack magic = NormalMagicItem.getAllItem().get(4).getItem();
-		AttackItemStack instance2 = AttackItemStack.getInstance(magic);
-		StrengthOperator.updateLore(magic, 10);
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(2));
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(7));
-		instance2.addSlot(new CombatLightningStone());
-		instance2.updateItem();
-		magic = instance2.getItem();
-
-		ItemStack bow = NormalBowWrapper.getAllNormalItem().get(4).getItem();
-		AttackItemStack instance3 = AttackItemStack.getInstance(bow);
-		StrengthOperator.updateLore(bow, 10);
-		instance3.addSlot(new FireAspect1());
-		instance3.updateItem();
-		bow = instance3.getItem();
-
-		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(sword,
-				magic,
-				bow,
-				new ItemStack(Material.ARROW, 64),
-				new ItemStack(Material.BREAD, 64)
-				);
-		for (int i = 0; i < 27; i++) {
-			inventory.addItem(potion.toItemStack(1));
-		}
-
-		Potion potionS = new Potion(PotionType.SPEED, 1);
-		inventory.addItem(potionS.toItemStack(1));
-
-		ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 10);
-		inventory.addItem(itemStack);
-	}
-
-	private void equipImpossible(Player p) {
-		LivingEntityUtil.setEquipment(p,
-				new BeneCommonAromor(Material.DIAMOND_HELMET).getItem(),
-				new BeneCommonAromor(Material.IRON_CHESTPLATE).getItem(),
-				new BeneCommonAromor(Material.IRON_LEGGINGS).getItem(),
-				new BeneCommonAromor(Material.DIAMOND_BOOTS).getItem(),
-				0f);
-
-		Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
-		potion.setSplash(true);
-
-		ItemStack sword = new SpecialSwordIceAspect(60).getItem();
-		StrengthOperator.updateLore(sword, 5);
-		AttackItemStack instance = AttackItemStack.getInstance(sword);
-		instance.addSlot(new FireAspect2());
-//		instance.addSlot(new HealSlotStone2());
-		instance.addSlot(OneMobDamageUpSlot.slotList.get(2));
-		instance.addSlot(OneMobDamageUpSlot.slotList.get(7));
-		instance.updateItem();
-		sword = instance.getItem();
-
-		ItemStack magic = NormalMagicItem.getAllItem().get(6).getItem();
-		AttackItemStack instance2 = AttackItemStack.getInstance(magic);
-		StrengthOperator.updateLore(magic, 5);
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(2));
-		instance2.addSlot(OneMobDamageUpSlot.slotList.get(7));
-		instance2.addSlot(new CombatLightningStone());
-		instance2.updateItem();
-		magic = instance2.getItem();
-
-		ItemStack bow = NormalBowWrapper.getAllNormalItem().get(6).getItem();
-		AttackItemStack instance3 = AttackItemStack.getInstance(bow);
-		StrengthOperator.updateLore(bow, 5);
-		instance3.addSlot(new FireAspect1());
-		instance3.updateItem();
-		bow = instance3.getItem();
-
-		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(sword,
-				magic,
-				bow,
-				new ItemStack(Material.ARROW, 64),
-				new ItemStack(Material.BREAD, 64)
-				);
 		for (int i = 0; i < 27; i++) {
 			inventory.addItem(potion.toItemStack(1));
 		}
@@ -343,6 +88,26 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 
 		ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 15);
 		inventory.addItem(itemStack);
+
+		updatePlayerLevel(p, Math.max(weaponLevel, level));
+
+		p.updateInventory();
+		return true;
+	}
+
+	public SpreadSheetWeaponData getWeaponData(int level, String itemType, Material m) {
+		SpreadSheetWeaponData data = new SpreadSheetWeaponData();
+		data.setAvailableLevel(String.valueOf(level));
+		data.setDefaultSlot("5");
+		data.setMaxSlot("5");
+		data.setName("テストアイテム：" + itemType);
+		data.setId("test_magic_" + itemType.toLowerCase() + "_" + level);
+		data.setItemType(itemType);
+		data.setMaxDurability("10000");
+		data.setRank("10");
+		data.setItemMaterial(m.toString(), Bukkit.getConsoleSender());
+		data.setSkillLevel("6");
+		return data;
 	}
 
 	protected void updatePlayerLevel(Player p, int level) {
@@ -352,22 +117,8 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		}
 	}
 
-	static ArrayList<String> difficulties = new ArrayList<>();
-	static{
-		difficulties.add(DungeonData.DIFFICULTY_VERY_EASY);
-		difficulties.add(DungeonData.DIFFICULTY_EASY);
-		difficulties.add(DungeonData.DIFFICULTY_NORMAL);
-		difficulties.add(DungeonData.DIFFICULTY_HARD);
-		difficulties.add(DungeonData.DIFFICULTY_VERY_HARD);
-		difficulties.add(DungeonData.DIFFICULTY_IMPOSSIBLE);
-
-	}
-
 	@Override
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-		if (arg3.length == 1) {
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], difficulties, new ArrayList<String>(difficulties.size()));
-		}
 		return ImmutableList.of();
 	}
 

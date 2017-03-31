@@ -5,6 +5,7 @@ import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCraftCustomItemEvent;
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
+import lbn.dungeoncore.Main;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.CraftItemable;
@@ -20,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 	static {
@@ -113,6 +115,14 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 			//アイテムを追加する
 			ItemStack craftedItem = customItemById.getItem();
 			p.getInventory().addItem(craftedItem);
+
+			//取引欄に0個のアイテムが残るので2tick後に実行する
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					p.updateInventory();
+				}
+			}.runTaskLater(Main.plugin, 2);
 
 			new PlayerCraftCustomItemEvent(TheLowPlayerManager.getTheLowPlayer(p), ((CraftItemable)customItemById), craftedItem).callEvent();
 		} else {

@@ -43,6 +43,15 @@ public class StrengthData {
 		}
 
 		Strengthenable customItem = ItemManager.getCustomItem(Strengthenable.class, item1);
+		if (customItem == null) {
+			nextLevel = 0;
+			material = null;
+			needMoney = 0;
+			successChance = 0;
+			canStrength = false;
+			return;
+		}
+
 		StrengthTemplate strengthTemplate = customItem.getStrengthTemplate();
 
 		//今のレベル

@@ -3,11 +3,12 @@ package lbn.dungeoncore.SpletSheet;
 import java.util.Arrays;
 import java.util.concurrent.Future;
 
-import lbn.command.CommandGiveItem;
+import lbn.command.CommandGetItem;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetKeyCommandBlockExecuteItem;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetKeyTpItem;
+import lbn.item.customItem.SpreadSheetItem.SpreadSheetMaterialItem;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetOtherItem;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetQuestItem;
 import lbn.util.ItemStackUtil;
@@ -43,7 +44,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation"};
+		return new String[]{"id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation", "detail"};
 	}
 
 	@Override
@@ -73,24 +74,33 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 
 			Location dungeonLoc = getLocationByString(row[7]);
 
+			String detail = row[8];
+
 			//アイテムを生成
 			ItemInterface item;
-			if (row[3].startsWith("1.")) {
-				item = new SpreadSheetKeyCommandBlockExecuteItem(name, id, price, command, dungeonName, dungeonLoc);
-			} else if (row[3].startsWith("2.")) {
-				Location tpLoc = getLocationByString(data);
-				if (tpLoc == null) {
-					sendMessage("TP先の座標が不正です。(dataで指定してください)");
-					return;
+			if (row[3] != null) {
+				if (row[3].startsWith("1.")) {
+					item = new SpreadSheetKeyCommandBlockExecuteItem(name, id, price, command, dungeonName, dungeonLoc);
+				} else if (row[3].startsWith("2.")) {
+					Location tpLoc = getLocationByString(data);
+					if (tpLoc == null) {
+						sendMessage("TP先の座標が不正です。(dataで指定してください)");
+						return;
+					}
+					item = new SpreadSheetKeyTpItem(name, id, price, command, dungeonName, dungeonLoc, tpLoc);
+				} else if (row[3].startsWith("3.")) {
+					item = new SpreadSheetQuestItem(name, id, price, command, detail);
+				} else if (row[3].startsWith("5.")) {
+					item = new SpreadSheetMaterialItem(name, id, price, command, detail);
+				} else {
+					item = new SpreadSheetOtherItem(name, id, price, command, detail);
 				}
-				item = new SpreadSheetKeyTpItem(name, id, price, command, dungeonName, dungeonLoc, tpLoc);
-			} else if (row[3].startsWith("3.")) {
-				item = new SpreadSheetQuestItem(name, id, price, command);
 			} else {
-				item = new SpreadSheetOtherItem(name, id, price, command);
+				sendMessage("Typeを選択していないため自動的に「その他」に設定されました。:" + Arrays.toString(row));
+				item = new SpreadSheetOtherItem(name, id, price, command, detail);
 			}
-
 			ItemManager.registItem(item);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,6 +117,6 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
 		super.onCallbackFunction(submit);
 
-		CommandGiveItem.initFlg = true;
+		CommandGetItem.initFlg = true;
 	}
 }

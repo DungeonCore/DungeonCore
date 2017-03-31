@@ -175,7 +175,7 @@ commands:
    equip:
       description: ダンジョンにあった装備を着る
       permission:  main.lbnDungeonUtil.command.mob.equip
-      usage: /<command> difficulty
+      usage: ダンジョン攻略時：/<command> level, mobの難易度調整時:/<command> level mob (mobはmob名ではなくmobと打ってください)
       permission-message: You don't have <permission>
    timelock:
       description: 一回実行してから指定した時間の間はそのコマンドブロックは実行されない

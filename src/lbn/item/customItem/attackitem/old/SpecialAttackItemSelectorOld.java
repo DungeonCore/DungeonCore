@@ -111,6 +111,11 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 	}
 
 	@Override
+	public boolean isShowItemList() {
+		return false;
+	}
+
+	@Override
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = super.getStandardLoreToken();
 		loreToken.addLore(Message.getMessage("レア度：{0}", getRarityStart()));

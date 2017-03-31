@@ -36,6 +36,11 @@ public class ArmorMaterialItem extends AbstractItem{
 	}
 
 	@Override
+	public boolean isShowItemList() {
+		return false;
+	}
+
+	@Override
 	public String getId() {
 		return getItemName().replace(" ", "_").toLowerCase();
 	}

@@ -12,15 +12,15 @@ import lbn.common.menu.SelectRunnable;
 import lbn.dungeon.contents.item.key.KeyItemable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.item.customItem.attackitem.old.BowItemOld;
-import lbn.item.customItem.attackitem.old.MagicItemOld;
-import lbn.item.customItem.attackitem.old.SwordItemOld;
 import lbn.item.itemInterface.ArmorItemable;
 import lbn.item.itemInterface.AvailableLevelItemable;
 import lbn.item.itemInterface.CombatItemable;
+import lbn.item.itemInterface.FoodItemable;
+import lbn.item.itemInterface.MaterialItemable;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.setItem.SetItemParts;
 import lbn.item.slot.SlotInterface;
+import lbn.player.ItemType;
 import lbn.util.DungeonLogger;
 import lbn.util.ItemStackUtil;
 
@@ -36,7 +36,7 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class CommandGiveItem implements CommandExecutor {
+public class CommandGetItem implements CommandExecutor {
 
 	public static boolean initFlg = false;
 
@@ -162,8 +162,12 @@ public class CommandGiveItem implements CommandExecutor {
 				rtn = 2;
 			} else if (item instanceof ArmorItemable) {
 				rtn = 2;
-			} else if (item instanceof SlotInterface) {
+			} else if (item instanceof FoodItemable) {
+				rtn = 7;
+			} else if (item instanceof MaterialItemable) {
 				rtn = 8;
+			} else if (item instanceof SlotInterface) {
+				rtn = 9;
 			} else if (item instanceof KeyItemable) {
 				rtn = 99;
 			} else if (item.isQuestItem()) {
@@ -183,24 +187,32 @@ public class CommandGiveItem implements CommandExecutor {
 
 		ItemStack itemStack = new ItemStack(Material.DIAMOND_SWORD);
 		ItemStackUtil.setDispName(itemStack, "武器");
-		menuSelecor.addMenu(itemStack, 9, getRun(allItem.get(1)));
+		menuSelecor.addMenu(itemStack, 0, getRun(allItem.getOrDefault(1, new TreeSet<ItemInterface>())));
 
 		ItemStack itemStack2 = new ItemStack(Material.DIAMOND_CHESTPLATE);
 		ItemStackUtil.setDispName(itemStack2, "装備");
-		menuSelecor.addMenu(itemStack2, 11, getRun(allItem.get(2)));
+		menuSelecor.addMenu(itemStack2, 2, getRun(allItem.getOrDefault(2, new TreeSet<ItemInterface>())));
 
 		ItemStack itemStack3 = new ItemStack(Material.INK_SACK);
 		itemStack3.setDurability((short) 10);
 		ItemStackUtil.setDispName(itemStack3, "魔法石");
-		menuSelecor.addMenu(itemStack3, 13, getRun(allItem.get(8)));
+		menuSelecor.addMenu(itemStack3, 4, getRun(allItem.getOrDefault(9, new TreeSet<ItemInterface>())));
 
 		ItemStack itemStack4 = new ItemStack(Material.TRIPWIRE_HOOK);
 		ItemStackUtil.setDispName(itemStack4, "鍵・クエストアイテム");
-		menuSelecor.addMenu(itemStack4, 15, getRun(allItem.get(99)));
+		menuSelecor.addMenu(itemStack4, 6, getRun(allItem.getOrDefault(99, new TreeSet<ItemInterface>())));
+
+		ItemStack itemStack6 = new ItemStack(Material.APPLE);
+		ItemStackUtil.setDispName(itemStack6, "特殊食べ物");
+		menuSelecor.addMenu(itemStack6, 8, getRun(allItem.getOrDefault(7, new TreeSet<ItemInterface>())));
+
+		ItemStack itemStack7 = new ItemStack(Material.STICK);
+		ItemStackUtil.setDispName(itemStack7, "クラフト材料");
+		menuSelecor.addMenu(itemStack7, 18, getRun(allItem.getOrDefault(8, new TreeSet<ItemInterface>())));
 
 		ItemStack itemStack5 = new ItemStack(Material.FEATHER);
 		ItemStackUtil.setDispName(itemStack5, "その他");
-		menuSelecor.addMenu(itemStack5, 17, getRun(allItem.get(1000)));
+		menuSelecor.addMenu(itemStack5, 20, getRun(allItem.getOrDefault(1000, new TreeSet<ItemInterface>())));
 		MenuSelectorManager.regist(menuSelecor);
 
 		initFlg = true;
@@ -211,10 +223,10 @@ public class CommandGiveItem implements CommandExecutor {
 			@Override
 			public int compare(ItemInterface o1, ItemInterface o2) {
 				// まずはアイテムの種類ごと
-				double order1 = getOrder(o1);
-				double order2 = getOrder(o2);
+				int order1 = getOrder(o1);
+				int order2 = getOrder(o2);
 				if (order1 != order2) {
-					return Double.compare(order1, order2);
+					return order1 - order2;
 				}
 
 				// アイテムのレベルごと
@@ -245,28 +257,29 @@ public class CommandGiveItem implements CommandExecutor {
 				return o1.getId().compareTo(o2.getId());
 			}
 
-			HashMap<ItemInterface, Double> cache = new HashMap<ItemInterface, Double>();
+			HashMap<ItemInterface, Integer> cache = new HashMap<ItemInterface, Integer>();
 
-			double getOrder(ItemInterface item) {
+			//アイテムの並び順
+			public int getOrder(ItemInterface item) {
 				if (cache.containsKey(item)) {
 					return cache.get(item);
 				}
 
-				double rtn;
-				if (item instanceof SwordItemOld) {
+				int rtn;
+				if (item.getAttackType() == ItemType.SWORD) {
 					rtn = 1;
-				} else if (item instanceof BowItemOld) {
+				} else if (item.getAttackType() == ItemType.BOW) {
 					rtn = 2;
-				} else if (item instanceof MagicItemOld) {
+				} else if (item.getAttackType() == ItemType.MAGIC) {
 					rtn = 3;
 				} else if (item instanceof KeyItemable) {
 					rtn = 4;
 				} else if (item instanceof SetItemParts) {
 					rtn = 5;
 				} else if (item instanceof OldArmorItemable) {
-					rtn = 5;
+					rtn = 6;
 				} else if (item instanceof ArmorItemable) {
-					rtn = 5;
+					rtn = 7;
 				} else if (item instanceof SlotInterface) {
 					rtn = 8;
 				} else if (item.isQuestItem()) {
@@ -286,6 +299,7 @@ public class CommandGiveItem implements CommandExecutor {
 			@Override
 			public void run(Player p, ItemStack item) {
 				Inventory createInventory = Bukkit.createInventory(null, (int) (((items.size()) / 9) + 2) * 9, "item list");
+
 				for (ItemInterface iItem : items) {
 					createInventory.addItem(iItem.getItem());
 				}

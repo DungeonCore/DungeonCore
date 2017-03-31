@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
 
+import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
 import lbn.api.player.TheLowPlayerManager;
@@ -29,6 +30,7 @@ import lbn.mob.LastDamageMethodType;
 import lbn.mob.MobHolder;
 import lbn.mob.SummonPlayerManager;
 import lbn.money.GalionEditReason;
+import lbn.player.ability.impl.LevelUpAbility;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.player.customplayer.PlayerChestTpManager;
 import lbn.player.magicstoneOre.MagicStoneFactor;
@@ -325,6 +327,12 @@ public class PlayerListener implements Listener{
 
 			//音を鳴らす
 			player.playSound(player.getLocation(), Sound.LEVEL_UP, 1f, 0.1f);
+		}
+
+		//abilityを追加する
+		LevelType levelType = event.getLevelType();
+		if (levelType == LevelType.MAIN) {
+			event.getTheLowPlayer().addAbility(new LevelUpAbility(event.getNewLevel()));
 		}
 	}
 

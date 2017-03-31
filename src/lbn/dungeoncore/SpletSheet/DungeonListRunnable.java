@@ -1,7 +1,7 @@
 package lbn.dungeoncore.SpletSheet;
 
-import lbn.common.other.DungeonData;
-import lbn.common.other.DungeonList;
+import lbn.common.place.dungeon.DungeonData;
+import lbn.common.place.dungeon.DungeonList;
 import lbn.util.JavaUtil;
 import net.md_5.bungee.api.ChatColor;
 
@@ -43,12 +43,12 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 		}
 
 		Location entrance = getLocationByString(row[4]);
-		if(startLoc == null){
-			sendMessage(ChatColor.RED+"不正なentrancelocです。"+ name);
-		}
+//		if(startLoc == null){
+//			sendMessage(ChatColor.RED+"不正なentrancelocです。"+ name);
+//		}
 
 		if(difficulty == null){
-			difficulty = DungeonData.DIFFICULTY_VERY_EASY;
+			difficulty = "";
 		}
 		difficulty = difficulty.toLowerCase();
 

@@ -48,7 +48,8 @@ public class StrengthMerchant extends TheLowMerchant{
 
 		//表示するレシピを取得する
 		ItemStack dispItem1 = topInventory.getItem(0) == null ? null : topInventory.getItem(0).clone();
-		MerchantRecipeCreator merchantRecipeCreator = new MerchantRecipeCreator(dispItem1, strengthData.getMaterial(), theLowPlayer, strengthData);
+		ItemStack dispItem2 = topInventory.getItem(1) == null ? null : topInventory.getItem(1).clone();
+		MerchantRecipeCreator merchantRecipeCreator = new MerchantRecipeCreator(dispItem1, dispItem2, theLowPlayer, strengthData);
 		List<TheLowMerchantRecipe> strengthItemRecipe = merchantRecipeCreator.getStrengthItemRecipe();
 		if (strengthItemRecipe == null) {
 			sendRecipeList(getInitRecipes());

@@ -5,6 +5,7 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
+import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.util.Message;
 
@@ -50,10 +51,8 @@ public class LeatherArmor extends AbstractItem implements OldArmorItemable, Stre
 	}
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		double val = getDefVal(level);
-
-		return new String[]{"防御力+" + val + "%"};
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		//もう使わないので何もしない
 	}
 
 	protected double getDefVal(int level) {

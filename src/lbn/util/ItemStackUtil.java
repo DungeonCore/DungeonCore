@@ -504,10 +504,11 @@ public class ItemStackUtil {
 			//個数が同じ場合は削除する
 			if (deleteAmount >= itemAmount) {
 				inv.clear(i);
-				deleteAmount -= itemAmount;
 			} else if (deleteAmount < itemAmount) {
 				items[i].setAmount(itemAmount - deleteAmount);
 			}
+			//消費した分を削除する
+			deleteAmount -= itemAmount;
 		}
 	}
 

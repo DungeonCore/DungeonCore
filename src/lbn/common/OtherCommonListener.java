@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.Random;
 
 import lbn.command.CommandChest;
-import lbn.command.CommandGiveItem;
+import lbn.command.CommandGetItem;
 import lbn.command.util.CommandSpecialSign;
 import lbn.command.util.SimplySetSpawnPointCommand;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.other.BookshelfCommandRunner;
-import lbn.common.other.DungeonList;
 import lbn.common.other.EndPortalOperator;
 import lbn.common.other.GetItemSign;
 import lbn.common.other.InHandItemClickSign;
 import lbn.common.other.SoulBound;
 import lbn.common.other.Stun;
+import lbn.common.place.dungeon.DungeonList;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
@@ -236,14 +236,14 @@ public class OtherCommonListener implements Listener{
 	public void onClick(InventoryClickEvent e) {
 		MenuSelectorManager.onSelect(e);
 
-		CommandGiveItem.onClick(e);
+		CommandGetItem.onClick(e);
 	}
 
 	@EventHandler
 	public void onDrag(InventoryDragEvent e) {
 		MenuSelectorManager.onSelect(e);
 
-		CommandGiveItem.onClick(e);
+		CommandGetItem.onClick(e);
 	}
 
 	@EventHandler
@@ -292,6 +292,7 @@ public class OtherCommonListener implements Listener{
 					PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player)owner, (LivingEntity)target, itemstack,
 							e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
 					playerCombatEntityEvent.callEvent();
+
 					//eventからDamageを取得
 					e.setDamage(playerCombatEntityEvent.getDamage());
 				} else {

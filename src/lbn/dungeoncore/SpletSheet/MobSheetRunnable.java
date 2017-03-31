@@ -46,7 +46,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 		return new String[]{"name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
 				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp",
 				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "dummy1", "attackpoint", "defencePoint",//21
-				"aitype", "reach", "jumpattack", "cps", "sps"
+				"aitype", "reach", "jumpattack", "cps", "sps", "dropitem3", "droprate3", "dropitem4", "droprate4", "level","autohp"
 				};
 	}
 
@@ -111,25 +111,15 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			nbtTag.setShotTarm((int)JavaUtil.getDouble(row[26], 1));
 
 			//DROP ITEM の設定
-			if (row[3] != null && !row[3].isEmpty()) {
-				ItemStack item = ItemStackUtil.getItemStack(row[3]);
-				if (item == null) {
-					sendMessage("入力されたdrop_item1が不正です。" + name);
-					return;
-				}
-				double dropRate1 = Double.parseDouble(row[4]);
-				instance.setDropItem(item, dropRate1);
-			}
+			setDropItem(row[3], row[4], instance);
+			setDropItem(row[5], row[6], instance);
+			setDropItem(row[27], row[28], instance);
+			setDropItem(row[29], row[30], instance);
 
-			if (row[5] != null && !row[5].isEmpty()) {
-				ItemStack item = ItemStackUtil.getItemStack(row[5]);
-				if (item == null) {
-					sendMessage("入力されたdrop_item2が不正です。" + name);
-					return;
-				}
-				double dropRate1 = Double.parseDouble(row[6]);
-				instance.setDropItem(item, dropRate1);
-			}
+			int level = JavaUtil.getInt(row[31], -1);
+			nbtTag.setLevel(level);
+
+			nbtTag.setAutoFixHp(JavaUtil.getBoolean(row[32], false));
 
 			//スキル追加
 			if (!isEmpty(row, 8)) {
@@ -189,5 +179,24 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 	protected boolean isEmpty(String[] row, int i) {
 		return row[i] == null || row[i].isEmpty();
+	}
+
+	/**
+	 * Set
+	 * @param itemId
+	 * @param parcent
+	 * @param instance
+	 */
+	public void setDropItem(String itemId, String parcent, CommandableMob instance) {
+		//DROP ITEM の設定
+		if (itemId != null && !itemId.isEmpty()) {
+			ItemStack item = ItemStackUtil.getItemStack(itemId);
+			if (item != null) {
+				double dropRate1 = Double.parseDouble(parcent);
+				instance.setDropItem(item, dropRate1);
+			} else {
+				sendMessage("入力されたdrop_itemが不正です。" + itemId);
+			}
+		}
 	}
 }

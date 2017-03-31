@@ -7,7 +7,7 @@ import lbn.command.CommandChest;
 import lbn.command.CommandEquipPlayer;
 import lbn.command.CommandExecuteLockByTimeCommand;
 import lbn.command.CommandExtraMob;
-import lbn.command.CommandGiveItem;
+import lbn.command.CommandGetItem;
 import lbn.command.CommandGiveSetItem;
 import lbn.command.CommandItem;
 import lbn.command.CommandMobSkill;
@@ -60,7 +60,7 @@ public class CommandRegister {
 	public static void registCommand() {
 		registCommand(new CommandAnnounce(), "announce");
 		registCommand(new CommandAttention(), "attention");
-		registCommand(new CommandGiveItem(), "getItem");
+		registCommand(new CommandGetItem(), "getItem");
 		registCommand(new CommandGiveSetItem(), "getSetItem");
 		registCommand(new CommandExtraMob(), "spawnmob");
 		registCommand(new CommandViewInfo(), "viewinfo");

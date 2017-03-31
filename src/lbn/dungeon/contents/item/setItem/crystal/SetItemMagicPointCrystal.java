@@ -10,6 +10,8 @@ import lbn.item.setItem.AbstractAbilitySetItem;
 import lbn.item.setItem.SetItemPartable;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.item.setItem.SetStrengthableItemParts;
+import lbn.item.system.lore.ItemLoreToken;
+import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
 
@@ -68,9 +70,9 @@ class MagicPointCystal extends SetStrengthableItemParts implements StrengthTempl
 	}
 
 	@Override
-	public String[] getStrengthDetail(int level) {
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
 		int maxPoint = ((SetItemMagicPointCrystal)getBelongSetItem()).getMaxMagicPoint(level);
-		return new String[]{"最大マジックポイント+" + maxPoint};
+		loreToken.addLore(LoreLine.getLoreLine("最大マジックポイント", maxPoint));
 	}
 
 	@Override

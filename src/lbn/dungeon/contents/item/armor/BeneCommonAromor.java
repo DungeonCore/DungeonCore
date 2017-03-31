@@ -11,7 +11,7 @@ import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemInterface;
 import lbn.item.customItem.armoritem.ArmorStrengthTemplate;
 import lbn.item.customItem.armoritem.old.ArmorMaterial;
-import lbn.item.customItem.armoritem.old.BeneEffectType;
+import lbn.item.system.lore.ItemLoreToken;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -78,12 +78,8 @@ public class BeneCommonAromor extends CommonArmor implements Beneable{
 	Random rnd = new Random();
 
 	@Override
-	public String[] getStrengthDetail(int level) {
-		if (level == 0) {
-			return new String[]{BeneEffectType.BENE_EFFECT_UNKNOW.getLine(0)};
-		} else {
-			return null;
-		}
+	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+		//もう使わないので何もしない
 	}
 
 	@Override
