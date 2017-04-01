@@ -2,10 +2,8 @@ package lbn.common.place;
 
 import java.util.Collection;
 
-import lbn.common.place.dungeon.DungeonData;
 import lbn.dungeoncore.Main;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
@@ -20,37 +18,6 @@ public class HolographicDisplaysManager {
 
 	public static void setUseHolographicDisplays(boolean useHolographicDisplays) {
 		HolographicDisplaysManager.useHolographicDisplays = useHolographicDisplays;
-	}
-
-	public static void addDungeon(DungeonData dungeonData) {
-		if (dungeonData.dungeonLoc == null) {
-			return;
-		}
-		if (isUseHolographicDisplays()) {
-			if (!dungeonData.dungeonLoc.getChunk().isLoaded()) {
-				dungeonData.dungeonLoc.getChunk().load();
-			}
-
-			Hologram hologram = HologramsAPI.createHologram(Main.plugin, dungeonData.dungeonLoc);
-			hologram.appendTextLine(ChatColor.AQUA  + ChatColor.BOLD.toString() + dungeonData.getDungeonName());
-			hologram.appendTextLine(ChatColor.GOLD + "DIFFICULTY : " + dungeonData.difficulty.toUpperCase());
-			dungeonData.setHologram(hologram);
-		}
-	}
-
-	public static void removeDungeon(DungeonData dungeonData) {
-		if (dungeonData.dungeonLoc == null) {
-			return;
-		}
-		if (isUseHolographicDisplays()) {
-			if (!dungeonData.dungeonLoc.getChunk().isLoaded()) {
-				dungeonData.dungeonLoc.getChunk().load();
-			}
-			Hologram hologram = dungeonData.getHologram();
-			if (hologram != null) {
-				hologram.delete();
-			}
-		}
 	}
 
 	public static void removeAllHologram() {

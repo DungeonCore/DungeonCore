@@ -15,6 +15,7 @@ import lbn.common.event.player.PlayerChangeStatusLevelEvent;
 import lbn.common.event.player.PlayerCompleteReincarnationEvent;
 import lbn.common.event.player.PlayerLevelUpEvent;
 import lbn.common.place.dungeon.DungeonData;
+import lbn.common.place.dungeon.DungeonDataOld;
 import lbn.common.place.dungeon.DungeonList;
 import lbn.item.setItem.SetItemManager;
 import lbn.money.GalionEditReason;
@@ -188,11 +189,11 @@ public class CustomPlayer implements TheLowPlayer{
 		if (inDungeonId == -1) {
 			return null;
 		}
-		return DungeonList.getDungeonByID(inDungeonId);
+		return DungeonList.getDungeonById(inDungeonId);
 	}
 
 	@Override
-	public void setInDungeonId(DungeonData dungeon) {
+	public void setInDungeonId(DungeonDataOld dungeon) {
 		if (dungeon == null) {
 			inDungeonId = -1;
 		} else {

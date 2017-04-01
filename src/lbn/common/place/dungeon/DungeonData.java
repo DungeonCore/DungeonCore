@@ -2,91 +2,100 @@ package lbn.common.place.dungeon;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 
-public class DungeonData {
-	String dungeonName;
-	public Location dungeonLoc;
-	public String difficulty;
-	int id;
+import lbn.common.place.HolographicDisplaysManager;
+import lbn.common.place.PlaceBean;
+import lbn.common.place.PlaceInterface;
+import lbn.common.place.PlaceType;
+import lbn.dungeoncore.Main;
+
+public class DungeonData implements PlaceInterface{
+
+	public DungeonData(int id, String name) {
+		PlaceBean placeBean = new PlaceBean();
+		placeBean.setId(id);
+		placeBean.setName(name);
+
+		this.bean = placeBean;
+	}
+
+	private PlaceBean bean;
+
 	Hologram hologram;
 
-	public DungeonData(String dungeonName, Location startLoc, String difficulty, int id, Location entranceLoc) {
-		this.dungeonName = dungeonName;
-		this.dungeonLoc = startLoc;
-		this.difficulty = difficulty;
-		this.id = id;
+	public DungeonData(PlaceBean bean) {
+		this.bean = bean;
 	}
 
-	public String getDungeonName() {
-		return dungeonName;
-	}
-
+	@Override
 	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Location getDungeonLoc() {
-		return dungeonLoc;
-	}
-
-	public String getDifficulty() {
-		return difficulty;
-	}
-
-	public Hologram getHologram() {
-		return hologram;
-	}
-
-	public void setHologram(Hologram hologram) {
-		this.hologram = hologram;
+		return bean.getId();
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((difficulty == null) ? 0 : difficulty.hashCode());
-		result = prime * result + ((dungeonLoc == null) ? 0 : dungeonLoc.hashCode());
-		result = prime * result + ((dungeonName == null) ? 0 : dungeonName.hashCode());
-		return result;
+	public String getName() {
+		return bean.getName();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DungeonData other = (DungeonData) obj;
-		if (difficulty == null) {
-			if (other.difficulty != null)
-				return false;
-		} else if (!difficulty.equals(other.difficulty))
-			return false;
-		if (dungeonLoc == null) {
-			if (other.dungeonLoc != null)
-				return false;
-		} else if (!dungeonLoc.equals(other.dungeonLoc))
-			return false;
-		if (dungeonName == null) {
-			if (other.dungeonName != null)
-				return false;
-		} else if (!dungeonName.equals(other.dungeonName))
-			return false;
-		return true;
+	public Location getTeleportLocation() {
+		return bean.getTpLocation();
 	}
 
-	public void sendInfo(Player p) {
-		p.sendMessage("");
-		p.sendMessage(ChatColor.GREEN + dungeonName + ",  " + difficulty);
+	@Override
+	public void enable() {
+		if (HolographicDisplaysManager.isUseHolographicDisplays()) {
+			Location location = getEntranceLocation();
+			if (location != null) {
+				if (!location.getChunk().isLoaded()) {
+					location.getChunk().load();
+				}
+
+				Hologram hologram = HologramsAPI.createHologram(Main.plugin, location);
+				hologram.appendTextLine(ChatColor.AQUA  + ChatColor.BOLD.toString() + getName());
+				hologram.appendTextLine(ChatColor.GOLD + "DIFFICULTY : " + getLevel() + "レベル");
+				this.hologram = hologram;
+			}
+		}
 	}
+
+	@Override
+	public void disenable() {
+		if (hologram != null) {
+			hologram.delete();
+		}
+	}
+
+	/**
+	 * 対象のレベル
+	 * @return
+	 */
+	public int getLevel() {
+		return bean.getLevel();
+	}
+
+	/**
+	 * ダンジョンの入口の座標
+	 * @return
+	 */
+	public Location getEntranceLocation() {
+		return bean.getEntranceLocation();
+	}
+
+	/**
+	 * ダンジョンのスタート地点の座標
+	 * @return
+	 */
+	public Location getStartLocation() {
+		return bean.getDungeonStartLocation();
+	}
+
+	@Override
+	public PlaceType getPlaceType() {
+		return PlaceType.DUNGEON;
+	}
+
 }

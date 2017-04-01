@@ -165,7 +165,7 @@ commands:
    setdungeon:
       description: ダンジョンを登録するためのコマンド。
       permission:  main.lbnDungeonUtil.command.builder.setDungeon
-      usage: /<command> [reload]/[difficulty] [dungeon name]
+      usage: /<command> reload/set [ダンジョン名]/tp [ダンジョン名]
       permission-message: You don't have <permission>
    tpcut:
       description: テレポートをキャンセルするコマンド。

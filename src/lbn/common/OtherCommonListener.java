@@ -16,7 +16,6 @@ import lbn.common.other.GetItemSign;
 import lbn.common.other.InHandItemClickSign;
 import lbn.common.other.SoulBound;
 import lbn.common.other.Stun;
-import lbn.common.place.dungeon.DungeonList;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.ItemManager;
@@ -105,11 +104,6 @@ public class OtherCommonListener implements Listener{
 	public void onClick(PlayerInteractEvent event) {
 		//stun処理
 		Stun.onClick(event);
-
-		//ダンジョン情報
-		if (event.getClickedBlock() != null && event.getClickedBlock().getType() == Material.LAPIS_BLOCK) {
-			DungeonList.sendDungeonInfo(event.getClickedBlock().getLocation(), event.getPlayer());
-		}
 
 		//エンダーアイの処理
 		EndPortalOperator.onClick(event);
