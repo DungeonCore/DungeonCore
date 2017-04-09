@@ -182,7 +182,7 @@ public class VillagerCommand implements CommandExecutor{
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("location", AbstractComplexSheetRunable.getLocationString(location));
-		villagerSheetRunnable.updateData(map, "name=" + villagerNpc.getId());
+		villagerSheetRunnable.updateData(map, "id=" + villagerNpc.getId());
 		SpletSheetExecutor.onExecute(villagerSheetRunnable);
 	}
 }

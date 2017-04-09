@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
+import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
@@ -107,7 +108,13 @@ public class WeaponSkillSelector implements MenuSelectorInterface{
 		//手持ちのアイテムのNBTTagに武器スキルのIDをセットする
 		ItemStackUtil.setNBTTag(itemInHand, "weaponskill", weaponSkill.getId());
 
-		Message.sendMessage(p, "{2}武器スキルを[{1}{0}{2}]に変更しました", weaponSkill.getName(), ChatColor.GREEN, ChatColor.GRAY);
+		//スキル解除の時は通知しない
+		if (WeaponSkillCancel.isThisSkill(weaponSkill)) {
+			Message.sendMessage(p, "{0}武器スキルを解除しました", ChatColor.GREEN);
+		} else {
+			Message.sendMessage(p, "{2}武器スキルを[{1}{0}{2}]に変更しました", weaponSkill.getName(), ChatColor.GREEN, ChatColor.GRAY);
+		}
+
 		p.playSound(p.getLocation(), Sound.CLICK, 0.5f, 10);
 
 		p.closeInventory();

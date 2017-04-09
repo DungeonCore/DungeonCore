@@ -10,12 +10,16 @@ import lbn.common.projectile.ProjectileManager;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillBlastOff;
 import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillBlastOffLevel2;
+import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
 import lbn.item.customItem.attackitem.weaponSkill.imple.bow.ArrowStorm;
 import lbn.item.customItem.attackitem.weaponSkill.imple.bow.BlindEye;
 import lbn.item.customItem.attackitem.weaponSkill.imple.bow.Finale;
 import lbn.item.customItem.attackitem.weaponSkill.imple.bow.IceArrow;
+import lbn.item.customItem.attackitem.weaponSkill.imple.bow.ReleaseAura;
 import lbn.item.customItem.attackitem.weaponSkill.imple.magic.Explosion;
+import lbn.item.customItem.attackitem.weaponSkill.imple.magic.GravityField;
 import lbn.item.customItem.attackitem.weaponSkill.imple.magic.HealRain;
+import lbn.item.customItem.attackitem.weaponSkill.imple.magic.LeafFlare;
 import lbn.item.customItem.attackitem.weaponSkill.imple.magic.MeteoStrike;
 import lbn.item.customItem.attackitem.weaponSkill.imple.sword.BloodyHeal;
 import lbn.item.customItem.attackitem.weaponSkill.imple.sword.BurstFlame;
@@ -31,6 +35,14 @@ public class WeaponSkillFactory {
 	private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<WeaponSkillInterface>(new Comparator<WeaponSkillInterface>() {
 		@Override
 		public int compare(WeaponSkillInterface o1, WeaponSkillInterface o2) {
+			//スキル解除は一番最初に表示する
+			if (WeaponSkillCancel.isThisSkill(o1)) {
+				return -1;
+			}
+			if (WeaponSkillCancel.isThisSkill(o2)) {
+				return 1;
+			}
+
 			if (o1.getSkillLevel() != o2.getSkillLevel()) {
 				return o1.getSkillLevel() - o2.getSkillLevel();
 			}
@@ -90,6 +102,7 @@ public class WeaponSkillFactory {
 	public static void allRegist() {
 		regist(new WeaponSkillBlastOff());
 		regist(new WeaponSkillBlastOffLevel2());
+		regist(new WeaponSkillCancel());
 		registTempData(new ArrowStorm());
 		registTempData(new LightningOrder());
 		registTempData(new BloodyHeal());
@@ -103,5 +116,8 @@ public class WeaponSkillFactory {
 		registTempData(new BurstFlame());
 		registTempData(new GrandSpike());
 		registTempData(new Finale());
+		registTempData(new LeafFlare());
+		registTempData(new ReleaseAura());
+		registTempData(new GravityField());
 	}
 }

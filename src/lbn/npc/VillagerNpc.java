@@ -34,7 +34,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-public class VillagerNpc {
+public class VillagerNpc implements CustomNpcInterface {
 	VillagerData data;
 
 	public VillagerNpc(VillagerData data) {
@@ -63,10 +63,7 @@ public class VillagerNpc {
 		updateNpc();
 	}
 
-	/**
-	 * 右クリック時の処理
-	 * @param e
-	 */
+	@Override
 	public void onNPCRightClickEvent(NPCRightClickEvent e) {
 		Player p = e.getClicker();
 
@@ -132,6 +129,8 @@ public class VillagerNpc {
 		}
 	}
 
+
+
 	/**
 	 * NPCを削除する
 	 */
@@ -143,13 +142,11 @@ public class VillagerNpc {
 		npc = null;
 	}
 
-	/**
-	 * reload時にも呼ばれる。もしすでに同じNPCが存在した場合、それらを削除する
-	 * @param e
-	 */
+	@Override
 	public void onSpawn(NPCSpawnEvent e) {
 	}
 
+	@Override
 	public EntityType getEntityType() {
 		return data.getEntityType();
 	}
@@ -183,10 +180,10 @@ public class VillagerNpc {
 		}
 	}
 
-	/**
-	 * 左クリック時の処理
-	 * @param e
+	/* (非 Javadoc)
+	 * @see lbn.npc.CustomNpcInterface#onNPCLeftClickEvent(net.citizensnpcs.api.event.NPCLeftClickEvent)
 	 */
+	@Override
 	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
 		Player p = e.getClicker();
 
@@ -244,6 +241,7 @@ public class VillagerNpc {
 		return data.getName();
 	}
 
+	@Override
 	public void onNPCDamageEvent(NPCDamageEvent e) {
 //		e.setCancelled(true);
 	}
@@ -259,6 +257,10 @@ public class VillagerNpc {
 		return data;
 	}
 
+	/* (非 Javadoc)
+	 * @see lbn.npc.CustomNpcInterface#getId()
+	 */
+	@Override
 	public String getId() {
 		return data.getId();
 	}

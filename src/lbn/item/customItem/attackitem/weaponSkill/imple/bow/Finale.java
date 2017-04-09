@@ -1,15 +1,21 @@
 package lbn.item.customItem.attackitem.weaponSkill.imple.bow;
 
+import java.util.HashMap;
+import java.util.List;
+
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
+import lbn.common.other.Stun;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.dungeoncore.Main;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
+import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiClick;
 import lbn.player.ItemType;
-import lbn.util.LbnRunnable;
 
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -19,8 +25,13 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class Finale extends WeaponSkillForOneType implements ProjectileInterface{
+public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface{
+
+	private static final String THELOW_WEAPONSKILL_FINALE_COUNT = "THELOW_WEAPONSKILL_FINALE_COUNT";
 
 	public Finale() {
 		super(ItemType.BOW);
@@ -39,9 +50,26 @@ public class Finale extends WeaponSkillForOneType implements ProjectileInterface
 
 	@Override
 	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
-		if (e.getDamager().hasMetadata(THELOW_WEAPON_SKILL13)) {
+		int count = -1;
+		List<MetadataValue> metadata = e.getDamager().getMetadata(THELOW_WEAPONSKILL_FINALE_COUNT);
+		if (!metadata.isEmpty()) {
+			MetadataValue metadataValue = metadata.get(0);
+			count = metadataValue.asInt();
+		}
+
+		switch (count) {
+		case 1:
+		case 2:
+		case 3:
+			target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(0)), 1));
 			e.setDamage(e.getDamage() * getData(1));
-			particleData.run(target.getLocation());
+			break;
+		case 4:
+			Stun.addStun(target, (int) (20 * 1.5));
+			e.setDamage(e.getDamage() * getData(2));
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -55,42 +83,80 @@ public class Finale extends WeaponSkillForOneType implements ProjectileInterface
 
 	}
 
+	//何発目の発射かを記録するためのMap
+	HashMap<Player, Integer> countMap = new HashMap<Player, Integer>();
+
 	@Override
-	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		new SkillRunnable(this, p, item).runTaskTimer((long) (20 * 0.2));
-		return true;
+	protected boolean onClick2(Player p, ItemStack item, AbstractAttackItem customItem) {
+
+		//cooltimeを調べる
+		CooltimeManager cooltimeManager = new CooltimeManager(p, new CooltimeImplemention(), item);
+		if (cooltimeManager.canUse()) {
+			//矢を発射する
+			Arrow launchProjectile = p.launchProjectile(Arrow.class, p.getLocation().getDirection().multiply(2));
+
+			//何発目の矢なのかを取得
+			int count = 0;
+			if (countMap.containsKey(p)) {
+				count = countMap.get(p);
+			}
+
+			//カウントアップする
+			count++;
+			launchProjectile.setMetadata(THELOW_WEAPONSKILL_FINALE_COUNT, new FixedMetadataValue(Main.plugin, count));
+			ProjectileManager.onLaunchProjectile(launchProjectile, this, item);
+
+			//音をだす
+			p.playSound(p.getLocation(), Sound.FIREWORK_BLAST2, 1, (float) 0.1);
+
+			//何発目の矢なのかを記録する
+			countMap.put(p, count);
+
+			//クールタイムを開始する
+			cooltimeManager.setCoolTime();
+
+			//4回目以上発射した場合は終了する
+			return count >= 4;
+		} else {
+			//クールタイムがまだある場合は何もしない
+			return false;
+		}
+
 	}
 
-	private static final String THELOW_WEAPON_SKILL13 = "thelow_weapon_skill13";
+	@Override
+	public double getTimeLimit() {
+		return 30;
+	}
 
-	class SkillRunnable extends LbnRunnable {
-		ProjectileInterface projectileInterface;
-		Player p;
-		ItemStack item;
-		public SkillRunnable(ProjectileInterface projectileInterface, Player p, ItemStack item) {
-			this.projectileInterface = projectileInterface;
-			this.p = p;
-			this.item = item;
+	@Override
+	protected void runWaitParticleData(Location loc, int i) {
+		if (i % 3 == 0) {
+			particleData.run(loc);
+		}
+	}
+
+	@Override
+	protected void startSkill(Player p, ItemStack item) {
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (getTimeLimit() * 20), 100), true);
+		countMap.remove(p);
+	}
+
+	@Override
+	protected void endSkill(Player p, ItemStack item) {
+		p.removePotionEffect(PotionEffectType.SLOW);
+		countMap.remove(p);
+	}
+
+	class CooltimeImplemention implements Cooltimable {
+		@Override
+		public int getCooltimeTick(ItemStack item) {
+			return 20 * 1;
 		}
 
 		@Override
-		public void run2() {
-			//{0}発打ったら終わりにする
-			if (getRunCount() >= getData(0)) {
-				cancel();
-				return;
-			}
-
-			Arrow launchProjectile = p.launchProjectile(Arrow.class, p.getLocation().getDirection().multiply(2));
-
-			if (getRunCount() == 0) {
-				launchProjectile.setMetadata(THELOW_WEAPON_SKILL13, new FixedMetadataValue(Main.plugin, "1"));
-				p.getWorld().playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST, 0.8f, 0.8f);
-			}
-
-			ProjectileManager.launchProjectile(launchProjectile, projectileInterface, item);
+		public String getId() {
+			return "weapon_skill_finale_shot_cooltime";
 		}
-
 	}
-
 }

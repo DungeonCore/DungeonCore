@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
@@ -30,6 +31,14 @@ public class ArmorBase {
 		if (entity.getType() != EntityType.PLAYER) {
 			return;
 		}
+
+		//落下ダメージの時はレジスタンスポーションの効果を消す
+		if (e.getCause() == DamageCause.FALL) {
+			if (e.isApplicable(DamageModifier.RESISTANCE)) {
+				e.setDamage(DamageModifier.RESISTANCE, 0);
+			}
+		}
+
 
 		Player p = (Player) entity;
 
@@ -92,12 +101,10 @@ public class ArmorBase {
 			AbstractMob<?> customMob = MobHolder.getMob(mob);
 			isBoss = customMob.isNullMob() || !customMob.isBoss();
 		}
-		System.out.println("@1");
 
 		//装備を取得
 		EntityEquipment equipment = p.getEquipment();
 
-		System.out.println("@2");
 		double totalArmorPoint = 0;
 		// 防具を取得
 		for (ItemStack armor : equipment.getArmorContents()) {
@@ -121,14 +128,13 @@ public class ArmorBase {
 					totalArmorPoint += customItem.getArmorPointForNormalMob();
 				}
 			}
-			//ダメージを修正する
-			damage = customItem.getModifiedDamage(damage, p, e, isBoss, mob);
+			//アーマーポイントを修正する
+			totalArmorPoint += customItem.getOtherArmorPoint(damage, p, e, isBoss, mob);
 		}
 		//防御ポイントを用いてダメージを修正する
 		double cutParcent = getDamageCutParcent(totalArmorPoint);
 		damage = damage * cutParcent;
 
-		System.out.println("@3@" + damage + "@" + cutParcent);
 		//ダメージをセット
 		e.setDamage(Math.max(damage, 0));
 	}

@@ -143,6 +143,19 @@ public class JavaUtil {
 		}
 		return value;
 	}
+
+	/**
+	 * 指定した場所から指定した半径内のランダムな場所を取得する
+	 * @param add
+	 * @param radius
+	 * @return
+	 */
+	public static Location getRandomLocationInCircle(Location add, int radius) {
+		int rndAngle = rnd.nextInt(360);
+		double rndRadius = rnd.nextInt(radius * 10) / 10.0;
+
+		return new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle))*rndRadius, add.getY(), add.getZ() + Math.cos(Math.toRadians(rndAngle))*rndRadius);
+	}
 }
 
 class InterfaceGetter {

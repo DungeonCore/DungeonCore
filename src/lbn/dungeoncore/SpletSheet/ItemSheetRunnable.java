@@ -103,14 +103,19 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			sendMessage("エラーが発生したため登録出来ませんでした。:" + Arrays.toString(row));
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	protected int startRow() {
 		return super.startRow();
+	}
+
+	@Override
+	public boolean hasSecoundSheet() {
+		return true;
 	}
 
 	@Override

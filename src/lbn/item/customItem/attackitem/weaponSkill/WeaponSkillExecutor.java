@@ -8,6 +8,7 @@ import lbn.common.cooltime.CooltimeManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.ItemStackUtil;
@@ -56,6 +57,8 @@ public class WeaponSkillExecutor {
 			sendMessage(player, skill);
 			//クールタイムをセット
 			cooltimeManager.setCoolTime();
+			//マジックポイントをセットする
+			MagicPointManager.consumeMagicPoint(player, skill.getNeedMagicPoint());
 		}
 	}
 
@@ -65,6 +68,11 @@ public class WeaponSkillExecutor {
 	 * @param skill
 	 */
 	private static void sendMessage(Player p, WeaponSkillInterface skill) {
+		//スキル解除の時は通知しない
+		if (WeaponSkillCancel.isThisSkill(skill)) {
+			return;
+		}
+
 		List<Player> players = p.getWorld().getPlayers();
 		Location location = p.getLocation();
 		for (Player player : players) {

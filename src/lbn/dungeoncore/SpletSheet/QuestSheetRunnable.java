@@ -51,4 +51,9 @@ public class QuestSheetRunnable extends AbstractSheetRunable{
 	protected int startRow() {
 		return super.startRow() + 4;
 	}
+
+	@Override
+	public boolean hasSecoundSheet() {
+		return true;
+	}
 }

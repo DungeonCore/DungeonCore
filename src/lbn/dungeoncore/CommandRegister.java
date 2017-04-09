@@ -11,6 +11,7 @@ import lbn.command.CommandGetItem;
 import lbn.command.CommandGiveSetItem;
 import lbn.command.CommandItem;
 import lbn.command.CommandMobSkill;
+import lbn.command.CommandNpcSpawn;
 import lbn.command.CommandQuestOperate;
 import lbn.command.CommandStatusView;
 import lbn.command.CommandTpOtherWorld;
@@ -104,6 +105,7 @@ public class CommandRegister {
 		registCommand(new JumpCommand(), "jumpboost");
 		registCommand(new OpenCommand(), "open");
 		registCommand(new CommandBook(), "book");
+		registCommand(new CommandNpcSpawn(), "spawnNpc");
 
 		new ExecuteMobSkillCommand().regist();
 		new CustomKillCommand().regist();

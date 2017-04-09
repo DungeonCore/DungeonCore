@@ -20,4 +20,6 @@ public class NbtTagConst {
 	 * クラフト時のViewerのItemのID
 	 */
 	public static final String THELOW_ITEM_ID_FOR_CRAFT = "thelow_item_id_for_craft";
+
+	public static final String THELOW_NOT_SET_BLOCK = "thelow_not_set_block";
 }

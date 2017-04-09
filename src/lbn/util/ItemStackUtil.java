@@ -319,14 +319,14 @@ public class ItemStackUtil {
 				}
 			}
 			ItemStack stack = new ItemStack(material, amount, data);
-			if (args.length >= 5) {
-				try {
+			try {
+				if (args.length >= 5) {
 					stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
-				} catch (Throwable t) {
-					sender.sendMessage("コマンド解析中にエラーが発生しました。");
-					t.printStackTrace();
-					return null;
 				}
+			} catch (Throwable t) {
+				sender.sendMessage("コマンド解析中にエラーが発生しました。");
+				t.printStackTrace();
+				return null;
 			}
 			return stack;
 		}

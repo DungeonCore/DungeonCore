@@ -248,6 +248,11 @@ commands:
       permission:  main.lbnDungeonUtil.command.admin.open
       usage: /<command> [open/item]
       permission-message: You don't have <permission>
+   spawnNpc:
+      description: 自分をフォローしてくれているNPCをスポーンします
+      permission:  main.lbnDungeonUtil.command.player.useable.spawnNpc
+      usage: /<command>
+      permission-message: You don't have <permission>
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:

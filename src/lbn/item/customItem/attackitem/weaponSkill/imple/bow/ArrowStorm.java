@@ -6,6 +6,7 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.LbnRunnable;
+import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -53,7 +54,7 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 			}
 
 			Arrow launchProjectile = p.launchProjectile(Arrow.class, p.getLocation().getDirection().multiply(2));
-			ProjectileManager.launchProjectile(launchProjectile, projectileInterface, item);
+			ProjectileManager.onLaunchProjectile(launchProjectile, projectileInterface, item);
 		}
 
 	}
@@ -68,5 +69,7 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 
 	@Override
 	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
+		//無敵時間を０にする
+		LivingEntityUtil.setNoDamageTickZero(target);
 	}
 }

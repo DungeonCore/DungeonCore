@@ -31,7 +31,7 @@ import org.bukkit.entity.Player;
 
 public class CustomPlayer implements TheLowPlayer{
 	public CustomPlayer(OfflinePlayer p) {
-		this.player = p;
+		this.player = Bukkit.getOfflinePlayer(p.getUniqueId());
 	}
 
 	/**
@@ -338,5 +338,13 @@ public class CustomPlayer implements TheLowPlayer{
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public boolean equalsPlayer(Player p) {
+		if (p == null) {
+			return false;
+		}
+		return getUUID().equals(p.getUniqueId());
 	}
 }

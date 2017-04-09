@@ -33,8 +33,8 @@ public class TestArmorItem extends AbstractArmorItem{
 	}
 
 	@Override
-	public double getModifiedDamage(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob) {
-		return damage;
+	public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob) {
+		return 0;
 	}
 
 	@Override

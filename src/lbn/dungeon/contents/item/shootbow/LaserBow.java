@@ -196,7 +196,7 @@ class LaserBowRunner extends LbnRunnable{
 		spawnArrow.setBounce(false);
 
 		//矢の情報を付与する
-		ProjectileManager.launchProjectile(spawnArrow, bow, item);
+		ProjectileManager.onLaunchProjectile(spawnArrow, bow, item);
 
 		//弓のアイテム情報をつける
 		spawnArrow.setMetadata("bow_date_lbn_doungeon_laserbow_attack", new FixedMetadataValue(Main.plugin, "1"));

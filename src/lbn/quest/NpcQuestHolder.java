@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import lbn.npc.VillagerNpc;
+import lbn.npc.CustomNpcInterface;
 
 import org.bukkit.entity.Player;
 
@@ -20,7 +20,7 @@ public class NpcQuestHolder {
 		villagerIDQuestMap.put(q.getEndVillagerId(), q);
 	}
 
-	public static List<Quest> getAvailableQuestList(VillagerNpc npc, Player p) {
+	public static List<Quest> getAvailableQuestList(CustomNpcInterface npc, Player p) {
 		ArrayList<Quest> availableQuestList = new ArrayList<Quest>();
 
 		Set<Quest> set = villagerIDQuestMap.get(npc.getId());
@@ -38,7 +38,7 @@ public class NpcQuestHolder {
 	 * @param p
 	 * @return
 	 */
-	public static Set<Quest> getQuestList(VillagerNpc npc, Player p) {
+	public static Set<Quest> getQuestList(CustomNpcInterface npc, Player p) {
 		return villagerIDQuestMap.get(npc.getId());
 	}
 }

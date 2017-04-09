@@ -180,6 +180,13 @@ public interface TheLowPlayer {
 	public boolean canReincarnation(LevelType levelType);
 
 	/**
+	 * 同じPlayerならTRUE
+	 * @param p
+	 * @return
+	 */
+	public boolean equalsPlayer(Player p);
+
+	/**
 	 * 指定されたLevelTypeで何回転生をしたか取得
 	 * @param levelType
 	 * @return

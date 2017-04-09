@@ -2,14 +2,14 @@ package lbn.quest.viewer;
 
 import java.util.List;
 
-import lbn.npc.VillagerNpc;
+import lbn.npc.CustomNpcInterface;
 import lbn.quest.NpcQuestHolder;
 import lbn.quest.Quest;
 
 import org.bukkit.entity.Player;
 
 public class QuestSelectorViewer {
-	public static void openSelector(VillagerNpc villager, Player p) {
+	public static void openSelector(CustomNpcInterface villager, Player p) {
 		//実行可能クエスト
 		List<Quest> canStartQuestList = NpcQuestHolder.getAvailableQuestList(villager, p);
 

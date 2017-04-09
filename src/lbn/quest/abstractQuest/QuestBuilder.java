@@ -55,6 +55,12 @@ public class QuestBuilder {
 	}
 
 	public Quest getQuest() {
+		if (q.getName() == null || q.getName().isEmpty()) {
+			return null;
+		}
+		if (q.getId() == null || q.getId().isEmpty()) {
+			return null;
+		}
 		return q;
 	}
 }

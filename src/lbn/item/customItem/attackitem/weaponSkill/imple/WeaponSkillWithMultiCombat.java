@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 複数の攻撃を行う際の処理
+ * 指定した時間内に指定した回数の攻撃を行う際の処理
  *
  */
 public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{

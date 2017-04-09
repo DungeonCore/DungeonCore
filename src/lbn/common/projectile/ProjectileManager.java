@@ -31,7 +31,7 @@ public class ProjectileManager {
 	 * @param projectile
 	 * @param projectileInterface
 	 */
-	public static void launchProjectile(Projectile projectile, ProjectileInterface projectileInterface, ItemStack item) {
+	public static void onLaunchProjectile(Projectile projectile, ProjectileInterface projectileInterface, ItemStack item) {
 		projectile.setMetadata(THELOW_PROJECTILE_DATA_PROJECTILE, new FixedMetadataValue(Main.plugin, projectileInterface.getId()));
 		projectile.setMetadata(THELOW_PROJECTILE_DATA_ITEMSTACK, new FixedMetadataValue(Main.plugin, item));
 	}

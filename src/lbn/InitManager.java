@@ -56,7 +56,7 @@ public class InitManager {
 			//Citizenのバグを治す
 			CitizenBugFixPatch.doPatch();
 
-//		SayTextCommand.reloadAlltext();
+			WeaponSkillFactory.allRegist();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,13 +66,17 @@ public class InitManager {
 	public void reloadSpreadSheet() {
 		SpletSheetCommand.reloadSheet(null, "weapon");
 
-		SpletSheetCommand.reloadSheet(null, "armor");
 
-		SpletSheetCommand.reloadSheet(null, "item");
+		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
+
+		SpletSheetCommand.reloadSheet(null, "weaponskill");
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
 		}
+		SpletSheetCommand.reloadSheet(null, "armor");
+
+		SpletSheetCommand.reloadSheet(null, "item");
 
 		CommandChest.allReload();
 
@@ -84,11 +88,8 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "particle");
 
-		SpletSheetCommand.reloadSheet(null, "weaponskill");
 
 		SpletSheetCommand.reloadSheet(null, "magicore");
-
-		WeaponSkillFactory.allRegist();
 
 		SpletSheetCommand.reloadSheet(null, "food");
 
@@ -103,7 +104,6 @@ public class InitManager {
 				case 0:
 					break;
 				case 3:
-					VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
 					MobCommand.reloadAllMob(null);
 					break;
 				case 7:

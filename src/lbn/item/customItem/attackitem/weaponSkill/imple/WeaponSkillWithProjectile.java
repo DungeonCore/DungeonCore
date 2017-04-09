@@ -19,7 +19,7 @@ public abstract class WeaponSkillWithProjectile extends WeaponSkillForOneType im
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
 		//Projectileを発射し、発射を記録する
 		Projectile spawnedProjectile = getSpawnedProjectile(p, item, customItem);
-		ProjectileManager.launchProjectile(spawnedProjectile, this, item);
+		ProjectileManager.onLaunchProjectile(spawnedProjectile, this, item);
 		return true;
 	}
 

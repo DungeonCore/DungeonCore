@@ -19,10 +19,10 @@ import org.bukkit.entity.EntityType;
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
 
-	public static VillagerNpc registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id, String uuid) {
-		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id, uuid);
+	public static CustomNpcInterface registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
+		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id, null);
 		if (villagerData.isError()) {
-			if (villagerData.getType() != null && !(p instanceof ConsoleCommandSender)) {
+			if (type != null && !type.isEmpty() && !(p instanceof ConsoleCommandSender)) {
 				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, texts}, ",") + "]");
 			}
 			return null;
@@ -81,7 +81,7 @@ public class VillagerData {
 		this.type = VillagerType.getValue(type);
 		if (this.type == null) {
 			this.type = VillagerType.NORMAL;
-			sendMsg(p, "typeは[normal, shop, BLACKSMITH]のみ許可されます");
+//			sendMsg(p, "typeは[normal, shop, BLACKSMITH]のみ許可されます");
 			isError = true;
 		}
 

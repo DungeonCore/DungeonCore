@@ -1,4 +1,4 @@
-package lbn.mob.customEntity1_8.ai.batai;
+package lbn.mob.customEntity1_8.ai.bat_ai;
 
 import net.minecraft.server.v1_8_R1.AttributeInstance;
 import net.minecraft.server.v1_8_R1.EntityHuman;

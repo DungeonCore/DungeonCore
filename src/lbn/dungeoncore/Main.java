@@ -30,7 +30,10 @@ import lbn.mob.customEntity1_8.CustomWitch;
 import lbn.mob.customEntity1_8.CustomZombie;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.money.MoneyListener;
+import lbn.npc.NpcListener;
+import lbn.npc.followNpc.FollowerNpcManager;
 import lbn.player.PlayerListener;
+import lbn.player.PlayerTeamManager;
 import lbn.player.ability.PlayerAbilityListener;
 import lbn.player.playerIO.PlayerIODataManager;
 import lbn.quest.QuestListener;
@@ -129,6 +132,7 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		new InitManager().init();
+		System.out.println("$$$$$$$$$$$$$$$$$$$1");
 
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
@@ -138,6 +142,17 @@ public class Main extends JavaPlugin {
 		startRutinePerHour();
 
 		DungeonLogger.info("Start complate!!");
+		System.out.println("$$$$$$$$$$$$$$$$$$$2");
+
+		try {
+			FollowerNpcManager.onEnable();
+
+			//チームに配属する
+			PlayerTeamManager.setTeamAllPlayer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("$$$$$$$$$$$$$$$$$$$3");
 	}
 
 	public static Collection<? extends Player> getOnlinePlayer() {
@@ -158,6 +173,8 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		getServer().getPluginManager().registerEvents(new QuestListener(), this);
 		getServer().getPluginManager().registerEvents(new MoneyListener(), this);
+		getServer().getPluginManager().registerEvents(new MoneyListener(), this);
+		getServer().getPluginManager().registerEvents(new NpcListener(), this);
 	}
 
 	/**
@@ -203,6 +220,8 @@ public class Main extends JavaPlugin {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.closeInventory();
 		}
+
+		FollowerNpcManager.onDisable();
 	}
 
 	public static void save() {

@@ -25,7 +25,7 @@ public interface ArmorItemable extends EquipItemable, Strengthenable, CraftItema
 	 * @param e Event
 	 * @param isBoss ダメージを与えたものが生き物でかつ、BossならTrue
 	 * @param mob ダメージを与えたものが生き物(もし生き物以外ならNull)
-	 * @return 修正後のダメージ
+	 * @return 防具ポイント
 	 */
-	double getModifiedDamage(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob);
+	double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob);
 }

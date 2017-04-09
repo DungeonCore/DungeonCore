@@ -1,8 +1,8 @@
 package lbn.npc;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import lbn.dungeoncore.Main;
@@ -10,7 +10,6 @@ import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.npc.citizens.RemoveNearNpcOnSpawnTrait;
 import lbn.npc.citizens.TheLowIdTrail;
-import lbn.util.DungeonLogger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
@@ -28,7 +27,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class NpcManager {
-	static HashMap<String, VillagerNpc> registedNpcIdMap = new HashMap<String, VillagerNpc>();
+	static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<String, CustomNpcInterface>();
+
+	static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
 
 //	static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
 
@@ -36,31 +37,42 @@ public class NpcManager {
 //	static NPCRegistry citizensNPCRegistry = CitizensAPI.createNamedNPCRegistry("TheLowNpc", SimpleNPCDataStore.create(new YamlStorage(new File(Main.dataFolder + File.separator + "npc.yml"))));
 
 	public static VillagerNpc getVillagerNpcById(String name) {
-		return registedNpcIdMap.get(name);
+		return registedVillagerNpcIdMap.get(name);
 	}
 //
 	public static void onTest() {
-		for (Entry<String, VillagerNpc> entry : registedNpcIdMap.entrySet()) {
-			VillagerNpc value = entry.getValue();
-			Location location = value.getLocation();
-			if (location == null) {
-				continue;
+		Iterator<NPC> it = CitizensAPI.getNPCRegistry().iterator();
+		while (it.hasNext()) {
+			NPC npc = (NPC) it.next();
+			TheLowIdTrail trait = npc.getTrait(TheLowIdTrail.class);
+			if (trait != null) {
+				String id = trait.getId();
+				if (id == null || id.isEmpty()) {
+					trait.setId(npc.getName());
+					npc.addTrait(trait);
+				}
 			}
-			DungeonLogger.debug(value.getName() + " is spawned");
-			spawnNpc(value, location);
+			LookClose trait2 = npc.getTrait(LookClose.class);
+			trait2.lookClose(true);
+
+			npc.addTrait(trait2);
 		}
 	}
 
 	public static Map<String, VillagerNpc> getNpcIdMap() {
-		return registedNpcIdMap;
+		return registedVillagerNpcIdMap;
 	}
 
 	/**
 	 * NPCを登録する
 	 * @param villagerNpc
 	 */
-	public static void regist(VillagerNpc villagerNpc) {
+	public static void regist(CustomNpcInterface villagerNpc) {
 		registedNpcIdMap.put(villagerNpc.getId(), villagerNpc);
+
+		if (villagerNpc instanceof VillagerNpc) {
+			registedVillagerNpcIdMap.put(villagerNpc.getId(), (VillagerNpc) villagerNpc);
+		}
 	}
 
 	static Random random = new Random();
@@ -117,6 +129,9 @@ public class NpcManager {
 	 * @return
 	 */
 	public static VillagerNpc getVillagerNpc(Entity entity) {
+		if (entity == null) {
+			return null;
+		}
 		if (!isNpc(entity)) {
 			return null;
 		}
@@ -134,10 +149,15 @@ public class NpcManager {
 			return null;
 		}
 
+		String id = null;
+
 		//IDを振り分ける
 		TheLowIdTrail trait = npc.getTrait(TheLowIdTrail.class);
 		if (trait != null) {
-			return trait.getId();
+			id = trait.getId();
+			if (id != null && !id.isEmpty()) {
+				return id;
+			}
 		}
 		return null;
 	}
@@ -148,7 +168,7 @@ public class NpcManager {
 	 */
 	public static void onNPCRightClickEvent(NPCRightClickEvent e) {
 		String id = getId(e.getNPC());
-		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
+		CustomNpcInterface villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCRightClickEvent(e);
 		}
@@ -160,7 +180,7 @@ public class NpcManager {
 	 */
 	public static void onNPCLeftClickEvent(NPCLeftClickEvent e) {
 		String id = getId(e.getNPC());
-		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
+		CustomNpcInterface villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCLeftClickEvent(e);
 		}
@@ -172,7 +192,7 @@ public class NpcManager {
 	 */
 	public static void onNPCDamageEvent(NPCDamageEvent e) {
 		String id = getId(e.getNPC());
-		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
+		CustomNpcInterface villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onNPCDamageEvent(e);
 		}
@@ -185,7 +205,7 @@ public class NpcManager {
 	public static void onNPCSpawnEvent(NPCSpawnEvent e) {
 		String id = getId(e.getNPC());
 		//スポーン済みにセットする
-		VillagerNpc villagerNpc = registedNpcIdMap.get(id);
+		CustomNpcInterface villagerNpc = registedNpcIdMap.get(id);
 		if (villagerNpc != null) {
 			villagerNpc.onSpawn(e);
 		}

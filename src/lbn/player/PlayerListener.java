@@ -70,6 +70,11 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
@@ -190,6 +195,9 @@ public class PlayerListener implements Listener{
 		MagicPointManager.onJoinServer(e.getPlayer());
 		updateSidebar(e.getPlayer());
 
+		//チームに配属する
+		PlayerTeamManager.setTeam(e.getPlayer());
+
 		//Abilityを適応
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e.getPlayer());
 		if (theLowPlayer != null) {
@@ -237,6 +245,9 @@ public class PlayerListener implements Listener{
 		}
 		//TPをキャンセルする
 		TpCutCommand.setTpCancel(e.getEntity());
+
+		//レベルを存続させる
+		e.setKeepLevel(true);
 
 		//ポーション効果を消す
 		new BukkitRunnable() {
@@ -495,41 +506,43 @@ public class PlayerListener implements Listener{
 
 
 	public static void updateSidebar(Player p) {
-//		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-//		Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
-//		Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
-//		registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-//		registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
-//
-//		Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
-//		scoreB.setScore(8);
-//
-//		SwordStatusManager instance = SwordStatusManager.getInstance();
-//		Score score = registerNewObjective.getScore("剣術 : " + instance.getLevel(p) + "レベル");
-//		score.setScore(7);
-//
-//		BowStatusManager instance2 = BowStatusManager.getInstance();
-//		Score score2 = registerNewObjective.getScore("弓術 : " + instance2.getLevel(p) + "レベル");
-//		score2.setScore(6);
-//
-//		MagicStatusManager instance3 = MagicStatusManager.getInstance();
-//		Score score3 = registerNewObjective.getScore("魔術 : " + instance3.getLevel(p) + "レベル");
-//		score3.setScore(5);
-//
-//		Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
-//		score4.setScore(4);
-//
-//		Score score6 = registerNewObjective.getScore("");
-//		score6.setScore(3);
-//
-//		Score score5 = registerNewObjective.getScore("お金 : " + GalionManager.getGalion(p) + " G");
-//		score5.setScore(2);
-//
-//		Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
-//		scoreB1.setScore(1);
-//
-//		Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
-//		scoreIp.setScore(0);
-//		p.setScoreboard(newScoreboard);
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+		if (theLowPlayer == null) {
+			return;
+		}
+
+		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+		Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
+		Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
+		registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
+
+		Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
+		scoreB.setScore(8);
+
+		Score score = registerNewObjective.getScore("剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル");
+		score.setScore(7);
+
+		Score score2 = registerNewObjective.getScore("弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル");
+		score2.setScore(6);
+
+		Score score3 = registerNewObjective.getScore("魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル");
+		score3.setScore(5);
+
+		Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
+		score4.setScore(4);
+
+		Score score6 = registerNewObjective.getScore("");
+		score6.setScore(3);
+
+		Score score5 = registerNewObjective.getScore("お金 : " + theLowPlayer.getGalions() + " G");
+		score5.setScore(2);
+
+		Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
+		scoreB1.setScore(1);
+
+		Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
+		scoreIp.setScore(0);
+		p.setScoreboard(newScoreboard);
 	}
 }

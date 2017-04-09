@@ -10,13 +10,7 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
 import lbn.mob.mob.BossMobable;
 import lbn.mob.mob.SummonMobable;
-import lbn.npc.NpcManager;
 import lbn.player.PlayerChecker;
-import net.citizensnpcs.api.event.NPCDamageEvent;
-import net.citizensnpcs.api.event.NPCDespawnEvent;
-import net.citizensnpcs.api.event.NPCLeftClickEvent;
-import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.event.NPCSpawnEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -215,28 +209,4 @@ public class MobListener implements Listener {
 		}
 	}
 
-	@EventHandler
-	public void onNPCRightClickEvent(NPCRightClickEvent e) {
-		NpcManager.onNPCRightClickEvent(e);
-	}
-
-	@EventHandler
-	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
-		NpcManager.onNPCLeftClickEvent(e);
-	}
-
-	@EventHandler
-	public void onNPCDamageEvent(NPCDamageEvent e) {
-		NpcManager.onNPCDamageEvent(e);
-	}
-
-	@EventHandler
-	public void onNPCSpawnEvent(NPCSpawnEvent e) {
-		NpcManager.onNPCSpawnEvent(e);
-	}
-
-	@EventHandler
-	public void onNPCDespawnEvent(NPCDespawnEvent e) {
-		NpcManager.onNPCDespawnEvent(e);
-	}
 }

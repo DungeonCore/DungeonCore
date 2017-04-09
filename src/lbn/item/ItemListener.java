@@ -100,7 +100,7 @@ public class ItemListener implements Listener{
 		if (item == null) {
 			return;
 		}
-		ProjectileManager.launchProjectile(entity, item, itemInHand);
+		ProjectileManager.onLaunchProjectile(entity, item, itemInHand);
 	}
 
 	/**

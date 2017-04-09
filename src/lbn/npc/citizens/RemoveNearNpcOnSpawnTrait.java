@@ -4,6 +4,7 @@ import java.util.List;
 
 import lbn.dungeoncore.Main;
 import lbn.npc.NpcManager;
+import lbn.npc.VillagerNpc;
 import lbn.util.DungeonLogger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -41,25 +42,29 @@ public class RemoveNearNpcOnSpawnTrait extends Trait{
 		new BukkitRunnable() {
 			@Override
 			public void run() {
+				VillagerNpc thisNpc = NpcManager.getVillagerNpc(npc.getEntity());
+				if (thisNpc == null) {
+					return;
+				}
+
 				List<Entity> nearbyEntities = bukkitEntity.getNearbyEntities(100, 50, 100);
 				for (Entity target : nearbyEntities) {
-					if (bukkitEntity.getType() == target.getType() && npc.getName().equals(target.getName())) {
-						if (!target.equals(bukkitEntity)) {
-							NPC targetNpc = CitizensAPI.getNPCRegistry().getNPC(target);
-							if (targetNpc != null) {
-								//同じなら何もしない
-								if (targetNpc.getId() == npc.getId()) {
-									continue;
-								}
-								String id2 = NpcManager.getId(targetNpc);
-								//IDが同じなら削除
-								if (id2 != null && id2.equals(id2)) {
-									targetNpc.destroy();
-									DungeonLogger.development("npc:" + npc.getName() + " is destoried(1)");
-								}
-							} else {
-								target.remove();
-								DungeonLogger.development("npc:" + npc.getName() + " is destoried(2)");
+					//名前・Typeが異なるなら削除
+					if (bukkitEntity.getType() != target.getType() || !npc.getName().equals(target.getName())) {
+						continue;
+					}
+					if (!target.equals(bukkitEntity)) {
+						NPC targetNpc = CitizensAPI.getNPCRegistry().getNPC(target);
+						if (targetNpc != null) {
+							//NPCが同じなら何もしない
+							if (targetNpc.getId() == npc.getId()) {
+								continue;
+							}
+							String id2 = NpcManager.getId(targetNpc);
+							//IDが同じなら削除
+							if (id2 != null && id2.equals(thisNpc.getId())) {
+								targetNpc.destroy();
+								DungeonLogger.development("npc:" +id2 + " is destoried(1) by " + thisNpc.getId());
 							}
 						}
 					}

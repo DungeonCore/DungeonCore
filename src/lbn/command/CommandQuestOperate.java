@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lbn.npc.CustomNpcInterface;
 import lbn.npc.NpcManager;
-import lbn.npc.VillagerNpc;
 import lbn.quest.NpcQuestHolder;
 import lbn.quest.Quest;
 import lbn.quest.QuestInventory;
@@ -71,6 +71,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 		}
 
 		if (arg3[0].equals("start")) {
+			arg0.sendMessage("クエスト実行ステータス：" + QuestManager.getStartQuestStatus(quest, p).getCanntMessage());
 			QuestManager.startQuest(quest, p, false, QuestManager.getStartQuestStatus(quest, p));
 		} else if (arg3[0].equals("remove")) {
 			QuestManager.removeQuest(quest, p);
@@ -85,7 +86,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 	}
 
 	private void viewNpcQuestList(Player p, String string) {
-		VillagerNpc villagerNpc = NpcManager.getVillagerNpcById(string);
+		CustomNpcInterface villagerNpc = NpcManager.getVillagerNpcById(string);
 		if (villagerNpc != null) {
 			Set<Quest> questList = NpcQuestHolder.getQuestList(villagerNpc, p);
 			for (Quest quest : questList) {

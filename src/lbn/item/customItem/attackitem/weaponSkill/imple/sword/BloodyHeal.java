@@ -4,7 +4,7 @@ import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.particle.ParticleType;
 import lbn.common.particle.Particles;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
+import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiCombat;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 
@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class BloodyHeal extends WeaponSkillWithCombat{
+public class BloodyHeal extends WeaponSkillWithMultiCombat{
 
 	public BloodyHeal() {
 		super(ItemType.SWORD);
@@ -25,17 +25,28 @@ public class BloodyHeal extends WeaponSkillWithCombat{
 	}
 
 	@Override
-	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e) {
-		//パーティクルを発生させる
-		Particles.runParticle(p.getLocation(), ParticleType.lava);
-		//ダメージを1.2倍
-		e.setDamage(e.getDamage() * getData(1));
-		//体力回復
-		LivingEntityUtil.addHealth(p, getData(2)*2);
+	protected void runWaitParticleData(Location loc, int count) {
+		Particles.runParticle(loc, ParticleType.reddust);
 	}
 
 	@Override
-	protected void runWaitParticleData(Location loc, int count) {
-		Particles.runParticle(loc, ParticleType.reddust);
+	protected int getMaxAttackCount() {
+		return 100;
+	}
+
+	@Override
+	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e, int attackCount) {
+		//ダメージを{1}倍する
+		e.setDamage(e.getDamage() * getData(1));
+
+		//体力を回復する
+		LivingEntityUtil.addHealth(p, 2 * getData(2));
+
+		Particles.runParticle(p.getLocation(), ParticleType.heart);
+	}
+
+	@Override
+	public double getTimeLimit() {
+		return getData(0);
 	}
 }
