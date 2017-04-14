@@ -1,6 +1,6 @@
 package lbn.dungeoncore.SpletSheet;
 
-import lbn.npc.VillagerData;
+import lbn.npc.villagerNpc.VillagerData;
 
 import org.bukkit.command.CommandSender;
 

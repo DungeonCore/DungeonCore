@@ -132,7 +132,6 @@ public class Main extends JavaPlugin {
 			e.printStackTrace();
 		}
 		new InitManager().init();
-		System.out.println("$$$$$$$$$$$$$$$$$$$1");
 
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
@@ -142,7 +141,6 @@ public class Main extends JavaPlugin {
 		startRutinePerHour();
 
 		DungeonLogger.info("Start complate!!");
-		System.out.println("$$$$$$$$$$$$$$$$$$$2");
 
 		try {
 			FollowerNpcManager.onEnable();
@@ -152,7 +150,6 @@ public class Main extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("$$$$$$$$$$$$$$$$$$$3");
 	}
 
 	public static Collection<? extends Player> getOnlinePlayer() {

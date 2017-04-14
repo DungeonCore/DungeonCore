@@ -12,6 +12,7 @@ import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.util.JavaUtil;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,15 +33,19 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 			DungeonList.clear();
 			DungeonList.load(sender);
 			return true;
-		} else if (args.length == 2 && args[0].equalsIgnoreCase("tp")) {
-			executeTp(sender, getName(args));
+		} else if (args.length >= 2 && args[0].equalsIgnoreCase("tp")) {
+			Player p = Bukkit.getPlayerExact(args[args.length - 1]);
+			if (p == null) {
+				p = (Player)sender;
+			}
+			executeTp(p, getName(Bukkit.getPlayerExact(args[args.length - 1]) != null, args));
 			return true;
 		} else if (args[0].equalsIgnoreCase("set")) {
 
 			Player p = (Player) sender;
 
 			//ダンジョン名
-			String dungeonName = getName(args);
+			String dungeonName = getName(false, args);
 
 			//ダンジョンデータを作成
 			DungeonData dungeon = new DungeonData(DungeonList.getNextId(), dungeonName);
@@ -88,7 +93,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 		if (arg3.length == 1) {
 			return (List<String>) StringUtil.copyPartialMatches(arg3[0], Arrays.asList(opeList), new ArrayList<String>(opeList.length));
 		} else if (arg3.length >= 2 && "tp".equalsIgnoreCase(arg3[0])) {
-			return (List<String>) StringUtil.copyPartialMatches(getName(arg3), DungeonList.names(), new ArrayList<String>());
+			return (List<String>) StringUtil.copyPartialMatches(getName(false, arg3), DungeonList.names(), new ArrayList<String>());
 		}
 		return ImmutableList.of();
 	}
@@ -98,10 +103,10 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 	 * @param args
 	 * @return
 	 */
-	public String getName(String[] args) {
+	public String getName(boolean withOutLast, String[] args) {
 		StringBuilder sb = new StringBuilder();
 		if (args.length >= 2) {
-			for (int i = 1; i < args.length; i++) {
+			for (int i = 1; i < (withOutLast ? args.length - 1 : args.length); i++) {
 				sb.append(args[i]);
 			}
 		}

@@ -17,6 +17,7 @@ import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.FoodSheetRunnable;
 import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MagicStoneOreSheetRunnable;
+import lbn.dungeoncore.SpletSheet.Mob2SheetRunnable;
 import lbn.dungeoncore.SpletSheet.MobSheetRunnable;
 import lbn.dungeoncore.SpletSheet.MobSkillSheetRunnable;
 import lbn.dungeoncore.SpletSheet.ParticleSheetRunnable;
@@ -60,6 +61,7 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter{
 		regist(new BookSheetRunnable(sender));
 		regist(new Book2SheetRunnable(sender));
 		regist(new ArmorSheetRunnable(sender));
+		regist(new Mob2SheetRunnable(sender));
 	}
 
 	public static void regist(SheetRunnable<String[][]> sheet) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
 import lbn.common.dropingEntity.DamageFallingblockForMonsterSkill;
-import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleManager;
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
@@ -167,16 +166,8 @@ public class OldNormalMobSkill implements MobSkillInterface{
 			executeOneTarget(livingEntity, mob);
 		}
 
-		//次のスキルが設定されている場合は実行
-		if (chainId != null && !chainId.equals(id)) {
-			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
-			if (fromId != null) {
-				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
-			}
-		}
-
 		//パーティクルを発動
-		executeOneTime(targetList, mob);
+		executeAfter(targetList, mob);
 	}
 
 	/**
@@ -212,21 +203,13 @@ public class OldNormalMobSkill implements MobSkillInterface{
 			protected void executeDamage(LivingEntity target, LivingEntity mob) {
 				executeOneTarget(target, mob);
 				damagedList.add(target);
-
-				//次のスキルが設定されている場合は実行
-				if (chainId != null && !chainId.equals(id)) {
-					MobSkillInterface fromId = MobSkillManager.fromId(chainId);
-					if (fromId != null) {
-						CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
-					}
-				}
 			}
 			@Override
 			public synchronized void cancel() throws IllegalStateException {
 				super.cancel();
 
 				if (damagedList.size() != 0) {
-					executeOneTime(damagedList, mob);
+					executeAfter(damagedList, mob);
 				}
 			}
 		};
@@ -247,24 +230,9 @@ public class OldNormalMobSkill implements MobSkillInterface{
 	 * @param targetList
 	 * @param mob
 	 */
-	protected void executeOneTime(ArrayList<Entity> targetList, Entity mob) {
+	protected void executeAfter(ArrayList<Entity> targetList, Entity mob) {
 		//パーティクルを実行
-		ParticleData particleData = ParticleManager.getParticleData(particleId);
-		if (particleData != null) {
-			//軽量化のため、順次実行
-			new BukkitRunnable() {
-				int i = 0;
-				@Override
-				public void run() {
-					if (i >= targetList.size()) {
-						cancel();
-						return;
-					}
-					particleData.run(particleLocType.getLocation(mob, targetList.get(i)));
-					i++;
-				}
-			}.runTaskTimer(Main.plugin, 0, 1);
-		}
+		MobSkillUtil.playParticle(ParticleManager.getParticleData(particleId), targetList, mob, particleLocType);
 
 		//周囲に対して実行の場合はここで一回だけ音を鳴らす
 		if (!isSoundTargetOnePlayer) {
@@ -322,6 +290,14 @@ public class OldNormalMobSkill implements MobSkillInterface{
 				if (fromId != null) {
 					fromId.playSoundOnePlayer(mob.getLocation(), (Player)condtionTarget);
 				}
+			}
+		}
+
+		//次のスキルが設定されている場合は実行
+		if (chainId != null && !chainId.equals(id)) {
+			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
+			if (fromId != null) {
+				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
 			}
 		}
 	}

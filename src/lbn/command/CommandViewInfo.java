@@ -148,6 +148,10 @@ public class CommandViewInfo implements CommandExecutor{
 			String command = "tellraw " + target.getName() +" {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + target.getLocation().getBlockX() + " " + target.getLocation().getBlockY()+ " " + target.getLocation().getBlockZ() + "\"}}";
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 			break;
+		case "xyz2":
+			String command2 = "tellraw " + target.getName() +" {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + target.getWorld().getName() + ":" + target.getLocation().getBlockX() + "," + target.getLocation().getBlockY()+ "," + target.getLocation().getBlockZ() + "\"}}";
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command2);
+			break;
 		case "particle":
 			ParticleData particle = ParticleManager.getParticleData(paramArrayOfString[1]);
 			if (particle != null) {

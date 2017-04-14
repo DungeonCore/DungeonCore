@@ -15,7 +15,6 @@ import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.util.Util;
 
@@ -44,6 +43,11 @@ public class FollowerNpc implements CustomNpcInterface{
 
 	public NPC getNpc() {
 		return npc;
+	}
+
+	@Override
+	public void setNpc(NPC npc) {
+		this.npc = npc;
 	}
 
 	/**
@@ -104,10 +108,6 @@ public class FollowerNpc implements CustomNpcInterface{
 			SilfiaNpcMenu silfiaNpcMenu = new SilfiaNpcMenu();
 			silfiaNpcMenu.open(e.getClicker());
 		}
-	}
-
-	@Override
-	public void onSpawn(NPCSpawnEvent e) {
 	}
 
 	@Override

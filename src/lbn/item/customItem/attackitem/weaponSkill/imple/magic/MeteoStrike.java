@@ -102,7 +102,7 @@ public class MeteoStrike extends WeaponSkillForOneType{
 					//ボスで無いならEntityを吹っ飛ばす
 					AbstractMob<?> mob = MobHolder.getMob(entity);
 					if (!mob.isBoss()) {
-						entity.setVelocity(getMoveVector(entity, entity, 2));
+						entity.setVelocity(getMoveVector(centerEntity, entity, 2));
 					}
 					//2倍のダメージを与える
 					entity.damage(item.getAttackItemDamage(0)* getData(0), p);

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.npc.CustomNpcInterface;
-import lbn.npc.NpcManager;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 import lbn.quest.NpcQuestHolder;
 import lbn.quest.Quest;
 import lbn.quest.QuestInventory;
@@ -86,7 +86,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter{
 	}
 
 	private void viewNpcQuestList(Player p, String string) {
-		CustomNpcInterface villagerNpc = NpcManager.getVillagerNpcById(string);
+		CustomNpcInterface villagerNpc = VillagerNpcManager.getVillagerNpcById(string);
 		if (villagerNpc != null) {
 			Set<Quest> questList = NpcQuestHolder.getQuestList(villagerNpc, p);
 			for (Quest quest : questList) {

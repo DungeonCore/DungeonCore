@@ -64,16 +64,16 @@ public class InitManager {
 	}
 
 	public void reloadSpreadSheet() {
-		SpletSheetCommand.reloadSheet(null, "weapon");
-
-
 		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
 
-		SpletSheetCommand.reloadSheet(null, "weaponskill");
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
 		}
+		SpletSheetCommand.reloadSheet(null, "weapon");
+
+		SpletSheetCommand.reloadSheet(null, "weaponskill");
+
 		SpletSheetCommand.reloadSheet(null, "armor");
 
 		SpletSheetCommand.reloadSheet(null, "item");

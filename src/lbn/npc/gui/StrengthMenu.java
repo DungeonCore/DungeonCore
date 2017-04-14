@@ -6,7 +6,7 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.item.system.repair.RepairUi;
 import lbn.item.system.strength.StrengthTables;
-import lbn.npc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpc;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;

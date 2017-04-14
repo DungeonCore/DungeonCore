@@ -1,4 +1,4 @@
-package lbn.npc;
+package lbn.npc.villagerNpc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.money.BuyerShopSelector;
-import lbn.npc.citizens.TheLowIdTrail;
+import lbn.npc.CustomNpcInterface;
+import lbn.npc.NpcManager;
 import lbn.npc.gui.StrengthMenu;
 import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.reincarnation.ReincarnationFactor;
@@ -25,11 +26,12 @@ import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.trait.LookClose;
+import net.citizensnpcs.trait.Age;
+import net.citizensnpcs.trait.ZombieModifier;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -51,14 +53,9 @@ public class VillagerNpc implements CustomNpcInterface {
 
 	NPC npc;
 
-//	public NPC getNpc() {
-//		return npc;
-//	}
-
 	public void setNpc(NPC npc) {
 		this.data.location = npc.getStoredLocation();
 		this.npc = npc;
-		this.data.uuid = npc.getUniqueId();
 		//NPCを更新する
 		updateNpc();
 	}
@@ -143,10 +140,6 @@ public class VillagerNpc implements CustomNpcInterface {
 	}
 
 	@Override
-	public void onSpawn(NPCSpawnEvent e) {
-	}
-
-	@Override
 	public EntityType getEntityType() {
 		return data.getEntityType();
 	}
@@ -155,15 +148,11 @@ public class VillagerNpc implements CustomNpcInterface {
 		if (npc == null || npc.getEntity() == null) {
 			return;
 		}
-
-		//IDを挿入
-		npc.removeTrait(TheLowIdTrail.class);
-		npc.addTrait(TheLowIdTrail.fromId(getId()));
-
 		VillagerData villagerData = getVillagerData();
 		if (villagerData == null) {
 			return;
 		}
+		//EntityTypeを変更する
 		if (villagerData.getEntityType() != npc.getEntity().getType()) {
 			npc.setBukkitEntityType(villagerData.getEntityType());
 		}
@@ -171,8 +160,24 @@ public class VillagerNpc implements CustomNpcInterface {
 			//skinの適用
 			npc.data().setPersistent("player-skin-name", villagerData.getSkin());
 		}
-		//周りを見る処理
-		npc.addTrait(new LookClose());
+
+		//子供にする
+		if (!data.isAdult()) {
+			//ageableの処理
+			if (npc.getEntity() instanceof Ageable) {
+				Age trait = npc.getTrait(Age.class);
+				trait.setAge(-24000);
+				npc.addTrait(trait);
+			}
+
+			//ZombieかPigManの処理
+			if (npc.getEntity().getType() == EntityType.ZOMBIE || npc.getEntity().getType() == EntityType.PIG_ZOMBIE) {
+				boolean toggleBaby = npc.getTrait(ZombieModifier.class).toggleBaby();
+				if (!toggleBaby) {
+					npc.getTrait(ZombieModifier.class).toggleBaby();
+				}
+			}
+		}
 
 		if (npc.isSpawned()) {
 			npc.despawn(DespawnReason.PENDING_RESPAWN);
@@ -257,12 +262,14 @@ public class VillagerNpc implements CustomNpcInterface {
 		return data;
 	}
 
-	/* (非 Javadoc)
-	 * @see lbn.npc.CustomNpcInterface#getId()
-	 */
 	@Override
 	public String getId() {
 		return data.getId();
+	}
+
+	@Override
+	public NPC getNpc() {
+		return npc;
 	}
 
 }

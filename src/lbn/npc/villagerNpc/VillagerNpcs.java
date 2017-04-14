@@ -1,4 +1,5 @@
-package lbn.npc;
+package lbn.npc.villagerNpc;
+
 
 public class VillagerNpcs {
 	/**
@@ -7,7 +8,7 @@ public class VillagerNpcs {
 	 * @return
 	 */
 	public static String getVillagerName(String id) {
-		VillagerNpc villagerNpcById = NpcManager.getVillagerNpcById(id);
+		VillagerNpc villagerNpcById = VillagerNpcManager.getVillagerNpcById(id);
 		if (villagerNpcById != null) {
 			return villagerNpcById.getName();
 		}

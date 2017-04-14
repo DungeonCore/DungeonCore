@@ -2,14 +2,14 @@ package lbn.npc;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
-import lbn.dungeoncore.Main;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.npc.citizens.RemoveNearNpcOnSpawnTrait;
 import lbn.npc.citizens.TheLowIdTrail;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
@@ -21,25 +21,19 @@ import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.trait.LookClose;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class NpcManager {
-	static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<String, CustomNpcInterface>();
+	static HashMap<String, NPC> spawnedNpcMap = new HashMap<String, NPC>();
 
-	static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
+	static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<String, CustomNpcInterface>();
 
 //	static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
 
 //	static CitizensNPCRegistry citizensNPCRegistry = new CitizensNPCRegistry(SimpleNPCDataStore.create(new YamlStorage(file)));
 //	static NPCRegistry citizensNPCRegistry = CitizensAPI.createNamedNPCRegistry("TheLowNpc", SimpleNPCDataStore.create(new YamlStorage(new File(Main.dataFolder + File.separator + "npc.yml"))));
 
-	public static VillagerNpc getVillagerNpcById(String name) {
-		return registedVillagerNpcIdMap.get(name);
-	}
-//
 	public static void onTest() {
 		Iterator<NPC> it = CitizensAPI.getNPCRegistry().iterator();
 		while (it.hasNext()) {
@@ -59,10 +53,6 @@ public class NpcManager {
 		}
 	}
 
-	public static Map<String, VillagerNpc> getNpcIdMap() {
-		return registedVillagerNpcIdMap;
-	}
-
 	/**
 	 * NPCを登録する
 	 * @param villagerNpc
@@ -71,49 +61,11 @@ public class NpcManager {
 		registedNpcIdMap.put(villagerNpc.getId(), villagerNpc);
 
 		if (villagerNpc instanceof VillagerNpc) {
-			registedVillagerNpcIdMap.put(villagerNpc.getId(), (VillagerNpc) villagerNpc);
+			VillagerNpcManager.regist((VillagerNpc) villagerNpc);
 		}
 	}
 
 	static Random random = new Random();
-	/**
-	 * NPCをスポーンする
-	 * @param villagerNpc
-	 */
-	public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
-		try {
-			//CitizenNPC作成
-			NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(),villagerNpc.getName());
-			createNPC.addTrait(TheLowIdTrail.fromId(villagerNpc.getId()));
-
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					//振り向くようにする
-					LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class) : new LookClose();
-					paramTrait.lookClose(true);
-					createNPC.addTrait(paramTrait);
-				}
-			}.runTaskLater(Main.plugin, 20 * 1);
-
-			if (loc != null && loc.getWorld() != null) {
-				//チャンクがロードされてなければロードする
-				if (!loc.getChunk().isLoaded()) {
-					//チャンクをロードする
-					loc.getChunk().load(true);
-				}
-
-				if (!createNPC.isSpawned()) {
-					//スポーンさせる
-					createNPC.spawn(loc);
-				}
-			}
-			villagerNpc.setNpc(createNPC);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * 指定されたエンチティがNPCならTRUE
 	 * @param entity
@@ -121,22 +73,6 @@ public class NpcManager {
 	 */
 	public static boolean isNpc(Entity entity) {
 		return entity.hasMetadata("NPC");
-	}
-
-	/**
-	 * EntityからVillagerNpcを取得
-	 * @param entity
-	 * @return
-	 */
-	public static VillagerNpc getVillagerNpc(Entity entity) {
-		if (entity == null) {
-			return null;
-		}
-		if (!isNpc(entity)) {
-			return null;
-		}
-		String id = getId(CitizensAPI.getNPCRegistry().getNPC(entity));
-		return getVillagerNpcById(id);
 	}
 
 	/**
@@ -204,10 +140,10 @@ public class NpcManager {
 	 */
 	public static void onNPCSpawnEvent(NPCSpawnEvent e) {
 		String id = getId(e.getNPC());
+
 		//スポーン済みにセットする
-		CustomNpcInterface villagerNpc = registedNpcIdMap.get(id);
-		if (villagerNpc != null) {
-			villagerNpc.onSpawn(e);
+		if (id != null && !id.isEmpty()) {
+			spawnedNpcMap.put(id, e.getNPC());
 		}
 	}
 
@@ -227,28 +163,19 @@ public class NpcManager {
 		if (sender == null) {
 			sender = Bukkit.getConsoleSender();
 		}
-//		NpcManager.allRemove();
-
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(sender);
 		villagerSheetRunnable.getData(null);
 		SpletSheetExecutor.onExecute(villagerSheetRunnable);
 	}
 
-//	/**
-//	 * 全てのNPCを削除する
-//	 */
-//	public static void allRemove() {
-//		Iterator<NPC> iterator = CitizensAPI.getNPCRegistry().iterator();
-//		while (iterator.hasNext()) {
-//			NPC npc = iterator.next();
-//			Entity entity = npc.getEntity();
-//			if (entity != null && entity.getLocation() != null) {
-//				JavaUtil.chunkLoadIfUnload(entity.getLocation().getChunk());
-//				entity.remove();
-//				iterator.remove();
-//			}
-//		}
-//	}
+	/**
+	 * IDからNPCを取得する
+	 * @return
+	 */
+	public static NPC getSpawnedNpc(String id) {
+		return spawnedNpcMap.get(id);
+	}
+
 
 	public static void init() {
 		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(TheLowIdTrail.class).withName(new TheLowIdTrail().getName()));

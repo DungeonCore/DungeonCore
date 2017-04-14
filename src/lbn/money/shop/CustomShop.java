@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
-import lbn.npc.NpcManager;
-import lbn.npc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class CustomShop extends Shop{
 	public CustomShop(String villagerID) {
 		//dataからLocationを取得しショップを作成する
-		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerID);
+		VillagerNpc villager = VillagerNpcManager.getVillagerNpcById(villagerID);
 		String data = villager.getData();
 		Location locationByString = AbstractSheetRunable.getLocationByString(data);
 		this.loc = locationByString;

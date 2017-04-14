@@ -3,7 +3,7 @@ package lbn.npc;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.event.NPCSpawnEvent;
+import net.citizensnpcs.api.npc.NPC;
 
 import org.bukkit.entity.EntityType;
 
@@ -14,12 +14,6 @@ public interface CustomNpcInterface {
 	 * @param e
 	 */
 	public abstract void onNPCRightClickEvent(NPCRightClickEvent e);
-
-	/**
-	 * reload時にも呼ばれる。もしすでに同じNPCが存在した場合、それらを削除する
-	 * @param e
-	 */
-	public abstract void onSpawn(NPCSpawnEvent e);
 
 	public abstract EntityType getEntityType();
 
@@ -34,5 +28,17 @@ public interface CustomNpcInterface {
 	public abstract String getId();
 
 	public String getName();
+
+	/**
+	 * NPCを取得する
+	 * @return
+	 */
+	public NPC getNpc();
+
+	/**
+	 * NPCをセットする
+	 * @param npc
+	 */
+	public void setNpc(NPC npc);
 
 }

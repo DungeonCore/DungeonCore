@@ -4,8 +4,8 @@ import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.UUID;
 
-import lbn.npc.NpcManager;
-import lbn.npc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 import lbn.quest.QuestAnnouncement;
 
 import org.bukkit.Bukkit;
@@ -23,7 +23,7 @@ public class QuestUtil {
 	public static void sendSatisfyComplateForVillager(String villagerId, Player p) {
 		//TODO 音追加
 
-		VillagerNpc npc = NpcManager.getVillagerNpcById(villagerId);
+		VillagerNpc npc = VillagerNpcManager.getVillagerNpcById(villagerId);
 		//NPCが登録されていなければIDをそのまま返す
 		if (npc == null) {
 			p.sendMessage("クエストクリア!!!  " + villagerId + "のところに戻ろう！！");

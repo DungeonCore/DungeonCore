@@ -11,8 +11,8 @@ import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.CraftItemable;
-import lbn.npc.NpcManager;
-import lbn.npc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 import lbn.util.ItemStackUtil;
 
 import org.bukkit.Bukkit;
@@ -37,7 +37,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 	}
 
 	public static void openTest(Player p, String villagerID) {
-		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerID);
+		VillagerNpc villager = VillagerNpcManager.getVillagerNpcById(villagerID);
 		String data = villager.getData();
 		Location locationByString = AbstractSheetRunable.getLocationByString(data);
 		Block block = locationByString.getBlock();
@@ -51,7 +51,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 	 * @param index
 	 */
 	public static void open(Player p, String villagerId, int index) {
-		VillagerNpc villager = NpcManager.getVillagerNpcById(villagerId);
+		VillagerNpc villager = VillagerNpcManager.getVillagerNpcById(villagerId);
 		if (villager == null) {
 			p.sendMessage("指定された村人がいません。" + villagerId);
 			return;

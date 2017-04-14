@@ -11,7 +11,7 @@ import org.bukkit.inventory.PlayerInventory;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
-import lbn.npc.VillagerNpcs;
+import lbn.npc.villagerNpc.VillagerNpcs;
 import lbn.quest.Quest;
 import lbn.quest.QuestAnnouncement;
 import lbn.quest.questData.PlayerQuestSession;

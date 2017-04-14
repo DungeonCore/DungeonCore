@@ -4,7 +4,8 @@ import java.util.List;
 
 import lbn.dungeoncore.Main;
 import lbn.npc.NpcManager;
-import lbn.npc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 import lbn.util.DungeonLogger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -42,7 +43,7 @@ public class RemoveNearNpcOnSpawnTrait extends Trait{
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				VillagerNpc thisNpc = NpcManager.getVillagerNpc(npc.getEntity());
+				VillagerNpc thisNpc = VillagerNpcManager.getVillagerNpc(npc.getEntity());
 				if (thisNpc == null) {
 					return;
 				}

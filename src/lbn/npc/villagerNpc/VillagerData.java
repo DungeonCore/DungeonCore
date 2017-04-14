@@ -1,9 +1,10 @@
-package lbn.npc;
+package lbn.npc.villagerNpc;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
+import lbn.npc.CustomNpcInterface;
+import lbn.npc.NpcManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
@@ -30,7 +31,7 @@ public class VillagerData {
 		villagerMap.put(id, villagerData);
 
 		//もしまだNPCが登録されていなければ新しく登録する
-		VillagerNpc villagerNpc = NpcManager.getVillagerNpcById(id);
+		VillagerNpc villagerNpc = VillagerNpcManager.getVillagerNpcById(id);
 		if (villagerNpc == null) {
 			NpcManager.regist(new VillagerNpc(villagerData));
 		} else {
@@ -56,8 +57,6 @@ public class VillagerData {
 	Location location;
 
 	String id;
-
-	UUID uuid;
 
 	EntityType entityType = EntityType.VILLAGER;
 
@@ -87,10 +86,6 @@ public class VillagerData {
 
 		//データ処理
 		this.data = data;
-
-		if (uuid != null) {
-			this.uuid = UUID.fromString(uuid);
-		}
 
 		this.location = AbstractSheetRunable.getLocationByString(location);
 
@@ -134,10 +129,6 @@ public class VillagerData {
 
 	public boolean isError() {
 		return isError;
-	}
-
-	public UUID getUuid() {
-		return uuid;
 	}
 
 	public boolean isAdult() {

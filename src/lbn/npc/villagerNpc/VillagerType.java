@@ -1,4 +1,4 @@
-package lbn.npc;
+package lbn.npc.villagerNpc;
 
 public enum VillagerType {
 	NORMAL, SHOP, BLACKSMITH, REINC, MAGIC_ORE;
