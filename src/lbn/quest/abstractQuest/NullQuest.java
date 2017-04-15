@@ -154,7 +154,7 @@ public class NullQuest implements Quest{
 	}
 
 	@Override
-	public String getStartVillagerName() {
+	public String getStartVillagerId() {
 		return null;
 	}
 
@@ -170,5 +170,10 @@ public class NullQuest implements Quest{
 
 	@Override
 	public void onStartQuestEvent(StartQuestEvent e) {
+	}
+
+	@Override
+	public boolean isShowProceessText() {
+		return false;
 	}
 }

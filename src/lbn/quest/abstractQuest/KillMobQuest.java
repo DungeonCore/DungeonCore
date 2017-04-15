@@ -42,9 +42,10 @@ public class KillMobQuest extends AbstractQuest{
 		return mobNameList.contains(mob.getName());
 	}
 
-	public void onDeath(EntityDeathEvent e, PlayerQuestSession session) {
+	public void onDeath(EntityDeathEvent e, PlayerQuestSession session, AbstractMob<?> killedMob) {
 		LivingEntity entity = e.getEntity();
-		if (MobHolder.getMob(e).equals(getTargetMob())) {
+
+		if (allowAnyMob() || killedMob.getName().equals(targetMobName)) {
 			//最後に攻撃したプレイヤーがいない場合は無視する
 			Player p = LastDamageManager.getLastDamagePlayer(entity);
 			if (p == null) {
@@ -58,6 +59,14 @@ public class KillMobQuest extends AbstractQuest{
 				sendProgressMessage(p, getNeedCount(), data + 1);
 			}
 		}
+	}
+
+	/**
+	 * どんなモンスターでもカウントを許可するならTRUE
+	 * @return
+	 */
+	protected boolean allowAnyMob() {
+		return targetMobName == null || targetMobName.isEmpty();
 	}
 
 	@Override

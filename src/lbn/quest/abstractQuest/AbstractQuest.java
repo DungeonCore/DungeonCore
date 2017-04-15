@@ -90,7 +90,9 @@ public abstract class AbstractQuest implements Quest{
 	 * @param player
 	 */
 	protected void sendProgressMessage(Player player, int needCount, int nowCount) {
-		QuestAnnouncement.sendQuestProcessInfo(player, MessageFormat.format("{0} ({1}/{2})", getName(), nowCount, needCount));
+		if (isShowProceessText()) {
+			QuestAnnouncement.sendQuestProcessInfo(player, MessageFormat.format("{0} ({1}/{2})", getName(), nowCount, needCount));
+		}
 	}
 
 	String id;
@@ -323,7 +325,7 @@ public abstract class AbstractQuest implements Quest{
 
 	String startVillager = null;
 	@Override
-	public String getStartVillagerName() {
+	public String getStartVillagerId() {
 		return startVillager;
 	}
 
@@ -335,6 +337,12 @@ public abstract class AbstractQuest implements Quest{
 
 	@Override
 	public void onStartQuestEvent(StartQuestEvent e) {
+	}
+
+	boolean isProcessText = true;
+	@Override
+	public boolean isShowProceessText() {
+		return isProcessText;
 	}
 
 }

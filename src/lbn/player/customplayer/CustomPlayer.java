@@ -50,7 +50,7 @@ public class CustomPlayer implements TheLowPlayer{
 	PlayerLevelIntData expData = null;
 
 	//最大レベル
-	PlayerLevelIntData maxLevelData = null;
+	transient PlayerLevelIntData maxLevelData = null;
 
 	//所持金
 	int galions = 0;
@@ -58,7 +58,7 @@ public class CustomPlayer implements TheLowPlayer{
 	OfflinePlayer player;
 
 	//現在いるダンジョンID
-	int inDungeonId = -1;
+	transient int inDungeonId = -1;
 
 	//PlayerStatusData
 	PlayerStatusData playerStatusData = new PlayerStatusData(this);
@@ -66,7 +66,7 @@ public class CustomPlayer implements TheLowPlayer{
 	//転生データを管理するクラス
 	PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
 
-	Location lastOverWorldLocation = null;
+	transient Location lastOverWorldLocation = null;
 
 	@Override
 	public int getLevel(LevelType type) {

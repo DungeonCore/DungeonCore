@@ -49,6 +49,7 @@ public class QuestBuilder {
 			if (values[21] != null && !values[21].isEmpty()) {
 				quest.endVillager = values[21];
 			}
+			quest.isProcessText = !"表示しない".equals(values[22]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

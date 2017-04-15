@@ -66,6 +66,10 @@ public class InitManager {
 	public void reloadSpreadSheet() {
 		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
 
+		SpletSheetCommand.reloadSheet(null, "item");
+
+		QuestCommand.questReload();
+
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
@@ -76,11 +80,8 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "armor");
 
-		SpletSheetCommand.reloadSheet(null, "item");
 
 		CommandChest.allReload();
-
-		QuestCommand.questReload();
 
 		SoundSheetRunnable.allReload();
 

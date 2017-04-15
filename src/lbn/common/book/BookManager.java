@@ -7,6 +7,7 @@ import lbn.command.SpletSheetCommand;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.customItem.itemAbstract.BookItem;
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_8_R1.ChatComponentText;
 import net.minecraft.server.v1_8_R1.ChatComponentUtils;
 import net.minecraft.server.v1_8_R1.ChatSerializer;
@@ -64,6 +65,8 @@ public class BookManager {
 		BookData bookData = bookMap.get(id);
 		if (bookData != null) {
 			openBook(bookData.toBookItem(), p);
+
+			p.sendMessage(ChatColor.GOLD + "[BOOK] " + ChatColor.GREEN + bookData.getTitile() + "の本を開きました");
 		}
 	}
 

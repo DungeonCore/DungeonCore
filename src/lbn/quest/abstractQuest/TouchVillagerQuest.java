@@ -2,6 +2,7 @@ package lbn.quest.abstractQuest;
 
 import java.util.Set;
 
+import lbn.npc.NpcManager;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.QuestUtil;
 
@@ -13,14 +14,14 @@ import com.google.common.collect.HashMultimap;
 public class TouchVillagerQuest extends AbstractQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
 
-	String villagerName;
+	String villagerId;
 	String[] talk;
 
-	protected TouchVillagerQuest(String id, String name, String[] talk) {
+	protected TouchVillagerQuest(String id, String villagerId, String[] talk) {
 		super(id);
-		villagerName = name;
+		this.villagerId = villagerId;
 		this.talk = talk;
-		targetVillagerNameQuestList.put(getTargetVillagerName().toLowerCase(), this);
+		targetVillagerNameQuestList.put(getTargetVillagerID(), this);
 	}
 
 	public String[] talkOnTouch() {
@@ -35,13 +36,21 @@ public class TouchVillagerQuest extends AbstractQuest{
 	}
 
 	public static Set<TouchVillagerQuest> getQuestByTargetVillager(Entity e) {
-		String name = e.getCustomName().toLowerCase();
-		return targetVillagerNameQuestList.get(name);
+		String id = NpcManager.getId(e);
+		if (id != null) {
+			return targetVillagerNameQuestList.get(id);
+		} else {
+			return null;
+		}
 	}
 
 	public void onTouchVillager(Player p, Entity entity, PlayerQuestSession session) {
-		String name = entity.getCustomName();
-		if (name.equalsIgnoreCase(getTargetVillagerName())) {
+		//NPCでないなら何もしない
+		String id = NpcManager.getId(entity);
+		if (id == null) {
+			return;
+		}
+		if (id.equalsIgnoreCase(getTargetVillagerID())) {
 			session.setQuestData(this, 1);
 
 			//メッセージを出力
@@ -49,8 +58,8 @@ public class TouchVillagerQuest extends AbstractQuest{
 		}
 	}
 
-	public String getTargetVillagerName() {
-		return villagerName;
+	public String getTargetVillagerID() {
+		return villagerId;
 	}
 
 	@Override
@@ -70,6 +79,6 @@ public class TouchVillagerQuest extends AbstractQuest{
 
 	@Override
 	public String getComplateCondition() {
-		return villagerName + "と会って話をする";
+		return villagerId + "と会って話をする";
 	}
 }

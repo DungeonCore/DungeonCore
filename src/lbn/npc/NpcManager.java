@@ -176,6 +176,25 @@ public class NpcManager {
 		return spawnedNpcMap.get(id);
 	}
 
+	/**
+	 * EntityからIDを取得する
+	 * @param e
+	 * @return
+	 */
+	public static String getId(Entity e) {
+		//NPCを取得
+		NPC npc = CitizensAPI.getNPCRegistry().getNPC(e);
+		if (npc == null) {
+			return null;
+		}
+		//IDを取得
+		String id = NpcManager.getId(npc);
+		if (id == null) {
+			return null;
+		}
+		return id;
+	}
+
 
 	public static void init() {
 		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(TheLowIdTrail.class).withName(new TheLowIdTrail().getName()));

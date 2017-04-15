@@ -86,6 +86,7 @@ commands:
       permission: main.lbnDungeonUtil.command.admin.quest_operate
       usage: /<command> start|remove|complate quest_name [player_name]
       permission-message: You don't have <permission>
+      aliases: [qo]
    change_biome:
       description: change biome
       permission: main.lbnDungeonUtil.command.builder.change_biome

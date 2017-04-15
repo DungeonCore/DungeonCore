@@ -17,7 +17,7 @@ public class NpcQuestHolder {
 	static HashMultimap<String, Quest> villagerIDQuestMap = HashMultimap.create();
 
 	public static void regist(Quest q) {
-		villagerIDQuestMap.put(q.getEndVillagerId(), q);
+		villagerIDQuestMap.put(q.getStartVillagerId(), q);
 	}
 
 	public static List<Quest> getAvailableQuestList(CustomNpcInterface npc, Player p) {

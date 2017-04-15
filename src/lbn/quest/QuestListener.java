@@ -90,11 +90,6 @@ public class QuestListener implements Listener{
 			return;
 		}
 
-		//殺したmobがtargetに含まれてないなら何もしない
-		if (!KillMobQuest.containsTargetMob(mob)) {
-			return;
-		}
-
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 
 		//今実行中のクエスト中からStrengthItemQuestを探しだす
@@ -102,7 +97,7 @@ public class QuestListener implements Listener{
 		for (Quest quest : doingQuest) {
 			//実行中ならクエストの処理を行う
 			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
-				((KillMobQuest)quest).onDeath(e, questSession);
+				((KillMobQuest)quest).onDeath(e, questSession, mob);
 				//終了条件を満たしたなら村人の場所へ帰らせる
 				onSatisfyCondition(p, quest);
 			}

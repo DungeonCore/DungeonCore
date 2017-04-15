@@ -67,9 +67,15 @@ public interface Quest{
 
 	public String getComplateCondition();
 
-	public String getStartVillagerName();
+	public String getStartVillagerId();
 
 	public String getEndVillagerId();
 
 	public void onStartQuestEvent(StartQuestEvent e);
+
+	/**
+	 * 進行状況を表示するかどうか
+	 * @return
+	 */
+	public boolean isShowProceessText();;
 }
