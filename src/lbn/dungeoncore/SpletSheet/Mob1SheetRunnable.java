@@ -29,6 +29,11 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 		query = "name=" + monsterName.trim();
 	}
 
+	@Override
+	public boolean hasSecoundSheet() {
+		return true;
+	}
+
 	String query = null;
 
 	@Override
