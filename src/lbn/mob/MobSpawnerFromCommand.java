@@ -161,7 +161,7 @@ public class MobSpawnerFromCommand {
 		return entity;
 	}
 
-	public static LbnMobTag getTBTTagByCommand(String[] paramArrayOfString, CommandSender sender) {
+	public static LbnMobTag getNBTTagByCommand(String[] paramArrayOfString, CommandSender sender) {
 		// summonがあったら取り除く
 		if (paramArrayOfString[0].equalsIgnoreCase("summon") || paramArrayOfString[0].equalsIgnoreCase("/summon")) {
 			String[] newParam = new String[paramArrayOfString.length - 1];

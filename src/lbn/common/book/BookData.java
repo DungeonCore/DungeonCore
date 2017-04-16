@@ -75,10 +75,7 @@ public class BookData {
 	}
 
 	public String[] getContents() {
-		ArrayList<String> contents2 = contents;
-//		String onePage = "\n\n\n\n"+ getTitile() + "\n\n    \n\n       \n\n\n      "+ getAuther() +"\n\n\n\n\n ";
-//		contents2.add(0, onePage);
-		return contents2.toArray(new String[0]);
+		return contents.toArray(new String[0]);
 	}
 
 	int index = 0;

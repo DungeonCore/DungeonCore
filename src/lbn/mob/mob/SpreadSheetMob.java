@@ -37,9 +37,9 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class CommandableMob extends AbstractMob<Entity>{
+public class SpreadSheetMob extends AbstractMob<Entity>{
 
-	protected CommandableMob(LbnMobTag nbtTag, String[] command, String name) {
+	protected SpreadSheetMob(LbnMobTag nbtTag, String[] command, String name) {
 		this.command = command;
 		this.nbtTag = nbtTag;
 		this.name = name;
@@ -59,19 +59,19 @@ public class CommandableMob extends AbstractMob<Entity>{
 	}
 
 
-	public static CommandableMob getInstance(String[] command, String name, CommandSender sender) {
-		LbnMobTag nbtTag = MobSpawnerFromCommand.getTBTTagByCommand(command, sender);
+	public static SpreadSheetMob getInstance(String[] command, String name, CommandSender sender) {
+		LbnMobTag nbtTag = MobSpawnerFromCommand.getNBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;
 		}
 
-		CommandableMob commandableMob = new CommandableMob(nbtTag, command, name);
+		SpreadSheetMob commandableMob = new SpreadSheetMob(nbtTag, command, name);
 
 		nbtTag.setBoss(false);
 
 		AbstractMob<?> mob2 = MobHolder.getMob(name);
-		if (mob2 != null && !mob2.isNullMob() && !(mob2 instanceof CommandableMob)) {
+		if (mob2 != null && !mob2.isNullMob() && !(mob2 instanceof SpreadSheetMob)) {
 			commandableMob.mob = mob2;
 		}
 		return commandableMob;
@@ -262,8 +262,8 @@ public class CommandableMob extends AbstractMob<Entity>{
 
 	private int index = 0;
 
-	private double[] dropPerList = {0.0, 0.0};
-	private ItemStack[] dropItemList = {null, null};
+	private double[] dropPerList = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	private ItemStack[] dropItemList = {null, null, null, null, null, null, null, null, null, null};
 
 	public void setDropItem(ItemStack item, double dropPer) {
 		dropPerList[index] = dropPer;

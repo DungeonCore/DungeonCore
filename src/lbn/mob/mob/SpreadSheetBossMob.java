@@ -45,18 +45,18 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import com.google.common.collect.HashBasedTable;
 
-public class CommandBossMob extends CommandableMob implements BossMobable{
+public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable{
 
 	static HashMap<String, LivingEntity> entityList = new HashMap<String, LivingEntity>();
 
-	protected CommandBossMob(LbnMobTag nbtTag, String[] command, String name) {
+	protected SpreadSheetBossMob(LbnMobTag nbtTag, String[] command, String name) {
 		super(nbtTag, command, name);
 	}
 
 	long spawnTimeMill = -1;
 
-	public static CommandBossMob getInstance(String[] command, String name, CommandSender sender, Location locationByString) {
-		LbnMobTag nbtTag = MobSpawnerFromCommand.getTBTTagByCommand(command, sender);
+	public static SpreadSheetBossMob getInstance(String[] command, String name, CommandSender sender, Location locationByString) {
+		LbnMobTag nbtTag = MobSpawnerFromCommand.getNBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
 			return null;
@@ -66,11 +66,11 @@ public class CommandBossMob extends CommandableMob implements BossMobable{
 			return null;
 		}
 
-		CommandBossMob commandableMob = new CommandBossMob(nbtTag, command, name);
+		SpreadSheetBossMob commandableMob = new SpreadSheetBossMob(nbtTag, command, name);
 		commandableMob.chestloc = locationByString;
 
 		AbstractMob<?> mob2 = MobHolder.getMob(name);
-		if (mob2 != null && !mob2.isNullMob() && !(mob2 instanceof CommandableMob)) {
+		if (mob2 != null && !mob2.isNullMob() && !(mob2 instanceof SpreadSheetMob)) {
 			commandableMob.mob = mob2;
 		}
 

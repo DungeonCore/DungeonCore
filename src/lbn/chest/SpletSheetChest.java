@@ -8,7 +8,7 @@ import java.util.Random;
 
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.CommandBossMob;
+import lbn.mob.mob.SpreadSheetBossMob;
 import lbn.player.customplayer.PlayerChestTpManager;
 import lbn.util.DungeonLogger;
 
@@ -58,8 +58,8 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
     this.random = random;
 
     for (AbstractMob<?> mob : MobHolder.getAllMobs()) {
-      if (mob instanceof CommandBossMob) {
-        if (((CommandBossMob) mob).chestLocation() != null && ((CommandBossMob) mob).chestLocation().equals(chestLoc)) {
+      if (mob instanceof SpreadSheetBossMob) {
+        if (((SpreadSheetBossMob) mob).chestLocation() != null && ((SpreadSheetBossMob) mob).chestLocation().equals(chestLoc)) {
           isBossChestTemplate = true;
         }
       }

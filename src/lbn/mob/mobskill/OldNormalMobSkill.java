@@ -12,7 +12,7 @@ import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.CommandableMob;
+import lbn.mob.mob.SpreadSheetMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 
@@ -297,7 +297,7 @@ public class OldNormalMobSkill implements MobSkillInterface{
 		if (chainId != null && !chainId.equals(id)) {
 			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
 			if (fromId != null) {
-				CommandableMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+				SpreadSheetMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
 			}
 		}
 	}

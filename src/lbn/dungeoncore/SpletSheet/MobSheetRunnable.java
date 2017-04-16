@@ -6,8 +6,8 @@ import lbn.mob.AIType;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.CommandBossMob;
-import lbn.mob.mob.CommandableMob;
+import lbn.mob.mob.SpreadSheetBossMob;
+import lbn.mob.mob.SpreadSheetMob;
 import lbn.mob.mob.LbnMobTag;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
@@ -72,9 +72,9 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			boolean isBoss = false;
 
 			//mobのインスタンス作成
-			CommandableMob instance;
+			SpreadSheetMob instance;
 			if (isEmpty(row, 7)) {
-				instance = CommandableMob.getInstance(command.split(" "), name, sender);
+				instance = SpreadSheetMob.getInstance(command.split(" "), name, sender);
 			} else {
 				//AbstractChestを取得
 				Location locationByString = getLocationByString(row[7]);
@@ -82,7 +82,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 					sendMessage("chest locationが不正です：" + name);
 					return;
 				}
-				instance = CommandBossMob.getInstance(command.split(" "), name, sender, locationByString);
+				instance = SpreadSheetBossMob.getInstance(command.split(" "), name, sender, locationByString);
 				isBoss = true;
 			}
 
@@ -151,7 +151,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				//もしEntityが存在していれば
 				LivingEntity entity = ((BossMobable)mob).getEntity();
 				if (entity != null) {
-					((CommandBossMob)instance).setEntity(entity);
+					((SpreadSheetBossMob)instance).setEntity(entity);
 				}
 			}
 
@@ -187,7 +187,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 	 * @param parcent
 	 * @param instance
 	 */
-	public void setDropItem(String itemId, String parcent, CommandableMob instance) {
+	public void setDropItem(String itemId, String parcent, SpreadSheetMob instance) {
 		//DROP ITEM の設定
 		if (itemId != null && !itemId.isEmpty()) {
 			ItemStack item = ItemStackUtil.getItemStack(itemId);

@@ -22,7 +22,7 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.CommandableMob;
+import lbn.mob.mob.SpreadSheetMob;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.npc.NpcManager;
@@ -203,8 +203,8 @@ public class CommandViewInfo implements CommandExecutor{
 			return;
 		}
 
-		if (mob instanceof CommandableMob) {
-			HashSet<String> skillIdList = ((CommandableMob) mob).getSkillIdList();
+		if (mob instanceof SpreadSheetMob) {
+			HashSet<String> skillIdList = ((SpreadSheetMob) mob).getSkillIdList();
 			for (String skill : skillIdList) {
 				paramCommandSender.sendMessage(skill);
 			}
