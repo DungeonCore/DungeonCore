@@ -8,8 +8,8 @@ import lbn.common.menu.SelectRunnable;
 import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,30 +32,34 @@ public class RepositoryChest extends WireLessChest{
 		//メニューセレクトターを作成
 		MenuSelector menuSelecor = new MenuSelector("Repository Menu:" + type);
 		menuSelecor.addMenu(ItemStackUtil.getItem("倉庫を購入する", Material.WOOL, (byte)5,
-				Message.getMessage("{0}Galionで倉庫を購入する", type.price)), 11, new SelectRunnable() {
+				ChatColor.GREEN + Integer.toString(type.price) + "Galionで倉庫を購入する"), 11, new SelectRunnable() {
 			@Override
 			public void run(Player p, ItemStack item) {
-				TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-				if (theLowPlayer == null) {
-					Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
-					return;
-				}
+				try {
+					TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+					if (theLowPlayer == null) {
+						Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+						return;
+					}
 
-				if (theLowPlayer.getGalions() > type.getPrice()) {
-					//チェストを作成
-					instance.createChest(p, type.getType());
-					//お金を引く
-					theLowPlayer.addGalions(-type.getPrice(), GalionEditReason.consume_shop);
-					Message.sendMessage(p, ChatColor.GREEN + "倉庫({0})を購入しました。", type.getType());
-				} else {
-					Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。", type.getType());
+					if (theLowPlayer.getGalions() > type.getPrice()) {
+						//チェストを作成
+						instance.createChest(p, type.getType());
+						//お金を引く
+						theLowPlayer.addGalions(-type.getPrice(), GalionEditReason.consume_shop);
+						Message.sendMessage(p, ChatColor.GREEN + "倉庫({0})を購入しました。", type.getType());
+					} else {
+						Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。", type.getType());
+					}
+					p.closeInventory();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				p.closeInventory();
 			}
 		});
 
 		menuSelecor.addMenu(ItemStackUtil.getItem("倉庫を購入しない", Material.WOOL, (byte)14,
-				Message.getMessage("倉庫を購入しない")), 15, new SelectRunnable() {
+				ChatColor.GREEN + "画面を閉じる"), 15, new SelectRunnable() {
 			@Override
 			public void run(Player p, ItemStack item) {
 				p.closeInventory();

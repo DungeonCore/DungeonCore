@@ -5,7 +5,9 @@ import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.ItemManager;
 import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.lore.ItemLoreToken;
+import lbn.util.ItemStackUtil;
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -63,6 +65,16 @@ public class TestArmorItem extends AbstractArmorItem{
 	}
 
 	@Override
+	protected ItemStack getItemStackBase() {
+		long nextLong = RandomUtils.nextLong();
+
+		String command = "/give @p minecraft:" + getMaterial().toString().toLowerCase() + " 1 0 {AttributeModifiers:[{Name: HaruEditor,UUIDLeast: " + nextLong++ + "L,UUIDMost: " + nextLong + "L,Operation: 0,AttributeName: generic.maxHealth,Amount: "
+				+ getHealthAdd(getAvailableLevel()) + "d}]}";
+		ItemStack itemStackBase = ItemStackUtil.getItemStackByCommand(command);
+		return itemStackBase;
+	}
+
+	@Override
 	public int getAvailableLevel() {
 		return level;
 	}
@@ -97,4 +109,7 @@ public class TestArmorItem extends AbstractArmorItem{
 		return null;
 	}
 
+	public static double getHealthAdd(int level) {
+		return (20.0 / (-0.0002 *level*level +1) - 20.0) / 4.0;
+	}
 }
