@@ -3,9 +3,9 @@ package lbn.dungeon.contents.mob.skelton;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
-import lbn.mob.mob.LbnMobTag;
-import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.mob.customMob.LbnMobTag;
+import lbn.mob.customMob.SummonMobable;
+import lbn.mob.customMob.abstractmob.AbstractSkelton;
 import lbn.player.ItemType;
 
 import org.bukkit.Material;

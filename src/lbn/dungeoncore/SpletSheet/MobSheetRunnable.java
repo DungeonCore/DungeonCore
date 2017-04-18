@@ -5,10 +5,10 @@ import java.util.Arrays;
 import lbn.mob.AIType;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.SpreadSheetBossMob;
-import lbn.mob.mob.SpreadSheetMob;
-import lbn.mob.mob.LbnMobTag;
+import lbn.mob.customMob.BossMobable;
+import lbn.mob.customMob.LbnMobTag;
+import lbn.mob.customMob.SpreadSheetBossMob;
+import lbn.mob.customMob.SpreadSheetMob;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 

@@ -11,8 +11,8 @@ import lbn.common.sound.SoundManager;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.SpreadSheetMob;
+import lbn.mob.customMob.BossMobable;
+import lbn.mob.customMob.SpreadSheetMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 

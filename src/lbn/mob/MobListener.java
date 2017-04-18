@@ -8,8 +8,8 @@ import java.util.Set;
 import lbn.chest.CustomChestManager;
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.SummonMobable;
+import lbn.mob.customMob.BossMobable;
+import lbn.mob.customMob.SummonMobable;
 import lbn.player.PlayerChecker;
 
 import org.bukkit.Bukkit;

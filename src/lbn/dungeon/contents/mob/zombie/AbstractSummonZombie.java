@@ -4,9 +4,9 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.LbnMobTag;
-import lbn.mob.mob.SummonMobable;
-import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.mob.customMob.LbnMobTag;
+import lbn.mob.customMob.SummonMobable;
+import lbn.mob.customMob.abstractmob.AbstractZombie;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Sound;

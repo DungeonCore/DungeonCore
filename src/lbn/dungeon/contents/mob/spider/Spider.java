@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.mob.spider;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractSpider;
+import lbn.mob.customMob.abstractmob.AbstractSpider;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

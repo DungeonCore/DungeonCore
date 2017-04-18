@@ -1,7 +1,7 @@
 package lbn.mobspawn.boss;
 
 import lbn.mob.AbstractMob;
-import lbn.mob.mob.BossMobable;
+import lbn.mob.customMob.BossMobable;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.gettter.SpletSheetSpawnMobGetter;
 import lbn.mobspawn.point.MobSpawnerPoint;

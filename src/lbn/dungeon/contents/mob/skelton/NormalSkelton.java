@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.mob.skelton;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractSkelton;
+import lbn.mob.customMob.abstractmob.AbstractSkelton;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;

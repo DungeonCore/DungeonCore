@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.mob.zombie;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractZombie;
+import lbn.mob.customMob.abstractmob.AbstractZombie;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;

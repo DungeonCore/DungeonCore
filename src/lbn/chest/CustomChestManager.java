@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import lbn.chest.wireless.RepositoryChest;
 import lbn.chest.wireless.RepositoryType;
-import lbn.mob.mob.BossMobable;
+import lbn.mob.customMob.BossMobable;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.Location;

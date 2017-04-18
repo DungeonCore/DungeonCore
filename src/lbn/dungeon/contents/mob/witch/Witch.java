@@ -1,7 +1,7 @@
 package lbn.dungeon.contents.mob.witch;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.mob.abstractmob.AbstractWitch;
+import lbn.mob.customMob.abstractmob.AbstractWitch;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

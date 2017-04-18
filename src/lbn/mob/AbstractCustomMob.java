@@ -1,6 +1,6 @@
 package lbn.mob;
 
-import lbn.mob.customEntity.ICustomEntity;
+import lbn.mob.minecraftEntity.ICustomEntity;
 
 import org.bukkit.Location;
 import org.bukkit.World;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.dungeoncore.Main;
-import lbn.mob.mob.BossMobable;
+import lbn.mob.customMob.BossMobable;
 import lbn.util.LbnRunnable;
 import lbn.util.Message;
 

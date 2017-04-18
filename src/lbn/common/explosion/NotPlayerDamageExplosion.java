@@ -1,7 +1,7 @@
 package lbn.common.explosion;
 
 import lbn.mob.MobHolder;
-import lbn.mob.mob.SummonMobable;
+import lbn.mob.customMob.SummonMobable;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

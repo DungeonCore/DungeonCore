@@ -5,11 +5,11 @@ import java.util.Arrays;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.MobSpawnerFromCommand;
-import lbn.mob.mob.BossMobable;
-import lbn.mob.mob.LbnMobTag;
-import lbn.mob.mob.LbnMobTag2;
-import lbn.mob.mob.SpreadSheetMob;
-import lbn.mob.mob.SpreadSheetMob2;
+import lbn.mob.customMob.BossMobable;
+import lbn.mob.customMob.LbnMobTag;
+import lbn.mob.customMob.LbnMobTag2;
+import lbn.mob.customMob.SpreadSheetMob;
+import lbn.mob.customMob.SpreadSheetMob2;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 

@@ -3,7 +3,7 @@ package lbn.mob;
 import java.util.HashMap;
 
 import lbn.dungeoncore.LbnRuntimeException;
-import lbn.mob.mob.SummonMobable;
+import lbn.mob.customMob.SummonMobable;
 import lbn.player.ItemType;
 
 import org.bukkit.entity.Entity;

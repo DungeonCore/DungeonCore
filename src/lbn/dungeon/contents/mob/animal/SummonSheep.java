@@ -4,7 +4,7 @@ import lbn.common.event.player.PlayerCustomMobSpawnEvent;
 import lbn.dungeoncore.Main;
 import lbn.mob.AbstractMob;
 import lbn.mob.SummonPlayerManager;
-import lbn.mob.mob.SummonMobable;
+import lbn.mob.customMob.SummonMobable;
 import lbn.util.JavaUtil;
 import lbn.util.LbnRunnable;
 

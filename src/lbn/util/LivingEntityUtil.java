@@ -8,7 +8,7 @@ import lbn.dungeoncore.Main;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.mob.SummonPlayerManager;
-import lbn.mob.customEntity1_8.CustomVillager;
+import lbn.mob.minecraftEntity.CustomVillager;
 import lbn.npc.NpcManager;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityLightning;

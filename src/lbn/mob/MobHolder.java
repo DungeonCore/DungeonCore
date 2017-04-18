@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import lbn.dungeon.contents.mob.NormalMob;
-import lbn.mob.mob.NullMob;
+import lbn.mob.customMob.NullMob;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;

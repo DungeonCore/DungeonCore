@@ -8,7 +8,7 @@ import java.util.Random;
 
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.SpreadSheetBossMob;
+import lbn.mob.customMob.SpreadSheetBossMob;
 import lbn.player.customplayer.PlayerChestTpManager;
 import lbn.util.DungeonLogger;
 

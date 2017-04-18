@@ -2,7 +2,7 @@ package lbn.dungeon.contents.mob;
 
 import lbn.dungeon.contents.mob.skelton.NormalSkelton;
 import lbn.dungeon.contents.mob.zombie.NormalZombie;
-import lbn.mob.mob.NullMob;
+import lbn.mob.customMob.NullMob;
 import lbn.util.LivingEntityUtil;
 
 import org.bukkit.Location;

@@ -22,7 +22,7 @@ import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
-import lbn.mob.mob.SpreadSheetMob;
+import lbn.mob.customMob.SpreadSheetMob;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.point.MobSpawnerPointManager;
 import lbn.npc.NpcManager;

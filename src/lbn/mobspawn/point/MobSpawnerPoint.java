@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import lbn.mob.AbstractMob;
-import lbn.mob.mob.abstractmob.AbstractCombinationMob;
+import lbn.mob.customMob.abstractmob.AbstractCombinationMob;
 import lbn.mobspawn.ChunkWrapper;
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.gettter.SpawnMobGetterInterface;
