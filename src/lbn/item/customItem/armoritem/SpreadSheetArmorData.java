@@ -49,6 +49,8 @@ public class SpreadSheetArmorData {
 
 	int price = 0;
 
+	double addHp = 0;
+
 	/**
 	 * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
 	 * @param sender

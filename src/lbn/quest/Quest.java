@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.common.event.quest.StartQuestEvent;
+import lbn.item.ItemInterface;
 import lbn.quest.abstractQuest.QuestType;
 
 import org.bukkit.entity.Player;
@@ -77,5 +78,11 @@ public interface Quest{
 	 * 進行状況を表示するかどうか
 	 * @return
 	 */
-	public boolean isShowProceessText();;
+	public boolean isShowProceessText();
+
+	/**
+	 * クエストを開始したときにもらえるアイテム
+	 * @return
+	 */
+	public ItemInterface getQuestBeforeItem();
 }

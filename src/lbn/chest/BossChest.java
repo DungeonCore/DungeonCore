@@ -12,6 +12,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -33,20 +35,7 @@ public class BossChest extends SpletSheetChest{
 	 * @param e
 	 * @return　設置後のチェストの座標
 	 */
-	@SuppressWarnings("deprecation")
 	public Location setChest(BossMobable e) {
-		CustomChestManager.registChest(getChestLocation(e.getEntity()).getBlock().getLocation(), this);
-
-		//全ての人のインベントリをセット
-		for (TheLowPlayer p : e.getCombatPlayer()) {
-			if (p != null) {
-				Player onlinePlayer = p.getOnlinePlayer();
-				if (onlinePlayer != null) {
-					rewordInventoryMap.put(onlinePlayer, getNewInventory(onlinePlayer));
-				}
-			}
-		}
-
 		if (moveLoc != null) {
 			for (Player p : rewordInventoryMap.keySet()) {
 				//もし途中でログアウトとかしていればテレポートしない
@@ -56,7 +45,35 @@ public class BossChest extends SpletSheetChest{
 			}
 		}
 
+		//chestじゃなければ何も設置しない
+		BlockState state = contentLoc.getBlock().getState();
+		if (!(state instanceof Chest)) {
+			return null;
+		}
+
 		Location chestLocation = getChestLocation(e.getEntity());
+		//実際にチェストを設置する
+		setChest(chestLocation, e);
+
+		return chestLocation;
+	}
+
+	/**
+	 * 指定された場所に実際にチェストを設置する
+	 * @param chestLocation
+	 */
+	@SuppressWarnings("deprecation")
+	protected void setChest(Location chestLocation, BossMobable e) {
+		CustomChestManager.registChest(getChestLocation(e.getEntity()).getBlock().getLocation(), this);
+		//全ての人のインベントリをセット
+		for (TheLowPlayer p : e.getCombatPlayer()) {
+			if (p != null) {
+				Player onlinePlayer = p.getOnlinePlayer();
+				if (onlinePlayer != null) {
+					rewordInventoryMap.put(onlinePlayer, getNewInventory(onlinePlayer));
+				}
+			}
+		}
 
 		//もとのブロックを取得
 		m = chestLocation.getBlock().getType();
@@ -84,8 +101,6 @@ public class BossChest extends SpletSheetChest{
 				data = 0;
 			};
 		}.runTaskLater(Main.plugin, 20 * getTeleportTime());
-
-		return chestLocation;
 	}
 
 	protected Location getChestLocation(LivingEntity e) {

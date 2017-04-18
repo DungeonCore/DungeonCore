@@ -50,6 +50,8 @@ public class QuestBuilder {
 				quest.endVillager = values[21];
 			}
 			quest.isProcessText = !"表示しない".equals(values[22]);
+
+			quest.questBeforeItem = values[23];
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

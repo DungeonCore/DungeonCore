@@ -345,4 +345,10 @@ public abstract class AbstractQuest implements Quest{
 		return isProcessText;
 	}
 
+	String questBeforeItem = null;
+
+	public ItemInterface getQuestBeforeItem() {
+		return ItemManager.getCustomItemById(questBeforeItem);
+	}
+
 }

@@ -11,8 +11,10 @@ import lbn.common.event.quest.DestructionQuestEvent;
 import lbn.common.event.quest.QuestEvent;
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.dungeoncore.Main;
+import lbn.item.ItemInterface;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 import lbn.util.Message;
 import lbn.util.QuestUtil;
@@ -21,6 +23,7 @@ import lbn.util.TitleSender;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
@@ -156,9 +159,21 @@ public class QuestManager {
 
 		StartQuestEvent event = new StartQuestEvent(p, q);
 		Bukkit.getServer().getPluginManager().callEvent(event);
-
 		if (event.isCancelled()) {
 			return false;
+		}
+
+		//クエスト開始時点で渡すアイテムがあるなら渡す
+		ItemInterface questBeforeItem = q.getQuestBeforeItem();
+		if (questBeforeItem != null) {
+			ItemStack questBeforeItemStack = questBeforeItem.getItem();
+			//空きがあるならアイテムを渡す
+			if (ItemStackUtil.canGiveItem(p, questBeforeItem.getItem())) {
+				p.getInventory().addItem(questBeforeItemStack);
+			} else {
+				QuestAnnouncement.sendQuestError(p, "インベントリに空きを作ってから開始してください");
+				return false;
+			}
 		}
 
 		//title表示

@@ -55,6 +55,8 @@ public class MobCommand implements CommandExecutor{
 		if (sender == null) {
 			sender = Bukkit.getConsoleSender();
 		}
+
+		SpletSheetCommand.reloadSheet(null, "mob2");
 		MobSheetRunnable mobSheetRunnable = new MobSheetRunnable(sender);
 		SpletSheetExecutor.onExecute(mobSheetRunnable);
 	}

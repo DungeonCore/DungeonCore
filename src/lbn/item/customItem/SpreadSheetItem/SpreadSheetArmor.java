@@ -44,6 +44,12 @@ public class SpreadSheetArmor extends AbstractArmorItem{
 	}
 
 	@Override
+	public ItemStack getItem() {
+		ItemStack item = super.getItem();
+		return item;
+	}
+
+	@Override
 	public String getItemName() {
 		return data.getName();
 	}

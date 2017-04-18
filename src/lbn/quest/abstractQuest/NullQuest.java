@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import lbn.common.event.quest.StartQuestEvent;
+import lbn.item.ItemInterface;
 import lbn.quest.Quest;
 
 import org.bukkit.entity.Player;
@@ -175,5 +176,10 @@ public class NullQuest implements Quest{
 	@Override
 	public boolean isShowProceessText() {
 		return false;
+	}
+
+	@Override
+	public ItemInterface getQuestBeforeItem() {
+		return null;
 	}
 }
