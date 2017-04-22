@@ -72,9 +72,9 @@ public class JavaUtil {
 	static TimeZone timeZone = TimeZone.getTimeZone("Asia/Tokyo");
 
 	public static long getJapanTimeInMillis() {
-		 Calendar cal1 = Calendar.getInstance(timeZone);
-		 long timeInMillis = cal1.getTimeInMillis();
-		 return timeInMillis;
+		Calendar cal1 = Calendar.getInstance(timeZone);
+		long timeInMillis = cal1.getTimeInMillis();
+		return timeInMillis;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -91,12 +91,13 @@ public class JavaUtil {
 
 	/**
 	 * Privateなメソッドに値を挿入する
+	 * 
 	 * @param target_object
 	 * @param field_name
 	 * @param value
 	 * @throws Exception
 	 */
-	public static void setPrivateField(Object target_object, String field_name, Object value){
+	public static void setPrivateField(Object target_object, String field_name, Object value) {
 		try {
 			Class<?> c = target_object.getClass();
 			Field fld = c.getDeclaredField(field_name);
@@ -109,6 +110,7 @@ public class JavaUtil {
 
 	/**
 	 * 指定された座標間の距離の2乗を返す
+	 * 
 	 * @param loc
 	 * @param x
 	 * @param y
@@ -116,11 +118,13 @@ public class JavaUtil {
 	 * @return
 	 */
 	public static double getDistanceSquared(Location loc, double x, double y, double z) {
-		return (loc.getX() - x) * (loc.getX() - x) + (loc.getY() - y) * (loc.getY() - y) + (loc.getZ() - z) * (loc.getZ() - z);
+		return (loc.getX() - x) * (loc.getX() - x) + (loc.getY() - y) * (loc.getY() - y)
+				+ (loc.getZ() - z) * (loc.getZ() - z);
 	}
 
 	/**
 	 * 指定された座標間の距離の2乗を返す
+	 * 
 	 * @param loc
 	 * @param x
 	 * @param y
@@ -133,6 +137,7 @@ public class JavaUtil {
 
 	/**
 	 * NullならnullValueを返す。nullじゃないならそのままvalueを返す
+	 * 
 	 * @param value
 	 * @param nullValue
 	 * @return
@@ -146,6 +151,7 @@ public class JavaUtil {
 
 	/**
 	 * 指定した場所から指定した半径内のランダムな場所を取得する
+	 * 
 	 * @param add
 	 * @param radius
 	 * @return
@@ -154,7 +160,8 @@ public class JavaUtil {
 		int rndAngle = rnd.nextInt(360);
 		double rndRadius = rnd.nextInt(radius * 10) / 10.0;
 
-		return new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle))*rndRadius, add.getY(), add.getZ() + Math.cos(Math.toRadians(rndAngle))*rndRadius);
+		return new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle)) * rndRadius, add.getY(),
+				add.getZ() + Math.cos(Math.toRadians(rndAngle)) * rndRadius);
 	}
 }
 
@@ -162,13 +169,14 @@ class InterfaceGetter {
 	private Set<Class<?>> interfaceList = new HashSet<Class<?>>();
 
 	private Class<?> clazz;
+
 	public InterfaceGetter(Class<?> clazz) {
 		this.clazz = clazz;
 	}
 
 	private void search(Class<?> clazz) {
 		for (Class<?> inter : clazz.getInterfaces()) {
-			//すでに探索済みなら何もしない
+			// すでに探索済みなら何もしない
 			if (interfaceList.contains(inter)) {
 				continue;
 			}

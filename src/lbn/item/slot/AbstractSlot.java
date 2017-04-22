@@ -10,14 +10,15 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
-public abstract class AbstractSlot extends AbstractItem implements SlotInterface{
+public abstract class AbstractSlot extends AbstractItem implements SlotInterface {
 	public SlotType getSlotType() {
 		return SlotType.NORMAL;
 	}
 
 	@Override
 	public String getItemName() {
-		return StringUtils.join(new Object[]{ ChatColor.WHITE , "魔法石[" , getNameColor() , getSlotName() , ChatColor.WHITE , "]"});
+		return StringUtils
+				.join(new Object[] { ChatColor.WHITE, "魔法石[", getNameColor(), getSlotName(), ChatColor.WHITE, "]" });
 	}
 
 	@Override
@@ -52,11 +53,11 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
 		ItemStack item = super.getItem();
 		item.setDurability(getLevel().getData());
 		MaterialData data = item.getData();
-		//データ値をセット
+		// データ値をセット
 		data.setData(getLevel().getData());
 		item.setData(data);
 
-		//エンチャントをセット
+		// エンチャントをセット
 		item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
 
 		return item;
@@ -78,7 +79,7 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof SlotInterface) {
-			return getId().equals(((SlotInterface)obj).getId());
+			return getId().equals(((SlotInterface) obj).getId());
 		} else {
 			return false;
 		}

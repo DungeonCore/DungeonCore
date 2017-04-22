@@ -20,7 +20,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 
-public abstract class SummonSheep extends AbstractMob<Sheep> implements SummonMobable{
+public abstract class SummonSheep extends AbstractMob<Sheep> implements SummonMobable {
 
 	public SummonSheep(int level, int strengthLevel) {
 		this.level = level;
@@ -77,8 +77,7 @@ public abstract class SummonSheep extends AbstractMob<Sheep> implements SummonMo
 	abstract protected void executeRun(LivingEntity entity, Player owner);
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target,
-			EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
 	}
 
 	@Override

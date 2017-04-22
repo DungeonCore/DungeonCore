@@ -13,7 +13,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion{
+public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion {
 
 	LivingEntity sourceEntity;
 	LastDamageMethodType type;
@@ -31,18 +31,20 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
 			return;
 		}
 
-		//爆発を起こしたのがPlayerのとき
+		// 爆発を起こしたのがPlayerのとき
 		if (sourceEntity.getType() == EntityType.PLAYER) {
-			LastDamageManager.onDamage((LivingEntity) target, (Player)sourceEntity, type);
-		//SummonMobのとき
-		}else if (SummonPlayerManager.isSummonMob(sourceEntity)) {
+			LastDamageManager.onDamage((LivingEntity) target, (Player) sourceEntity, type);
+			// SummonMobのとき
+		} else if (SummonPlayerManager.isSummonMob(sourceEntity)) {
 			Player owner = SummonPlayerManager.getOwner(sourceEntity);
 			if (owner != null) {
-				LastDamageManager.onDamage((LivingEntity) target, owner, LastDamageMethodType.fromAttackType(SummonPlayerManager.getItemType(owner), true));
+				LastDamageManager.onDamage((LivingEntity) target, owner,
+						LastDamageMethodType.fromAttackType(SummonPlayerManager.getItemType(owner), true));
 			}
 		}
-		//プレイヤーによるダメージにする
-		((CraftEntity)target).getHandle().damageEntity(DamageSource.playerAttack(((CraftPlayer)sourceEntity).getHandle()), d10);
+		// プレイヤーによるダメージにする
+		((CraftEntity) target).getHandle()
+				.damageEntity(DamageSource.playerAttack(((CraftPlayer) sourceEntity).getHandle()), d10);
 	}
 
 }

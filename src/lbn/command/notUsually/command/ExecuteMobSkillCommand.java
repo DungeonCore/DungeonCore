@@ -13,7 +13,7 @@ import net.minecraft.server.v1_8_R1.CommandException;
 import net.minecraft.server.v1_8_R1.ExceptionUsage;
 import net.minecraft.server.v1_8_R1.ICommandListener;
 
-public class ExecuteMobSkillCommand extends AbstractPluginCommand{
+public class ExecuteMobSkillCommand extends AbstractPluginCommand {
 
 	@Override
 	public String getCommand() {
@@ -44,7 +44,7 @@ public class ExecuteMobSkillCommand extends AbstractPluginCommand{
 		List<Entity> targetEntitys = getEntityListByToken(paramICommandListener, paramArrayOfString[2]);
 		for (Entity executeor : executeEntitys) {
 			for (Entity target : targetEntitys) {
-				//スキルを発動する
+				// スキルを発動する
 				fromId.execute(target, executeor);
 			}
 		}

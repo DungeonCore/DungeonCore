@@ -17,7 +17,7 @@ import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 
-public class GrandSpike extends WeaponSkillForOneType{
+public class GrandSpike extends WeaponSkillForOneType {
 
 	public GrandSpike() {
 		super(ItemType.SWORD);
@@ -34,7 +34,7 @@ public class GrandSpike extends WeaponSkillForOneType{
 		for (Entity entity : nearbyEntities) {
 			if (LivingEntityUtil.isEnemy(entity)) {
 				entity.setVelocity(new Vector(0, getData(2), 0));
-				Stun.addStun((LivingEntity)entity, (int) (getData(1) * 20));
+				Stun.addStun((LivingEntity) entity, (int) (getData(1) * 20));
 				Particles.runParticle(p.getLocation(), ParticleType.splash, 20);
 			}
 		}

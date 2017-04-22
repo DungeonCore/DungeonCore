@@ -7,10 +7,11 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  * Playerが強化を完了した瞬間
+ * 
  * @author KENSUKE
  *
  */
-public class PlayerStrengthFinishEvent extends PlayerEvent{
+public class PlayerStrengthFinishEvent extends PlayerEvent {
 	private ItemStack item;
 	private int level;
 	private boolean isSuccess;

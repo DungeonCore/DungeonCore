@@ -18,6 +18,7 @@ public class SoulBound {
 
 	/**
 	 * 素材がsoulbound付きの場合はsoulboundをつける
+	 * 
 	 * @param e
 	 */
 	public static void onCraftSoulBound(PrepareItemCraftEvent e) {
@@ -71,7 +72,6 @@ public class SoulBound {
 			}
 		}
 	}
-
 
 	public static void onDrops(PlayerDropItemEvent event) {
 		Item itemDrop = event.getItemDrop();

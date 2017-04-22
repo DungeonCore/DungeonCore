@@ -10,12 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class TpCutCommand implements CommandExecutor{
+public class TpCutCommand implements CommandExecutor {
 	static HashSet<String> hashSet = new HashSet<String>();
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
-			String[] arg3) {
+	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		setTpCancel((Player) arg0);
 		return true;
 	}

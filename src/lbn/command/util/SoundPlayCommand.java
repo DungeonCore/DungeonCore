@@ -21,11 +21,10 @@ import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
-public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCommandable{
+public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCommandable {
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command arg1, String arg2,
-			String[] arg3) {
+	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1 && arg3[0].equalsIgnoreCase("list")) {
 			sender.sendMessage(Arrays.toString(Sound.values()));
 			return true;
@@ -83,7 +82,8 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
 			HashSet<String> itemNameList = getNameList();
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList,
+					new ArrayList<String>(itemNameList.size()));
 		}
 		return ImmutableList.of();
 	}
@@ -106,16 +106,14 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
 	public String getUsage() {
 		return "/<command> list or /<command> sound_name volume pitch"
 				+ "\n volumeとは音の大きさで0から1までの値を指定できます。初期値は1です。1以上だと1になります。"
-				+ "\n pitchとは音の速さで1より小さいと早くなり、1より大きいとゆっくりになります。初期値は1です。"
-				+ ChatColor.GREEN + "\n '/<command> list"
-				+ ChatColor.BLACK + "\n ---- sound_name一覧を取得します"
-				+ ChatColor.GREEN + "\n '/<command> DOOR_OPEN 0.5 2"
+				+ "\n pitchとは音の速さで1より小さいと早くなり、1より大きいとゆっくりになります。初期値は1です。" + ChatColor.GREEN + "\n '/<command> list"
+				+ ChatColor.BLACK + "\n ---- sound_name一覧を取得します" + ChatColor.GREEN + "\n '/<command> DOOR_OPEN 0.5 2"
 				+ ChatColor.BLACK + "\n ---- DOOR_OPENを大きさ0.5、速さ2で再生します。";
 	}
+
 	@Override
 	public String getDescription() {
 		return "音を実行するためのコマンド";
 	}
-
 
 }

@@ -43,11 +43,12 @@ public class MoneyCommand implements CommandExecutor {
 		if (args.length == 3) {
 			theLowPlayer = TheLowPlayerManager.getTheLowPlayer(Bukkit.getOfflinePlayer(args[2]));
 		} else {
-			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)sender);
+			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player) sender);
 		}
 
 		if (theLowPlayer == null) {
-			sender.sendMessage(ChatColor.RED  + "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
+			sender.sendMessage(ChatColor.RED
+					+ "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
 			return true;
 		}
 
@@ -70,8 +71,8 @@ public class MoneyCommand implements CommandExecutor {
 		Player p = (Player) sender;
 		TheLowPlayer theLowPlayer = null;
 		if (args.length == 0) {
-			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player)sender);
-		} else  {
+			theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player) sender);
+		} else {
 			if (!p.hasPermission("main.lbnDungeonUtil.command.admin.galions")) {
 				theLowPlayer = TheLowPlayerManager.getTheLowPlayer(Bukkit.getOfflinePlayer(args[1]));
 				return false;
@@ -79,7 +80,8 @@ public class MoneyCommand implements CommandExecutor {
 		}
 
 		if (theLowPlayer == null) {
-			sender.sendMessage(ChatColor.RED  + "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
+			sender.sendMessage(ChatColor.RED
+					+ "指定されたPlayerのデータをロードするので時間を開けて再度同じコマンドを実行してください。もしこのメッセージが何度も表示される場合は指定したPlayerのデータは存在しません");
 			return true;
 		}
 

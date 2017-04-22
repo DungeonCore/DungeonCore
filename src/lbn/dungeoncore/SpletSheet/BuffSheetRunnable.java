@@ -30,7 +30,7 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "effect", "second", "level"};
+		return new String[] { "id", "effect", "second", "level" };
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
 
 		BuffType debuffType = BuffType.getDebuffType(row[1]);
 		if (debuffType == null) {
-			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + row[1]  + "]");
+			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + row[1] + "]");
 			return;
 		}
 
@@ -55,10 +55,11 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
 		int level = JavaUtil.getInt(row[3], 0);
 
 		BuffData data = BuffDataFactory.create(id, effect, second, level);
-		if(data != null) {
+		if (data != null) {
 			BuffDataFactory.register(data);
-		}else{
-			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + effect + ", second:" + second + ", level:" + level + "]");
+		} else {
+			sendMessage(
+					"不正なBuffパラメータ[id:" + id + ", effect:" + effect + ", second:" + second + ", level:" + level + "]");
 		}
 
 	}

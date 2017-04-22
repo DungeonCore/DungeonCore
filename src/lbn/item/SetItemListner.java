@@ -21,18 +21,19 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SetItemListner implements Listener{
+public class SetItemListner implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
 		if (((Player) e.getWhoClicked()).getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 
-		//クリックした場所がSetItemの可能性がある場合
-		if (SetItemPartsType.getTypeBySlot(e.getSlot()) != null && e.getClickedInventory().getType() == InventoryType.PLAYER) {
-			//クリックしたアイテムがSETITEMのとき
+		// クリックした場所がSetItemの可能性がある場合
+		if (SetItemPartsType.getTypeBySlot(e.getSlot()) != null
+				&& e.getClickedInventory().getType() == InventoryType.PLAYER) {
+			// クリックしたアイテムがSETITEMのとき
 			if (SetItemManager.isSetItem(e.getCurrentItem()) || SetItemManager.isSetItem(e.getCursor())) {
-				//アイテムを置き終わった後のデータを見たいので２tick後に実行する
+				// アイテムを置き終わった後のデータを見たいので２tick後に実行する
 				new BukkitRunnable() {
 					@Override
 					public void run() {
@@ -59,7 +60,7 @@ public class SetItemListner implements Listener{
 
 	@EventHandler
 	public void onPlayerItemBreakEvent(PlayerItemBreakEvent e) {
-		//壊れたアイテムがセットアイテムならチェックする
+		// 壊れたアイテムがセットアイテムならチェックする
 		ItemStack brokenItem = e.getBrokenItem();
 		if (SetItemManager.isSetItem(brokenItem)) {
 			SetItemManager.updateAllSetItem(e.getPlayer());
@@ -71,8 +72,7 @@ public class SetItemListner implements Listener{
 		SetItemManager.removeAll(e.getPlayer());
 	}
 
-
-	//TODO 効率悪いので後で修正する
+	// TODO 効率悪いので後で修正する
 	@EventHandler
 	public void click(final PlayerInteractEvent e) {
 		ItemStack item = e.getItem();
@@ -81,16 +81,16 @@ public class SetItemListner implements Listener{
 		}
 		boolean checkFlg = false;
 
-		//クリックした部分のパーツが存在しない
+		// クリックした部分のパーツが存在しない
 		Collection<SetItemPartsType> partsTypeList = SetItemManager.getPartsTypeListByMaterial(item.getType());
 		for (SetItemPartsType setItemPartsType : partsTypeList) {
-			//もし装備するパーツでないならスキップする
+			// もし装備するパーツでないならスキップする
 			if (!setItemPartsType.isEquipParts()) {
 				continue;
 			}
-			//該当箇所にあるパーツを取得
+			// 該当箇所にあるパーツを取得
 			ItemStack equipItem = setItemPartsType.getItemStackByParts(e.getPlayer());
-			//もし何もなければ装備したものとする
+			// もし何もなければ装備したものとする
 			if (ItemStackUtil.isEmpty(equipItem)) {
 				checkFlg = true;
 				break;
@@ -102,12 +102,12 @@ public class SetItemListner implements Listener{
 		}
 
 		String setitemName = SetItemManager.getSetItemName(item);
-		if (setitemName != null ) {
+		if (setitemName != null) {
 			checkFlg = true;
 		}
 
 		if (checkFlg) {
-			//装備をきた後に処理を行う
+			// 装備をきた後に処理を行う
 			new BukkitRunnable() {
 				@Override
 				public void run() {

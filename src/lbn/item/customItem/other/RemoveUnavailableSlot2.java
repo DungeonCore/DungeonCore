@@ -5,7 +5,7 @@ import lbn.item.slot.SlotLevel;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class RemoveUnavailableSlot2 extends RemoveUnavailableSlot{
+public class RemoveUnavailableSlot2 extends RemoveUnavailableSlot {
 	@Override
 	public String getItemName() {
 		return "除石具";

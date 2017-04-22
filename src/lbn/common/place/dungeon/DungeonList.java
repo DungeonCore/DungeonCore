@@ -17,6 +17,7 @@ public class DungeonList {
 
 	/**
 	 * IDから検索する
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -26,6 +27,7 @@ public class DungeonList {
 
 	/**
 	 * 名前の一覧を取得
+	 * 
 	 * @return
 	 */
 	public static Set<String> names() {
@@ -34,6 +36,7 @@ public class DungeonList {
 
 	/**
 	 * 名前から検索する
+	 * 
 	 * @param name
 	 * @return
 	 */
@@ -45,7 +48,7 @@ public class DungeonList {
 		return maxId + 1;
 	}
 
-	public static void clear(){
+	public static void clear() {
 		for (DungeonData dungeon : iDMap.values()) {
 			dungeon.disenable();
 		}
@@ -55,7 +58,7 @@ public class DungeonList {
 		maxId = -1;
 	}
 
-	public static void addDungeon(DungeonData dungeon){
+	public static void addDungeon(DungeonData dungeon) {
 		dungeon.enable();
 
 		maxId = dungeon.getId();
@@ -63,7 +66,7 @@ public class DungeonList {
 		iDMap.put(dungeon.getId(), dungeon);
 	}
 
-	public static void load(CommandSender sender){
+	public static void load(CommandSender sender) {
 		DungeonListRunnable dungeonListRunnable = new DungeonListRunnable(sender);
 		dungeonListRunnable.getData(null);
 		SpletSheetExecutor.onExecute(dungeonListRunnable);

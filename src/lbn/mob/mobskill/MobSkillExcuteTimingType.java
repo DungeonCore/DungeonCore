@@ -4,13 +4,11 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 
 public enum MobSkillExcuteTimingType {
-	ALWAYS("体力関係なし"),
-	HP_OVER_50PER("体力が50％以上"),
-	HP_OVER_75PER("体力が75％以上"),
-	HP_UNDER_50PER("体力が50％以下"),
-	HP_UNDER_25PER("体力が25％以下");
+	ALWAYS("体力関係なし"), HP_OVER_50PER("体力が50％以上"), HP_OVER_75PER("体力が75％以上"), HP_UNDER_50PER("体力が50％以下"), HP_UNDER_25PER(
+			"体力が25％以下");
 
 	String detail;
+
 	private MobSkillExcuteTimingType(String detail) {
 		this.detail = detail;
 	}
@@ -33,8 +31,8 @@ public enum MobSkillExcuteTimingType {
 		double maxHealth = 1;
 
 		if (e.getType().isAlive()) {
-			health = ((Damageable)e).getHealth();
-			maxHealth = ((Damageable)e).getMaxHealth();
+			health = ((Damageable) e).getHealth();
+			maxHealth = ((Damageable) e).getMaxHealth();
 		}
 		switch (this) {
 		case HP_OVER_50PER:

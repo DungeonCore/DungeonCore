@@ -8,7 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class MobSkillMobJump extends MobSkillRunnable{
+public class MobSkillMobJump extends MobSkillRunnable {
 
 	public MobSkillMobJump(String data) {
 		super(data);

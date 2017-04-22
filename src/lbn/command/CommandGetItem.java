@@ -248,7 +248,8 @@ public class CommandGetItem implements CommandExecutor {
 						return ((SlotInterface) o1).getSlotType().compareTo(((SlotInterface) o2).getSlotType());
 					}
 
-					if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel().getSucessPer()) {
+					if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel()
+							.getSucessPer()) {
 						return Double.compare(((SlotInterface) o2).getLevel().getSucessPer(),
 								((SlotInterface) o1).getLevel().getSucessPer());
 					}
@@ -259,7 +260,7 @@ public class CommandGetItem implements CommandExecutor {
 
 			HashMap<ItemInterface, Integer> cache = new HashMap<ItemInterface, Integer>();
 
-			//アイテムの並び順
+			// アイテムの並び順
 			public int getOrder(ItemInterface item) {
 				if (cache.containsKey(item)) {
 					return cache.get(item);
@@ -298,7 +299,8 @@ public class CommandGetItem implements CommandExecutor {
 		return new SelectRunnable() {
 			@Override
 			public void run(Player p, ItemStack item) {
-				Inventory createInventory = Bukkit.createInventory(null, (int) (((items.size()) / 9) + 2) * 9, "item list");
+				Inventory createInventory = Bukkit.createInventory(null, (int) (((items.size()) / 9) + 2) * 9,
+						"item list");
 
 				for (ItemInterface iItem : items) {
 					createInventory.addItem(iItem.getItem());

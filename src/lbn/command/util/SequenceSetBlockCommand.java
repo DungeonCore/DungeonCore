@@ -18,7 +18,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandable{
+public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandable {
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -32,7 +32,7 @@ public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandabl
 			return false;
 		}
 
-		String id = arg3[1].substring(0, arg3[1].indexOf(":") == -1 ? arg3[1].length() : arg3[1].indexOf(":") );
+		String id = arg3[1].substring(0, arg3[1].indexOf(":") == -1 ? arg3[1].length() : arg3[1].indexOf(":"));
 		final String data;
 		if (arg3[1].contains(":") && !arg3[1].endsWith(":")) {
 			data = arg3[1].substring(arg3[1].indexOf(":") + 1);
@@ -84,6 +84,7 @@ public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandabl
 		} else {
 			new BukkitRunnable() {
 				int i = 0;
+
 				@Override
 				public void run() {
 					try {
@@ -113,11 +114,11 @@ public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandabl
 
 	@Override
 	public String getUsage() {
-		return "\n /sequence_setblock second blockid:data x y z & x y z & ... "
-				+ ChatColor.GREEN + "\n '/sequence_setblock 1 5:2 20 60 20 & 20 61 20' "
-				+ ChatColor.GRAY + "\n ---- 1秒間隔でブロック'5:2(白樺の木材)'を(20 60 20), (20 61 20)に設置します"
-				+ ChatColor.GREEN + "\n '/sequence_setblock 0 1 20 60 20 & 20 61 20 & 20 62 2' "
-				+ ChatColor.GRAY + "\n ---- 一気にブロック'1(焼石)'を(20 60 20), (20 61 20), (20 62 20)に設置します";
+		return "\n /sequence_setblock second blockid:data x y z & x y z & ... " + ChatColor.GREEN
+				+ "\n '/sequence_setblock 1 5:2 20 60 20 & 20 61 20' " + ChatColor.GRAY
+				+ "\n ---- 1秒間隔でブロック'5:2(白樺の木材)'を(20 60 20), (20 61 20)に設置します" + ChatColor.GREEN
+				+ "\n '/sequence_setblock 0 1 20 60 20 & 20 61 20 & 20 62 2' " + ChatColor.GRAY
+				+ "\n ---- 一気にブロック'1(焼石)'を(20 60 20), (20 61 20), (20 62 20)に設置します";
 	}
 
 	@Override

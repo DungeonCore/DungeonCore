@@ -24,10 +24,11 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractQuest implements Quest{
+public abstract class AbstractQuest implements Quest {
 	protected AbstractQuest(String id) {
 		this.id = id;
 	}
+
 	@Override
 	public int hashCode() {
 		return getId().hashCode();
@@ -39,10 +40,10 @@ public abstract class AbstractQuest implements Quest{
 	@Override
 	public void onSatisfyComplateCondtion(Player p) {
 		if (endVillager != null) {
-			//最後に報告する村人がいる場合は村人に報告するようにPlayerに伝える
+			// 最後に報告する村人がいる場合は村人に報告するようにPlayerに伝える
 			QuestUtil.sendSatisfyComplateForVillager(endVillager, p);
 		} else {
-			//最後に報告する村人がいない場合はこの場所で終了にする
+			// 最後に報告する村人がいない場合はこの場所で終了にする
 			QuestManager.complateQuest(this, p, true);
 		}
 	}
@@ -87,11 +88,13 @@ public abstract class AbstractQuest implements Quest{
 
 	/**
 	 * クエスト進展メッセージ
+	 * 
 	 * @param player
 	 */
 	protected void sendProgressMessage(Player player, int needCount, int nowCount) {
 		if (isShowProceessText()) {
-			QuestAnnouncement.sendQuestProcessInfo(player, MessageFormat.format("{0} ({1}/{2})", getName(), nowCount, needCount));
+			QuestAnnouncement.sendQuestProcessInfo(player,
+					MessageFormat.format("{0} ({1}/{2})", getName(), nowCount, needCount));
 		}
 	}
 
@@ -110,6 +113,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	String[] detail;
+
 	@Override
 	public String[] getQuestDetail() {
 		return detail;
@@ -118,26 +122,27 @@ public abstract class AbstractQuest implements Quest{
 	boolean isSucessBeforeQuest = false;
 	String[] beforeQuestIds = null;
 	Set<Quest> beforeQuests = null;
+
 	@Override
 	public Set<Quest> getBeforeQuest() {
 		if (isSucessBeforeQuest) {
 			return beforeQuests;
 		}
 
-		//もし前提クエストがない場合は空を返す
+		// もし前提クエストがない場合は空を返す
 		if (beforeQuestIds == null) {
 			beforeQuests = new HashSet<Quest>();
 			isSucessBeforeQuest = true;
 			return beforeQuests;
 		}
 
-		//前提クエストを空にする
+		// 前提クエストを空にする
 		beforeQuests = new HashSet<Quest>();
 
 		boolean existNullQuest = false;
-		//IDからクエストを取得
+		// IDからクエストを取得
 		for (String id : beforeQuestIds) {
-			//クエストが存在しない場合はNullQuestとして処理
+			// クエストが存在しない場合はNullQuestとして処理
 			Quest questById = QuestManager.getQuestById(id);
 			if (questById == null) {
 				existNullQuest = true;
@@ -146,7 +151,7 @@ public abstract class AbstractQuest implements Quest{
 			beforeQuests.add(questById);
 		}
 
-		//もしnullQuestが存在しない場合はクエスト取得成功にする
+		// もしnullQuestが存在しない場合はクエスト取得成功にする
 		if (!existNullQuest) {
 			isSucessBeforeQuest = true;
 		}
@@ -154,12 +159,14 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	boolean isMain = false;
+
 	@Override
 	public boolean isMainQuest() {
 		return isMain;
 	}
 
 	boolean isStartOverlap = false;
+
 	@Override
 	public boolean isStartOverlap() {
 		return isStartOverlap;
@@ -173,6 +180,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	String[] talk2 = null;
+
 	@Override
 	public String[] getTalkOnComplate() {
 		return talk2;
@@ -185,19 +193,19 @@ public abstract class AbstractQuest implements Quest{
 
 	@Override
 	public Quest getAutoExecuteNextQuest() {
-		//次のクエストIDが存在しないならnullを返す
+		// 次のクエストIDが存在しないならnullを返す
 		if (autoExecuteNextQuestId == null) {
 			return null;
 		}
 
-		//次のクエストIDが見つかっていないなら再検する
+		// 次のクエストIDが見つかっていないなら再検する
 		if (autoExecuteNextQuest != null) {
 			Quest questIfExist = getQuestIfExist(autoExecuteNextQuestId);
-			//見つからなかったらnullQuestを返す
+			// 見つからなかったらnullQuestを返す
 			if (questIfExist == null || questIfExist.isNullQuest()) {
 				return questIfExist;
 			}
-			//見つかったならsetする
+			// 見つかったならsetする
 			autoExecuteNextQuest = questIfExist;
 		}
 		return autoExecuteNextQuest;
@@ -205,6 +213,7 @@ public abstract class AbstractQuest implements Quest{
 
 	/**
 	 * クエストがもし存在すればTRUE
+	 * 
 	 * @param questId
 	 * @return
 	 */
@@ -220,12 +229,14 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	boolean isShowTitle = true;
+
 	@Override
 	public boolean isShowTitle() {
 		return isShowTitle;
 	}
 
 	long coolTimeSecound = -1;
+
 	@Override
 	public long getCoolTimeSecound() {
 		return coolTimeSecound;
@@ -245,7 +256,7 @@ public abstract class AbstractQuest implements Quest{
 	@Override
 	public void giveRewardItem(Player p) {
 
-		//報酬アイテムを渡す
+		// 報酬アイテムを渡す
 		if (getRewordItem() != null) {
 			p.getInventory().addItem(getRewordItem().getItem());
 		}
@@ -253,7 +264,7 @@ public abstract class AbstractQuest implements Quest{
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 
 		if (theLowPlayer != null) {
-			//お金を渡す
+			// お金を渡す
 			if (rewordMoney != 0) {
 				theLowPlayer.addGalions(rewordMoney, GalionEditReason.quest_reword);
 			}
@@ -324,12 +335,14 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	String startVillager = null;
+
 	@Override
 	public String getStartVillagerId() {
 		return startVillager;
 	}
 
 	String endVillager = null;
+
 	@Override
 	public String getEndVillagerId() {
 		return endVillager;
@@ -340,6 +353,7 @@ public abstract class AbstractQuest implements Quest{
 	}
 
 	boolean isProcessText = true;
+
 	@Override
 	public boolean isShowProceessText() {
 		return isProcessText;

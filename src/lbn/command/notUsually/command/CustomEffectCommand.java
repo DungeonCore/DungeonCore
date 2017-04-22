@@ -13,35 +13,32 @@ import net.minecraft.server.v1_8_R1.ICommandListener;
 import net.minecraft.server.v1_8_R1.MobEffect;
 import net.minecraft.server.v1_8_R1.MobEffectList;
 
-public class CustomEffectCommand extends AbstractVanillaCommand{
+public class CustomEffectCommand extends AbstractVanillaCommand {
 
 	public CustomEffectCommand() {
 		super(new CommandEffect());
 	}
 
 	@Override
-	protected void execute2(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws CommandException{
+	protected void execute2(ICommandListener paramICommandListener, String[] paramArrayOfString)
+			throws CommandException {
 		if (paramArrayOfString.length < 2) {
 			throw new ExceptionUsage("commands.effect.usage", new Object[0]);
 		}
 
-		//1.7の方の名前を使う
+		// 1.7の方の名前を使う
 		String effectName = getEffectName(paramArrayOfString[1]);
 		paramArrayOfString[1] = effectName;
 
-		EntityLiving localEntityLiving = (EntityLiving) a(
-				paramICommandListener, paramArrayOfString[0],
+		EntityLiving localEntityLiving = (EntityLiving) a(paramICommandListener, paramArrayOfString[0],
 				EntityLiving.class);
 		if (paramArrayOfString[1].equals("clear")) {
 			if (localEntityLiving.getEffects().isEmpty()) {
-				throw new CommandException(
-						"commands.effect.failure.notActive.all",
+				throw new CommandException("commands.effect.failure.notActive.all",
 						new Object[] { localEntityLiving.getName() });
 			}
 			localEntityLiving.removeAllEffects();
-			a(paramICommandListener, this,
-					"commands.effect.success.removed.all",
+			a(paramICommandListener, this, "commands.effect.success.removed.all",
 					new Object[] { localEntityLiving.getName() });
 			return;
 		}
@@ -49,8 +46,7 @@ public class CustomEffectCommand extends AbstractVanillaCommand{
 		try {
 			i = a(paramArrayOfString[1], 1);
 		} catch (Exception localExceptionInvalidNumber) {
-			MobEffectList localMobEffectList1 = MobEffectList
-					.b(paramArrayOfString[1]);
+			MobEffectList localMobEffectList1 = MobEffectList.b(paramArrayOfString[1]);
 			if (localMobEffectList1 == null) {
 				throw localExceptionInvalidNumber;
 			}
@@ -59,10 +55,8 @@ public class CustomEffectCommand extends AbstractVanillaCommand{
 		int j = 600;
 		int k = 30;
 		int m = 0;
-		if ((i < 0) || (i >= MobEffectList.byId.length)
-				|| (MobEffectList.byId[i] == null)) {
-			throw new ExceptionInvalidNumber("commands.effect.notFound",
-					new Object[] { Integer.valueOf(i) });
+		if ((i < 0) || (i >= MobEffectList.byId.length) || (MobEffectList.byId[i] == null)) {
+			throw new ExceptionInvalidNumber("commands.effect.notFound", new Object[] { Integer.valueOf(i) });
 		}
 		MobEffectList localMobEffectList2 = MobEffectList.byId[i];
 		if (paramArrayOfString.length >= 3) {
@@ -79,34 +73,24 @@ public class CustomEffectCommand extends AbstractVanillaCommand{
 			m = a(paramArrayOfString[3], 0, 255);
 		}
 		boolean bool = true;
-		if ((paramArrayOfString.length >= 5)
-				&& ("true".equalsIgnoreCase(paramArrayOfString[4]))) {
+		if ((paramArrayOfString.length >= 5) && ("true".equalsIgnoreCase(paramArrayOfString[4]))) {
 			bool = false;
 		}
 		if (k > 0) {
 			MobEffect localMobEffect = new MobEffect(i, j, m, false, bool);
 			localEntityLiving.addEffect(localMobEffect);
 			a(paramICommandListener, this, "commands.effect.success",
-					new Object[] {
-							new ChatMessage(localMobEffect.g(), new Object[0]),
-							Integer.valueOf(i), Integer.valueOf(m),
-							localEntityLiving.getName(), Integer.valueOf(k) });
+					new Object[] { new ChatMessage(localMobEffect.g(), new Object[0]), Integer.valueOf(i),
+							Integer.valueOf(m), localEntityLiving.getName(), Integer.valueOf(k) });
 			return;
 		}
 		if (localEntityLiving.hasEffect(i)) {
 			localEntityLiving.removeEffect(i);
-			a(paramICommandListener,
-					this,
-					"commands.effect.success.removed",
-					new Object[] {
-							new ChatMessage(localMobEffectList2.a(),
-									new Object[0]), localEntityLiving.getName() });
+			a(paramICommandListener, this, "commands.effect.success.removed", new Object[] {
+					new ChatMessage(localMobEffectList2.a(), new Object[0]), localEntityLiving.getName() });
 		} else {
-			throw new CommandException(
-					"commands.effect.failure.notActive",
-					new Object[] {
-							new ChatMessage(localMobEffectList2.a(),
-									new Object[0]), localEntityLiving.getName() });
+			throw new CommandException("commands.effect.failure.notActive", new Object[] {
+					new ChatMessage(localMobEffectList2.a(), new Object[0]), localEntityLiving.getName() });
 		}
 	}
 

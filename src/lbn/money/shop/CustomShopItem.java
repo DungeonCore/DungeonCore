@@ -9,15 +9,19 @@ import lbn.util.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomShopItem extends ShopItem{
+public class CustomShopItem extends ShopItem {
 
 	String shopItemId;
 
 	/**
-	 * @param item 実際に買われる商品
-	 * @param price　値段
-	 * @param amount　個数
-	 * @param shopItemId　ID
+	 * @param item
+	 *            実際に買われる商品
+	 * @param price
+	 *            値段
+	 * @param amount
+	 *            個数
+	 * @param shopItemId
+	 *            ID
 	 */
 	public CustomShopItem(ItemStack item, int price, int amount, String shopItemId) {
 		super(item, price, amount);
@@ -37,7 +41,8 @@ public class CustomShopItem extends ShopItem{
 					amount = Integer.parseInt(ChatColor.stripColor(string.replace("Quantity : ", "")));
 					iterator.remove();
 				} else if (string.contains("Price : ")) {
-					price = Integer.parseInt(ChatColor.stripColor(string.replace("Price : ", "").replace("Galions", "").trim()));
+					price = Integer.parseInt(
+							ChatColor.stripColor(string.replace("Price : ", "").replace("Galions", "").trim()));
 					iterator.remove();
 				} else if (string.contains(Message.getMessage("使用可能レベル : {0}", ""))) {
 					iterator.remove();
@@ -70,28 +75,28 @@ public class CustomShopItem extends ShopItem{
 
 	/**
 	 * テンプレートを取得
+	 * 
 	 * @param get_money_item
 	 * @param price
 	 * @return
 	 */
 	public ItemStack getCustomShopItemTemplate() {
-		//実際の商品を複製する
+		// 実際の商品を複製する
 		ItemStack clone = item.clone();
-		//量をセット
+		// 量をセット
 		clone.setAmount(1);
-		//情報をセットする
+		// 情報をセットする
 		ItemStackUtil.addLore(clone, Message.getMessage("Price : {0} Galions", price),
 				Message.getMessage("Quantity : {0}", count),
 				Message.getMessage("使用可能レベル : {0}", getAvailableLevel(item)),
-				Message.getMessage("shopitemid: {0}", shopItemId)
-				);
+				Message.getMessage("shopitemid: {0}", shopItemId));
 		return clone;
 	}
 
 	@Override
 	public ItemStack getShopDispItem() {
 		ItemStack shopDispItem = super.getShopDispItem();
-		//TODO slotなどを追加
+		// TODO slotなどを追加
 		ItemStackUtil.addLore(shopDispItem, ChatColor.BLACK + Message.getMessage("shopitemid: {0}", shopItemId));
 		return shopDispItem;
 	}

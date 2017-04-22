@@ -16,7 +16,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractItem implements ItemInterface{
+public abstract class AbstractItem implements ItemInterface {
 	@Override
 	public boolean isThisItem(ItemStack item) {
 		if (ItemStackUtil.isEmpty(item)) {
@@ -43,34 +43,35 @@ public abstract class AbstractItem implements ItemInterface{
 	public ItemStack getItem() {
 		ItemStack itemStack = getItemStackBase();
 
-		//アイテム名
+		// アイテム名
 		ItemStackUtil.setDispName(itemStack, ChatColor.RESET + getItemName());
 
-		//アイテムの説明
+		// アイテムの説明
 		List<String> lore = ItemStackUtil.getLore(itemStack);
 
-		//id付与
+		// id付与
 		lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
 		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
 
 		if (getDetail() != null) {
-			for (String string :  getDetail()) {
+			for (String string : getDetail()) {
 				lore.add(ChatColor.AQUA + string);
 			}
 		}
 
-		//IDを付与
+		// IDを付与
 
-		//Loreを生成
+		// Loreを生成
 		ItemLoreData itemLoreData = new ItemLoreData();
 		itemLoreData.setBefore(lore);
 
-		//スタンダートLoreTokenを取得
+		// スタンダートLoreTokenを取得
 		itemLoreData.addLore(getStandardLoreToken());
 
-//		if (isStrengthItem()) {
-//			itemLoreData.addLore(StrengthOperator.getStrengthLoreToken((Strengthenable) this, 0));
-//		}
+		// if (isStrengthItem()) {
+		// itemLoreData.addLore(StrengthOperator.getStrengthLoreToken((Strengthenable)
+		// this, 0));
+		// }
 
 		ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
@@ -80,14 +81,16 @@ public abstract class AbstractItem implements ItemInterface{
 
 	/**
 	 * 基本性能のLoreTokenを取得する
+	 * 
 	 * @return
 	 */
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = new ItemLoreToken(ItemLoreToken.TITLE_STANDARD);
 		if (this instanceof Strengthenable) {
-			//最大強化
-			if (((Strengthenable)this).getMaxStrengthCount() != 0) {
-				loreToken.addLore(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable)this).getMaxStrengthCount(), ChatColor.GOLD));
+			// 最大強化
+			if (((Strengthenable) this).getMaxStrengthCount() != 0) {
+				loreToken.addLore(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable) this).getMaxStrengthCount(),
+						ChatColor.GOLD));
 			}
 		}
 		return loreToken;

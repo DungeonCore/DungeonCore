@@ -40,42 +40,42 @@ public class LivingEntityUtil {
 	public static boolean isEnemy(Entity e) {
 		EntityType type = e.getType();
 
-		//生き物でないならFALSE
+		// 生き物でないならFALSE
 		if (!e.getType().isAlive()) {
 			return false;
 		}
 
-		//プレイヤーか村人ならFALSE
+		// プレイヤーか村人ならFALSE
 		if (type == EntityType.PLAYER || type == EntityType.VILLAGER) {
 			return false;
 		}
 
-		//ゾンビビッグマンで怒っていないならFALSE
+		// ゾンビビッグマンで怒っていないならFALSE
 		if (type == EntityType.PIG_ZOMBIE) {
-			if (!((PigZombie)e).isAngry()) {
+			if (!((PigZombie) e).isAngry()) {
 				return false;
 			}
 		}
 
-//		//動物ならFALSE
-//		if (e instanceof Animals) {
-//			//狼で怒っていないならFALSE
-//			if (type == EntityType.WOLF) {
-//				if (!((Wolf)e).isAngry()) {
-//					return false;
-//				}
-//			} else {
-//				//狼でないならFALSE
-//				return false;
-//			}
-//		}
+		// //動物ならFALSE
+		// if (e instanceof Animals) {
+		// //狼で怒っていないならFALSE
+		// if (type == EntityType.WOLF) {
+		// if (!((Wolf)e).isAngry()) {
+		// return false;
+		// }
+		// } else {
+		// //狼でないならFALSE
+		// return false;
+		// }
+		// }
 
-		//NPCならTRUE
+		// NPCならTRUE
 		if (NpcManager.isNpc(e)) {
 			return false;
 		}
 
-		//スノーゴーレムならFALSE
+		// スノーゴーレムならFALSE
 		if (type == EntityType.SNOWMAN) {
 			return false;
 		}
@@ -84,7 +84,6 @@ public class LivingEntityUtil {
 			return false;
 		}
 
-
 		if (SummonPlayerManager.isSummonMob(e)) {
 			return false;
 		}
@@ -92,10 +91,11 @@ public class LivingEntityUtil {
 	}
 
 	public static boolean isCustomVillager(Entity entity) {
-		return (((CraftEntity)entity).getHandle() instanceof CustomVillager);
+		return (((CraftEntity) entity).getHandle() instanceof CustomVillager);
 	}
 
-	public static EntityEquipment setEquipment(LivingEntity e, ItemStack helmet, ItemStack chestplate, ItemStack leggings, ItemStack boots, float chance) {
+	public static EntityEquipment setEquipment(LivingEntity e, ItemStack helmet, ItemStack chestplate,
+			ItemStack leggings, ItemStack boots, float chance) {
 		EntityEquipment equipment = e.getEquipment();
 		equipment.setHelmet(getNull(helmet));
 		equipment.setChestplate(getNull(chestplate));
@@ -146,6 +146,7 @@ public class LivingEntityUtil {
 
 	/**
 	 * 周りのプレイヤーを取得
+	 * 
 	 * @param e
 	 * @param x
 	 * @param y
@@ -163,7 +164,8 @@ public class LivingEntityUtil {
 	}
 
 	/**
-	 *指定したEntityの周囲にいるPlayerと友好的なmobを取得
+	 * 指定したEntityの周囲にいるPlayerと友好的なmobを取得
+	 * 
 	 * @param e
 	 * @param x
 	 * @param y
@@ -181,7 +183,8 @@ public class LivingEntityUtil {
 	}
 
 	/**
-	 *指定したEntityの周囲にいるPlayerと敵対するmobを取得
+	 * 指定したEntityの周囲にいるPlayerと敵対するmobを取得
+	 * 
 	 * @param e
 	 * @param x
 	 * @param y
@@ -200,6 +203,7 @@ public class LivingEntityUtil {
 
 	/**
 	 * handleのクラス名を取得
+	 * 
 	 * @param e
 	 * @return
 	 */
@@ -218,7 +222,7 @@ public class LivingEntityUtil {
 	public static boolean isFriendship(Entity e) {
 		if (e.getType() == EntityType.PLAYER) {
 			return true;
-		}else if (e.getType() == EntityType.VILLAGER) {
+		} else if (e.getType() == EntityType.VILLAGER) {
 			return true;
 		} else if (e.getType().isAlive()) {
 			return SummonPlayerManager.isSummonMob(e);
@@ -228,7 +232,7 @@ public class LivingEntityUtil {
 	}
 
 	public static void addHealth(LivingEntity e, double val) {
-		double nextHealth = ((Damageable)e).getHealth() + val;
+		double nextHealth = ((Damageable) e).getHealth() + val;
 
 		if (nextHealth <= 0) {
 			if (e.getType() == EntityType.BAT) {
@@ -236,34 +240,34 @@ public class LivingEntityUtil {
 			} else {
 				nextHealth = 0.01;
 			}
-		} else if (nextHealth > ((Damageable)e).getMaxHealth()){
-			nextHealth = ((Damageable)e).getMaxHealth();
+		} else if (nextHealth > ((Damageable) e).getMaxHealth()) {
+			nextHealth = ((Damageable) e).getMaxHealth();
 		}
 
 		e.setHealth(nextHealth);
 	}
 
 	public static void trueDamage(LivingEntity target, double val, LivingEntity damager, LastDamageMethodType type) {
-		//攻撃を与えたのがPlayerの場合はLastDamageを登録する
+		// 攻撃を与えたのがPlayerの場合はLastDamageを登録する
 		if (damager.getType() == EntityType.PLAYER) {
 			LastDamageManager.onDamage(target, (Player) damager, type);
 		}
 
-		//ダメージを与える対象がクリエイティブなら何もしない
-		if (target.getType() == EntityType.PLAYER && ((Player)target).getGameMode() == GameMode.CREATIVE) {
+		// ダメージを与える対象がクリエイティブなら何もしない
+		if (target.getType() == EntityType.PLAYER && ((Player) target).getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 
 		val *= -1;
 		target.damage(0.0);
-		//HP処理
+		// HP処理
 		addHealth(target, val);
 	}
-
 
 	public static void setNoFallDamage(Player player) {
 		new BukkitRunnable() {
 			int count = 0;
+
 			@Override
 			public void run() {
 				if (count == 60 * 20) {
@@ -292,55 +296,62 @@ public class LivingEntityUtil {
 		}.runTaskLater(Main.plugin, 1);
 	}
 
-		public static void setNoDamageTickZero(LivingEntity entity) {
-			setNoDamageTick(entity, 0);
+	public static void setNoDamageTickZero(LivingEntity entity) {
+		setNoDamageTick(entity, 0);
 	}
 
-		/**
-		 * 雷のエフェクトを周囲のPlayerの知らせる
-		 * @param location
-		 */
-		public static void strikeLightningEffect(Location location) {
-			World world = location.getWorld();
-			List<Player> players = world.getPlayers();
-			for (Player player : players) {
-				double x = player.getLocation().getX() - location.getX();
-				double y = player.getLocation().getY() - location.getY();
-				double z = player.getLocation().getZ() - location.getZ();
-				if ((x * x) + (y * y) + (z * z) < 30 * 30) {
-					((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
-					player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
-				}
-			}
-		}
-
-		public static void strikeLightningEffect(Location location, Player...p) {
-			if (p == null) {
-				return;
-			}
-
-			for (Player player : p) {
-				if (player == null) {
-					continue;
-				}
-				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
+	/**
+	 * 雷のエフェクトを周囲のPlayerの知らせる
+	 * 
+	 * @param location
+	 */
+	public static void strikeLightningEffect(Location location) {
+		World world = location.getWorld();
+		List<Player> players = world.getPlayers();
+		for (Player player : players) {
+			double x = player.getLocation().getX() - location.getX();
+			double y = player.getLocation().getY() - location.getY();
+			double z = player.getLocation().getZ() - location.getZ();
+			if ((x * x) + (y * y) + (z * z) < 30 * 30) {
+				((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(
+						new EntityLightning(((CraftWorld) location.getWorld()).getHandle(), location.getX(),
+								location.getY(), location.getZ(), true)));
 				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
 			}
 		}
+	}
 
-		public static void strikeLightningEffect(Location location, Collection<Player> p) {
-			if (p == null) {
-				return;
-			}
-
-			for (Player player : p) {
-				if (player == null) {
-					continue;
-				}
-				((CraftPlayer)player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather( new EntityLightning(((CraftWorld)location.getWorld()).getHandle() , location.getX() , location.getY() , location.getZ(), true)));
-				player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
-			}
+	public static void strikeLightningEffect(Location location, Player... p) {
+		if (p == null) {
+			return;
 		}
+
+		for (Player player : p) {
+			if (player == null) {
+				continue;
+			}
+			((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(
+					new EntityLightning(((CraftWorld) location.getWorld()).getHandle(), location.getX(),
+							location.getY(), location.getZ(), true)));
+			player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
+		}
+	}
+
+	public static void strikeLightningEffect(Location location, Collection<Player> p) {
+		if (p == null) {
+			return;
+		}
+
+		for (Player player : p) {
+			if (player == null) {
+				continue;
+			}
+			((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(
+					new EntityLightning(((CraftWorld) location.getWorld()).getHandle(), location.getX(),
+							location.getY(), location.getZ(), true)));
+			player.playSound(location, Sound.AMBIENCE_THUNDER, 1, 1);
+		}
+	}
 
 	public static boolean isAnimal(EntityType type) {
 		if (type == null) {

@@ -15,36 +15,36 @@ import org.bukkit.inventory.ItemStack;
  * 武器のデータを保持するためのクラス
  */
 public class SpreadSheetArmorData {
-	//最大耐久値をセット
+	// 最大耐久値をセット
 	short maxDurability = -1;
 
-	//アイテム名
+	// アイテム名
 	String name = null;
 
-	//ID
+	// ID
 	String id = null;
 
-	//アイテムの素材
+	// アイテムの素材
 	ItemStack itemstack = null;
 
-	//アイテムの利用可能レベル
+	// アイテムの利用可能レベル
 	int availableLevel = 0;
 
-	//Itemの詳細
+	// Itemの詳細
 	String[] detail = null;
 
-	//クラフトに必要なアイテムとその数
+	// クラフトに必要なアイテムとその数
 	HashMap<String, Integer> craftMaterial = new HashMap<String, Integer>();
 
-	//エラーかどうか
+	// エラーかどうか
 	boolean isCraftItemError = false;
 
-	//メインのクラフト素材
+	// メインのクラフト素材
 	String mainCraftMaterial = null;
 
-	//通常モンスターの防御ポイント
+	// 通常モンスターの防御ポイント
 	double armorPointNormalMob = -1;
-	//ボスモンスターの防御ポイント
+	// ボスモンスターの防御ポイント
 	double armorPointBoss = -1;
 
 	int price = 0;
@@ -53,11 +53,13 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
+	 * 
 	 * @param sender
 	 * @return
 	 */
 	public boolean check(CommandSender sender) {
-		boolean isError = false;;
+		boolean isError = false;
+		;
 		if (isCraftItemError) {
 			sendError(sender, "クラフトアイテムにエラーがあります");
 			isError = true;
@@ -91,6 +93,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * 最大耐久を取得, もし設定されていない場合は-1を返す
+	 * 
 	 * @return
 	 */
 	public short getMaxDurability() {
@@ -99,6 +102,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * 最大耐久をセットする
+	 * 
 	 * @param maxDurability
 	 */
 	public void setMaxDurability(String maxDurability) {
@@ -107,6 +111,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテム名を取得
+	 * 
 	 * @return
 	 */
 	public String getName() {
@@ -115,6 +120,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテム名をセットする
+	 * 
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -123,6 +129,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテムIDを取得する
+	 * 
 	 * @return
 	 */
 	public String getId() {
@@ -131,6 +138,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテムIDを取得する
+	 * 
 	 * @param id
 	 */
 	public void setId(String id) {
@@ -139,32 +147,34 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテム自体の素材, またはコマンドをセットする
+	 * 
 	 * @param item
 	 */
 	public void setItemMaterial(String item, CommandSender sender) {
 		if (item == null || item.isEmpty()) {
 			return;
 		}
-		//アイテムの素材
+		// アイテムの素材
 		Material m = null;
-		//アイテムの素材をセットする
+		// アイテムの素材をセットする
 		try {
 			m = Material.getMaterial(item.toUpperCase());
 		} catch (Exception e) {
 		}
 
-		//素材が設定されていなければコマンドを取得する
+		// 素材が設定されていなければコマンドを取得する
 		if (m != null) {
 			itemstack = new ItemStack(m);
 			return;
 		}
 
-		//コマンドからItemを取得する
+		// コマンドからItemを取得する
 		itemstack = ItemStackUtil.getItemStackByCommand(item, sender);
 	}
 
 	/**
 	 * 使用可能レベルを取得
+	 * 
 	 * @return
 	 */
 	public int getAvailableLevel() {
@@ -173,6 +183,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * 使用可能レベルをセット
+	 * 
 	 * @param availableLevel
 	 */
 	public void setAvailableLevel(String availableLevel) {
@@ -180,9 +191,12 @@ public class SpreadSheetArmorData {
 	}
 
 	/**
-	 *アイテム制作に使うアイテムIDと個数をセットする
-	 * @param itemid アイテムID
-	 * @param count 個数
+	 * アイテム制作に使うアイテムIDと個数をセットする
+	 * 
+	 * @param itemid
+	 *            アイテムID
+	 * @param count
+	 *            個数
 	 */
 	public void setCraftItem(String itemid, String count) {
 		craftMaterial.put(itemid, JavaUtil.getInt(count, 1));
@@ -190,6 +204,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * 制作に必要なアイテムIDと個数を取得
+	 * 
 	 * @return
 	 */
 	public Map<String, Integer> getCraftItem() {
@@ -198,6 +213,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * メインのクラフト素材をセットする
+	 * 
 	 * @param mainCraftMaterial
 	 */
 	public void setMainCraftMaterial(String mainCraftMaterial) {
@@ -206,6 +222,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * メインのクラフト素材を取得する
+	 * 
 	 * @return
 	 */
 	public String getMainCraftMaterial() {
@@ -214,6 +231,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * コンソール以外の時、エラーを送信する
+	 * 
 	 * @param sender
 	 */
 	public void sendError(CommandSender sender, String error) {
@@ -224,6 +242,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * ItemStackを取得する
+	 * 
 	 * @return
 	 */
 	public ItemStack getItemStack() {
@@ -232,6 +251,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * 詳細を取得する
+	 * 
 	 * @return
 	 */
 	public String[] getDetail() {
@@ -243,6 +263,7 @@ public class SpreadSheetArmorData {
 
 	/**
 	 * アイテムの詳細をセットする
+	 * 
 	 * @param detail
 	 */
 	public void setDetail(String detail) {

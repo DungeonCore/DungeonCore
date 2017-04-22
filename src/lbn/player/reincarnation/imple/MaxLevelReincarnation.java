@@ -6,7 +6,7 @@ import lbn.api.LevelType;
 import lbn.api.player.ReincarnationInterface;
 import lbn.api.player.TheLowPlayer;
 
-public class MaxLevelReincarnation implements ReincarnationInterface{
+public class MaxLevelReincarnation implements ReincarnationInterface {
 
 	LevelType levelType;
 
@@ -21,9 +21,9 @@ public class MaxLevelReincarnation implements ReincarnationInterface{
 
 	@Override
 	public void addReincarnationEffect(TheLowPlayer p, LevelType levelType, int count) {
-		//最大Level取得
+		// 最大Level取得
 		int maxLevel = p.getMaxLevel(levelType);
-		//最大レベルを更新
+		// 最大レベルを更新
 		p.setMaxLevel(levelType, maxLevel + 5);
 	}
 

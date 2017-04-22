@@ -6,7 +6,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 
-public class SpreadSheetMob2 extends SpreadSheetMob{
+public class SpreadSheetMob2 extends SpreadSheetMob {
 
 	LbnMobTag2 mobData;
 
@@ -19,11 +19,11 @@ public class SpreadSheetMob2 extends SpreadSheetMob{
 	protected Entity spawnPrivate(Location loc) {
 		Entity spawnPrivate = super.spawnPrivate(loc);
 
-		//HPが設定されてるならHPをセットする
+		// HPが設定されてるならHPをセットする
 		double mobHp = mobData.getHp();
 		if (mobHp >= 0 && spawnPrivate.getType().isAlive()) {
-			((LivingEntity)spawnPrivate).setMaxHealth(mobHp);
-			((LivingEntity)spawnPrivate).setHealth(mobHp);
+			((LivingEntity) spawnPrivate).setMaxHealth(mobHp);
+			((LivingEntity) spawnPrivate).setHealth(mobHp);
 		}
 		return spawnPrivate;
 	}
@@ -33,7 +33,7 @@ public class SpreadSheetMob2 extends SpreadSheetMob{
 		super.onDamage(mob, damager, e);
 
 		if (mobData.getHp() >= 0) {
-			//防具分の防御力を消す
+			// 防具分の防御力を消す
 			if (e.isApplicable(DamageModifier.ARMOR)) {
 				e.setDamage(DamageModifier.ARMOR, 0);
 			}
@@ -46,7 +46,7 @@ public class SpreadSheetMob2 extends SpreadSheetMob{
 
 		if (mobData.getAttack() >= 0) {
 			if (e.isApplicable(DamageModifier.BASE)) {
-				e.setDamage(DamageModifier.BASE, mobData.getAttack() );
+				e.setDamage(DamageModifier.BASE, mobData.getAttack());
 			}
 		}
 	}

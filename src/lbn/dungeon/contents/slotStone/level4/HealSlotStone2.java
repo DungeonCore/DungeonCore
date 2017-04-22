@@ -8,7 +8,7 @@ import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.UnUseSlot;
 import lbn.item.system.strength.StrengthOperator;
 
-public class HealSlotStone2 extends UnUseSlot implements Cooltimable{
+public class HealSlotStone2 extends UnUseSlot implements Cooltimable {
 
 	@Override
 	public String getSlotName() {

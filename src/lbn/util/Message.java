@@ -8,13 +8,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class Message {
-	static String[] sign = {"{0}", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "{11}", "{12}", "{13}", "{14}"};
+	static String[] sign = { "{0}", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}", "{10}", "{11}",
+			"{12}", "{13}", "{14}" };
 
-	public static String getMessage(Player p, String message, Object...arg) {
+	public static String getMessage(Player p, String message, Object... arg) {
 		return getMessage(message, arg);
 	}
 
-	public static String getMessage(String message, Object...arg) {
+	public static String getMessage(String message, Object... arg) {
 		if (arg.length == 0) {
 			return message;
 		}
@@ -25,13 +26,13 @@ public class Message {
 		return message;
 	}
 
-	public static void sendMessage(Player p,String message,  Object...arg) {
+	public static void sendMessage(Player p, String message, Object... arg) {
 		if (p != null) {
 			p.sendMessage(getMessage(p, message, arg));
 		}
 	}
 
-	public static void sendMessage(TheLowPlayerEvent event,String message,  Object...arg) {
+	public static void sendMessage(TheLowPlayerEvent event, String message, Object... arg) {
 		if (event == null) {
 			return;
 		}
@@ -41,18 +42,20 @@ public class Message {
 		}
 	}
 
-	public static void sendMessage(TheLowPlayer player,String message,  Object...arg) {
+	public static void sendMessage(TheLowPlayer player, String message, Object... arg) {
 		Player onlinePlayer = player.getOnlinePlayer();
 		if (onlinePlayer != null) {
 			sendMessage(player.getOnlinePlayer(), message, arg);
 		}
 	}
 
-	public static void sendTellraw(Player p,String message,  Object...arg) {
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), getMessage(p, message, arg).replace("{player_name}", p.getName()));
+	public static void sendTellraw(Player p, String message, Object... arg) {
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+				getMessage(p, message, arg).replace("{player_name}", p.getName()));
 	}
 
-	public static String QUEST_START_MESSAGE = "tellraw {player_name} [\"\",{\"text\":\"" + getQuestName("{0}") + "を開始しました。(\"},{\"text\":\"/quest\",\"bold\":false,\"underlined\":false,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest\"}},{\"text\":\"でクエストを確認)\"}]";
+	public static String QUEST_START_MESSAGE = "tellraw {player_name} [\"\",{\"text\":\"" + getQuestName("{0}")
+			+ "を開始しました。(\"},{\"text\":\"/quest\",\"bold\":false,\"underlined\":false,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest\"}},{\"text\":\"でクエストを確認)\"}]";
 
 	public static String QUEST_REMOVE_MESSAGE = getQuestName("{0}") + "を破棄しました。";
 

@@ -15,7 +15,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class SummonHealSheep extends SummonSheep{
+public class SummonHealSheep extends SummonSheep {
 
 	public SummonHealSheep(int level, int strengthLevel) {
 		super(level, strengthLevel);
@@ -41,7 +41,8 @@ public class SummonHealSheep extends SummonSheep{
 			level = metadata.get(0).asInt();
 		}
 
-		ArrayList<Player> nearByPlayer = LivingEntityUtil.getNearByPlayer(entity, 5 + (level * 0.05) , 5, 5 + (level * 0.05));
+		ArrayList<Player> nearByPlayer = LivingEntityUtil.getNearByPlayer(entity, 5 + (level * 0.05), 5,
+				5 + (level * 0.05));
 		for (Player player : nearByPlayer) {
 			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 3, getLevel(level)), true);
 			particleData.run(player.getLocation().add(0, 2, 0));
@@ -51,7 +52,7 @@ public class SummonHealSheep extends SummonSheep{
 	public int getLevel(int level) {
 		if (level < 30) {
 			return 0;
-		}else if (level < 60) {
+		} else if (level < 60) {
 			return 1;
 		} else {
 			return 2;

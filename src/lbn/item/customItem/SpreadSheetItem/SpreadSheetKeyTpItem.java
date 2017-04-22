@@ -11,10 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class SpreadSheetKeyTpItem extends AbstractTeleportKey{
+public class SpreadSheetKeyTpItem extends AbstractTeleportKey {
 
-	public SpreadSheetKeyTpItem(String name, String id, int price,
-			String command, String dungeon, Location dungeonLoc, Location data) {
+	public SpreadSheetKeyTpItem(String name, String id, int price, String command, String dungeon, Location dungeonLoc,
+			Location data) {
 		super(data);
 		this.name = name;
 		this.id = id;
@@ -51,7 +51,6 @@ public class SpreadSheetKeyTpItem extends AbstractTeleportKey{
 	protected String getDungeonName() {
 		return dungeon;
 	}
-
 
 	@Override
 	protected Location getDungeonLocation() {

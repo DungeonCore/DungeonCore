@@ -9,13 +9,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFallingblock{
+public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFallingblock {
 
 	Entity mob;
 	Vector direction;
 
 	public DamageFallingblockForMonsterSkill(Entity mob, Location target, Material m, byte data, double speed) {
-		super(target.toVector().subtract(mob.getLocation().toVector()).normalize(), mob.getLocation().add(0, 1.5, 0), m, data);
+		super(target.toVector().subtract(mob.getLocation().toVector()).normalize(), mob.getLocation().add(0, 1.5, 0), m,
+				data);
 		spawnEntity.setVelocity(spawnEntity.getVelocity().multiply(speed / 2.0));
 		direction = spawnEntity.getVelocity();
 		this.mob = mob;
@@ -24,7 +25,7 @@ public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFa
 	@Override
 	public void run2() {
 		super.run2();
-		//6秒以上飛んでいたら削除
+		// 6秒以上飛んでいたら削除
 		if (isElapsedTick(20 * 6)) {
 			removeEntity(spawnEntity);
 		}
@@ -32,7 +33,8 @@ public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFa
 
 	@Override
 	protected boolean damageLivingentity(Entity entity) {
-		if (LivingEntityUtil.isFriendship(entity) && entity.getType() != EntityType.VILLAGER && entity.getType().isAlive()) {
+		if (LivingEntityUtil.isFriendship(entity) && entity.getType() != EntityType.VILLAGER
+				&& entity.getType().isAlive()) {
 			executeDamage((LivingEntity) entity, (LivingEntity) mob);
 			return true;
 		}
@@ -52,8 +54,9 @@ public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFa
 			return;
 		}
 
-		//xとzが違うなら壁に衝突したと考える
-		if (!confirictWall && (spawnEntity.getVelocity().getX() != direction.getX() || spawnEntity.getVelocity().getY() != direction.getY())) {
+		// xとzが違うなら壁に衝突したと考える
+		if (!confirictWall && (spawnEntity.getVelocity().getX() != direction.getX()
+				|| spawnEntity.getVelocity().getY() != direction.getY())) {
 			confirictWall = true;
 		}
 

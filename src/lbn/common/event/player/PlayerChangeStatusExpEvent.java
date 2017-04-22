@@ -6,7 +6,7 @@ import lbn.player.status.StatusAddReason;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent{
+public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent {
 	private static final HandlerList handlers = new HandlerList();
 
 	int addExp;

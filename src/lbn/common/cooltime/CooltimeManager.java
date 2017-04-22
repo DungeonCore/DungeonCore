@@ -28,11 +28,9 @@ public class CooltimeManager {
 
 	static HashMap<CooltimeKeyClass, Integer> create = new HashMap<>();
 
-
 	Player p;
 	Cooltimable cooltime;
 	ItemStack item;
-
 
 	/**
 	 * cooltimeを開始する
@@ -73,10 +71,12 @@ public class CooltimeManager {
 
 	/**
 	 * プレイヤーに残りクールタイムのメッセージを送る
+	 * 
 	 * @param p
 	 */
 	public void sendCooltimeMessage(Player p) {
-		Message.sendMessage(p, ChatColor.GREEN + "[システム]" + ChatColor.RED + "クールタイム中です。(残り{0}秒)", (int)(getRemainTick() / 20));
+		Message.sendMessage(p, ChatColor.GREEN + "[システム]" + ChatColor.RED + "クールタイム中です。(残り{0}秒)",
+				(int) (getRemainTick() / 20));
 	}
 }
 
@@ -93,12 +93,11 @@ class CooltimeKeyClass {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((cooltimeName == null) ? 0 : cooltimeName.hashCode());
-		result = prime * result
-				+ ((playerName == null) ? 0 : playerName.hashCode());
+		result = prime * result + ((cooltimeName == null) ? 0 : cooltimeName.hashCode());
+		result = prime * result + ((playerName == null) ? 0 : playerName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,6 +119,5 @@ class CooltimeKeyClass {
 			return false;
 		return true;
 	};
-
 
 }

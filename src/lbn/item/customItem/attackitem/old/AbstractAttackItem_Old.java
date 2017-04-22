@@ -13,14 +13,14 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
+public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
 	public boolean isAvilable(Player player) {
-		//クリエイティブなら使えるようにする
+		// クリエイティブなら使えるようにする
 		if (player.getGameMode() == GameMode.CREATIVE) {
 			return true;
 		}
 
-		//Playerインスタンスを取得
+		// Playerインスタンスを取得
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
 		if (theLowPlayer == null) {
 			return false;
@@ -53,6 +53,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	/**
 	 * デフォルトのスロットの数
+	 * 
 	 * @return
 	 */
 	public int getDefaultSlotCount() {
@@ -61,6 +62,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	/**
 	 * デフォルトのスロットの数
+	 * 
 	 * @return
 	 */
 	public int getMaxSlotCount() {
@@ -107,13 +109,15 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 
 	/**
 	 * 武器のダメージを取得 (武器本体のダメージも含まれます)
+	 * 
 	 * @param p
 	 * @param get_money_item
 	 * @return
 	 */
 	public double getAttackItemDamage(int strengthLevel) {
 		if (b == -1) {
-			b = (- a * 0 * 0 + a * getMaxStrengthCount() * getMaxStrengthCount() + getMinAttackDamage() - getMaxAttackDamage()) / (0 - getMaxStrengthCount());
+			b = (-a * 0 * 0 + a * getMaxStrengthCount() * getMaxStrengthCount() + getMinAttackDamage()
+					- getMaxAttackDamage()) / (0 - getMaxStrengthCount());
 		}
 		if (c == -1) {
 			c = getMinAttackDamage();
@@ -136,7 +140,8 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	public abstract double getMaterialDamage();
 
 	protected void sendNotAvailableMessage(Player p) {
-		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
+		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(),
+				getAvailableLevel());
 	}
 
 	protected double getMaxAttackDamage() {
@@ -148,7 +153,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	}
 
 	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
-		//もう使わないので記載しない
+		// もう使わないので記載しない
 	}
 
 	abstract protected String[] getStrengthDetail2(int level);
@@ -156,7 +161,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem{
 	@Override
 	public int getBuyPrice(ItemStack item) {
 		int availableLevel = Math.min(getAvailableLevel(), 70);
-		return (int) (getBaseBuyPrice()  + availableLevel * 5 + ((StrengthOperator.getLevel(item) + 1) * 200));
+		return (int) (getBaseBuyPrice() + availableLevel * 5 + ((StrengthOperator.getLevel(item) + 1) * 200));
 	}
 
 	abstract protected int getBaseBuyPrice();

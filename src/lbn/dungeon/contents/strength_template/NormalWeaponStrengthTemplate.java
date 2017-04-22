@@ -2,8 +2,9 @@ package lbn.dungeon.contents.strength_template;
 
 import org.bukkit.inventory.ItemStack;
 
-public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTemplate{
+public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTemplate {
 	int available;
+
 	public NormalWeaponStrengthTemplate(int available, int maxStrengthCount) {
 		super(maxStrengthCount);
 		this.available = available;
@@ -26,6 +27,7 @@ public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTe
 
 	/**
 	 * 武器の使用可能レベル
+	 * 
 	 * @return
 	 */
 	public int getAvailableLevel() {
@@ -35,7 +37,7 @@ public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTe
 	@Override
 	protected double getSuccessRateLevelMax() {
 		double a = -0.007;
-		return a * getAvailableLevel() * getAvailableLevel() - (80 * a + 3.0/4.0) * getAvailableLevel() + 70;
+		return a * getAvailableLevel() * getAvailableLevel() - (80 * a + 3.0 / 4.0) * getAvailableLevel() + 70;
 	}
 
 }

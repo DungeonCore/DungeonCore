@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.HashMultimap;
 
-public class PickItemQuest extends AbstractQuest{
+public class PickItemQuest extends AbstractQuest {
 	static HashMultimap<String, PickItemQuest> needItemMap = HashMultimap.create();
 
 	public static Set<PickItemQuest> getQuest(ItemInterface item) {
@@ -36,7 +36,7 @@ public class PickItemQuest extends AbstractQuest{
 		if (data1 == null) {
 			return null;
 		}
-		//採取数チェック
+		// 採取数チェック
 		int count = JavaUtil.getInt(data2, -1);
 		if (count <= 0) {
 			return null;
@@ -45,17 +45,20 @@ public class PickItemQuest extends AbstractQuest{
 	}
 
 	String pickItemId;
+
 	protected ItemInterface getNeedItem() {
 		return ItemManager.getCustomItemById(pickItemId);
 	}
 
 	int needCount;
+
 	public int needCount() {
 		return needCount;
 	}
 
 	/**
 	 * クエストアイテムを拾ったときの処理
+	 * 
 	 * @param e
 	 * @param session
 	 * @return もし完了メッセージを出力するならTRUE
@@ -73,13 +76,13 @@ public class PickItemQuest extends AbstractQuest{
 		boolean isQuestItem = customPickItem.isQuestItem();
 
 		QuestProcessingStatus processingStatus = session.getProcessingStatus(this);
-		//実行中でない時はクエストアイテムを取得させない
+		// 実行中でない時はクエストアイテムを取得させない
 		if (processingStatus != QuestProcessingStatus.PROCESSING) {
 			e.setCancelled(true);
 			return;
 		}
 
-		//対象のアイテムが存在しないなら何もしない
+		// 対象のアイテムが存在しないなら何もしない
 		ItemInterface needItem = getNeedItem();
 		if (needItem == null) {
 			return;
@@ -88,24 +91,24 @@ public class PickItemQuest extends AbstractQuest{
 		int nowCount = session.getQuestData(this);
 		int pickCount = pickItem.getAmount();
 
-		//全て拾ってもクエスト達成しない時
+		// 全て拾ってもクエスト達成しない時
 		if (nowCount + pickCount <= needCount()) {
-			//クエストアイテムならインベントリにいれない
+			// クエストアイテムならインベントリにいれない
 			if (isQuestItem) {
 				e.getItem().remove();
 				e.setCancelled(true);
 			}
 		} else {
-			//クエストアイテムなら必要数以上拾わせない
+			// クエストアイテムなら必要数以上拾わせない
 			if (isQuestItem) {
-				//ex) 拾った個数3個 - 必要数10個 + 今まで拾った個数8個 = 1 個
+				// ex) 拾った個数3個 - 必要数10個 + 今まで拾った個数8個 = 1 個
 				pickItem.setAmount(pickCount - (needCount() - nowCount));
 				e.getItem().setItemStack(pickItem);
 				e.setCancelled(true);
 			}
 		}
 
-		//最終的にDataとして残る個数
+		// 最終的にDataとして残る個数
 		int totalCount = Math.min(nowCount + pickCount, needCount());
 
 		onPickItem(e.getPlayer(), totalCount);
@@ -119,7 +122,7 @@ public class PickItemQuest extends AbstractQuest{
 
 	@Override
 	public String getCurrentInfo(Player p) {
-		int data =  PlayerQuestSessionManager.getQuestSession(p).getQuestData(this);
+		int data = PlayerQuestSessionManager.getQuestSession(p).getQuestData(this);
 		return "達成度(" + data + "/" + needCount() + ")";
 	}
 

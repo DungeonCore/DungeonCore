@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
+public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
 	public WeaponSkillWithCombat(ItemType type) {
 		super(type);
 	}
@@ -23,10 +23,10 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		//クリックしたPlayerを保存する
+		// クリックしたPlayerを保存する
 		UUID uniqueId = p.getUniqueId();
 
-		//5tickに一度、パーティクルを発生させる
+		// 5tickに一度、パーティクルを発生させる
 		BukkitTask runTaskTimer = new LbnRunnable() {
 			@Override
 			public void run2() {
@@ -46,6 +46,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 
 	/**
 	 * 効果が続く時間
+	 * 
 	 * @return
 	 */
 	public double getTimeLimit() {
@@ -54,13 +55,15 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 
 	/**
 	 * 攻撃待機中のパーティクル
+	 * 
 	 * @param loc
 	 * @param i
 	 */
 	abstract protected void runWaitParticleData(Location loc, int i);
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent event) {
 		if (isWaitingSkill(p)) {
 			onCombat2(p, item, customItem, livingEntity, event);
 			BukkitTask remove = executePlayer.remove(p.getUniqueId());
@@ -70,6 +73,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 
 	/**
 	 * スキル発動待機中ならTRUE
+	 * 
 	 * @param p
 	 * @return
 	 */
@@ -79,11 +83,13 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType{
 
 	/**
 	 * 効果発動条件を満たして攻撃を行うときの処理
+	 * 
 	 * @param p
 	 * @param item
 	 * @param customItem
 	 * @param livingEntity
 	 * @param e
 	 */
-	abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e);
+	abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem,
+			LivingEntity livingEntity, PlayerCombatEntityEvent e);
 }

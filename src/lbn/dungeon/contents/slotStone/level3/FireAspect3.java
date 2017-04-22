@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-public class FireAspect3 extends CombatSlot{
+public class FireAspect3 extends CombatSlot {
 
 	@Override
 	public String getSlotName() {
@@ -42,7 +42,7 @@ public class FireAspect3 extends CombatSlot{
 
 		for (Entity entity : e.getEnemy().getNearbyEntities(3, 3, 3)) {
 			if (LivingEntityUtil.isEnemy(entity)) {
-				((LivingEntity)entity).setFireTicks(20 * 4);
+				((LivingEntity) entity).setFireTicks(20 * 4);
 			}
 		}
 	}

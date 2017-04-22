@@ -18,21 +18,21 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftClickItemable{
+public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftClickItemable {
 
 	public BowItem(SpreadSheetWeaponData data) {
 		super(data);
 	}
 
 	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e,
-			ItemStack item, LivingEntity owner, LivingEntity target) {
+	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner,
+			LivingEntity target) {
 	}
 
 	@Override
 	public void excuteOnShootBow(EntityShootBowEvent e) {
 		LivingEntity entity = e.getEntity();
-		//レベルを足りなければ弓を打たせない
+		// レベルを足りなければ弓を打たせない
 		if (entity.getType() == EntityType.PLAYER) {
 			if (!isAvilable((Player) entity)) {
 				sendNotAvailableMessage((Player) entity);
@@ -44,7 +44,7 @@ public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftC
 
 	@Override
 	public void excuteOnLeftClick(PlayerInteractEvent e) {
-		//レベルなどを確認する
+		// レベルなどを確認する
 		Player player = e.getPlayer();
 		if (!isAvilable(player)) {
 			sendNotAvailableMessage(player);
@@ -52,7 +52,7 @@ public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftC
 			return;
 		}
 		if (!player.isSneaking()) {
-			//スキルを発動
+			// スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
 	}

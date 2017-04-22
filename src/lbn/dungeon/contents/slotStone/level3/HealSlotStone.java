@@ -8,7 +8,7 @@ import lbn.item.system.strength.StrengthOperator;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-public class HealSlotStone extends UnUseSlot implements Cooltimable{
+public class HealSlotStone extends UnUseSlot implements Cooltimable {
 
 	@Override
 	public String getSlotName() {
@@ -34,7 +34,6 @@ public class HealSlotStone extends UnUseSlot implements Cooltimable{
 	public SlotLevel getLevel() {
 		return SlotLevel.LEVEL3;
 	}
-
 
 	@Override
 	public int getCooltimeTick(ItemStack item) {

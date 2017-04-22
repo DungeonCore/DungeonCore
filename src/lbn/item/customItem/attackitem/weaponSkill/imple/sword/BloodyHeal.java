@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class BloodyHeal extends WeaponSkillWithMultiCombat{
+public class BloodyHeal extends WeaponSkillWithMultiCombat {
 
 	public BloodyHeal() {
 		super(ItemType.SWORD);
@@ -35,11 +35,12 @@ public class BloodyHeal extends WeaponSkillWithMultiCombat{
 	}
 
 	@Override
-	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e, int attackCount) {
-		//ダメージを{1}倍する
+	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent e, int attackCount) {
+		// ダメージを{1}倍する
 		e.setDamage(e.getDamage() * getData(1));
 
-		//体力を回復する
+		// 体力を回復する
 		LivingEntityUtil.addHealth(p, 2 * getData(2));
 
 		Particles.runParticle(p.getLocation(), ParticleType.heart);

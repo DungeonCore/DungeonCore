@@ -19,12 +19,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
-public class BossChest extends SpletSheetChest{
+public class BossChest extends SpletSheetChest {
 
 	HashMap<Player, Inventory> rewordInventoryMap = new HashMap<>();
 
 	public BossChest(SpletSheetChest chest) {
-		super(null, chest.contentLoc, chest.refuelTick, chest.moveLoc, chest.minItemCount, chest.maxItemCount, 25, chest.random);
+		super(null, chest.contentLoc, chest.refuelTick, chest.moveLoc, chest.minItemCount, chest.maxItemCount, 25,
+				chest.random);
 	}
 
 	Material m = Material.AIR;
@@ -32,27 +33,28 @@ public class BossChest extends SpletSheetChest{
 
 	/**
 	 * チェストを設置する
+	 * 
 	 * @param e
-	 * @return　設置後のチェストの座標
+	 * @return 設置後のチェストの座標
 	 */
 	public Location setChest(BossMobable e) {
 		if (moveLoc != null) {
 			for (Player p : rewordInventoryMap.keySet()) {
-				//もし途中でログアウトとかしていればテレポートしない
+				// もし途中でログアウトとかしていればテレポートしない
 				if (p.equals(Bukkit.getPlayerExact(p.getName()))) {
 					teleportPlayer(p.getName());
 				}
 			}
 		}
 
-		//chestじゃなければ何も設置しない
+		// chestじゃなければ何も設置しない
 		BlockState state = contentLoc.getBlock().getState();
 		if (!(state instanceof Chest)) {
 			return null;
 		}
 
 		Location chestLocation = getChestLocation(e.getEntity());
-		//実際にチェストを設置する
+		// 実際にチェストを設置する
 		setChest(chestLocation, e);
 
 		return chestLocation;
@@ -60,12 +62,13 @@ public class BossChest extends SpletSheetChest{
 
 	/**
 	 * 指定された場所に実際にチェストを設置する
+	 * 
 	 * @param chestLocation
 	 */
 	@SuppressWarnings("deprecation")
 	protected void setChest(Location chestLocation, BossMobable e) {
 		CustomChestManager.registChest(getChestLocation(e.getEntity()).getBlock().getLocation(), this);
-		//全ての人のインベントリをセット
+		// 全ての人のインベントリをセット
 		for (TheLowPlayer p : e.getCombatPlayer()) {
 			if (p != null) {
 				Player onlinePlayer = p.getOnlinePlayer();
@@ -75,13 +78,13 @@ public class BossChest extends SpletSheetChest{
 			}
 		}
 
-		//もとのブロックを取得
+		// もとのブロックを取得
 		m = chestLocation.getBlock().getType();
 		data = chestLocation.getBlock().getData();
-		//チェストを設置
+		// チェストを設置
 		chestLocation.getBlock().setType(Material.CHEST);
 
-		//一定時間後にチェストを消す
+		// 一定時間後にチェストを消す
 		new LbnRunnable() {
 			@Override
 			public void run2() {
@@ -90,11 +93,11 @@ public class BossChest extends SpletSheetChest{
 
 			protected void runIfServerEnd() {
 				CustomChestManager.removeChest(chestLocation);
-				//チャンクがロードされてなかったらロードする
+				// チャンクがロードされてなかったらロードする
 				if (!chestLocation.getChunk().isLoaded()) {
 					chestLocation.getChunk().load();
 				}
-				//ブロックを元に戻す
+				// ブロックを元に戻す
 				chestLocation.getBlock().setType(m);
 				chestLocation.getBlock().setData(data);
 				m = Material.AIR;
@@ -130,6 +133,6 @@ public class BossChest extends SpletSheetChest{
 
 	@Override
 	public void setRefule(SpletSheetChest chest) {
-		//とりあえず今は何もしない
+		// とりあえず今は何もしない
 	}
 }

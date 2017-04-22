@@ -11,7 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface{
+public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface {
 
 	@Override
 	public String getItemName() {
@@ -36,7 +36,7 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
 	@Override
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = super.getStandardLoreToken();
-		loreToken.addLore( "装着成功確率 : " + getLevel().getSucessPer() + "% ");
+		loreToken.addLore("装着成功確率 : " + getLevel().getSucessPer() + "% ");
 		return loreToken;
 	}
 
@@ -72,7 +72,7 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"鍛冶屋の魔法石装着画面で", "使用不可のスロットを１つ削除する"};
+		return new String[] { "鍛冶屋の魔法石装着画面で", "使用不可のスロットを１つ削除する" };
 	}
 
 	@Override

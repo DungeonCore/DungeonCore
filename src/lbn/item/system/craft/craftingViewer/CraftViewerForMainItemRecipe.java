@@ -24,7 +24,7 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class CraftViewerForMainItemRecipe extends TheLowMerchant{
+public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 
 	private CraftItemable craftItem;
 	private TheLowCraftRecipeInterface craftRecipe;
@@ -43,19 +43,20 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 	protected void onSetItem(InventoryView inv) {
 		Inventory topInventory = inv.getTopInventory();
 		ItemStack baseItem = topInventory.getItem(0);
-		//アイテムが置かれてないなら初期画面を表示
+		// アイテムが置かれてないなら初期画面を表示
 		if (ItemStackUtil.isEmpty(baseItem)) {
 			sendRecipeList(getInitRecipes());
 			return;
-		//別のアイテムを置いてあったらバリアブロックを置く
+			// 別のアイテムを置いてあったらバリアブロックを置く
 		} else if (!mainItem.isThisItem(baseItem)) {
-			sendRecipeList(Arrays.asList(new TheLowMerchantRecipe(mainItem.getItem(), ItemStackUtil.getItem("アイテムが違います", Material.BARRIER))));
+			sendRecipeList(Arrays.asList(new TheLowMerchantRecipe(mainItem.getItem(),
+					ItemStackUtil.getItem("アイテムが違います", Material.BARRIER))));
 			return;
 		}
 
 		ItemStack craftedItem = getCraftedItem(baseItem);
 
-		//レシピとして表示するアイテム
+		// レシピとして表示するアイテム
 		ItemStack dispItem = baseItem.clone();
 		dispItem.setAmount(1);
 		sendRecipeList(Arrays.asList(new TheLowMerchantRecipe(dispItem, craftedItem)));
@@ -63,13 +64,15 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 
 	/**
 	 * クラフト後のアイテムを取得する
-	 * @param baseItem 元となるアイテム
+	 * 
+	 * @param baseItem
+	 *            元となるアイテム
 	 * @return
 	 */
 	private ItemStack getCraftedItem(ItemStack baseItem) {
 		int level = StrengthOperator.getLevel(baseItem);
 
-		//今はレベルだけ引き継ぐ
+		// 今はレベルだけ引き継ぐ
 		ItemStack item = craftItem.getItem();
 		StrengthOperator.updateLore(item, level);
 		return item;
@@ -82,7 +85,7 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 
 	@Override
 	public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe) {
-		//素材を全て持っていないなら取引できない
+		// 素材を全て持っていないなら取引できない
 		if (!craftRecipe.hasAllMaterial(p, false)) {
 			p.sendMessage("アイテムが足りないため取引出来ません");
 			return null;
@@ -104,7 +107,7 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 	public void onFinishTrade(TheLowMerchantRecipe recipe) {
 		craftRecipe.removeMaterial(p.getInventory());
 
-		//取引欄に0個のアイテムが残るので2tick後に実行する
+		// 取引欄に0個のアイテムが残るので2tick後に実行する
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -123,7 +126,8 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant{
 		}
 
 		if (item.getCraftRecipe() instanceof TheLowCraftRecipeWithMainItem) {
-			CraftViewerForMainItemRecipe craftViewerForMainItemRecipe = new CraftViewerForMainItemRecipe(theLowPlayer, item);
+			CraftViewerForMainItemRecipe craftViewerForMainItemRecipe = new CraftViewerForMainItemRecipe(theLowPlayer,
+					item);
 			TheLowTrades.open(craftViewerForMainItemRecipe, p);
 		} else {
 			p.sendMessage("エラーが発生しました(code:1)");

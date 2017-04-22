@@ -9,22 +9,24 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuSelector implements MenuSelectorInterface{
+public class MenuSelector implements MenuSelectorInterface {
 	public void regist() {
 		MenuSelectorManager.regist(this);
 	}
 
 	protected String title;
 	protected Inventory createInventory;
+
 	public MenuSelector(String title) {
 		this.title = ChatColor.WHITE + title;
-		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE +  title);
+		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + title);
 	}
 
 	protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
 
 	/**
 	 * メニューを追加する
+	 * 
 	 * @param item
 	 * @param index
 	 * @param run
@@ -38,6 +40,7 @@ public class MenuSelector implements MenuSelectorInterface{
 
 	/**
 	 * メニューを開く
+	 * 
 	 * @param p
 	 */
 	public void open(Player p) {
@@ -46,6 +49,7 @@ public class MenuSelector implements MenuSelectorInterface{
 
 	/**
 	 * アイテムを選択したときの処理
+	 * 
 	 * @param p
 	 * @param item
 	 */

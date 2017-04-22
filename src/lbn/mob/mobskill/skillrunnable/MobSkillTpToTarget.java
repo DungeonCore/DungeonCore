@@ -6,12 +6,11 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-public class MobSkillTpToTarget extends MobSkillRunnable{
+public class MobSkillTpToTarget extends MobSkillRunnable {
 
 	public MobSkillTpToTarget(String data) {
 		super(data);
 	}
-
 
 	@Override
 	public void execute(Entity target, Entity mob) {
@@ -21,7 +20,7 @@ public class MobSkillTpToTarget extends MobSkillRunnable{
 
 			Vector vectorMob = mob.getLocation().toVector();
 			Vector vectorDamager = target.getLocation().toVector();
-			target.setVelocity(vectorDamager.subtract(vectorMob).multiply(- 0.5));
+			target.setVelocity(vectorDamager.subtract(vectorMob).multiply(-0.5));
 		}
 	}
 

@@ -4,7 +4,7 @@ import lbn.player.ItemType;
 
 import org.bukkit.inventory.ItemStack;
 
-public interface ItemInterface{
+public interface ItemInterface {
 	String getItemName();
 
 	boolean isShowItemList();

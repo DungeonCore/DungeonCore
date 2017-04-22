@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityEvent;
 
-public class EndermanFindTargetEvent extends EntityEvent{
+public class EndermanFindTargetEvent extends EntityEvent {
 	Player p;
 
 	public EndermanFindTargetEvent(Entity what, Player p) {

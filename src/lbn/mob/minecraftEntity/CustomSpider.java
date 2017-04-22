@@ -28,7 +28,7 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>, IRangedEntity{
+public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>, IRangedEntity {
 	static final LbnMobTag DEFAULT_TAG = new LbnMobTag(EntityType.SPIDER);
 
 	public CustomSpider(World world) {
@@ -46,38 +46,39 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, this.a);
 			this.goalSelector.a(3, new PathfinderGoalLeapAtTarget(this, 0.4F));
-    		//戦闘AIをセットする
-    		AttackAISetter.setAttackAI(this, tag);
+			// 戦闘AIをセットする
+			AttackAISetter.setAttackAI(this, tag);
 			this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 0.8D));
 			this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
+					this);
+			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
+			this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public CustomSpider(org.bukkit.World world, LbnMobTag tag) {
-		this(((CraftWorld)world).getHandle(), tag);
+		this(((CraftWorld) world).getHandle(), tag);
 	}
 
-//	@Override
-//	protected Entity findTarget() {
-//		return this.world.findNearbyVulnerablePlayer(this, 16d);
-//	}
+	// @Override
+	// protected Entity findTarget() {
+	// return this.world.findNearbyVulnerablePlayer(this, 16d);
+	// }
 
 	@Override
 	public Spider spawn(Location loc) {
-		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
-		//位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
-		 //ワールドにentityを追加
-		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Spider) getBukkitEntity();
+		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
+		// 位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+		// ワールドにentityを追加
+		world.addEntity(this, SpawnReason.CUSTOM);
+		return (Spider) getBukkitEntity();
 	}
 
 	@Override
@@ -107,10 +108,10 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
 		}
 	}
 
-
 	@Override
 	public void a(EntityLiving entityliving, float f) {
-		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, 14 - this.world.getDifficulty().a() * 4);
+		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F,
+				14 - this.world.getDifficulty().a() * 4);
 		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bz());
 		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bz());
 
@@ -154,14 +155,15 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
 			return;
 		}
 
-		//指定した距離以上離れていたら殺す
+		// 指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
+					* tag.getRemoveDistance()) {
 				return;
 			}
 			if (getMobTag().isBoss()) {

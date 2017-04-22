@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
 
-public class CircleParticleData extends ParticleData{
+public class CircleParticleData extends ParticleData {
 
 	double radius;
 
@@ -23,7 +23,6 @@ public class CircleParticleData extends ParticleData{
 		}
 	}
 
-
 	@Override
 	public void run(Location... locList) {
 		for (Location location : locList) {
@@ -34,7 +33,7 @@ public class CircleParticleData extends ParticleData{
 	Vector centerVec = null;
 
 	protected void runCircle(Location center) {
-		//center vecを登録する
+		// center vecを登録する
 		centerVec = center.toVector();
 
 		ArrayList<Vector> pointList = CircleParticleCache.getCircleVecList(radius, true);

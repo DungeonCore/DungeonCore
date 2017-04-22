@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
  * 指定した時間内に指定した回数の攻撃を行う際の処理
  *
  */
-public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
+public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 	public WeaponSkillWithMultiCombat(ItemType type) {
 		super(type);
 	}
@@ -26,10 +26,10 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		//クリックしたPlayerを保存する
+		// クリックしたPlayerを保存する
 		UUID uniqueId = p.getUniqueId();
 
-		//5tickに一度、パーティクルを発生させる
+		// 5tickに一度、パーティクルを発生させる
 		LbnRunnableImplemantion runTaskTimer = new LbnRunnableImplemantion(p) {
 			@Override
 			public void run2() {
@@ -49,6 +49,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 
 	/**
 	 * 効果が続く時間
+	 * 
 	 * @return
 	 */
 	public double getTimeLimit() {
@@ -57,20 +58,22 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 
 	/**
 	 * 攻撃待機中のパーティクル
+	 * 
 	 * @param loc
 	 * @param i
 	 */
 	abstract protected void runWaitParticleData(Location loc, int i);
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent event) {
 		if (executePlayer.containsKey(p.getUniqueId())) {
 			LbnRunnableImplemantion implemantion = executePlayer.get(p.getUniqueId());
-			//カウントを増加させる
+			// カウントを増加させる
 			implemantion.incremantCount();
-			//スキルを実行
+			// スキルを実行
 			onCombat2(p, item, customItem, livingEntity, event, implemantion.getCount());
-			//指定回数攻撃したら終わり
+			// 指定回数攻撃したら終わり
 			if (getMaxAttackCount() <= implemantion.getCount()) {
 				implemantion.cancel();
 				executePlayer.remove(p.getUniqueId());
@@ -78,15 +81,16 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 		}
 	}
 
-
 	/**
 	 * 攻撃を行った時の効果が発動する最大回数を取得
+	 * 
 	 * @return
 	 */
 	abstract protected int getMaxAttackCount();
 
 	/**
 	 * 効果発動条件を満たして攻撃を行うときの処理
+	 * 
 	 * @param p
 	 * @param item
 	 * @param customItem
@@ -94,10 +98,12 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 	 * @param e
 	 * @param attackCount
 	 */
-	abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e, int attackCount);
+	abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem,
+			LivingEntity livingEntity, PlayerCombatEntityEvent e, int attackCount);
 
 	class LbnRunnableImplemantion extends LbnRunnable {
 		Player p;
+
 		public LbnRunnableImplemantion(Player p) {
 			this.p = p;
 		}
@@ -106,6 +112,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 
 		/**
 		 * カウントを1増加する
+		 * 
 		 * @return
 		 */
 		public void incremantCount() {
@@ -114,6 +121,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType{
 
 		/**
 		 * カウントを取得
+		 * 
 		 * @return
 		 */
 		public int getCount() {

@@ -4,7 +4,7 @@ import lbn.item.ItemManager;
 import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
 import lbn.item.customItem.itemAbstract.SwordItem;
 
-public class TestSwordWeaponItem extends SwordItem{
+public class TestSwordWeaponItem extends SwordItem {
 
 	public TestSwordWeaponItem(SpreadSheetWeaponData data) {
 		super(data);

@@ -15,7 +15,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-
 public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
 
 	@Override
@@ -30,14 +29,14 @@ public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"CLICK 7 POINT IN WATER", "水の中にある7つのポイントをクリックせよ"};
+		return new String[] { "CLICK 7 POINT IN WATER", "水の中にある7つのポイントをクリックせよ" };
 	}
-
 
 	protected void updateKey(ItemStack item, Location signLoc, Player player) {
 		List<String> loreList = ItemStackUtil.getLore(item);
 
-		String signLogStr =StringUtils.join(new Object[]{"@", (int)signLoc.getBlockX(), ",", (int)signLoc.getBlockY(), ",", (int)signLoc.getBlockZ()});
+		String signLogStr = StringUtils.join(new Object[] { "@", (int) signLoc.getBlockX(), ",",
+				(int) signLoc.getBlockY(), ",", (int) signLoc.getBlockZ() });
 
 		if (loreList.contains(signLogStr)) {
 			player.sendMessage(ChatColor.RED + "すでに登録済みです。");
@@ -54,9 +53,9 @@ public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
 		player.sendMessage(ChatColor.GREEN + "この地点をキーに登録しました。");
 
 		PlayerInventory inventory = player.getInventory();
-		//最後のキーを渡す
+		// 最後のキーを渡す
 		if (count >= 6) {
-			//それ以外のキーを全て削除する
+			// それ以外のキーを全て削除する
 			ItemStackUtil.removeAll(inventory, getItem());
 			inventory.setItemInHand(new KalgrusFinishKey().getItem());
 			player.updateInventory();

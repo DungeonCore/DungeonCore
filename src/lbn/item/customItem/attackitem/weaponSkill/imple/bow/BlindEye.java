@@ -10,7 +10,7 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 
-public class BlindEye extends WeaponSkillForOneType{
+public class BlindEye extends WeaponSkillForOneType {
 
 	public BlindEye() {
 		super(ItemType.BOW);

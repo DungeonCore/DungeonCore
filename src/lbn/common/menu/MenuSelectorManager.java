@@ -36,16 +36,16 @@ public class MenuSelectorManager {
 	public static void onSelect(InventoryInteractEvent e) {
 		InventoryView view = e.getView();
 		String title = view.getTitle();
-		//もしセレクト画面でないなら何もしない
+		// もしセレクト画面でないなら何もしない
 		if (title == null || !contains(title)) {
 			return;
 		}
 		e.setCancelled(true);
-		//クリックでないなら何もしない
+		// クリックでないなら何もしない
 		if (e instanceof InventoryClickEvent) {
 			InventoryClickEvent event = (InventoryClickEvent) e;
 
-			//クリックしたのが上のインベントリでないなら無視
+			// クリックしたのが上のインベントリでないなら無視
 			if (event.getClickedInventory() != view.getTopInventory()) {
 				return;
 			}

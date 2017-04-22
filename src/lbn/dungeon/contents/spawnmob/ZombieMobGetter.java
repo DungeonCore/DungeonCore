@@ -9,7 +9,7 @@ import lbn.mobspawn.gettter.AbstractSpawnMobGetter;
 
 import org.bukkit.entity.EntityType;
 
-public class ZombieMobGetter  extends AbstractSpawnMobGetter{
+public class ZombieMobGetter extends AbstractSpawnMobGetter {
 
 	@Override
 	public String getName() {

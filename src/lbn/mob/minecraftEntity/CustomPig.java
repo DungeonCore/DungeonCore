@@ -29,7 +29,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
+public class CustomPig extends EntityPig implements ICustomEntity<Pig> {
 
 	private LbnMobTag tag;
 
@@ -38,18 +38,20 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 	public CustomPig(World world) {
 		this(world, new LbnMobTag(EntityType.PIG));
 	}
+
 	public CustomPig(World world, LbnMobTag tag) {
 		super(world);
 		this.tag = tag;
 
-		//全てのAIを取り除く
+		// 全てのAIを取り除く
 		try {
 			AttackAISetter.removeAllAi(this);
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
 
-			//ターゲットAIを設定
+			// ターゲットAIを設定
 			if (tag.isSummonMob()) {
-				PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
+				PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
+						this);
 				pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
 				this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 			}
@@ -64,7 +66,7 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 				this.goalSelector.a(5, new PathfinderGoalFollowParent(this, 1.1D));
 			}
 
-			//戦闘AIをセットする
+			// 戦闘AIをセットする
 			AttackAISetter.setAttackAI(this, tag);
 			this.goalSelector.a(7, this.bk = new PathfinderGoalPassengerCarrotStick(this, 0.3F));
 			this.goalSelector.a(11, new PathfinderGoalRandomStroll(this, 1.0D));
@@ -84,13 +86,13 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 	}
 
 	@Override
-		public Pig spawn(Location loc) {
-		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
-		//位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
-		 //ワールドにentityを追加
-		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Pig) getBukkitEntity();
+	public Pig spawn(Location loc) {
+		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
+		// 位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+		// ワールドにentityを追加
+		world.addEntity(this, SpawnReason.CUSTOM);
+		return (Pig) getBukkitEntity();
 	}
 
 	@Override
@@ -116,14 +118,15 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 			return;
 		}
 
-		//指定した距離以上離れていたら殺す
+		// 指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
+					* tag.getRemoveDistance()) {
 				return;
 			}
 			if (getMobTag().isBoss()) {
@@ -136,7 +139,8 @@ public class CustomPig extends EntityPig implements ICustomEntity<Pig>{
 
 	@Override
 	public boolean r(Entity entity) {
-		boolean flag = entity.damageEntity(DamageSource.mobAttack(this), (int) getAttributeInstance(GenericAttributes.e).getValue());
+		boolean flag = entity.damageEntity(DamageSource.mobAttack(this),
+				(int) getAttributeInstance(GenericAttributes.e).getValue());
 		if (flag) {
 			a(this, entity);
 		}

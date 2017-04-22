@@ -14,7 +14,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
+public class CustomWitch extends EntityWitch implements ICustomEntity<Witch> {
 
 	private LbnMobTag tag;
 
@@ -30,19 +30,19 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 	boolean isChangeItem = true;
 
 	public CustomWitch(org.bukkit.World w, AbstractWitch mobInstance) {
-		super(((CraftWorld)w).getHandle());
+		super(((CraftWorld) w).getHandle());
 
 		isChangeItem = mobInstance.isChangeItem();
 	}
 
 	@Override
 	public Witch spawn(Location loc) {
-		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
-		//位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
-		 //ワールドにentityを追加
-		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Witch) getBukkitEntity();
+		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
+		// 位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+		// ワールドにentityを追加
+		world.addEntity(this, SpawnReason.CUSTOM);
+		return (Witch) getBukkitEntity();
 	}
 
 	@Override
@@ -50,26 +50,27 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 		super.setPosition(d0, d1, d2);
 		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
 	}
+
 	Location spawnLocation = null;
 
-//	@Override
-//	public boolean N() {
-//		if (!isIgnoreWater) {
-//			return super.N();
-//		} else {
-//			inWater = false;
-//			return false;
-//		}
-//	}
-//
-//	@Override
-//	public boolean M() {
-//		if (!isIgnoreWater) {
-//			return super.M();
-//		} else {
-//			return false;
-//		}
-//	}
+	// @Override
+	// public boolean N() {
+	// if (!isIgnoreWater) {
+	// return super.N();
+	// } else {
+	// inWater = false;
+	// return false;
+	// }
+	// }
+	//
+	// @Override
+	// public boolean M() {
+	// if (!isIgnoreWater) {
+	// return super.M();
+	// } else {
+	// return false;
+	// }
+	// }
 
 	@Override
 	public void a(NBTTagCompound nbttagcompound) {
@@ -113,7 +114,7 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 			return;
 		}
 
-		//指定した距離以上離れていたら殺す
+		// 指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
@@ -131,14 +132,14 @@ public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
 		}
 	}
 
-//	@Override
-//	public void e() {
-//		ItemStack itemstack = this.be();
-//		super.e();
-//		//持っているアイテムを戻す
-//		if (!isChangeItem) {
-//			setEquipment(0, itemstack);
-//		}
-//
-//	}
+	// @Override
+	// public void e() {
+	// ItemStack itemstack = this.be();
+	// super.e();
+	// //持っているアイテムを戻す
+	// if (!isChangeItem) {
+	// setEquipment(0, itemstack);
+	// }
+	//
+	// }
 }

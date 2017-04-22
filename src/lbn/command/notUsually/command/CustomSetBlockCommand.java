@@ -20,15 +20,15 @@ import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.TileEntity;
 import net.minecraft.server.v1_8_R1.World;
 
-public class CustomSetBlockCommand extends AbstractVanillaCommand{
+public class CustomSetBlockCommand extends AbstractVanillaCommand {
 
 	public CustomSetBlockCommand() {
 		super(new CommandSetBlock());
 	}
 
 	@Override
-	protected void execute2(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws CommandException {
+	protected void execute2(ICommandListener paramICommandListener, String[] paramArrayOfString)
+			throws CommandException {
 		if (paramArrayOfString.length < 4) {
 			throw new ExceptionUsage("commands.setblock.usage", new Object[0]);
 		}
@@ -46,10 +46,8 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand{
 			e.printStackTrace();
 		}
 
-		BlockPosition localBlockPosition = a(paramICommandListener,
-				paramArrayOfString, 0, false);
-		Block localBlock = CommandAbstract.g(paramICommandListener,
-				paramArrayOfString[3]);
+		BlockPosition localBlockPosition = a(paramICommandListener, paramArrayOfString, 0, false);
+		Block localBlock = CommandAbstract.g(paramICommandListener, paramArrayOfString[3]);
 
 		int i = 0;
 		if (paramArrayOfString.length >= 5) {
@@ -63,21 +61,17 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand{
 		int j = 0;
 		if ((paramArrayOfString.length >= 7) && (localBlock.isTileEntity())) {
 			Object localObject = a(paramICommandListener, paramArrayOfString, 6).c();
-			localNBTTagCompound = MojangsonParser
-					.parse((String) localObject);
+			localNBTTagCompound = MojangsonParser.parse((String) localObject);
 			j = 1;
 		}
 		if (paramArrayOfString.length >= 6) {
 			if (paramArrayOfString[5].equals("destroy")) {
 				localWorld.setAir(localBlockPosition, true);
 				if (localBlock == Blocks.AIR) {
-					a(paramICommandListener, this, "commands.setblock.success",
-							new Object[0]);
+					a(paramICommandListener, this, "commands.setblock.success", new Object[0]);
 				}
-			} else if ((paramArrayOfString[5].equals("keep"))
-					&& (!localWorld.isEmpty(localBlockPosition))) {
-				throw new CommandException("commands.setblock.noChange",
-						new Object[0]);
+			} else if ((paramArrayOfString[5].equals("keep")) && (!localWorld.isEmpty(localBlockPosition))) {
+				throw new CommandException("commands.setblock.noChange", new Object[0]);
 			}
 		}
 		Object localObject = localWorld.getTileEntity(localBlockPosition);
@@ -85,18 +79,14 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand{
 			if ((localObject instanceof IInventory)) {
 				((IInventory) localObject).l();
 			}
-			localWorld
-					.setTypeAndData(localBlockPosition, Blocks.AIR
-							.getBlockData(), localBlock == Blocks.AIR ? 2 : 4);
+			localWorld.setTypeAndData(localBlockPosition, Blocks.AIR.getBlockData(), localBlock == Blocks.AIR ? 2 : 4);
 		}
 		IBlockData localIBlockData = localBlock.fromLegacyData(i);
 		if (!localWorld.setTypeAndData(localBlockPosition, localIBlockData, 2)) {
-			throw new CommandException("commands.setblock.noChange",
-					new Object[0]);
+			throw new CommandException("commands.setblock.noChange", new Object[0]);
 		}
 		if (j != 0) {
-			TileEntity localTileEntity = localWorld
-					.getTileEntity(localBlockPosition);
+			TileEntity localTileEntity = localWorld.getTileEntity(localBlockPosition);
 			if (localTileEntity != null) {
 				localNBTTagCompound.setInt("x", localBlockPosition.getX());
 				localNBTTagCompound.setInt("y", localBlockPosition.getY());
@@ -107,9 +97,7 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand{
 		}
 		localWorld.update(localBlockPosition, localIBlockData.getBlock());
 		paramICommandListener.a(EnumCommandResult.AFFECTED_BLOCKS, 1);
-		a(paramICommandListener, this, "commands.setblock.success",
-				new Object[0]);
+		a(paramICommandListener, this, "commands.setblock.success", new Object[0]);
 	}
-
 
 }

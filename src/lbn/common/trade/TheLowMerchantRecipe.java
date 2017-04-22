@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class TheLowMerchantRecipe {
 	MerchantRecipe recipe;
+
 	public TheLowMerchantRecipe(MerchantRecipe recipe) {
 		buy1 = CraftItemStack.asBukkitCopy(recipe.getBuyItem1());
 		buy2 = CraftItemStack.asBukkitCopy(recipe.getBuyItem2());
@@ -55,7 +56,8 @@ public class TheLowMerchantRecipe {
 
 	public MerchantRecipe toMerchantRecipe() {
 		if (recipe == null) {
-			recipe = new MerchantRecipe(CraftItemStack.asNMSCopy(buy1), CraftItemStack.asNMSCopy(buy2), CraftItemStack.asNMSCopy(result), 0 , 2000);
+			recipe = new MerchantRecipe(CraftItemStack.asNMSCopy(buy1), CraftItemStack.asNMSCopy(buy2),
+					CraftItemStack.asNMSCopy(result), 0, 2000);
 		} else {
 			apply(recipe);
 		}
@@ -64,6 +66,7 @@ public class TheLowMerchantRecipe {
 
 	/**
 	 * 引数のMerchantRecipeに現インスタンスの内容で上書きする
+	 * 
 	 * @param bukkitRecipe
 	 */
 	public void apply(MerchantRecipe bukkitRecipe) {

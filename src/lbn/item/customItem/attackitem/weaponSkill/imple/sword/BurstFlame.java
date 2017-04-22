@@ -12,7 +12,7 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
 import lbn.player.ItemType;
 
-public class BurstFlame extends WeaponSkillWithCombat{
+public class BurstFlame extends WeaponSkillWithCombat {
 
 	public BurstFlame() {
 		super(ItemType.SWORD);
@@ -28,8 +28,9 @@ public class BurstFlame extends WeaponSkillWithCombat{
 	}
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
-		//スキル発動待機中ならスキルを発動する
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent event) {
+		// スキル発動待機中ならスキルを発動する
 		if (isWaitingSkill(p)) {
 			livingEntity.setFireTicks((int) (20 * getData(1)));
 			Particles.runParticle(livingEntity.getEyeLocation(), ParticleType.flame, 10);
@@ -42,7 +43,8 @@ public class BurstFlame extends WeaponSkillWithCombat{
 	}
 
 	@Override
-	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e) {
+	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent e) {
 	}
 
 }

@@ -114,9 +114,9 @@ public class Main extends JavaPlugin {
 		}
 
 		try {
-			//最大攻撃力書き換え
+			// 最大攻撃力書き換え
 			((AttributeRanged) GenericAttributes.maxHealth).b = Double.MAX_VALUE;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -145,7 +145,7 @@ public class Main extends JavaPlugin {
 		try {
 			FollowerNpcManager.onEnable();
 
-			//チームに配属する
+			// チームに配属する
 			PlayerTeamManager.setTeamAllPlayer();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -155,8 +155,6 @@ public class Main extends JavaPlugin {
 	public static Collection<? extends Player> getOnlinePlayer() {
 		return plugin.getServer().getOnlinePlayers();
 	}
-
-
 
 	public void registLintener() {
 		getServer().getPluginManager().registerEvents(new LimitedListener(), this);
@@ -211,7 +209,7 @@ public class Main extends JavaPlugin {
 
 		HolographicDisplaysManager.removeAllHologram();
 
-//		NpcManager.allRemove();
+		// NpcManager.allRemove();
 
 		// 全てのプレイヤーのインベントリを閉じる
 		for (Player p : Bukkit.getOnlinePlayers()) {

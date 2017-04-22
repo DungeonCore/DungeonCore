@@ -26,7 +26,8 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
 		this(paramEntityCreature, paramBoolean, false);
 	}
 
-	public TheLowPathfinderGoalTarget(EntityInsentient paramEntityCreature, boolean paramBoolean1, boolean paramBoolean2) {
+	public TheLowPathfinderGoalTarget(EntityInsentient paramEntityCreature, boolean paramBoolean1,
+			boolean paramBoolean2) {
 		this.e = paramEntityCreature;
 		this.f = paramBoolean1;
 		this.a = paramBoolean2;
@@ -56,7 +57,8 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
 				return false;
 			}
 		}
-		if (((localEntityLiving instanceof EntityHuman)) && (((EntityHuman) localEntityLiving).abilities.isInvulnerable)) {
+		if (((localEntityLiving instanceof EntityHuman))
+				&& (((EntityHuman) localEntityLiving).abilities.isInvulnerable)) {
 			return false;
 		}
 		return true;
@@ -77,7 +79,8 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
 		this.e.setGoalTarget(null);
 	}
 
-	public static boolean a(EntityInsentient paramEntityInsentient, EntityLiving paramEntityLiving, boolean paramBoolean1, boolean paramBoolean2) {
+	public static boolean a(EntityInsentient paramEntityInsentient, EntityLiving paramEntityLiving,
+			boolean paramBoolean1, boolean paramBoolean2) {
 		if (paramEntityLiving == null) {
 			return false;
 		}
@@ -95,14 +98,17 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
 		if ((localScoreboardTeamBase1 != null) && (localScoreboardTeamBase2 == localScoreboardTeamBase1)) {
 			return false;
 		}
-		if (((paramEntityInsentient instanceof EntityOwnable)) && (StringUtils.isNotEmpty(((EntityOwnable) paramEntityInsentient).getOwnerUUID()))) {
-			if (((paramEntityLiving instanceof EntityOwnable)) && (((EntityOwnable) paramEntityInsentient).getOwnerUUID().equals(((EntityOwnable) paramEntityLiving).getOwnerUUID()))) {
+		if (((paramEntityInsentient instanceof EntityOwnable))
+				&& (StringUtils.isNotEmpty(((EntityOwnable) paramEntityInsentient).getOwnerUUID()))) {
+			if (((paramEntityLiving instanceof EntityOwnable)) && (((EntityOwnable) paramEntityInsentient)
+					.getOwnerUUID().equals(((EntityOwnable) paramEntityLiving).getOwnerUUID()))) {
 				return false;
 			}
 			if (paramEntityLiving == ((EntityOwnable) paramEntityInsentient).getOwner()) {
 				return false;
 			}
-		} else if (((paramEntityLiving instanceof EntityHuman)) && (!paramBoolean1) && (((EntityHuman) paramEntityLiving).abilities.isInvulnerable)) {
+		} else if (((paramEntityLiving instanceof EntityHuman)) && (!paramBoolean1)
+				&& (((EntityHuman) paramEntityLiving).abilities.isInvulnerable)) {
 			return false;
 		}
 		if ((paramBoolean2) && (!paramEntityInsentient.getEntitySenses().a(paramEntityLiving))) {
@@ -115,9 +121,9 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
 		if (!a(this.e, paramEntityLiving, paramBoolean, this.f)) {
 			return false;
 		}
-//		if (!this.e.d(new BlockPosition(paramEntityLiving))) {
-//			return false;
-//		}
+		// if (!this.e.d(new BlockPosition(paramEntityLiving))) {
+		// return false;
+		// }
 		if (this.a) {
 			if (--this.c <= 0) {
 				this.b = 0;

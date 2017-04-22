@@ -45,23 +45,22 @@ public class ItemRegister {
 		ItemManager.registItem(new MaratKey());
 		ItemManager.registItem(new NativeUnderground());
 
-		//rightClick
+		// rightClick
 		ItemManager.registItem(AbstractMagicBook.getAllItem());
 		ItemManager.registItem(new JumpBoost());
 
-		//questitem
+		// questitem
 		ItemManager.registItem(new Serum());
 
-
-		//弓
+		// 弓
 		ItemManager.registItem(new LaserBow());
 		ItemManager.registItem(new BowOfExplosion());
 		ItemManager.registItem(new DebugBow());
 
-		//魔法
+		// 魔法
 		ItemManager.registItem(NormalMagicItem.getAllItem());
 
-		//SLOT
+		// SLOT
 		ItemManager.registItem(new KillEffectTutorial());
 		ItemManager.registItem(new KillEffectSlotStone1());
 		ItemManager.registItem(new KillEffectSlotStone2());
@@ -75,11 +74,10 @@ public class ItemRegister {
 		ItemManager.registItem(MagicHealMagicStone.getAllItem());
 		OneMobDamageUpSlot.regist();
 
-		//OTHER
+		// OTHER
 		ItemManager.registItem(new StrengthBaseJade());
 
-
-		//chest
+		// chest
 		AlphaWhiteListChest alphaWhiteListChest = new AlphaWhiteListChest();
 		CustomChestManager.registChest(alphaWhiteListChest.getChestLocation(), alphaWhiteListChest);
 	}

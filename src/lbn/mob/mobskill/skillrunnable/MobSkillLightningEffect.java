@@ -5,7 +5,7 @@ import lbn.util.LivingEntityUtil;
 
 import org.bukkit.entity.Entity;
 
-public class MobSkillLightningEffect extends MobSkillRunnable{
+public class MobSkillLightningEffect extends MobSkillRunnable {
 
 	public MobSkillLightningEffect(String data) {
 		super(data);

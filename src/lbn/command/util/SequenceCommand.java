@@ -33,6 +33,7 @@ public class SequenceCommand implements CommandExecutor, UsageCommandable {
 
 		new BukkitRunnable() {
 			int i = 0;
+
 			@Override
 			public void run() {
 				Bukkit.dispatchCommand(arg0, split[i].trim());
@@ -48,15 +49,15 @@ public class SequenceCommand implements CommandExecutor, UsageCommandable {
 
 	@Override
 	public String getUsage() {
-		return "/sequencecommand second command1 & command2 & ... "
-				+ ChatColor.GREEN + "\n '/sequencecommand 1 say 123 & say 456' & say 789' "
-				+ ChatColor.GRAY + "\n ---- 1秒間隔で'/say 123'と'/say 456'と'/say 789'を実行します。"
-				+ ChatColor.GREEN + "\n '/sequencecommand 0 say こんにちは & setblock 60 60 60 1' "
-				+ ChatColor.GRAY + "\n ---- 連続で'/say こんにちわ'と'/setblock 60 60 60 1'を実行します。"
-				+ ChatColor.GREEN + "\n '/sequencecommand 0 say こんにちは & delaycommand 5 say こんばんわ' "
-				+ ChatColor.GRAY + "\n ---- 連続で'/say こんにちわ'と'/delaycommand 5 say こんばんわ'を実行します。"
-				+ ChatColor.GRAY + "\n ---- つまり'/say こんにちわ'を実行した5秒後、'/say こんばんわ'を実行します。"
-				+ ChatColor.GREEN + "\n 応用すればコマンド実行後に穴を作り、10秒後に塞ぐというようなことも出来ます。";
+		return "/sequencecommand second command1 & command2 & ... " + ChatColor.GREEN
+				+ "\n '/sequencecommand 1 say 123 & say 456' & say 789' " + ChatColor.GRAY
+				+ "\n ---- 1秒間隔で'/say 123'と'/say 456'と'/say 789'を実行します。" + ChatColor.GREEN
+				+ "\n '/sequencecommand 0 say こんにちは & setblock 60 60 60 1' " + ChatColor.GRAY
+				+ "\n ---- 連続で'/say こんにちわ'と'/setblock 60 60 60 1'を実行します。" + ChatColor.GREEN
+				+ "\n '/sequencecommand 0 say こんにちは & delaycommand 5 say こんばんわ' " + ChatColor.GRAY
+				+ "\n ---- 連続で'/say こんにちわ'と'/delaycommand 5 say こんばんわ'を実行します。" + ChatColor.GRAY
+				+ "\n ---- つまり'/say こんにちわ'を実行した5秒後、'/say こんばんわ'を実行します。" + ChatColor.GREEN
+				+ "\n 応用すればコマンド実行後に穴を作り、10秒後に塞ぐというようなことも出来ます。";
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
-	//ItemId
+	// ItemId
 	String mainItemId;
 	HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
 
@@ -38,9 +38,9 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
 		return !withMainItem || contains(p.getInventory(), getMainItem());
 	}
 
-
 	/**
 	 * 指定されたアイテムが指定されたインベントリに入っていたらTRUE
+	 * 
 	 * @param inv
 	 * @param item
 	 * @return
@@ -51,7 +51,7 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
 		}
 		for (ItemStack i : inv.getContents()) {
 			if (item.isThisItem(i)) {
-					return true;
+				return true;
 			}
 		}
 		return false;

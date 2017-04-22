@@ -15,7 +15,8 @@ public class SummonPlayerManager {
 
 	public static void addSummon(LivingEntity e, Player p) {
 		if (entityOwnerMap.size() > 100000) {
-			new LbnRuntimeException("summon map is over 100000").printStackTrace();;
+			new LbnRuntimeException("summon map is over 100000").printStackTrace();
+			;
 		}
 		entityOwnerMap.put(e, p);
 	}
@@ -41,7 +42,7 @@ public class SummonPlayerManager {
 	public static ItemType getItemType(Entity damage) {
 		AbstractMob<?> mob = MobHolder.getMob(damage);
 		if (mob.isSummonMob()) {
-			return ((SummonMobable)mob).getUseItemType();
+			return ((SummonMobable) mob).getUseItemType();
 		}
 		return ItemType.IGNORE;
 	}

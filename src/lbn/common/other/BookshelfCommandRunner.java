@@ -19,7 +19,8 @@ public class BookshelfCommandRunner {
 	Location bedRockLoc;
 
 	public BookshelfCommandRunner(PlayerInteractEvent e) {
-		if (e.getAction() == Action.PHYSICAL || e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_AIR) {
+		if (e.getAction() == Action.PHYSICAL || e.getAction() == Action.LEFT_CLICK_AIR
+				|| e.getAction() == Action.RIGHT_CLICK_AIR) {
 			return;
 		}
 
@@ -33,7 +34,6 @@ public class BookshelfCommandRunner {
 		}
 
 		CommandBlock state = null;
-
 
 		Location location = clickedBlock.getLocation();
 		if (location.add(1, 0, 0).getBlock().getType() == Material.COMMAND) {

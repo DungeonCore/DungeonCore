@@ -14,7 +14,7 @@ public class BuffDataFactory {
 	}
 
 	public static BuffData create(String id, PotionEffectType effect, int second, int level) {
-		if(id == null || effect == null) {
+		if (id == null || effect == null) {
 			return null;
 		}
 

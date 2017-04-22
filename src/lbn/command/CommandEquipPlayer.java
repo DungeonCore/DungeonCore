@@ -27,11 +27,10 @@ import org.bukkit.potion.PotionType;
 
 import com.google.common.collect.ImmutableList;
 
-public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
+public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender,
-			Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 
 		if (paramArrayOfString.length == 0) {
@@ -58,8 +57,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		LivingEntityUtil.setEquipment(p, new TestArmorItem(level, Material.LEATHER_HELMET).getItem(),
 				new TestArmorItem(level, Material.LEATHER_CHESTPLATE).getItem(),
 				new TestArmorItem(level, Material.LEATHER_LEGGINGS).getItem(),
-				new TestArmorItem(level, Material.LEATHER_BOOTS).getItem(),
-				0f);
+				new TestArmorItem(level, Material.LEATHER_BOOTS).getItem(), 0f);
 
 		int weaponLevel = isMobTest ? 9 : level;
 
@@ -68,12 +66,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter{
 		ItemStack bow = new TestMagicWeaponItem(getWeaponData(weaponLevel, "MAGIC", Material.IRON_HOE)).getItem();
 
 		PlayerInventory inventory = p.getInventory();
-		inventory.addItem(sword,
-				magic,
-				bow,
-				new ItemStack(Material.ARROW, 64),
-				new ItemStack(Material.BREAD, 64)
-				);
+		inventory.addItem(sword, magic, bow, new ItemStack(Material.ARROW, 64), new ItemStack(Material.BREAD, 64));
 
 		Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
 		potion.setSplash(true);

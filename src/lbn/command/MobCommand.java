@@ -8,11 +8,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class MobCommand implements CommandExecutor{
+public class MobCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender,
-			Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 
 		if (paramArrayOfString.length < 1) {
@@ -26,7 +25,8 @@ public class MobCommand implements CommandExecutor{
 				return true;
 			}
 
-			MobSheetRunnable mobSheetRunnable = new MobSheetRunnable(paramCommandSender, getMobName(paramArrayOfString));
+			MobSheetRunnable mobSheetRunnable = new MobSheetRunnable(paramCommandSender,
+					getMobName(paramArrayOfString));
 			if (mobSheetRunnable.isTransaction()) {
 				paramCommandSender.sendMessage("現在他の人が実行中です。");
 				return true;

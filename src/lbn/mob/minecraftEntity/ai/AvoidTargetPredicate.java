@@ -7,7 +7,7 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 
 import com.google.common.base.Predicate;
 
-public class AvoidTargetPredicate implements Predicate<Entity>{
+public class AvoidTargetPredicate implements Predicate<Entity> {
 
 	boolean isSummonMob;
 
@@ -20,10 +20,10 @@ public class AvoidTargetPredicate implements Predicate<Entity>{
 		CraftEntity bukkitEntity = entity.getBukkitEntity();
 
 		if (isSummonMob) {
-			//summon mobの時は敵ならTRUE
+			// summon mobの時は敵ならTRUE
 			return LivingEntityUtil.isEnemy(bukkitEntity);
 		} else {
-			//summon mobで無い時は友好モブならTRUE
+			// summon mobで無い時は友好モブならTRUE
 			return LivingEntityUtil.isFriendship(bukkitEntity);
 		}
 	}

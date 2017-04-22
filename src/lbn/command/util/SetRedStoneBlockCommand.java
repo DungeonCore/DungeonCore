@@ -10,11 +10,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetRedStoneBlockCommand implements CommandExecutor{
+public class SetRedStoneBlockCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command arg1, String arg2,
-			String[] arg3) {
+	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length != 3) {
 			return false;
 		}

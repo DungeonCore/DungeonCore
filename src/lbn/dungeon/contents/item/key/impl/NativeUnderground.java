@@ -5,7 +5,7 @@ import lbn.item.customItem.key.CommandBlockExceteKey;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-public class NativeUnderground extends CommandBlockExceteKey{
+public class NativeUnderground extends CommandBlockExceteKey {
 
 	@Override
 	public String getItemName() {
@@ -19,7 +19,7 @@ public class NativeUnderground extends CommandBlockExceteKey{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"Native Undergroundで使用可能", "x:1534 y:38 z:243"};
+		return new String[] { "Native Undergroundで使用可能", "x:1534 y:38 z:243" };
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class CommandExecuteLockByTimeCommand implements CommandExecutor{
+public class CommandExecuteLockByTimeCommand implements CommandExecutor {
 	static TaskManager taskManager = new TaskManager();
 
 	static HashMap<Location, Long> executeMap = new HashMap<Location, Long>();
@@ -27,7 +27,7 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 			return true;
 		}
 
-		//実行者の座標を取得
+		// 実行者の座標を取得
 		Location blockLoc = MinecraftUtil.getSenderLocation(paramCommandSender);
 		if (blockLoc == null) {
 			return false;
@@ -45,9 +45,9 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 			return true;
 		}
 
-
 		if (!executeMap.containsKey(blockLoc)) {
-			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length), " ");
+			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length),
+					" ");
 			Bukkit.dispatchCommand(paramCommandSender, command);
 			executeMap.put(blockLoc, System.currentTimeMillis());
 
@@ -56,9 +56,10 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor{
 		}
 
 		long beforeExecuteTime = executeMap.get(blockLoc);
-		//もし(前実行した時間  + 指定した待ち時間) < (今の時間)　ならコマンド実行
+		// もし(前実行した時間 + 指定した待ち時間) < (今の時間) ならコマンド実行
 		if (beforeExecuteTime + second * 1000 < System.currentTimeMillis()) {
-			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length), " ");
+			String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length),
+					" ");
 			Bukkit.dispatchCommand(paramCommandSender, command);
 			executeMap.put(blockLoc, System.currentTimeMillis());
 

@@ -14,18 +14,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class OldAbstractArmor extends AbstractItem implements OldArmorItemable, Strengthenable{
+public abstract class OldAbstractArmor extends AbstractItem implements OldArmorItemable, Strengthenable {
 
 	@Override
-	public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e,
-			ItemStack armor) {
+	public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor) {
 		ArmorMaterial material = getArmorMaterial();
 		if (material != null) {
 			return material.getBaseDamageCut();
 		}
 		return 0;
 	}
-
 
 	@Override
 	public ItemLoreToken getStandardLoreToken() {
@@ -37,8 +35,7 @@ public abstract class OldAbstractArmor extends AbstractItem implements OldArmorI
 	abstract protected List<String> getBaseDefanceDetail();
 
 	@Override
-	public double getBaseBossDamageCuteParcent(Player me, EntityDamageEvent e,
-			ItemStack armor) {
+	public double getBaseBossDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor) {
 		ArmorMaterial material = getArmorMaterial();
 		if (material != null) {
 			return material.getBaseBossDamageCut();
@@ -47,9 +44,8 @@ public abstract class OldAbstractArmor extends AbstractItem implements OldArmorI
 	}
 
 	@Override
-	public double getStrengthDamageCuteParcent(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
-			LivingEntity mob) {
+	public double getStrengthDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor,
+			boolean isArmorCutDamage, boolean isBoss, LivingEntity mob) {
 		if (!isArmorCutDamage) {
 			return 0;
 		}

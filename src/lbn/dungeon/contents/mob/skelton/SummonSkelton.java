@@ -18,7 +18,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
-public class SummonSkelton extends AbstractSkelton implements SummonMobable{
+public class SummonSkelton extends AbstractSkelton implements SummonMobable {
 
 	@Override
 	public String getName() {
@@ -33,7 +33,8 @@ public class SummonSkelton extends AbstractSkelton implements SummonMobable{
 		equipment.setItemInHand(item);
 
 		e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ZOMBIE_UNFECT, 1, 1);
-		new ParticleData(ParticleType.portal, 100).setDispersion(0.5, 0.5, 0.5).run(e.getEntity().getLocation().add(0, 1, 0));
+		new ParticleData(ParticleType.portal, 100).setDispersion(0.5, 0.5, 0.5)
+				.run(e.getEntity().getLocation().add(0, 1, 0));
 	}
 
 	@Override

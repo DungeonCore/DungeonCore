@@ -3,7 +3,7 @@ package lbn.dungeon.contents.item.key.impl;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class MaratKey extends Fragment{
+public class MaratKey extends Fragment {
 
 	public MaratKey() {
 		super(1);
@@ -26,7 +26,7 @@ public class MaratKey extends Fragment{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"Marat Assembly hallで使用可能", "x:630 y:12 z:168"};
+		return new String[] { "Marat Assembly hallで使用可能", "x:630 y:12 z:168" };
 	}
 
 }

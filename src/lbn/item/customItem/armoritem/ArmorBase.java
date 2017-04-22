@@ -32,20 +32,19 @@ public class ArmorBase {
 			return;
 		}
 
-		//落下ダメージの時はレジスタンスポーションの効果を消す
+		// 落下ダメージの時はレジスタンスポーションの効果を消す
 		if (e.getCause() == DamageCause.FALL) {
 			if (e.isApplicable(DamageModifier.RESISTANCE)) {
 				e.setDamage(DamageModifier.RESISTANCE, 0);
 			}
 		}
 
-
 		Player p = (Player) entity;
 
-		//メインレベル
+		// メインレベル
 		int mainLevel;
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-		//データが読み込まれていない時, またはクリエのときはとりあえず装備可能にする
+		// データが読み込まれていない時, またはクリエのときはとりあえず装備可能にする
 		if (theLowPlayer == null || PlayerChecker.isNonNormalPlayer(p)) {
 			mainLevel = 1000;
 		} else {
@@ -102,7 +101,7 @@ public class ArmorBase {
 			isBoss = customMob.isNullMob() || !customMob.isBoss();
 		}
 
-		//装備を取得
+		// 装備を取得
 		EntityEquipment equipment = p.getEquipment();
 
 		double totalArmorPoint = 0;
@@ -113,9 +112,10 @@ public class ArmorBase {
 				continue;
 			}
 
-			//レベルを調べる
+			// レベルを調べる
 			if (customItem.getAvailableLevel() > mainLevel) {
-				p.sendMessage(MessageFormat.format("{0}この防具はメインレベル{1}以上のPlayerのみ効果があります。({2})", ChatColor.RED, mainLevel, customItem.getItemName()));
+				p.sendMessage(MessageFormat.format("{0}この防具はメインレベル{1}以上のPlayerのみ効果があります。({2})", ChatColor.RED,
+						mainLevel, customItem.getItemName()));
 				continue;
 			}
 
@@ -128,19 +128,20 @@ public class ArmorBase {
 					totalArmorPoint += customItem.getArmorPointForNormalMob();
 				}
 			}
-			//アーマーポイントを修正する
+			// アーマーポイントを修正する
 			totalArmorPoint += customItem.getOtherArmorPoint(damage, p, e, isBoss, mob);
 		}
-		//防御ポイントを用いてダメージを修正する
+		// 防御ポイントを用いてダメージを修正する
 		double cutParcent = getDamageCutParcent(totalArmorPoint);
 		damage = damage * cutParcent;
 
-		//ダメージをセット
+		// ダメージをセット
 		e.setDamage(Math.max(damage, 0));
 	}
 
 	/**
 	 * ダメージのカット率を取得
+	 * 
 	 * @param totalArmorPoint
 	 * @return
 	 */

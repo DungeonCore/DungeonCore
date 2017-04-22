@@ -17,7 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-public class Mob1SheetRunnable extends AbstractSheetRunable{
+public class Mob1SheetRunnable extends AbstractSheetRunable {
 
 	public Mob1SheetRunnable(CommandSender p) {
 		super(p);
@@ -48,8 +48,9 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"name", "command", "level", "attack", "hp", "money", "exp", "dropitem1", "droprate1", "dropitem2", "droprate2",
-				"dropitem3", "droprate3", "dropitem4", "droprate4", "mobskill1", "mobskill2", "mobskill3"};
+		return new String[] { "name", "command", "level", "attack", "hp", "money", "exp", "dropitem1", "droprate1",
+				"dropitem2", "droprate2", "dropitem3", "droprate3", "dropitem4", "droprate4", "mobskill1", "mobskill2",
+				"mobskill3" };
 	}
 
 	@Override
@@ -89,20 +90,19 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 
 			SpreadSheetMob2 instance = new SpreadSheetMob2(mobData, command.split(" "), name);
 
-			//DROP ITEM の設定
+			// DROP ITEM の設定
 			setDropItem(row[7], row[8], instance);
 			setDropItem(row[9], row[10], instance);
 			setDropItem(row[11], row[12], instance);
 			setDropItem(row[13], row[14], instance);
 
-
-			//モブがまだ存在していればそのままセットする
+			// モブがまだ存在していればそのままセットする
 			AbstractMob<?> mob = MobHolder.getMob(name);
 			if (mob instanceof BossMobable) {
-				//もしEntityが存在していれば
-				LivingEntity entity = ((BossMobable)mob).getEntity();
+				// もしEntityが存在していれば
+				LivingEntity entity = ((BossMobable) mob).getEntity();
 				if (entity != null) {
-					((BossMobable)instance).setEntity(entity);
+					((BossMobable) instance).setEntity(entity);
 				}
 			}
 
@@ -111,7 +111,7 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 			sendMessage("入力されたDropItemRateが不正です。" + row[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
-			sendMessage("エラーが発生しました。モンスターを登録出来ませんでした:"+ row[0]);
+			sendMessage("エラーが発生しました。モンスターを登録出来ませんでした:" + row[0]);
 		}
 	}
 
@@ -121,12 +121,13 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 
 	/**
 	 * Set
+	 * 
 	 * @param itemId
 	 * @param parcent
 	 * @param instance
 	 */
 	public void setDropItem(String itemId, String parcent, SpreadSheetMob instance) {
-		//DROP ITEM の設定
+		// DROP ITEM の設定
 		if (itemId != null && !itemId.isEmpty()) {
 			ItemStack item = ItemStackUtil.getItemStack(itemId);
 			if (item != null) {

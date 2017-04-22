@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-public class QuestEvent extends PlayerEvent{
+public class QuestEvent extends PlayerEvent {
 
 	protected Quest quest;
 

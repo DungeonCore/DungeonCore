@@ -13,11 +13,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * 全てのプレイヤーが同じ内容のチェストを参照する
+ * 
  * @author kensuke
  *
  */
 public class AllPlayerSameContentChest extends SpletSheetChest {
-
 
 	public AllPlayerSameContentChest(Location chestLoc, Location contentLoc, int refuelTick, Location moveLoc,
 			int minItemCount, int maxItemCount, int moveSec, boolean random) {
@@ -27,7 +27,7 @@ public class AllPlayerSameContentChest extends SpletSheetChest {
 	@Override
 	public void open(Player p, Block block, PlayerInteractEvent e) {
 		if (isFirestOpenWithPlayer(p)) {
-			//最初に開けてから１０秒後にテレポートする
+			// 最初に開けてから１０秒後にテレポートする
 			if (moveLoc != null) {
 				teleportPlayer(p.getName());
 			}
@@ -78,11 +78,11 @@ public class AllPlayerSameContentChest extends SpletSheetChest {
 
 	@Override
 	public void setRefule(SpletSheetChest chest) {
-//		if (chest instanceof AllPlayerSameContentChest) {
-//			set = ((AllPlayerSameContentChest) chest).set;
-//			inv = ((AllPlayerSameContentChest) chest).inv;
-//			notOpen = ((AllPlayerSameContentChest) chest).notOpen;
-//		}
+		// if (chest instanceof AllPlayerSameContentChest) {
+		// set = ((AllPlayerSameContentChest) chest).set;
+		// inv = ((AllPlayerSameContentChest) chest).inv;
+		// notOpen = ((AllPlayerSameContentChest) chest).notOpen;
+		// }
 	}
 
 }

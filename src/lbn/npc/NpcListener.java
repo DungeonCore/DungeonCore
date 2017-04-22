@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-public class NpcListener implements Listener{
+public class NpcListener implements Listener {
 	@EventHandler
 	public void onNPCRightClickEvent(NPCRightClickEvent e) {
 		NpcManager.onNPCRightClickEvent(e);
@@ -46,7 +46,7 @@ public class NpcListener implements Listener{
 		e.setCancelled(true);
 	}
 
-	@EventHandler(priority=EventPriority.MONITOR)
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onDamageEvent(EntityDamageEvent e) {
 		if (NpcManager.isNpc(e.getEntity())) {
 			e.setCancelled(true);

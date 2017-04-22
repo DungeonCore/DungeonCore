@@ -11,7 +11,7 @@ import lbn.mobspawn.point.SpletSheetMobSpawnerPoint;
 
 import org.bukkit.Location;
 
-public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter{
+public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
 
 	public SpletSheetSpawnMobGetter(int id) {
 		this.id = id;
@@ -28,6 +28,7 @@ public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter{
 
 	/**
 	 * 追加に成功したらTRUE
+	 * 
 	 * @param name
 	 * @return
 	 */
@@ -47,8 +48,7 @@ public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter{
 	}
 
 	@Override
-	public MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxMobCount,
-			SpawnLevel level) {
+	public MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxMobCount, SpawnLevel level) {
 		return new SpletSheetMobSpawnerPoint(id, loc, this, maxMobCount, level);
 	}
 

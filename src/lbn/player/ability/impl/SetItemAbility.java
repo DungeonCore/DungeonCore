@@ -6,13 +6,14 @@ import lbn.api.PlayerStatusType;
 import lbn.item.setItem.SetItemPartsType;
 import lbn.player.ability.AbstractItemEquipAbility;
 
-public class SetItemAbility extends AbstractItemEquipAbility{
+public class SetItemAbility extends AbstractItemEquipAbility {
 
 	public SetItemAbility(SetItemPartsType partsType) {
 		id = "setitemability_" + partsType;
 	}
 
 	String id;
+
 	public SetItemAbility(String id) {
 		this.id = id;
 	}
@@ -31,8 +32,11 @@ public class SetItemAbility extends AbstractItemEquipAbility{
 
 	/**
 	 * 追加ステータスを登録する
-	 * @param type ステータスの種類
-	 * @param value 増加値
+	 * 
+	 * @param type
+	 *            ステータスの種類
+	 * @param value
+	 *            増加値
 	 */
 	public void addData(PlayerStatusType type, double value) {
 		statusMap.put(type, value);

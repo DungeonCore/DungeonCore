@@ -20,15 +20,16 @@ import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
-public class CommandGiveSetItem implements CommandExecutor, TabCompleter{
+public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+			String[] paramArrayOfString) {
 		if (!(paramCommandSender instanceof Player)) {
 			return false;
 		}
 
-		if (!((Player)paramCommandSender).isOp()) {
+		if (!((Player) paramCommandSender).isOp()) {
 			return false;
 		}
 
@@ -47,7 +48,7 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter{
 
 		HashMap<SetItemPartsType, SetItemPartable> fullSetItem = setitem.getFullSetItem();
 		for (SetItemPartable setItemParts : fullSetItem.values()) {
-			((Player)paramCommandSender).getInventory().addItem(setItemParts.getItem());
+			((Player) paramCommandSender).getInventory().addItem(setItemParts.getItem());
 		}
 
 		return true;
@@ -58,13 +59,15 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter{
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
 			HashSet<String> itemNameList = getSetItemNameList();
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList,
+					new ArrayList<String>(itemNameList.size()));
 		}
 		return ImmutableList.of();
 	}
 
 	/**
 	 * アイテム名一覧を取得
+	 * 
 	 * @return
 	 */
 	public HashSet<String> getSetItemNameList() {

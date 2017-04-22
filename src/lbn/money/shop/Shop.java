@@ -22,6 +22,7 @@ public class Shop {
 
 	/**
 	 * ショップ用のインベントリを取得
+	 * 
 	 * @return
 	 */
 	public Inventory getShopInventory() {
@@ -30,7 +31,8 @@ public class Shop {
 		if (arrayList == null) {
 			return null;
 		}
-		Inventory createInventory = Bukkit.createInventory(null, ((int)(arrayList.size() / 9) + 1) * 9, getName() + " shop");
+		Inventory createInventory = Bukkit.createInventory(null, ((int) (arrayList.size() / 9) + 1) * 9,
+				getName() + " shop");
 
 		int i = 0;
 		for (ShopItem shopItem : arrayList) {
@@ -42,8 +44,10 @@ public class Shop {
 	}
 
 	static ArrayList<ShopItem> arrayList = null;
+
 	/**
 	 * 商品を取得
+	 * 
 	 * @return
 	 */
 	protected ArrayList<ShopItem> getShopItemList() {
@@ -52,37 +56,51 @@ public class Shop {
 		}
 		arrayList = new ArrayList<ShopItem>();
 
-//		for (ItemInterface item : NormalSwordWrapper.getAllNormalItem()) {
-//			arrayList.add(new ShopItem(item.getItem(), Math.max(((NormalSwordWrapper)item).getAvailableLevel() * 200 + 20, 330)));
-//		}
-//		arrayList.add(ShopItem.getBlank());
-//
-//		for (ItemInterface item : NormalBowWrapper.getAllNormalItem()) {
-//			arrayList.add(new ShopItem(item.getItem(), Math.max(((NormalBowWrapper)item).getAvailableLevel() * 200 + 20, 330)));
-//		}
-//		arrayList.add(ShopItem.getBlank());
-//
-//		for (ItemInterface item : NormalMagicItem.getAllItem()) {
-//			arrayList.add(new ShopItem(item.getItem(), Math.max(((NormalMagicItem)item).getAvailableLevel() * 200 + 20, 330)));
-//		}
-//		arrayList.add(ShopItem.getBlank());
-//
-//		arrayList.add(new ShopItem(LeatherArmor.getLeatherHelmet().getItem(), 80));
-//		arrayList.add(new ShopItem(LeatherArmor.getLeatherChestplate().getItem(), 80));
-//		arrayList.add(new ShopItem(LeatherArmor.getLeatherLeggings().getItem(), 80));
-//		arrayList.add(new ShopItem(LeatherArmor.getLeatherBoots().getItem(), 80));
-//		arrayList.add(ShopItem.getBlank());
-//		arrayList.add(ShopItem.getBlank());
-//		arrayList.add(ShopItem.getBlank());
-//		arrayList.add(ShopItem.getBlank());
-//		arrayList.add(ShopItem.getBlank());
-//
-//		arrayList.add(new ShopItem(new ItemStack(Material.MELON), 1));
-//		arrayList.add(new ShopItem(new ItemStack(Material.MELON), 1 * 60, 64));
-//		arrayList.add(new ShopItem(new Potion(PotionType.INSTANT_HEAL, 1).toItemStack(1), 10));
-//		arrayList.add(new ShopItem(new Potion(PotionType.SPEED, 1).toItemStack(1), 10000));
-//		arrayList.add(new ShopItem(new ItemStack(Material.ARROW), 2));
-//		arrayList.add(new ShopItem(new ItemStack(Material.ARROW), 60 * 2, 64));
+		// for (ItemInterface item : NormalSwordWrapper.getAllNormalItem()) {
+		// arrayList.add(new ShopItem(item.getItem(),
+		// Math.max(((NormalSwordWrapper)item).getAvailableLevel() * 200 + 20,
+		// 330)));
+		// }
+		// arrayList.add(ShopItem.getBlank());
+		//
+		// for (ItemInterface item : NormalBowWrapper.getAllNormalItem()) {
+		// arrayList.add(new ShopItem(item.getItem(),
+		// Math.max(((NormalBowWrapper)item).getAvailableLevel() * 200 + 20,
+		// 330)));
+		// }
+		// arrayList.add(ShopItem.getBlank());
+		//
+		// for (ItemInterface item : NormalMagicItem.getAllItem()) {
+		// arrayList.add(new ShopItem(item.getItem(),
+		// Math.max(((NormalMagicItem)item).getAvailableLevel() * 200 + 20,
+		// 330)));
+		// }
+		// arrayList.add(ShopItem.getBlank());
+		//
+		// arrayList.add(new ShopItem(LeatherArmor.getLeatherHelmet().getItem(),
+		// 80));
+		// arrayList.add(new
+		// ShopItem(LeatherArmor.getLeatherChestplate().getItem(), 80));
+		// arrayList.add(new
+		// ShopItem(LeatherArmor.getLeatherLeggings().getItem(), 80));
+		// arrayList.add(new ShopItem(LeatherArmor.getLeatherBoots().getItem(),
+		// 80));
+		// arrayList.add(ShopItem.getBlank());
+		// arrayList.add(ShopItem.getBlank());
+		// arrayList.add(ShopItem.getBlank());
+		// arrayList.add(ShopItem.getBlank());
+		// arrayList.add(ShopItem.getBlank());
+		//
+		// arrayList.add(new ShopItem(new ItemStack(Material.MELON), 1));
+		// arrayList.add(new ShopItem(new ItemStack(Material.MELON), 1 * 60,
+		// 64));
+		// arrayList.add(new ShopItem(new Potion(PotionType.INSTANT_HEAL,
+		// 1).toItemStack(1), 10));
+		// arrayList.add(new ShopItem(new Potion(PotionType.SPEED,
+		// 1).toItemStack(1), 10000));
+		// arrayList.add(new ShopItem(new ItemStack(Material.ARROW), 2));
+		// arrayList.add(new ShopItem(new ItemStack(Material.ARROW), 60 * 2,
+		// 64));
 		return arrayList;
 	}
 
@@ -97,6 +115,7 @@ public class Shop {
 
 	/**
 	 * ShopItemを設定したItemStackからShopItemを取得
+	 * 
 	 * @param shopItem
 	 * @param error
 	 * @return
@@ -109,13 +128,13 @@ public class Shop {
 		ItemStack cloneItem = shopItem.clone();
 		String id = ItemStackUtil.getId(cloneItem);
 
-		//もしIDがなければアイテムのLoreを取り除きそのまま渡す(通常のマイクラのアイテム)
+		// もしIDがなければアイテムのLoreを取り除きそのまま渡す(通常のマイクラのアイテム)
 		if (id == null) {
 			ItemStackUtil.setLore(cloneItem, new ArrayList<String>());
 		} else {
-			//idがある場合はCustomItemとみなし、idから逆引きする
+			// idがある場合はCustomItemとみなし、idから逆引きする
 			ItemInterface customItemById = ItemManager.getCustomItemById(id);
-			//もしそのidに対応したアイテムがなければ購入できないためnullにしておく
+			// もしそのidに対応したアイテムがなければ購入できないためnullにしておく
 			if (customItemById == null) {
 				if (error) {
 					new LbnRuntimeException("存在しないアイテムIDです。:" + customItemById).printStackTrace();
@@ -135,7 +154,8 @@ public class Shop {
 					count = Integer.parseInt(ChatColor.stripColor(string.replace("Quantity : ", "")));
 				}
 				if (string.contains("Price : ")) {
-					price = Integer.parseInt(ChatColor.stripColor(string.replace("Price : ", "").replace("Galions", "").trim()));
+					price = Integer.parseInt(
+							ChatColor.stripColor(string.replace("Price : ", "").replace("Galions", "").trim()));
 				}
 			} catch (NumberFormatException e) {
 				if (error) {

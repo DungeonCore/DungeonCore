@@ -12,10 +12,11 @@ public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 		super(l, f);
 	}
 
-
 	boolean isRunParticle = true;
+
 	/**
 	 * 爆発のパーティクルを発生させるかどうかセットする
+	 * 
 	 * @param isRunParticle
 	 */
 	public void setRunParticle(boolean isRunParticle) {

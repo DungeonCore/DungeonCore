@@ -9,7 +9,7 @@ import lbn.mobspawn.gettter.AbstractSpawnMobGetter;
 
 import org.bukkit.entity.EntityType;
 
-public class SkeltonMobGetter extends AbstractSpawnMobGetter{
+public class SkeltonMobGetter extends AbstractSpawnMobGetter {
 
 	@Override
 	public String getName() {
@@ -20,6 +20,7 @@ public class SkeltonMobGetter extends AbstractSpawnMobGetter{
 	static {
 		mobList.add(new NormalMob(EntityType.SKELETON));
 	}
+
 	@Override
 	public List<AbstractMob<?>> getAllMobList() {
 		return mobList;

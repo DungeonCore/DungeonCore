@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class JumpBoost extends RightClickItem{
+public class JumpBoost extends RightClickItem {
 	@Override
 	public String getItemName() {
 		return "Jumping Feather";
@@ -31,7 +31,6 @@ public class JumpBoost extends RightClickItem{
 			return false;
 		}
 
-
 		player.setVelocity(new Vector(0, 2, 0));
 		player.getWorld().playSound(player.getLocation(), Sound.BAT_LOOP, 1, 3);
 		new ParticleData(ParticleType.crit, 100).setDispersion(0.5, 0.5, 0.5).run(player.getLocation());
@@ -43,12 +42,12 @@ public class JumpBoost extends RightClickItem{
 
 	@Override
 	protected Material getMaterial() {
-		return  Material.FEATHER;
+		return Material.FEATHER;
 	}
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"右クリックをすることで", "真上に飛べます。"};
+		return new String[] { "右クリックをすることで", "真上に飛べます。" };
 	}
 
 	@Override

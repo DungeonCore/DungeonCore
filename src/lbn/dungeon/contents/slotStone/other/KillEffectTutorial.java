@@ -8,7 +8,7 @@ import lbn.item.slot.SlotLevel;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 
-public class KillEffectTutorial extends AbstractKillEffectSlotStone{
+public class KillEffectTutorial extends AbstractKillEffectSlotStone {
 
 	ParticleData particleData = new ParticleData(ParticleType.flame, 50);
 	{

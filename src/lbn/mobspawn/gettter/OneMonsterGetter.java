@@ -5,8 +5,9 @@ import java.util.List;
 
 import lbn.mob.AbstractMob;
 
-public class OneMonsterGetter extends AbstractSpawnMobGetter{
+public class OneMonsterGetter extends AbstractSpawnMobGetter {
 	AbstractMob<?> mob;
+
 	public OneMonsterGetter(AbstractMob<?> mob) {
 		this.mob = mob;
 	}

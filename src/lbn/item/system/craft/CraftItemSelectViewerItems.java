@@ -22,7 +22,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-
 public class CraftItemSelectViewerItems {
 	private static final String NOT_CRAFT_LINE = ChatColor.RED + "" + ChatColor.BOLD + "素材が足りないためアイテムを作成出来ません";
 	private static final String CRAFT_MATERIAL_LORE_TITLE = "クラフト素材";
@@ -34,38 +33,37 @@ public class CraftItemSelectViewerItems {
 
 		boolean isValid = true;
 
-		//LoreDataを生成
+		// LoreDataを生成
 		ItemLoreData itemLoreData = new ItemLoreData(itemstack, new CraftViewerLoreComparator());
 
-		//素材のLoreを取得
+		// 素材のLoreを取得
 		ItemLoreToken materialLore = getLoreTokenFromRecipe(craftRecipe);
 		if (materialLore == null) {
 			isValid = false;
 		}
 
-
-		//エラーがあるなら
+		// エラーがあるなら
 		if (!isValid) {
 			return ItemStackUtil.getItem(craftItem.getItemName(), Material.BARRIER, "エラーがあるので生成出来ません");
 		}
-		//材料のLoreを追加する
+		// 材料のLoreを追加する
 		itemLoreData.addLore(materialLore);
 
-		//SlotのLoreを削除する
+		// SlotのLoreを削除する
 		itemLoreData.removeLore(ItemLoreToken.TITLE_SLOT);
 
-		//Slotを装着できるならSlotの情報をのせる
+		// Slotを装着できるならSlotの情報をのせる
 		if (ItemManager.isImplemental(CombatItemable.class, craftItem)) {
 			ItemLoreToken loreToken = itemLoreData.getLoreToken(ItemLoreToken.TITLE_STANDARD);
-			loreToken.addLore(LoreLine.getLoreLine("最大スロット数", ((CombatItemable)craftItem).getMaxSlotCount()));
-			loreToken.addLore(LoreLine.getLoreLine("初期スロット数", ((CombatItemable)craftItem).getDefaultSlotCount()));
+			loreToken.addLore(LoreLine.getLoreLine("最大スロット数", ((CombatItemable) craftItem).getMaxSlotCount()));
+			loreToken.addLore(LoreLine.getLoreLine("初期スロット数", ((CombatItemable) craftItem).getDefaultSlotCount()));
 
 			itemLoreData.addLore(materialLore);
 		}
 
 		ItemStackUtil.setLore(itemstack, itemLoreData.getLore());
 
-		//IDをつける
+		// IDをつける
 		ItemStackUtil.setNBTTag(itemstack, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT, craftItem.getId());
 
 		return itemstack;
@@ -73,14 +71,15 @@ public class CraftItemSelectViewerItems {
 
 	/**
 	 * レシピからLoreTokenを取得。もしエラーがあるならnullを返す
+	 * 
 	 * @param craftRecipe
 	 * @return
 	 */
 	public static ItemLoreToken getLoreTokenFromRecipe(TheLowCraftRecipeInterface craftRecipe) {
 		ItemLoreToken materialLore = new ItemLoreToken(CRAFT_MATERIAL_LORE_TITLE);
-		//メインアイテムがあるならTRUE
+		// メインアイテムがあるならTRUE
 		if (craftRecipe.hasMainItem()) {
-			//メインアイテムがないならエラーとする
+			// メインアイテムがないならエラーとする
 			ItemInterface mainItem = craftRecipe.getMainItem();
 			if (mainItem != null) {
 				materialLore.addLore(mainItem.getItemName(), ChatColor.LIGHT_PURPLE);
@@ -89,13 +88,14 @@ public class CraftItemSelectViewerItems {
 			}
 		}
 
-		//材料を追加する
+		// 材料を追加する
 		Map<ItemInterface, Integer> materialMap = craftRecipe.getMaterialMap();
 		if (materialMap != null) {
 			for (Entry<ItemInterface, Integer> entry : materialMap.entrySet()) {
 				ItemInterface materialItem = entry.getKey();
 				if (materialItem != null) {
-					materialLore.addLore(MessageFormat.format("{0}  {1}個", materialItem.getItemName(), entry.getValue()));
+					materialLore
+							.addLore(MessageFormat.format("{0}  {1}個", materialItem.getItemName(), entry.getValue()));
 				} else {
 					return null;
 				}
@@ -108,12 +108,13 @@ public class CraftItemSelectViewerItems {
 
 	/**
 	 * 素材が足りないからクラフトできないという文をLoreに追加する
+	 * 
 	 * @param item
 	 */
 	public static void addDontHasMaterial(ItemStack item) {
-		//まずは削除する
+		// まずは削除する
 		List<String> lore = removeDontHasMaterialLine(item);
-		//一番最初に追加する
+		// 一番最初に追加する
 		ArrayList<String> newLore = new ArrayList<String>();
 		newLore.add(NOT_CRAFT_LINE);
 		newLore.addAll(lore);
@@ -122,19 +123,20 @@ public class CraftItemSelectViewerItems {
 
 	/**
 	 * 素材が足りないからクラフト出来ないという文をLoreから削除する
+	 * 
 	 * @param item
 	 * @return
 	 */
 	public static List<String> removeDontHasMaterialLine(ItemStack item) {
 		List<String> lore = ItemStackUtil.getLore(item);
-		//もしすでに警告文が存在するなら何もしない
+		// もしすでに警告文が存在するなら何もしない
 		Iterator<String> iterator = lore.iterator();
 		while (iterator.hasNext()) {
 			String line = iterator.next();
 			if (NOT_CRAFT_LINE.equals(line)) {
 				iterator.remove();
 			} else {
-				//もし警告文でなければこれ以上警告文がないと判断する
+				// もし警告文でなければこれ以上警告文がないと判断する
 				return lore;
 			}
 		}

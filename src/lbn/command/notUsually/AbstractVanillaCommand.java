@@ -8,22 +8,22 @@ import net.minecraft.server.v1_8_R1.CommandException;
 import net.minecraft.server.v1_8_R1.ExceptionUsage;
 import net.minecraft.server.v1_8_R1.ICommandListener;
 
-public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand{
+public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand {
 
 	protected CommandAbstract command;
+
 	public AbstractVanillaCommand(CommandAbstract command) {
 		this.command = command;
 	}
 
 	@Override
-	final public void execute(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws ExceptionUsage,
-			CommandException {
-			execute2(paramICommandListener,paramArrayOfString);
+	final public void execute(ICommandListener paramICommandListener, String[] paramArrayOfString)
+			throws ExceptionUsage, CommandException {
+		execute2(paramICommandListener, paramArrayOfString);
 	}
 
-	abstract protected void execute2(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws ExceptionUsage,	CommandException;
+	abstract protected void execute2(ICommandListener paramICommandListener, String[] paramArrayOfString)
+			throws ExceptionUsage, CommandException;
 
 	@Override
 	public int a() {
@@ -47,10 +47,9 @@ public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand{
 	}
 
 	@Override
-	public List<?> tabComplete(ICommandListener paramICommandListener,
-			String[] paramArrayOfString, BlockPosition paramBlockPosition) {
-		return command.tabComplete(paramICommandListener, paramArrayOfString,
-				paramBlockPosition);
+	public List<?> tabComplete(ICommandListener paramICommandListener, String[] paramArrayOfString,
+			BlockPosition paramBlockPosition) {
+		return command.tabComplete(paramICommandListener, paramArrayOfString, paramBlockPosition);
 	}
 
 	@Override

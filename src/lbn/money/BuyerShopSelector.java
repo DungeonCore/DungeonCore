@@ -30,12 +30,12 @@ public class BuyerShopSelector {
 	public static void onSelect(InventoryInteractEvent e) {
 		InventoryView view = e.getView();
 		String title = view.getTitle();
-		//もしセレクト画面でないなら何もしない
+		// もしセレクト画面でないなら何もしない
 		if (title == null || !title.contains(SHOP_MENU)) {
 			return;
 		}
 		e.setCancelled(true);
-		//クリックでないなら何もしない
+		// クリックでないなら何もしない
 		if (!(e instanceof InventoryClickEvent)) {
 			return;
 		}

@@ -5,7 +5,7 @@ import lbn.mob.mobskill.MobSkillRunnable;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-public class MobSkillTpToMob extends MobSkillRunnable{
+public class MobSkillTpToMob extends MobSkillRunnable {
 
 	public MobSkillTpToMob(String data) {
 		super(data);
@@ -16,7 +16,7 @@ public class MobSkillTpToMob extends MobSkillRunnable{
 		if (mob.isValid() && target.isValid()) {
 			Vector vectorMob = mob.getLocation().toVector();
 			Vector vectorDamager = target.getLocation().toVector();
-			target.setVelocity(vectorDamager.subtract(vectorMob).multiply(- 0.5));
+			target.setVelocity(vectorDamager.subtract(vectorMob).multiply(-0.5));
 		}
 	}
 

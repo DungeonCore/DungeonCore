@@ -10,10 +10,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class SilfiaNpcMenu implements MenuSelectorInterface{
+public class SilfiaNpcMenu implements MenuSelectorInterface {
 
-	private static final ItemStack close = ItemStackUtil.getItem("メニューを閉じる", Material.WOOL, (byte)14, "");
-	private static final ItemStack hideNpc = ItemStackUtil.getItem("NPCを非表示にする", Material.WOOL, (byte)1, "");
+	private static final ItemStack close = ItemStackUtil.getItem("メニューを閉じる", Material.WOOL, (byte) 14, "");
+	private static final ItemStack hideNpc = ItemStackUtil.getItem("NPCを非表示にする", Material.WOOL, (byte) 1, "");
 
 	@Override
 	public void open(Player p) {

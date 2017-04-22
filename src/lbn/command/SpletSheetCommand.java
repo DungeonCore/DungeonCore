@@ -39,7 +39,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.util.StringUtil;
 
-public class SpletSheetCommand implements CommandExecutor, TabCompleter{
+public class SpletSheetCommand implements CommandExecutor, TabCompleter {
 	static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
 	static {
 		ConsoleCommandSender sender = Bukkit.getConsoleSender();
@@ -120,7 +120,8 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter{
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
 			Set<String> sheetNameList = sheetMap.keySet();
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], sheetNameList, new ArrayList<String>(sheetNameList.size()));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[0], sheetNameList,
+					new ArrayList<String>(sheetNameList.size()));
 		}
 		return null;
 	}

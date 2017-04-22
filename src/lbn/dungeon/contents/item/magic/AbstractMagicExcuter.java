@@ -5,9 +5,10 @@ import lbn.item.system.strength.StrengthOperator;
 
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractMagicExcuter implements MagicExcuteable{
+public abstract class AbstractMagicExcuter implements MagicExcuteable {
 
-	public AbstractMagicExcuter(ItemStack item, int cooltimeTick, int needMagicPoint, String id, boolean isShowMessage) {
+	public AbstractMagicExcuter(ItemStack item, int cooltimeTick, int needMagicPoint, String id,
+			boolean isShowMessage) {
 		this.item = item;
 		this.cooltimeTick = cooltimeTick;
 		this.needMagicPoint = needMagicPoint;
@@ -20,7 +21,6 @@ public abstract class AbstractMagicExcuter implements MagicExcuteable{
 	int needMagicPoint;
 	String id;
 	boolean isShowMessage;
-
 
 	@Override
 	public String getId() {

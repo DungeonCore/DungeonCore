@@ -17,14 +17,15 @@ import org.bukkit.entity.Player;
 public class QuestUtil {
 	/**
 	 * 村人から受けたクエストのクリア条件が満たされたときの処理
+	 * 
 	 * @param villagerName
 	 * @param p
 	 */
 	public static void sendSatisfyComplateForVillager(String villagerId, Player p) {
-		//TODO 音追加
+		// TODO 音追加
 
 		VillagerNpc npc = VillagerNpcManager.getVillagerNpcById(villagerId);
-		//NPCが登録されていなければIDをそのまま返す
+		// NPCが登録されていなければIDをそのまま返す
 		if (npc == null) {
 			p.sendMessage("クエストクリア!!!  " + villagerId + "のところに戻ろう！！");
 			return;
@@ -34,22 +35,17 @@ public class QuestUtil {
 
 		String loc;
 		if (location != null) {
-			loc = MessageFormat.format("{0}, {1}, {2}", location.getBlockX(), location.getBlockY(), location.getBlockZ());
+			loc = MessageFormat.format("{0}, {1}, {2}", location.getBlockX(), location.getBlockY(),
+					location.getBlockZ());
 		} else {
 			loc = "現在は村人が存在しません";
 		}
 
 		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-		String command = MessageFormat.format("tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
-				p.getName(),
-				"クエストクリア!!!  ",
-				npc.getName(),
-				npc.getEntityType(),
-				loc,
-				"のところに戻ろう",
-				QuestAnnouncement.QUEST_INFO_PREFIX,
-				"{"
-				);
+		String command = MessageFormat.format(
+				"tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
+				p.getName(), "クエストクリア!!!  ", npc.getName(), npc.getEntityType(), loc, "のところに戻ろう",
+				QuestAnnouncement.QUEST_INFO_PREFIX, "{");
 		Bukkit.dispatchCommand(consoleSender, command);
 	}
 
@@ -60,7 +56,7 @@ public class QuestUtil {
 			return;
 		}
 
-		//現在、チャット中なら何もしない
+		// 現在、チャット中なら何もしない
 		if (inChatPlayer.contains(p.getUniqueId())) {
 			return;
 		}
@@ -69,24 +65,24 @@ public class QuestUtil {
 		new LbnRunnable() {
 			@Override
 			public void run2() {
-				//Playerがオフラインなら終了
+				// Playerがオフラインなら終了
 				if (!p.isOnline()) {
 					cancel();
-					//チャット中から削除する
+					// チャット中から削除する
 					inChatPlayer.remove(p.getUniqueId());
 					return;
 				}
 
-				//もし現在のカウントがテキストの行以上ならストップ
+				// もし現在のカウントがテキストの行以上ならストップ
 				if (text.length <= getRunCount()) {
 					cancel();
-					//チャット中から削除する
+					// チャット中から削除する
 					inChatPlayer.remove(p.getUniqueId());
 					return;
 				}
-				//逐次的にテキストを表示する
+				// 逐次的にテキストを表示する
 				p.sendMessage(ChatColor.GOLD + text[getRunCount()]);
-				//チャット中ということを記録する
+				// チャット中ということを記録する
 				inChatPlayer.add(p.getUniqueId());
 			}
 		}.runTaskTimer(15);

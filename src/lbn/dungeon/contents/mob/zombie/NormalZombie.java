@@ -9,7 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class NormalZombie extends AbstractZombie{
+public class NormalZombie extends AbstractZombie {
 
 	@Override
 	public String getName() {

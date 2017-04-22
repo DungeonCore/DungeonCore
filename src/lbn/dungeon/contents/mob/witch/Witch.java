@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class Witch extends AbstractWitch{
+public class Witch extends AbstractWitch {
 
 	@Override
 	public String getName() {
@@ -20,14 +20,12 @@ public class Witch extends AbstractWitch{
 	}
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target,
-			EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
 
 	}
 
 	@Override
-	public void onDamage(LivingEntity mob, Entity damager,
-			EntityDamageByEntityEvent e) {
+	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 
 	}
 

@@ -3,16 +3,11 @@ package lbn.mobspawn;
 import java.util.ArrayList;
 
 public enum SpawnLevel {
-	LEVEL1(20 * 30),
-	LEVEL2(20 * 35),
-	LEVEL3(20 * 40),
-	LEVEL4(20 * 45),
-	LEVEL5(20 * 50),
-	BOSS(20 * 35);
+	LEVEL1(20 * 30), LEVEL2(20 * 35), LEVEL3(20 * 40), LEVEL4(20 * 45), LEVEL5(20 * 50), BOSS(20 * 35);
 
 	int num;
 
-	private SpawnLevel(int  num) {
+	private SpawnLevel(int num) {
 		this.num = num;
 	}
 

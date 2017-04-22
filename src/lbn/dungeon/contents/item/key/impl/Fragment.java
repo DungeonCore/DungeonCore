@@ -11,9 +11,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Fragment  extends AbstractKeyItem{
+public class Fragment extends AbstractKeyItem {
 
-	int  no;
+	int no;
+
 	public Fragment(int no) {
 		this.no = no;
 	}
@@ -35,7 +36,7 @@ public class Fragment  extends AbstractKeyItem{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"クロキナコダンジョンで使用可能", "x:1223 y:13 z:375"};
+		return new String[] { "クロキナコダンジョンで使用可能", "x:1223 y:13 z:375" };
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class Fragment  extends AbstractKeyItem{
 		final Location add3 = add2.add(0, 1, 0);
 		add3.getBlock().setType(Material.REDSTONE_TORCH_ON);
 
-		//アイテムを減らせる
+		// アイテムを減らせる
 		ItemStack itemInHand = p.getItemInHand();
 		if (itemInHand.getAmount() == 1) {
 			p.setItemInHand(new ItemStack(Material.AIR));
@@ -87,7 +88,7 @@ public class Fragment  extends AbstractKeyItem{
 	}
 
 	public static Fragment[] getAllFragment() {
-		return new Fragment[]{new Fragment(1), new Fragment(2), new Fragment(3), new Fragment(4), new Fragment(5)};
+		return new Fragment[] { new Fragment(1), new Fragment(2), new Fragment(3), new Fragment(4), new Fragment(5) };
 	}
 
 	@Override

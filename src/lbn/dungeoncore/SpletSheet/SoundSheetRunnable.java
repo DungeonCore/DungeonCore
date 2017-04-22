@@ -11,7 +11,7 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
-public class SoundSheetRunnable extends AbstractSheetRunable{
+public class SoundSheetRunnable extends AbstractSheetRunable {
 
 	public SoundSheetRunnable(CommandSender p) {
 		super(p);
@@ -29,7 +29,7 @@ public class SoundSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "sound", "volume", "pitch"};
+		return new String[] { "id", "sound", "volume", "pitch" };
 	}
 
 	@Override

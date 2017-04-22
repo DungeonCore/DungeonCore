@@ -2,7 +2,7 @@ package lbn.dungeon.contents.strength_template;
 
 import org.bukkit.inventory.ItemStack;
 
-public class ChangeStrengthItemTemplate implements StrengthTemplate{
+public class ChangeStrengthItemTemplate implements StrengthTemplate {
 
 	ItemStack material;
 	int needGalion;

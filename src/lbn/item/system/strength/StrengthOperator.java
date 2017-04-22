@@ -20,20 +20,22 @@ import org.bukkit.inventory.ItemStack;
 public class StrengthOperator {
 	/**
 	 * 指定されたアイテムのレベルを取得
+	 * 
 	 * @param strength
 	 * @param item
 	 * @return
 	 */
 	public static int getLevel(ItemStack item) {
 		ItemInterface customItem = ItemManager.getCustomItem(item);
-		//強化できないアイテムなら何もしない
+		// 強化できないアイテムなら何もしない
 		if (customItem == null || !(customItem instanceof Strengthenable)) {
 			return 0;
 		}
 		Strengthenable strength = (Strengthenable) customItem;
 
 		String dispName = ItemStackUtil.getName(item);
-		String replace = dispName.replace(strength.getItemName(), "").replace( ChatColor.RESET.toString() + ChatColor.RED +  " +", "").trim();
+		String replace = dispName.replace(strength.getItemName(), "")
+				.replace(ChatColor.RESET.toString() + ChatColor.RED + " +", "").trim();
 
 		if (!replace.isEmpty() && NumberUtils.isDigits(replace)) {
 			return Integer.parseInt(replace);
@@ -43,16 +45,17 @@ public class StrengthOperator {
 
 	/**
 	 * 指定されたアイテムを指定されたレベルに強化する
+	 * 
 	 * @param strength
 	 * @param item
 	 * @param toLevel
 	 */
 	public static void updateLore(ItemStack item, int toLevel) {
-		//もとのアイテム
+		// もとのアイテム
 		ItemStack clone = item.clone();
 
 		ItemInterface customItem = ItemManager.getCustomItem(item);
-		//強化できないアイテムなら何もしない
+		// 強化できないアイテムなら何もしない
 		if (customItem == null || !customItem.isStrengthItem()) {
 			return;
 		}
@@ -65,33 +68,34 @@ public class StrengthOperator {
 			toLevel = strength.getMaxStrengthCount();
 		}
 
-
 		ItemLoreData itemLoreData = new ItemLoreData(item);
 		itemLoreData.addLore(getStrengthLoreToken(strength, toLevel));
 
 		ItemStackUtil.setLore(item, itemLoreData.getLore());
 
-		//nameを変更する
+		// nameを変更する
 		if (toLevel == 0) {
 			ItemStackUtil.setDispName(item, strength.getItemName());
 		} else {
-			ItemStackUtil.setDispName(item, strength.getItemName() + ChatColor.RESET + ChatColor.RED +  " +" + toLevel);
+			ItemStackUtil.setDispName(item, strength.getItemName() + ChatColor.RESET + ChatColor.RED + " +" + toLevel);
 		}
 
-		//TODO getAfterで更新させる
-		ChangeStrengthLevelItemEvent event = new ChangeStrengthLevelItemEvent(clone, item, StrengthOperator.getLevel(clone), toLevel);
+		// TODO getAfterで更新させる
+		ChangeStrengthLevelItemEvent event = new ChangeStrengthLevelItemEvent(clone, item,
+				StrengthOperator.getLevel(clone), toLevel);
 		Bukkit.getServer().getPluginManager().callEvent(event);
 	}
 
 	/**
 	 * 強化性能のLoreを取得
+	 * 
 	 * @param strength
 	 * @param level
 	 * @return
 	 */
 	public static ItemLoreToken getStrengthLoreToken(Strengthenable strength, int level) {
 		ItemLoreToken itemLoreToken = new ItemLoreToken(ItemLoreToken.TITLE_STRENGTH);
-		//Loreをセットする
+		// Loreをセットする
 		strength.setStrengthDetail(level, itemLoreToken);
 
 		if (itemLoreToken.size() == 0) {
@@ -101,7 +105,7 @@ public class StrengthOperator {
 	}
 
 	@Deprecated
-		public static void addStrengthLore(List<String> strengthLore, List<String> lore) {
+	public static void addStrengthLore(List<String> strengthLore, List<String> lore) {
 		lore.add(ChatColor.GREEN + "[強化性能]");
 		if (strengthLore == null || strengthLore.size() == 0) {
 			lore.add(ChatColor.YELLOW + "    なし");
@@ -119,7 +123,7 @@ public class StrengthOperator {
 
 	public static void removedStrengthLore(List<String> lore) {
 		boolean inLine = false;
-		//Loreを変更する
+		// Loreを変更する
 		Iterator<String> iterator = lore.iterator();
 		while (iterator.hasNext()) {
 			String line = iterator.next();
@@ -138,7 +142,7 @@ public class StrengthOperator {
 	}
 
 	public static ItemStack getItem(ItemStack item, int level) {
-		//強化できるアイテムか確認
+		// 強化できるアイテムか確認
 		ItemInterface itemInterface = ItemManager.getCustomItem(item);
 		if (itemInterface == null) {
 			return item;
@@ -152,6 +156,7 @@ public class StrengthOperator {
 
 	/**
 	 * 強化できるアイテムならTRUE
+	 * 
 	 * @param item
 	 * @return
 	 */

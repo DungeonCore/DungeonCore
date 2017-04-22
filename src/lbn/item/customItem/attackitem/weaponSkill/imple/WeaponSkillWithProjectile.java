@@ -10,14 +10,14 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class WeaponSkillWithProjectile extends WeaponSkillForOneType implements ProjectileInterface{
+public abstract class WeaponSkillWithProjectile extends WeaponSkillForOneType implements ProjectileInterface {
 	public WeaponSkillWithProjectile(ItemType type) {
 		super(type);
 	}
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		//Projectileを発射し、発射を記録する
+		// Projectileを発射し、発射を記録する
 		Projectile spawnedProjectile = getSpawnedProjectile(p, item, customItem);
 		ProjectileManager.onLaunchProjectile(spawnedProjectile, this, item);
 		return true;

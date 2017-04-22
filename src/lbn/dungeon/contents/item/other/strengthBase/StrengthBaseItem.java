@@ -11,12 +11,11 @@ import lbn.util.Message;
 
 import org.bukkit.inventory.ItemStack;
 
-public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable{
+public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable {
 
 	@Override
 	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
 	}
-
 
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
@@ -36,7 +35,8 @@ public abstract class StrengthBaseItem extends AbstractItem implements StrengthC
 
 	@Override
 	public String[] getDetail() {
-		return Message.getMessage("このアイテムを{0}回強化に成功すると, [{1}]になります。", getMaxStrengthCount(), getLastStrengthResultItem().getSimpleName()).split(",");
+		return Message.getMessage("このアイテムを{0}回強化に成功すると, [{1}]になります。", getMaxStrengthCount(),
+				getLastStrengthResultItem().getSimpleName()).split(",");
 	}
 
 }

@@ -17,7 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-public class VillagerCommand implements CommandExecutor{
+public class VillagerCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
@@ -75,25 +75,25 @@ public class VillagerCommand implements CommandExecutor{
 	protected void removeVillager(CommandSender sender, String targetName) {
 		ArrayList<VillagerNpc> npcList = new ArrayList<VillagerNpc>();
 
-		//名前が指定されていない時はプレイヤーの周囲のNPCを調べる
+		// 名前が指定されていない時はプレイヤーの周囲のNPCを調べる
 		if (targetName == null) {
-			List<Entity> nearbyEntities = ((Player)sender).getNearbyEntities(1, 1, 1);
+			List<Entity> nearbyEntities = ((Player) sender).getNearbyEntities(1, 1, 1);
 			for (Entity entity : nearbyEntities) {
-				//NPCならリストに追加
+				// NPCならリストに追加
 				VillagerNpc villagerNpc = VillagerNpcManager.getVillagerNpc(entity);
 				if (villagerNpc != null) {
 					npcList.add(villagerNpc);
 				}
 			}
 		} else {
-			List<Entity> nearbyEntities = ((Player)sender).getNearbyEntities(5, 2, 5);
+			List<Entity> nearbyEntities = ((Player) sender).getNearbyEntities(5, 2, 5);
 			for (Entity entity : nearbyEntities) {
 				VillagerNpc villagerNpc = VillagerNpcManager.getVillagerNpc(entity);
-				//NPCでないなら無視する
+				// NPCでないなら無視する
 				if (villagerNpc == null) {
 					continue;
 				}
-				//名前が違うなら無視する
+				// 名前が違うなら無視する
 				if (!villagerNpc.getName().equals(targetName)) {
 					continue;
 				}
@@ -101,10 +101,10 @@ public class VillagerCommand implements CommandExecutor{
 			}
 		}
 
-		//スプレットシートの内容を変更する
+		// スプレットシートの内容を変更する
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(sender);
 		for (VillagerNpc villagerNpc : npcList) {
-			//locationを更新
+			// locationを更新
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("location", "");
 			villagerSheetRunnable.updateData(map, "name=" + villagerNpc.getName());
@@ -117,7 +117,7 @@ public class VillagerCommand implements CommandExecutor{
 			sender.sendMessage("エラーが発生しました。");
 		}
 
-		//ワールドから削除する
+		// ワールドから削除する
 		for (VillagerNpc villagerNpc : npcList) {
 			villagerNpc.remove();
 		}
@@ -135,16 +135,15 @@ public class VillagerCommand implements CommandExecutor{
 			return;
 		}
 
-		Location location = ((Player)arg0).getLocation();
+		Location location = ((Player) arg0).getLocation();
 		location.setX(location.getBlockX() + 0.5);
 		location.setY(location.getBlockY());
 		location.setZ(location.getBlockZ() + 0.5);
 
-
-		//NPCが存在してないとき
+		// NPCが存在してないとき
 		VillagerNpcManager.spawnNpc(villagerNpc, location);
 
-		//スプレットシートに書きこむ
+		// スプレットシートに書きこむ
 		VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("location", AbstractComplexSheetRunable.getLocationString(location));

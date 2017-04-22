@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Lump extends WeaponSkillWithMultiCombat{
+public class Lump extends WeaponSkillWithMultiCombat {
 
 	public Lump() {
 		super(ItemType.SWORD);
@@ -45,7 +45,8 @@ public class Lump extends WeaponSkillWithMultiCombat{
 	}
 
 	@Override
-	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e, int attackCount) {
+	protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent e, int attackCount) {
 		switch (attackCount) {
 		case 1:
 			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, (int) (20 * getData(0)), 0));
@@ -62,7 +63,7 @@ public class Lump extends WeaponSkillWithMultiCombat{
 		default:
 			break;
 		}
-		p.sendMessage(ChatColor.RED + "[武器スキル]" + ChatColor.GREEN +  attackCount + " HIT!!!");
+		p.sendMessage(ChatColor.RED + "[武器スキル]" + ChatColor.GREEN + attackCount + " HIT!!!");
 	}
 
 }

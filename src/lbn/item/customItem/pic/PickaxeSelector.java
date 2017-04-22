@@ -17,7 +17,7 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.PlayerChecker;
 
-public class PickaxeSelector extends AbstractItem implements RightClickItemable{
+public class PickaxeSelector extends AbstractItem implements RightClickItemable {
 
 	public PickaxeSelector(AbstractPickaxe pickaxe) {
 		this.pickaxe = pickaxe;
@@ -50,7 +50,7 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"ピッケルのセレクター。運営のみ使用可能"};
+		return new String[] { "ピッケルのセレクター。運営のみ使用可能" };
 	}
 
 	@Override
@@ -58,22 +58,23 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable{
 		pickSelectorMenu.open(e.getPlayer());
 	}
 
-	class PickSelectorMenu implements MenuSelectorInterface{
+	class PickSelectorMenu implements MenuSelectorInterface {
 		AbstractPickaxe pickaxe;
+
 		public PickSelectorMenu(AbstractPickaxe pickaxe) {
 			this.pickaxe = pickaxe;
 		}
 
 		@Override
 		public void open(Player p) {
-			//もし、Playerなら何もしない
+			// もし、Playerなら何もしない
 			if (PlayerChecker.isNormalPlayer(p)) {
 				return;
 			}
 
 			Inventory createInventory = Bukkit.createInventory(null, 9 * 2, getTitle());
 			List<ItemInterface> allLevelPick = pickaxe.getAllLevelPick();
-			//全てのピッケルを表示する
+			// 全てのピッケルを表示する
 			for (ItemInterface itemInterface : allLevelPick) {
 				createInventory.addItem(itemInterface.getItem());
 			}
@@ -82,7 +83,7 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable{
 
 		@Override
 		public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
-			//もし、Playerなら何もしない
+			// もし、Playerなら何もしない
 			if (PlayerChecker.isNormalPlayer(p)) {
 				return;
 			}

@@ -45,7 +45,8 @@ public class TaskManager {
 			}
 
 			Location loc = value.loc;
-			send.sendMessage(MessageFormat.format("Loc:{0} {1} {2},  残り時間:{3}s, コマブロ:{4}",  loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), value.remaindSecound(), value.isCommandBlock));
+			send.sendMessage(MessageFormat.format("Loc:{0} {1} {2},  残り時間:{3}s, コマブロ:{4}", loc.getBlockX(),
+					loc.getBlockY(), loc.getBlockZ(), value.remaindSecound(), value.isCommandBlock));
 		}
 		send.sendMessage(ChatColor.GREEN + "===== TASK STATUS =====");
 	}
@@ -59,6 +60,6 @@ class CommandTask {
 	long endTime = 0;
 
 	public int remaindSecound() {
-		return (int)((endTime - System.currentTimeMillis()) / 1000.0);
+		return (int) ((endTime - System.currentTimeMillis()) / 1000.0);
 	}
 }

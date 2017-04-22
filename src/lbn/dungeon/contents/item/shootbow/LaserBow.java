@@ -35,7 +35,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class LaserBow extends BowItemOld implements Cooltimable{
+public class LaserBow extends BowItemOld implements Cooltimable {
 	@Override
 	public String getItemName() {
 		return "LASER BOW";
@@ -62,7 +62,7 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 				if (count >= 20 * 60) {
 					cancel();
 				}
-				if (!projectile.isValid()  || projectile.isOnGround() || projectile.getVelocity().equals(zeroVec)) {
+				if (!projectile.isValid() || projectile.isOnGround() || projectile.getVelocity().equals(zeroVec)) {
 					cancel();
 				}
 				projectile.setVelocity(velocity);
@@ -82,31 +82,30 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 			Entity shooter = (Entity) entity.getShooter();
 			final Location shooterLoc = shooter.getLocation();
 
-			//爆発させる
+			// 爆発させる
 			if (LivingEntityUtil.isFriendship((LivingEntity) shooter)) {
-				new NoPlayerDamageExplotionForAttackType(location, 3, (LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
+				new NoPlayerDamageExplotionForAttackType(location, 3, (LivingEntity) shooter, LastDamageMethodType.BOW)
+						.runExplosion();
 			} else {
 				new NotMonsterDamageExplosion(location, 3).runExplosion();
 			}
 
-			//距離が近い時はパーティクルを出す
+			// 距離が近い時はパーティクルを出す
 			if (location.distance(shooterLoc) < 100) {
-				//軌道にパーティクルを追加する
-				final StraightParticleData particleData = new StraightParticleData(new ParticleData(ParticleType.reddust, 10), location);
+				// 軌道にパーティクルを追加する
+				final StraightParticleData particleData = new StraightParticleData(
+						new ParticleData(ParticleType.reddust, 10), location);
 				particleData.run(shooterLoc);
 			}
 		}
 
-		//矢を削除する
+		// 矢を削除する
 		entity.remove();
 	}
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{
-				"一直線に飛んで、着地地点で",
-				"爆発します"
-		};
+		return new String[] { "一直線に飛んで、着地地点で", "爆発します" };
 	}
 
 	@Override
@@ -160,9 +159,8 @@ public class LaserBow extends BowItemOld implements Cooltimable{
 
 }
 
-class LaserBowRunner extends LbnRunnable{
-	public LaserBowRunner(Location add, Player player,
-			LaserBow bow, ItemStack item) {
+class LaserBowRunner extends LbnRunnable {
+	public LaserBowRunner(Location add, Player player, LaserBow bow, ItemStack item) {
 		this.add = add;
 		this.player = player;
 		this.bow = bow;
@@ -182,32 +180,33 @@ class LaserBowRunner extends LbnRunnable{
 
 	@Override
 	public void run2() {
-		//0.5秒に一度パーティクルを発生
+		// 0.5秒に一度パーティクルを発生
 		if (getAgeTick() % 20 == 0) {
 			circleParticleData.run(add);
 		}
 		int rndAngle = rnd.nextInt(360);
 		double rndRadius = rnd.nextInt(30) / 10.0;
 
-		Location add2 = new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle))*rndRadius, add.getY(), add.getZ() + Math.cos(Math.toRadians(rndAngle))*rndRadius);
+		Location add2 = new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle)) * rndRadius,
+				add.getY(), add.getZ() + Math.cos(Math.toRadians(rndAngle)) * rndRadius);
 		data.run(add2);
 		Arrow spawnArrow = add.getWorld().spawnArrow(add2, new Vector(0, -1, 0), (float) 1.2, 3);
 		spawnArrow.setShooter(player);
 		spawnArrow.setBounce(false);
 
-		//矢の情報を付与する
+		// 矢の情報を付与する
 		ProjectileManager.onLaunchProjectile(spawnArrow, bow, item);
 
-		//弓のアイテム情報をつける
+		// 弓のアイテム情報をつける
 		spawnArrow.setMetadata("bow_date_lbn_doungeon_laserbow_attack", new FixedMetadataValue(Main.plugin, "1"));
-
 
 		add.getWorld().playSound(add2, Sound.BLAZE_HIT, 1, 1);
 
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				StraightParticleData particleData = new StraightParticleData(new ParticleData(ParticleType.reddust, 10), add2);
+				StraightParticleData particleData = new StraightParticleData(new ParticleData(ParticleType.reddust, 10),
+						add2);
 				particleData.run(spawnArrow);
 			}
 		}.runTaskLater(Main.plugin, 10);

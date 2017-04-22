@@ -11,7 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff{
+public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
 
 	@Override
 	public int getSkillLevel() {
@@ -30,18 +30,18 @@ public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"自分を停止させ、", "周りの敵を吹き飛ばす。", "更に敵にダメージを与える"};
+		return new String[] { "自分を停止させ、", "周りの敵を吹き飛ばす。", "更に敵にダメージを与える" };
 	}
 
-	//パーティクル
+	// パーティクル
 	CircleParticleData circleParticleData = new CircleParticleData(new ParticleData(ParticleType.smoke, 3), 7);
 
 	@Override
 	public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p) {
-		//敵を吹き飛ばす
+		// 敵を吹き飛ばす
 		super.blastOff(vector, livingEntity, customItem, p);
 
-		//ダメージを与える
+		// ダメージを与える
 		livingEntity.damage(customItem.getAttackItemDamage(0));
 		LastDamageManager.addData(p, LastDamageMethodType.fromAttackType(customItem.getAttackType()), livingEntity);
 	}

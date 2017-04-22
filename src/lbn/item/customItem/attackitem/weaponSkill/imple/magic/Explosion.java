@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class Explosion extends WeaponSkillForOneType{
+public class Explosion extends WeaponSkillForOneType {
 
 	public Explosion() {
 		super(ItemType.MAGIC);
@@ -40,8 +40,10 @@ public class Explosion extends WeaponSkillForOneType{
 		Player p;
 
 		AbstractAttackItem customItem;
+
 		public DropItemImplement(Player p, AbstractAttackItem customItem) {
-			super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(), Material.NETHER_STAR, (byte) 0);
+			super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(),
+					Material.NETHER_STAR, (byte) 0);
 			this.customItem = customItem;
 			this.p = p;
 		}
@@ -64,7 +66,7 @@ public class Explosion extends WeaponSkillForOneType{
 
 		@Override
 		public void onHitDamagedEntity(Entity target) {
-			//生き物のときのみ
+			// 生き物のときのみ
 			if (target.getType().isAlive()) {
 				LivingEntity entity = (LivingEntity) target;
 				entity.damage(customItem.getAttackItemDamage(0) * getData(0), p);

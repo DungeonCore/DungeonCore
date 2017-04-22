@@ -28,25 +28,27 @@ import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomChicken extends EntityChicken implements ICustomEntity<Chicken>{
+public class CustomChicken extends EntityChicken implements ICustomEntity<Chicken> {
 
 	private LbnMobTag tag;
 
 	public CustomChicken(World world) {
 		this(world, new LbnMobTag(EntityType.PIG));
 	}
+
 	public CustomChicken(World world, LbnMobTag tag) {
 		super(world);
 		this.tag = tag;
 
-		//全てのAIを取り除く
+		// 全てのAIを取り除く
 		try {
 			AttackAISetter.removeAllAi(this);
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
 
-			//ターゲットAIを設定
+			// ターゲットAIを設定
 			if (tag.isSummonMob()) {
-				PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
+				PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
+						this);
 				pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
 				this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 			}
@@ -60,7 +62,7 @@ public class CustomChicken extends EntityChicken implements ICustomEntity<Chicke
 				this.goalSelector.a(10, new PathfinderGoalFollowParent(this, 1.1D));
 			}
 
-			//戦闘AIをセットする
+			// 戦闘AIをセットする
 			AttackAISetter.setAttackAI(this, tag);
 			this.goalSelector.a(11, new PathfinderGoalRandomStroll(this, 1.0D));
 			this.goalSelector.a(12, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 6.0F));
@@ -74,13 +76,13 @@ public class CustomChicken extends EntityChicken implements ICustomEntity<Chicke
 	}
 
 	@Override
-		public Chicken spawn(Location loc) {
-		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
-		//位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
-		 //ワールドにentityを追加
-		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Chicken) getBukkitEntity();
+	public Chicken spawn(Location loc) {
+		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
+		// 位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+		// ワールドにentityを追加
+		world.addEntity(this, SpawnReason.CUSTOM);
+		return (Chicken) getBukkitEntity();
 	}
 
 	@Override
@@ -106,14 +108,15 @@ public class CustomChicken extends EntityChicken implements ICustomEntity<Chicke
 			return;
 		}
 
-		//指定した距離以上離れていたら殺す
+		// 指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
+					* tag.getRemoveDistance()) {
 				return;
 			}
 			if (getMobTag().isBoss()) {
@@ -126,7 +129,8 @@ public class CustomChicken extends EntityChicken implements ICustomEntity<Chicke
 
 	@Override
 	public boolean r(Entity entity) {
-		boolean flag = entity.damageEntity(DamageSource.mobAttack(this), (int) getAttributeInstance(GenericAttributes.e).getValue());
+		boolean flag = entity.damageEntity(DamageSource.mobAttack(this),
+				(int) getAttributeInstance(GenericAttributes.e).getValue());
 		if (flag) {
 			a(this, entity);
 		}

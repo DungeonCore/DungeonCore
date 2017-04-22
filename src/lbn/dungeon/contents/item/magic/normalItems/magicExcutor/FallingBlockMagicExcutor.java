@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class FallingBlockMagicExcutor implements MagicExcuteable{
+public abstract class FallingBlockMagicExcutor implements MagicExcuteable {
 	int availableLevel = 0;
 	int strengthLevel = 0;
 	String id;
@@ -47,7 +47,7 @@ public abstract class FallingBlockMagicExcutor implements MagicExcuteable{
 
 	@Override
 	public int getNeedMagicPoint() {
-//		return (int) (3 * availableLevel * 0.1);
+		// return (int) (3 * availableLevel * 0.1);
 		return 4;
 	}
 

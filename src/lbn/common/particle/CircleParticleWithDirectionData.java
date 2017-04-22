@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-public class CircleParticleWithDirectionData extends ParticleData{
+public class CircleParticleWithDirectionData extends ParticleData {
 
 	double radius;
 	double directionLength;
@@ -31,9 +31,9 @@ public class CircleParticleWithDirectionData extends ParticleData{
 		Location location = e.getLocation();
 		Vector vector = location.getDirection().normalize().multiply(directionLength);
 
-//		float pitch = -location.getPitch();
+		// float pitch = -location.getPitch();
 		float pitch = 0;
-//		float yaw = location.getYaw();
+		// float yaw = location.getYaw();
 		float yaw = 90;
 
 		double cosTheta = Math.cos(Math.toRadians(pitch));
@@ -42,10 +42,8 @@ public class CircleParticleWithDirectionData extends ParticleData{
 		double cosPsi = Math.cos(Math.toRadians(yaw));
 		double sinPsi = Math.sin(Math.toRadians(yaw));
 
-
-		double[][] matrix = {{cosTheta, sinTheta * sinPsi, sinTheta * cosPsi},
-				{0, cosPsi, -sinPsi},
-				{-sinTheta, cosTheta * sinPsi, cosTheta * sinPsi}};
+		double[][] matrix = { { cosTheta, sinTheta * sinPsi, sinTheta * cosPsi }, { 0, cosPsi, -sinPsi },
+				{ -sinTheta, cosTheta * sinPsi, cosTheta * sinPsi } };
 
 		for (Vector ds : circleVecList) {
 			Vector product = product(matrix, ds);
@@ -57,8 +55,7 @@ public class CircleParticleWithDirectionData extends ParticleData{
 	}
 
 	/**
-	 * =Ax
-	 * 行列Aとベクトルxの積
+	 * =Ax 行列Aとベクトルxの積
 	 */
 	public static Vector product(double[][] A, Vector ds) { // =Ax
 		double[] temp = new double[A.length];

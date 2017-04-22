@@ -26,12 +26,13 @@ import org.bukkit.util.StringUtil;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 
-public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, TabExecutor{
+public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, TabExecutor {
 	static HashMultimap<String, Location> create = HashMultimap.create();
 	static HashMap<String, CommandInfo> waitTimeMap = new HashMap<>();
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+			String[] paramArrayOfString) {
 		if (paramArrayOfString.length < 4) {
 			return false;
 		}
@@ -51,7 +52,8 @@ public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, Ta
 			paramCommandSender.sendMessage(ChatColor.RED + "typeはpressingとpassedしか認められていません。");
 		}
 
-		String commandAll = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 3, paramArrayOfString.length), " ").trim();
+		String commandAll = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 3, paramArrayOfString.length), " ")
+				.trim();
 		String successCommand;
 		String failureCommand = "";
 		String[] split = commandAll.split("&");
@@ -61,12 +63,13 @@ public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, Ta
 		}
 
 		if (!(paramCommandSender instanceof BlockCommandSender)) {
-			paramCommandSender.sendMessage(StringUtils.join(new Object[]{"type:", type, ", id:", id, ", time:" , waitSecound, ", command1:", successCommand, ", command2:", failureCommand }));
+			paramCommandSender.sendMessage(StringUtils.join(new Object[] { "type:", type, ", id:", id, ", time:",
+					waitSecound, ", command1:", successCommand, ", command2:", failureCommand }));
 			return true;
 		}
-		Block block = ((BlockCommandSender)paramCommandSender).getBlock();
+		Block block = ((BlockCommandSender) paramCommandSender).getBlock();
 
-		//2つ上がプレートであることを確認
+		// 2つ上がプレートであることを確認
 		Location plateLoc = block.getLocation().add(0, 2, 0);
 		final Block plate = plateLoc.getBlock();
 		if (!BlockUtil.isPressable(plate)) {
@@ -74,19 +77,20 @@ public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, Ta
 			return false;
 		}
 
-		//すでに登録されている場合は何もしない
+		// すでに登録されている場合は何もしない
 		if (waitTimeMap.containsKey(id) && create.containsEntry(id, plateLoc)) {
 			return true;
 		}
 
-		//IDだけ登録されている場合は何もしない
+		// IDだけ登録されている場合は何もしない
 		if (waitTimeMap.containsKey(id) && !create.containsEntry(id, plateLoc)) {
 			create.put(id, plateLoc);
 			return true;
 		}
 
-		CommandInfo commandInfo = new CommandInfo(id,(long)(waitSecound * 20), failureCommand, successCommand, (BlockCommandSender)paramCommandSender);
-		//IDも登録されていない新規の場合
+		CommandInfo commandInfo = new CommandInfo(id, (long) (waitSecound * 20), failureCommand, successCommand,
+				(BlockCommandSender) paramCommandSender);
+		// IDも登録されていない新規の場合
 		waitTimeMap.put(id, commandInfo);
 		create.put(id, plateLoc);
 
@@ -104,13 +108,12 @@ public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, Ta
 	@Override
 	public String getUsage() {
 		return "/<command> id secound type command1 & command2     (& command2は省略可)"
-				+ "\n idは他の人と被らないID。typeは'passed'か'presing'を選択 "
-				+ ChatColor.GREEN + "\n n秒間感圧板を押していたらコマンドを実行する場合"
-				+ ChatColor.DARK_GREEN + "\n <command> id n passed command1 & command2"
-				+ ChatColor.GRAY + "\n n秒間感圧板を押していたらcommand1が実行され、途中で離したらcommand2が実行"
-				+ ChatColor.GREEN + "\n 感圧板を押している間、n秒間に一回コマンドを実行し続ける場合"
-				+ ChatColor.DARK_GREEN + "\n <command> id n pressing command1 & command2"
-				+ ChatColor.GRAY + "\n 感圧板を押していたらn秒に一回command1が実行され、離したらcommand2を実行";
+				+ "\n idは他の人と被らないID。typeは'passed'か'presing'を選択 " + ChatColor.GREEN + "\n n秒間感圧板を押していたらコマンドを実行する場合"
+				+ ChatColor.DARK_GREEN + "\n <command> id n passed command1 & command2" + ChatColor.GRAY
+				+ "\n n秒間感圧板を押していたらcommand1が実行され、途中で離したらcommand2が実行" + ChatColor.GREEN
+				+ "\n 感圧板を押している間、n秒間に一回コマンドを実行し続ける場合" + ChatColor.DARK_GREEN
+				+ "\n <command> id n pressing command1 & command2" + ChatColor.GRAY
+				+ "\n 感圧板を押していたらn秒に一回command1が実行され、離したらcommand2を実行";
 	}
 
 	@Override
@@ -121,7 +124,8 @@ public class TimerExcuteCommand implements CommandExecutor, UsageCommandable, Ta
 	@Override
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 3) {
-			return (List<String>)StringUtil.copyPartialMatches(arg3[2], Arrays.asList("pressing", "passed"), new ArrayList<String>(2));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[2], Arrays.asList("pressing", "passed"),
+					new ArrayList<String>(2));
 		}
 		return ImmutableList.of();
 	}
@@ -134,7 +138,8 @@ class CommandInfo {
 	String firstCommand;
 	BlockCommandSender sender;
 
-	public CommandInfo(String id, long paramTick, String failureCommand, String successCommand, BlockCommandSender sender) {
+	public CommandInfo(String id, long paramTick, String failureCommand, String successCommand,
+			BlockCommandSender sender) {
 		this.id = id;
 		this.paramTick = paramTick;
 		this.secoundCommand = failureCommand;
@@ -152,6 +157,7 @@ class PassedExcuteRunnable extends BukkitRunnable {
 	String id;
 
 	long excuteTime = -1;
+
 	public PassedExcuteRunnable(String id) {
 		this.id = id;
 		CommandInfo commandInfo2 = TimerExcuteCommand.waitTimeMap.get(id);
@@ -169,7 +175,7 @@ class PassedExcuteRunnable extends BukkitRunnable {
 			return;
 		}
 
-		//時間が指定時間になった時コマンドを実行する
+		// 時間が指定時間になった時コマンドを実行する
 		if (commandInfo2.getworld().getFullTime() >= excuteTime) {
 			excuteCommand(commandInfo2.sender, commandInfo2.firstCommand);
 			TimerExcuteCommand.waitTimeMap.remove(id);
@@ -177,17 +183,16 @@ class PassedExcuteRunnable extends BukkitRunnable {
 			return;
 		}
 
-		//一つでもプレスされていればそのまま監視を続ける
+		// 一つでもプレスされていればそのまま監視を続ける
 		if (pushed()) {
-			//何もしない
+			// 何もしない
 		} else {
-		//一つもプレスされていなければ監視を修了する
+			// 一つもプレスされていなければ監視を修了する
 			TimerExcuteCommand.waitTimeMap.remove(id);
 			TimerExcuteCommand.create.removeAll(id);
 			cancel();
 			excuteCommand(commandInfo2.sender, commandInfo2.secoundCommand);
 		}
-
 
 	}
 
@@ -195,16 +200,16 @@ class PassedExcuteRunnable extends BukkitRunnable {
 		Set<Location> set = TimerExcuteCommand.create.get(id);
 		for (Location location : set) {
 			Block plate = location.getBlock();
-			//感圧板以外のものに変わっている場合は無視する
+			// 感圧板以外のものに変わっている場合は無視する
 			if (!BlockUtil.isPressable(plate)) {
 				continue;
 			}
-			//一つでもプレスされていたらTRUE
+			// 一つでもプレスされていたらTRUE
 			if (BlockUtil.isPressed(plate)) {
 				return true;
 			}
 		}
-		//一つもプレスされていなければFALSE
+		// 一つもプレスされていなければFALSE
 		return false;
 	}
 
@@ -236,14 +241,14 @@ class PressingExcuteRunnable extends PassedExcuteRunnable {
 			return;
 		}
 
-		//時間が指定時間になった時コマンドを実行する
+		// 時間が指定時間になった時コマンドを実行する
 		if (commandInfo2.getworld().getFullTime() % commandInfo2.paramTick == remainder) {
 			excuteCommand(commandInfo2.sender, commandInfo2.firstCommand);
 		}
 
-		//一つでもプレスされていればそのまま監視を続ける
+		// 一つでもプレスされていればそのまま監視を続ける
 		if (pushed()) {
-			//何もしない
+			// 何もしない
 		} else {
 			excuteCommand(commandInfo2.sender, commandInfo2.secoundCommand);
 			TimerExcuteCommand.waitTimeMap.remove(id);

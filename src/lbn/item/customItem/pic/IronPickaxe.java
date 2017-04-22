@@ -9,7 +9,7 @@ import lbn.player.magicstoneOre.MagicStoneOreType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class IronPickaxe extends AbstractPickaxe{
+public class IronPickaxe extends AbstractPickaxe {
 
 	public IronPickaxe(int level) {
 		super(level);
@@ -38,7 +38,6 @@ public class IronPickaxe extends AbstractPickaxe{
 		}
 	}
 
-
 	@Override
 	public short getMaxExp() {
 		return 50;
@@ -66,7 +65,7 @@ public class IronPickaxe extends AbstractPickaxe{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"鉱石を採掘するとレベルが上がります", "石炭鉱石・鉄鉱石・ラピス鉱石・", "レッドストーン鉱石・金鉱石を採掘できます"};
+		return new String[] { "鉱石を採掘するとレベルが上がります", "石炭鉱石・鉄鉱石・ラピス鉱石・", "レッドストーン鉱石・金鉱石を採掘できます" };
 	}
 
 	@Override
@@ -79,7 +78,7 @@ public class IronPickaxe extends AbstractPickaxe{
 		return "iron_pickaxe";
 	}
 
-	public List<ItemInterface> getAllLevelPick(){
+	public List<ItemInterface> getAllLevelPick() {
 		ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
 		for (int i = 1; i <= 10; i++) {
 			woodPicks.add(new IronPickaxe(i));

@@ -7,7 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class MobSkillUpperTargetHight extends MobSkillRunnable{
+public class MobSkillUpperTargetHight extends MobSkillRunnable {
 
 	public MobSkillUpperTargetHight(String data) {
 		super(data);

@@ -24,14 +24,14 @@ public class QuestInventory {
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 
 		Collection<Quest> doingQuest = session.getDoingQuestList();
-		//メインクエストを先に表示
+		// メインクエストを先に表示
 		for (Quest quest : doingQuest) {
 			if (quest.isMainQuest()) {
 				view.addItem(questViewIcon.getItemStack(quest));
 			}
 		}
 
-		//サブクエストを表示
+		// サブクエストを表示
 		for (Quest quest : doingQuest) {
 			if (!quest.isMainQuest()) {
 				view.addItem(questViewIcon.getItemStack(quest));
@@ -42,6 +42,7 @@ public class QuestInventory {
 
 	/**
 	 * クエストを破棄するとき
+	 * 
 	 * @param e
 	 */
 	public static void drop(PlayerDropItemEvent e) {
@@ -57,7 +58,7 @@ public class QuestInventory {
 			return;
 		}
 
-		//クエストを削除できないので操作をキャンセルする
+		// クエストを削除できないので操作をキャンセルする
 		if (!quest.canDestory()) {
 			e.getPlayer().sendMessage(ChatColor.RED + "このクエストは破棄できません。");
 			e.setCancelled(true);
@@ -65,11 +66,11 @@ public class QuestInventory {
 		}
 
 		boolean removeQuest = QuestManager.removeQuest(quest, e.getPlayer());
-		//クエストを削除できたらアイテムを削除する
+		// クエストを削除できたらアイテムを削除する
 		if (removeQuest) {
 			e.getItemDrop().remove();
 		} else {
-		//クエストを削除できなければ操作をキャンセルする
+			// クエストを削除できなければ操作をキャンセルする
 			e.setCancelled(true);
 		}
 	}
@@ -80,19 +81,19 @@ public class QuestInventory {
 		}
 		String title = e.getClickedInventory().getTitle();
 		String name = e.getView().getTopInventory().getName();
-		//開いているのがQuestViewでなければ無視
+		// 開いているのがQuestViewでなければ無視
 		if (!name.contains("quest_view")) {
 			return;
 		}
 
-		//クリックしたのがQuestViewのとき
+		// クリックしたのがQuestViewのとき
 		if (title.contains("quest_view")) {
 			ItemStack itemStack = e.getCurrentItem();
 			Quest quest = new QuestViewIcon((Player) e.getView().getPlayer()).getQuest(itemStack);
 			if (quest != null && !quest.canDestory()) {
 				e.setCancelled(true);
 			}
-		//クリックしたのがQuestViewでない時はキャンセルする
+			// クリックしたのがQuestViewでない時はキャンセルする
 		} else {
 			e.setCancelled(true);
 		}

@@ -20,4 +20,3 @@ public class SoundManager {
 		soundMap.clear();
 	}
 }
-

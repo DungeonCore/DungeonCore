@@ -12,7 +12,7 @@ import net.minecraft.server.v1_8_R1.EnumParticle;
 
 import org.bukkit.command.CommandSender;
 
-public class ParticleSheetRunnable extends AbstractSheetRunable{
+public class ParticleSheetRunnable extends AbstractSheetRunable {
 
 	public ParticleSheetRunnable(CommandSender p) {
 		super(p);
@@ -30,7 +30,7 @@ public class ParticleSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "particle", "shape", "data", "amount", "dx", "dy", "dz"};
+		return new String[] { "id", "particle", "shape", "data", "amount", "dx", "dy", "dz" };
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class QuestConfirmMenu extends MenuSelector {
 		super("quest confirm");
 		this.q = q;
 
-		ItemStack reciveItem = ItemStackUtil.getItem(ChatColor.GREEN + "クエストを受注する", Material.WOOL, (byte)5);
+		ItemStack reciveItem = ItemStackUtil.getItem(ChatColor.GREEN + "クエストを受注する", Material.WOOL, (byte) 5);
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add(ChatColor.AQUA + "[QUEST] " + q.getName());
 
@@ -38,7 +38,7 @@ public class QuestConfirmMenu extends MenuSelector {
 			arrayList.add(ChatColor.YELLOW + "   " + detail);
 		}
 		arrayList.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(q.getId()));
-		//IDを付与
+		// IDを付与
 		ItemStackUtil.setNBTTag(reciveItem, NbtTagConst.THELOW_ITEM_ID, q.getId());
 
 		ItemStackUtil.setLore(reciveItem, arrayList);
@@ -53,7 +53,7 @@ public class QuestConfirmMenu extends MenuSelector {
 			return;
 		}
 
-		//quest idがない時はインベントリを閉じる
+		// quest idがない時はインベントリを閉じる
 		String id = ItemStackUtil.getId(item);
 		if (id == null) {
 			p.closeInventory();
@@ -61,15 +61,15 @@ public class QuestConfirmMenu extends MenuSelector {
 		}
 
 		Quest questById = QuestManager.getQuestById(id);
-		//クエストを開始する
+		// クエストを開始する
 		QuestStartStatus startQuestStatus = QuestManager.getStartQuestStatus(questById, p);
 		if (startQuestStatus.canStart()) {
 			QuestManager.startQuest(questById, p, false, startQuestStatus);
 		}
-		//インベントリを閉める
+		// インベントリを閉める
 		p.closeInventory();
 	}
 
-	public static ItemStack refuseItem = ItemStackUtil.getItem(ChatColor.RED + "クエストを受注しない", Material.WOOL, (byte)14);
+	public static ItemStack refuseItem = ItemStackUtil.getItem(ChatColor.RED + "クエストを受注しない", Material.WOOL, (byte) 14);
 
 }

@@ -14,6 +14,7 @@ public class BlockUtil {
 
 	/**
 	 * 感圧板が踏まれていたらTRUE
+	 * 
 	 * @param b
 	 * @return
 	 */
@@ -22,7 +23,8 @@ public class BlockUtil {
 			return false;
 		}
 		Material type = b.getType();
-		if (type == Material.STONE_PLATE || type == Material.WOOD_PLATE || type == Material.GOLD_PLATE || type == Material.IRON_PLATE) {
+		if (type == Material.STONE_PLATE || type == Material.WOOD_PLATE || type == Material.GOLD_PLATE
+				|| type == Material.IRON_PLATE) {
 			@SuppressWarnings("deprecation")
 			byte data = b.getData();
 			return data == 1;
@@ -32,6 +34,7 @@ public class BlockUtil {
 
 	/**
 	 * 感圧板系のブロックならTRUE
+	 * 
 	 * @param b
 	 * @return
 	 */
@@ -40,7 +43,8 @@ public class BlockUtil {
 			return false;
 		}
 		Material type = b.getType();
-		if (type == Material.STONE_PLATE || type == Material.WOOD_PLATE || type == Material.GOLD_PLATE || type == Material.IRON_PLATE) {
+		if (type == Material.STONE_PLATE || type == Material.WOOD_PLATE || type == Material.GOLD_PLATE
+				|| type == Material.IRON_PLATE) {
 			return true;
 		}
 		return false;
@@ -67,7 +71,7 @@ public class BlockUtil {
 	}
 
 	public static BlockData getBlockData(String bData, CommandSender sender) {
-		String id = bData.substring(0, bData.indexOf(":") == -1 ? bData.length() : bData.indexOf(":") );
+		String id = bData.substring(0, bData.indexOf(":") == -1 ? bData.length() : bData.indexOf(":"));
 		final String data;
 		if (bData.contains(":") && !bData.endsWith(":")) {
 			data = bData.substring(bData.indexOf(":") + 1);
@@ -97,7 +101,6 @@ public class BlockUtil {
 		}
 	}
 
-
 	public static class BlockData {
 		Material m;
 		byte b;
@@ -105,6 +108,7 @@ public class BlockUtil {
 		public Material getM() {
 			return m;
 		}
+
 		public byte getB() {
 			return b;
 		}

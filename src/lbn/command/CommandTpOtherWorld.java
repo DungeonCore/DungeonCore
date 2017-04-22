@@ -10,11 +10,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandTpOtherWorld implements CommandExecutor{
+public class CommandTpOtherWorld implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender sender,Command paramCommand, String paramString,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command paramCommand, String paramString, String[] args) {
 		if ((args.length < 1)) {
 			return false;
 		}
@@ -42,9 +41,8 @@ public class CommandTpOtherWorld implements CommandExecutor{
 			Location playerLocation = player.getLocation();
 			double x = JavaUtil.getDouble(args[(args.length - 4)], -3.0000001E7D);
 			double y = JavaUtil.getDouble(args[(args.length - 3)], -3.0000001E7D);
-			double z =  JavaUtil.getDouble(args[(args.length - 2)], -3.0000001E7D);
-			if ((x == -3.0000001E7D) || (y == -3.0000001E7D)
-					|| (z == -3.0000001E7D)) {
+			double z = JavaUtil.getDouble(args[(args.length - 2)], -3.0000001E7D);
+			if ((x == -3.0000001E7D) || (y == -3.0000001E7D) || (z == -3.0000001E7D)) {
 				sender.sendMessage("Please provide a valid location!");
 				return true;
 			}

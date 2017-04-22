@@ -10,7 +10,7 @@ import lbn.common.book.BookManager;
 import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
 
-public class BookItem extends AbstractItem implements RightClickItemable{
+public class BookItem extends AbstractItem implements RightClickItemable {
 
 	BookData data;
 
@@ -23,7 +23,7 @@ public class BookItem extends AbstractItem implements RightClickItemable{
 		if (itemStack == null) {
 			itemStack = new ItemStack(Material.WRITTEN_BOOK);
 		}
-		//アイテムの情報を書きかる
+		// アイテムの情報を書きかる
 		BookMeta itemMeta = (BookMeta) itemStack.getItemMeta();
 		itemMeta.setAuthor(data.getAuther());
 		itemMeta.setTitle(data.getTitile());
@@ -63,17 +63,18 @@ public class BookItem extends AbstractItem implements RightClickItemable{
 
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
-		//もし本でなくても本のGUIを強制的に開かせる
+		// もし本でなくても本のGUIを強制的に開かせる
 		if (getMaterial() != Material.WRITTEN_BOOK) {
 			BookManager.openBook(data.toBookItem(), e.getPlayer());
 			e.setCancelled(true);
 		}
 
-		//本を開くのを記録する
+		// 本を開くのを記録する
 	}
 
 	/**
 	 * 本のID
+	 * 
 	 * @return
 	 */
 	public String getBookId() {

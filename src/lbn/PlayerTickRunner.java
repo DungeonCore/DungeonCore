@@ -20,20 +20,20 @@ public class PlayerTickRunner {
 
 			@Override
 			public void run() {
-				//Playerのリストを更新する
+				// Playerのリストを更新する
 				if (tickCount == 0) {
 					onlinePlayers = new ArrayList<Player>(Bukkit.getOnlinePlayers());
 				}
 
-				//20人ごとにPlayerを操作する
-				for (int i = 0; i < onlinePlayers.size(); i+=20) {
+				// 20人ごとにPlayerを操作する
+				for (int i = 0; i < onlinePlayers.size(); i += 20) {
 					Player player = onlinePlayers.get(i);
 
 					checkQuest(player);
 				}
 
 				tickCount++;
-				tickCount %=20;
+				tickCount %= 20;
 			}
 		}.runTaskTimer(Main.plugin, 0, 1);
 	}
@@ -43,7 +43,7 @@ public class PlayerTickRunner {
 
 		for (ReachQuest quest : ReachQuest.fromChunk(p.getLocation())) {
 			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
-				//クエスト完了処理
+				// クエスト完了処理
 				questSession.setQuestData(quest, 1);
 				quest.onSatisfyComplateCondtion(p);
 			}

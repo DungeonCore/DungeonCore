@@ -12,7 +12,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-public abstract class AbstractDamageFallingblock extends LbnRunnable{
+public abstract class AbstractDamageFallingblock extends LbnRunnable {
 	protected Entity spawnEntity;
 
 	Location end;
@@ -21,7 +21,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 	public AbstractDamageFallingblock(Vector direction, Location start, Material m, byte data) {
 		spawnEntity = start.getWorld().spawnFallingBlock(start, m, data);
 		spawnEntity.setVelocity(direction.normalize().multiply(2));
-		((FallingBlock)spawnEntity).setDropItem(false);
+		((FallingBlock) spawnEntity).setDropItem(false);
 	}
 
 	public AbstractDamageFallingblock(Entity spawnedEntity) {
@@ -44,28 +44,28 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 				boolean damaged = damageLivingentity(entity);
 				isAttack = isAttack || damaged;
 				if (damaged) {
-					//ダメージ時の特殊処理
-					onHitDamagedEntity((LivingEntity)entity);
+					// ダメージ時の特殊処理
+					onHitDamagedEntity((LivingEntity) entity);
 				}
 			}
 
-			//対象のEntityにぶつかったなら消す
+			// 対象のEntityにぶつかったなら消す
 			if (isAttack) {
 				removeEntity(spawnEntity);
 			}
 		}
 		tickRutine(getRunCount());
 
-		//entityがなくなったら削除
+		// entityがなくなったら削除
 		if (!spawnEntity.isValid()) {
 			removeEntity(spawnEntity);
 		}
 
-		//地面に接触していないか調べる
+		// 地面に接触していないか調べる
 		if (spawnEntity.isOnGround()) {
 			removeEntity(spawnEntity);
 		}
-		//10秒以上飛んでいたら削除
+		// 10秒以上飛んでいたら削除
 		if (isElapsedTick(20 * 10)) {
 			removeEntity(spawnEntity);
 		}
@@ -73,7 +73,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 
 	abstract protected boolean damageLivingentity(Entity entity);
 
-	double[] range = new double[]{1, 1, 1};
+	double[] range = new double[] { 1, 1, 1 };
 
 	protected double[] getDamageRange() {
 		return range;
@@ -82,6 +82,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable{
 	abstract public void tickRutine(int count);
 
 	abstract public void removedRutine(Entity spawnEntity);
+
 	abstract public void onHitDamagedEntity(Entity target);
 
 	protected void removeEntity(Entity spawnEntity) {

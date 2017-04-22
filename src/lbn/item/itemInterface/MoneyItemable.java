@@ -4,6 +4,6 @@ import lbn.item.ItemInterface;
 
 import org.bukkit.entity.Player;
 
-public interface MoneyItemable extends ItemInterface{
+public interface MoneyItemable extends ItemInterface {
 	void applyGalionItem(Player p);
 }

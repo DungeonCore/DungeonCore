@@ -23,14 +23,14 @@ public enum BeneEffectType {
 	BeneEffectExcutor excuter;
 	String title;
 	String id;
+
 	private BeneEffectType(BeneEffectExcutor excuter, String title, String id) {
 		this.excuter = excuter;
 		this.title = title;
 		this.id = id;
 	}
 
-	public void execute(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+	public void execute(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
 			LivingEntity mob, int level) {
 		excuter.execute(me, e, armor, isArmorCutDamage, isBoss, mob, level);
 	}
@@ -55,18 +55,15 @@ public enum BeneEffectType {
 }
 
 interface BeneEffectExcutor {
-	void execute(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+	void execute(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
 			LivingEntity mob, int level);
 }
 
 class BeneEffectNull implements BeneEffectExcutor {
 
 	@Override
-	public void execute(Player me, EntityDamageEvent e, ItemStack armor,
-			boolean isArmorCutDamage, boolean isBoss, LivingEntity mob,
-			int level) {
+	public void execute(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+			LivingEntity mob, int level) {
 	}
 
 }
-

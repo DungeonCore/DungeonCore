@@ -9,7 +9,7 @@ import lbn.item.customItem.itemAbstract.SwordItem;
 
 import org.bukkit.command.CommandSender;
 
-public class WeaponSheetRunnable extends AbstractSheetRunable{
+public class WeaponSheetRunnable extends AbstractSheetRunable {
 
 	public WeaponSheetRunnable(CommandSender sender) {
 		super(sender);
@@ -27,9 +27,11 @@ public class WeaponSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "name", "material", "detail", "damageparcent", "type", "skilllevel", "defaultslot", "maxslot", "rank", "uselevel", //10
-				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial2", "craftcount2", "durability", "maincraftmaterial"//18
-				};
+		return new String[] { "id", "name", "material", "detail", "damageparcent", "type", "skilllevel", "defaultslot",
+				"maxslot", "rank", "uselevel", // 10
+				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial2", "craftcount2",
+				"durability", "maincraftmaterial"// 18
+		};
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable{
 			return;
 		}
 
-		//Itemを登録する
+		// Itemを登録する
 		ItemManager.registItem(item);
 	}
 }

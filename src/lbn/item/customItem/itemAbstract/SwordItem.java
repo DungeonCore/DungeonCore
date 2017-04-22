@@ -17,7 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItemable{
+public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItemable {
 	public SwordItem(SpreadSheetWeaponData data) {
 		super(data);
 	}
@@ -29,7 +29,7 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
 		super.excuteOnRightClick(e);
-		//レベルなどを確認する
+		// レベルなどを確認する
 		Player player = e.getPlayer();
 		if (!isAvilable(player)) {
 			sendNotAvailableMessage(player);
@@ -37,7 +37,7 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 			return;
 		}
 		if (!e.getPlayer().isSneaking()) {
-			//スキルを発動
+			// スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
 	}
@@ -48,8 +48,9 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 	}
 
 	@Override
-	public void excuteOnMeleeAttack(ItemStack item, LivingEntity owner, LivingEntity target, EntityDamageByEntityEvent e) {
-		//プレイヤーでないなら関係ない
+	public void excuteOnMeleeAttack(ItemStack item, LivingEntity owner, LivingEntity target,
+			EntityDamageByEntityEvent e) {
+		// プレイヤーでないなら関係ない
 		if (owner.getType() != EntityType.PLAYER) {
 			return;
 		}
@@ -64,12 +65,12 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 		}
 
 		if (LivingEntityUtil.isEnemy(target)) {
-			//eventを呼ぶ
-			//相殺されるはず(e.getDamage() - getNormalDamage() )
+			// eventを呼ぶ
+			// 相殺されるはず(e.getDamage() - getNormalDamage() )
 			PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent(player, target, item,
 					e.getDamage() - getMaterialDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
 			playerCombatEntityEvent.callEvent();
-			//ダメージの計算を行う
+			// ダメージの計算を行う
 			e.setDamage(playerCombatEntityEvent.getDamage());
 		} else {
 			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());

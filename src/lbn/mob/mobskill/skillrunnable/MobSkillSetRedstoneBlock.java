@@ -7,7 +7,7 @@ import lbn.util.BlockUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-public class MobSkillSetRedstoneBlock extends MobSkillRunnable{
+public class MobSkillSetRedstoneBlock extends MobSkillRunnable {
 
 	public MobSkillSetRedstoneBlock(String data) {
 		super(data);

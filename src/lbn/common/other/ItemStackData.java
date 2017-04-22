@@ -25,14 +25,14 @@ public class ItemStackData {
 
 	public ItemStackData(Material m, int data) {
 		this.m = m;
-		this.data = (byte)data;
+		this.data = (byte) data;
 	}
 
 	public ItemStackData(Material m, int data, Enchantment enchantment, Integer level) {
 		this.m = m;
-		this.data = (byte)data;
+		this.data = (byte) data;
 
-		//エンチャントを追加
+		// エンチャントを追加
 		enchantMap = new HashMap<Enchantment, Integer>();
 		enchantMap.put(enchantment, level);
 	}
@@ -50,11 +50,12 @@ public class ItemStackData {
 	}
 
 	public void setData(int data) {
-		this.data = (byte)data;
+		this.data = (byte) data;
 	}
 
 	/**
 	 * エンチャントマップを取得。もしエンチャントがない場合はnullを返す
+	 * 
 	 * @return
 	 */
 	public Map<Enchantment, Integer> getEnchantMap() {
@@ -63,23 +64,25 @@ public class ItemStackData {
 
 	/**
 	 * エンチャントを追加
+	 * 
 	 * @param enchantment
 	 * @param level
 	 */
 	public void addEnchant(Enchantment enchantment, int level) {
-		//エンチャントを追加
+		// エンチャントを追加
 		enchantMap = new HashMap<Enchantment, Integer>();
 		enchantMap.put(enchantment, level);
 	}
 
 	/**
 	 * ItemStackに変換
+	 * 
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")
 	public ItemStack toItemStack() {
 		ItemStack itemStack = new ItemStack(m, 1);
-		//データ値を設定する
+		// データ値を設定する
 		MaterialData data2 = itemStack.getData();
 		data2.setData(getData());
 		itemStack.setData(data2);

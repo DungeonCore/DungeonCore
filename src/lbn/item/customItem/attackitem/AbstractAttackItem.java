@@ -25,25 +25,27 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, CombatItemable, LeftClickItemable{
+public abstract class AbstractAttackItem extends AbstractItem
+		implements Strengthenable, CombatItemable, LeftClickItemable {
 	/**
 	 * この武器が使用可能ならTRUE
+	 * 
 	 * @param player
 	 * @return
 	 */
 	protected boolean isAvilable(Player player) {
-		//クリエイティブなら使えるようにする
+		// クリエイティブなら使えるようにする
 		if (player.getGameMode() == GameMode.CREATIVE) {
 			return true;
 		}
 
-		//Playerインスタンスを取得
+		// Playerインスタンスを取得
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
 		if (theLowPlayer == null) {
 			TheLowPlayerManager.sendLoingingMessage(player);
 			return false;
 		}
-		//レベルを確認
+		// レベルを確認
 		int level = theLowPlayer.getLevel(getLevelType());
 		if (getAvailableLevel() > level) {
 			return false;
@@ -52,6 +54,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	}
 
 	static WeaponStrengthTemplate strengthTemplate = new WeaponStrengthTemplate();
+
 	@Override
 	public StrengthTemplate getStrengthTemplate() {
 		return strengthTemplate;
@@ -59,7 +62,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
-		//レベルを確認
+		// レベルを確認
 		Player player = e.getPlayer();
 		if (!isAvilable(player)) {
 			sendNotAvailableMessage(player);
@@ -80,20 +83,24 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
 	/**
 	 * スキルレベルを取得
+	 * 
 	 * @return
 	 */
 	abstract protected int getSkillLevel();
 
 	/**
 	 * 武器のダメージを取得 (武器本体のダメージも含まれます)
+	 * 
 	 * @param p
-	 * @param strengthLevel 強化レベル
+	 * @param strengthLevel
+	 *            強化レベル
 	 * @return
 	 */
 	abstract public double getAttackItemDamage(int strengthLevel);
 
 	/**
 	 * クラフトレベルを取得する
+	 * 
 	 * @return
 	 */
 	abstract public int getWeaponLevel();
@@ -105,6 +112,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
 	/**
 	 * この武器のアイテムのデフォルトの攻撃力を取得
+	 * 
 	 * @return
 	 */
 	public double getMaterialDamage() {
@@ -115,10 +123,11 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	@Override
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = super.getStandardLoreToken();
-		//使用可能レベル
-		loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
+		// 使用可能レベル
+		loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(),
+				getAvailableLevel(), ChatColor.GOLD));
 		loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
-		//武器は耐久とレベルが関係ないのでnullでも問題ない
+		// 武器は耐久とレベルが関係ないのでnullでも問題ない
 		loreToken.addLore("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
 		return loreToken;
 	}
@@ -126,12 +135,14 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 	@Override
 	public ItemStack getItem() {
 		ItemStack item = super.getItem();
-		//SLOTを追加
+		// SLOTを追加
 		ArrayList<String> arrayList = new ArrayList<String>();
-		arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個" + ItemLoreToken.TITLE_TAG);
+		arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個"
+				+ ItemLoreToken.TITLE_TAG);
 		EmptySlot slot = new EmptySlot();
 		for (int i = 0; i < getDefaultSlotCount(); i++) {
-			arrayList.add (StringUtils.join(new Object[]{slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId()}));
+			arrayList.add(StringUtils.join(new Object[] { slot.getNameColor(), "    ■ ", slot.getSlotName(),
+					ChatColor.BLACK, "id:", slot.getId() }));
 		}
 		arrayList.add("");
 		ItemStackUtil.addLore(item, arrayList.toArray(new String[0]));
@@ -140,25 +151,27 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
 	/**
 	 * 使用不可のときに表示するメッセージ
+	 * 
 	 * @param p
 	 */
 	protected void sendNotAvailableMessage(Player p) {
-		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
+		Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(),
+				getAvailableLevel());
 	}
 
 	@Override
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
 		Player player = e.getPlayer();
-		//スニーク状態でないなら無視
+		// スニーク状態でないなら無視
 		if (!player.isSneaking()) {
 			return;
 		}
-		//捨てるのをキャンセル
+		// 捨てるのをキャンセル
 		e.setCancelled(true);
 
-		//レベルが足りないなら何もしない
+		// レベルが足りないなら何もしない
 		if (isAvilable(player)) {
-			//選択メニューを開く
+			// 選択メニューを開く
 			new WeaponSkillSelector(getAttackType(), getSkillLevel()).open(player);
 		} else {
 			sendNotAvailableMessage(player);

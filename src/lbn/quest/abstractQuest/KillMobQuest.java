@@ -15,7 +15,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class KillMobQuest extends AbstractQuest{
+public class KillMobQuest extends AbstractQuest {
 	static HashSet<String> mobNameList = new HashSet<>();
 
 	private KillMobQuest(String id, String targetMobName, int needCount) {
@@ -30,7 +30,7 @@ public class KillMobQuest extends AbstractQuest{
 			return null;
 		}
 
-		//討伐数チェック
+		// 討伐数チェック
 		int count = JavaUtil.getInt(data2, -1);
 		if (count <= 0) {
 			return null;
@@ -46,16 +46,16 @@ public class KillMobQuest extends AbstractQuest{
 		LivingEntity entity = e.getEntity();
 
 		if (allowAnyMob() || killedMob.getName().equals(targetMobName)) {
-			//最後に攻撃したプレイヤーがいない場合は無視する
+			// 最後に攻撃したプレイヤーがいない場合は無視する
 			Player p = LastDamageManager.getLastDamagePlayer(entity);
 			if (p == null) {
 				return;
 			}
 			if (session.getProcessingStatus(this) == QuestProcessingStatus.PROCESSING) {
-				//カウントを加算する
+				// カウントを加算する
 				int data = session.getQuestData(this);
 				session.setQuestData(this, data + 1);
-				//メッセージを出力
+				// メッセージを出力
 				sendProgressMessage(p, getNeedCount(), data + 1);
 			}
 		}
@@ -63,6 +63,7 @@ public class KillMobQuest extends AbstractQuest{
 
 	/**
 	 * どんなモンスターでもカウントを許可するならTRUE
+	 * 
 	 * @return
 	 */
 	protected boolean allowAnyMob() {
@@ -87,6 +88,7 @@ public class KillMobQuest extends AbstractQuest{
 	}
 
 	int needCount = 0;
+
 	protected int getNeedCount() {
 		return needCount;
 	}

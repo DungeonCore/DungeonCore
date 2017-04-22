@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class ChestListner implements Listener{
+public class ChestListner implements Listener {
 
 	@EventHandler
 	public void onclick(PlayerInteractEvent e) {
@@ -49,7 +49,7 @@ public class ChestListner implements Listener{
 				return;
 			}
 
-			//クリエ かつ シフトの時はそのまま中身を開く
+			// クリエ かつ シフトの時はそのまま中身を開く
 			if (p.isSneaking() && p.getGameMode() == GameMode.CREATIVE) {
 				chest.executeIfDebug(p, e.getClickedBlock(), e);
 				return;
@@ -72,10 +72,12 @@ public class ChestListner implements Listener{
 
 			e.setCancelled(true);
 			if (p.getGameMode() == GameMode.CREATIVE || p.isOp()) {
-				String name = ChestLocationManager.getName(((SpletSheetChest)chest).contentLoc);
+				String name = ChestLocationManager.getName(((SpletSheetChest) chest).contentLoc);
 				p.sendMessage("");
-				p.sendMessage(ChatColor.GREEN + "中身:" +( name == null ? "オリジナル" : name));
-				p.sendMessage(ChatColor.GREEN + "reful:" + (int)(((SpletSheetChest)chest).refuelTick / 20.0) + "秒,  type:" + (chest instanceof AllPlayerSameContentChest) + ",  max:" + ((SpletSheetChest)chest).maxItemCount + ",  min:" + ((SpletSheetChest)chest).minItemCount);
+				p.sendMessage(ChatColor.GREEN + "中身:" + (name == null ? "オリジナル" : name));
+				p.sendMessage(ChatColor.GREEN + "reful:" + (int) (((SpletSheetChest) chest).refuelTick / 20.0)
+						+ "秒,  type:" + (chest instanceof AllPlayerSameContentChest) + ",  max:"
+						+ ((SpletSheetChest) chest).maxItemCount + ",  min:" + ((SpletSheetChest) chest).minItemCount);
 			}
 		}
 	}

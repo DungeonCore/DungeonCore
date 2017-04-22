@@ -26,7 +26,7 @@ import lbn.util.JavaUtil;
 
 import org.bukkit.command.CommandSender;
 
-public class MobSkillSheetRunnable extends AbstractSheetRunable{
+public class MobSkillSheetRunnable extends AbstractSheetRunable {
 
 	public MobSkillSheetRunnable(CommandSender p) {
 		super(p);
@@ -44,15 +44,15 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "skill", "damage", "condition", "timing", "rate", "firescound", "buffid1", "bufftarget1",
-				"dummy3", "data", "particleId", "dummy1", "dummy2", "particlelocation", "targeting",
-				"targetingdata", "latersecond", "chain", "skilltalk", "soundid", "soundtarget"};
+		return new String[] { "id", "skill", "damage", "condition", "timing", "rate", "firescound", "buffid1",
+				"bufftarget1", "dummy3", "data", "particleId", "dummy1", "dummy2", "particlelocation", "targeting",
+				"targetingdata", "latersecond", "chain", "skilltalk", "soundid", "soundtarget" };
 	}
 
 	@Override
 	protected void excuteOnerow(String[] row) {
 		String id = row[0];
-		//skill
+		// skill
 		MobSkillRunnable skill = getMobSkillByDetail(row[1], row[10]);
 		if (skill == null) {
 			sendMessage(id + "のskillが無効ですスキップされました。:" + row[1]);
@@ -72,32 +72,30 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 			timing = MobSkillExcuteTimingType.ALWAYS;
 		}
 
-
-		int rate = (int)getDouble(row[5]);
+		int rate = (int) getDouble(row[5]);
 		if (rate == 0) {
 			rate = 100;
 		}
 
 		int fireTick = (int) (getDouble(row[6]) * 20);
 
-
 		String buffId = row[7];
 		boolean isMobBuffTerget = "モンスター".equals(row[8]);
 
-		//パーティクルの設置
-//		ParticleType type = ParticleType.getType(row[11]);
-//		ParticleData data = null;
-//		double particleData = JavaUtil.getDouble(row[13], 0);
+		// パーティクルの設置
+		// ParticleType type = ParticleType.getType(row[11]);
+		// ParticleData data = null;
+		// double particleData = JavaUtil.getDouble(row[13], 0);
 		ParticleLocationType particleLocationType = ParticleLocationType.getValue(row[14]);
 		if (particleLocationType == null) {
 			particleLocationType = ParticleLocationType.MONSTER_BODY;
 		}
 
-//		if (type != null) {
-//			data = getParticleData(row, type, particleData);
-//		} else {
-//			data = null;
-//		}
+		// if (type != null) {
+		// data = getParticleData(row, type, particleData);
+		// } else {
+		// data = null;
+		// }
 
 		MobSkillTargetingMethodType targetingMethod = MobSkillTargetingMethodType.getInstance(row[15]);
 		if (targetingMethod == null) {
@@ -113,27 +111,27 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable{
 
 		String soundId = "".equals(row[20]) ? null : row[20];
 
-		OldNormalMobSkill normalMobSkill = new OldNormalMobSkill(damage, fireTick, skill, timing, condition,
-				id, rate, row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19],
-				soundId, isOnePlayerSoundTarget, buffId, isMobBuffTerget);
+		OldNormalMobSkill normalMobSkill = new OldNormalMobSkill(damage, fireTick, skill, timing, condition, id, rate,
+				row[11], particleLocationType, targetingMethod, row[16], laterTick, row[18], row[19], soundId,
+				isOnePlayerSoundTarget, buffId, isMobBuffTerget);
 
 		MobSkillManager.registSkill(normalMobSkill);
 	}
 
-//	protected ParticleData getParticleData(String[] row, ParticleType type,
-//			double particleData) {
-//		ParticleData data;
-//		if ("円".equals(row[12])) {
-//			data = new CircleParticleData(new ParticleData(type, 1), 3);
-//		} else if ("バネ状".equals(row[12])) {
-//			data = new SpringParticleData(new ParticleData(type, 3), 3, 6, 1.5, 10);
-//		} else {
-//			data = new ParticleData(type, 30);
-//		}
-//		data.setLastArgument(particleData);
-//
-//		return data;
-//	}
+	// protected ParticleData getParticleData(String[] row, ParticleType type,
+	// double particleData) {
+	// ParticleData data;
+	// if ("円".equals(row[12])) {
+	// data = new CircleParticleData(new ParticleData(type, 1), 3);
+	// } else if ("バネ状".equals(row[12])) {
+	// data = new SpringParticleData(new ParticleData(type, 3), 3, 6, 1.5, 10);
+	// } else {
+	// data = new ParticleData(type, 30);
+	// }
+	// data.setLastArgument(particleData);
+	//
+	// return data;
+	// }
 
 	public double getDouble(String deta) {
 		if (deta == null || deta.isEmpty()) {

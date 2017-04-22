@@ -20,7 +20,7 @@ public class PlayerChestTpManager {
 			return;
 		}
 
-		//まだテレポートしていなければテレポートする
+		// まだテレポートしていなければテレポートする
 		if (tpLaterRunnable.isCantTeleported()) {
 			tpLaterRunnable.runIfServerEnd();
 			tpDataMap.remove(p.getName());
@@ -31,7 +31,7 @@ public class PlayerChestTpManager {
 	public static void teleport(String name, Location loc, int tick) {
 		TpLaterRunnable tpNow = new TpLaterRunnable(name, tick, loc);
 
-		//他のテレポートが実行されていないならそのまま実行
+		// 他のテレポートが実行されていないならそのまま実行
 		if (!tpDataMap.containsKey(name)) {
 			tpDataMap.put(name, tpNow);
 			tpNow.exec();
@@ -39,12 +39,12 @@ public class PlayerChestTpManager {
 		}
 
 		TpLaterRunnable tpBefore = tpDataMap.get(name);
-		//前に設定されたテレポートされる時刻
+		// 前に設定されたテレポートされる時刻
 		int whenTpBefore = tpBefore.getWhenTp();
-		//今設定されたテレポートされる時刻
+		// 今設定されたテレポートされる時刻
 		int whenTpNow = tpNow.getWhenTp();
 
-		//今設定したほうがテレポートされる時刻があとなら前のテレポートをキャンセルし、今設定したものを開始する
+		// 今設定したほうがテレポートされる時刻があとなら前のテレポートをキャンセルし、今設定したものを開始する
 		if (whenTpBefore < whenTpNow) {
 			tpBefore.cancel();
 			tpDataMap.put(name, tpNow);
@@ -53,7 +53,7 @@ public class PlayerChestTpManager {
 	}
 }
 
-class TpLaterRunnable extends LbnRunnable{
+class TpLaterRunnable extends LbnRunnable {
 	String playerName;
 	int tick;
 	Location loc;
@@ -106,7 +106,7 @@ class TpLaterRunnable extends LbnRunnable{
 				sendMessage = true;
 			}
 
-			//テレポートする
+			// テレポートする
 			if (remainedTime <= 0) {
 				cantTeleported = !teleport();
 				Message.sendMessage(Bukkit.getPlayerExact(playerName), ChatColor.YELLOW + "テレポートしました。");
@@ -115,7 +115,8 @@ class TpLaterRunnable extends LbnRunnable{
 			}
 
 			if (sendMessage) {
-				Message.sendMessage(Bukkit.getPlayerExact(playerName), ChatColor.YELLOW + "{0}秒後にテレポートします。", remainedTime);
+				Message.sendMessage(Bukkit.getPlayerExact(playerName), ChatColor.YELLOW + "{0}秒後にテレポートします。",
+						remainedTime);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,9 +129,9 @@ class TpLaterRunnable extends LbnRunnable{
 			return false;
 		}
 
-		//playerがオンラインのときはテレポートする
+		// playerがオンラインのときはテレポートする
 		player.teleport(loc);
-		//MAPから削除する
+		// MAPから削除する
 		PlayerChestTpManager.tpDataMap.remove(player.getName());
 		return true;
 	}

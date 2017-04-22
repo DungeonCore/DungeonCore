@@ -14,6 +14,7 @@ public class ChangeStrengthLevelItemEvent extends Event {
 	ItemStack after;
 	int nextLevel;
 	int beforeLevel;
+
 	public ChangeStrengthLevelItemEvent(ItemStack before, ItemStack after, int beforeLevel, int nextLevel) {
 		this.before = before;
 		this.after = after;

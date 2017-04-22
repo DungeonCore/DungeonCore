@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
-public class Serum extends AbstractItem{
+public class Serum extends AbstractItem {
 
 	@Override
 	public String getItemName() {
@@ -30,7 +30,7 @@ public class Serum extends AbstractItem{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"モンスターの血清", "調剤師によって回復薬が作られる。"};
+		return new String[] { "モンスターの血清", "調剤師によって回復薬が作られる。" };
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class Serum extends AbstractItem{
 
 	static Serum serum = new Serum();
 
-	static public  Serum getInstance() {
+	static public Serum getInstance() {
 		return serum;
 	}
 

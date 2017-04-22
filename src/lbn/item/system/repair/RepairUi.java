@@ -20,12 +20,16 @@ public class RepairUi {
 	{
 
 	}
+
 	public static void onOpenUi(Player p) {
 		MenuSelector menuSelecor = new MenuSelector("Repair Menu");
-		menuSelecor.addMenu(ItemStackUtil.getItem(Message.getMessage("全て修理"), Material.ANVIL,
-				ChatColor.GREEN + Message.getMessage("全ての保持しているアイテムを修理する"), ChatColor.GREEN + Message.getMessage("必要金額: {0} Galions", getNeedGalion(p.getInventory().getContents()) + getNeedGalion(p.getInventory().getArmorContents()))),
-				11,
-				new SelectRunnable() {
+		menuSelecor.addMenu(
+				ItemStackUtil.getItem(Message.getMessage("全て修理"), Material.ANVIL,
+						ChatColor.GREEN + Message.getMessage("全ての保持しているアイテムを修理する"),
+						ChatColor.GREEN + Message.getMessage("必要金額: {0} Galions",
+								getNeedGalion(p.getInventory().getContents())
+										+ getNeedGalion(p.getInventory().getArmorContents()))),
+				11, new SelectRunnable() {
 					@Override
 					public void run(Player p, ItemStack item) {
 						repairItemAll(p);
@@ -33,27 +37,26 @@ public class RepairUi {
 					}
 				});
 
-		menuSelecor.addMenu(ItemStackUtil.getItem(Message.getMessage("選択して修理(未実装)"), Material.DIAMOND_SPADE, Message.getMessage("修理するアイテムを選択して修理する")),
-				15,
-				new SelectRunnable() {
-			@Override
-			public void run(Player p, ItemStack item) {
-				p.sendMessage("未実装です");
-			}
-		});
+		menuSelecor.addMenu(ItemStackUtil.getItem(Message.getMessage("選択して修理(未実装)"), Material.DIAMOND_SPADE,
+				Message.getMessage("修理するアイテムを選択して修理する")), 15, new SelectRunnable() {
+					@Override
+					public void run(Player p, ItemStack item) {
+						p.sendMessage("未実装です");
+					}
+				});
 		menuSelecor.regist();
 		MenuSelectorManager.open(p, "Repair Menu");
 	}
 
-	public static int getNeedGalion(ItemStack...item) {
+	public static int getNeedGalion(ItemStack... item) {
 		int repairDurability = 0;
 		for (ItemStack itemStack : item) {
-			//アイテムがないなら無視
+			// アイテムがないなら無視
 			if (itemStack == null) {
 				continue;
 			}
 			Material type = itemStack.getType();
-			//最大耐久が３０以下のアイテムは無視
+			// 最大耐久が３０以下のアイテムは無視
 			if (type.getMaxDurability() < 30) {
 				continue;
 			}
@@ -62,11 +65,12 @@ public class RepairUi {
 			short durability = (short) (itemStack.getDurability() * waight);
 			repairDurability += Math.min(durability, type.getMaxDurability());
 		}
-		return (int)(repairDurability);
+		return (int) (repairDurability);
 	}
 
 	/**
 	 * プレイヤーの全てのアイテムを修理する
+	 * 
 	 * @param p
 	 */
 	public static void repairItemAll(Player p) {
@@ -86,8 +90,7 @@ public class RepairUi {
 			return;
 		}
 
-
-		//防具以外のアイテムを修理
+		// 防具以外のアイテムを修理
 		for (int i = 0; i < inventory.getSize(); i++) {
 			ItemStack item = inventory.getItem(i);
 			if (repairItem(item)) {
@@ -95,7 +98,7 @@ public class RepairUi {
 			}
 		}
 
-		//防具を修理
+		// 防具を修理
 		ItemStack helmet = inventory.getHelmet();
 		if (repairItem(helmet)) {
 			inventory.setHelmet(helmet);
@@ -113,7 +116,7 @@ public class RepairUi {
 			inventory.setBoots(boots);
 		}
 
-		theLowPlayer.addGalions(- needGalion, GalionEditReason.consume_strength);
+		theLowPlayer.addGalions(-needGalion, GalionEditReason.consume_strength);
 
 		Message.sendMessage(p, "アイテムを修理しました。");
 		return;
@@ -121,6 +124,7 @@ public class RepairUi {
 
 	/**
 	 * 指定されたアイテムを修理する
+	 * 
 	 * @param item
 	 * @return アイテムを修理したならTRUE
 	 */
@@ -132,7 +136,7 @@ public class RepairUi {
 		if (type.getMaxDurability() < 30) {
 			return false;
 		}
-		//アイテムの耐久を０にする
+		// アイテムの耐久を０にする
 		item.setDurability((short) 0);
 		return true;
 	}

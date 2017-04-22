@@ -10,10 +10,11 @@ import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 
-public class MerchantImplemention implements IMerchant{
+public class MerchantImplemention implements IMerchant {
 
 	int containerCounter;
 	TheLowMerchant merchant;
+
 	public MerchantImplemention(TheLowMerchant merchant) {
 		this.containerCounter = merchant.getContainerCounter();
 		this.merchant = merchant;
@@ -52,7 +53,6 @@ public class MerchantImplemention implements IMerchant{
 		}
 		return new ChatMessage(merchant.getName(), new Object[0]);
 	}
-
 
 	@Override
 	public EntityHuman u_() {

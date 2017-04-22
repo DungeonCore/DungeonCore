@@ -32,26 +32,28 @@ import lbn.util.DungeonLogger;
 public class WeaponSkillFactory {
 	private static HashMap<String, WeaponSkillInterface> skillMap = new HashMap<String, WeaponSkillInterface>();
 
-	private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<WeaponSkillInterface>(new Comparator<WeaponSkillInterface>() {
-		@Override
-		public int compare(WeaponSkillInterface o1, WeaponSkillInterface o2) {
-			//スキル解除は一番最初に表示する
-			if (WeaponSkillCancel.isThisSkill(o1)) {
-				return -1;
-			}
-			if (WeaponSkillCancel.isThisSkill(o2)) {
-				return 1;
-			}
+	private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<WeaponSkillInterface>(
+			new Comparator<WeaponSkillInterface>() {
+				@Override
+				public int compare(WeaponSkillInterface o1, WeaponSkillInterface o2) {
+					// スキル解除は一番最初に表示する
+					if (WeaponSkillCancel.isThisSkill(o1)) {
+						return -1;
+					}
+					if (WeaponSkillCancel.isThisSkill(o2)) {
+						return 1;
+					}
 
-			if (o1.getSkillLevel() != o2.getSkillLevel()) {
-				return o1.getSkillLevel() - o2.getSkillLevel();
-			}
-			return o1.getId().compareTo(o2.getId());
-		}
-	});
+					if (o1.getSkillLevel() != o2.getSkillLevel()) {
+						return o1.getSkillLevel() - o2.getSkillLevel();
+					}
+					return o1.getId().compareTo(o2.getId());
+				}
+			});
 
 	/**
 	 * SkillListを取得
+	 * 
 	 * @return
 	 */
 	public static Collection<WeaponSkillInterface> getSortedSkillList() {
@@ -59,7 +61,8 @@ public class WeaponSkillFactory {
 	}
 
 	/**
-	 *武器スキルを登録する
+	 * 武器スキルを登録する
+	 * 
 	 * @param weaponSkill
 	 */
 	public static void regist(WeaponSkillData data) {
@@ -85,14 +88,16 @@ public class WeaponSkillFactory {
 	}
 
 	/**
-	 *武器スキルを取得する
-	 * @param id 武器スキルID
+	 * 武器スキルを取得する
+	 * 
+	 * @param id
+	 *            武器スキルID
 	 */
 	public static WeaponSkillInterface getWeaponSkill(String id) {
 		return skillMap.get(id);
 	}
 
-	//一時的なインスンタンスを保持するためのクラス
+	// 一時的なインスンタンスを保持するためのクラス
 	static HashMap<String, WeaponSkillInterface> tempInstanceMap = new HashMap<String, WeaponSkillInterface>();
 
 	public static void registTempData(WeaponSkillInterface skill) {

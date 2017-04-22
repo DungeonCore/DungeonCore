@@ -11,7 +11,7 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
 import lbn.player.ItemType;
 
-public class WeaponSkillCancel implements WeaponSkillInterface{
+public class WeaponSkillCancel implements WeaponSkillInterface {
 
 	private static final String SKILL_CANCEL = "skill_cancel";
 
@@ -32,7 +32,7 @@ public class WeaponSkillCancel implements WeaponSkillInterface{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"武器スキルを解除する"};
+		return new String[] { "武器スキルを解除する" };
 	}
 
 	@Override
@@ -41,7 +41,8 @@ public class WeaponSkillCancel implements WeaponSkillInterface{
 	}
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
+			PlayerCombatEntityEvent event) {
 	}
 
 	@Override
@@ -66,6 +67,7 @@ public class WeaponSkillCancel implements WeaponSkillInterface{
 
 	/**
 	 * 指定した武器スキルがこのスキルならTRUE
+	 * 
 	 * @param skill
 	 * @return
 	 */

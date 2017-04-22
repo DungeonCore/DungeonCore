@@ -50,7 +50,7 @@ public class PlayerLevelIntData {
 			magicData = data;
 			break;
 		case MAIN:
-			//全てのDataにセットする
+			// 全てのDataにセットする
 			swordData = data;
 			bowData = data;
 			magicData = data;
@@ -58,7 +58,7 @@ public class PlayerLevelIntData {
 		default:
 			throw new RuntimeException("unsupport level type:" + type);
 		}
-		//メインレベルを更新
+		// メインレベルを更新
 		updateMainLevel();
 	}
 
@@ -74,7 +74,7 @@ public class PlayerLevelIntData {
 			magicData += data;
 			break;
 		case MAIN:
-			//全てのDataに加算する
+			// 全てのDataに加算する
 			swordData += data;
 			bowData += data;
 			magicData += data;
@@ -83,9 +83,8 @@ public class PlayerLevelIntData {
 			throw new RuntimeException("unsupport level type:" + type);
 		}
 
-		//メインレベルを更新する
+		// メインレベルを更新する
 		updateMainLevel();
 	}
-
 
 }

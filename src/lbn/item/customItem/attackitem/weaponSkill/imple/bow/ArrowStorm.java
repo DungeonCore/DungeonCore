@@ -17,7 +17,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 
 //{0}秒間、矢を連射する						当たった敵に{1}秒間のスタン
-public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInterface{
+public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInterface {
 
 	public ArrowStorm() {
 		super(ItemType.BOW);
@@ -38,6 +38,7 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 		ProjectileInterface projectileInterface;
 		Player p;
 		ItemStack item;
+
 		public SkillRunnable(ProjectileInterface projectileInterface, Player p, ItemStack item) {
 			this.projectileInterface = projectileInterface;
 			this.p = p;
@@ -47,7 +48,7 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 		@Override
 		public void run2() {
 			long ageTick = getAgeTick();
-			//{0}秒たったら終わりにする
+			// {0}秒たったら終わりにする
 			if (ageTick > getData(0) * 20) {
 				cancel();
 				return;
@@ -68,8 +69,9 @@ public class ArrowStorm extends WeaponSkillForOneType implements ProjectileInter
 	}
 
 	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
-		//無敵時間を０にする
+	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner,
+			LivingEntity target) {
+		// 無敵時間を０にする
 		LivingEntityUtil.setNoDamageTickZero(target);
 	}
 }

@@ -2,7 +2,7 @@ package lbn.dungeon.contents.strength_template;
 
 import org.bukkit.inventory.ItemStack;
 
-public class TutorialTemplate implements StrengthTemplate{
+public class TutorialTemplate implements StrengthTemplate {
 
 	@Override
 	public ItemStack getStrengthMaterials(int level) {

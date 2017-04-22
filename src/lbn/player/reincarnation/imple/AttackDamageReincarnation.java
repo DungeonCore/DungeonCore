@@ -5,7 +5,7 @@ import lbn.api.PlayerStatusType;
 
 import org.bukkit.Material;
 
-public class AttackDamageReincarnation extends AbstractAbilityReincarnation{
+public class AttackDamageReincarnation extends AbstractAbilityReincarnation {
 
 	LevelType levelType;
 

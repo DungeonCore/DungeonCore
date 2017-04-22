@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractMagicBook extends RightClickItem{
+public abstract class AbstractMagicBook extends RightClickItem {
 
 	@Override
 	protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
@@ -23,7 +23,7 @@ public abstract class AbstractMagicBook extends RightClickItem{
 		List<Entity> nearbyEntities = getNearEntitys(player);
 		for (Entity entity : nearbyEntities) {
 			if (LivingEntityUtil.isEnemy(entity)) {
-				onDamage(player, (LivingEntity)entity);
+				onDamage(player, (LivingEntity) entity);
 			}
 		}
 		return true;
@@ -32,9 +32,9 @@ public abstract class AbstractMagicBook extends RightClickItem{
 	abstract protected List<Entity> getNearEntitys(Player player);
 
 	protected void onDamage(Player player, LivingEntity entity) {
-		//ダメージを与える
+		// ダメージを与える
 		entity.damage(getDamageVal(), player);
-		//LastDamageを登録
+		// LastDamageを登録
 		LastDamageManager.onDamage(entity, player, LastDamageMethodType.USE_ITEM);
 	}
 

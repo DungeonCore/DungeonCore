@@ -8,7 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
 
-public class DropingEntityForPlayer extends AbstractDamageFallingblock{
+public class DropingEntityForPlayer extends AbstractDamageFallingblock {
 	public DropingEntityForPlayer(Vector direction, Location start, Material m, byte data) {
 		super(getDropItem(direction, start, m, data));
 	}
@@ -22,7 +22,7 @@ public class DropingEntityForPlayer extends AbstractDamageFallingblock{
 
 	@Override
 	protected boolean damageLivingentity(Entity entity) {
-		//mobとは接触しない
+		// mobとは接触しない
 		return false;
 	}
 
@@ -38,6 +38,7 @@ public class DropingEntityForPlayer extends AbstractDamageFallingblock{
 
 	/**
 	 * 地面についたときの処理
+	 * 
 	 * @param spawnEntity
 	 */
 	public void onGround(Entity spawnEntity) {

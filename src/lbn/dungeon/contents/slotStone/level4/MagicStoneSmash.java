@@ -6,7 +6,7 @@ import lbn.item.slot.slot.KillSlot;
 
 import org.bukkit.ChatColor;
 
-public class MagicStoneSmash extends KillSlot{
+public class MagicStoneSmash extends KillSlot {
 
 	@Override
 	public String getSlotName() {

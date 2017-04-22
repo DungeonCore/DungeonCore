@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
 
-public abstract class WireLessChest extends AbstractCustomChest{
+public abstract class WireLessChest extends AbstractCustomChest {
 	abstract public Location getContainsLocation(Player p, Block block, PlayerInteractEvent e);
 
 	@Override

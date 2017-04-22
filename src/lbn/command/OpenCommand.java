@@ -14,10 +14,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-public class OpenCommand implements CommandExecutor, TabCompleter{
+public class OpenCommand implements CommandExecutor, TabCompleter {
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] params) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+			String[] params) {
 		if (params.length == 0) {
 			return false;
 		}
@@ -48,10 +49,10 @@ public class OpenCommand implements CommandExecutor, TabCompleter{
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender arg0, Command arg1,
-			String arg2, String[] arg3) {
+	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], arrayList, new ArrayList<String>(arrayList.size()));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[0], arrayList,
+					new ArrayList<String>(arrayList.size()));
 		}
 		return null;
 	}

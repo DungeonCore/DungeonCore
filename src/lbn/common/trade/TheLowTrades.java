@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 public class TheLowTrades {
 	/**
 	 * 設定したTrade画面を開く
+	 * 
 	 * @param merchant
 	 * @param p
 	 */
@@ -29,7 +30,8 @@ public class TheLowTrades {
 
 	@SuppressWarnings("unchecked")
 	private static void openTrade(MerchantImplemention imerchant, EntityPlayer p, TheLowMerchant merchant) {
-		Container container = CraftEventFactory.callInventoryOpenEvent(p, new ContainerMerchant(p.inventory, imerchant, p.world));
+		Container container = CraftEventFactory.callInventoryOpenEvent(p,
+				new ContainerMerchant(p.inventory, imerchant, p.world));
 		if (container == null) {
 			return;
 		}
@@ -38,7 +40,7 @@ public class TheLowTrades {
 
 		int containerCounter = imerchant.getContainerCounter();
 
-		//ココらへんはマイクラの処理のまま
+		// ココらへんはマイクラの処理のまま
 		p.nextContainerCounter();
 		p.activeContainer = container;
 		p.activeContainer.windowId = containerCounter;
@@ -46,15 +48,16 @@ public class TheLowTrades {
 		InventoryMerchant inventorymerchant = ((ContainerMerchant) p.activeContainer).e();
 		IChatBaseComponent ichatbasecomponent = imerchant.getScoreboardDisplayName();
 
-		p.playerConnection.sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager", ichatbasecomponent, inventorymerchant.getSize()));
+		p.playerConnection.sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager",
+				ichatbasecomponent, inventorymerchant.getSize()));
 
-		//レシピを登録する
+		// レシピを登録する
 		MerchantRecipeList merchantrecipelist = new MerchantRecipeListImplemention(merchant);
 		for (TheLowMerchantRecipe recipe : merchant.getInitRecipes()) {
 			merchantrecipelist.add(recipe.toMerchantRecipe());
 		}
 
-		//レシピのパケットを送る
+		// レシピのパケットを送る
 		PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
 		packetdataserializer.writeInt(containerCounter);
 		merchantrecipelist.a(packetdataserializer);

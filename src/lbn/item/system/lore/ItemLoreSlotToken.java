@@ -2,7 +2,7 @@ package lbn.item.system.lore;
 
 import org.bukkit.ChatColor;
 
-public class ItemLoreSlotToken extends ItemLoreToken{
+public class ItemLoreSlotToken extends ItemLoreToken {
 
 	public ItemLoreSlotToken(String title) {
 		super(title, false);

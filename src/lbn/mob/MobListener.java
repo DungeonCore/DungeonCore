@@ -51,7 +51,7 @@ public class MobListener implements Listener {
 	public void onSpawn(final PlayerCustomMobSpawnEvent e) {
 		AbstractMob<?> mob = MobHolder.getMob(e);
 
-		//前のボスが存在する場合は削除する
+		// 前のボスが存在する場合は削除する
 		if (mob instanceof BossMobable) {
 			LivingEntity entity = ((BossMobable) mob).getEntity();
 			if (entity == null || !entity.isValid()) {
@@ -61,20 +61,20 @@ public class MobListener implements Listener {
 			bossoList.add((BossMobable) mob);
 		}
 
-		//アイテムを拾わない
+		// アイテムを拾わない
 		LivingEntity entity = e.getEntity();
 		entity.setCanPickupItems(false);
 
-		//スポーンする
+		// スポーンする
 		mob.onSpawn(e);
 		mob.updateName(false);
 
-		//もしSummonの場合は指定時間後に削除する
+		// もしSummonの場合は指定時間後に削除する
 		if (mob.isSummonMob()) {
 			new BukkitRunnable() {
 				@Override
 				public void run() {
-					//チャンクがロードされてなかったらロードする
+					// チャンクがロードされてなかったらロードする
 					Location loc = entity.getLocation();
 					if (!loc.getChunk().isLoaded()) {
 						loc.getChunk().load();
@@ -84,42 +84,42 @@ public class MobListener implements Listener {
 						SummonPlayerManager.removeSummon(e.getEntity());
 					}
 				}
-			}.runTaskLater(Main.plugin, ((SummonMobable)mob).getDeadlineTick());
+			}.runTaskLater(Main.plugin, ((SummonMobable) mob).getDeadlineTick());
 		}
 	}
 
-	@EventHandler(priority=EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onDagame(EntityDamageByEntityEvent e) {
-		//ダメージを与えたEntity
+		// ダメージを与えたEntity
 		Entity damager = e.getDamager();
-		//ダメージを受けたEntity
+		// ダメージを受けたEntity
 		Entity entity = e.getEntity();
 
 		if (MobHolder.isCustomMob(entity)) {
-		//mobがダメージを受けるとき
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)entity);
-			mob.onDamageBefore((LivingEntity)entity, damager, e);
-			mob.onDamage((LivingEntity)entity, damager, e);
+			// mobがダメージを受けるとき
+			AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+			mob.onDamageBefore((LivingEntity) entity, damager, e);
+			mob.onDamage((LivingEntity) entity, damager, e);
 			mob.updateName(true);
 		}
 		if (MobHolder.isCustomMob(damager)) {
-		//mobがダメージを与える時
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)damager);
-			mob.onAttackBefore((LivingEntity)damager, (LivingEntity)entity, e);
-			mob.onAttack((LivingEntity)damager, (LivingEntity)entity, e);
+			// mobがダメージを与える時
+			AbstractMob<?> mob = MobHolder.getMob((LivingEntity) damager);
+			mob.onAttackBefore((LivingEntity) damager, (LivingEntity) entity, e);
+			mob.onAttack((LivingEntity) damager, (LivingEntity) entity, e);
 		} else if (damager instanceof Projectile) {
-			//mobが放ったProjectileがダメージを与えた時
-			ProjectileSource shooter = ((Projectile)damager).getShooter();
+			// mobが放ったProjectileがダメージを与えた時
+			ProjectileSource shooter = ((Projectile) damager).getShooter();
 			if (MobHolder.isExtraMobByProjectile(shooter) && e.getEntity() instanceof LivingEntity) {
 				AbstractMob<?> mob = MobHolder.getMob((LivingEntity) shooter);
-				mob.onProjectileHitEntity((LivingEntity)shooter, (LivingEntity) e.getEntity(), e);
+				mob.onProjectileHitEntity((LivingEntity) shooter, (LivingEntity) e.getEntity(), e);
 			}
 		}
 
 		if (entity.getType() == EntityType.VILLAGER) {
 			e.setCancelled(true);
 		} else if (entity.getType() == EntityType.ARMOR_STAND) {
-			//管理者でないなら攻撃をキャンセルする
+			// 管理者でないなら攻撃をキャンセルする
 			if (!PlayerChecker.isNonNormalPlayer(e.getDamager())) {
 				e.setCancelled(true);
 			}
@@ -130,7 +130,7 @@ public class MobListener implements Listener {
 	public void onDamageOther(EntityDamageEvent e) {
 		Entity entity = e.getEntity();
 		if (MobHolder.isCustomMob(entity)) {
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)entity);
+			AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
 			mob.onOtherDamage(e);
 			mob.updateName(false);
 		}
@@ -140,7 +140,7 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onDeath(EntityDeathEvent e) {
-		//mobが死んだ時はデフォルトのアイテムドロップはなしにする
+		// mobが死んだ時はデフォルトのアイテムドロップはなしにする
 		LivingEntity entity = e.getEntity();
 		if (entity.getType() != EntityType.PLAYER) {
 			e.getDrops().clear();
@@ -151,12 +151,12 @@ public class MobListener implements Listener {
 
 		Player lastDamagePlayer = LastDamageManager.getLastDamagePlayer(e.getEntity());
 		if (lastDamagePlayer != null) {
-			//ドロップアイテムをセットする
+			// ドロップアイテムをセットする
 			List<ItemStack> dropItem = mob.getDropItem(lastDamagePlayer);
 			e.getDrops().addAll(dropItem);
 		}
 
-		//もしボスの場合はチェストを設置する
+		// もしボスの場合はチェストを設置する
 		if (mob.isBoss()) {
 			CustomChestManager.setBossRewardChest((BossMobable) mob);
 		}
@@ -171,7 +171,7 @@ public class MobListener implements Listener {
 	@EventHandler
 	public void onInteractEntity(PlayerInteractEntityEvent e) {
 		if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)e.getRightClicked());
+			AbstractMob<?> mob = MobHolder.getMob((LivingEntity) e.getRightClicked());
 			mob.onInteractEntity(e);
 		}
 	}
@@ -184,9 +184,9 @@ public class MobListener implements Listener {
 
 	@EventHandler
 	public void onTeleport(EntityTeleportEvent e) {
-		 if (e.getEntityType() == EntityType.ENDERMAN) {
-			 e.setCancelled(true);
-		 }
+		if (e.getEntityType() == EntityType.ENDERMAN) {
+			e.setCancelled(true);
+		}
 	}
 
 	@EventHandler

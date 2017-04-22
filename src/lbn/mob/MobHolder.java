@@ -14,26 +14,27 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class MobHolder{
+public class MobHolder {
 	private static final NullMob NULL_MOB = new NullMob();
 
 	private static HashMap<String, AbstractMob<?>> mobs = new HashMap<>();
 
 	/**
 	 * CustomMobならTRUE
+	 * 
 	 * @param e
 	 * @return
 	 */
 	public static boolean isCustomMob(Entity e) {
-		//normal mob実装のため、全てのMobがCustomMobとなるので一旦すべてTrueとする
+		// normal mob実装のため、全てのMobがCustomMobとなるので一旦すべてTrueとする
 		if (e.getType().isAlive()) {
-//			if (((LivingEntity)e).getCustomName() == null) {
-//				return false;
-//			}
-//			String name = getRealName(e);
-//			return mobs.containsKey(name);
-//		} else {
-//			return false;
+			// if (((LivingEntity)e).getCustomName() == null) {
+			// return false;
+			// }
+			// String name = getRealName(e);
+			// return mobs.containsKey(name);
+			// } else {
+			// return false;
 			return e.getType() != EntityType.PLAYER;
 		}
 		return false;
@@ -41,6 +42,7 @@ public class MobHolder{
 
 	/**
 	 * mobを登録する
+	 * 
 	 * @param mob
 	 */
 	public static void registMob(AbstractMob<?> mob) {
@@ -51,6 +53,7 @@ public class MobHolder{
 
 	/**
 	 * CustomMobならTRUE
+	 * 
 	 * @param e
 	 * @return
 	 */
@@ -64,6 +67,7 @@ public class MobHolder{
 
 	/**
 	 * mobInstanceを取得
+	 * 
 	 * @param e
 	 * @return
 	 */
@@ -76,9 +80,9 @@ public class MobHolder{
 		}
 	}
 
-
 	/**
 	 * Normal mobを含めたMobを取得
+	 * 
 	 * @param name
 	 * @return
 	 */
@@ -90,7 +94,7 @@ public class MobHolder{
 		String alias = name.replace("_", " ");
 		String alias1 = name.replace(" ", "_");
 
-		//指定されたMob名が存在したらそれを返す
+		// 指定されたMob名が存在したらそれを返す
 		for (String mobName : Arrays.asList(alias, alias1, name)) {
 			AbstractMob<?> mob = MobHolder.getMob(mobName);
 			if (!mob.isNullMob()) {
@@ -98,17 +102,17 @@ public class MobHolder{
 			}
 		}
 
-		//指定されたMob名が存在したらそれを返す
+		// 指定されたMob名が存在したらそれを返す
 		for (String mobName : Arrays.asList(alias, alias1, name)) {
-			//EntityTypeが全て大文字のため大文字にする
+			// EntityTypeが全て大文字のため大文字にする
 			mobName = mobName.toUpperCase();
 			try {
 				EntityType valueOf = EntityType.valueOf(mobName);
-				//もしLivingEntityでないなら失敗
+				// もしLivingEntityでないなら失敗
 				if (!valueOf.isAlive()) {
 					continue;
 				}
-				//normalMobでラッピングする
+				// normalMobでラッピングする
 				return new NormalMob(valueOf);
 			} catch (Exception e) {
 				continue;
@@ -116,8 +120,10 @@ public class MobHolder{
 		}
 		return null;
 	}
+
 	/**
 	 * mobInstanceを取得
+	 * 
 	 * @param e
 	 * @return
 	 */
@@ -125,12 +131,12 @@ public class MobHolder{
 		if (name == null) {
 			return NULL_MOB;
 		}
-		//大文字にする
+		// 大文字にする
 		name = ChatColor.stripColor(name.toUpperCase());
 
-		//[があったら消す
+		// [があったら消す
 		if (name.contains("[") && name.contains("]")) {
-			if (name.contains("[") && name.contains("]") ) {
+			if (name.contains("[") && name.contains("]")) {
 				name = name.substring(0, name.lastIndexOf("[")).trim();
 			}
 		}
@@ -141,8 +147,10 @@ public class MobHolder{
 			return NULL_MOB;
 		}
 	}
+
 	/**
 	 * mobInstanceを取得
+	 * 
 	 * @param e
 	 * @return
 	 */
@@ -166,6 +174,7 @@ public class MobHolder{
 
 	/**
 	 * 全てのモブの名前を取得
+	 * 
 	 * @return
 	 */
 	public static Collection<String> getAllNames() {
@@ -174,6 +183,7 @@ public class MobHolder{
 
 	/**
 	 * 全てのモブを取得
+	 * 
 	 * @return
 	 */
 	public static Collection<AbstractMob<?>> getAllMobs() {

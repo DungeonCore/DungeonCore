@@ -25,7 +25,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class BowOfExplosion extends BowItemOld implements Strengthenable{
+public class BowOfExplosion extends BowItemOld implements Strengthenable {
 	@Override
 	public String getItemName() {
 		return "BOW OF EXPLOTSION";
@@ -39,7 +39,8 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 	@Override
 	public void excuteOnShootBow2(EntityShootBowEvent e) {
 		Entity entity = e.getProjectile();
-		entity.setMetadata("bow_date_lbn_doungeon_bow_of_explosion_can_explosion", new FixedMetadataValue(Main.plugin, "1"));
+		entity.setMetadata("bow_date_lbn_doungeon_bow_of_explosion_can_explosion",
+				new FixedMetadataValue(Main.plugin, "1"));
 
 	}
 
@@ -53,9 +54,9 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 		}
 
 		List<MetadataValue> metadataBow = entity.getMetadata("bow_date_lbn_doungeon_bow_of_explosion_can_explosion");
-		//着地したものに弓の情報がある確認する
+		// 着地したものに弓の情報がある確認する
 		if (metadataBow.size() == 0) {
-			//一回爆発したので爆発させない
+			// 一回爆発したので爆発させない
 			return;
 		} else {
 			entity.removeMetadata("bow_date_lbn_doungeon_bow_of_explosion_can_explosion", Main.plugin);
@@ -64,7 +65,8 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 		int level = StrengthOperator.getLevel(bow);
 
 		if (LivingEntityUtil.isFriendship((LivingEntity) shooter)) {
-			new NoPlayerDamageExplotionForAttackType(entity.getLocation(), getExplosionSize(level), (LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
+			new NoPlayerDamageExplotionForAttackType(entity.getLocation(), getExplosionSize(level),
+					(LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
 		} else {
 			new NotMonsterDamageExplosion(entity.getLocation(), getExplosionSize(level)).runExplosion();
 		}
@@ -72,7 +74,7 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"着弾地点が爆発します"};
+		return new String[] { "着弾地点が爆発します" };
 	}
 
 	static StrengthTemplate template = new WeaponStrengthTemplate();
@@ -81,7 +83,6 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 	public StrengthTemplate getStrengthTemplate() {
 		return template;
 	}
-
 
 	protected int getExplosionSize(int level) {
 		switch (level) {
@@ -128,7 +129,7 @@ public class BowOfExplosion extends BowItemOld implements Strengthenable{
 
 	@Override
 	protected String[] getStrengthDetail2(int level) {
-		return new String[]{"爆発力：" + getExplosionSize(level)};
+		return new String[] { "爆発力：" + getExplosionSize(level) };
 	}
 
 	@Override

@@ -21,7 +21,8 @@ public abstract class TheLowMerchant {
 
 	public TheLowMerchant(Player p) {
 		this.p = p;
-		this.containerCounter = JavaUtil.getField(EntityPlayer.class, "containerCounter", ((CraftPlayer) p).getHandle());
+		this.containerCounter = JavaUtil.getField(EntityPlayer.class, "containerCounter",
+				((CraftPlayer) p).getHandle());
 	}
 
 	public int getContainerCounter() {
@@ -38,6 +39,7 @@ public abstract class TheLowMerchant {
 
 	/**
 	 * Playerがアイテムを動かした時の処理
+	 * 
 	 * @param inv
 	 */
 	protected abstract void onSetItem(InventoryView inv);
@@ -63,6 +65,7 @@ public abstract class TheLowMerchant {
 
 	/**
 	 * レシピのパケットを送信する
+	 * 
 	 * @param recipeList
 	 */
 	@SuppressWarnings("unchecked")
@@ -73,13 +76,14 @@ public abstract class TheLowMerchant {
 			merchantrecipelist.add(recipe.toMerchantRecipe());
 		}
 
-		//パケットを送信する
+		// パケットを送信する
 		PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
 		packetdataserializer.writeInt(getContainerCounter());
 		merchantrecipelist.a(packetdataserializer);
-		((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
+		((CraftPlayer) p).getHandle().playerConnection
+				.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
 
-		//一旦全て削除し、入れ直す
+		// 一旦全て削除し、入れ直す
 		if (nowRecipeList != null) {
 			nowRecipeList.clear();
 		} else {
@@ -94,6 +98,7 @@ public abstract class TheLowMerchant {
 
 	/**
 	 * 現在開いているレシピリストを取得
+	 * 
 	 * @return
 	 */
 	public MerchantRecipeListImplemention getNowRecipeList() {
@@ -106,13 +111,12 @@ public abstract class TheLowMerchant {
 		return nowRecipeList;
 	}
 
-
 	/**
 	 * 一番最初に表示されるレシピを取得する
+	 * 
 	 * @return
 	 */
 	abstract public List<TheLowMerchantRecipe> getInitRecipes();
-
 
 	/**
 	 * 取引が終了した時

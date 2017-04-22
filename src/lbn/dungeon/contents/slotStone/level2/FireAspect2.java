@@ -6,7 +6,7 @@ import lbn.item.slot.slot.CombatSlot;
 
 import org.bukkit.ChatColor;
 
-public class FireAspect2 extends CombatSlot{
+public class FireAspect2 extends CombatSlot {
 
 	@Override
 	public String getSlotName() {

@@ -10,11 +10,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class JumpCommand implements CommandExecutor{
+public class JumpCommand implements CommandExecutor {
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender,
-			Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 		if (paramArrayOfString.length == 0) {
 			return false;

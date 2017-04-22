@@ -6,12 +6,8 @@ import lbn.util.ItemStackUtil;
 import org.bukkit.Material;
 
 public enum ItemType {
-	SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
-	BOW(LevelType.BOW, ItemStackUtil.getVanillaDamage(Material.BOW)),
-	MAGIC(LevelType.BOW, 6),
-	OTHER(),
-	IGNORE();
-
+	SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)), BOW(LevelType.BOW,
+			ItemStackUtil.getVanillaDamage(Material.BOW)), MAGIC(LevelType.BOW, 6), OTHER(), IGNORE();
 
 	private ItemType(LevelType type, double level0MinDamage) {
 		this.levelType = type;
@@ -32,6 +28,7 @@ public enum ItemType {
 
 	/**
 	 * レベルに応じた武器の最小ダメージ
+	 * 
 	 * @param level
 	 * @return
 	 */
@@ -45,7 +42,7 @@ public enum ItemType {
 		}
 
 		if (level <= 60) {
-			return - level / 10.0 * 2.0 - 4;
+			return -level / 10.0 * 2.0 - 4;
 		}
 
 		return -16;
@@ -53,11 +50,13 @@ public enum ItemType {
 
 	/**
 	 * レベルに応じた武器の最大ダメージを取得
-	 * @param availableLevel 利用可能レベル
+	 * 
+	 * @param availableLevel
+	 *            利用可能レベル
 	 * @return
 	 */
 	public double getMaxDamage(int availableLevel) {
-		//キャッシュをするほうが遅くなるのでこのまま計算する
+		// キャッシュをするほうが遅くなるのでこのまま計算する
 		if (availableLevel <= 60) {
 			if (this == SWORD) {
 				return 9 + Math.pow(availableLevel / 10.0, 2) * 2.6;
@@ -76,7 +75,7 @@ public enum ItemType {
 			}
 		}
 
-		//その他の時は起こり得ないが剣にする
+		// その他の時は起こり得ないが剣にする
 		return 12 + Math.pow(availableLevel / 10.0, 2) * 2.6;
 	}
 }

@@ -25,7 +25,7 @@ public class CraftTableViewManager {
 
 		craftTableViewMap.put(p, type);
 
-		//1tickごとに監視する
+		// 1tickごとに監視する
 		new BukkitRunnable() {
 			@Override
 			public void run() {

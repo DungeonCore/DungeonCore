@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-public abstract class AbstractCustomMob<T extends ICustomEntity<?>, K extends LivingEntity> extends AbstractMob<K>{
+public abstract class AbstractCustomMob<T extends ICustomEntity<?>, K extends LivingEntity> extends AbstractMob<K> {
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -34,7 +34,7 @@ public abstract class AbstractCustomMob<T extends ICustomEntity<?>, K extends Li
 
 	@Override
 	public void onOtherDamage(EntityDamageEvent e) {
-		//水の中では落下ダメージを受けない
+		// 水の中では落下ダメージを受けない
 		if (isIgnoreWater()) {
 			if (e.getCause() == DamageCause.DROWNING || e.getCause() == DamageCause.FALL) {
 				e.setCancelled(true);

@@ -14,7 +14,7 @@ import net.citizensnpcs.api.trait.Trait;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class RemoveNearNpcOnSpawnTrait extends Trait{
+public class RemoveNearNpcOnSpawnTrait extends Trait {
 
 	public RemoveNearNpcOnSpawnTrait() {
 		super("THELOW_NEAR_REMOVE_ONSPAWN");
@@ -50,22 +50,22 @@ public class RemoveNearNpcOnSpawnTrait extends Trait{
 
 				List<Entity> nearbyEntities = bukkitEntity.getNearbyEntities(100, 50, 100);
 				for (Entity target : nearbyEntities) {
-					//名前・Typeが異なるなら削除
+					// 名前・Typeが異なるなら削除
 					if (bukkitEntity.getType() != target.getType() || !npc.getName().equals(target.getName())) {
 						continue;
 					}
 					if (!target.equals(bukkitEntity)) {
 						NPC targetNpc = CitizensAPI.getNPCRegistry().getNPC(target);
 						if (targetNpc != null) {
-							//NPCが同じなら何もしない
+							// NPCが同じなら何もしない
 							if (targetNpc.getId() == npc.getId()) {
 								continue;
 							}
 							String id2 = NpcManager.getId(targetNpc);
-							//IDが同じなら削除
+							// IDが同じなら削除
 							if (id2 != null && id2.equals(thisNpc.getId())) {
 								targetNpc.destroy();
-								DungeonLogger.development("npc:" +id2 + " is destoried(1) by " + thisNpc.getId());
+								DungeonLogger.development("npc:" + id2 + " is destoried(1) by " + thisNpc.getId());
 							}
 						}
 					}

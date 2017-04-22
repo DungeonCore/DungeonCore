@@ -11,8 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetOtherItem extends AbstractItem {
-	public SpreadSheetOtherItem(String name, String id, int price,
-			String command, String detail) {
+	public SpreadSheetOtherItem(String name, String id, int price, String command, String detail) {
 		super();
 		this.name = name;
 		this.id = id;

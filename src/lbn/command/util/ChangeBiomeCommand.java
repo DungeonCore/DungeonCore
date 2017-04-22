@@ -21,16 +21,15 @@ import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
-public class ChangeBiomeCommand implements CommandExecutor, TabCompleter{
+public class ChangeBiomeCommand implements CommandExecutor, TabCompleter {
 
-	//<command> biomename x z x z
+	// <command> biomename x z x z
 	@Override
-	public boolean onCommand(final CommandSender arg0, Command arg1, String arg2,
-			String[] arg3) {
+	public boolean onCommand(final CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
 			String special = arg3[0];
 			if (special.equals("search")) {
-				RouteSearcher autoPlantInstance = RouteSearcher.getInstance((Player)arg0);
+				RouteSearcher autoPlantInstance = RouteSearcher.getInstance((Player) arg0);
 				autoPlantInstance.startSearchingPath();
 				return true;
 			}
@@ -58,11 +57,12 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter{
 				int count = 0;
 
 				double z = minZ;
+
 				@Override
 				public void run() {
 					for (int i = 0; i < 20; i++) {
 						for (double x = minX; x < maxX; x++) {
-							Location location = new Location(((Player)arg0).getWorld(), x, 65, z);
+							Location location = new Location(((Player) arg0).getWorld(), x, 65, z);
 							location.getBlock().setBiome(valueOf);
 						}
 						z++;
@@ -73,7 +73,8 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter{
 						}
 					}
 					if (count % 5 == 0) {
-						Bukkit.broadcastMessage(ChatColor.GRAY + "進捗:" + (int)((z - minZ) * 100 / (maxZ - minZ)) + "%");
+						Bukkit.broadcastMessage(
+								ChatColor.GRAY + "進捗:" + (int) ((z - minZ) * 100 / (maxZ - minZ)) + "%");
 					}
 					count++;
 				}
@@ -91,7 +92,8 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter{
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
 			Collection<String> itemNameList = getNames();
-			return (List<String>)StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+			return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList,
+					new ArrayList<String>(itemNameList.size()));
 		}
 		return ImmutableList.of();
 	}

@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.customItem.other.StrengthScrollWeapon;
 
-public class WeaponStrengthTemplate implements StrengthTemplate{
+public class WeaponStrengthTemplate implements StrengthTemplate {
 	static ItemStack strengthScrollWeapon = new StrengthScrollWeapon().getItem();
 
 	@Override

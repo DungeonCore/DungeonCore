@@ -18,7 +18,7 @@ public class MagicPointManager {
 	}
 
 	protected static void startHealMagicPoint(Player p) {
-		//magicポイントを回復させる
+		// magicポイントを回復させる
 		MagicPointRunnable runable = new MagicPointRunnable(p);
 		if (!runable.isRun()) {
 			runable.startTask();
@@ -42,7 +42,7 @@ public class MagicPointManager {
 		if (theLowPlayer != null) {
 			return (int) theLowPlayer.getStatusData(PlayerStatusType.MAX_MAGIC_POINT);
 		}
-		//ロードされていない時はとりあえず100にしておく
+		// ロードされていない時はとりあえず100にしておく
 		return 100;
 	}
 
@@ -54,9 +54,10 @@ public class MagicPointManager {
 }
 
 class MagicPointRunnable extends LbnRunnable {
-	static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<Player,MagicPointRunnable>();
+	static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<Player, MagicPointRunnable>();
 
 	Player p;
+
 	public MagicPointRunnable(Player p) {
 		this.p = p;
 	}
@@ -97,4 +98,3 @@ class MagicPointRunnable extends LbnRunnable {
 		hashSet.remove(p);
 	}
 }
-

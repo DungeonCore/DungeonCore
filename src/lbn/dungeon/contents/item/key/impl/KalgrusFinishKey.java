@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class KalgrusFinishKey extends SuikaCastle{
+public class KalgrusFinishKey extends SuikaCastle {
 
 	public KalgrusFinishKey() {
 		super("", "x:? y:? z:?");
@@ -27,7 +27,7 @@ public class KalgrusFinishKey extends SuikaCastle{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"Kalgrusで使用可能", loc};
+		return new String[] { "Kalgrusで使用可能", loc };
 	}
 
 	@Override

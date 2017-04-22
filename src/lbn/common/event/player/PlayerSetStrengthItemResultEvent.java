@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
  * 強化完成形のアイテムがRESULT欄に表示される瞬間
  *
  */
-public class PlayerSetStrengthItemResultEvent extends PlayerEvent{
+public class PlayerSetStrengthItemResultEvent extends PlayerEvent {
 
 	ItemStack item;
 

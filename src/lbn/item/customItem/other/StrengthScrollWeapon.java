@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import lbn.item.customItem.AbstractItem;
 
-public class StrengthScrollWeapon extends AbstractItem{
+public class StrengthScrollWeapon extends AbstractItem {
 
 	@Override
 	public String getItemName() {
@@ -29,7 +29,7 @@ public class StrengthScrollWeapon extends AbstractItem{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"武器の強化の際に使うアイテム"};
+		return new String[] { "武器の強化の際に使うアイテム" };
 	}
 
 }

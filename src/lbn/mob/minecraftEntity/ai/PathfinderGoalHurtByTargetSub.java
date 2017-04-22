@@ -10,14 +10,13 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
 
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
-public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget{
+public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
 	private boolean a;
 	private int b;
 	@SuppressWarnings("rawtypes")
 	private final Class[] c;
 
-	public PathfinderGoalHurtByTargetSub(EntityCreature entitycreature,
-			boolean flag, Class<?>... aclass) {
+	public PathfinderGoalHurtByTargetSub(EntityCreature entitycreature, boolean flag, Class<?>... aclass) {
 		super(entitycreature, false);
 		this.a = flag;
 		this.c = aclass;
@@ -31,21 +30,16 @@ public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget{
 	}
 
 	public void c() {
-		this.e.setGoalTarget(this.e.getLastDamager(),
-				TargetReason.TARGET_ATTACKED_ENTITY, true);
+		this.e.setGoalTarget(this.e.getLastDamager(), TargetReason.TARGET_ATTACKED_ENTITY, true);
 		this.b = this.e.bd();
 		if (this.a) {
 			double d0 = f();
-			List<?> list = this.e.world
-					.a(this.e.getClass(), new AxisAlignedBB(this.e.locX,
-							this.e.locY, this.e.locZ, this.e.locX + 1.0D,
-							this.e.locY + 1.0D, this.e.locZ + 1.0D).grow(d0,
-							10.0D, d0));
+			List<?> list = this.e.world.a(this.e.getClass(), new AxisAlignedBB(this.e.locX, this.e.locY, this.e.locZ,
+					this.e.locX + 1.0D, this.e.locY + 1.0D, this.e.locZ + 1.0D).grow(d0, 10.0D, d0));
 			Iterator<?> iterator = list.iterator();
 			while (iterator.hasNext()) {
 				EntityCreature entitycreature = (EntityCreature) iterator.next();
-				if ((this.e != entitycreature)
-						&& (entitycreature.getGoalTarget() == null)
+				if ((this.e != entitycreature) && (entitycreature.getGoalTarget() == null)
 						&& (!entitycreature.c(this.e.getLastDamager()))) {
 					boolean flag = false;
 					@SuppressWarnings("rawtypes")
@@ -68,8 +62,6 @@ public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget{
 	}
 
 	protected void a(EntityCreature entitycreature, EntityLiving entityliving) {
-		entitycreature.setGoalTarget(entityliving,
-				TargetReason.TARGET_ATTACKED_NEARBY_ENTITY,
-				true);
+		entitycreature.setGoalTarget(entityliving, TargetReason.TARGET_ATTACKED_NEARBY_ENTITY, true);
 	}
 }

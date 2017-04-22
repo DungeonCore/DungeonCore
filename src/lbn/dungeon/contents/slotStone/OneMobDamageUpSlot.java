@@ -10,11 +10,11 @@ import lbn.item.slot.slot.CombatSlot;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 
-public class OneMobDamageUpSlot extends CombatSlot{
+public class OneMobDamageUpSlot extends CombatSlot {
 
 	public static ArrayList<OneMobDamageUpSlot> slotList = new ArrayList<OneMobDamageUpSlot>();
 
-	static{
+	static {
 		slotList.add(new OneMobDamageUpSlot(SlotLevel.LEVEL2, 1, EntityType.ZOMBIE, "ゾンビ"));
 		slotList.add(new OneMobDamageUpSlot(SlotLevel.LEVEL3, 2, EntityType.ZOMBIE, "ゾンビ"));
 		slotList.add(new OneMobDamageUpSlot(SlotLevel.LEVEL4, 3, EntityType.ZOMBIE, "ゾンビ"));
@@ -42,8 +42,7 @@ public class OneMobDamageUpSlot extends CombatSlot{
 		}
 	}
 
-	public OneMobDamageUpSlot(SlotLevel slotLevel, int damageLevel,
-			EntityType targetType, String targetName) {
+	public OneMobDamageUpSlot(SlotLevel slotLevel, int damageLevel, EntityType targetType, String targetName) {
 		this.slotLevel = slotLevel;
 		this.damageLevel = damageLevel;
 		this.targetType = targetType;
@@ -95,11 +94,12 @@ public class OneMobDamageUpSlot extends CombatSlot{
 	}
 
 	/**
-	 * 9 →　10 →　11　→　12 →　13
+	 * 9 → 10 → 11 → 12 → 13
+	 * 
 	 * @return
 	 */
 	public int getAddDamagePer() {
-		return (int)((9.0 + getDamageLevel()) / 9.0 * 100) - 100;
+		return (int) ((9.0 + getDamageLevel()) / 9.0 * 100) - 100;
 	}
 
 	@Override

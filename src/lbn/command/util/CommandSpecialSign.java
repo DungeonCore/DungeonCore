@@ -18,12 +18,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CommandSpecialSign implements CommandExecutor{
+public class CommandSpecialSign implements CommandExecutor {
 	public static HashMap<Player, Location> signClickMap = new HashMap<Player, Location>();
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender,
-			Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 
 		if (!(paramCommandSender instanceof Player)) {
@@ -54,7 +53,6 @@ public class CommandSpecialSign implements CommandExecutor{
 			return true;
 		}
 
-
 		Location location = signClickMap.get(p);
 		if (location == null) {
 			p.sendMessage("先に空白の看板をクリエイティブで左クリックしてください");
@@ -69,9 +67,9 @@ public class CommandSpecialSign implements CommandExecutor{
 
 		String line2 = null;
 
-		String lastLine =  null;
+		String lastLine = null;
 		if (clazz.equals(KeyItemable.class)) {
-			lastLine =  ((KeyItemable)customItem).getLastLine(p, paramArrayOfString);
+			lastLine = ((KeyItemable) customItem).getLastLine(p, paramArrayOfString);
 			line2 = "IN HAND";
 		} else if (paramArrayOfString[0].equalsIgnoreCase("get")) {
 			line2 = "FOR GETTING";
@@ -81,7 +79,7 @@ public class CommandSpecialSign implements CommandExecutor{
 			return false;
 		}
 
-		//看板の内容を調べる
+		// 看板の内容を調べる
 		Sign state = (Sign) clickedBlock.getState();
 		state.setLine(0, ChatColor.GREEN + "CLICK HERE");
 		state.setLine(1, ChatColor.GREEN + line2);
@@ -101,7 +99,7 @@ public class CommandSpecialSign implements CommandExecutor{
 			return false;
 		}
 
-		//看板の内容を調べる
+		// 看板の内容を調べる
 		Sign state = (Sign) clickedBlock.getState();
 		String[] lines = state.getLines();
 		int whiteCount = 0;

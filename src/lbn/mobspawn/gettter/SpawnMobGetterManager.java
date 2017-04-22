@@ -15,6 +15,7 @@ public class SpawnMobGetterManager {
 
 	/**
 	 * SpawnMobGetterを登録する
+	 * 
 	 * @param spawnMob
 	 */
 	public static void registSpawnMobGetter(SpawnMobGetterInterface spawnMob) {
@@ -23,12 +24,13 @@ public class SpawnMobGetterManager {
 
 	/**
 	 * SpawnMobGetterをnameから取得する
+	 * 
 	 * @param name
 	 * @return
 	 */
 	public static SpawnMobGetterInterface getSpawnMobGetter(String name) {
 		try {
-			//もしLivingEntity名と一致するならそれを返す
+			// もしLivingEntity名と一致するならそれを返す
 			EntityType valueOf = EntityType.valueOf(name.toUpperCase());
 			if (valueOf != null && valueOf.isAlive()) {
 				OneMonsterGetter mobGetter = new OneMonsterGetter(new NormalMob(valueOf));

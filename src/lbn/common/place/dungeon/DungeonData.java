@@ -12,7 +12,7 @@ import lbn.common.place.PlaceInterface;
 import lbn.common.place.PlaceType;
 import lbn.dungeoncore.Main;
 
-public class DungeonData implements PlaceInterface{
+public class DungeonData implements PlaceInterface {
 
 	public DungeonData(int id, String name) {
 		PlaceBean placeBean = new PlaceBean();
@@ -55,7 +55,7 @@ public class DungeonData implements PlaceInterface{
 				}
 
 				Hologram hologram = HologramsAPI.createHologram(Main.plugin, location);
-				hologram.appendTextLine(ChatColor.AQUA  + ChatColor.BOLD.toString() + getName());
+				hologram.appendTextLine(ChatColor.AQUA + ChatColor.BOLD.toString() + getName());
 				hologram.appendTextLine(ChatColor.GOLD + "DIFFICULTY : " + getLevel() + "レベル");
 				this.hologram = hologram;
 			}
@@ -71,6 +71,7 @@ public class DungeonData implements PlaceInterface{
 
 	/**
 	 * 対象のレベル
+	 * 
 	 * @return
 	 */
 	public int getLevel() {
@@ -79,6 +80,7 @@ public class DungeonData implements PlaceInterface{
 
 	/**
 	 * ダンジョンの入口の座標
+	 * 
 	 * @return
 	 */
 	public Location getEntranceLocation() {
@@ -87,6 +89,7 @@ public class DungeonData implements PlaceInterface{
 
 	/**
 	 * ダンジョンのスタート地点の座標
+	 * 
 	 * @return
 	 */
 	public Location getStartLocation() {

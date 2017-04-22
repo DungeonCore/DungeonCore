@@ -9,16 +9,17 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Zombie;
 
-public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zombie>{
+public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zombie> {
 	/**
 	 * アンデット属性にするかしないかを選択
-	 * @param isNoUndead 初期値はFALSE
+	 * 
+	 * @param isNoUndead
+	 *            初期値はFALSE
 	 */
 	public void setNoUndead(boolean isNoUndead, Zombie mob) {
 		CustomZombie entity = (CustomZombie) CustomEntityUtil.getEntity(mob);
 		entity.setUndead(!isNoUndead);
 	}
-
 
 	@Override
 	public CustomZombie getInnerEntity(World w) {
@@ -29,9 +30,9 @@ public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zom
 		return 1.5;
 	}
 
-
 	/**
 	 * アンデット属性でないならTRUE。通常はFALSE
+	 * 
 	 * @return
 	 */
 	public boolean isNoUndead() {

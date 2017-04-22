@@ -17,7 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-public class MobSheetRunnable extends AbstractSheetRunable{
+public class MobSheetRunnable extends AbstractSheetRunable {
 
 	public MobSheetRunnable(CommandSender p) {
 		super(p);
@@ -43,11 +43,11 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
-				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp",
-				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "dummy1", "attackpoint", "defencePoint",//21
-				"aitype", "reach", "jumpattack", "cps", "sps", "dropitem3", "droprate3", "dropitem4", "droprate4", "level","autohp"
-				};
+		return new String[] { "name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
+				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp", "swordresistance",
+				"bowresistance", "magicresistance", "redstonelocation", "dummy1", "attackpoint", "defencePoint", // 21
+				"aitype", "reach", "jumpattack", "cps", "sps", "dropitem3", "droprate3", "dropitem4", "droprate4",
+				"level", "autohp" };
 	}
 
 	@Override
@@ -71,12 +71,12 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 			boolean isBoss = false;
 
-			//mobのインスタンス作成
+			// mobのインスタンス作成
 			SpreadSheetMob instance;
 			if (isEmpty(row, 7)) {
 				instance = SpreadSheetMob.getInstance(command.split(" "), name, sender);
 			} else {
-				//AbstractChestを取得
+				// AbstractChestを取得
 				Location locationByString = getLocationByString(row[7]);
 				if (locationByString == null) {
 					sendMessage("chest locationが不正です：" + name);
@@ -91,26 +91,26 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				return;
 			}
 
-			//LbnNbtTagを取得
+			// LbnNbtTagを取得
 			LbnMobTag nbtTag = instance.getLbnMobTag();
 			if (nbtTag == null) {
 				sendMessage("入力されたsummon commandが不正です。(1):" + name);
 				return;
 			}
-			//WaterMob化
+			// WaterMob化
 			nbtTag.setWaterMonster(JavaUtil.getBoolean(row[2], false));
-			//AI Type
+			// AI Type
 			nbtTag.setAiType(AIType.fromName(row[22]));
-			//腕の長さ
+			// 腕の長さ
 			nbtTag.setAttackReach(JavaUtil.getFloat(row[23], -1f));
-			//ジャンプ斬り
+			// ジャンプ斬り
 			nbtTag.setJumpAttack("ジャンプ斬りする".equals(row[24]));
-			//CPS
-			nbtTag.setAttackCountPerSec((int)JavaUtil.getDouble(row[25], 1));
-			//SPS
-			nbtTag.setShotTarm((int)JavaUtil.getDouble(row[26], 1));
+			// CPS
+			nbtTag.setAttackCountPerSec((int) JavaUtil.getDouble(row[25], 1));
+			// SPS
+			nbtTag.setShotTarm((int) JavaUtil.getDouble(row[26], 1));
 
-			//DROP ITEM の設定
+			// DROP ITEM の設定
 			setDropItem(row[3], row[4], instance);
 			setDropItem(row[5], row[6], instance);
 			setDropItem(row[27], row[28], instance);
@@ -121,7 +121,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 			nbtTag.setAutoFixHp(JavaUtil.getBoolean(row[32], false));
 
-			//スキル追加
+			// スキル追加
 			if (!isEmpty(row, 8)) {
 				instance.addSkill(row[8]);
 			}
@@ -145,13 +145,13 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 				instance.setExp(JavaUtil.getInt(row[14], -1));
 			}
 
-			//モブがまだ存在していればそのままセットする
+			// モブがまだ存在していればそのままセットする
 			AbstractMob<?> mob = MobHolder.getMob(name);
 			if (mob instanceof BossMobable && isBoss) {
-				//もしEntityが存在していれば
-				LivingEntity entity = ((BossMobable)mob).getEntity();
+				// もしEntityが存在していれば
+				LivingEntity entity = ((BossMobable) mob).getEntity();
 				if (entity != null) {
-					((SpreadSheetBossMob)instance).setEntity(entity);
+					((SpreadSheetBossMob) instance).setEntity(entity);
 				}
 			}
 
@@ -173,7 +173,7 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			sendMessage("入力されたDropItemRateが不正です。" + row[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
-			sendMessage("エラーが発生しました。モンスターを登録出来ませんでした:"+ row[0]);
+			sendMessage("エラーが発生しました。モンスターを登録出来ませんでした:" + row[0]);
 		}
 	}
 
@@ -183,12 +183,13 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 
 	/**
 	 * Set
+	 * 
 	 * @param itemId
 	 * @param parcent
 	 * @param instance
 	 */
 	public void setDropItem(String itemId, String parcent, SpreadSheetMob instance) {
-		//DROP ITEM の設定
+		// DROP ITEM の設定
 		if (itemId != null && !itemId.isEmpty()) {
 			ItemStack item = ItemStackUtil.getItemStack(itemId);
 			if (item != null) {

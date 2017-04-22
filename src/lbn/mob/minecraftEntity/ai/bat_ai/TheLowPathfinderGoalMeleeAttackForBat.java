@@ -22,10 +22,10 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
 	private double j;
 	private double k;
 
-//	protected int attackTerm = 1;
+	// protected int attackTerm = 1;
 	protected int attackTerm = 10;
 
-//	protected double attackRange = -1;
+	// protected double attackRange = -1;
 	protected double attackRange = 3;
 
 	protected boolean isJump = true;
@@ -72,7 +72,9 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
 	public boolean b() {
 		EntityLiving entityliving = this.b.getGoalTarget();
 
-		return entityliving == null ? false : (!entityliving.isAlive() ? false : (!this.isKillAura ? !this.b.getNavigation().m() : !this.b.getNavigation().m()));
+		return entityliving == null ? false
+				: (!entityliving.isAlive() ? false
+						: (!this.isKillAura ? !this.b.getNavigation().m() : !this.b.getNavigation().m()));
 	}
 
 	public void c() {
@@ -88,7 +90,7 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
 		EntityLiving entityliving = this.b.getGoalTarget();
 
 		this.b.getControllerLook().a(entityliving, 30.0F, 30.0F);
-		double d0 = this.b.e(entityliving.locX, entityliving.getBoundingBox().b, entityliving.locZ); //相手との距離の２乗
+		double d0 = this.b.e(entityliving.locX, entityliving.getBoundingBox().b, entityliving.locZ); // 相手との距離の２乗
 		double d1 = attackRange * attackRange + entityliving.width;
 		if (attackRange < 0) {
 			d1 = this.a(entityliving); // 腕の長さ
@@ -98,7 +100,9 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
 
 		if (isJump && d0 <= d1 + 1) { // ジャンプ斬り
 			this.b.getControllerJump().a();
-		} else if ((this.isKillAura || this.b.getEntitySenses().a(entityliving)) && this.h <= 0 && (this.i == 0.0D && this.j == 0.0D && this.k == 0.0D || entityliving.e(this.i, this.j, this.k) >= 1.0D || this.b.bb().nextFloat() < 0.05F)) {
+		} else if ((this.isKillAura || this.b.getEntitySenses().a(entityliving)) && this.h <= 0
+				&& (this.i == 0.0D && this.j == 0.0D && this.k == 0.0D || entityliving.e(this.i, this.j, this.k) >= 1.0D
+						|| this.b.bb().nextFloat() < 0.05F)) {
 			this.i = entityliving.locX;
 			this.j = entityliving.getBoundingBox().b;
 			this.k = entityliving.locZ;
@@ -109,7 +113,7 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
 				this.h += 5;
 			}
 
-			//キルオーラ発動中は攻撃が当たらないときだけ相手に近づく
+			// キルオーラ発動中は攻撃が当たらないときだけ相手に近づく
 			if (!isKillAura || d0 > attackRange * attackRange) {
 				if (!this.b.getNavigation().a((Entity) entityliving, this.d)) {
 					this.h += 15;

@@ -24,7 +24,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class MoneyListener implements Listener{
+public class MoneyListener implements Listener {
 
 	@EventHandler
 	public void onClickShop(InventoryClickEvent e) {
@@ -38,7 +38,7 @@ public class MoneyListener implements Listener{
 
 		Player p = (Player) e.getWhoClicked();
 
-		//Playerデータがロードされていない時は何もしない
+		// Playerデータがロードされていない時は何もしない
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer == null) {
 			Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
@@ -63,26 +63,26 @@ public class MoneyListener implements Listener{
 			return;
 		}
 
-		//お金チェック
+		// お金チェック
 		if (theLowPlayer.getGalions() < shopItem.getPrice()) {
 			Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。");
 			return;
 		}
 
-		//インベントリチェック
+		// インベントリチェック
 		if (p.getInventory().firstEmpty() == -1) {
 			Message.sendMessage(p, ChatColor.RED + "インベントリに空きがないので購入できません。");
 			p.closeInventory();
 			return;
 		}
 
-		//インベントリに追加する
+		// インベントリに追加する
 		ItemStack buyItem = shopItem.getItem();
 		buyItem.setAmount(shopItem.getCount());
 		p.getInventory().addItem(buyItem);
 
-		//お金の計算を行う
-		theLowPlayer.addGalions(- shopItem.getPrice(), GalionEditReason.consume_shop);
+		// お金の計算を行う
+		theLowPlayer.addGalions(-shopItem.getPrice(), GalionEditReason.consume_shop);
 	}
 
 	@EventHandler
@@ -96,17 +96,17 @@ public class MoneyListener implements Listener{
 	}
 
 	@EventHandler
-	public void onDropMoney(PlayerDropItemEvent e){
+	public void onDropMoney(PlayerDropItemEvent e) {
 		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItemDrop().getItemStack());
 		if (customItem != null) {
-			//ドロップさせないで消す
+			// ドロップさせないで消す
 			e.setCancelled(true);
 			customItem.applyGalionItem(e.getPlayer());
 		}
 	}
 
 	@EventHandler
-	public void onPickupMoney(PlayerPickupItemEvent e){
+	public void onPickupMoney(PlayerPickupItemEvent e) {
 		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItem().getItemStack());
 		if (customItem != null) {
 			customItem.applyGalionItem(e.getPlayer());

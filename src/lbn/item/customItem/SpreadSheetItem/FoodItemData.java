@@ -130,5 +130,4 @@ public class FoodItemData {
 		return id;
 	}
 
-
 }

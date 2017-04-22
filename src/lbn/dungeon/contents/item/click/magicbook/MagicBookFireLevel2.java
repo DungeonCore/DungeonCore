@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class MagicBookFireLevel2 extends AbstractMagicBook{
+public class MagicBookFireLevel2 extends AbstractMagicBook {
 
 	@Override
 	public String getItemName() {
@@ -39,7 +39,7 @@ public class MagicBookFireLevel2 extends AbstractMagicBook{
 
 	@Override
 	public String[] getDetail() {
-		return new String[]{"右クリックで中範囲の敵にダメージ大を与える", "使用者に火炎耐性を5秒間付与する"};
+		return new String[] { "右クリックで中範囲の敵にダメージ大を与える", "使用者に火炎耐性を5秒間付与する" };
 	}
 
 	ParticleData particleData = new ParticleData(ParticleType.flame, 20);
@@ -63,7 +63,7 @@ public class MagicBookFireLevel2 extends AbstractMagicBook{
 	protected void onDamage(Player player, LivingEntity entity) {
 		super.onDamage(player, entity);
 		entity.setFireTicks(20 * 8);
-		//パーティクル
+		// パーティクル
 		particleData.run(entity.getLocation());
 	}
 

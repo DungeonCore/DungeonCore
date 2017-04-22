@@ -34,7 +34,6 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-
 public class MobSpawnerFromCommand {
 	public static void spawn(Player p, String[] comand) throws CommandException {
 		new CommandSummon().execute(((CraftPlayer) p).getHandle(), comand);
@@ -63,7 +62,7 @@ public class MobSpawnerFromCommand {
 				}
 			}
 			localNBTTagCompound1.setString("id", str);
-			//オリジナルのNBTTagをつける
+			// オリジナルのNBTTagをつける
 			localNBTTagCompound1.setBoolean("IsWaterMonster", nbtTag.isWaterMonster());
 
 			WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
@@ -71,27 +70,22 @@ public class MobSpawnerFromCommand {
 			if (localObject1_1 != null) {
 				// spawn
 				((Entity) localObject1_1).setPositionRotation(loc.getX(), loc.getY(), loc.getZ(),
-						((Entity) localObject1_1).yaw,
-						((Entity) localObject1_1).pitch);
+						((Entity) localObject1_1).yaw, ((Entity) localObject1_1).pitch);
 				world.addEntity((Entity) localObject1_1);
 
 				Entity localObject2 = localObject1_1;
 				NBTTagCompound localNBTTagCompound2 = localNBTTagCompound1;
-				while ((localObject2 != null)
-						&& (localNBTTagCompound2.hasKeyOfType("Riding", 10))) {
-					Entity localEntity = EntityTypes.a(
-							localNBTTagCompound2.getCompound("Riding"),
-							world);
+				while ((localObject2 != null) && (localNBTTagCompound2.hasKeyOfType("Riding", 10))) {
+					Entity localEntity = EntityTypes.a(localNBTTagCompound2.getCompound("Riding"), world);
 					if (localEntity != null) {
 						// spawn
-						localEntity.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(),
-								localEntity.yaw, localEntity.pitch);
+						localEntity.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), localEntity.yaw,
+								localEntity.pitch);
 						world.addEntity(localEntity);
 						localObject2.mount(localEntity);
 					}
 					localObject2 = localEntity;
-					localNBTTagCompound2 = localNBTTagCompound2
-							.getCompound("Riding");
+					localNBTTagCompound2 = localNBTTagCompound2.getCompound("Riding");
 				}
 				return localObject1_1.getBukkitEntity();
 			}
@@ -109,49 +103,49 @@ public class MobSpawnerFromCommand {
 		}
 		EntityType type = entity.getBukkitEntity().getType();
 
-		//nullの場合はここで作成
+		// nullの場合はここで作成
 		if (tag == null) {
 			tag = new LbnMobTag(type);
 		}
 
 		boolean updateFlg = true;
 		switch (type) {
-			case ENDER_DRAGON:
-				entity = new CustomEnderDragon(world);
-				break;
-			case ENDERMAN:
-				entity = new CustomEnderman(world, tag);
-				break;
-			case PIG:
-				entity = new CustomPig(world, tag);
-				break;
-			case SKELETON:
-				entity = new CustomSkeleton(world, tag);
-				break;
-			case SPIDER:
-				entity = new CustomSpider(world, tag);
-				break;
-			case WITCH:
-				entity = new CustomWitch(world, tag);
-				break;
-			case ZOMBIE:
-				entity = new CustomZombie(world, tag);
-				break;
-			case PIG_ZOMBIE:
-				entity = new CustomPigZombie(world);
-				break;
-			case GIANT:
-				entity = new CustomGiant(world, tag);
-				break;
-			case SLIME:
-				entity = new CustomSlime(world, tag);
-				break;
-			case BAT:
-				entity = new CustomBat(world, tag);
-				break;
-			default:
-				updateFlg = false;
-				break;
+		case ENDER_DRAGON:
+			entity = new CustomEnderDragon(world);
+			break;
+		case ENDERMAN:
+			entity = new CustomEnderman(world, tag);
+			break;
+		case PIG:
+			entity = new CustomPig(world, tag);
+			break;
+		case SKELETON:
+			entity = new CustomSkeleton(world, tag);
+			break;
+		case SPIDER:
+			entity = new CustomSpider(world, tag);
+			break;
+		case WITCH:
+			entity = new CustomWitch(world, tag);
+			break;
+		case ZOMBIE:
+			entity = new CustomZombie(world, tag);
+			break;
+		case PIG_ZOMBIE:
+			entity = new CustomPigZombie(world);
+			break;
+		case GIANT:
+			entity = new CustomGiant(world, tag);
+			break;
+		case SLIME:
+			entity = new CustomSlime(world, tag);
+			break;
+		case BAT:
+			entity = new CustomBat(world, tag);
+			break;
+		default:
+			updateFlg = false;
+			break;
 		}
 
 		if (updateFlg) {
@@ -193,15 +187,11 @@ public class MobSpawnerFromCommand {
 			if (localObject1_1 != null) {
 				Entity localObject2 = localObject1_1;
 				NBTTagCompound localNBTTagCompound2 = localNBTTagCompound1;
-				while ((localObject2 != null)
-						&& (localNBTTagCompound2.hasKeyOfType("Riding", 10))) {
+				while ((localObject2 != null) && (localNBTTagCompound2.hasKeyOfType("Riding", 10))) {
 					isRiding = true;
-					Entity localEntity = EntityTypes.a(
-							localNBTTagCompound2.getCompound("Riding"),
-							world);
+					Entity localEntity = EntityTypes.a(localNBTTagCompound2.getCompound("Riding"), world);
 					localObject2 = localEntity;
-					localNBTTagCompound2 = localNBTTagCompound2
-							.getCompound("Riding");
+					localNBTTagCompound2 = localNBTTagCompound2.getCompound("Riding");
 				}
 
 				LbnMobTag lbnNBTTag = new LbnMobTag(localObject1_1.getBukkitEntity());

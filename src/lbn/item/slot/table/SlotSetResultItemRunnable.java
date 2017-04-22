@@ -15,15 +15,16 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SlotSetResultItemRunnable extends BukkitRunnable{
-	 public SlotSetResultItemRunnable(CraftingInventory top, InventoryClickEvent e) {
+public class SlotSetResultItemRunnable extends BukkitRunnable {
+	public SlotSetResultItemRunnable(CraftingInventory top, InventoryClickEvent e) {
 		this.top = top;
 		this.e = e;
 		p = (Player) e.getWhoClicked();
 	}
-	 Player p;
+
+	Player p;
 	CraftingInventory top;
-	 InventoryClickEvent e;
+	InventoryClickEvent e;
 
 	@Override
 	public void run() {
@@ -32,29 +33,29 @@ public class SlotSetResultItemRunnable extends BukkitRunnable{
 			if (slotItems == null) {
 				return;
 			}
-			AttackItemStack attackItem = (AttackItemStack)slotItems[0];
+			AttackItemStack attackItem = (AttackItemStack) slotItems[0];
 			SlotInterface magicStone = (SlotInterface) slotItems[1];
 
 			SlotSetOperator slotSetOperator = new SlotSetOperator(attackItem, magicStone);
-			//エラーがあるかチェックする
+			// エラーがあるかチェックする
 			String error = slotSetOperator.check();
 			if (error != null) {
 				sendError(error);
 				return;
 			}
 
-			//アイテムをスロットにセットする
+			// アイテムをスロットにセットする
 			slotSetOperator.setSlot();
 
-			//成功確率をセットする
+			// 成功確率をセットする
 			ItemStack updateRedGlass = getUpdateRedGlass(slotSetOperator.getSuccessRate());
 			top.setItem(5, updateRedGlass);
 
 			ItemStack complate = attackItem.getItem();
 			complate.setAmount(1);
-			//アイテムをセットする
+			// アイテムをセットする
 			top.setResult(complate);
-			//完成形を表示させる
+			// 完成形を表示させる
 			new BukkitRunnable() {
 				@Override
 				public void run() {
@@ -84,7 +85,7 @@ public class SlotSetResultItemRunnable extends BukkitRunnable{
 	protected ItemStack getMaxLevelRedGlass() {
 		ItemStack clone = SlotSetTableOperation.redGlass.clone();
 		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.RED.toString() + ChatColor.BOLD +"これ以上強化できません");
+		lore.add(ChatColor.RED.toString() + ChatColor.BOLD + "これ以上強化できません");
 		ItemStackUtil.setLore(clone, lore);
 		return clone;
 	}

@@ -20,7 +20,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class ReincarnationSelector implements MenuSelectorInterface{
+public class ReincarnationSelector implements MenuSelectorInterface {
 
 	static {
 		MenuSelectorManager.regist(new ReincarnationSelector(LevelType.SWORD));
@@ -32,8 +32,10 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 	LevelType type;
 
 	/**
-	 * @param type 転生を行うレベル
-	 * @param count 指定されたLevelTypeで転生を行った回数
+	 * @param type
+	 *            転生を行うレベル
+	 * @param count
+	 *            指定されたLevelTypeで転生を行った回数
 	 */
 	public ReincarnationSelector(LevelType type) {
 		this.type = type;
@@ -42,28 +44,28 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 	@Override
 	public void open(Player p) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-		//データがロードされていない時は開かない
+		// データがロードされていない時は開かない
 		if (theLowPlayer == null) {
 			TheLowPlayerManager.sendLoingingMessage(p);
 			return;
 		}
 
-		//転生できないなら開かない
+		// 転生できないなら開かない
 		if (!theLowPlayer.canReincarnation(type)) {
 			p.sendMessage(ChatColor.RED + "リンカーできません。");
 			return;
 		}
 
-		//インベントリを取得
+		// インベントリを取得
 		Inventory createInventory = Bukkit.createInventory(null, 9, getTitle());
 
-		//何回目の転生か
+		// 何回目の転生か
 		int count = theLowPlayer.getEachReincarnationCount(type) + 1;
 
-		//全ての転生効果を取得
+		// 全ての転生効果を取得
 		ArrayList<ReincarnationInterface> reincarnationList = allReincarnationList();
 		for (ReincarnationInterface reincarnation : reincarnationList) {
-			//もし表示を許可するならアイテムをセットする
+			// もし表示を許可するならアイテムをセットする
 			if (reincarnation.isShow(type, count)) {
 				createInventory.addItem(getViewItemStack(reincarnation, p));
 			}
@@ -71,62 +73,64 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 		p.openInventory(createInventory);
 	}
 
-
 	ArrayList<ReincarnationInterface> reincarnationCache = null;
+
 	/**
 	 * ソート済みの全ての転生効果を取得
+	 * 
 	 * @return
 	 */
 	public ArrayList<ReincarnationInterface> allReincarnationList() {
-		//キャッシュがあるならキャッシュを返す
+		// キャッシュがあるならキャッシュを返す
 		if (reincarnationCache != null) {
 			return reincarnationCache;
 		}
 
-		//全ての転生効果を取得
+		// 全ての転生効果を取得
 		Map<String, ReincarnationInterface> allReincanationMap = ReincarnationFactor.getAllReincanationMap();
-		//転生効果のリスト
-		ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<ReincarnationInterface>(allReincanationMap.values());
-		//並び替えを行う
+		// 転生効果のリスト
+		ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<ReincarnationInterface>(
+				allReincanationMap.values());
+		// 並び替えを行う
 		reincarnationList.sort(new Comparator<ReincarnationInterface>() {
 			@Override
 			public int compare(ReincarnationInterface o1, ReincarnationInterface o2) {
 				return o1.getId().compareTo(o2.getId());
 			}
 		});
-		//キャッシュに残す
+		// キャッシュに残す
 		this.reincarnationCache = reincarnationList;
 		return reincarnationList;
 	}
 
-	//View用のItemStackのキャッシュ
+	// View用のItemStackのキャッシュ
 	private static Map<ReincarnationInterface, ItemStack> viewItemCache = new HashMap<ReincarnationInterface, ItemStack>();
 
 	/**
 	 * ReincarnationInterfaceからそれに対応するView用のItemStackを取得する
+	 * 
 	 * @param reincarnation
 	 * @param p
 	 * @return
 	 */
 	protected ItemStack getViewItemStack(ReincarnationInterface reincarnation, Player p) {
-		//キャッシュから取得
+		// キャッシュから取得
 		ItemStack itemStack = viewItemCache.get(viewItemCache);
-		//キャッシュが存在するならそれを返す
+		// キャッシュが存在するならそれを返す
 		if (itemStack != null) {
 			return itemStack;
 		}
 
-		//View用のItemStackを作成
-		ItemStack item = ItemStackUtil.getItem(
-				ChatColor.GREEN + reincarnation.getTitle(),		//アイテム名
-				reincarnation.getMaterial(),								//素材
-				(byte)reincarnation.getItemStackData()			//データ値
-			);	//詳細
+		// View用のItemStackを作成
+		ItemStack item = ItemStackUtil.getItem(ChatColor.GREEN + reincarnation.getTitle(), // アイテム名
+				reincarnation.getMaterial(), // 素材
+				(byte) reincarnation.getItemStackData() // データ値
+		); // 詳細
 
-		//ID情報をNBTTagにセットする
+		// ID情報をNBTTagにセットする
 		ItemStackUtil.setNBTTag(item, REINCARNATION_ID, reincarnation.getId());
 
-		//キャッシュに保存
+		// キャッシュに保存
 		viewItemCache.put(reincarnation, item);
 		return item;
 	}
@@ -134,29 +138,29 @@ public class ReincarnationSelector implements MenuSelectorInterface{
 	@Override
 	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		String nbtTag = ItemStackUtil.getNBTTag(item, REINCARNATION_ID);
-		//NBTTagがないなら転生を行わない
+		// NBTTagがないなら転生を行わない
 		if (nbtTag == null || nbtTag.isEmpty()) {
 			return;
 		}
 
-		//転生を取得
+		// 転生を取得
 		ReincarnationInterface reincarnationInterface = ReincarnationFactor.getReincarnationInterface(nbtTag);
 
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-		//Playerデータがロードされていないなら閉じる
+		// Playerデータがロードされていないなら閉じる
 		if (theLowPlayer == null) {
 			p.closeInventory();
 			TheLowPlayerManager.sendLoingingMessage(p);
 			return;
 		}
-		//転生できないなら閉める
+		// 転生できないなら閉める
 		if (!theLowPlayer.canReincarnation(type)) {
 			p.closeInventory();
 			p.sendMessage(ChatColor.RED + "リンカーできませんでした。");
 			return;
 		}
 
-		//転生を行う
+		// 転生を行う
 		if (!theLowPlayer.doReincarnation(reincarnationInterface, type)) {
 			p.sendMessage(ChatColor.RED + "リンカーできませんでした。");
 		}

@@ -12,10 +12,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PacketUtil {
 	/**
 	 * 攻撃のモーション
+	 * 
 	 * @param e
 	 */
 	public static void sendAttackMotionPacket(LivingEntity e) {
-		EntityLiving handle = ((CraftLivingEntity)e).getHandle();
+		EntityLiving handle = ((CraftLivingEntity) e).getHandle();
 		new BukkitRunnable() {
 			@Override
 			public void run() {

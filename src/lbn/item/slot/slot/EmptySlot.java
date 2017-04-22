@@ -6,7 +6,7 @@ import lbn.item.slot.SlotType;
 
 import org.bukkit.ChatColor;
 
-public class EmptySlot implements SlotInterface{
+public class EmptySlot implements SlotInterface {
 
 	@Override
 	public String getSlotName() {
@@ -54,7 +54,7 @@ public class EmptySlot implements SlotInterface{
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof SlotInterface) {
-			return getId().equals(((SlotInterface)obj).getId());
+			return getId().equals(((SlotInterface) obj).getId());
 		} else {
 			return false;
 		}

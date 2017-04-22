@@ -29,7 +29,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class CraftItemSelectViewer implements MenuSelectorInterface{
+public class CraftItemSelectViewer implements MenuSelectorInterface {
 	private static final String TITLE = "アイテム制作";
 
 	static {
@@ -44,8 +44,10 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 		Inventory inventory = getInventory(block);
 		open(p, Arrays.asList(inventory), 0);
 	}
+
 	/**
 	 * 指定したクラフト後のアイテムが入ったインベントリを開く
+	 * 
 	 * @param p
 	 * @param invList
 	 * @param index
@@ -64,7 +66,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 
 		ArrayList<Inventory> validInvList = new ArrayList<Inventory>();
 
-		//正しいインベントを取得する
+		// 正しいインベントを取得する
 		for (String data : dataList.split("&")) {
 			Location location = AbstractSheetRunable.getLocationByString(data.trim());
 			if (location == null) {
@@ -90,30 +92,31 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 
 	/**
 	 * 指定したクラフト後のアイテムが入ったインベントリを開く
+	 * 
 	 * @param p
 	 * @param invList
 	 * @param index
 	 */
 	public static void open(Player p, List<Inventory> invList, int index) {
-		//設定したインベントリ
+		// 設定したインベントリ
 		Inventory inventory = invList.get(index);
 
 		Inventory itemViewer = Bukkit.createInventory(null, inventory.getSize(), TITLE);
 		ItemStack[] contents = inventory.getContents();
 		for (int i = 0; i < contents.length; i++) {
-			//アイテムが無い時は無視する
+			// アイテムが無い時は無視する
 			if (contents[i] == null) {
 				continue;
 			}
 
-			//クラフトできるアイテムを取得する
+			// クラフトできるアイテムを取得する
 			ItemInterface customItem = ItemManager.getCustomItem(contents[i]);
-			//クラフト出来るアイテムでないなら無視
+			// クラフト出来るアイテムでないなら無視
 			if (customItem == null) {
-				//オリジナルアイテムでないならそのまま入れる
+				// オリジナルアイテムでないならそのまま入れる
 				itemViewer.setItem(i, contents[i]);
 			} else {
-				//クラフト出来るアイテムならセットする
+				// クラフト出来るアイテムならセットする
 				if (ItemManager.isImplemental(CraftItemable.class, customItem)) {
 					itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem((CraftItemable) customItem));
 				}
@@ -125,6 +128,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 
 	/**
 	 * 指定したチェストのインベントリを開く。もしダブルチェストならダブルチェストで開く
+	 * 
 	 * @param b
 	 * @return
 	 */
@@ -145,31 +149,31 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 
 	@Override
 	public void open(Player p) {
-		//直接は開けられない
+		// 直接は開けられない
 		p.sendMessage("この操作はサポートされていません");
 	}
 
 	@Override
 	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
 		String nbtTag = ItemStackUtil.getNBTTag(item, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT);
-		//クラフトできないアイテムを選択しているので何もしない
-		if (nbtTag == null  || nbtTag.isEmpty() || item.getType() == Material.BARRIER) {
+		// クラフトできないアイテムを選択しているので何もしない
+		if (nbtTag == null || nbtTag.isEmpty() || item.getType() == Material.BARRIER) {
 			return;
 		}
 
 		CraftItemable customItem = ItemManager.getCustomItem(CraftItemable.class, item);
-		//nullはありえないが念のため
-		if (customItem == null){
+		// nullはありえないが念のため
+		if (customItem == null) {
 			new RuntimeException("このアイテムはクラフト出来ません。id:" + nbtTag).printStackTrace();
 			return;
 		}
 
 		TheLowCraftRecipeInterface craftRecipe = customItem.getCraftRecipe();
-		//素材を持っているか確認
+		// 素材を持っているか確認
 		if (craftRecipe.hasAllMaterial(p, true)) {
 			craftRecipe.openCraftingViewer(p, customItem);
 		} else {
-			//書き換える
+			// 書き換える
 			CraftItemSelectViewerItems.addDontHasMaterial(item);
 			e.setCurrentItem(item);
 			p.updateInventory();
@@ -182,7 +186,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface{
 	}
 }
 
-class InventoryViewImplement extends InventoryView{
+class InventoryViewImplement extends InventoryView {
 	public InventoryViewImplement(Inventory top, Inventory bottom, Player p) {
 		this.top = top;
 		this.bottom = bottom;

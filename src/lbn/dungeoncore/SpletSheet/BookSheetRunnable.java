@@ -5,7 +5,7 @@ import lbn.common.book.BookManager;
 
 import org.bukkit.command.CommandSender;
 
-public class BookSheetRunnable extends AbstractSheetRunable{
+public class BookSheetRunnable extends AbstractSheetRunable {
 
 	public BookSheetRunnable(CommandSender sender) {
 		super(sender);
@@ -23,7 +23,8 @@ public class BookSheetRunnable extends AbstractSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		return new String[]{"id", "title", "auther", "command", "page1", "page2", "page3", "page4", "page5", "page6", "page7", "page8", "page9", "page10"};
+		return new String[] { "id", "title", "auther", "command", "page1", "page2", "page3", "page4", "page5", "page6",
+				"page7", "page8", "page9", "page10" };
 	}
 
 	@Override
