@@ -15,7 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class DebugBow extends BowItem implements StrengthChangeItemable, EntityKillable {
+public class DebugBow extends BowItem implements StrengthChangeItemable, EntityKillable{
 
 	public DebugBow() {
 		super(new SpreadSheetWeaponDataForDebug());

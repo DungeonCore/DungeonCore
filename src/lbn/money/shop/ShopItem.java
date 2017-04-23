@@ -20,7 +20,6 @@ public class ShopItem {
 		this.price = price;
 		this.count = Math.min(count, 64);
 	}
-
 	public ShopItem(ItemStack item, int price) {
 		this(item, price, item.getAmount());
 	}
@@ -36,7 +35,6 @@ public class ShopItem {
 
 	/**
 	 * 商品としてお店に並べるアイテム
-	 * 
 	 * @return
 	 */
 	public ItemStack getShopDispItem() {
@@ -50,14 +48,14 @@ public class ShopItem {
 
 		dispItem = item.clone();
 		ArrayList<String> lore = new ArrayList<String>();
-		// IDがあればプラグイン用のアイテムなのでIDを記載する
+		//IDがあればプラグイン用のアイテムなのでIDを記載する
 		String id = ItemStackUtil.getId(item);
 		if (id != null) {
-			// IDを付与
+			//IDを付与
 			ItemStackUtil.setNBTTag(dispItem, NbtTagConst.THELOW_ITEM_ID, id);
 			lore.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(id));
 
-			// IDがなければプラグイン用ではないのでloreをそのまま記載する
+			//IDがなければプラグイン用ではないのでloreをそのまま記載する
 		} else {
 			List<String> lore2 = ItemStackUtil.getLore(item);
 			lore.addAll(lore2);
@@ -76,23 +74,20 @@ public class ShopItem {
 			return "制限なし";
 		}
 
-		AvailableLevelItemable item = (AvailableLevelItemable) customItem;
+		AvailableLevelItemable item = (AvailableLevelItemable)customItem;
 		return item.getLevelType().getName() + " " + item.getAvailableLevel() + "以上";
 	}
 
 	/**
 	 * 実際に購入者に渡すアイテム
-	 * 
 	 * @return
 	 */
 	public ItemStack getItem() {
 		return item;
 	}
-
 	public int getPrice() {
 		return price;
 	}
-
 	public int getCount() {
 		return count;
 	}

@@ -30,7 +30,7 @@ import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
-public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
+public class SetSpawnPointCommand implements CommandExecutor, TabCompleter{
 
 	@Override
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
@@ -44,7 +44,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 
 		Location loc = null;
 		try {
-			loc = ((Player) arg0).getLocation();
+			loc = ((Player)arg0).getLocation();
 		} catch (Exception e) {
 		}
 
@@ -90,7 +90,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 		if (arg3.length == 1) {
 			MobSpawnerPointManager.clear();
 
-			// 全てを更新する
+			//全てを更新する
 			SpawnPointSheetRunnable spawnPointSheetRunnable = new SpawnPointSheetRunnable(arg0);
 			spawnPointSheetRunnable.getData(null);
 			SpletSheetExecutor.onExecute(spawnPointSheetRunnable);
@@ -100,18 +100,17 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 			String[] split = arg3[1].split(",");
 			for (String id : split) {
 				try {
-					// idを取得
+					//idを取得
 					int parseInt = Integer.parseInt(id);
-					// idからSpawnPointを取得
-					MobSpawnerPoint spawnerPointbySerialNumber = MobSpawnerPointManager
-							.getSpawnerPointbySerialNumber(parseInt);
+					//idからSpawnPointを取得
+					MobSpawnerPoint spawnerPointbySerialNumber = MobSpawnerPointManager.getSpawnerPointbySerialNumber(parseInt);
 					if (spawnerPointbySerialNumber == null) {
 						arg0.sendMessage(id + "存在しないidです。");
 						continue;
 					}
-					// spawnpointを削除
+					//spawnpointを削除
 					MobSpawnerPointManager.remove(spawnerPointbySerialNumber);
-					// 一つだけ更新する
+					//一つだけ更新する
 					spawnPointSheetRunnable.getData("id=" + id);
 				} catch (Exception e) {
 					arg0.sendMessage(id + "は不正な数字です。");
@@ -134,8 +133,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 				arg0.sendMessage(ChatColor.RED + "シリアル番号が不正です。数字で指定してください:" + string);
 				continue;
 			}
-			MobSpawnerPoint spawnerPoint = MobSpawnerPointManager
-					.getSpawnerPointbySerialNumber(Integer.parseInt(string));
+			MobSpawnerPoint spawnerPoint = MobSpawnerPointManager.getSpawnerPointbySerialNumber(Integer.parseInt(string));
 			if (spawnerPoint == null) {
 				arg0.sendMessage(ChatColor.RED + "指定されたシリアル番号のSpwanPointが存在しません:" + string);
 				continue;
@@ -143,7 +141,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 			MobSpawnerPointManager.remove(spawnerPoint);
 			arg0.sendMessage(ChatColor.GREEN + "id:" + spawnerPoint.getId() + "を削除しました。");
 
-			// スプレットシートのものを削除する
+			//スプレットシートのものを削除する
 			spawnPointSheetRunnable.deleteData("id=" + string);
 		}
 		SpletSheetExecutor.onExecute(spawnPointSheetRunnable);
@@ -165,7 +163,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 		arg0.sendMessage("スポーン処理実行中スポーンポイント : " + count);
 		HashMap<SpawnLevel, SpawnScheduler> schedulerList = MobSpawnerPointManager.getSchedulerList();
 		for (SpawnLevel level : SpawnLevel.values()) {
-			// スポーンポイントの情報を取得
+			//スポーンポイントの情報を取得
 			String spawnDetail = null;
 			if (spawnDetailMap == null) {
 				spawnDetail = "spawn point system is not working";
@@ -178,9 +176,9 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 
 			SpawnScheduler spawnScheduler = schedulerList.get(level);
 			if (spawnScheduler == null) {
-				arg0.sendMessage("       " + level + " : 0    " + spawnDetail);
+				arg0.sendMessage("       " + level +" : 0    " + spawnDetail);
 			} else {
-				arg0.sendMessage("       " + level + " : " + spawnScheduler.getSize() + "    " + spawnDetail);
+				arg0.sendMessage("       " + level +" : " + spawnScheduler.getSize() + "    " + spawnDetail);
 			}
 		}
 
@@ -205,17 +203,15 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 			}
 		}
 
-		SpawnMobGetterInterface mobSpawnPointInterface = SpawnMobGetterManager
-				.getSpawnMobGetter(arg3[1].toUpperCase().replace("_", " "));
+		SpawnMobGetterInterface mobSpawnPointInterface = SpawnMobGetterManager.getSpawnMobGetter(arg3[1].toUpperCase().replace("_", " "));
 		if (mobSpawnPointInterface == null) {
 			arg0.sendMessage(ChatColor.RED + "spawn point nameが不正です。:" + arg3[1]);
 			return true;
 		}
-		SpletSheetMobSpawnerPoint spawnerPoint = new SpletSheetMobSpawnerPoint(MobSpawnerPointManager.getNextId(), loc,
-				mobSpawnPointInterface, Integer.parseInt(arg3[2]), level);
+		SpletSheetMobSpawnerPoint spawnerPoint = new SpletSheetMobSpawnerPoint(MobSpawnerPointManager.getNextId(), loc, mobSpawnPointInterface,  Integer.parseInt(arg3[2]), level);
 		MobSpawnerPointManager.addSpawnPoint(spawnerPoint);
 
-		// スプレットシートに書き込む
+		//スプレットシートに書き込む
 		SpawnPointSheetRunnable spawnPointSheetRunnable = new SpawnPointSheetRunnable(arg0);
 		String memo = "";
 		if (arg0 instanceof Player) {
@@ -240,26 +236,21 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 	@Override
 	public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1) {
-			return (List<String>) StringUtil.copyPartialMatches(arg3[0].toLowerCase(), operatorList,
-					new ArrayList<String>(operatorList.size()));
+			return (List<String>)StringUtil.copyPartialMatches(arg3[0].toLowerCase(), operatorList, new ArrayList<String>(operatorList.size()));
 		}
 
 		if (arg3.length > 1) {
 			if ("set".equalsIgnoreCase(arg3[0])) {
 				if (arg3.length == 2) {
-					return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(),
-							SpawnMobGetterManager.getNames(),
-							new ArrayList<String>(SpawnMobGetterManager.getNames().size()));
+					return (List<String>)StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(), new ArrayList<String>(SpawnMobGetterManager.getNames().size()));
 				}
 				if (arg3.length == 4) {
-					return (List<String>) StringUtil.copyPartialMatches(arg3[3].toUpperCase(), SpawnLevel.getNames(),
-							new ArrayList<String>(SpawnLevel.values().length));
+					return (List<String>)StringUtil.copyPartialMatches(arg3[3].toUpperCase(), SpawnLevel.getNames(), new ArrayList<String>(SpawnLevel.values().length));
 				}
 			} else if ("list".equalsIgnoreCase(arg3[0])) {
 				if (arg3.length == 2) {
-					List<String> rangeList = Arrays.asList("", "all", "here", "loadedChunk");
-					return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(), rangeList,
-							new ArrayList<String>(rangeList.size()));
+					List<String> rangeList = Arrays.asList("","all", "here", "loadedChunk");
+					return (List<String>)StringUtil.copyPartialMatches(arg3[1].toUpperCase(), rangeList, new ArrayList<String>(rangeList.size()));
 				}
 			}
 		}

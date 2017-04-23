@@ -42,31 +42,30 @@ public class GravityField extends WeaponSkillForOneType {
 			if (!entity.getType().isAlive()) {
 				continue;
 			}
-			// 敵じゃない時は無視する
+			//敵じゃない時は無視する
 			if (!LivingEntityUtil.isEnemy(entity)) {
 				continue;
 			}
-			LivingEntity e = (LivingEntity) entity;
+			LivingEntity e = (LivingEntity)entity;
 
-			// 動きを止める
+			//動きを止める
 			e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(0)), 100), true);
-			// ダメージを与える敵を記録する
+			//ダメージを与える敵を記録する
 			enemy.add(e);
 		}
 
-		List<Location> randomCircleUpperBlock = FallingBlockParticles.randomCircleUpperBlock(p.getLocation(),
-				Material.DIRT, (byte) 0, 0.5, 1.1, 50, getData(0));
+		List<Location> randomCircleUpperBlock = FallingBlockParticles.randomCircleUpperBlock(p.getLocation(), Material.DIRT, (byte) 0, 0.5, 1.1, 50, getData(0));
 		for (Location location : randomCircleUpperBlock) {
 			Particles.runParticle(location, ParticleType.explode);
 		}
 		p.getWorld().playSound(p.getLocation(), Sound.EXPLODE, 1, (float) 0.5);
 
-		// {1}秒ごとにダメージを与える
+		//{1}秒ごとにダメージを与える
 		new LbnRunnable() {
 			@Override
 			public void run2() {
 				for (LivingEntity livingEntity : enemy) {
-					// ダメージを与える
+					//ダメージを与える
 					livingEntity.damage(customItem.getAttackItemDamage(StrengthOperator.getLevel(item)) * getData(2));
 					Particles.runParticle(livingEntity, ParticleType.lava, 100);
 				}

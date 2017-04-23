@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class WeaponSkillBlastOff implements WeaponSkillInterface {
+public class WeaponSkillBlastOff implements WeaponSkillInterface{
 
 	@Override
 	public int getSkillLevel() {
@@ -40,29 +40,29 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "自分を停止させ、", "周りの敵を吹き飛ばす" };
+		return new String[]{"自分を停止させ、", "周りの敵を吹き飛ばす"};
 	}
 
-	// パーティクル
+	//パーティクル
 	CircleParticleData circleParticleData = new CircleParticleData(new ParticleData(ParticleType.smoke, 3), 7);
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
 		Vector vector = p.getLocation().toVector();
 
-		// 周囲の敵対モブを取得
+		//周囲の敵対モブを取得
 		ArrayList<LivingEntity> nearEnemy = LivingEntityUtil.getNearEnemy(p, 7, 4, 7);
 		for (LivingEntity livingEntity : nearEnemy) {
 			blastOff(vector, livingEntity, customItem, p);
 		}
 
-		// 鈍足を付与
-		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (20 * 1.5), 100));
+		//鈍足を付与
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int)(20 * 1.5), 100));
 
-		// パーティクルを発生させる
+		//パーティクルを発生させる
 		circleParticleData.run(p.getLocation());
 
-		// 音を鳴らす
+		//音を鳴らす
 		p.getWorld().playSound(p.getLocation(), Sound.BAT_LOOP, 0.4f, 2f);
 
 		return true;
@@ -70,16 +70,14 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
 
 	/**
 	 * モブを吹き飛ばす処理
-	 * 
 	 * @param vector
 	 * @param livingEntity
 	 * @param customItem
 	 * @param p
 	 */
 	public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p) {
-		// 吹き飛ばす
-		livingEntity
-				.setVelocity(livingEntity.getLocation().toVector().subtract(vector).normalize().multiply(5).setY(0));
+		//吹き飛ばす
+		livingEntity.setVelocity(livingEntity.getLocation().toVector().subtract(vector).normalize().multiply(5).setY(0));
 	}
 
 	@Override
@@ -103,8 +101,7 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
 	}
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
-			PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
 	}
 
 }

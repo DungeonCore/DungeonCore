@@ -24,7 +24,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class FollowerNpc implements CustomNpcInterface {
+public class FollowerNpc implements CustomNpcInterface{
 	static {
 		MenuSelectorManager.regist(new SilfiaNpcMenu());
 	}
@@ -54,13 +54,13 @@ public class FollowerNpc implements CustomNpcInterface {
 	 * NPCをスポーンする
 	 */
 	private void spawn() {
-		// CitizenNPC作成
-		NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(getEntityType(), getName());
+		//CitizenNPC作成
+		NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(getEntityType(),getName());
 		npc = createNPC;
 
 		createNPC.addTrait(TheLowIdTrail.fromId(getId()));
 
-		// 戦闘Traitを追加
+		//戦闘Traitを追加
 		SentryTrait sentryTrait = new SentryTrait();
 		createNPC.addTrait(sentryTrait);
 
@@ -91,7 +91,7 @@ public class FollowerNpc implements CustomNpcInterface {
 				Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
 				for (Player player : onlinePlayers) {
 					if (!p.equalsPlayer(player)) {
-						player.hidePlayer(((Player) npc.getEntity()));
+						player.hidePlayer(((Player)npc.getEntity()));
 					}
 				}
 			}
@@ -118,7 +118,7 @@ public class FollowerNpc implements CustomNpcInterface {
 	@Override
 	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
 		if (getOwner().equalsPlayer(e.getClicker())) {
-			// 向く方向を設定
+			//向く方向を設定
 			Util.faceEntity(e.getNPC().getEntity(), e.getClicker());
 			PacketUtil.sendAttackMotionPacket((LivingEntity) e.getNPC().getEntity());
 		}

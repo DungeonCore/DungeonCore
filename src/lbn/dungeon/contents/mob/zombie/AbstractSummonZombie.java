@@ -20,7 +20,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public abstract class AbstractSummonZombie extends AbstractZombie implements SummonMobable {
+
+public abstract class AbstractSummonZombie extends AbstractZombie implements SummonMobable{
 
 	@Override
 	public String getName() {
@@ -32,10 +33,9 @@ public abstract class AbstractSummonZombie extends AbstractZombie implements Sum
 		e.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
 
 		e.getEntity().getWorld().playSound(e.getEntity().getLocation(), Sound.ZOMBIE_UNFECT, 1, 1);
-		new ParticleData(ParticleType.portal, 100).setDispersion(0.5, 0.5, 0.5)
-				.run(e.getEntity().getLocation().add(0, 1, 0));
+		new ParticleData(ParticleType.portal, 100).setDispersion(0.5, 0.5, 0.5).run(e.getEntity().getLocation().add(0, 1, 0));
 
-		((Zombie) e.getEntity()).setBaby(false);
+		((Zombie)e.getEntity()).setBaby(false);
 		LivingEntityUtil.removeEquipment(e.getEntity());
 	}
 

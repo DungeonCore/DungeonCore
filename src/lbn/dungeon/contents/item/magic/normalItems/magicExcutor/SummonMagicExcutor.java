@@ -12,7 +12,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SummonMagicExcutor implements MagicExcuteable {
+public class SummonMagicExcutor implements MagicExcuteable{
 
 	int availableLevel;
 	int strengthLevel;
@@ -45,7 +45,7 @@ public class SummonMagicExcutor implements MagicExcuteable {
 
 	@Override
 	public int getNeedMagicPoint() {
-		// return (int) (10 * availableLevel / 10.0 * 3) - strengthLevel;
+//		return (int) (10 * availableLevel / 10.0 * 3) - strengthLevel;
 		return 15;
 	}
 

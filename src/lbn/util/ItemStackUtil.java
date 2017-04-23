@@ -124,7 +124,6 @@ public class ItemStackUtil {
 
 	/**
 	 * unsafeなエンチャントならTRUE
-	 * 
 	 * @param itemMeta
 	 * @return
 	 */
@@ -221,7 +220,7 @@ public class ItemStackUtil {
 			return null;
 		}
 
-		// nbt tagから取得
+		//nbt tagから取得
 		String nbtTag = getNBTTag(item, NbtTagConst.THELOW_ITEM_ID);
 		if (nbtTag != null && !nbtTag.isEmpty()) {
 			return nbtTag;
@@ -239,7 +238,6 @@ public class ItemStackUtil {
 
 	/**
 	 * IDからアイテムを取得
-	 * 
 	 * @param id
 	 * @return
 	 */
@@ -247,7 +245,7 @@ public class ItemStackUtil {
 		if (id == null || id.isEmpty()) {
 			return null;
 		}
-		// 最初はMaterialから調べる
+		//最初はMaterialから調べる
 		Material material = Material.getMaterial(id.toUpperCase());
 		if (material != null) {
 			return new ItemStack(material);
@@ -280,7 +278,6 @@ public class ItemStackUtil {
 
 	/**
 	 * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
-	 * 
 	 * @param command
 	 * @return
 	 */
@@ -290,7 +287,6 @@ public class ItemStackUtil {
 
 	/**
 	 * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
-	 * 
 	 * @param command
 	 * @param sender
 	 * @return
@@ -311,7 +307,7 @@ public class ItemStackUtil {
 			material = Bukkit.getUnsafe().getMaterialFromInternalName(args[1]);
 		}
 		if (material != null) {
-			// 個数は絶対に１つ
+			//個数は絶対に１つ
 			int amount = 1;
 			short data = 0;
 			if (args.length >= 3) {
@@ -325,8 +321,7 @@ public class ItemStackUtil {
 			ItemStack stack = new ItemStack(material, amount, data);
 			try {
 				if (args.length >= 5) {
-					stack = Bukkit.getUnsafe().modifyItemStack(stack,
-							Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
+					stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
 				}
 			} catch (Throwable t) {
 				sender.sendMessage("コマンド解析中にエラーが発生しました。");
@@ -341,7 +336,6 @@ public class ItemStackUtil {
 
 	/**
 	 * アイテムの個数を1つ減少させる
-	 * 
 	 * @param item
 	 * @return
 	 */
@@ -352,7 +346,7 @@ public class ItemStackUtil {
 
 		if (item.getAmount() == 1) {
 			return new ItemStack(Material.AIR);
-		} else if (item.getAmount() > 1) {
+		} else if (item.getAmount() > 1){
 			item.setAmount(item.getAmount() - 1);
 			return item;
 		} else {
@@ -362,7 +356,6 @@ public class ItemStackUtil {
 
 	/**
 	 * インベントリから同じアイテムのものを取得する
-	 * 
 	 * @param inv
 	 * @param item
 	 * @return
@@ -382,7 +375,6 @@ public class ItemStackUtil {
 
 	/**
 	 * 指定したアイテムを追加できるならTRUE
-	 * 
 	 * @param p
 	 * @param item
 	 * @return
@@ -392,18 +384,18 @@ public class ItemStackUtil {
 			return false;
 		}
 
-		// インベントリに１つ以上の空きがあるならTRUE
+		//インベントリに１つ以上の空きがあるならTRUE
 		if (p.getInventory().firstEmpty() != -1) {
 			return true;
 		}
 
-		// 最大スタック数が1の場合はこの時点でFALSE
+		//最大スタック数が1の場合はこの時点でFALSE
 		int maxStackSize = item.getMaxStackSize();
 		if (maxStackSize != 1) {
 			return false;
 		}
 
-		// stackした時にアイテムを格納できるか確認する
+		//stackした時にアイテムを格納できるか確認する
 		Map<Integer, ItemStack> all = ItemStackUtil.allSameItems(p.getInventory(), item);
 		for (ItemStack invItem : all.values()) {
 			if (invItem.getAmount() + item.getAmount() <= maxStackSize) {
@@ -415,7 +407,6 @@ public class ItemStackUtil {
 
 	/**
 	 * 手に持っているアイテムを1つ消費する
-	 * 
 	 * @param player
 	 */
 	public static void consumeItemInHand(Player player) {
@@ -423,7 +414,7 @@ public class ItemStackUtil {
 		if (itemInHand == null) {
 			return;
 		}
-		// 消費させる
+		//消費させる
 		if (player.getItemInHand().getAmount() <= 1) {
 			player.getInventory().clear(player.getInventory().getHeldItemSlot());
 		} else {
@@ -433,7 +424,6 @@ public class ItemStackUtil {
 
 	/**
 	 * NTBTagをセットする
-	 * 
 	 * @param item
 	 * @param name
 	 * @param value
@@ -449,7 +439,6 @@ public class ItemStackUtil {
 
 	/**
 	 * NTBTagを取得する
-	 * 
 	 * @param item
 	 * @param name
 	 */
@@ -466,7 +455,6 @@ public class ItemStackUtil {
 
 	/**
 	 * NTBTagをセットする
-	 * 
 	 * @param item
 	 * @param name
 	 * @param value
@@ -482,7 +470,6 @@ public class ItemStackUtil {
 
 	/**
 	 * NTBTagを取得する
-	 * 
 	 * @param item
 	 * @param name
 	 */
@@ -496,16 +483,14 @@ public class ItemStackUtil {
 
 	/**
 	 * インベントリから指定したCustomアイテムを指定した数量削除する
-	 * 
 	 * @param inv
 	 * @param itemId
-	 * @param deleteAmount
-	 *            数量
+	 * @param deleteAmount 数量
 	 */
-	public static void removeCustomItem(Inventory inv, String itemId, int deleteAmount) {
+	public static void removeCustomItem(Inventory inv ,String itemId, int deleteAmount) {
 		ItemStack[] items = inv.getContents();
 		for (int i = 0; i < items.length; i++) {
-			// IDを比較する
+			//IDを比較する
 			String id = ItemStackUtil.getId(items[i]);
 			if (!itemId.equals(id)) {
 				continue;
@@ -516,20 +501,19 @@ public class ItemStackUtil {
 			}
 
 			int itemAmount = items[i].getAmount();
-			// 個数が同じ場合は削除する
+			//個数が同じ場合は削除する
 			if (deleteAmount >= itemAmount) {
 				inv.clear(i);
 			} else if (deleteAmount < itemAmount) {
 				items[i].setAmount(itemAmount - deleteAmount);
 			}
-			// 消費した分を削除する
+			//消費した分を削除する
 			deleteAmount -= itemAmount;
 		}
 	}
 
 	/**
 	 * 指定したIDのアイテムが指定した個数持っていた場合はTRUE
-	 * 
 	 * @param inv
 	 * @param itemId
 	 * @param amount
@@ -538,7 +522,7 @@ public class ItemStackUtil {
 	public static boolean containsCustomItem(Inventory inv, String itemId, int amount) {
 		ItemStack[] items = inv.getContents();
 		for (int i = 0; i < items.length; i++) {
-			// IDを比較する
+			//IDを比較する
 			String id = ItemStackUtil.getId(items[i]);
 			if (!itemId.equals(id)) {
 				continue;
@@ -549,7 +533,7 @@ public class ItemStackUtil {
 			}
 
 			int itemAmount = items[i].getAmount();
-			// 持っているアイテムの個数の方が多い場合はTRUE
+			//持っているアイテムの個数の方が多い場合はTRUE
 			if (amount <= itemAmount) {
 				return true;
 			} else if (amount > itemAmount) {

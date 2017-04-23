@@ -16,16 +16,16 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class BowItemOld extends AbstractAttackItem_Old
-		implements ItemInterface, BowItemable, LeftClickItemable {
+public abstract class BowItemOld extends AbstractAttackItem_Old implements  ItemInterface, BowItemable, LeftClickItemable{
 	@Override
 	protected Material getMaterial() {
 		return Material.BOW;
 	}
 
+
 	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner,
-			LivingEntity target) {
+	public void onProjectileDamage(EntityDamageByEntityEvent e,
+			ItemStack item, LivingEntity owner, LivingEntity target) {
 	}
 
 	abstract protected void excuteOnShootBow2(EntityShootBowEvent e);
@@ -45,7 +45,7 @@ public abstract class BowItemOld extends AbstractAttackItem_Old
 
 	@Override
 	public void excuteOnLeftClick(PlayerInteractEvent e) {
-		// レベルなどを確認する
+		//レベルなどを確認する
 		Player player = e.getPlayer();
 		if (!isAvilable(player)) {
 			sendNotAvailableMessage(player);
@@ -55,7 +55,7 @@ public abstract class BowItemOld extends AbstractAttackItem_Old
 		excuteOnLeftClick2(e);
 
 		if (!player.isSneaking()) {
-			// スキルを発動
+			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
 	}

@@ -31,7 +31,6 @@ public class PlayerCraftCustomItemEvent extends TheLowPlayerEvent {
 
 	/**
 	 * クラフトしたItemInterface
-	 * 
 	 * @return
 	 */
 	public CraftItemable getItemInterface() {
@@ -40,7 +39,6 @@ public class PlayerCraftCustomItemEvent extends TheLowPlayerEvent {
 
 	/**
 	 * クラフトに使用したレシピを取得
-	 * 
 	 * @return
 	 */
 	public TheLowCraftRecipeInterface getCraftRecipe() {
@@ -49,7 +47,6 @@ public class PlayerCraftCustomItemEvent extends TheLowPlayerEvent {
 
 	/**
 	 * クラフトして実際に手に入れたアイテム
-	 * 
 	 * @return
 	 */
 	public ItemStack getCraftedItem() {

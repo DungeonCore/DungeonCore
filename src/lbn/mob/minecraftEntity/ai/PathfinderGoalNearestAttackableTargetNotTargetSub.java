@@ -21,7 +21,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget {
+public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget{
 	protected final Class<EntityLiving> a;
 	private final int g;
 	protected final DistanceComparator b;
@@ -37,13 +37,14 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
 		this.isSummon = isSummon;
 	}
 
-	public PathfinderGoalNearestAttackableTargetNotTargetSub(EntityCreature entitycreature, Class<EntityLiving> oclass,
-			boolean flag, boolean flag1) {
+	public PathfinderGoalNearestAttackableTargetNotTargetSub(EntityCreature entitycreature,
+			Class<EntityLiving> oclass, boolean flag, boolean flag1) {
 		this(entitycreature, oclass, 10, flag, flag1, null);
 	}
 
-	public PathfinderGoalNearestAttackableTargetNotTargetSub(EntityCreature entitycreature, Class<EntityLiving> oclass,
-			int i, boolean flag, boolean flag1, final Predicate<? super EntityLiving> predicate) {
+	public PathfinderGoalNearestAttackableTargetNotTargetSub(EntityCreature entitycreature,
+			Class<EntityLiving> oclass, int i, boolean flag, boolean flag1,
+			final Predicate<? super EntityLiving> predicate) {
 		super(entitycreature, flag, flag1);
 		this.a = oclass;
 		this.g = i;
@@ -83,87 +84,85 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
 		if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) {
 			return false;
 		}
-		// double d0 = f();
+//		double d0 = f();
 		double d0 = 16;
 		@SuppressWarnings("unchecked")
-		List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0),
-				Predicates.and(this.c, predicateEntity));
+		List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0), Predicates.and(this.c, predicateEntity));
 
 		Collections.sort(list, this.b);
-		if (list.isEmpty()) {
-			return false;
-		} else {
-			for (Entity e : list) {
-				if (e == null) {
-					continue;
-				}
-				// 動物には攻撃しない
-				if (e instanceof EntityAnimal) {
-					continue;
-				}
+		   if (list.isEmpty()) {
+               return false;
+           } else {
+           	for (Entity e : list) {
+           		if (e == null) {
+           			continue;
+           		}
+           		//動物には攻撃しない
+           		if (e instanceof EntityAnimal) {
+           			continue;
+           		}
 
-				CraftEntity bukkitEntity = e.getBukkitEntity();
-				boolean targetIsSummon = SummonPlayerManager.isSummonMob(bukkitEntity);
-				if (isSummon) {
-					// ターゲットがプレイヤーでなくsummonでないなら
-					if (!targetIsSummon && bukkitEntity.getType() != EntityType.PLAYER) {
-						this.d = (EntityLiving) e;
-						return true;
-					}
-				} else {
-					// ターゲットがプレイヤーまたはsummonなら
-					if (targetIsSummon || bukkitEntity.getType() == EntityType.PLAYER) {
-						this.d = (EntityLiving) e;
-						return true;
-					}
-				}
-				// else if
-				// (SummonPlayerManager.isSummonMob(e.getBukkitEntity())) {
-				// if (isSummon) {
-				// //ターゲットがSUMMONならスキップする
-				// continue;
-				// } else {
-				// this.d = (EntityLiving) e;
-				// return true;
-				// }
-				// } else if (e.getBukkitEntity().getType() ==
-				// EntityType.PLAYER) {
-				// //クエリに場合には何もしない
-				// if (((Player)e.getBukkitEntity()).getGameMode() ==
-				// GameMode.CREATIVE) {
-				// continue;
-				// }
-				// if (isSummon) {
-				// continue;
-				// } else {
-				// this.d = (EntityLiving) e;
-				// return true;
-				// }
-				// } else {
-				// if (isSummon) {
-				// this.d = (EntityLiving) e;
-				// return true;
-				// } else {
-				// continue;
-				// }
-				// }
+           		CraftEntity bukkitEntity = e.getBukkitEntity();
+           		boolean targetIsSummon = SummonPlayerManager.isSummonMob(bukkitEntity);
+           		if (isSummon) {
+           			//ターゲットがプレイヤーでなくsummonでないなら
+           			if (!targetIsSummon && bukkitEntity.getType() != EntityType.PLAYER) {
+           				this.d = (EntityLiving) e;
+           				return true;
+           			}
+           		} else {
+           			//ターゲットがプレイヤーまたはsummonなら
+           			if (targetIsSummon || bukkitEntity.getType() == EntityType.PLAYER) {
+           				this.d = (EntityLiving) e;
+           				return true;
+           			}
+           		}
+//           		else if (SummonPlayerManager.isSummonMob(e.getBukkitEntity())) {
+//           			if (isSummon) {
+//           				//ターゲットがSUMMONならスキップする
+//           				continue;
+//           			} else {
+//           				this.d = (EntityLiving) e;
+//           				return true;
+//           			}
+//           		} else if (e.getBukkitEntity().getType() == EntityType.PLAYER) {
+//           			//クエリに場合には何もしない
+//           			if (((Player)e.getBukkitEntity()).getGameMode() == GameMode.CREATIVE) {
+//           				continue;
+//           			}
+//           			if (isSummon) {
+//           				continue;
+//           			} else {
+//           				this.d = (EntityLiving) e;
+//           				return true;
+//           			}
+//           		} else {
+//           			if (isSummon) {
+//           				this.d = (EntityLiving) e;
+//           				return true;
+//           			} else {
+//           				continue;
+//           			}
+//           		}
 			}
-			return false;
-		}
+           	return false;
+           }
 	}
 
-	// IEntitySelector.d の代わり
-	public final Predicate<EntityLiving> predicateEntity = new Predicate<EntityLiving>() {
+	//IEntitySelector.d の代わり
+	public final Predicate<EntityLiving> predicateEntity = new Predicate<EntityLiving>()
+	  {
 		@Override
 		public boolean apply(EntityLiving e) {
-			return (!(e instanceof EntityHuman))
-					|| (((EntityHuman) e).getBukkitEntity().getGameMode() != GameMode.SPECTATOR);
+	      return (!(e instanceof EntityHuman)) || (((EntityHuman)e).getBukkitEntity().getGameMode() != GameMode.SPECTATOR);
 		}
-	};
+	  };
 
 	public void c() {
-		this.e.setGoalTarget(this.d, (this.d instanceof EntityPlayer) ? EntityTargetEvent.TargetReason.CLOSEST_PLAYER
-				: EntityTargetEvent.TargetReason.CLOSEST_ENTITY, true);
+		this.e.setGoalTarget(
+				this.d,
+				(this.d instanceof EntityPlayer) ? EntityTargetEvent.TargetReason.CLOSEST_PLAYER
+						: EntityTargetEvent.TargetReason.CLOSEST_ENTITY, true);
 		super.c();
 	}
 

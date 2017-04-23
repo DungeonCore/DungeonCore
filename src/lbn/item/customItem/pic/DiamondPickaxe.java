@@ -10,7 +10,7 @@ import lbn.player.magicstoneOre.MagicStoneOreType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class DiamondPickaxe extends AbstractPickaxe {
+public class DiamondPickaxe extends AbstractPickaxe{
 
 	public DiamondPickaxe(int level) {
 		super(level);
@@ -54,7 +54,7 @@ public class DiamondPickaxe extends AbstractPickaxe {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "鉱石を採掘するとレベルが上がります", "全ての鉱石を採掘できます" };
+		return new String[]{"鉱石を採掘するとレベルが上がります", "全ての鉱石を採掘できます"};
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class DiamondPickaxe extends AbstractPickaxe {
 		return "diamond_pickaxe";
 	}
 
-	public List<ItemInterface> getAllLevelPick() {
+	public List<ItemInterface> getAllLevelPick(){
 		ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
 		for (int i = 1; i <= 10; i++) {
 			woodPicks.add(new DiamondPickaxe(i));

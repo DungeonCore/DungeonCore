@@ -49,22 +49,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.google.common.collect.HashMultimap;
 
-public class CommandViewInfo implements CommandExecutor {
+public class CommandViewInfo implements CommandExecutor{
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] paramArrayOfString) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
 		if (paramArrayOfString.length == 0) {
 			paramCommandSender.sendMessage("パラメータ:appendix");
 			return false;
 		}
 
+
 		if (!(paramCommandSender instanceof Player)) {
 			return false;
 		}
 
-		// if (!((Player)paramCommandSender).isOp()) {
-		// return false;
-		// }
+//		if (!((Player)paramCommandSender).isOp()) {
+//			return false;
+//		}
 
 		if (paramArrayOfString[0].equals("chunk")) {
 			showLoadedChunk(paramCommandSender);
@@ -76,8 +76,7 @@ public class CommandViewInfo implements CommandExecutor {
 			return false;
 		}
 
-		Player target = (Player) paramCommandSender;
-		;
+		Player target = (Player) paramCommandSender;;
 		if (paramArrayOfString.length == 2) {
 			target = Bukkit.getPlayer(paramArrayOfString[1]);
 		}
@@ -105,7 +104,7 @@ public class CommandViewInfo implements CommandExecutor {
 		case "craft":
 			Block block = new Location(Bukkit.getWorld("thelow"), -23, 70, 0).getBlock();
 			Inventory inventory = CraftItemSelectViewer.getInventory(block);
-			CraftItemSelectViewer.open((Player) paramCommandSender, Arrays.asList(inventory), 0);
+			CraftItemSelectViewer.open((Player)paramCommandSender, Arrays.asList(inventory), 0);
 			break;
 		case "status":
 			sendPlayerStatus(target);
@@ -126,17 +125,15 @@ public class CommandViewInfo implements CommandExecutor {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HHmmss");
 			String format = sdf.format(new Date());
 			String fileName = "backup_world_" + format + ".zip";
-			InOutputUtil.compressDirectory(
-					Main.dataFolder + File.separator + "worldbackup" + File.separator + fileName + ".zip",
-					file2.getAbsolutePath());
+			InOutputUtil.compressDirectory(Main.dataFolder + File.separator + "worldbackup" + File.separator + fileName + ".zip", file2.getAbsolutePath());
 			break;
-		// case "doragon":
-		// makeDragon();
-		// case "doragon1":
-		// makeDragon1();
-		// break;
+//		case "doragon":
+//			makeDragon();
+//		case "doragon1":
+//			makeDragon1();
+//			break;
 		case "dungeon":
-			makeDungeonGround((Player) paramCommandSender);
+			makeDungeonGround((Player)paramCommandSender);
 			break;
 		case "npc":
 			NpcManager.onTest();
@@ -148,37 +145,32 @@ public class CommandViewInfo implements CommandExecutor {
 			}
 			break;
 		case "xyz":
-			String command = "tellraw " + target.getName()
-					+ " {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\""
-					+ target.getLocation().getBlockX() + " " + target.getLocation().getBlockY() + " "
-					+ target.getLocation().getBlockZ() + "\"}}";
+			String command = "tellraw " + target.getName() +" {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + target.getLocation().getBlockX() + " " + target.getLocation().getBlockY()+ " " + target.getLocation().getBlockZ() + "\"}}";
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 			break;
 		case "xyz2":
-			String command2 = "tellraw " + target.getName()
-					+ " {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\""
-					+ target.getWorld().getName() + ":" + target.getLocation().getBlockX() + ","
-					+ target.getLocation().getBlockY() + "," + target.getLocation().getBlockZ() + "\"}}";
+			String command2 = "tellraw " + target.getName() +" {\"text\":\"座標取得\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + target.getWorld().getName() + ":" + target.getLocation().getBlockX() + "," + target.getLocation().getBlockY()+ "," + target.getLocation().getBlockZ() + "\"}}";
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command2);
 			break;
 		case "particle":
 			ParticleData particle = ParticleManager.getParticleData(paramArrayOfString[1]);
 			if (particle != null) {
-				particle.run(((Player) paramCommandSender).getLocation());
+				particle.run(((Player)paramCommandSender).getLocation());
 			}
 			break;
 		case "kaminari":
-			LivingEntityUtil.strikeLightningEffect(((Player) paramCommandSender).getLocation());
+			LivingEntityUtil.strikeLightningEffect(((Player)paramCommandSender).getLocation());
 			break;
 		case "armor":
-			sendArmorData((Player) paramCommandSender);
+			sendArmorData((Player)paramCommandSender);
 			break;
-		default:
-			paramCommandSender.sendMessage("unknown param");
+			default :
+				paramCommandSender.sendMessage("unknown param");
 		}
 		return true;
 
 	}
+
 
 	private void sendArmorData(Player p) {
 		double normalMobArmorPoint = 0;
@@ -204,6 +196,7 @@ public class CommandViewInfo implements CommandExecutor {
 		p.sendMessage(ChatColor.GOLD + "=========================");
 	}
 
+
 	private void showMobSkill(String string, CommandSender paramCommandSender) {
 		AbstractMob<?> mob = MobHolder.getMob(string);
 		if (mob == null) {
@@ -218,10 +211,12 @@ public class CommandViewInfo implements CommandExecutor {
 		}
 	}
 
+
 	private void addEffect(Player target) {
 		new PotionEffect(PotionEffectType.SPEED, 80, 1).apply(target);
 		new PotionEffect(PotionEffectType.POISON, 80, 1).apply(target);
 	}
+
 
 	private void sendPlayerStatus(Player target) {
 		Collection<PotionEffect> activePotionEffects = target.getActivePotionEffects();
@@ -231,54 +226,55 @@ public class CommandViewInfo implements CommandExecutor {
 		}
 	}
 
+
 	private void makeDungeonGround(Player p) {
 		Location location = p.getLocation();
 		if (!location.getWorld().getName().equals("dungeon")) {
 			return;
 		}
 
-		new BukkitRunnable() {
-			int xx = location.getBlockX() + 150;
-			int c = 0;
+			new BukkitRunnable() {
+				int xx = location.getBlockX() + 150;
+				int c = 0;
 
-			int blockCount = 0;
+				int blockCount = 0;
+				@Override
+				public void run() {
+					for (int z = location.getBlockZ() - 150; z < location.getBlockZ() + 150; z++) {
+						if (!new Location(location.getWorld(), xx, 3, z).getBlock().getType().equals(Material.GRASS)) {
+							continue;
+						}
 
-			@Override
-			public void run() {
-				for (int z = location.getBlockZ() - 150; z < location.getBlockZ() + 150; z++) {
-					if (!new Location(location.getWorld(), xx, 3, z).getBlock().getType().equals(Material.GRASS)) {
-						continue;
+						if (location.getWorld().getHighestBlockYAt(location) != 4) {
+							continue;
+						}
+
+						for (int y = 2; y<= 200; y++) {
+							new Location(location.getWorld(), xx, y, z).getBlock().setType(Material.STONE);
+							blockCount++;
+						}
 					}
 
-					if (location.getWorld().getHighestBlockYAt(location) != 4) {
-						continue;
+					xx--;
+					c++;
+
+					if (xx % 10 == 0) {
+						p.sendMessage(c * 100 / 300 + "%  完了 :" + blockCount);
+						blockCount = 0;
 					}
 
-					for (int y = 2; y <= 200; y++) {
-						new Location(location.getWorld(), xx, y, z).getBlock().setType(Material.STONE);
-						blockCount++;
+					if (xx < location.getBlockX() - 150) {
+						p.sendMessage("100%  完了");
+						cancel();
 					}
 				}
-
-				xx--;
-				c++;
-
-				if (xx % 10 == 0) {
-					p.sendMessage(c * 100 / 300 + "%  完了 :" + blockCount);
-					blockCount = 0;
-				}
-
-				if (xx < location.getBlockX() - 150) {
-					p.sendMessage("100%  完了");
-					cancel();
-				}
-			}
-		}.runTaskTimer(Main.plugin, 0, 1);
+			}.runTaskTimer(Main.plugin, 0, 1);
 	}
+
 
 	void makeDragon1() {
 		for (int i = 44; i >= 3; i--) {
-			for (int j = 200; j <= 254; j++) {
+			for (int j = 200; j <= 254 ; j++) {
 				for (int l = 555; l <= 733; l++) {
 					Location location = new Location(Bukkit.getWorld("world"), i, j, l);
 					if (location.getBlock().getType() != Material.AIR) {
@@ -290,14 +286,12 @@ public class CommandViewInfo implements CommandExecutor {
 		}
 	}
 
-	HashMultimap<Integer, BlockData> create = HashMultimap.create();
 
+	HashMultimap<Integer, BlockData> create = HashMultimap.create();
 	void makeDragon() {
-		// Location start = new Location(Bukkit.getWorld("world"), 44, 200,
-		// 555);
+//		Location start = new Location(Bukkit.getWorld("world"), 44, 200, 555);
 		new BukkitRunnable() {
 			int i = 555;
-
 			@Override
 			public void run() {
 				Set<BlockData> set = create.get(i);
@@ -311,7 +305,7 @@ public class CommandViewInfo implements CommandExecutor {
 				}
 			}
 		}.runTaskTimer(Main.plugin, 0, 2);
-		// Location end = new Location(Bukkit.getWorld("world"), 3, 254, 733);
+//		Location end = new Location(Bukkit.getWorld("world"), 3, 254, 733);
 	}
 
 	class BlockData {
@@ -322,7 +316,6 @@ public class CommandViewInfo implements CommandExecutor {
 			this.loc = loc;
 			this.data = block.getData();
 		}
-
 		Material m;
 		Location loc;
 		byte data;
@@ -334,6 +327,7 @@ public class CommandViewInfo implements CommandExecutor {
 		}
 	}
 
+
 	private void sendChunkInfo(Player target) {
 		target.sendMessage(ChatColor.GREEN + "=== CHUNK INFO ===");
 		Chunk chunk = target.getLocation().getChunk();
@@ -344,6 +338,7 @@ public class CommandViewInfo implements CommandExecutor {
 		target.sendMessage("system loaded:" + MobSpawnerPointManager.loadedChunk.contains(new ChunkWrapper(chunk)));
 		target.sendMessage(ChatColor.GREEN + "=== CHUNK INFO ===");
 	}
+
 
 	private void showLoadedChunk(CommandSender paramCommandSender) {
 		List<World> worlds = Bukkit.getWorlds();

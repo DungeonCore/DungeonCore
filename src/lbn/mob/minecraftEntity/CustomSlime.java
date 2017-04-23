@@ -13,7 +13,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Slime;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomSlime extends EntitySlime implements ICustomEntity<Slime> {
+public class CustomSlime extends EntitySlime implements ICustomEntity<Slime>{
 
 	private LbnMobTag tag;
 
@@ -48,17 +48,16 @@ public class CustomSlime extends EntitySlime implements ICustomEntity<Slime> {
 		super.setPosition(d0, d1, d2);
 		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
 	}
-
 	Location spawnLocation = null;
 
 	@Override
 	public Slime spawn(Location loc) {
-		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
-		// 位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-		// ワールドにentityを追加
-		world.addEntity(this, SpawnReason.CUSTOM);
-		return (Slime) getBukkitEntity();
+		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
+		//位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
+		 //ワールドにentityを追加
+		 world.addEntity(this, SpawnReason.CUSTOM);
+		 return (Slime) getBukkitEntity();
 	}
 
 	@Override
@@ -76,15 +75,14 @@ public class CustomSlime extends EntitySlime implements ICustomEntity<Slime> {
 			return;
 		}
 
-		// 指定した距離以上離れていたら殺す
+		//指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
-					* tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
 				return;
 			}
 			if (getMobTag().isBoss()) {

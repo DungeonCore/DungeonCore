@@ -14,7 +14,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class SetItemParts implements SetItemPartable {
+public class SetItemParts implements SetItemPartable{
 	SetItemInterface belongSetItem;
 	Material material;
 	SetItemPartsType type;
@@ -79,7 +79,7 @@ public class SetItemParts implements SetItemPartable {
 
 		ItemStackUtil.addLore(itemStack, lore.toArray(new String[0]));
 
-		// IDを付与
+		//IDを付与
 		ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
 		return itemStack;
 	}

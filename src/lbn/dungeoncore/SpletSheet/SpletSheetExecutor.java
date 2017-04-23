@@ -9,7 +9,7 @@ import lbn.util.LbnRunnable;
 public class SpletSheetExecutor {
 	static ExecutorService service = Executors.newFixedThreadPool(3);
 
-	public static <T> void onExecute(SheetRunnable<T> run) {
+	public static <T> void onExecute(SheetRunnable<T> run){
 		try {
 			Future<T> submit = service.submit(run);
 			new LbnRunnable() {

@@ -21,7 +21,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class SetItemHealthCrystal extends AbstractAbilitySetItem {
+public class SetItemHealthCrystal extends AbstractAbilitySetItem{
 	@Override
 	public void doRutine(Player p, ItemStack[] itemStacks) {
 	}
@@ -45,16 +45,16 @@ public class SetItemHealthCrystal extends AbstractAbilitySetItem {
 
 	@Override
 	protected void addAbility(SetItemAbility emptyAbility, Player p, ItemStack... item) {
-		// ヒールクリスタル取得
+		//ヒールクリスタル取得
 		HealthCystal customItem = (HealthCystal) ItemManager.getCustomItemByName(ItemStackUtil.getName(item[0]));
-		// 効果をつける
+		//効果をつける
 		emptyAbility.addData(PlayerStatusType.MAX_HP, customItem.getMaxHealth(StrengthOperator.getLevel(item[0])));
 	}
 }
 
 class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate {
 	public HealthCystal() {
-		super(new SetItemHealthCrystal());
+		super(new SetItemHealthCrystal() );
 	}
 
 	@Override

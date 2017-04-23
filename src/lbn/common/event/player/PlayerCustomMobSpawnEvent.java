@@ -5,7 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent {
+public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent{
 
 	String name;
 

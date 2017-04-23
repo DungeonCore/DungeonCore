@@ -20,12 +20,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneTradeData {
 	static Random random = new Random();
-	// 石ころ
+	//石ころ
 	static ItemStack stone = new SimpleStone().getItem();
 
 	/**
 	 * マジックストーンのタイプからランダムでアイテムを取得する
-	 * 
 	 * @param type
 	 * @return
 	 */
@@ -73,9 +72,9 @@ public class MagicStoneTradeData {
 				return getRandomSlotItem(SlotLevel.LEVEL3);
 			}
 		case EMERALD_ORE:
-			return ItemStackUtil.getItem("未設定", Material.EMERALD, new String[] { "未設定アイテム" });
+			return ItemStackUtil.getItem("未設定", Material.EMERALD, new String[]{"未設定アイテム"});
 		case GOLD_ORE:
-			return ItemStackUtil.getItem("未設定", Material.GOLD_INGOT, new String[] { "未設定アイテム" });
+			return ItemStackUtil.getItem("未設定", Material.GOLD_INGOT, new String[]{"未設定アイテム"});
 		default:
 			break;
 		}
@@ -87,33 +86,32 @@ public class MagicStoneTradeData {
 
 	/**
 	 * 指定されたSlotLevelからランダムで魔法石アイテムを取得する
-	 * 
 	 * @param level
 	 * @return
 	 */
 	public static ItemStack getRandomSlotItem(SlotLevel level) {
-		// キャッシュに含まれていないならキャッシュを作成する
+		//キャッシュに含まれていないならキャッシュを作成する
 		if (!magicStoneCache.containsKey(level)) {
 			Collection<SlotInterface> slotListByLevel = SlotManager.getSlotListByLevel(level);
 			if (slotListByLevel.isEmpty()) {
 				return null;
 			}
 			// ItemInterfaceを継承しているものはItem化できるので保持する
-			ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+			ArrayList< ItemInterface> arrayList = new ArrayList< ItemInterface>();
 			for (SlotInterface slotInterface : slotListByLevel) {
 				if (slotInterface instanceof ItemInterface) {
 					arrayList.add((AbstractSlot) slotInterface);
 				}
 			}
-			// もし1つもアイテム化出来るものが存在しなければ何もしない
+			//もし1つもアイテム化出来るものが存在しなければ何もしない
 			if (arrayList.isEmpty()) {
 				return null;
 			}
-			// キャッシュに保存する
+			//キャッシュに保存する
 			magicStoneCache.put(level, arrayList);
 		}
 
-		// ランダムで1つ選択する
+		//ランダムで1つ選択する
 		ArrayList<ItemInterface> magicStoneItemList = magicStoneCache.get(level);
 		int nextInt = random.nextInt(magicStoneItemList.size());
 		ItemInterface slot = magicStoneItemList.get(nextInt);

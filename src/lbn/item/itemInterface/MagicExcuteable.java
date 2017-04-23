@@ -6,7 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public interface MagicExcuteable extends Cooltimable {
+
+public interface MagicExcuteable extends Cooltimable{
 	ItemStack getItem();
 
 	int getNeedMagicPoint();

@@ -6,7 +6,7 @@ import lbn.item.slot.slot.CombatSlot;
 
 import org.bukkit.ChatColor;
 
-public class MagicStoneInstaceKill extends CombatSlot {
+public class MagicStoneInstaceKill extends CombatSlot{
 
 	@Override
 	public String getSlotName() {
@@ -35,7 +35,7 @@ public class MagicStoneInstaceKill extends CombatSlot {
 
 	@Override
 	public void onCombat(PlayerCombatEntityEvent e) {
-		// LivingEntity enemy = e.getEnemy();
-		// AbstractMob<?> mob = MobHolder.getMob(enemy);
+//		LivingEntity enemy = e.getEnemy();
+//		AbstractMob<?> mob = MobHolder.getMob(enemy);
 	}
 }

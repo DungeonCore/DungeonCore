@@ -29,7 +29,7 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class CustomPlayer implements TheLowPlayer {
+public class CustomPlayer implements TheLowPlayer{
 	public CustomPlayer(OfflinePlayer p) {
 		this.player = Bukkit.getOfflinePlayer(p.getUniqueId());
 	}
@@ -43,42 +43,42 @@ public class CustomPlayer implements TheLowPlayer {
 		maxLevelData = new PlayerLevelIntData(60, 60, 60);
 	}
 
-	// レベル
+	//レベル
 	PlayerLevelIntData levelData = null;
 
-	// 経験値
+	//経験値
 	PlayerLevelIntData expData = null;
 
-	// 最大レベル
+	//最大レベル
 	transient PlayerLevelIntData maxLevelData = null;
 
-	// 所持金
+	//所持金
 	int galions = 0;
 
 	OfflinePlayer player;
 
-	// 現在いるダンジョンID
+	//現在いるダンジョンID
 	transient int inDungeonId = -1;
 
-	// PlayerStatusData
+	//PlayerStatusData
 	PlayerStatusData playerStatusData = new PlayerStatusData(this);
 
-	// 転生データを管理するクラス
+	//転生データを管理するクラス
 	PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
 
 	transient Location lastOverWorldLocation = null;
 
 	@Override
 	public int getLevel(LevelType type) {
-		// 最大レベルを上回っていた場合は最大レベルを返す
+		//最大レベルを上回っていた場合は最大レベルを返す
 		return Math.min(levelData.get(type), getMaxLevel(type));
 	}
 
 	@Override
 	public void setLevel(LevelType type, int level) {
-		// 最大レベルを上回っていたら最大レベルを返す
+		//最大レベルを上回っていたら最大レベルを返す
 		levelData.put(type, Math.min(level, getMaxLevel(type)));
-		// Eventを呼ぶ
+		//Eventを呼ぶ
 		new PlayerChangeStatusLevelEvent(this, level, type).callEvent();
 	}
 
@@ -92,7 +92,7 @@ public class CustomPlayer implements TheLowPlayer {
 
 	@Override
 	public void addExp(LevelType type, int addExp, StatusAddReason reason) {
-		// メインレベルが指定された時は全ての経験値をセットする
+		//メインレベルが指定された時は全ての経験値をセットする
 		if (type == LevelType.MAIN) {
 			addExp(LevelType.SWORD, addExp, reason);
 			addExp(LevelType.BOW, addExp, reason);
@@ -104,21 +104,21 @@ public class CustomPlayer implements TheLowPlayer {
 		event.callEvent();
 		addExp = event.getAddExp();
 
-		// 現在の経験値
+		//現在の経験値
 		int nowExp = getExp(type) + addExp;
 
-		// 現在のレベル
+		//現在のレベル
 		int nowLevel = getLevel(type) + 1;
 
 		for (; nowExp >= getNeedExp(type, nowLevel); nowLevel++) {
-			// 最大レベルを超えていたらレベルアップさせない
+			//最大レベルを超えていたらレベルアップさせない
 			if (getMaxLevel(type) < nowLevel) {
 				nowExp = 0;
 				break;
 			}
-			// レベルアップする
+			//レベルアップする
 			levelUp(type, nowLevel);
-			// 必要な経験値を引く
+			//必要な経験値を引く
 			nowExp -= getNeedExp(type, nowLevel);
 		}
 		expData.put(type, nowExp);
@@ -126,14 +126,13 @@ public class CustomPlayer implements TheLowPlayer {
 
 	/**
 	 * レベルをアップさせる
-	 * 
 	 * @param type
 	 * @param level
 	 */
 	protected void levelUp(LevelType type, int level) {
-		// レベルをセットする
+		//レベルをセットする
 		setLevel(type, level);
-		// eventの発生させる
+		//eventの発生させる
 		PlayerLevelUpEvent event = new PlayerLevelUpEvent(this, type);
 		event.callEvent();
 	}
@@ -235,7 +234,8 @@ public class CustomPlayer implements TheLowPlayer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataType == null) ? 0 : dataType.hashCode());
+		result = prime * result
+				+ ((dataType == null) ? 0 : dataType.hashCode());
 		result = prime * result + ((player == null) ? 0 : player.hashCode());
 		return result;
 	}
@@ -282,13 +282,12 @@ public class CustomPlayer implements TheLowPlayer {
 		if (!canReincarnation(levelType)) {
 			return false;
 		}
-		// 転生を行う
-		OneReincarnationData oneReincarnationData = reincarnationData.addReincarnation(reincarnationInterface,
-				levelType);
+		//転生を行う
+		OneReincarnationData oneReincarnationData = reincarnationData.addReincarnation(reincarnationInterface, levelType);
 
-		// 60レベル引いたレベルをセットする
+		//60レベル引いたレベルをセットする
 		setLevel(levelType, getLevel(levelType) - 60);
-		// Eventを発火させる
+		//Eventを発火させる
 		new PlayerCompleteReincarnationEvent(this, oneReincarnationData).callEvent();
 		return true;
 	}
@@ -296,7 +295,7 @@ public class CustomPlayer implements TheLowPlayer {
 	@Override
 	public boolean canReincarnation(LevelType levelType) {
 		int level = getLevel(levelType);
-		// 現在のレベルが60レベル以下なら転生できない
+		//現在のレベルが60レベル以下なら転生できない
 		if (level < 60) {
 			return false;
 		}
@@ -313,29 +312,28 @@ public class CustomPlayer implements TheLowPlayer {
 		switch (level) {
 		case LEVEL2:
 			if (isOnline()) {
-				// ItemStackのAbilityをすべて消す
+				//ItemStackのAbilityをすべて消す
 				playerStatusData.clear(AbilityType.SET_ITEM_ABILITY);
-				// SetItemのAbilityをセットしなおす
+				//SetItemのAbilityをセットしなおす
 				SetItemManager.updateAllSetItem(getOnlinePlayer());
 
-				// 転生のAbilityをすべて消す
+				//転生のAbilityをすべて消す
 				playerStatusData.clear(AbilityType.REINCARNATION_ABILITY);
 				for (OneReincarnationData oneReincarnationData : reincarnationData.getAllOneReincarnationDataList()) {
-					// 転生を行ったときの効果を追加する
-					oneReincarnationData.getReincarnationInterface().addReincarnationEffect(this,
-							oneReincarnationData.getLevelType(), oneReincarnationData.getCount());
+					//転生を行ったときの効果を追加する
+					oneReincarnationData.getReincarnationInterface().addReincarnationEffect(this, oneReincarnationData.getLevelType(), oneReincarnationData.getCount());
 				}
 
-				// 転生のAbilityをすべて消す
+				//転生のAbilityをすべて消す
 				playerStatusData.clear(AbilityType.LEVEL_UP);
 				addAbility(new LevelUpAbility(getLevel(LevelType.MAIN)));
 
-				// 時間制限付きのAbilityをチェックする
+				//時間制限付きのAbilityをチェックする
 				Set<AbilityInterface> ablitys = playerStatusData.getApplyedAbility(AbilityType.TIME_LIMIT_ABILITY);
 				AbstractTimeLimitAbility.fixIntegrity(this, ablitys);
 			}
 		case LEVEL1:
-			// データの適応を行う
+			//データの適応を行う
 			playerStatusData.applyAllAbility();
 		default:
 			break;

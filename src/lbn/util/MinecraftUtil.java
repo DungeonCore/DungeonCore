@@ -15,8 +15,7 @@ public class MinecraftUtil {
 
 	/**
 	 *
-	 * //http://wiki.vg/Protocol#Sound_Effect
-	 * 
+		//http://wiki.vg/Protocol#Sound_Effect
 	 * @param center
 	 * @param sound
 	 * @param volume
@@ -24,21 +23,21 @@ public class MinecraftUtil {
 	 * @param range
 	 */
 	public static void sendSound(Location center, Sound sound, float volume, float pitch, double range) {
-		// packetを送信
+		//packetを送信
 		for (Player p : center.getWorld().getPlayers()) {
 			if (!p.isOnline()) {
 				continue;
 			}
 			Location loc = p.getLocation();
-
-			// 聞こえるが遠い場所
+	
+	
+			//聞こえるが遠い場所
 			if (loc.distance(center) <= range && loc.distance(center) > (range / 2)) {
 				volume = volume * 0.7f;
 			}
-
-			PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect(CraftSound.getSound(sound),
-					center.getX(), center.getY(), center.getZ(), volume, pitch);
-			((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+	
+			PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect( CraftSound.getSound(sound), center.getX(), center.getY(), center.getZ(), volume, pitch);
+			((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
 		}
 	}
 
@@ -48,7 +47,7 @@ public class MinecraftUtil {
 		}
 	}
 
-	public static Location getSenderLocation(CommandSender sender) {
+	public static Location getSenderLocation (CommandSender sender){
 		Location senderLoc = null;
 		if ((sender instanceof BlockCommandSender)) {
 			senderLoc = ((BlockCommandSender) sender).getBlock().getLocation();
@@ -59,7 +58,7 @@ public class MinecraftUtil {
 	}
 
 	public static String getLocationString(Location loc) {
-		return String.format("(%d, %d, %d)", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+	  return String.format("(%d, %d, %d)", loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
 }

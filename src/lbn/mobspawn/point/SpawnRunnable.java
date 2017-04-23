@@ -12,8 +12,9 @@ import lbn.mobspawn.SpawnLevel;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SpawnRunnable extends BukkitRunnable {
-	public SpawnRunnable(boolean isRunManage, HashMap<SpawnLevel, SpawnScheduler> schedulerList,
+public class SpawnRunnable extends BukkitRunnable{
+	public SpawnRunnable(boolean isRunManage,
+			HashMap<SpawnLevel, SpawnScheduler> schedulerList,
 			HashSet<ChunkWrapper> loadedChunk) {
 		this.schedulerList = schedulerList;
 		this.loadedChunk = loadedChunk;
@@ -33,7 +34,7 @@ public class SpawnRunnable extends BukkitRunnable {
 			return;
 		}
 
-		// 全てのレベルを走査する
+		//全てのレベルを走査する
 		for (SpawnLevel level : SpawnLevel.values()) {
 			SpawnScheduler scheduler = schedulerList.get(level);
 			if (scheduler == null) {
@@ -56,10 +57,10 @@ public class SpawnRunnable extends BukkitRunnable {
 					spawnMpbCount += spawnPoint.spawnMob();
 				}
 			}
-			schedulerDetail.put(level, StringUtils
-					.join(new Object[] { "TRUE:spawnpoint(", spawnPointCount, "), spawnmob(", spawnMpbCount, ")" }));
+			schedulerDetail.put(level, StringUtils.join(new Object[]{"TRUE:spawnpoint(", spawnPointCount, "), spawnmob(", spawnMpbCount, ")"}));
 			Collections.shuffle(spawnPointList);
 		}
 	}
+
 
 }

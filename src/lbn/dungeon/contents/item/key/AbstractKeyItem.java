@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractKeyItem extends AbstractItem implements KeyItemable {
+public abstract class AbstractKeyItem extends AbstractItem implements KeyItemable{
 	@Override
 	public String getId() {
 		return ChatColor.stripColor(getItemName());
@@ -21,11 +21,9 @@ public abstract class AbstractKeyItem extends AbstractItem implements KeyItemabl
 	@Override
 	public String[] getDetail() {
 		if (getDungeonLocation() != null) {
-			return new String[] { getDungeonName() + "で使用可能",
-					StringUtils.join(new Object[] { "x:", (int) getDungeonLocation().getBlockX(), " y:",
-							(int) getDungeonLocation().getBlockY(), " z:", (int) getDungeonLocation().getBlockZ() }) };
+			return new String[]{getDungeonName() + "で使用可能", StringUtils.join(new Object[]{"x:", (int)getDungeonLocation().getBlockX(), " y:", (int)getDungeonLocation().getBlockY(), " z:", (int)getDungeonLocation().getBlockZ()})};
 		} else {
-			return new String[] { getDungeonName() + "で使用可能" };
+			return new String[]{getDungeonName() + "で使用可能"};
 		}
 	}
 

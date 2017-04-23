@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-public class LeafFlare extends WeaponSkillForOneType {
+public class LeafFlare extends WeaponSkillForOneType{
 
 	public LeafFlare() {
 		super(ItemType.MAGIC);
@@ -40,14 +40,14 @@ public class LeafFlare extends WeaponSkillForOneType {
 			}
 
 			if (LivingEntityUtil.isFriendship(entity)) {
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.SLOW);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.CONFUSION);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.HUNGER);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.SLOW_DIGGING);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.WEAKNESS);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.POISON);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.WITHER);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.BLINDNESS);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.SLOW);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.CONFUSION);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.HUNGER);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.SLOW_DIGGING);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.WEAKNESS);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.POISON);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.WITHER);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.BLINDNESS);
 			}
 		}
 		return true;

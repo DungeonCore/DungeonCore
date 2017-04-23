@@ -7,7 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
 
-public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch> {
+public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch>{
 	@Override
 	protected CustomWitch getInnerEntity(World w) {
 		return new CustomWitch(w, this);
@@ -20,7 +20,6 @@ public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch
 
 	/**
 	 * アイテムを持ち変えるならTRUE
-	 * 
 	 * @return
 	 */
 	public boolean isChangeItem() {

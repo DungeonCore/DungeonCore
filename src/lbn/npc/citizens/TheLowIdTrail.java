@@ -4,7 +4,7 @@ import net.citizensnpcs.api.exception.NPCLoadException;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
 
-public class TheLowIdTrail extends Trait {
+public class TheLowIdTrail extends Trait{
 
 	private static final String THE_LOW_NPC_ID = "TheLowNpcId";
 

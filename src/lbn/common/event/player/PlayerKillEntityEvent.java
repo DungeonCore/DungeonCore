@@ -9,7 +9,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerKillEntityEvent extends PlayerEvent {
+public class PlayerKillEntityEvent extends PlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
 	LivingEntity entity;

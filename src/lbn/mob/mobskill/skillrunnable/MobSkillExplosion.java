@@ -6,10 +6,9 @@ import lbn.util.JavaUtil;
 
 import org.bukkit.entity.Entity;
 
-public class MobSkillExplosion extends MobSkillRunnable {
+public class MobSkillExplosion extends MobSkillRunnable{
 
 	int explosionSize;
-
 	public MobSkillExplosion(String data) {
 		super(data);
 		explosionSize = JavaUtil.getInt(data, 2);

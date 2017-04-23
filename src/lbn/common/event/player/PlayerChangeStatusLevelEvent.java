@@ -5,7 +5,7 @@ import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent {
+public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
 	int level;
@@ -28,7 +28,6 @@ public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent {
 	public LevelType getLevelType() {
 		return type;
 	}
-
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;

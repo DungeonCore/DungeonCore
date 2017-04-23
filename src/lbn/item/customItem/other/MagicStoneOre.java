@@ -13,18 +13,17 @@ import org.bukkit.Sound;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class MagicStoneOre extends AbstractItem implements RightClickItemable {
+public class MagicStoneOre extends AbstractItem implements RightClickItemable{
 
 	MagicStoneOreType type;
 
 	/**
 	 * MagicStoneOreTypeからインスタンスを取得する
-	 * 
 	 * @param type
 	 * @return
 	 */
 	public static ItemInterface getMagicStoneOre(MagicStoneOreType type) {
-		// 登録されている時はそれを取得
+		//登録されている時はそれを取得
 		ItemInterface customItemById = ItemManager.getCustomItemById("ore_" + type.toString().toLowerCase());
 		if (customItemById != null) {
 			return customItemById;
@@ -34,7 +33,6 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 
 	/**
 	 * 魔法鉱石の種類
-	 * 
 	 * @param type
 	 */
 	public MagicStoneOre(MagicStoneOreType type) {
@@ -45,7 +43,7 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 	public String getItemName() {
 		if (type == MagicStoneOreType.COAL_ORE) {
 			return "石炭";
-		} else if (type == MagicStoneOreType.LAPIS_ORE) {
+		} else if (type == MagicStoneOreType.LAPIS_ORE){
 			return "MP回復石";
 		}
 		return type.getJpName();
@@ -84,21 +82,21 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 	@Override
 	public String[] getDetail() {
 		if (type == MagicStoneOreType.COAL_ORE) {
-			return new String[] { "魔法鉱石を精錬するときに使います" };
+			return new String[]{"魔法鉱石を精錬するときに使います"};
 		} else if (type == MagicStoneOreType.GOLD_ORE) {
-			return new String[] { "精錬するとお金になります" };
+			return new String[]{"精錬するとお金になります"};
 		} else if (type == MagicStoneOreType.LAPIS_ORE) {
-			return new String[] { "右クリックでMPを20即時回復する" };
+			return new String[]{"右クリックでMPを20即時回復する"};
 		}
-		return new String[] { "精錬すると魔法石になります" };
+		return new String[]{"精錬すると魔法石になります"};
 	}
 
 	@Override
 	public void excuteOnRightClick(PlayerInteractEvent e) {
 		if (type == MagicStoneOreType.LAPIS_ORE) {
 			MagicPointManager.addMagicPoint(e.getPlayer(), 20);
-			e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.DRINK, 1, 5);
-			// アイテムを1つ消費する
+			e.getPlayer().playSound(e.getPlayer().getLocation() ,Sound.DRINK, 1, 5);
+			//アイテムを1つ消費する
 			ItemStackUtil.consumeItemInHand(e.getPlayer());
 		}
 	}

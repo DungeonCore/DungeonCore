@@ -11,7 +11,6 @@ public enum AIType {
 
 	/**
 	 * 名前からインスタンスを取得
-	 * 
 	 * @param name
 	 * @return
 	 */

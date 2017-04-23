@@ -18,35 +18,32 @@ import org.bukkit.craftbukkit.libs.com.google.gson.JsonParseException;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+
 public class TitleSender {
 	ArrayList<String[]> commandJobList = new ArrayList<String[]>();
 
-	public void setTitle(String text, ChatColor c, boolean isBold) {
-		commandJobList.add(new String[] { null, "title", MessageFormat
-				.format("{3}text:\"{0}\",color:\"{1}\",bold:\"{2}\"}", text, c.name().toLowerCase(), isBold, "{") });
+	public void setTitle(String text, ChatColor c, boolean isBold ) {
+		commandJobList.add(new String[]{null, "title", MessageFormat.format("{3}text:\"{0}\",color:\"{1}\",bold:\"{2}\"}", text, c.name().toLowerCase(), isBold, "{")});
 	}
 
-	public void setSubTitle(String text, ChatColor c, boolean isBold) {
-		commandJobList.add(new String[] { null, "subtitle", MessageFormat
-				.format("{3}text:\"{0}\",color:\"{1}\",bold:\"{2}\"}", text, c.name().toLowerCase(), isBold, "{") });
+	public void setSubTitle(String text, ChatColor c, boolean isBold ) {
+		commandJobList.add(new String[]{null, "subtitle", MessageFormat.format("{3}text:\"{0}\",color:\"{1}\",bold:\"{2}\"}", text, c.name().toLowerCase(), isBold, "{")});
 	}
 
 	public void setTimes(int fadeIn, int stay, int fadeOut) {
-		commandJobList.add(new String[] { null, "times", Integer.toString(fadeIn), Integer.toString(stay),
-				Integer.toString(fadeOut) });
+		commandJobList.add(new String[]{null, "times", Integer.toString(fadeIn), Integer.toString(stay), Integer.toString(fadeOut)});
 	}
 
 	public void setReset() {
-		commandJobList.add(new String[] { null, "reset" });
+		commandJobList.add(new String[]{null, "reset"});
 	}
 
 	public void setClear() {
-		commandJobList.add(new String[] { null, "clear" });
+		commandJobList.add(new String[]{null, "clear"});
 	}
 
 	/**
 	 * Titileを実行
-	 * 
 	 * @param p
 	 */
 	public void execute(Player p) {
@@ -56,9 +53,11 @@ public class TitleSender {
 		}
 	}
 
-	private void execute(ICommandListener paramICommandListener, Player p, String[] paramArrayOfString) {
-		EntityPlayer localEntityPlayer = ((CraftPlayer) p).getHandle();
-		EnumTitleAction localEnumTitleAction = EnumTitleAction.a(paramArrayOfString[1]);
+
+	  private void execute(ICommandListener paramICommandListener, Player p, String[] paramArrayOfString) {
+		EntityPlayer localEntityPlayer = ((CraftPlayer)p).getHandle();
+		EnumTitleAction localEnumTitleAction = EnumTitleAction
+				.a(paramArrayOfString[1]);
 		if ((localEnumTitleAction == EnumTitleAction.CLEAR) || (localEnumTitleAction == EnumTitleAction.RESET)) {
 			PacketPlayOutTitle localPacketPlayOutTitle1 = new PacketPlayOutTitle(localEnumTitleAction, null);
 			localEntityPlayer.playerConnection.sendPacket(localPacketPlayOutTitle1);
@@ -81,8 +80,7 @@ public class TitleSender {
 			localJsonParseException.printStackTrace();
 			return;
 		}
-		PacketPlayOutTitle localPacketPlayOutTitle2 = new PacketPlayOutTitle(localEnumTitleAction,
-				ChatComponentUtils.filterForDisplay(paramICommandListener, localIChatBaseComponent, localEntityPlayer));
+		PacketPlayOutTitle localPacketPlayOutTitle2 = new PacketPlayOutTitle(localEnumTitleAction, ChatComponentUtils.filterForDisplay(paramICommandListener, localIChatBaseComponent, localEntityPlayer));
 		localEntityPlayer.playerConnection.sendPacket(localPacketPlayOutTitle2);
 	}
 

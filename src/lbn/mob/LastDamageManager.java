@@ -66,57 +66,50 @@ public class LastDamageManager {
 
 	/**
 	 * Player以外のMobがダメージを与えたときのLastDamage情報を登録
-	 * 
-	 * @param target
-	 *            ダメージを受けたmob
-	 * @param damager
-	 *            ダメージを与えたmob
+	 * @param target ダメージを受けたmob
+	 * @param damager ダメージを与えたmob
 	 */
 	public static void registLastDamageByLivingEntityWithoutPlayer(LivingEntity target, LivingEntity damager) {
-		// ダメージを受けたのがPlayer, または, summonなら無視
+		//ダメージを受けたのがPlayer, または, summonなら無視
 		if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
 			return;
 		}
 
-		// ダメージを与えたmobの召喚主を取得
+		//ダメージを与えたmobの召喚主を取得
 		Player owner = SummonPlayerManager.getOwner(damager);
 		if (owner != null) {
-			// データをセット
-			addData(owner, LastDamageMethodType.fromAttackType(SummonPlayerManager.getItemType(damager), true),
-					target.getEntityId());
+			//データをセット
+			addData(owner, LastDamageMethodType.fromAttackType(SummonPlayerManager.getItemType(damager), true), target.getEntityId());
 		}
 	}
 
 	/**
 	 * Projectileがダメージを与えたときのLastDamage情報を登録
-	 * 
-	 * @param target
-	 *            ダメージを受けたmob
-	 * @param projectile
-	 *            ダメージを与えたProjectile
+	 * @param target  ダメージを受けたmob
+	 * @param projectile ダメージを与えたProjectile
 	 */
 	public static void registLastDamageByProjectile(LivingEntity target, Projectile projectile) {
-		// ダメージを受けたのがPlayer, または, summonなら無視
+		//ダメージを受けたのがPlayer, または, summonなら無視
 		if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
 			return;
 		}
 
-		// 撃ち主を取得
+		//撃ち主を取得
 		ProjectileSource shooter = projectile.getShooter();
 		if (shooter == null) {
 			return;
 		}
 
-		// 打ったのがEntityでないなら無視
+		//打ったのがEntityでないなら無視
 		if (!(shooter instanceof Entity)) {
 			return;
 		}
 		Entity shooterEntity = (Entity) shooter;
 
-		// 打ったのがPlayerの時
+		//打ったのがPlayerの時
 		if (shooterEntity.getType() == EntityType.PLAYER) {
 			addData((Player) shooter, LastDamageMethodType.BOW, target.getEntityId());
-			// 打ったのがPlayer以外の生き物の時
+		//打ったのがPlayer以外の生き物の時
 		} else if (shooterEntity.getType().isAlive()) {
 			registLastDamageByLivingEntityWithoutPlayer(target, (LivingEntity) shooter);
 		}
@@ -124,7 +117,6 @@ public class LastDamageManager {
 
 	/**
 	 * 最後に攻撃したPlayerを取得
-	 * 
 	 * @param e
 	 * @return
 	 */
@@ -134,7 +126,6 @@ public class LastDamageManager {
 
 	/**
 	 * 最後ダメージの攻撃方法を取得
-	 * 
 	 * @param e
 	 * @return
 	 */
@@ -154,7 +145,6 @@ public class LastDamageManager {
 
 	/**
 	 * EventからLastDamage情報を登録する
-	 * 
 	 * @param e
 	 */
 	public static void registLastDamageByEvent(EntityDamageByEntityEvent e) {
@@ -168,17 +158,17 @@ public class LastDamageManager {
 		if (!(e.getEntity().getType().isAlive())) {
 			return;
 		}
-		// ダメージを受けたMob
+		//ダメージを受けたMob
 		LivingEntity entityDamaged = (LivingEntity) e.getEntity();
 
-		// ダメージを与えた対象のEntityType
+		//ダメージを与えた対象のEntityType
 		EntityType type = damager.getType();
 
 		// ダメージを与えたのがPlayerによる攻撃のとき
 		if (type == EntityType.PLAYER) {
 			Player p = (Player) damager;
 			onPlayerDamage(p, entityDamaged);
-			// ダメージを与えたのが弓の時
+		//ダメージを与えたのが弓の時
 		} else if (type == EntityType.ARROW) {
 			LastDamageManager.registLastDamageByProjectile(entityDamaged, (Arrow) damager);
 		}
@@ -200,8 +190,7 @@ public class LastDamageManager {
 		} else if (itemInHand == null || itemInHand.getType() == Material.AIR) {
 			LastDamageManager.onDamage(entity, p, LastDamageMethodType.BARE_HAND);
 		} else {
-			// LastDamageManager.onDamage(entity, p,
-			// LastDamageMethodType.MELEE_ATTACK_WITH_OTHER);
+//			LastDamageManager.onDamage(entity, p, LastDamageMethodType.MELEE_ATTACK_WITH_OTHER);
 		}
 	}
 }

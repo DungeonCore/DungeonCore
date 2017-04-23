@@ -12,10 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class TmCommand implements CommandExecutor {
+public class TmCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 		if (paramArrayOfString.length == 0) {
 			return false;

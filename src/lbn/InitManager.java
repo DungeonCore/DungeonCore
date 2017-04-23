@@ -31,9 +31,8 @@ public class InitManager {
 
 	public void init() {
 		try {
-			HolographicDisplaysManager
-					.setUseHolographicDisplays(Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"));
-			// ホログラムを全て削除
+			HolographicDisplaysManager.setUseHolographicDisplays(Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"));
+			//ホログラムを全て削除
 			HolographicDisplaysManager.removeAllHologram();
 
 			ItemRegister.registItem();
@@ -48,13 +47,13 @@ public class InitManager {
 
 			NpcManager.init();
 
-			// スプレットシートを読み込む
+			//スプレットシートを読み込む
 			reloadSpreadSheet();
 
 			PlayerLastSaveType.load();
 			PlayerIODataManager.allLoad();
 
-			// Citizenのバグを治す
+			//Citizenのバグを治す
 			CitizenBugFixPatch.doPatch();
 
 			WeaponSkillFactory.allRegist();
@@ -81,6 +80,7 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "armor");
 
+
 		CommandChest.allReload();
 
 		SoundSheetRunnable.allReload();
@@ -89,13 +89,14 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "particle");
 
+
 		SpletSheetCommand.reloadSheet(null, "magicore");
 
 		SpletSheetCommand.reloadSheet(null, "food");
 
 		BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
 
-		// SystemSqlExecutor.execute();
+		//	SystemSqlExecutor.execute();
 		new LbnRunnable() {
 			@Override
 			public void run2() {

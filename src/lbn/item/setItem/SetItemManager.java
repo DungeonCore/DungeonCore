@@ -25,7 +25,7 @@ import com.google.common.collect.HashMultimap;
 /**
  * Set Itemの情報を管理するためのクラス
  */
-public class SetItemManager {
+public class SetItemManager{
 	/**
 	 * Playerが装備しているセットアイテム一覧
 	 */
@@ -38,16 +38,15 @@ public class SetItemManager {
 	public static void regist(SetItemInterface setitem) {
 		setItemMap.put(setitem.getName(), setitem);
 		for (SetItemPartable item : setitem.getFullSetItem().values()) {
-			// itemとして登録する
+			//itemとして登録する
 			ItemManager.registItem(item);
-			// partsとMaterialを登録
+			//partsとMaterialを登録
 			partsMaterialMap.put(item.getMaterial(), item.getItemSetPartsType());
 		}
 	}
 
 	/**
 	 * 名前からSetItemInterfaceを取得
-	 * 
 	 * @param name
 	 * @return
 	 */
@@ -57,7 +56,6 @@ public class SetItemManager {
 
 	/**
 	 * 対象のプレイヤーの全てのSetItem情報を取り除く
-	 * 
 	 * @param p
 	 */
 	public static void removeAll(Player p) {
@@ -69,7 +67,6 @@ public class SetItemManager {
 
 	/**
 	 * check無しでSetItemを取得する
-	 * 
 	 * @param p
 	 * @return
 	 */
@@ -79,59 +76,58 @@ public class SetItemManager {
 
 	/**
 	 * プレイヤーの全てのSetItemをチェックする
-	 * 
 	 * @param p
 	 * @return
 	 */
 	public static void updateAllSetItem(Player p) {
-		// 現在セットしているセットアイテム一覧
+		//現在セットしているセットアイテム一覧
 		HashMap<SetItemInterface, ItemStack[]> setedSetItem = new HashMap<SetItemInterface, ItemStack[]>();
 
 		HashSet<String> setitemCache = new HashSet<String>();
-		// 関連する全てのパーツを取得
+		//関連する全てのパーツを取得
 		for (SetItemPartsType partsType : SetItemPartsType.values()) {
-			// プレイヤーが装備しているアイテムを取得
+			//プレイヤーが装備しているアイテムを取得
 			ItemStack setItemPartsItem = partsType.getItemStackByParts(p);
 			if (setItemPartsItem == null) {
 				continue;
 			}
 
-			// アイテムからsetitem名を取得
+			//アイテムからsetitem名を取得
 			String setItemName = getSetItemName(setItemPartsItem);
-			// setItemでないならスキップ
+			//setItemでないならスキップ
 			if (setItemName == null) {
 				continue;
 			}
-			// すでにチェックを行っていればスキップ
+			//すでにチェックを行っていればスキップ
 			if (setitemCache.contains(setItemName)) {
 				continue;
 			}
 
-			// SetItem名からSetItemインスタンスを取得する
+			//SetItem名からSetItemインスタンスを取得する
 			SetItemInterface setItemInterface = getSetItem(setItemName);
 			if (setItemInterface != null) {
-				// checkを行う
+				//checkを行う
 				if (setItemInterface.isWearSetItem(p)) {
-					// もし正常にセットされていればリストに追加する
+					//もし正常にセットされていればリストに追加する
 					setedSetItem.put(setItemInterface, setItemInterface.getWearedSetItem(p));
 				}
-				// チェック済みに追加する
+				//チェック済みに追加する
 				setitemCache.add(setItemName);
 			} else {
-				// ありえないが念のため
+				//ありえないが念のため
 				new RuntimeException("setItem is not registed!!:" + setItemName).printStackTrace();
-				// チェック済みに追加する
+				//チェック済みに追加する
 				setitemCache.add(setItemName);
 				continue;
 			}
 		}
 
-		// 同じセットアイテムでも効果が違う場合があるので今まで装備していたものを一旦全て取り除く
+		//同じセットアイテムでも効果が違う場合があるので今まで装備していたものを一旦全て取り除く
 		for (SetItemInterface setItemInterface : playerUsingMap.removeAll(p.getUniqueId())) {
 			setItemInterface.endJob(p);
 		}
 
-		// 今装備しているものを全て追加する
+		//今装備しているものを全て追加する
 		for (Entry<SetItemInterface, ItemStack[]> entry : setedSetItem.entrySet()) {
 			entry.getKey().startJob(p, entry.getValue());
 		}
@@ -149,18 +145,18 @@ public class SetItemManager {
 				for (Entry<UUID, SetItemInterface> e : playerUsingMap.entries()) {
 					Player player = Bukkit.getPlayer(e.getKey());
 
-					// もしプレイヤーがいないなら何もしない
+					//もしプレイヤーがいないなら何もしない
 					if (player == null || !player.isOnline()) {
-						removePlayers.add(new Object[] { e.getKey(), e.getValue() });
+						removePlayers.add(new Object[]{e.getKey(), e.getValue()});
 						continue;
 					}
 
 					SetItemInterface instance = e.getValue();
-					// 効果を実行する
+					//効果を実行する
 					instance.doRutine(player, instance.getWearedSetItem(player));
 				}
 
-				// とりあえずmapから削除する
+				//とりあえずmapから削除する
 				for (Object[] pair : removePlayers) {
 					playerUsingMap.remove(pair[0], pair[1]);
 				}
@@ -182,14 +178,13 @@ public class SetItemManager {
 
 	/**
 	 * ItemStackからSetItem名を取得
-	 * 
 	 * @param item
 	 * @return
 	 */
 	public static String getSetItemName(ItemStack item) {
 		List<String> lore = ItemStackUtil.getLore(item);
 		for (String string : lore) {
-			// "SET:"が含まれていたらsetitemとして処理する
+			//"SET:"が含まれていたらsetitemとして処理する
 			if (string.contains("SET:")) {
 				return string.replace("SET:", "");
 			}
@@ -199,7 +194,6 @@ public class SetItemManager {
 
 	/**
 	 * ItemStackからSetItemを取得
-	 * 
 	 * @param item
 	 * @return
 	 */
@@ -208,14 +202,13 @@ public class SetItemManager {
 			return null;
 		}
 
-		// IDを取得
+		//IDを取得
 		String setItemName = getSetItemName(item);
 		return getSetItem(setItemName);
 	}
 
 	/**
 	 * もしSetItemならTRUE
-	 * 
 	 * @param item
 	 * @return
 	 */
@@ -223,7 +216,7 @@ public class SetItemManager {
 		if (item == null) {
 			return false;
 		}
-		// IDを取得
+		//IDを取得
 		String setItemName = getSetItemName(item);
 		return setItemMap.containsKey(setItemName);
 	}

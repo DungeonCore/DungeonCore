@@ -15,14 +15,13 @@ import org.bukkit.entity.Player;
 import com.google.common.collect.HashMultimap;
 
 /**
- * プレイヤーの追加ステータスを変更・取得を行う <br />
- * 追加ステータスの変更はAbilityを用いて行う <br />
- * 
+ * プレイヤーの追加ステータスを変更・取得を行う			<br />
+ * 追加ステータスの変更はAbilityを用いて行う				<br />
  * @see AbilityInterface
  *
  */
 public class PlayerStatusData {
-	// 実際のステータスデータ値をいれておくMap
+	//実際のステータスデータ値をいれておくMap
 	protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<PlayerStatusType, Double>();
 
 	/**
@@ -45,74 +44,71 @@ public class PlayerStatusData {
 
 	/**
 	 * 指定したAbilityをセットします
-	 * 
 	 * @param status
 	 * @param data
 	 */
 	public void addData(AbilityInterface ability) {
-		// 過去に登録されたAbilityを取得
+		//過去に登録されたAbilityを取得
 		AbilityInterface beforeAbility = idMap.get(ability.getId());
-		// もし過去に存在したAbilityがある場合は削除する
+		//もし過去に存在したAbilityがある場合は削除する
 		if (beforeAbility != null) {
 			unsafeDeapplayAbility(beforeAbility);
 		}
-		// 今のを適応させる
+		//今のを適応させる
 		unsafeApplayAbility(ability);
 
-		// データを残す
+		//データを残す
 		abilityType.put(ability.getAbilityType(), ability);
 		idMap.put(ability.getId(), ability);
 
-		// データを適応させる
+		//データを適応させる
 		applyAllAbility();
 	}
 
 	/**
 	 * 指定したAbilityを削除します
-	 * 
 	 * @param status
 	 * @param data
 	 */
 	public void removeData(AbilityInterface ability) {
-		// 過去に登録されたAbilityを取得
+		//過去に登録されたAbilityを取得
 		AbilityInterface beforeAbility = idMap.get(ability.getId());
-		// もし過去に存在したAbilityがない場合は無視する
+		//もし過去に存在したAbilityがない場合は無視する
 		if (beforeAbility == null) {
 			return;
 		}
-		// 前のを削除する
+		//前のを削除する
 		unsafeDeapplayAbility(beforeAbility);
 
-		// データを削除する
+		//データを削除する
 		abilityType.remove(beforeAbility.getAbilityType(), beforeAbility);
 		idMap.remove(beforeAbility.getId());
 
-		// データを適応させる
+		//データを適応させる
 		applyAllAbility();
 	}
 
 	/**
 	 * このメソッドではすでにAbilityが対応済みか、対応済みでないかチェックを行わないでAbilityを適応します。
 	 * 事前に適応されてないことを確認しないと効果が重複する可能性があります
-	 * 
 	 * @param ability
 	 */
 	private void unsafeApplayAbility(AbilityInterface ability) {
 		HashMap<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
-		// 適応効果がない場合は何もしない
+		//適応効果がない場合は何もしない
 		if (dataMap == null) {
 			return;
 		}
 
-		// 1つずつ効果を追加していく
+		//1つずつ効果を追加していく
 		for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
-			// もしすでにデータがある場合はそれに追加する
+			//もしすでにデータがある場合はそれに追加する
 			if (dataMapDouble.containsKey(entry.getKey())) {
-				// 割合で表している時はかけていく
+				//割合で表している時はかけていく
 				if (entry.getKey().isPercentage()) {
 					dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) * entry.getValue());
 				} else {
-					// 直接の値の時は加算する
+				//直接の値の時は加算する
 					dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
 				}
 			} else {
@@ -124,19 +120,18 @@ public class PlayerStatusData {
 	/**
 	 * このメソッドではすでにAbilityが対応済みか、対応済みでないかチェックを行わないでAbilityを削除します。
 	 * 事前に適応されてないことを確認しないと効果がついていないのにステータスが減少する可能性があります
-	 * 
 	 * @param ability
 	 */
 	private void unsafeDeapplayAbility(AbilityInterface ability) {
 		HashMap<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
-		// 適応効果がない場合は何もしない
+		//適応効果がない場合は何もしない
 		if (dataMap == null) {
 			return;
 		}
 
-		// 1つずつ効果を削除していく
+		//1つずつ効果を削除していく
 		for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
-			// 割合で表している時は割る
+			//割合で表している時は割る
 			if (entry.getKey().isPercentage()) {
 				dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) / entry.getValue());
 			} else {
@@ -147,7 +142,6 @@ public class PlayerStatusData {
 
 	/**
 	 * 指定したStatusデータを取得します
-	 * 
 	 * @param status
 	 * @return
 	 */
@@ -160,7 +154,6 @@ public class PlayerStatusData {
 
 	/**
 	 * プレイヤーデータを実際のPlayerに適応させる
-	 * 
 	 * @param p
 	 */
 	protected void applyAllAbility() {
@@ -172,7 +165,7 @@ public class PlayerStatusData {
 			onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP));
 		}
 
-		// マジックポイントの回復を開始する
+		//マジックポイントの回復を開始する
 		if (MagicPointManager.getMaxMagicPoint(onlinePlayer) > MagicPointManager.getNowMagicPoint(onlinePlayer)) {
 			MagicPointManager.startHealMagicPoint(onlinePlayer);
 		}
@@ -180,11 +173,10 @@ public class PlayerStatusData {
 
 	/**
 	 * 指定されたAbilityTypeを全て削除する
-	 * 
 	 * @param type
 	 */
 	public void clear(AbilityType type) {
-		// 全て取得し、1つずつ削除する
+		//全て取得し、1つずつ削除する
 		Set<AbilityInterface> set = new HashSet<AbilityInterface>(abilityType.get(type));
 		for (AbilityInterface abilityInterface : set) {
 			removeData(abilityInterface);
@@ -192,30 +184,27 @@ public class PlayerStatusData {
 	}
 
 	/**
-	 * 適応中のAbilityを取得する
-	 * 
+	 *適応中のAbilityを取得する
 	 * @param type
 	 * @return
 	 */
-	public Set<AbilityInterface> getApplyedAbility(AbilityType type) {
+	public Set<AbilityInterface> getApplyedAbility(AbilityType type){
 		return abilityType.get(type);
 	}
 
-	// /**
-	// * Abilityの整合性をチェック, 修正する
-	// */
-	// public void checkAbility() {
-	// //すべてクリアする
-	// clear(AbilityType.REINCARNATION_ABILITY);
-	// //転生済みの転生データを全て取得し1つずつ適応する
-	// List<OneReincarnationData> reincarnationData =
-	// player.getReincarnationData();
-	// for (OneReincarnationData oneReincarnationData : reincarnationData) {
-	// ReincarnationInterface reincarnationInterface =
-	// oneReincarnationData.getReincarnationInterface();
-	// if (oneReincarnationData instanceof AbstractAbilityReincarnation) {
-	//
-	// }
-	// }
-	// }
+//	/**
+//	 * Abilityの整合性をチェック, 修正する
+//	 */
+//	public void checkAbility() {
+//		//すべてクリアする
+//		clear(AbilityType.REINCARNATION_ABILITY);
+//		//転生済みの転生データを全て取得し1つずつ適応する
+//		List<OneReincarnationData> reincarnationData = player.getReincarnationData();
+//		for (OneReincarnationData oneReincarnationData : reincarnationData) {
+//			ReincarnationInterface reincarnationInterface = oneReincarnationData.getReincarnationInterface();
+//			if (oneReincarnationData instanceof AbstractAbilityReincarnation) {
+//
+//			}
+//		}
+//	}
 }

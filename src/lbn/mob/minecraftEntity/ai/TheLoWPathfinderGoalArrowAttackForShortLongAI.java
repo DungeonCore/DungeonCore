@@ -11,8 +11,8 @@ import net.minecraft.server.v1_8_R1.PathfinderGoal;
 /**
  * 元の仕様：距離が引数のf以上離れていたら近づく、fより近かったら弓を打つ
  *
- * 近接攻撃範囲^2+5なら無視 距離が16から22の場合は近づく
- * 
+ * 近接攻撃範囲^2+5なら無視
+ * 距離が16から22の場合は近づく
  * @author KENSUKE
  *
  */
@@ -30,13 +30,11 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 
 	protected float nearAttackRange = 3 * 3;
 
-	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, float f,
-			LbnMobTag tag) {
+	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, float f, LbnMobTag tag) {
 		this(irangedentity, d0, i, i, f, tag);
 	}
 
-	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, int j, float f,
-			LbnMobTag tag) {
+	public TheLoWPathfinderGoalArrowAttackForShortLongAI(IRangedEntity irangedentity, double d0, int i, int j, float f, LbnMobTag tag) {
 		this.d = -1;
 		if (!(irangedentity instanceof EntityLiving)) {
 			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
@@ -66,7 +64,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 		} else {
 			this.c = entityliving;
 			double d0 = this.a.e(this.c.locX, this.c.getBoundingBox().b, this.c.locZ);
-			// 近距離攻撃^2+5より近い場合は無視する
+			//近距離攻撃^2+5より近い場合は無視する
 			return d0 >= nearAttackRange + 5;
 		}
 	}
@@ -94,7 +92,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 		// 敵との距離が16マス以下の場合はその場にいる
 		if (d0 <= 16 * 16) {
 			this.a.getNavigation().n(); // ターゲットを消す
-			// 距離が16 ~ 22の時は近づく
+		//距離が16 ~ 22の時は近づく
 		} else if (d0 <= 22 * 22) {
 			this.a.getNavigation().a((Entity) this.c, this.e);
 		} else {
@@ -105,7 +103,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 		float f;
 
 		if (--this.d == 0) {
-			// 一定距離以上離れていたら打たない
+			//一定距離以上離れていたら打たない
 			if (d0 > (double) 22 * 22 || !flag) {
 				return;
 			}
@@ -126,10 +124,9 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 
 	/**
 	 * 一秒間に何発打つかセットする
-	 * 
 	 * @param val
 	 */
 	public void setShotTerm(int val) {
-		shotParSecound = (int) (20.0 / val);
+		shotParSecound = (int)(20.0 / val);
 	}
 }

@@ -6,8 +6,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public enum GalionEditReason {
-	mob_drop(true), penalty(true), consume_shop(true), consume_strength(true), command(true), get_money_item(
-			true), quest_reword(true), system(false);
+	mob_drop(true),
+	penalty(true),
+	consume_shop(true),
+	consume_strength(true),
+	command(true),
+	get_money_item(true),
+	quest_reword(true),
+	system(false);
 
 	boolean isPrintMessageLog;
 
@@ -21,7 +27,6 @@ public enum GalionEditReason {
 
 	/**
 	 * お金の取得・消費のメッセージをPlayerに表示する
-	 * 
 	 * @param p
 	 * @param galions
 	 */
@@ -46,7 +51,7 @@ public enum GalionEditReason {
 				Message.sendMessage(p, ChatColor.YELLOW + "{0} Galions 失った", galions);
 			}
 		} else {
-			Message.sendMessage(p, ChatColor.YELLOW + "{0} Galions 入手した", galions);
+			Message.sendMessage(p,  ChatColor.YELLOW + "{0} Galions 入手した", galions);
 		}
 
 	}

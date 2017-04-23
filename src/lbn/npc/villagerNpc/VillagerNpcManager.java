@@ -27,7 +27,6 @@ public class VillagerNpcManager {
 
 	/**
 	 * NPCを登録する
-	 * 
 	 * @param villagerNpc
 	 */
 	public static void regist(VillagerNpc villagerNpc) {
@@ -41,35 +40,33 @@ public class VillagerNpcManager {
 
 	/**
 	 * NPCをスポーンする
-	 * 
 	 * @param villagerNpc
 	 */
 	public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
 		try {
-			// CitizenNPC作成
-			NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(), villagerNpc.getName());
+			//CitizenNPC作成
+			NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(),villagerNpc.getName());
 			createNPC.addTrait(TheLowIdTrail.fromId(villagerNpc.getId()));
 
 			new BukkitRunnable() {
 				@Override
 				public void run() {
-					// 振り向くようにする
-					LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class)
-							: new LookClose();
+					//振り向くようにする
+					LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class) : new LookClose();
 					paramTrait.lookClose(true);
 					createNPC.addTrait(paramTrait);
 				}
 			}.runTaskLater(Main.plugin, 20 * 1);
 
 			if (loc != null && loc.getWorld() != null) {
-				// チャンクがロードされてなければロードする
+				//チャンクがロードされてなければロードする
 				if (!loc.getChunk().isLoaded()) {
-					// チャンクをロードする
+					//チャンクをロードする
 					loc.getChunk().load(true);
 				}
 
 				if (!createNPC.isSpawned()) {
-					// スポーンさせる
+					//スポーンさせる
 					createNPC.spawn(loc);
 				}
 			}
@@ -81,7 +78,6 @@ public class VillagerNpcManager {
 
 	/**
 	 * EntityからVillagerNpcを取得
-	 * 
 	 * @param entity
 	 * @return
 	 */

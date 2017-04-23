@@ -35,7 +35,6 @@ public class Buyer {
 
 	/**
 	 * Buyer用のクラフトテーブルでは通常のクラフトは行えない
-	 * 
 	 * @param event
 	 */
 	public static void onCraftItem(PrepareItemCraftEvent event) {
@@ -45,12 +44,12 @@ public class Buyer {
 		}
 
 		ItemStack result = event.getRecipe().getResult();
-		// 生成されたアイテムがお金なら何もしない
+		//生成されたアイテムがお金なら何もしない
 		if (GalionItem.getInstance(0).isThisItem(result)) {
 			return;
 		}
 
-		// もし別なアイテムが生成されたなら削除する
+		//もし別なアイテムが生成されたなら削除する
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -62,7 +61,6 @@ public class Buyer {
 
 	/**
 	 * 材料欄をクリックした場合はお金を計算し、resultをクリックした場合は全ての材料欄のアイテムを削除する
-	 * 
 	 * @param event
 	 */
 	public static void onInteractInv(InventoryInteractEvent event) {
@@ -74,17 +72,16 @@ public class Buyer {
 		InventoryView view = event.getView();
 		Inventory topInventory = view.getTopInventory();
 
-		// 見ているものがクラフティングテーブルでないことは起こり得ないはず
+		//見ているものがクラフティングテーブルでないことは起こり得ないはず
 		if (topInventory.getType() != InventoryType.WORKBENCH) {
-			// 強制的にインベントリを閉じる
+			//強制的にインベントリを閉じる
 			CraftTableViewManager.forceCloseInventory(p);
-			// 起こり得ないのでエラーにする
-			new LbnRuntimeException("crafting table manager system is dont work!! type:" + topInventory.getType())
-					.printStackTrace();
+			//起こり得ないのでエラーにする
+			new LbnRuntimeException("crafting table manager system is dont work!! type:" + topInventory.getType()).printStackTrace();
 			return;
 		}
 
-		// クリック以外は認めない
+		//クリック以外は認めない
 		if (!(event instanceof InventoryClickEvent)) {
 			event.setCancelled(true);
 			return;
@@ -93,7 +90,7 @@ public class Buyer {
 		InventoryClickEvent e = (InventoryClickEvent) event;
 
 		CraftingInventory crafting = (CraftingInventory) topInventory;
-		// お金を計算し、セットする
+		//お金を計算し、セットする
 		if (1 <= e.getRawSlot() && e.getRawSlot() <= 9) {
 			setGalions(crafting, e);
 		} else if (e.getSlotType() == SlotType.RESULT) {
@@ -106,21 +103,21 @@ public class Buyer {
 	}
 
 	private static void allClearMaterial(CraftingInventory crafting, InventoryClickEvent e) {
-		// 生成されたアイテムがお金なら何もしない
+		//生成されたアイテムがお金なら何もしない
 		if (!GalionItem.getInstance(0).isThisItem(crafting.getResult())) {
 			return;
 		}
 
-		// マテリアルリスト
+		//マテリアルリスト
 		ArrayList<ItemStack> deleteList = new ArrayList<ItemStack>();
 
-		// setGalionsが必要か？
+		//setGalionsが必要か？
 		ItemStack[] matrix = crafting.getMatrix();
 		for (ItemStack itemStack : matrix) {
 			ItemInterface customItem = ItemManager.getCustomItem(itemStack);
-			// カスタムアイテムでないなら削除する
+			//カスタムアイテムでないなら削除する
 			if (customItem == null) {
-				// 削除する
+				//削除する
 				deleteList.add(itemStack);
 				continue;
 			}
@@ -132,7 +129,7 @@ public class Buyer {
 			}
 		}
 
-		// 素材を削除する
+		//素材を削除する
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -145,14 +142,13 @@ public class Buyer {
 
 	/**
 	 * 材料をすべて調べてGalionsをセットする
-	 * 
 	 * @param crafting
 	 * @param e
 	 */
 	private static void setGalions(CraftingInventory crafting, InventoryClickEvent e) {
 		new BukkitRunnable() {
 
-			// 押した直後にアイテムを検出する
+			//押した直後にアイテムを検出する
 			@Override
 			public void run() {
 				ItemStack[] matrix = crafting.getMatrix();
@@ -161,7 +157,7 @@ public class Buyer {
 
 				int galions = 0;
 				for (ItemStack itemStack : matrix) {
-					// アイテムが設置されていればTRUE
+					//アイテムが設置されていればTRUE
 					if (itemStack != null && itemStack.getType() != Material.AIR) {
 						emptyItemFlg = false;
 					} else {
@@ -170,7 +166,7 @@ public class Buyer {
 
 					ItemInterface customItem = ItemManager.getCustomItem(itemStack);
 
-					// カスタムアイテムでないなら0Galionsなので無視する
+					//カスタムアイテムでないなら0Galionsなので無視する
 					if (customItem == null) {
 						continue;
 					}
@@ -179,15 +175,15 @@ public class Buyer {
 					if (buyPrice == -1) {
 						continue;
 					}
-					// TODO バグで１つしかアイテムが減らないことがあるので要注意。その場合は下の処理をコメントアウトする
+					//TODO バグで１つしかアイテムが減らないことがあるので要注意。その場合は下の処理をコメントアウトする
 					buyPrice *= itemStack.getAmount();
 					galions += buyPrice;
 				}
 
-				// 売上が0より大きいならアイテムをセットする
+				//売上が0より大きいならアイテムをセットする
 				if (galions >= 0 && !emptyItemFlg) {
 					crafting.setResult(GalionItem.getInstance(galions).getItem());
-					((Player) e.getWhoClicked()).updateInventory();
+					((Player)e.getWhoClicked()).updateInventory();
 				}
 
 			}

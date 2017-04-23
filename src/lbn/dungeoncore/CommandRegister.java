@@ -113,7 +113,7 @@ public class CommandRegister {
 		new CustomSetBlockCommand().regist();
 	}
 
-	private static void registCommand(CommandExecutor instance, String name) {
+	private  static void registCommand(CommandExecutor instance, String name) {
 		PluginCommand command = Main.plugin.getCommand(name);
 		command.setExecutor(instance);
 		if (instance instanceof TabCompleter) {

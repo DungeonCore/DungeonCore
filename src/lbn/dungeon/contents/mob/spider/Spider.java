@@ -21,12 +21,14 @@ public class Spider extends AbstractSpider {
 	}
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 
 	}
 
 	@Override
-	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
+	public void onDamage(LivingEntity mob, Entity damager,
+			EntityDamageByEntityEvent e) {
 
 	}
 

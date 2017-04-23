@@ -15,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class SwordItemOld extends AbstractAttackItem_Old implements MeleeAttackItemable {
+public abstract class SwordItemOld extends AbstractAttackItem_Old implements MeleeAttackItemable{
 	public int rank() {
 		return 0;
 	}
@@ -25,7 +25,7 @@ public abstract class SwordItemOld extends AbstractAttackItem_Old implements Mel
 		super.excuteOnRightClick(e);
 		if (!e.getPlayer().isSneaking()) {
 			excuteOnRightClick2(e);
-			// スキルを発動
+			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
 	}
@@ -35,13 +35,11 @@ public abstract class SwordItemOld extends AbstractAttackItem_Old implements Mel
 		return ItemStackUtil.getVanillaDamage(getMaterial());
 	}
 
-	abstract protected void excuteOnMeleeAttack2(ItemStack item, LivingEntity owner, LivingEntity target,
-			EntityDamageByEntityEvent e);
+	abstract protected void excuteOnMeleeAttack2(ItemStack item, LivingEntity owner, LivingEntity target, EntityDamageByEntityEvent e);
 
 	@Override
-	public void excuteOnMeleeAttack(ItemStack item, LivingEntity owner, LivingEntity target,
-			EntityDamageByEntityEvent e) {
-		// プレイヤーでないなら関係ない
+	public void excuteOnMeleeAttack(ItemStack item, LivingEntity owner, LivingEntity target, EntityDamageByEntityEvent e) {
+		//プレイヤーでないなら関係ない
 		if (owner.getType() != EntityType.PLAYER) {
 			excuteOnMeleeAttack2(item, owner, target, e);
 			return;
@@ -55,12 +53,12 @@ public abstract class SwordItemOld extends AbstractAttackItem_Old implements Mel
 		}
 
 		if (LivingEntityUtil.isEnemy(target)) {
-			// eventを呼ぶ
-			// 相殺されるはず(e.getDamage() - getNormalDamage() )
+			//eventを呼ぶ
+			//相殺されるはず(e.getDamage() - getNormalDamage() )
 			PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent(player, target, item,
 					e.getDamage() - getMaterialDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
 			playerCombatEntityEvent.callEvent();
-			// ダメージの計算を行う
+			//ダメージの計算を行う
 			e.setDamage(playerCombatEntityEvent.getDamage());
 		} else {
 			e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());

@@ -7,9 +7,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public abstract class TheLowPlayerEvent extends Event {
+public abstract class TheLowPlayerEvent extends Event{
 	TheLowPlayer player;
-
 	public TheLowPlayerEvent(TheLowPlayer player) {
 		this.player = player;
 	}

@@ -10,7 +10,7 @@ import lbn.quest.Quest;
 
 import org.bukkit.entity.Player;
 
-public class NullQuest implements Quest {
+public class NullQuest implements Quest{
 
 	String id;
 
@@ -30,7 +30,7 @@ public class NullQuest implements Quest {
 
 	@Override
 	public String[] getQuestDetail() {
-		return new String[] { "クエストが存在しません" };
+		return new String[]{"クエストが存在しません"};
 	}
 
 	@Override

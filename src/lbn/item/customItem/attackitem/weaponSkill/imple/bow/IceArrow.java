@@ -17,7 +17,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class IceArrow extends WeaponSkillWithProjectile {
+public class IceArrow extends WeaponSkillWithProjectile{
 
 	public IceArrow() {
 		super(ItemType.BOW);
@@ -29,8 +29,7 @@ public class IceArrow extends WeaponSkillWithProjectile {
 	}
 
 	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner,
-			LivingEntity target) {
+	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
 		Stun.addStun(target, (int) (20 * getData(0)));
 		Particles.runParticle(target.getEyeLocation(), ParticleType.snowballpoof, 100);
 	}

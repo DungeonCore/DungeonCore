@@ -8,7 +8,7 @@ import lbn.item.system.strength.StrengthOperator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class StrengthBaseJade extends StrengthBaseItem {
+public class StrengthBaseJade extends StrengthBaseItem{
 	@Override
 	public String getItemName() {
 		return "魔法石ジェイドの欠片";

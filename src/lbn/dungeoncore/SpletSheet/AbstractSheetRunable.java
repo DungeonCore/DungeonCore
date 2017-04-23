@@ -85,14 +85,13 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
 	/**
 	 * スプレットシート接続のセッション用インスタンスを作成する
-	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	private List<LbnSpreadSheet> getInstanceList() throws Exception {
 		ArrayList<LbnSpreadSheet> instanceList = new ArrayList<LbnSpreadSheet>();
 		instanceList.add(LbnSpreadSheet.getInstance(getSheetName()));
-		// 他の参照先がある場合はそちらのインスタンスも作成する
+		//他の参照先がある場合はそちらのインスタンスも作成する
 		if (hasSecoundSheet()) {
 			instanceList.add(LbnSpreadSheet.getInstance(THE_LOW_SHEET2, getSheetName()));
 		}

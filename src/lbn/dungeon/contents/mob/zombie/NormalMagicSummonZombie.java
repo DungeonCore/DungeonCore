@@ -2,7 +2,7 @@ package lbn.dungeon.contents.mob.zombie;
 
 import lbn.player.ItemType;
 
-public class NormalMagicSummonZombie extends AbstractSummonZombie {
+public class NormalMagicSummonZombie extends AbstractSummonZombie{
 	int availableLevel;
 	int strengthLevel;
 

@@ -11,7 +11,6 @@ public interface CustomNpcInterface {
 
 	/**
 	 * 右クリック時の処理
-	 * 
 	 * @param e
 	 */
 	public abstract void onNPCRightClickEvent(NPCRightClickEvent e);
@@ -20,7 +19,6 @@ public interface CustomNpcInterface {
 
 	/**
 	 * 左クリック時の処理
-	 * 
 	 * @param e
 	 */
 	public abstract void onNPCLeftClickEvent(NPCLeftClickEvent e);
@@ -33,14 +31,12 @@ public interface CustomNpcInterface {
 
 	/**
 	 * NPCを取得する
-	 * 
 	 * @return
 	 */
 	public NPC getNpc();
 
 	/**
 	 * NPCをセットする
-	 * 
 	 * @param npc
 	 */
 	public void setNpc(NPC npc);

@@ -11,7 +11,7 @@ import lbn.util.LivingEntityUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 
-public class MagicStoneJade extends CombatSlot {
+public class MagicStoneJade extends CombatSlot{
 
 	@Override
 	public String getSlotName() {
@@ -50,8 +50,7 @@ public class MagicStoneJade extends CombatSlot {
 			particleData.run(e.getPlayer().getLocation().add(0, 2, 0));
 		}
 
-		e.setDamage(e.getDamage() * 1.2);
-		;
+		e.setDamage(e.getDamage() * 1.2);;
 	}
 
 }

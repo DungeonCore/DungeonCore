@@ -13,9 +13,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomShop extends Shop {
+public class CustomShop extends Shop{
 	public CustomShop(String villagerID) {
-		// dataからLocationを取得しショップを作成する
+		//dataからLocationを取得しショップを作成する
 		VillagerNpc villager = VillagerNpcManager.getVillagerNpcById(villagerID);
 		String data = villager.getData();
 		Location locationByString = AbstractSheetRunable.getLocationByString(data);
@@ -60,20 +60,17 @@ public class CustomShop extends Shop {
 
 	@Override
 	public ShopItem fromShopItem(ItemStack shopItem, boolean error) {
-		// shopid 取得
+		//shopid 取得
 		String shopItemId = CustomShopItem.getShopItemId(shopItem);
-		// IDがなけばれ通常のshopと同じ扱いにする
+		//IDがなけばれ通常のshopと同じ扱いにする
 		if (shopItemId == null) {
-			// new LbnRuntimeException("invaild shop item id :" +
-			// ItemStackUtil.getLore(shopItem) + ", shop name:" +
-			// getName()).printStackTrace();
+//			new LbnRuntimeException("invaild shop item id :" + ItemStackUtil.getLore(shopItem) + ", shop name:" + getName()).printStackTrace();
 			return super.fromShopItem(shopItem, error);
 		}
 
 		ItemStack templateByShopId = getTemplateByShopId(shopItemId);
 		if (templateByShopId == null) {
-			new LbnRuntimeException("can not found template item. id:" + shopItemId + ", shop name:" + getName())
-					.printStackTrace();
+			new LbnRuntimeException("can not found template item. id:" + shopItemId + ", shop name:" + getName()).printStackTrace();
 			return super.fromShopItem(shopItem, error);
 		}
 		return CustomShopItem.fromTemplate(templateByShopId);

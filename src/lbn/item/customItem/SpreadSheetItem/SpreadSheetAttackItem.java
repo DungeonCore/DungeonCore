@@ -20,17 +20,15 @@ import lbn.util.JavaUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class SpreadSheetAttackItem extends AbstractAttackItem
-		implements StrengthChangeItemable, CraftItemable {
-	protected SpreadSheetWeaponData data;
 
+public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable{
+	protected SpreadSheetWeaponData data;
 	public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
 		this.data = data;
 	}
 
 	/**
-	 * 同じレベルのMobを倒すのにかかる攻撃回数
-	 * 
+	 *	同じレベルのMobを倒すのにかかる攻撃回数
 	 * @return
 	 */
 	public double getCombatLoad() {
@@ -69,9 +67,8 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 	@Override
 	public ItemLoreToken getStandardLoreToken() {
 		ItemLoreToken loreToken = super.getStandardLoreToken();
-		// 通常ダメージ
-		loreToken
-				.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(getAttackItemDamage(0) - getMaterialDamage(), 2)));
+		//通常ダメージ
+		loreToken.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(getAttackItemDamage(0) - getMaterialDamage(), 2)));
 		return loreToken;
 	}
 
@@ -87,7 +84,6 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 
 	/**
 	 * クリティカル時、減算される戦闘負荷量
-	 * 
 	 * @return
 	 */
 	public double getMinusCombatLoadForCritical() {
@@ -103,8 +99,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 		}
 
 		double normalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad(), getAvailableLevel());
-		double criticalDamage = AttackDamageValue
-				.getAttackDamageValue(getCombatLoad() - getMinusCombatLoadForCritical(), getAvailableLevel());
+		double criticalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad() - getMinusCombatLoadForCritical() , getAvailableLevel());
 
 		if (criticalDamage > normalDamage) {
 			loreToken.addLore(LoreLine.getLoreLine("クリティカル追加ダメージ", JavaUtil.round(criticalDamage - normalDamage, 2)));
@@ -113,7 +108,6 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 
 	/**
 	 * クリティカル確率
-	 * 
 	 * @param level
 	 * @return
 	 */
@@ -173,7 +167,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 	public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
 		if (!event.isSuccess()) {
 			int level = event.getNextLevel();
-			// +6までの強化の時は失敗しても+0にしないで元にもどす
+			//+6までの強化の時は失敗しても+0にしないで元にもどす
 			if (level <= 6) {
 				ItemStack item = event.getItem();
 				StrengthOperator.updateLore(item, Math.max(0, level - 1));
@@ -191,9 +185,8 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 	@Override
 	public TheLowCraftRecipeInterface getCraftRecipe() {
 		if (recipe == null) {
-			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface
-					.createNewInstance(data.getMainCraftMaterial());
-			// 素材を追加する
+			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
+			//素材を追加する
 			for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
 				recipe.addMaterial(entry.getKey(), entry.getValue());
 			}
@@ -201,5 +194,6 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem
 		}
 		return recipe;
 	}
+
 
 }

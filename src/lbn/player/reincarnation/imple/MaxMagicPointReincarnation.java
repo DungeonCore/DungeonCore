@@ -4,7 +4,7 @@ import lbn.api.PlayerStatusType;
 
 import org.bukkit.Material;
 
-public class MaxMagicPointReincarnation extends AbstractAbilityReincarnation {
+public class MaxMagicPointReincarnation extends AbstractAbilityReincarnation{
 
 	@Override
 	public String getTitle() {

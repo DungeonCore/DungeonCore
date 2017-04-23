@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public abstract class AbstractCombinationMob<K extends LivingEntity> extends AbstractMob<K> {
+public abstract class AbstractCombinationMob<K extends LivingEntity> extends AbstractMob<K>{
 
 	@Override
 	public boolean isRiding() {
@@ -51,8 +51,8 @@ public abstract class AbstractCombinationMob<K extends LivingEntity> extends Abs
 	@Override
 	protected K spawnPrivate(Location loc) {
 		Entity spawnPrivate = getBaseMob().spawn(loc);
-		onSpawn((LivingEntity) spawnPrivate);
-		// spawnPrivate.setCustomName(getBaseMob().getName());
+		onSpawn((LivingEntity)spawnPrivate);
+//		spawnPrivate.setCustomName(getBaseMob().getName());
 		return (K) spawnPrivate;
 	}
 

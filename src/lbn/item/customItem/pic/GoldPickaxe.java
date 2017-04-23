@@ -9,7 +9,7 @@ import lbn.player.magicstoneOre.MagicStoneOreType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class GoldPickaxe extends AbstractPickaxe {
+public class GoldPickaxe extends AbstractPickaxe{
 
 	public GoldPickaxe(int level) {
 		super(level);
@@ -38,6 +38,7 @@ public class GoldPickaxe extends AbstractPickaxe {
 		}
 	}
 
+
 	@Override
 	public short getMaxExp() {
 		return 40;
@@ -63,7 +64,7 @@ public class GoldPickaxe extends AbstractPickaxe {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "鉱石を採掘するとレベルが上がります", "石炭鉱石・鉄鉱石・ラピス鉱石を", "採掘できます" };
+		return new String[]{"鉱石を採掘するとレベルが上がります", "石炭鉱石・鉄鉱石・ラピス鉱石を", "採掘できます"};
 	}
 
 	@Override
@@ -76,13 +77,11 @@ public class GoldPickaxe extends AbstractPickaxe {
 		return "golden_pickaxe";
 	}
 
-	// @Override
-	// protected ItemStack getItemStackBase() {
-	// return ItemStackUtil.getItemStackByCommand("give @p
-	// minecraft:gold_pickaxe 1 0
-	// {Unbreakable:1,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\"]}");
-	// }
-	public List<ItemInterface> getAllLevelPick() {
+//	@Override
+//	protected ItemStack getItemStackBase() {
+//		return ItemStackUtil.getItemStackByCommand("give @p minecraft:gold_pickaxe 1 0 {Unbreakable:1,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\"]}");
+//	}
+	public List<ItemInterface> getAllLevelPick(){
 		ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
 		for (int i = 1; i <= 10; i++) {
 			woodPicks.add(new GoldPickaxe(i));

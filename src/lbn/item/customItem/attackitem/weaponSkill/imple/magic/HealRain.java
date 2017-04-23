@@ -15,12 +15,12 @@ import lbn.player.ItemType;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
 
-public class HealRain extends WeaponSkillForOneType {
+public class HealRain extends WeaponSkillForOneType{
 
 	public HealRain() {
 		super(ItemType.MAGIC);
 	}
-
+	
 	@Override
 	public String getId() {
 		return "skill5";
@@ -34,21 +34,21 @@ public class HealRain extends WeaponSkillForOneType {
 		new LbnRunnable() {
 			@Override
 			public void run2() {
-				// 周囲の味方を回復させる
+				//周囲の味方を回復させる
 				double radius = getData(0);
 				List<Entity> nearbyEntities = p.getNearbyEntities(radius, radius, radius);
 				for (Entity entity : nearbyEntities) {
 					if (LivingEntityUtil.isFriendship(entity) && entity.getType().isAlive()) {
-						LivingEntityUtil.addHealth((LivingEntity) entity, getData(2) * 2);
+						LivingEntityUtil.addHealth((LivingEntity) entity, getData(2)*2);
 					}
 					particleData.run(entity.getLocation().add(0, 2, 0));
 				}
 
-				// 自分を回復
-				LivingEntityUtil.addHealth(p, getData(2) * 2);
+				//自分を回復
+				LivingEntityUtil.addHealth(p, getData(2)*2);
 				particleData.run(p.getLocation().add(0, 1, 0));
 
-				// 10秒たったら終わりにする
+				//10秒たったら終わりにする
 				if (getAgeTick() >= 20 * getData(3)) {
 					cancel();
 				}

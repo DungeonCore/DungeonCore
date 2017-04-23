@@ -27,7 +27,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class MagicItem extends SpreadSheetAttackItem implements RightClickItemable, LeftClickItemable {
+public class MagicItem extends SpreadSheetAttackItem implements RightClickItemable, LeftClickItemable{
 
 	public MagicItem(SpreadSheetWeaponData data) {
 		super(data);
@@ -37,7 +37,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 
 	@Override
 	final public void excuteOnLeftClick(PlayerInteractEvent e) {
-		// レベルなどを確認する
+		//レベルなどを確認する
 		e.setCancelled(true);
 		Player player = e.getPlayer();
 		ItemStack item = player.getItemInHand();
@@ -45,7 +45,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 			sendNotAvailableMessage(player);
 			return;
 		}
-		// 魔法を実行
+		//魔法を実行
 		excuteMagic(e, player, item, getLeftClickMagic(item));
 	}
 
@@ -59,42 +59,41 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 			e.setCancelled(true);
 			return;
 		}
-		// スキルを発動
+		//スキルを発動
 		WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 	}
 
 	/**
 	 * 指定された魔法を発動する
-	 * 
 	 * @param e
 	 * @param player
 	 * @param item
 	 * @param magic
 	 */
 	protected void excuteMagic(PlayerInteractEvent e, Player player, ItemStack item, MagicExcuteable magic) {
-		// 魔法が存在しないなら何もしない
+		//魔法が存在しないなら何もしない
 		if (magic == null) {
 			return;
 		}
-		// クールタイムを確認
+		//クールタイムを確認
 		CooltimeManager cooltime = new CooltimeManager(e, magic);
-		// クールタイム中ならメッセージを表示
+		//クールタイム中ならメッセージを表示
 		if (!cooltime.canUse()) {
 			if (magic.isShowMessageIfUnderCooltime()) {
 				cooltime.sendCooltimeMessage(player);
 			}
 			return;
 		}
-		// マジックポイントを確認し足りなければメッセージを表示
+		//マジックポイントを確認し足りなければメッセージを表示
 		if (!hasMagicPoint(player, magic.getNeedMagicPoint())) {
 			Message.sendMessage(player, "マジックポイントが不足しています。");
 			return;
 		}
-		// 魔法を発動
+		//魔法を発動
 		magic.excuteMagic(player, e);
-		// クールタイムをつける
+		//クールタイムをつける
 		cooltime.setCoolTime();
-		// マジックポイントを消費する
+		//マジックポイントを消費する
 		MagicPointManager.consumeMagicPoint(player, magic.getNeedMagicPoint());
 
 		PlayerItemDamageEvent event = new PlayerItemDamageEvent(player, item, 1);
@@ -108,7 +107,6 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 
 	/**
 	 * 必要のマジックポイントを持っているか
-	 * 
 	 * @param p
 	 * @param needMagicPoint
 	 * @return
@@ -139,14 +137,10 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 		return new FallingBlockMagicExcutor(item, getId() + "_lc") {
 			@Override
 			protected DamagedFallingBlockForPlayer getDamagedFallingBlock(Player p, PlayerInteractEvent e) {
-				DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p,
-						itemStackData.getMaterial(), item, getAttackItemDamage(StrengthOperator.getLevel(item)),
-						itemStackData.getData()) {
-					ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8,
-							0.8);
+				DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p, itemStackData.getMaterial(), item, getAttackItemDamage(StrengthOperator.getLevel(item)), itemStackData.getData()){
+					ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8, 0.8);
 
 					ParticleData particleData2 = new ParticleData(ParticleType.crit, 40);
-
 					@Override
 					public void tickRutine(int count) {
 						if (count % 2 == 0) {
@@ -179,15 +173,15 @@ class MagicAttackData {
 	static SoundData lv0Sound = new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3);
 	static SoundData lv10Sound = new SoundData(Sound.GLASS, 1, (float) 0.1);
 	static SoundData lv20Sound = new SoundData(Sound.IRONGOLEM_HIT, 1, (float) 0.7);
-	static SoundData lv30Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1);
+	static 	SoundData lv30Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1);
 	static SoundData lv40Sound = new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1);
-	static SoundData lv50Sound = new SoundData(Sound.GLASS, 1, (float) 0.1);
-	static SoundData lv60Sound = new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1);
-	static SoundData lv70Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
-	static SoundData lv80Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
+	static 	SoundData lv50Sound = new SoundData(Sound.GLASS, 1, (float) 0.1);
+	static 	SoundData lv60Sound = new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1);
+	static 	SoundData lv70Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
+	static 	SoundData lv80Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
 
 	public static SoundData getSoundData(int level) {
-		switch ((int) (level / 10)) {
+		switch ((int)(level / 10)) {
 		case 0:
 			return lv0Sound;
 		case 1:
@@ -223,7 +217,7 @@ class MagicAttackData {
 	static ItemStackData lv80Block = new ItemStackData(Material.OBSIDIAN);
 
 	public static ItemStackData getItemStackData(int level) {
-		switch ((int) (level / 10)) {
+		switch ((int)(level / 10)) {
 		case 0:
 			return lv00Block;
 		case 1:

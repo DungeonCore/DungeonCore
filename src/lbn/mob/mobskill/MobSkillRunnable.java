@@ -8,6 +8,5 @@ public abstract class MobSkillRunnable {
 	public MobSkillRunnable(String data) {
 		this.data = data;
 	}
-
 	abstract public void execute(Entity target, Entity mob);
 }

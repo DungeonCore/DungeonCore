@@ -16,7 +16,7 @@ import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
 
-public class ReleaseAura extends WeaponSkillForOneType {
+public class ReleaseAura extends WeaponSkillForOneType{
 
 	public ReleaseAura() {
 		super(ItemType.BOW);
@@ -35,19 +35,19 @@ public class ReleaseAura extends WeaponSkillForOneType {
 			}
 
 			if (LivingEntityUtil.isEnemy(entity)) {
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.ABSORPTION);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.FAST_DIGGING);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.HEALTH_BOOST);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.INVISIBILITY);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.JUMP);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.NIGHT_VISION);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.REGENERATION);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.SATURATION);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.SPEED);
-				((LivingEntity) entity).removePotionEffect(PotionEffectType.WATER_BREATHING);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.ABSORPTION);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.FAST_DIGGING);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.HEALTH_BOOST);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.INVISIBILITY);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.JUMP);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.NIGHT_VISION);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.REGENERATION);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.SATURATION);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.SPEED);
+				((LivingEntity)entity).removePotionEffect(PotionEffectType.WATER_BREATHING);
 			}
 		}
 		return true;

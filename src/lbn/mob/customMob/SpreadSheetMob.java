@@ -37,7 +37,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class SpreadSheetMob extends AbstractMob<Entity> {
+public class SpreadSheetMob extends AbstractMob<Entity>{
 
 	protected SpreadSheetMob(LbnMobTag nbtTag, String[] command, String name) {
 		this.command = command;
@@ -57,6 +57,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 	public LbnMobTag getLbnMobTag() {
 		return nbtTag;
 	}
+
 
 	public static SpreadSheetMob getInstance(String[] command, String name, CommandSender sender) {
 		LbnMobTag nbtTag = MobSpawnerFromCommand.getNBTTagByCommand(command, sender);
@@ -90,12 +91,12 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
 		if (nbtTag.isAutoFixHp() && nbtTag.getLevel() >= 0) {
 			if (spawn.getType().isAlive()) {
-				double oldHp = ((LivingEntity) spawn).getMaxHealth();
-				((LivingEntity) spawn).setMaxHealth(AttackDamageValue.getAttackDamageValue(
-						AttackDamageValue.getCombatLoad(nbtTag.getLevel(), ItemType.SWORD), nbtTag.getLevel())
-						/ AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(9, ItemType.SWORD), 9)
-						* oldHp);
-				((LivingEntity) spawn).setHealth(((LivingEntity) spawn).getMaxHealth());
+				double oldHp = ((LivingEntity)spawn).getMaxHealth();
+				((LivingEntity)spawn).setMaxHealth(
+						AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(nbtTag.getLevel(), ItemType.SWORD), nbtTag.getLevel())
+						/ AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(9, ItemType.SWORD), 9) * oldHp
+						);
+				((LivingEntity)spawn).setHealth(((LivingEntity)spawn).getMaxHealth());
 			}
 		}
 
@@ -113,7 +114,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 			redstone.getBlock().setType(Material.AIR);
 		}
 
-		// mobskill発動
+		//mobskill発動
 		executeMobSkill(e.getEntity(), null, MobSkillExcuteConditionType.MOB_SPAWN);
 
 		if (this.mob == null) {
@@ -124,32 +125,34 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 	}
 
 	@Override
-	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 
-		// mobskill
+		//mobskill
 		if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
 			executeMobSkill(mob, target, MobSkillExcuteConditionType.MOB_ATTACK);
 		}
 		super.onProjectileHitEntity(mob, target, e);
 
-		// 攻撃ポイント
+		//攻撃ポイント
 		e.setDamage(e.getDamage() * attackPoint);
 	}
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 		if (mob == target) {
 			e.setCancelled(true);
 			return;
 		}
 
-		// skill
+		//skill
 		executeMobSkill(mob, target, MobSkillExcuteConditionType.MOB_ATTACK);
 
-		// 攻撃力ポイント
+		//攻撃力ポイント
 		e.setDamage(e.getDamage() * attackPoint);
 
-		// ジャイアントの攻撃範囲調整
+		//ジャイアントの攻撃範囲調整
 		if (getEntityType() == EntityType.GIANT) {
 			Location location = mob.getLocation();
 			location.setY(0);
@@ -159,13 +162,13 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 				e.setCancelled(true);
 			}
 		} else if (getEntityType() == EntityType.GUARDIAN) {
-			// ガーディアンの攻撃速度調整
+		//ガーディアンの攻撃速度調整
 			if (rnd.nextInt(4) != 0) {
 				e.setCancelled(true);
 			}
 		}
 
-		// もとのmobの効果
+		//もとのmobの効果
 		if (this.mob == null) {
 			return;
 		}
@@ -173,23 +176,24 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 	}
 
 	@Override
-	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
+	public void onDamage(LivingEntity mob, Entity damager,
+			EntityDamageByEntityEvent e) {
 		if (mob == damager) {
 			e.setCancelled(true);
 			return;
 		}
 
-		// skill
+		//skill
 		if (damager.getType().isAlive()) {
 			executeMobSkill(mob, (LivingEntity) damager, MobSkillExcuteConditionType.MOB_DAMAGED);
 		} else if (damager.getType() == EntityType.ARROW) {
-			ProjectileSource shooter = ((Arrow) damager).getShooter();
+			ProjectileSource shooter = ((Arrow)damager).getShooter();
 			if (shooter instanceof Player) {
 				executeMobSkill(mob, (LivingEntity) shooter, MobSkillExcuteConditionType.MOB_DAMAGED);
 			}
 		}
 
-		// 耐性
+		//耐性
 		switch (LastDamageManager.getLastDamageAttackType(mob)) {
 		case SWORD:
 			if (swordRegistance == 100) {
@@ -201,7 +205,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 			if (magicRegistance == 100) {
 				e.setCancelled(true);
 			}
-			e.setDamage(e.getDamage() * (1 - magicRegistance / 100.0));
+			e.setDamage(e.getDamage() * (1- magicRegistance / 100.0));
 			break;
 		case BOW:
 			if (bowRegistance == 100) {
@@ -213,7 +217,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 			break;
 		}
 
-		// 防御ポイント
+		//防御ポイント
 		e.setDamage(e.getDamage() * defencePoint);
 
 		if (this.mob == null) {
@@ -234,14 +238,15 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		}
 	}
 
+
 	@Override
 	public void onDeathPrivate(EntityDeathEvent e) {
-		// RSを設置
+		//RSを設置
 		if (redstone != null) {
 			BlockUtil.setRedstone(redstone);
 		}
 
-		// mobskill発動
+		//mobskill発動
 		executeMobSkill(e.getEntity(), e.getEntity().getKiller(), MobSkillExcuteConditionType.MOB_DEATH);
 
 		if (this.mob == null) {
@@ -257,8 +262,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
 	private int index = 0;
 
-	private double[] dropPerList = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-	private ItemStack[] dropItemList = { null, null, null, null, null, null, null, null, null, null };
+	private double[] dropPerList = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+	private ItemStack[] dropItemList = {null, null, null, null, null, null, null, null, null, null};
 
 	public void setDropItem(ItemStack item, double dropPer) {
 		dropPerList[index] = dropPer;
@@ -274,12 +279,12 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		}
 		Random random = new Random();
 		for (int i = 0; i < index; i++) {
-			// 確率を調べる
+			//確率を調べる
 			if (random.nextInt(1000) < dropPerList[i] * 10) {
 				dropItem.add(dropItemList[i]);
 			}
 		}
-		// 関係のないクエストのアイテムを削除する
+		//関係のないクエストのアイテムを削除する
 		removeOtherQuestItem(lastDamagePlayer, dropItem);
 		return dropItem;
 	}
@@ -295,8 +300,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		}
 
 		if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
-			executeMobSkill((LivingEntity) event.getEntity(), event.getTarget(),
-					MobSkillExcuteConditionType.TARGET_PLAYER);
+			executeMobSkill((LivingEntity) event.getEntity(), event.getTarget(), MobSkillExcuteConditionType.TARGET_PLAYER);
 		}
 	}
 
@@ -304,7 +308,6 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
 	/**
 	 * このモブが持っているSkillIDを取得する
-	 * 
 	 * @return
 	 */
 	public HashSet<String> getSkillIdList() {
@@ -324,47 +327,48 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		}
 	}
 
+
 	public static void MobSkillExecutor(Entity mob, Entity target, MobSkillInterface skill) {
-		// 発動タイミングを調べる
+		//発動タイミングを調べる
 		if (!skill.getTiming().canExecute(mob)) {
 			return;
 		}
 
-		// 確立を調べる
+		//確立を調べる
 		if (rnd.nextInt(100) + 1 > skill.excutePercent()) {
 			return;
 		}
 		skill.execute(target, mob);
 	}
 
-	int money = 10;
-	int exp = -1;
+	 int money = 10;
+	 int exp = -1;
 
-	public void setExp(int exp) {
-		if (exp >= 0) {
-			this.exp = exp;
-		}
+	 public void setExp(int exp) {
+		 if (exp >= 0) {
+			 this.exp = exp;
+		 }
 	}
 
-	public void setMoney(int money) {
-		if (money >= 0) {
-			this.money = money;
-		}
+	 public void setMoney(int money) {
+		 if (money >= 0) {
+			 this.money = money;
+		 }
 	}
 
-	@Override
+	 @Override
 	public int getExp(LastDamageMethodType type) {
-		return exp;
+		 return exp;
 	}
 
-	@Override
+	 @Override
 	public int getDropGalions() {
-		return money;
+		 return money;
 	}
 
-	double swordRegistance = 0;
-	double bowRegistance = 0;
-	double magicRegistance = 0;
+	 double swordRegistance = 0;
+	 double bowRegistance = 0;
+	 double magicRegistance = 0;
 
 	public void setSwordRegistance(double swordRegistance) {
 		if (swordRegistance < 0) {
@@ -375,6 +379,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		this.swordRegistance = swordRegistance;
 	}
 
+
 	public void setBowRegistance(double bowRegistance) {
 		if (bowRegistance < 0) {
 			bowRegistance = 0;
@@ -383,6 +388,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 		}
 		this.bowRegistance = bowRegistance;
 	}
+
 
 	public void setMagicRegistance(double magicRegistance) {
 		if (magicRegistance < 0) {
@@ -394,19 +400,16 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 	}
 
 	Location redstone = null;
-
 	public void setRedstoneLocation(Location loc) {
 		redstone = loc;
 	}
 
 	double attackPoint = 1;
-
 	public void setAttackPoint(double attackPoint) {
 		this.attackPoint = attackPoint;
 	}
 
 	double defencePoint = 1;
-
 	public void setDefencePoint(double defencePoint) {
 		this.defencePoint = defencePoint;
 	}

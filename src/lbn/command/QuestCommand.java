@@ -10,16 +10,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class QuestCommand implements CommandExecutor {
+public class QuestCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] paramArrayOfString) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
 		Player p = (Player) paramCommandSender;
 		if (paramArrayOfString.length == 0) {
 			QuestInventory.openQuestViewer(p);
 			return true;
 		}
+
 
 		if (paramArrayOfString[0].equals("reload")) {
 			QuestSheetRunnable questSheetRunnable = new QuestSheetRunnable(p);

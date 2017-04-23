@@ -12,15 +12,15 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class MagicBookLevel1Flame extends AbstractMagicBook {
+public class MagicBookLevel1Flame extends AbstractMagicBook{
 
 	@Override
 	protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
 		super.excuteOnRightClick2(e);
 		Player player = e.getPlayer();
-		// 音を再生
+		//音を再生
 		player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 1, 1);
-		// 火を消す
+		//火を消す
 		player.setFireTicks(0);
 		return true;
 	}
@@ -29,7 +29,7 @@ public class MagicBookLevel1Flame extends AbstractMagicBook {
 	protected void onDamage(Player player, LivingEntity entity) {
 		super.onDamage(player, entity);
 		entity.setFireTicks(20 * 4);
-		// パーティクル
+		//パーティクル
 		particleData.run(entity.getLocation());
 	}
 
@@ -57,7 +57,7 @@ public class MagicBookLevel1Flame extends AbstractMagicBook {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "右クリックで周囲の敵に火炎ダメージ中を与える", "使用者が延焼していた場合は火を消す" };
+		return new String[] {"右クリックで周囲の敵に火炎ダメージ中を与える", "使用者が延焼していた場合は火を消す"};
 	}
 
 	@Override

@@ -29,7 +29,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface {
+public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface{
 
 	private static final String THELOW_WEAPONSKILL_FINALE_COUNT = "THELOW_WEAPONSKILL_FINALE_COUNT";
 
@@ -49,8 +49,7 @@ public class Finale extends WeaponSkillWithMultiClick implements ProjectileInter
 	}
 
 	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner,
-			LivingEntity target) {
+	public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
 		int count = -1;
 		List<MetadataValue> metadata = e.getDamager().getMetadata(THELOW_WEAPONSKILL_FINALE_COUNT);
 		if (!metadata.isEmpty()) {
@@ -84,42 +83,42 @@ public class Finale extends WeaponSkillWithMultiClick implements ProjectileInter
 
 	}
 
-	// 何発目の発射かを記録するためのMap
+	//何発目の発射かを記録するためのMap
 	HashMap<Player, Integer> countMap = new HashMap<Player, Integer>();
 
 	@Override
 	protected boolean onClick2(Player p, ItemStack item, AbstractAttackItem customItem) {
 
-		// cooltimeを調べる
+		//cooltimeを調べる
 		CooltimeManager cooltimeManager = new CooltimeManager(p, new CooltimeImplemention(), item);
 		if (cooltimeManager.canUse()) {
-			// 矢を発射する
+			//矢を発射する
 			Arrow launchProjectile = p.launchProjectile(Arrow.class, p.getLocation().getDirection().multiply(2));
 
-			// 何発目の矢なのかを取得
+			//何発目の矢なのかを取得
 			int count = 0;
 			if (countMap.containsKey(p)) {
 				count = countMap.get(p);
 			}
 
-			// カウントアップする
+			//カウントアップする
 			count++;
 			launchProjectile.setMetadata(THELOW_WEAPONSKILL_FINALE_COUNT, new FixedMetadataValue(Main.plugin, count));
 			ProjectileManager.onLaunchProjectile(launchProjectile, this, item);
 
-			// 音をだす
+			//音をだす
 			p.playSound(p.getLocation(), Sound.FIREWORK_BLAST2, 1, (float) 0.1);
 
-			// 何発目の矢なのかを記録する
+			//何発目の矢なのかを記録する
 			countMap.put(p, count);
 
-			// クールタイムを開始する
+			//クールタイムを開始する
 			cooltimeManager.setCoolTime();
 
-			// 4回目以上発射した場合は終了する
+			//4回目以上発射した場合は終了する
 			return count >= 4;
 		} else {
-			// クールタイムがまだある場合は何もしない
+			//クールタイムがまだある場合は何もしない
 			return false;
 		}
 

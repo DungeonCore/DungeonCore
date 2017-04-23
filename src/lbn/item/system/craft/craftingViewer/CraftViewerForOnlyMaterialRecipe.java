@@ -42,33 +42,32 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 
 		TheLowCraftRecipeInterface recipe = item.getCraftRecipe();
 
-		// アイテムを作成するボタンを配置する
-		// tokenがnullならエラーとする
+		//アイテムを作成するボタンを配置する
+		//tokenがnullならエラーとする
 		ItemLoreToken loreToken = CraftItemSelectViewerItems.getLoreTokenFromRecipe(recipe);
-		// エラーの時はエラーの内容を表示する
+		//エラーの時はエラーの内容を表示する
 		if (loreToken == null) {
-			ItemStack errorItem = ItemStackUtil.getItem("アイテムを作成できません", Material.BARRIER, "エラーが発生したため", "アイテムを作成出来ません");
+			ItemStack errorItem = ItemStackUtil.getItem("アイテムを作成できません", Material.BARRIER, "エラーが発生したため","アイテムを作成出来ません");
 			ItemStackUtil.setNBTTag(errorItem, THELOW_CRAFT_BUTTON_NBTTAG, "close");
 			createInventory.setItem(11, errorItem);
 		} else {
-			// Loreを作成
+			//Loreを作成
 			ItemLoreData itemLoreData = new ItemLoreData();
 			itemLoreData.addBefore(item.getItemName() + "を作成します。");
 			itemLoreData.addBefore("必要素材は自動で消費します。");
 			itemLoreData.addLore(loreToken);
-			// itemを作成
-			ItemStack acceptItem = ItemStackUtil.getItem("アイテムを作成する", Material.WOOL, (byte) 5,
-					itemLoreData.getLore().toArray(new String[0]));
+			//itemを作成
+			ItemStack acceptItem = ItemStackUtil.getItem("アイテムを作成する", Material.WOOL, (byte)5, itemLoreData.getLore().toArray(new String[0]));
 			ItemStackUtil.setNBTTag(acceptItem, THELOW_CRAFT_BUTTON_NBTTAG, "craft");
 			ItemStackUtil.setNBTTag(acceptItem, "thelow_craft_item_id", item.getId());
 			createInventory.setItem(11, acceptItem);
 		}
 
-		ItemStack closeButton = ItemStackUtil.getItem("アイテムを作成しない", Material.WOOL, (byte) 14, "インベントリを閉める");
+		ItemStack closeButton = ItemStackUtil.getItem("アイテムを作成しない", Material.WOOL, (byte)14, "インベントリを閉める");
 		ItemStackUtil.setNBTTag(closeButton, THELOW_CRAFT_BUTTON_NBTTAG, "close");
 		createInventory.setItem(15, closeButton);
 
-		// アイテムを作成しないボタンを作成する
+		//アイテムを作成しないボタンを作成する
 		p.openInventory(createInventory);
 	}
 
@@ -102,22 +101,22 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 			return;
 		}
 
-		// インベントリの空きチェック
+		//インベントリの空きチェック
 		if (p.getInventory().firstEmpty() == -1) {
 			p.closeInventory();
 			p.sendMessage("インベントリに空きがありません");
 			return;
 		}
 
-		// 念のため素材をもっているか確認
-		if (((CraftItemable) customItemById).getCraftRecipe().hasAllMaterial(p, false)) {
-			// アイテムを削除する
-			((CraftItemable) customItemById).getCraftRecipe().removeMaterial(p.getInventory());
-			// アイテムを追加する
+		//念のため素材をもっているか確認
+		if (((CraftItemable)customItemById).getCraftRecipe().hasAllMaterial(p, false)) {
+			//アイテムを削除する
+			((CraftItemable)customItemById).getCraftRecipe().removeMaterial(p.getInventory());
+			//アイテムを追加する
 			ItemStack craftedItem = customItemById.getItem();
 			p.getInventory().addItem(craftedItem);
 
-			// 取引欄に0個のアイテムが残るので2tick後に実行する
+			//取引欄に0個のアイテムが残るので2tick後に実行する
 			new BukkitRunnable() {
 				@Override
 				public void run() {
@@ -125,8 +124,7 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 				}
 			}.runTaskLater(Main.plugin, 2);
 
-			new PlayerCraftCustomItemEvent(TheLowPlayerManager.getTheLowPlayer(p), ((CraftItemable) customItemById),
-					craftedItem).callEvent();
+			new PlayerCraftCustomItemEvent(TheLowPlayerManager.getTheLowPlayer(p), ((CraftItemable)customItemById), craftedItem).callEvent();
 		} else {
 			p.sendMessage("素材が足りないためアイテムを作成出来ません");
 		}

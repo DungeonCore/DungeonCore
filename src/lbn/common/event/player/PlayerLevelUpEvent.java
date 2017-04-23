@@ -5,7 +5,7 @@ import lbn.api.player.TheLowPlayer;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerLevelUpEvent extends TheLowPlayerEvent {
+public class PlayerLevelUpEvent extends TheLowPlayerEvent{
 
 	int newLevel;
 	LevelType levelType;

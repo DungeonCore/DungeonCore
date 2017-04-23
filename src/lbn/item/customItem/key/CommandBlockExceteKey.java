@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public abstract class CommandBlockExceteKey extends AbstractKeyItem {
+public abstract class CommandBlockExceteKey  extends AbstractKeyItem{
 
 	@Override
 	public void onClick(PlayerInteractEvent e, String[] lines, ItemStack item) {
@@ -33,7 +33,7 @@ public abstract class CommandBlockExceteKey extends AbstractKeyItem {
 		final Location add3 = add2.add(0, 1, 0);
 		add3.getBlock().setType(Material.REDSTONE_TORCH_ON);
 
-		// アイテムを減らせる
+		//アイテムを減らせる
 		ItemStack itemInHand = p.getItemInHand();
 		if (itemInHand.getAmount() == 1) {
 			p.setItemInHand(new ItemStack(Material.AIR));

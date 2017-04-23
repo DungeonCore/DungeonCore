@@ -18,38 +18,38 @@ public class InHandItemClickSign {
 
 	protected ItemInterface signItem;
 
-	// private Location loc = null;
+//	private Location loc = null;
 
 	Location signLoc;
 
 	protected String[] lines;
 
 	public InHandItemClickSign(PlayerInteractEvent e) {
-		// 看板かどうか調べる
+		//看板かどうか調べる
 		Block clickedBlock = e.getClickedBlock();
 		if (clickedBlock == null || !(clickedBlock.getState() instanceof Sign)) {
 			return;
 		}
 		signLoc = clickedBlock.getLocation();
 
-		// 看板の内容を調べる
+		//看板の内容を調べる
 		Sign state = (Sign) clickedBlock.getState();
-		lines = state.getLines();
+		 lines = state.getLines();
 		if (lines.length != 4) {
 			return;
 		}
 
-		// 一行目
+		//一行目
 		if (!ChatColor.stripColor(lines[0]).equals(getLine1())) {
 			return;
 		}
 
-		// 二行目
+		//二行目
 		if (!ChatColor.stripColor(lines[1]).equals(getLine2())) {
 			return;
 		}
 
-		// ３行目はアイテム名かアイテムID
+		//３行目はアイテム名かアイテムID
 		ItemInterface item = ItemManager.getCustomItemById(lines[2]);
 		if (item != null) {
 			signItem = item;
@@ -78,8 +78,8 @@ public class InHandItemClickSign {
 
 	public void doClick(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		// 手に持っているアイテムのカスタムアイテムを取得
-		KeyItemable itemInHand = ItemManager.getCustomItem(KeyItemable.class, e.getItem());
+		//手に持っているアイテムのカスタムアイテムを取得
+		KeyItemable itemInHand =  ItemManager.getCustomItem(KeyItemable.class, e.getItem());
 		if (itemInHand == null) {
 			p.sendMessage(ChatColor.RED + "アイテム：" + signItem.getSimpleName() + "を持ってクリックしてください");
 			return;
@@ -93,20 +93,20 @@ public class InHandItemClickSign {
 	}
 
 	public static boolean onWriteSign(PlayerInteractEvent e) {
-		KeyItemable itemInHand = ItemManager.getCustomItem(KeyItemable.class, e.getItem());
+		KeyItemable itemInHand =  ItemManager.getCustomItem(KeyItemable.class, e.getItem());
 		if (itemInHand == null) {
 			return false;
 		}
 
-		// 看板かどうか調べる
+		//看板かどうか調べる
 		Block clickedBlock = e.getClickedBlock();
 		if (clickedBlock == null || !(clickedBlock.getState() instanceof Sign)) {
 			return false;
 		}
 
-		// 看板が空白かどうか調べる
+		//看板が空白かどうか調べる
 		Sign state = (Sign) clickedBlock.getState();
-		String[] lines = state.getLines();
+		 String[] lines = state.getLines();
 		if (lines.length != 4) {
 			return false;
 		}
@@ -118,12 +118,12 @@ public class InHandItemClickSign {
 
 		String line2 = null;
 
-		String lastLine = null;
+		String lastLine =  null;
 		if (itemInHand instanceof KeyItemable) {
-			lastLine = ((KeyItemable) itemInHand).getLastLine(e.getPlayer(), null);
+			lastLine =  ((KeyItemable)itemInHand).getLastLine(e.getPlayer(), null);
 			line2 = "IN HAND";
 		} else if (itemInHand instanceof GettingItemable) {
-			lastLine = ((GettingItemable) itemInHand).getLastLine(e.getPlayer(), null);
+			lastLine =  ((GettingItemable)itemInHand).getLastLine(e.getPlayer(), null);
 			line2 = "FOR GETTING";
 		} else {
 			return false;
@@ -143,7 +143,7 @@ public class InHandItemClickSign {
 			return false;
 		}
 
-		// 看板の内容を調べる
+		//看板の内容を調べる
 		state.setLine(0, ChatColor.GREEN + "CLICK HERE");
 		state.setLine(1, ChatColor.GREEN + line2);
 		state.setLine(2, ChatColor.stripColor(itemInHand.getId()));

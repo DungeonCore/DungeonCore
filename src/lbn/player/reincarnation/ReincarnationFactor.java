@@ -27,7 +27,6 @@ public class ReincarnationFactor {
 
 	/**
 	 * 全ての転生効果を取得する
-	 * 
 	 * @return
 	 */
 	public static Map<String, ReincarnationInterface> getAllReincanationMap() {
@@ -36,7 +35,6 @@ public class ReincarnationFactor {
 
 	/**
 	 * 新しい転生効果を追加する
-	 * 
 	 * @param reincarnationInterface
 	 */
 	public static void registReincarnation(ReincarnationInterface reincarnationInterface) {
@@ -45,7 +43,6 @@ public class ReincarnationFactor {
 
 	/**
 	 * IDから転生効果を取得
-	 * 
 	 * @return IDが存在しないばあいはUndefinedReincarnationを返す
 	 */
 	public static ReincarnationInterface getReincarnationInterface(String id) {
@@ -72,7 +69,7 @@ public class ReincarnationFactor {
  * データが未定義の場合のReincarnation
  */
 class UndefinedReincarnation implements ReincarnationInterface {
-	static Map<String, UndefinedReincarnation> cache = new HashMap<String, UndefinedReincarnation>();
+	static Map<String,UndefinedReincarnation> cache = new HashMap<String, UndefinedReincarnation>();
 
 	public static UndefinedReincarnation getInstance(String id) {
 		if (!cache.containsKey(id)) {
@@ -83,7 +80,6 @@ class UndefinedReincarnation implements ReincarnationInterface {
 	}
 
 	String id;
-
 	private UndefinedReincarnation(String id) {
 		this.id = id;
 	}

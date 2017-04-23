@@ -10,7 +10,7 @@ import lbn.util.JavaUtil;
 
 import org.bukkit.command.CommandSender;
 
-public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
+public class WeaponSkillSheetRunnable extends AbstractSheetRunable{
 
 	public WeaponSkillSheetRunnable(CommandSender sender) {
 		super(sender);
@@ -28,8 +28,7 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "type", "name", "level", "cooltime", "mp", "detail", "data0", "data1", "data2", "data3",
-				"data4", "id", "material", "materialData" };
+		return new String[]{"type", "name", "level", "cooltime", "mp", "detail", "data0", "data1", "data2", "data3", "data4", "id", "material", "materialData"};
 	}
 
 	@Override
@@ -38,9 +37,10 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 
 		ItemType itemType = getItemType(row[0]);
 		if (itemType == null) {
-			sendMessage(itemType + "が不正です(name:" + name + ")");
+			sendMessage(itemType + "が不正です(name:" + name + ")" );
 			return;
 		}
+
 
 		int level = JavaUtil.getInt(row[2], -1);
 		int cooltime = JavaUtil.getInt(row[3], -1);
@@ -54,19 +54,21 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 		double data4 = JavaUtil.getDouble(row[10], 0);
 
 		String detail = getNull(row[5]);
-		detail = detail.replace("{0}", getNull(row[6])).replace("{1}", getNull(row[7])).replace("{2}", getNull(row[8]))
-				.replace("{3}", getNull(row[9])).replace("{4}", getNull(row[10]));
+		detail = detail.replace("{0}", getNull(row[6])).
+				replace("{1}", getNull(row[7])).
+				replace("{2}", getNull(row[8])).
+				replace("{3}", getNull(row[9])).
+				replace("{4}", getNull(row[10]));
 
 		if (level == -1 || cooltime == -1 || needMp == -1) {
-			sendMessage("level, cooltime, needMpが不正です(name:" + name + ")");
+			sendMessage("level, cooltime, needMpが不正です(name:" + name + ")" );
 			return;
 		}
 
 		WeaponSkillData weaponSkillData = new WeaponSkillData(name, itemType, row[11]);
 		weaponSkillData.setCooltime(cooltime);
 		weaponSkillData.setSkillLevel(level);
-		weaponSkillData.setNeedMp(needMp);
-		;
+		weaponSkillData.setNeedMp(needMp);;
 		weaponSkillData.setDetail(detail);
 		weaponSkillData.setData(data0, 0);
 		weaponSkillData.setData(data1, 1);
@@ -75,18 +77,17 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 		weaponSkillData.setData(data4, 4);
 
 		weaponSkillData.setMaterial(JavaUtil.getInt(row[12], 1));
-		weaponSkillData.setMaterialdata((byte) JavaUtil.getInt((row[13]), 0));
+		weaponSkillData.setMaterialdata((byte) JavaUtil.getInt( (row[13]), 0));
 
 		WeaponSkillFactory.regist(weaponSkillData);
 	}
 
 	public String getNull(String val) {
-		return val == null ? "" : val;
+		return val == null ? "": val;
 	}
 
 	/**
 	 * アイテムの種類を説明
-	 * 
 	 * @param name
 	 * @return
 	 */
@@ -106,7 +107,7 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
-		// キャッシュをクリアする
+		//キャッシュをクリアする
 		WeaponSkillSelector.clearCache();
 		super.onCallbackFunction(submit);
 	}

@@ -25,6 +25,8 @@ public class PersonalChestData {
 
 	String type;
 
+
+
 	public PersonalChestData(Player p, Location loc, String type) {
 		playerID = p.getUniqueId();
 		uuid = playerID.toString();

@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
-public abstract class AbstractKillEffectSlotStone extends KillSlot {
+public abstract class AbstractKillEffectSlotStone extends KillSlot{
 
 	@Override
 	public String getSlotName() {
@@ -17,7 +17,6 @@ public abstract class AbstractKillEffectSlotStone extends KillSlot {
 	}
 
 	abstract protected String getEffectName();
-
 	abstract protected String getEffectId();
 
 	@Override
@@ -49,6 +48,5 @@ public abstract class AbstractKillEffectSlotStone extends KillSlot {
 	}
 
 	abstract protected void playSound(Location location);
-
 	abstract protected ParticleData getParticleData();
 }

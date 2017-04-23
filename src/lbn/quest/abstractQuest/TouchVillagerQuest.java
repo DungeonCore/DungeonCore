@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
-public class TouchVillagerQuest extends AbstractQuest {
+public class TouchVillagerQuest extends AbstractQuest{
 	static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();
 
 	String villagerId;
@@ -45,7 +45,7 @@ public class TouchVillagerQuest extends AbstractQuest {
 	}
 
 	public void onTouchVillager(Player p, Entity entity, PlayerQuestSession session) {
-		// NPCでないなら何もしない
+		//NPCでないなら何もしない
 		String id = NpcManager.getId(entity);
 		if (id == null) {
 			return;
@@ -53,7 +53,7 @@ public class TouchVillagerQuest extends AbstractQuest {
 		if (id.equalsIgnoreCase(getTargetVillagerID())) {
 			session.setQuestData(this, 1);
 
-			// メッセージを出力
+			//メッセージを出力
 			QuestUtil.sendMessageByVillager(p, talk);
 		}
 	}

@@ -25,23 +25,22 @@ import org.bukkit.event.block.BlockBreakEvent;
 import com.google.common.collect.HashMultimap;
 
 public class MobSpawnerPointManager {
-	// チャンクごとに保存されたスポーンポイント
+	//チャンクごとに保存されたスポーンポイント
 	static HashMultimap<ChunkWrapper, MobSpawnerPoint> spawnPointListAndChunk = HashMultimap.create();
-	// IDとそれに紐付いたスポーンポイント
+	//IDとそれに紐付いたスポーンポイント
 	static HashMap<Integer, MobSpawnerPoint> mobSpawnerPointSerial = new HashMap<>();
-	// 現在起動中のスケジューラー
+	//現在起動中のスケジューラー
 	static HashMap<SpawnLevel, SpawnScheduler> schedulerList = new HashMap<>();
-	// ロードされているチャンク
+	//ロードされているチャンク
 	public static HashSet<ChunkWrapper> loadedChunk = new HashSet<ChunkWrapper>();
 
-	// スプレットシートIDの最大値
+	//スプレットシートIDの最大値
 	static int spletSheetId = 0;
-	// スポーンさせないワールド
+	//スポーンさせないワールド
 	public static String ignoreSpawnWorld = null;
 
 	/**
 	 * スポーンポイントを追加する
-	 * 
 	 * @param spawnerPoint
 	 */
 	public static void addSpawnPoint(MobSpawnerPoint spawnerPoint) {

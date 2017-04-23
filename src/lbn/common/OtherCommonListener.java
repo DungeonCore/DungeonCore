@@ -58,7 +58,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-public class OtherCommonListener implements Listener {
+public class OtherCommonListener implements Listener{
 	@EventHandler
 	public void StopDrops(PlayerDropItemEvent event) {
 		SoulBound.onDrops(event);
@@ -80,13 +80,13 @@ public class OtherCommonListener implements Listener {
 
 	@EventHandler
 	public void onDeath(EntityDeathEvent e) {
-		// 取得経験値は常にゼロ
+		//取得経験値は常にゼロ
 		e.setDroppedExp(0);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void StopClicking(InventoryClickEvent event) {
-		// soulboundの処理
+		//soulboundの処理
 		SoulBound.onInventoryClick(event);
 	}
 
@@ -102,10 +102,10 @@ public class OtherCommonListener implements Listener {
 
 	@EventHandler
 	public void onClick(PlayerInteractEvent event) {
-		// stun処理
+		//stun処理
 		Stun.onClick(event);
 
-		// エンダーアイの処理
+		//エンダーアイの処理
 		EndPortalOperator.onClick(event);
 	}
 
@@ -114,8 +114,7 @@ public class OtherCommonListener implements Listener {
 	@EventHandler
 	public void onBlockCanBuildEvent(BlockCanBuildEvent event) {
 		if (!event.isBuildable() && event.getMaterial() == Material.GRAVEL
-				&& (event.getBlock().getType() == Material.REDSTONE_TORCH_ON
-						|| event.getBlock().getType() == Material.REDSTONE_TORCH_OFF)) {
+				&& (event.getBlock().getType() == Material.REDSTONE_TORCH_ON || event.getBlock().getType() == Material.REDSTONE_TORCH_OFF)) {
 			notItemFlg = true;
 		} else {
 			notItemFlg = false;
@@ -149,6 +148,7 @@ public class OtherCommonListener implements Listener {
 		}
 	}
 
+
 	public static int[] randomNumber = new int[100];
 	static {
 		Random rnd = new Random();
@@ -162,7 +162,7 @@ public class OtherCommonListener implements Listener {
 
 	@EventHandler
 	public void onChangeFoodLevel(FoodLevelChangeEvent e) {
-		// 1/16の確率で腹減りを起こさせる
+		//1/16の確率で腹減りを起こさせる
 		HumanEntity entity = e.getEntity();
 
 		Integer level = foodlevel.get(entity);
@@ -194,12 +194,12 @@ public class OtherCommonListener implements Listener {
 			}
 		}
 
-		// 空白の看板に書き込む
+		//空白の看板に書き込む
 		if (InHandItemClickSign.onWriteSign(e)) {
 			return;
 		}
 
-		// 鍵を持ったままクリックする看板
+		//鍵を持ったままクリックする看板
 		InHandItemClickSign tpSign = new InHandItemClickSign(e);
 		if (tpSign.isSuccess()) {
 			tpSign.doClick(e);
@@ -207,7 +207,7 @@ public class OtherCommonListener implements Listener {
 			return;
 		}
 
-		// 何も持たない状態でクリックしアイテムを取得する看板
+		//何も持たない状態でクリックしアイテムを取得する看板
 		GetItemSign getItemSign = new GetItemSign(e);
 		if (getItemSign.isSuccess()) {
 			getItemSign.doClick(e);
@@ -223,7 +223,7 @@ public class OtherCommonListener implements Listener {
 
 	@EventHandler
 	public void onChunkLoad(ChunkLoadEvent e) {
-		// VillagerChunkManager.onLoadChank(e.getChunk());
+//		VillagerChunkManager.onLoadChank(e.getChunk());
 	}
 
 	@EventHandler
@@ -255,49 +255,46 @@ public class OtherCommonListener implements Listener {
 		MobSpawnerPointManager.onBrakeSponge(e);
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onProjectileLaunchEvent(ProjectileLaunchEvent e) {
 		ProjectileManager.onProjectileLaunchEvent(e);
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onProjectileHit(ProjectileHitEvent e) {
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onProjectileHit(ProjectileHitEvent e){
 		ProjectileManager.onProjectileHit(e);
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onDamage2(EntityDamageByEntityEvent e) {
 		Entity damager = e.getDamager();
 		Entity target = e.getEntity();
 
 		if (target.getType().isAlive()) {
-			// ProjectileInterfaceを取得
+			//ProjectileInterfaceを取得
 			ProjectileInterface projectileInterface = ProjectileManager.getProjectileInterface(damager);
 			ItemStack itemstack = ProjectileManager.getItemStack(damager);
 
-			if (projectileInterface != null && itemstack != null) {
-				LivingEntity owner = (LivingEntity) ((Projectile) damager).getShooter();
 
-				AbstractAttackItem attackItem = (AbstractAttackItem) ItemManager.getCustomItem(itemstack);
+			if (projectileInterface != null && itemstack != null) {
+				LivingEntity owner = (LivingEntity)((Projectile) damager).getShooter();
+
+				AbstractAttackItem attackItem = (AbstractAttackItem)ItemManager.getCustomItem(itemstack);
 
 				if (owner != null && owner.getType() == EntityType.PLAYER) {
-					// eventを呼ぶ
-					PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player) owner,
-							(LivingEntity) target, itemstack,
-							e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack))
-									- attackItem.getMaterialDamage());
+					//eventを呼ぶ
+					PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player)owner, (LivingEntity)target, itemstack,
+							e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
 					playerCombatEntityEvent.callEvent();
 
-					// eventからDamageを取得
+					//eventからDamageを取得
 					e.setDamage(playerCombatEntityEvent.getDamage());
 				} else {
-					// 通常通りの計算を行う
-					e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack))
-							- attackItem.getMaterialDamage());
+					//通常通りの計算を行う
+					e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
 				}
 
-				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity) ((Projectile) damager).getShooter(),
-						(LivingEntity) target);
+				projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity)((Projectile)damager).getShooter(), (LivingEntity) target);
 			}
 		}
 	}

@@ -15,8 +15,8 @@ import org.bukkit.inventory.Inventory;
 public class CommandStatusView implements CommandExecutor {
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] params) {
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString, String[] params) {
 		if (!(paramCommandSender instanceof Player)) {
 			paramCommandSender.sendMessage("コンソールから実行できません。");
 			return true;
@@ -37,7 +37,7 @@ public class CommandStatusView implements CommandExecutor {
 			OfflinePlayer player = Bukkit.getOfflinePlayer(name);
 			target = TheLowPlayerManager.getTheLowPlayer(player);
 
-			// もしロードされていなかったらロードする
+			//もしロードされていなかったらロードする
 			if (target == null) {
 				TheLowPlayerManager.loadData(player);
 			}
@@ -51,9 +51,9 @@ public class CommandStatusView implements CommandExecutor {
 		return true;
 	}
 
-	private void openStatus(Player sender, TheLowPlayer target) {
-		Inventory statusView = StatusViewerInventory.getStatusView(target);
-		sender.openInventory(statusView);
-	}
+  private void openStatus(Player sender, TheLowPlayer target) {
+    Inventory statusView = StatusViewerInventory.getStatusView(target);
+    sender.openInventory(statusView);
+  }
 
 }

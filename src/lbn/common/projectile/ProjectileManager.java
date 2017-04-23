@@ -28,53 +28,48 @@ public class ProjectileManager {
 
 	/**
 	 * Projectileを発射した時の処理
-	 * 
 	 * @param projectile
 	 * @param projectileInterface
 	 */
-	public static void onLaunchProjectile(Projectile projectile, ProjectileInterface projectileInterface,
-			ItemStack item) {
-		projectile.setMetadata(THELOW_PROJECTILE_DATA_PROJECTILE,
-				new FixedMetadataValue(Main.plugin, projectileInterface.getId()));
+	public static void onLaunchProjectile(Projectile projectile, ProjectileInterface projectileInterface, ItemStack item) {
+		projectile.setMetadata(THELOW_PROJECTILE_DATA_PROJECTILE, new FixedMetadataValue(Main.plugin, projectileInterface.getId()));
 		projectile.setMetadata(THELOW_PROJECTILE_DATA_ITEMSTACK, new FixedMetadataValue(Main.plugin, item));
 	}
 
 	/**
 	 * Entity(Projectile)から対応するProjectileInterfaceを取得。もし存在しない場合はnullを返す
-	 * 
 	 * @param entity
 	 */
 	public static ProjectileInterface getProjectileInterface(Entity entity) {
-		// メタデータを見る
+		//メタデータを見る
 		List<MetadataValue> metadata = entity.getMetadata(THELOW_PROJECTILE_DATA_PROJECTILE);
-		// メタデータが無いなら何もしない
+		//メタデータが無いなら何もしない
 		if (metadata == null || metadata.size() == 0) {
 			return null;
 		}
 
-		// IDを取得
+		//IDを取得
 		MetadataValue metadataValue = metadata.get(0);
 		String projectileId = metadataValue.asString();
 
-		// projectileを返す
+		//projectileを返す
 		ProjectileInterface projectileInterface = projectileMap.get(projectileId);
 		return projectileInterface;
 	}
 
 	/**
 	 * Entity(Projectile)から対応するItemStackを取得。もし存在しない場合はnullを返す
-	 * 
 	 * @param entity
 	 */
 	public static ItemStack getItemStack(Entity entity) {
-		// メタデータを見る
+		//メタデータを見る
 		List<MetadataValue> metadata = entity.getMetadata(THELOW_PROJECTILE_DATA_ITEMSTACK);
-		// メタデータが無いなら何もしない
+		//メタデータが無いなら何もしない
 		if (metadata == null || metadata.size() == 0) {
 			return null;
 		}
 
-		// IDを取得
+		//IDを取得
 		MetadataValue metadataValue = metadata.get(0);
 		ItemStack item = (ItemStack) metadataValue.value();
 
@@ -83,13 +78,12 @@ public class ProjectileManager {
 
 	/**
 	 * ProjectileLaunchEvent時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onProjectileLaunchEvent(ProjectileLaunchEvent e) {
 		Projectile entity = e.getEntity();
 
-		// projectileInterfaceを取得
+		//projectileInterfaceを取得
 		ProjectileInterface projectileInterface = getProjectileInterface(entity);
 		ItemStack item = getItemStack(entity);
 		if (projectileInterface != null) {
@@ -100,12 +94,11 @@ public class ProjectileManager {
 
 	/**
 	 * ProjectileHitEvent時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onProjectileHit(ProjectileHitEvent e) {
 		Projectile entity = e.getEntity();
-		// projectileInterfaceを取得
+		//projectileInterfaceを取得
 		ProjectileInterface projectileInterface = getProjectileInterface(entity);
 		ItemStack item = getItemStack(entity);
 		if (projectileInterface != null) {

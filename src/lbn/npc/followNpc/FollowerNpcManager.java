@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+
 public class FollowerNpcManager {
 	static HashMap<TheLowPlayer, FollowerNpc> map = new HashMap<>();
 
@@ -29,7 +30,7 @@ public class FollowerNpcManager {
 	 * プラグインインが終了するときのEvent
 	 */
 	public static void onDisable() {
-		// すべて削除する
+		//すべて削除する
 		for (FollowerNpc npcFollowerNpc : map.values()) {
 			NPC npc = npcFollowerNpc.getNpc();
 			if (npc != null) {
@@ -40,7 +41,6 @@ public class FollowerNpcManager {
 
 	/**
 	 * NPCを削除する
-	 * 
 	 * @param p
 	 */
 	public static void remove(Player p) {
@@ -49,20 +49,19 @@ public class FollowerNpcManager {
 			TheLowPlayerManager.sendLoingingMessage(p);
 			return;
 		}
-		// デスポーンさせる
+		//デスポーンさせる
 		FollowerNpc followerNpc = map.get(theLowPlayer);
 		NPC npc = followerNpc.getNpc();
 		if (npc != null) {
 			npc.destroy();
 		}
 
-		// Mapから削除する
+		//Mapから削除する
 		map.remove(followerNpc);
 	}
 
 	/**
 	 * FollowerNpcを作成しスポーンする
-	 * 
 	 * @param p
 	 * @return
 	 */
@@ -73,7 +72,7 @@ public class FollowerNpcManager {
 			return null;
 		}
 
-		// NPCをスポーンさせる
+		//NPCをスポーンさせる
 		FollowerNpc followerNpc = new FollowerNpc(theLowPlayer);
 		map.put(theLowPlayer, followerNpc);
 
@@ -83,7 +82,6 @@ public class FollowerNpcManager {
 
 	/**
 	 * FollowNpcを取得する
-	 * 
 	 * @param p
 	 * @return
 	 */
@@ -99,7 +97,6 @@ public class FollowerNpcManager {
 
 	/**
 	 * 自分のNPC以外を削除する
-	 * 
 	 * @param p
 	 */
 	public static void hideAllFollowerNpc(Player p) {
@@ -128,11 +125,11 @@ public class FollowerNpcManager {
 			return;
 		}
 
-		// NPCを削除する
+		//NPCを削除する
 		FollowerNpc removedNpc = map.remove(theLowPlayer);
 		if (removedNpc != null) {
 			NPC npc = removedNpc.getNpc();
-			if (npc != null) {
+			if (npc !=null) {
 				npc.destroy();
 			}
 		}
@@ -140,23 +137,22 @@ public class FollowerNpcManager {
 
 	/**
 	 * Playerがシフトした時のイベント
-	 * 
 	 * @param e
 	 */
 	public static void onToggleEvent(PlayerToggleSneakEvent e) {
 		Player player = e.getPlayer();
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
-		// PlayerがロードされていたらNPCもシフトする
+		//PlayerがロードされていたらNPCもシフトする
 		if (theLowPlayer != null) {
-			// NPC取得
+			//NPC取得
 			FollowerNpc followerNpc = map.get(theLowPlayer);
 			if (followerNpc != null) {
-				// NPCをシフトさせる
+				//NPCをシフトさせる
 				Entity entity = followerNpc.getNpc().getEntity();
 				if (entity.getType() == EntityType.PLAYER) {
-					// 5マス以内ならシフトさせる
+					//5マス以内ならシフトさせる
 					if (entity.getLocation().distance(player.getLocation()) < 5) {
-						((Player) entity).setSneaking(e.isSneaking());
+						((Player)entity).setSneaking(e.isSneaking());
 					}
 				}
 			}

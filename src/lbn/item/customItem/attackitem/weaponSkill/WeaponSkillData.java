@@ -7,6 +7,7 @@ import org.bukkit.Material;
 public class WeaponSkillData {
 	double[] data = new double[5];
 
+
 	public WeaponSkillData(String name, ItemType type, String id) {
 		this.name = name;
 		this.type = type;
@@ -105,7 +106,6 @@ public class WeaponSkillData {
 	}
 
 	public void setData(double data0, int index) {
-		data[index] = data0;
-		;
+		data[index] = data0;;
 	}
 }

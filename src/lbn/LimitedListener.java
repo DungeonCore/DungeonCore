@@ -49,7 +49,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class LimitedListener implements Listener {
+public class LimitedListener implements Listener{
 	static String targetWorldName = "world";
 
 	public static boolean isTarget(World w) {
@@ -70,10 +70,10 @@ public class LimitedListener implements Listener {
 			return;
 		}
 		if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			return;
+			return ;
 		}
 
-		// クリックをしていけないブロックの処理
+		//クリックをしていけないブロックの処理
 		Block clickedBlock = event.getClickedBlock();
 		if (clickedBlock != null) {
 			Material material = clickedBlock.getType();
@@ -92,7 +92,7 @@ public class LimitedListener implements Listener {
 		}
 		Player p = (Player) damager;
 
-		// クリエイティブでないならアーマースタンドをけさない
+		//クリエイティブでないならアーマースタンドをけさない
 		if (e.getEntity().getType() == EntityType.ARMOR_STAND && p.getGameMode() != GameMode.CREATIVE) {
 			e.setCancelled(true);
 		}
@@ -105,36 +105,35 @@ public class LimitedListener implements Listener {
 		}
 	}
 
-	//
-	// @EventHandler
-	// public void onCommand(PlayerCommandPreprocessEvent e) {
-	// Player p = e.getPlayer();
-	// String command = e.getMessage();
-	// String[] split = command.split(" ");
-	// if (command.trim().toLowerCase().startsWith("/clear")) {
-	// if (split.length >=2 && !p.getDisplayName().equalsIgnoreCase(split[1])) {
-	// e.setMessage(split[0]);
-	// }
-	// } else if (command.trim().toLowerCase().startsWith("/gamemode")) {
-	// if (split.length >=3 && !p.getDisplayName().equalsIgnoreCase(split[2])) {
-	// e.setMessage(split[0] + " " + split[1]);
-	// }
-	// } else if (command.trim().toLowerCase().startsWith("/tp")) {
-	// if (split.length == 3 && !p.getDisplayName().equalsIgnoreCase(split[1]))
-	// {
-	// e.setMessage("/");
-	// p.sendMessage("他の人をTPすることは出来ません。");
-	// }
-	// }
-	// }
+//
+//	@EventHandler
+//	public void onCommand(PlayerCommandPreprocessEvent e) {
+//		Player p = e.getPlayer();
+//		String command = e.getMessage();
+//		String[] split = command.split(" ");
+//		if (command.trim().toLowerCase().startsWith("/clear")) {
+//			if (split.length >=2 && !p.getDisplayName().equalsIgnoreCase(split[1])) {
+//				e.setMessage(split[0]);
+//			}
+//		} else if (command.trim().toLowerCase().startsWith("/gamemode")) {
+//			if (split.length >=3 && !p.getDisplayName().equalsIgnoreCase(split[2])) {
+//				e.setMessage(split[0] + " " + split[1]);
+//			}
+//		} else if (command.trim().toLowerCase().startsWith("/tp")) {
+//			if (split.length == 3 && !p.getDisplayName().equalsIgnoreCase(split[1])) {
+//				e.setMessage("/");
+//				p.sendMessage("他の人をTPすることは出来ません。");
+//			}
+//		}
+//	}
 
 	@EventHandler
 	public void LeavesDecayEvent(LeavesDecayEvent e) {
 		e.setCancelled(true);
 	}
 
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void WeatherChange(WeatherChangeEvent event) {
+	@EventHandler(priority=EventPriority.LOWEST)
+	public void WeatherChange(WeatherChangeEvent event){
 		if (!isTarget(event.getWorld())) {
 			return;
 		}
@@ -176,7 +175,8 @@ public class LimitedListener implements Listener {
 		if (!isTarget(e.getEntity().getWorld())) {
 			return;
 		}
-		if (e.getSpawnReason() == SpawnReason.CUSTOM || e.getSpawnReason() == SpawnReason.DEFAULT) {
+		if (e.getSpawnReason() == SpawnReason.CUSTOM ||
+				e.getSpawnReason() == SpawnReason.DEFAULT) {
 			return;
 		}
 		e.setCancelled(true);
@@ -193,7 +193,7 @@ public class LimitedListener implements Listener {
 		}
 
 		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			return;
+			return ;
 		}
 
 		if (Config.getClickCancelItems().contains(itemInHand.getType())) {
@@ -223,7 +223,6 @@ public class LimitedListener implements Listener {
 
 	/**
 	 * 砂と砂利以外はブロックを設置しない
-	 * 
 	 * @param e
 	 */
 	@EventHandler
@@ -245,8 +244,7 @@ public class LimitedListener implements Listener {
 		if (!isTarget(e)) {
 			return;
 		}
-		if (e.getDamager().getType() == EntityType.PLAYER
-				&& ((Player) e.getDamager()).getGameMode() == GameMode.CREATIVE) {
+		if (e.getDamager().getType() == EntityType.PLAYER && ((Player)e.getDamager()).getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 
@@ -266,7 +264,7 @@ public class LimitedListener implements Listener {
 			return;
 		}
 		Entity remover = e.getRemover();
-		if (remover.getType() == EntityType.PLAYER && ((Player) remover).getGameMode() == GameMode.CREATIVE) {
+		if (remover.getType() == EntityType.PLAYER && ((Player)remover).getGameMode() == GameMode.CREATIVE) {
 			return;
 		}
 		e.setCancelled(true);
@@ -309,7 +307,6 @@ public class LimitedListener implements Listener {
 
 	/**
 	 * クリエ以外は特定のものを除き、クラフトできない
-	 * 
 	 * @param e
 	 */
 	@EventHandler
@@ -323,7 +320,7 @@ public class LimitedListener implements Listener {
 		}
 
 		boolean allowCraft = false;
-		// クラフトできるか確認
+		//クラフトできるか確認
 		Recipe recipe = e.getRecipe();
 		if (recipe instanceof ShapedRecipe) {
 			Collection<ItemStack> values = ((ShapedRecipe) recipe).getIngredientMap().values();
@@ -335,7 +332,7 @@ public class LimitedListener implements Listener {
 			return;
 		}
 
-		// クラフトできなければAIRをセットする
+		//クラフトできなければAIRをセットする
 		if (!allowCraft) {
 			new BukkitRunnable() {
 				@Override
@@ -355,7 +352,6 @@ public class LimitedListener implements Listener {
 
 		e.setCancelled(true);
 	}
-
 	@EventHandler
 	public void PlayerBucketEmptyEvent(PlayerBucketEmptyEvent e) {
 		if (!isTarget(e)) {
@@ -367,7 +363,6 @@ public class LimitedListener implements Listener {
 
 		e.setCancelled(true);
 	}
-
 	@EventHandler
 	public void PlayerBucketFillEvent(PlayerBucketFillEvent e) {
 		if (!isTarget(e)) {
@@ -398,7 +393,7 @@ public class LimitedListener implements Listener {
 		e.setCancelled(true);
 	}
 
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority=EventPriority.HIGH)
 	public void onBreakBlock(BlockBreakEvent e) {
 		Player player = e.getPlayer();
 		if (player.getGameMode() != GameMode.CREATIVE) {
@@ -414,16 +409,19 @@ public class LimitedListener implements Listener {
 		}
 	}
 
+
 	@EventHandler
 	public void soilChangePlayer(PlayerInteractEvent event) {
-		if ((event.getAction() == Action.PHYSICAL) && (event.getClickedBlock().getType() == Material.SOIL)) {
+		if ((event.getAction() == Action.PHYSICAL)
+				&& (event.getClickedBlock().getType() == Material.SOIL)) {
 			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler
 	public void soilChangeEntity(EntityInteractEvent event) {
-		if ((event.getEntityType() != EntityType.PLAYER) && (event.getBlock().getType() == Material.SOIL)) {
+		if ((event.getEntityType() != EntityType.PLAYER)
+				&& (event.getBlock().getType() == Material.SOIL)) {
 			event.setCancelled(true);
 		}
 	}

@@ -11,7 +11,6 @@ import org.bukkit.entity.LivingEntity;
 
 public class SpawnPointMonitor {
 	MobSpawnerPoint point;
-
 	public SpawnPointMonitor(MobSpawnerPoint point) {
 		this.point = point;
 	}
@@ -20,6 +19,7 @@ public class SpawnPointMonitor {
 	boolean isWillDelete;
 	int waitTime;
 	String detail;
+
 
 	public void setWorking(boolean isWorking) {
 		this.isWorking = isWorking;
@@ -40,29 +40,23 @@ public class SpawnPointMonitor {
 	public void send(CommandSender sender) {
 		Location location = point.getLocation();
 		sender.sendMessage(ChatColor.GREEN + "==========モニター==========");
-		sender.sendMessage("id : " + point.getId() + ", Location : " + location.getBlockX() + ", "
-				+ location.getBlockY() + ", " + location.getBlockZ());
-		sender.sendMessage("working : " + isWorking + "(willdelete : " + isWillDelete + ",  chunk load : "
-				+ MobSpawnerPointManager.loadedChunk.contains(new ChunkWrapper(point)) + ")");
+		sender.sendMessage("id : " + point.getId() + ", Location : " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ());
+		sender.sendMessage("working : " + isWorking + "(willdelete : " + isWillDelete  + ",  chunk load : " + MobSpawnerPointManager.loadedChunk.contains(new ChunkWrapper(point)) + ")");
 
 		if (point.nearMob.size() == 0) {
 			sender.sendMessage("near Entity:none");
 		} else {
 			LivingEntity livingEntity = point.nearMob.get(0);
-			sender.sendMessage("near Entity:" + livingEntity.getCustomName() + "(" + livingEntity.getType() + ") "
-					+ getLocationString(livingEntity.getLocation()));
+			sender.sendMessage("near Entity:" + livingEntity.getCustomName() +"(" + livingEntity.getType() + ") " + getLocationString(livingEntity.getLocation()));
 		}
 		sender.sendMessage("waitingTime : " + JavaUtil.round((waitTime / 20), 2) + "秒,  detail : " + detail);
-		int lastSpawnTime = (int) ((System.currentTimeMillis() - point.lastSpawnTime) / 1000);
+		int lastSpawnTime = (int)((System.currentTimeMillis() - point.lastSpawnTime) / 1000);
 		if (point.lastSpawnTime == -1) {
 			lastSpawnTime = -1;
 		}
-		sender.sendMessage(
-				"lastspawn : " + lastSpawnTime + "秒前 (" + point.lastSpawnCount + "匹), キャンセル理由:" + point.cancelReson);
-		sender.sendMessage(
-				"LEVEL:" + point.getLevel() + "(" + (int) (point.getLevel().getSpawnTick() / 20) + "秒に一回スポーン)");
-		sender.sendMessage("最大湧き数:" + point.getMaxMobCount() + ", nearChunk:" + point.isLookNearChunk() + ", hight:"
-				+ point.getDungeonHight());
+		sender.sendMessage("lastspawn : " + lastSpawnTime + "秒前 (" +  point.lastSpawnCount +  "匹), キャンセル理由:" + point.cancelReson);
+		sender.sendMessage("LEVEL:" + point.getLevel() + "(" + (int)(point.getLevel().getSpawnTick() / 20) + "秒に一回スポーン)");
+		sender.sendMessage("最大湧き数:" + point.getMaxMobCount() + ", nearChunk:" + point.isLookNearChunk() + ", hight:" + point.getDungeonHight());
 		sender.sendMessage(ChatColor.GREEN + "==========モニター==========");
 	}
 

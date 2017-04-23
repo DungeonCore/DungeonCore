@@ -16,7 +16,7 @@ public class QuestBuilder {
 				return;
 			}
 
-			AbstractQuest quest = (AbstractQuest) q;
+			AbstractQuest quest = (AbstractQuest)q;
 			quest.name = values[1];
 			if (values[2] != null) {
 				quest.detail = values[2].split(",");

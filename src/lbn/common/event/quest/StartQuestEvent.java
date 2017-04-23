@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 
-public class StartQuestEvent extends QuestEvent implements Cancellable {
+public class StartQuestEvent extends QuestEvent implements Cancellable{
 
 	public StartQuestEvent(Player who, Quest quest) {
 		super(who, quest);

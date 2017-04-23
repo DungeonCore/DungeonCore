@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 
 public class MagicStoneTrade {
 	/**
-	 * 魔法鉱石の交換画面を開く
+	 *魔法鉱石の交換画面を開く
 	 */
 	public static void open(Player player) {
-		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		EntityPlayer p = ((CraftPlayer)player).getHandle();
 		MagicStoneMerchant imerchant = new MagicStoneMerchant();
 		imerchant.a_(p);
 		p.openTrade(imerchant);

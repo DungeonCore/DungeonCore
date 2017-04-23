@@ -29,14 +29,10 @@ public class NpcManager {
 
 	static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<String, CustomNpcInterface>();
 
-	// static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
+//	static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
 
-	// static CitizensNPCRegistry citizensNPCRegistry = new
-	// CitizensNPCRegistry(SimpleNPCDataStore.create(new YamlStorage(file)));
-	// static NPCRegistry citizensNPCRegistry =
-	// CitizensAPI.createNamedNPCRegistry("TheLowNpc",
-	// SimpleNPCDataStore.create(new YamlStorage(new File(Main.dataFolder +
-	// File.separator + "npc.yml"))));
+//	static CitizensNPCRegistry citizensNPCRegistry = new CitizensNPCRegistry(SimpleNPCDataStore.create(new YamlStorage(file)));
+//	static NPCRegistry citizensNPCRegistry = CitizensAPI.createNamedNPCRegistry("TheLowNpc", SimpleNPCDataStore.create(new YamlStorage(new File(Main.dataFolder + File.separator + "npc.yml"))));
 
 	public static void onTest() {
 		Iterator<NPC> it = CitizensAPI.getNPCRegistry().iterator();
@@ -59,7 +55,6 @@ public class NpcManager {
 
 	/**
 	 * NPCを登録する
-	 * 
 	 * @param villagerNpc
 	 */
 	public static void regist(CustomNpcInterface villagerNpc) {
@@ -71,10 +66,8 @@ public class NpcManager {
 	}
 
 	static Random random = new Random();
-
 	/**
 	 * 指定されたエンチティがNPCならTRUE
-	 * 
 	 * @param entity
 	 * @return
 	 */
@@ -84,7 +77,6 @@ public class NpcManager {
 
 	/**
 	 * EntityからVillagerIdを取得
-	 * 
 	 * @param npc
 	 * @return
 	 */
@@ -95,7 +87,7 @@ public class NpcManager {
 
 		String id = null;
 
-		// IDを振り分ける
+		//IDを振り分ける
 		TheLowIdTrail trait = npc.getTrait(TheLowIdTrail.class);
 		if (trait != null) {
 			id = trait.getId();
@@ -108,7 +100,6 @@ public class NpcManager {
 
 	/**
 	 * NPCを右クリックをした時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onNPCRightClickEvent(NPCRightClickEvent e) {
@@ -121,7 +112,6 @@ public class NpcManager {
 
 	/**
 	 * NPCを左クリックをした時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onNPCLeftClickEvent(NPCLeftClickEvent e) {
@@ -134,7 +124,6 @@ public class NpcManager {
 
 	/**
 	 * NPCがダメージを受けたときの処理
-	 * 
 	 * @param e
 	 */
 	public static void onNPCDamageEvent(NPCDamageEvent e) {
@@ -147,13 +136,12 @@ public class NpcManager {
 
 	/**
 	 * NPCがスポーンした時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onNPCSpawnEvent(NPCSpawnEvent e) {
 		String id = getId(e.getNPC());
 
-		// スポーン済みにセットする
+		//スポーン済みにセットする
 		if (id != null && !id.isEmpty()) {
 			spawnedNpcMap.put(id, e.getNPC());
 		}
@@ -161,15 +149,14 @@ public class NpcManager {
 
 	/**
 	 * NPCがデスポーンした時の処理
-	 * 
 	 * @param e
 	 */
 	public static void onNPCDespawnEvent(NPCDespawnEvent e) {
 	}
 
+
 	/**
 	 * スプレットシートのデータを取得する
-	 * 
 	 * @param sender
 	 */
 	public static void allReload(CommandSender sender) {
@@ -183,7 +170,6 @@ public class NpcManager {
 
 	/**
 	 * IDからNPCを取得する
-	 * 
 	 * @return
 	 */
 	public static NPC getSpawnedNpc(String id) {
@@ -192,17 +178,16 @@ public class NpcManager {
 
 	/**
 	 * EntityからIDを取得する
-	 * 
 	 * @param e
 	 * @return
 	 */
 	public static String getId(Entity e) {
-		// NPCを取得
+		//NPCを取得
 		NPC npc = CitizensAPI.getNPCRegistry().getNPC(e);
 		if (npc == null) {
 			return null;
 		}
-		// IDを取得
+		//IDを取得
 		String id = NpcManager.getId(npc);
 		if (id == null) {
 			return null;
@@ -210,10 +195,9 @@ public class NpcManager {
 		return id;
 	}
 
+
 	public static void init() {
-		CitizensAPI.getTraitFactory()
-				.registerTrait(TraitInfo.create(TheLowIdTrail.class).withName(new TheLowIdTrail().getName()));
-		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(RemoveNearNpcOnSpawnTrait.class).asDefaultTrait()
-				.withName(new RemoveNearNpcOnSpawnTrait().getName()));
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(TheLowIdTrail.class).withName(new TheLowIdTrail().getName()));
+		CitizensAPI.getTraitFactory().registerTrait(TraitInfo.create(RemoveNearNpcOnSpawnTrait.class).asDefaultTrait().withName(new RemoveNearNpcOnSpawnTrait().getName()));
 	}
 }

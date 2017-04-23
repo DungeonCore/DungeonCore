@@ -17,15 +17,15 @@ public class BookData {
 		}
 		item = ItemStackUtil.getItemStackByCommand(command);
 
-		// 本のコマンドがあるならそれを追加する
+		//本のコマンドがあるならそれを追加する
 		if (item.getItemMeta() instanceof BookMeta) {
-			// 本の情報を取得
+			//本の情報を取得
 			BookMeta itemMeta = (BookMeta) item.getItemMeta();
-			// タイトルを表示
+			//タイトルを表示
 			title = itemMeta.getTitle();
-			// 作者
+			//作者
 			auther = itemMeta.getAuthor();
-			// 内容
+			//内容
 			contents.addAll(itemMeta.getPages());
 		}
 	}
@@ -79,7 +79,6 @@ public class BookData {
 	}
 
 	int index = 0;
-
 	public void addContents(String page) {
 		if (isNull(page)) {
 			index++;
@@ -114,16 +113,14 @@ public class BookData {
 	}
 
 	ItemStack cacheBookItem = null;
-
 	/**
 	 * 本のアイテムへ変換
-	 * 
 	 * @return
 	 */
 	public ItemStack toBookItem() {
 		if (cacheBookItem == null) {
 			cacheBookItem = new ItemStack(Material.WRITTEN_BOOK);
-			// アイテムの情報を書きかる
+			//アイテムの情報を書きかる
 			BookMeta itemMeta = (BookMeta) cacheBookItem.getItemMeta();
 			itemMeta.setAuthor(getAuther());
 			itemMeta.setTitle(getTitile());

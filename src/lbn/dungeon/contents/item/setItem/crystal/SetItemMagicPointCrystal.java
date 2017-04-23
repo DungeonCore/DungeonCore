@@ -19,7 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class SetItemMagicPointCrystal extends AbstractAbilitySetItem {
+public class SetItemMagicPointCrystal extends AbstractAbilitySetItem{
 	@Override
 	public void doRutine(Player p, ItemStack[] itemStacks) {
 	}
@@ -43,7 +43,7 @@ public class SetItemMagicPointCrystal extends AbstractAbilitySetItem {
 
 	@Override
 	protected void addAbility(SetItemAbility emptyAbility, Player p, ItemStack... item) {
-		// 効果をつける
+		//効果をつける
 		emptyAbility.addData(PlayerStatusType.MAX_MAGIC_POINT, getMaxMagicPoint(StrengthOperator.getLevel(item[0])));
 	}
 
@@ -71,7 +71,7 @@ class MagicPointCystal extends SetStrengthableItemParts implements StrengthTempl
 
 	@Override
 	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
-		int maxPoint = ((SetItemMagicPointCrystal) getBelongSetItem()).getMaxMagicPoint(level);
+		int maxPoint = ((SetItemMagicPointCrystal)getBelongSetItem()).getMaxMagicPoint(level);
 		loreToken.addLore(LoreLine.getLoreLine("最大マジックポイント", maxPoint));
 	}
 

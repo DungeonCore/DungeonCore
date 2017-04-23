@@ -7,12 +7,9 @@ import lbn.api.LevelType;
  */
 public class OneReincarnationData {
 	/**
-	 * @param reincarnationInterface
-	 *            転生効果
-	 * @param levelType
-	 *            何のLevelTypeの転生か
-	 * @param count
-	 *            このLevelTypeで何回目の転生か
+	 * @param reincarnationInterface 転生効果
+	 * @param levelType 何のLevelTypeの転生か
+	 * @param count このLevelTypeで何回目の転生か
 	 */
 	public OneReincarnationData(ReincarnationInterface reincarnationInterface, LevelType levelType, int count) {
 		this.reincarnationInterface = reincarnationInterface;
@@ -26,7 +23,6 @@ public class OneReincarnationData {
 
 	/**
 	 * 転生効果を取得
-	 * 
 	 * @return
 	 */
 	public ReincarnationInterface getReincarnationInterface() {
@@ -35,7 +31,6 @@ public class OneReincarnationData {
 
 	/**
 	 * このレベルタイプで何回目の転生かを取得
-	 * 
 	 * @return
 	 */
 	public int getCount() {
@@ -44,7 +39,6 @@ public class OneReincarnationData {
 
 	/**
 	 * なんのレベルタイプで転生したかを取得
-	 * 
 	 * @return
 	 */
 	public LevelType getLevelType() {

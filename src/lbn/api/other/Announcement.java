@@ -21,14 +21,11 @@ public final class Announcement {
 	/**
 	 * Format string for attention
 	 */
-	private static final String FORMAT_ATTENTION = format("%s[%sAttention!%s]:%s%%s", DARK_GRAY, DARK_RED, DARK_GRAY,
-			WHITE);
+	private static final String FORMAT_ATTENTION = format("%s[%sAttention!%s]:%s%%s", DARK_GRAY, DARK_RED, DARK_GRAY, WHITE);
 
 	/**
 	 * Broadcast messages with "Announce" prefixes.
-	 * 
-	 * @param message
-	 *            Message for broadcasting
+	 * @param message Message for broadcasting
 	 */
 	public static void announce(String message) {
 		broadcastMessage(format(FORMAT_ANNOUNCE, message));
@@ -36,9 +33,7 @@ public final class Announcement {
 
 	/**
 	 * Broadcast messages with "Attention" prefixes.
-	 * 
-	 * @param message
-	 *            Message for broadcasting
+	 * @param message Message for broadcasting
 	 */
 	public static void attention(String message) {
 		broadcastMessage(format(FORMAT_ATTENTION, message));

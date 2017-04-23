@@ -19,7 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
-public class ItemSheetRunnable extends AbstractSheetRunable {
+public class ItemSheetRunnable extends AbstractSheetRunable{
 
 	public ItemSheetRunnable(CommandSender p) {
 		super(p);
@@ -44,8 +44,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation",
-				"detail" };
+		return new String[]{"id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation", "detail"};
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 
 			String detail = row[8];
 
-			// アイテムを生成
+			//アイテムを生成
 			ItemInterface item;
 			if (row[3] != null) {
 				if (row[3].startsWith("1.")) {
@@ -101,6 +100,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 				item = new SpreadSheetOtherItem(name, id, price, command, detail);
 			}
 			ItemManager.registItem(item);
+
 
 		} catch (Exception e) {
 			sendMessage("エラーが発生したため登録出来ませんでした。:" + Arrays.toString(row));

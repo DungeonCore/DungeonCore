@@ -13,7 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-public class MobSkillSpawnMob2 extends MobSkillRunnable {
+public class MobSkillSpawnMob2 extends MobSkillRunnable{
 
 	public MobSkillSpawnMob2(String data) {
 		super(data);
@@ -31,7 +31,7 @@ public class MobSkillSpawnMob2 extends MobSkillRunnable {
 	public void execute(Entity target, Entity mob) {
 		int count = getCount();
 
-		// initした後にモブを更新してたらinitする
+		//initした後にモブを更新してたらinitする
 		long lastUpdate = new MobSheetRunnable(Bukkit.getConsoleSender()).getLastUpdate();
 		if (lastUpdate > mobLastUpdate) {
 			init(lastUpdate);

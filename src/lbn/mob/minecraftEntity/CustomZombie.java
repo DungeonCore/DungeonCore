@@ -27,88 +27,83 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
-public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>, IRangedEntity {
-	public CustomZombie(org.bukkit.World bukkitWorld, LbnMobTag tag) {
-		this(((CraftWorld) bukkitWorld).getHandle(), tag);
-	}
+public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>, IRangedEntity{
+    public CustomZombie(org.bukkit.World bukkitWorld, LbnMobTag tag) {
+    	this(((CraftWorld)bukkitWorld).getHandle(), tag);
+    }
 
-	public CustomZombie(World world) {
-		this(world, new LbnMobTag(EntityType.ZOMBIE));
-	}
+    public CustomZombie(World world) {
+    	this(world, new LbnMobTag(EntityType.ZOMBIE));
+    }
 
-	LbnMobTag tag;
+    LbnMobTag tag;
 
 	public CustomZombie(World world, LbnMobTag tag) {
-		super(world);
-		try {
-			this.tag = tag;
+    	super(world);
+    	try {
+    		this.tag = tag;
 
-			isIgnoreWater = tag.isWaterMonster();
+    		isIgnoreWater = tag.isWaterMonster();
 
-			// 全てのAIを取り除く
-			AttackAISetter.removeAllAi(this);
+    		//全てのAIを取り除く
+    		AttackAISetter.removeAllAi(this);
 
-			// ターゲットAIを設定
-			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
-			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
-					this);
-			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-			this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+    		//ターゲットAIを設定
+    		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
+    		PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
+    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
+    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 
-			this.goalSelector.a(0, new PathfinderGoalFloat(this));
-			// 戦闘AIをセットする
-			AttackAISetter.setAttackAI(this, tag);
+    		this.goalSelector.a(0, new PathfinderGoalFloat(this));
+    		//戦闘AIをセットする
+    		AttackAISetter.setAttackAI(this, tag);
 
 			this.goalSelector.a(7, new PathfinderGoalMoveTowardsRestriction(this, 1.0D));
-			// this.goalSelector.a(8, new PathfinderGoalMoveThroughVillage(this,
-			// 1.0D, false));
+//			this.goalSelector.a(8, new PathfinderGoalMoveThroughVillage(this, 1.0D, false));
 			this.goalSelector.a(9, new PathfinderGoalRandomStroll(this, 1.0D));
 			this.goalSelector.a(10, new PathfinderGoalRandomLookaround(this));
 
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-	}
+    }
 
-	// public CustomZombie(World world) {
-	// super(world);
-	// ((Navigation) getNavigation()).b(true);
-	// this.goalSelector.a(0, new PathfinderGoalFloat(this));
-	// this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this,
-	// EntityHuman.class, 1.0D, false));
-	// this.goalSelector.a(5, new PathfinderGoalMoveTowardsRestriction(this,
-	// 1.0D));
-	// this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 1.0D));
-	// this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this,
-	// EntityHuman.class, 8.0F));
-	// this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
-	// n();
-	// setSize(0.6F, 1.95F);
-	// }
-	//
-	// protected void n() {
-	// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-	// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-	// EntityVillager.class, 1.0D, true));
-	// }
-	// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-	// EntityIronGolem.class, 1.0D, true));
-	// this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
-	// false));
-	// this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true,
-	// new Class[] { EntityPigZombie.class }));
-	// this.targetSelector.a(2, new
-	// PathfinderGoalNearestAttackableTarget<EntityHuman>(
-	// this, EntityHuman.class, true));
-	// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-	// this.targetSelector.a(2, new
-	// PathfinderGoalNearestAttackableTarget<EntityVillager>(
-	// this, EntityVillager.class, false));
-	// }
-	// this.targetSelector.a(2, new
-	// PathfinderGoalNearestAttackableTarget<EntityIronGolem>(
-	// this, EntityIronGolem.class, true));
-	// }
+//	public CustomZombie(World world) {
+//		super(world);
+//		((Navigation) getNavigation()).b(true);
+//		this.goalSelector.a(0, new PathfinderGoalFloat(this));
+//		this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this,
+//				EntityHuman.class, 1.0D, false));
+//		this.goalSelector.a(5, new PathfinderGoalMoveTowardsRestriction(this,
+//				1.0D));
+//		this.goalSelector.a(7, new PathfinderGoalRandomStroll(this, 1.0D));
+//		this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this,
+//				EntityHuman.class, 8.0F));
+//		this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
+//		n();
+//		setSize(0.6F, 1.95F);
+//	}
+//
+//	protected void n() {
+//		if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+//			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+//					EntityVillager.class, 1.0D, true));
+//		}
+//		this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+//				EntityIronGolem.class, 1.0D, true));
+//		this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
+//				false));
+//		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true,
+//				new Class[] { EntityPigZombie.class }));
+//		this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityHuman>(
+//				this, EntityHuman.class, true));
+//		if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+//			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityVillager>(
+//					this, EntityVillager.class, false));
+//		}
+//		this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget<EntityIronGolem>(
+//				this, EntityIronGolem.class, true));
+//	}
 
 	@Override
 	public EnumMonsterType getMonsterType() {
@@ -119,15 +114,15 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		}
 	}
 
-	// private ChunkCoordinates h;
+//	private ChunkCoordinates h;
 
-	// @Override
-	// protected void bn() {
-	// super.bn();
-	// if (isFly) {
-	// CustomEntityUtil.onFly(h, this);
-	// }
-	// }
+//	@Override
+//	protected void bn() {
+//		super.bn();
+//		if (isFly) {
+//			CustomEntityUtil.onFly(h, this);
+//		}
+//	}
 
 	@Override
 	public void m() {
@@ -140,7 +135,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 				extinguish();
 				fireTicks = nowFireTick;
 			} else {
-				// 何もしない
+				//何もしない
 			}
 		} else {
 			super.m();
@@ -175,12 +170,12 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 
 	@Override
 	public Zombie spawn(Location loc) {
-		WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
-		// 位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-		// ワールドにentityを追加
-		world.addEntity(this, SpawnReason.CUSTOM);
-		return (Zombie) getBukkitEntity();
+		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
+		//位置を指定
+		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
+		 //ワールドにentityを追加
+		 world.addEntity(this, SpawnReason.CUSTOM);
+		 return (Zombie) getBukkitEntity();
 	}
 
 	@Override
@@ -214,8 +209,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 
 	@Override
 	public void a(EntityLiving entityliving, float f) {
-		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F,
-				14 - this.world.getDifficulty().a() * 4);
+		EntityArrow entityarrow = new EntityArrow(this.world, this, entityliving, 1.6F, 14 - this.world.getDifficulty().a() * 4);
 		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bz());
 		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bz());
 
@@ -259,15 +253,14 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 			return;
 		}
 
-		// 指定した距離以上離れていたら殺す
+		//指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
-					* tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
 				return;
 			}
 
@@ -283,3 +276,4 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		}
 	}
 }
+

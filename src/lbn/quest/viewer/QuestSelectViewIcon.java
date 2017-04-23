@@ -22,7 +22,7 @@ public class QuestSelectViewIcon {
 		List<String> lore = ItemStackUtil.getLore(item);
 		for (String string : lore) {
 			if (string.contains(ID_PREFIX)) {
-				return true;
+				return  true;
 			}
 		}
 		return false;
@@ -35,19 +35,19 @@ public class QuestSelectViewIcon {
 			return null;
 		}
 
-		// キャッシュ登録を始めるよりもあとにスプレットシートを登録したらキャッシュをを削除する
+		//キャッシュ登録を始めるよりもあとにスプレットシートを登録したらキャッシュをを削除する
 		long sheetLastUpdate = new QuestSheetRunnable(null).getLastUpdate();
 		if (lastUpdate < sheetLastUpdate) {
 			itemCache.clear();
 			lastUpdate = sheetLastUpdate;
 		}
 
-		// キャッシュが残っていたらそれを使う
+		//キャッシュが残っていたらそれを使う
 		if (itemCache.containsKey(q)) {
 			return itemCache.get(q);
 		}
 
-		// Itemを作成
+		//Itemを作成
 		ArrayList<String> lore = new ArrayList<String>();
 		for (String detail : q.getQuestDetail()) {
 			lore.add(ChatColor.AQUA + detail);

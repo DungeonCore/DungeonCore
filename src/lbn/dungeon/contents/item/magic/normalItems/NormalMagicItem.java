@@ -25,32 +25,24 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class NormalMagicItem extends MagicItemOld {
+public class NormalMagicItem extends MagicItemOld{
 
 	public static List<ItemInterface> getAllItem() {
 		ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
-		arrayList.add(new NormalMagicItem("始まりの杖", 0, Material.STICK, new BlockData(Material.WOOD, (byte) 1),
-				new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3)));
-		arrayList.add(new NormalMagicItem("アイスジャベリン", 10, Material.WOOD_HOE, new BlockData(Material.ICE),
-				new SoundData(Sound.GLASS, 1, (float) 0.1)));
-		arrayList.add(new NormalMagicItem("セイクリッド", 20, Material.STONE_HOE, new BlockData(Material.IRON_BLOCK),
-				new SoundData(Sound.IRONGOLEM_HIT, 1, (float) 0.7)));
-		arrayList.add(new NormalMagicItem("ジャベラス", 30, Material.IRON_HOE,
-				new BlockData(Material.STAINED_CLAY, (byte) 11), new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1)));
-		arrayList.add(new NormalMagicItem("ルーク", 40, Material.IRON_HOE, new BlockData(Material.STAINED_CLAY, (byte) 14),
-				new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
-		arrayList.add(new NormalMagicItem("グレス", 50, Material.DIAMOND_HOE, new BlockData(Material.GOLD_BLOCK),
-				new SoundData(Sound.GLASS, 1, (float) 0.1)));
-		arrayList.add(new NormalMagicItem("ジュピター", 60, Material.DIAMOND_HOE, new BlockData(Material.DIAMOND_BLOCK),
-				new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
-		arrayList.add(new NormalMagicItem("エルシオン", 70, Material.DIAMOND_HOE,
-				new BlockData(Material.OBSIDIAN, (byte) 11), new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1)));
-		arrayList.add(new NormalMagicItem("セルシオ", 80, Material.DIAMOND_HOE, new BlockData(Material.OBSIDIAN, (byte) 11),
-				new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1)));
+		arrayList.add(new NormalMagicItem("始まりの杖", 0, Material.STICK, new BlockData(Material.WOOD, (byte) 1), new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3)));
+		arrayList.add(new NormalMagicItem("アイスジャベリン", 10, Material.WOOD_HOE, new BlockData(Material.ICE), new SoundData(Sound.GLASS, 1, (float) 0.1)));
+		arrayList.add(new NormalMagicItem("セイクリッド", 20, Material.STONE_HOE, new BlockData(Material.IRON_BLOCK), new SoundData(Sound.IRONGOLEM_HIT, 1, (float) 0.7)));
+		arrayList.add(new NormalMagicItem("ジャベラス", 30, Material.IRON_HOE, new BlockData(Material.STAINED_CLAY, (byte) 11), new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1)));
+		arrayList.add(new NormalMagicItem("ルーク", 40, Material.IRON_HOE, new BlockData(Material.STAINED_CLAY, (byte) 14), new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
+		arrayList.add(new NormalMagicItem("グレス", 50, Material.DIAMOND_HOE, new BlockData(Material.GOLD_BLOCK), new SoundData(Sound.GLASS, 1, (float) 0.1)));
+		arrayList.add(new NormalMagicItem("ジュピター", 60, Material.DIAMOND_HOE, new BlockData(Material.DIAMOND_BLOCK), new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
+		arrayList.add(new NormalMagicItem("エルシオン", 70, Material.DIAMOND_HOE, new BlockData(Material.OBSIDIAN, (byte) 11), new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1)));
+		arrayList.add(new NormalMagicItem("セルシオ", 80, Material.DIAMOND_HOE, new BlockData(Material.OBSIDIAN, (byte) 11), new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1)));
 		return arrayList;
 	}
 
-	protected NormalMagicItem(String name, int availableLevel, Material m, BlockData blockdata, SoundData onHitSound) {
+	protected NormalMagicItem(String name,
+			int availableLevel, Material m, BlockData blockdata, SoundData onHitSound) {
 		this.id = "normalmagic_" + availableLevel;
 		this.name = name;
 		this.availableLevel = availableLevel;
@@ -100,13 +92,10 @@ public class NormalMagicItem extends MagicItemOld {
 		return new FallingBlockMagicExcutor(item, getId() + "_lc") {
 			@Override
 			protected DamagedFallingBlockForPlayer getDamagedFallingBlock(Player p, PlayerInteractEvent e) {
-				DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p, ferFallingBlockType(),
-						item, getAttackItemDamage(StrengthOperator.getLevel(item)), getFallingBlockData()) {
-					ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8,
-							0.8);
+				DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p, ferFallingBlockType(), item, getAttackItemDamage(StrengthOperator.getLevel(item)), getFallingBlockData()){
+					ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8, 0.8);
 
 					ParticleData particleData2 = new ParticleData(ParticleType.crit, 40);
-
 					@Override
 					public void tickRutine(int count) {
 						if (count % 2 == 0) {
@@ -168,7 +157,7 @@ public class NormalMagicItem extends MagicItemOld {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "左クリックで遠距離攻撃" };
+		return new String[]{"左クリックで遠距離攻撃"};
 	}
 }
 
@@ -177,7 +166,6 @@ class BlockData {
 		this.m = m;
 		this.data = 0;
 	}
-
 	protected BlockData(Material m, byte data) {
 		this.m = m;
 		this.data = data;

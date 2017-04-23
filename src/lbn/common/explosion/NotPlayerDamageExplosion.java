@@ -20,8 +20,7 @@ public abstract class NotPlayerDamageExplosion extends AbstractNotDamageExplosio
 			return true;
 		}
 		if (entity instanceof LivingEntity) {
-			return entity.getType() == EntityType.PLAYER || entity.getType() == EntityType.VILLAGER
-					|| (MobHolder.getMob((LivingEntity) entity) instanceof SummonMobable);
+			return entity.getType() == EntityType.PLAYER || entity.getType() == EntityType.VILLAGER || (MobHolder.getMob((LivingEntity)entity) instanceof SummonMobable);
 		} else {
 			return false;
 		}

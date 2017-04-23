@@ -10,6 +10,7 @@ import lbn.util.ItemStackUtil;
 
 import org.bukkit.inventory.ItemStack;
 
+
 public class ItemLoreData {
 	ItemStack item;
 
@@ -23,16 +24,12 @@ public class ItemLoreData {
 		loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
 	}
 
-	// テスト用
-	// public static void main(String[] args) {
-	// String[] aa = new String[]{"§8id:pvp2", "", "§a機能性能§ctitle", " §e最大強化 ：
-	// §6+10", " §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル", " §e耐久値 ： §6120", "
-	// §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル", "§e耐久値 ： §6120", "", "",
-	// "§a強化性能§ctitle", " §eADD:ダメージ §6+1.8", "", "§aSLOT §b最大1個", "§f ■
-	// 空のスロット§0id:empty", ""};
-	// List<String> asList = java.util.Arrays.asList(aa);
-	// new ItemLoreData(asList);
-	// }
+//テスト用
+//	public static void main(String[] args) {
+//	String[] aa = new String[]{"§8id:pvp2", "", "§a機能性能§ctitle", "    §e最大強化 ： §6+10", "    §e使用可能 ： §6弓レベル0以上", "    §eスキルレベル ： §660レベル", "    §e耐久値 ： §6120", "    §e使用可能 ： §6弓レベル0以上", "    §eスキルレベル ： §660レベル", "§e耐久値 ： §6120", "", "", "§a強化性能§ctitle", "    §eADD:ダメージ §6+1.8", "", "§aSLOT  §b最大1個", "§f    ■ 空のスロット§0id:empty", ""};
+//		List<String> asList = java.util.Arrays.asList(aa);
+//		new ItemLoreData(asList);
+//	}
 
 	public ItemLoreData(ItemStack stack) {
 		this(stack, null);
@@ -49,10 +46,8 @@ public class ItemLoreData {
 			loreMap = new TreeMap<String, ItemLoreToken>(comparator);
 		}
 
-		// テスト用
-		// lbn.util.DungeonLogger.debug("String[] aa = new String[]{\"" +
-		// lore.toString().replace("\"", "\\\"").replace("[", "").replace("]",
-		// "").replace(", ", "\", \"") + "\"};");
+//		テスト用
+//		 lbn.util.DungeonLogger.debug("String[] aa = new String[]{\"" + lore.toString().replace("\"", "\\\"").replace("[", "").replace("]", "").replace(", ", "\", \"") + "\"};");
 
 		LorePoint point = LorePoint.BEFORE;
 
@@ -61,28 +56,28 @@ public class ItemLoreData {
 		for (String line : lore) {
 			switch (point) {
 			case BEFORE:
-				// タイトルでない場合は値を保持しておく
+				//タイトルでない場合は値を保持しておく
 				if (!ItemLoreToken.isTitle(line)) {
 					beforeDetail.add(line);
 					break;
 				}
-				// タイトルであった場合はLoreTokenとする
+				//タイトルであった場合はLoreTokenとする
 				point = LorePoint.LORE;
 			case LORE:
 				if (nowToken == null) {
-					// タイトルだった場合はLoreTokenを生成する
+					//タイトルだった場合はLoreTokenを生成する
 					if (ItemLoreToken.isTitle(line)) {
 						nowToken = createLoreTokenInstance(line);
-						// タイトルでなければ次に進む
+						//タイトルでなければ次に進む
 						break;
 					} else if (line.equals("")) {
-						// 空白の時はミスかもしれないので何もしない
+						//空白の時はミスかもしれないので何もしない
 						break;
 					} else {
 						point = LorePoint.AFTER;
 					}
 				} else {
-					// 空白の場合はLoreToken終了とする
+					//空白の場合はLoreToken終了とする
 					if (line.equals("")) {
 						loreMap.put(nowToken.getTitle(), nowToken);
 						nowToken = null;
@@ -98,13 +93,13 @@ public class ItemLoreData {
 			}
 
 		}
-		// 一番最後が空文字ならそれを削除する
+		//一番最後が空文字ならそれを削除する
 		if (beforeDetail.size() != 0) {
 			if (beforeDetail.get(beforeDetail.size() - 1).equals("")) {
 				beforeDetail.remove(beforeDetail.size() - 1);
 			}
 		}
-		// 一番最後が空文字ならそれを削除する
+		//一番最後が空文字ならそれを削除する
 		if (afterDetail.size() != 0) {
 			if (afterDetail.get(afterDetail.size() - 1).equals("")) {
 				afterDetail.remove(afterDetail.size() - 1);
@@ -119,7 +114,6 @@ public class ItemLoreData {
 
 	/**
 	 * タイトルからLoreTokenを生成する
-	 * 
 	 * @param line
 	 * @return
 	 */
@@ -156,7 +150,6 @@ public class ItemLoreData {
 
 	/**
 	 * 指定したタイトルのLoreを削除する
-	 * 
 	 * @param title
 	 */
 	public void removeLore(String title) {
@@ -165,7 +158,6 @@ public class ItemLoreData {
 
 	/**
 	 * 指定したLoreTokenを取得する。もし存在しない場合は新規作成して生成する
-	 * 
 	 * @param title
 	 * @return
 	 */
@@ -175,7 +167,6 @@ public class ItemLoreData {
 
 	/**
 	 * Loreを取得する
-	 * 
 	 * @param item
 	 */
 	public List<String> getLore() {
@@ -192,7 +183,6 @@ public class ItemLoreData {
 
 	/**
 	 * Loreを追加する
-	 * 
 	 * @param loreToken
 	 */
 	public void addLore(ItemLoreToken loreToken) {
@@ -200,7 +190,7 @@ public class ItemLoreData {
 	}
 
 	enum LorePoint {
-		BEFORE, LORE, AFTER;
+		BEFORE, LORE, AFTER ;
 	}
 
 	class ComparatorImplemention implements Comparator<String> {

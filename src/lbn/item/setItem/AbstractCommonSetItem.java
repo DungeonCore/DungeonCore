@@ -8,18 +8,18 @@ import java.util.Set;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractCommonSetItem implements SetItemInterface {
+public abstract class AbstractCommonSetItem implements SetItemInterface{
 
 	@Override
 	public boolean isWearSetItem(Player p) {
-		// 装備が必要な部分を全てチェックする
+		//装備が必要な部分を全てチェックする
 		for (Entry<SetItemPartsType, SetItemPartable> entry : getFullSetItem().entrySet()) {
 			ItemStack itemStackByParts = entry.getKey().getItemStackByParts(p);
-			// もし装備していなければFALSE
+			//もし装備していなければFALSE
 			if (itemStackByParts == null) {
 				return false;
 			}
-			// 別なものを装備していればFALSE
+			//別なものを装備していればFALSE
 			if (!entry.getValue().isThisItem(itemStackByParts)) {
 				return false;
 			}
@@ -55,7 +55,6 @@ public abstract class AbstractCommonSetItem implements SetItemInterface {
 
 	/**
 	 * 指定したパーツの部分が指定したitemと一致したらTRUE
-	 * 
 	 * @param item
 	 * @param parts
 	 * @return
@@ -79,7 +78,7 @@ public abstract class AbstractCommonSetItem implements SetItemInterface {
 
 	@Override
 	public HashMap<SetItemPartsType, SetItemPartable> getFullSetItem() {
-		// もしまだ生成されてないならMapを生成する
+		//もしまだ生成されてないならMapを生成する
 		if (itemPartsMap == null) {
 			itemPartsMap = new HashMap<SetItemPartsType, SetItemPartable>();
 			for (SetItemPartable setItemParts : getAllItemParts()) {

@@ -1,8 +1,8 @@
 package lbn.dungeon.contents.strength_template;
 
-public abstract class AbstractSelectMaxMinStrengthTemplate implements StrengthTemplate {
-	int maxStrengthCount;
 
+public abstract class AbstractSelectMaxMinStrengthTemplate implements StrengthTemplate{
+	int maxStrengthCount;
 	public AbstractSelectMaxMinStrengthTemplate(int maxStrengthCount) {
 		this.maxStrengthCount = maxStrengthCount;
 	}

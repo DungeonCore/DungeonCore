@@ -18,12 +18,11 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public class MagicHealMagicStone extends KillSlot {
+public class MagicHealMagicStone extends KillSlot{
 
 	int mpHealLevel;
 	SlotLevel sLevel;
 	String HealValueString;
-
 	public MagicHealMagicStone(int mpHealLevel, SlotLevel sLevel, String HealValueString) {
 		this.mpHealLevel = mpHealLevel;
 		this.sLevel = sLevel;
@@ -65,7 +64,7 @@ public class MagicHealMagicStone extends KillSlot {
 
 	Random rnd = new Random();
 
-	ParticleData particleData = new CircleParticleData(new ParticleData(ParticleType.enchantmenttable, 3), 1.3);
+	ParticleData particleData = new CircleParticleData(new ParticleData(ParticleType.enchantmenttable, 3),1.3);
 
 	@Override
 	public void onKill(PlayerKillEntityEvent e) {
@@ -74,7 +73,7 @@ public class MagicHealMagicStone extends KillSlot {
 			Player player = e.getPlayer();
 			MagicPointManager.addMagicPoint(player, mpHealLevel * 3);
 			e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENDERMAN_DEATH, 1, (float) 2);
-			// エフェクト
+			//エフェクト
 			Location add = player.getLocation().add(0, 1, 0);
 			particleData.run(add);
 		}

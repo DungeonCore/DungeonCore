@@ -87,7 +87,6 @@ public class LbnMobTag {
 
 	/**
 	 * EntityTypeを取得
-	 * 
 	 * @return
 	 */
 	public EntityType getType() {
@@ -96,7 +95,6 @@ public class LbnMobTag {
 
 	/**
 	 * 水を無視するならTRUE
-	 * 
 	 * @return
 	 */
 	public boolean isWaterMonster() {
@@ -105,7 +103,6 @@ public class LbnMobTag {
 
 	/**
 	 * 水を無視するならTRUE
-	 * 
 	 * @param isWaterMonster
 	 */
 	public void setWaterMonster(boolean isWaterMonster) {
@@ -114,7 +111,6 @@ public class LbnMobTag {
 
 	/**
 	 * 一秒間の攻撃速度を取得
-	 * 
 	 * @return
 	 */
 	public int getAttackCountPerSec() {
@@ -123,7 +119,6 @@ public class LbnMobTag {
 
 	/**
 	 * 一秒間の攻撃速度をセットする
-	 * 
 	 * @param attackCountPerSec
 	 */
 	public void setAttackCountPerSec(int attackCountPerSec) {
@@ -132,7 +127,6 @@ public class LbnMobTag {
 
 	/**
 	 * 攻撃範囲を取得
-	 * 
 	 * @return
 	 */
 	public float getAttackReach() {
@@ -141,7 +135,6 @@ public class LbnMobTag {
 
 	/**
 	 * 攻撃範囲をセットする
-	 * 
 	 * @param attackReach
 	 */
 	public void setAttackReach(float attackReach) {
@@ -150,7 +143,6 @@ public class LbnMobTag {
 
 	/**
 	 * ジャンプ斬りをするか取得
-	 * 
 	 * @return
 	 */
 	public boolean isJumpAttack() {
@@ -159,7 +151,6 @@ public class LbnMobTag {
 
 	/**
 	 * ジャンプ斬りをするかどうかセットする
-	 * 
 	 * @param isJumpAttack
 	 */
 	public void setJumpAttack(boolean isJumpAttack) {
@@ -168,7 +159,6 @@ public class LbnMobTag {
 
 	/**
 	 * Playerを避ける動きをするならTRUE
-	 * 
 	 * @return
 	 */
 	public boolean isAvoidPlayer() {
@@ -177,7 +167,6 @@ public class LbnMobTag {
 
 	/**
 	 * Playerを避ける動きをするかどうかセットする
-	 * 
 	 * @param isAvoidPlayer
 	 */
 	public void setAvoidPlayer(boolean isAvoidPlayer) {
@@ -186,7 +175,6 @@ public class LbnMobTag {
 
 	/**
 	 * Playerに近づく速度を取得
-	 * 
 	 * @return
 	 */
 	public double getNearingSpeed() {
@@ -195,7 +183,6 @@ public class LbnMobTag {
 
 	/**
 	 * Playerに近づく速度をセットする
-	 * 
 	 * @param nearingSpeed
 	 */
 	public void setNearingSpeed(double nearingSpeed) {
@@ -204,7 +191,6 @@ public class LbnMobTag {
 
 	/**
 	 * サモンゾンビならTRUE
-	 * 
 	 * @return
 	 */
 	public boolean isSummonMob() {
@@ -213,7 +199,6 @@ public class LbnMobTag {
 
 	/**
 	 * サモンゾンビかどうかセットする
-	 * 
 	 * @param isSummonMob
 	 */
 	public void setSummonMob(boolean isSummonMob) {
@@ -222,7 +207,6 @@ public class LbnMobTag {
 
 	/**
 	 * AIのTypeをセットする
-	 * 
 	 * @param aiType
 	 */
 	public void setAiType(AIType aiType) {
@@ -233,15 +217,14 @@ public class LbnMobTag {
 
 	/**
 	 * AITypeを取得
-	 * 
 	 * @return
 	 */
 	public AIType getAiType() {
 		if (aiType == null) {
 			if (LivingEntityUtil.isAnimal(getType())) {
-				aiType = AIType.NO_ATACK;
+				aiType =  AIType.NO_ATACK;
 			} else {
-				aiType = AIType.NORMAL;
+				aiType= AIType.NORMAL;
 			}
 		}
 		return aiType;
@@ -249,7 +232,6 @@ public class LbnMobTag {
 
 	/**
 	 * 一秒間に何回打つかセットする
-	 * 
 	 * @param shotTarm
 	 */
 	public void setShotTarm(int shotTarm) {
@@ -258,7 +240,6 @@ public class LbnMobTag {
 
 	/**
 	 * 一秒間に何回打つか取得
-	 * 
 	 * @return
 	 */
 	public int getShotTarm() {

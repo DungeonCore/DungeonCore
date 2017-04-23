@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class LightningOrder extends WeaponSkillWithCombat {
+public class LightningOrder extends WeaponSkillWithCombat{
 
 	public LightningOrder() {
 		super(ItemType.SWORD);
@@ -30,8 +30,7 @@ public class LightningOrder extends WeaponSkillWithCombat {
 	}
 
 	@Override
-	public void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
-			PlayerCombatEntityEvent e) {
+	public void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e) {
 		LivingEntityUtil.strikeLightningEffect(livingEntity.getLocation());
 
 		Stun.addStun(livingEntity, (int) (20 * getData(1)));
@@ -41,7 +40,7 @@ public class LightningOrder extends WeaponSkillWithCombat {
 			public void run() {
 				livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(2)), 1), true);
 			}
-		}.runTaskLater(Main.plugin, (long) (20 * getData(1) + 0.1));
+		}.runTaskLater(Main.plugin, (long) (20 * getData(1)+0.1));
 	}
 
 	@Override

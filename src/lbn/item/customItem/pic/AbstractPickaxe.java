@@ -19,7 +19,7 @@ import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractPickaxe extends AbstractItem implements MagicPickaxeable {
+public abstract class AbstractPickaxe extends AbstractItem implements MagicPickaxeable{
 
 	int level = 1;
 
@@ -29,7 +29,6 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	/**
 	 * ピッケルのレベルを取得
-	 * 
 	 * @return
 	 */
 	public int getLevel() {
@@ -40,7 +39,6 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	/**
 	 * ピッケルの素材の日本語名
-	 * 
 	 * @return
 	 */
 	abstract String getMaterialName();
@@ -56,7 +54,6 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	}
 
 	Random random = new Random();
-
 	@Override
 	public void onPlayerBreakMagicOreEvent(PlayerBreakMagicOreEvent e) {
 		if (!canDestory(e.getBrokenType())) {
@@ -64,12 +61,12 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 			return;
 		}
 		ItemStack useItem = e.getUseItem();
-		// 次のレベルを取得
+		//次のレベルを取得
 		short nextExp = (short) (getPickExp(useItem) + e.getBrokenType().getExp());
 
-		// ラピスの個数処理
+		//ラピスの個数処理
 		if (e.getBrokenType() == MagicStoneOreType.LAPIS_ORE) {
-			// 個数をセットする
+			//個数をセットする
 			if (getLapisCount(nextExp) > 1) {
 				int nextInt = random.nextInt(getLapisCount(nextExp) - 1) + 1;
 				e.getAcquisition().setAmount(nextInt);
@@ -78,31 +75,30 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 			}
 		}
 
-		// 最大レベル未満の時はレベルを追加する
+		//最大レベル未満の時はレベルを追加する
 		if (nextExp < getMaxExp()) {
 			updatePickExp(useItem, nextExp);
 		} else {
-			// 次のピッケルがない場合は最大レベルまでしか追加しない
+			//次のピッケルがない場合は最大レベルまでしか追加しない
 			if (getNextPickAxe() == null) {
 				updatePickExp(useItem, getMaxExp());
 				return;
 			}
-			// 進化後のピッケルをセットする
+			//進化後のピッケルをセットする
 			ItemStack nextPickAxe = getNextPickAxe().getItem();
-			// 余った経験値をセットする
+			//余った経験値をセットする
 			updatePickExp(nextPickAxe, (short) (nextExp - getMaxExp()));
 			e.getPlayer().setItemInHand(nextPickAxe);
-			// メッセージを送信する
-			e.getPlayer().sendMessage(ChatColor.GREEN + "ピッケルが" + org.bukkit.ChatColor.GOLD
-					+ getNextPickAxe().getItemName() + ChatColor.GREEN + "に進化した。");
+			//メッセージを送信する
+			e.getPlayer().sendMessage(ChatColor.GREEN + "ピッケルが" + org.bukkit.ChatColor.GOLD + getNextPickAxe().getItemName() + ChatColor.GREEN + "に進化した。");
 
-			// タイトルを表示
+			//タイトルを表示
 			TitleSender titleSender = new TitleSender();
 			titleSender.setTitle("ピッケル レベルアップ", ChatColor.GREEN, false);
 			titleSender.setSubTitle(getNextPickAxe().getItemName() + "に進化した", ChatColor.YELLOW, false);
 			titleSender.execute(e.getPlayer());
 
-			// 音をだす
+			//音をだす
 			e.getLocation().getWorld().playSound(e.getLocation(), Sound.ORB_PICKUP, 1, (float) 0.1);
 		}
 	}
@@ -112,13 +108,13 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 	@Override
 	public ItemStack getItem() {
 		ItemStack item = super.getItem();
-		// 0レベルにセットする
+		//0レベルにセットする
 		updatePickExp(item, (short) 0);
 
-		// 効率強化のレベルを取得
+		//効率強化のレベルを取得
 		int effecientLevel = level / 2;
 		if (effecientLevel != 0) {
-			// 効率強化のエンチャントをつける
+			//効率強化のエンチャントをつける
 			item.addEnchantment(Enchantment.DIG_SPEED, effecientLevel);
 		}
 		return item;
@@ -126,14 +122,12 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	/**
 	 * 進化時のピッケルを取得する
-	 * 
 	 * @return
 	 */
 	abstract public AbstractPickaxe getNextPickAxe();
 
 	/**
 	 * このアイテムの最大レベルを取得
-	 * 
 	 * @return
 	 */
 	abstract public short getMaxExp();
@@ -142,7 +136,6 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	/**
 	 * ピッケルのレベルを取得
-	 * 
 	 * @param item
 	 * @return
 	 */
@@ -153,24 +146,23 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	/**
 	 * ピッケルのレベルを設定する
-	 * 
 	 * @param item
 	 * @param level
 	 */
 	public void updatePickExp(ItemStack item, short level) {
-		// NBTTagを設定
+		//NBTTagを設定
 		ItemStackUtil.setNBTTag(item, MAGIC_PICKAXE_EXP, level);
 
 		List<String> lore = ItemStackUtil.getLore(item);
 		Iterator<String> iterator = lore.iterator();
-		// ピッケルレベルのLoreを削除する
+		//ピッケルレベルのLoreを削除する
 		while (iterator.hasNext()) {
 			String next = iterator.next();
 			if (next.contains("ピッケルレベル ")) {
 				iterator.remove();
 			}
 		}
-		// レベルを記載
+		//レベルを記載
 		lore.add(ChatColor.GREEN + "ピッケルレベル " + level + "/" + getMaxExp());
 
 		ItemStackUtil.setLore(item, lore);
@@ -190,36 +182,32 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
 	@Override
 	protected ItemStack getItemStackBase() {
-		return ItemStackUtil.getItemStackByCommand("/give @p minecraft:" + getGiveItemId()
-				+ " 1 0 {Unbreakable:1,HideFlags:8,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\",\"minecraft:redstone_ore\",\"minecraft:gold_ore\",\"minecraft:diamond_ore\", \"minecraft:lit_redstone_ore\"]}");
+		return ItemStackUtil.getItemStackByCommand("/give @p minecraft:" + getGiveItemId() + " 1 0 {Unbreakable:1,HideFlags:8,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\",\"minecraft:redstone_ore\",\"minecraft:gold_ore\",\"minecraft:diamond_ore\", \"minecraft:lit_redstone_ore\"]}");
 	}
 
 	/**
 	 * Giveコマンドに使うIDを取得
-	 * 
 	 * @return
 	 */
 	abstract public String getGiveItemId();
 
 	/**
-	 * 全てのレベルのピッケルを取得する
-	 * 
+	 *全てのレベルのピッケルを取得する
 	 * @return
 	 */
 	abstract public List<ItemInterface> getAllLevelPick();
 
 	/**
 	 * 関係のあるアイテムを全て取得
-	 * 
 	 * @return
 	 */
-	public List<ItemInterface> getAllRelativeItem() {
-		ArrayList<ItemInterface> itemList = new ArrayList<>(getAllLevelPick());
-		itemList.add(new PickaxeSelector(this));
-		return itemList;
-	}
+	 public List<ItemInterface> getAllRelativeItem() {
+		 ArrayList<ItemInterface> itemList = new ArrayList<>(getAllLevelPick());
+		 itemList.add(new PickaxeSelector(this));
+		 return itemList;
+	 }
 
-	@Override
+	 @Override
 	public boolean isShowItemList() {
 		return false;
 	}

@@ -17,7 +17,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class StrengthMenu implements MenuSelectorInterface {
+public class StrengthMenu implements MenuSelectorInterface{
 	private static final String INVENTOY_TITLE = "鍛冶屋メニュー";
 
 	static {
@@ -25,13 +25,13 @@ public class StrengthMenu implements MenuSelectorInterface {
 	}
 
 	public static void open(Player p, VillagerNpc npc) {
-		// NPCが無い時は通常の画面を開く
+		//NPCが無い時は通常の画面を開く
 		if (npc == null) {
 			new StrengthMenu().open(p);
 			return;
 		}
 		String data = npc.getData();
-		// データが無い時は通常の画面を開く
+		//データが無い時は通常の画面を開く
 		if (data == null || data.isEmpty()) {
 			new StrengthMenu().open(p);
 			return;
@@ -39,18 +39,19 @@ public class StrengthMenu implements MenuSelectorInterface {
 
 		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, INVENTOY_TITLE);
 
-		// 修理
+		//修理
 		createInventory.setItem(10, getButtonItem("修理", "1", Material.ANVIL, "アイテムの修理を行います。"));
 
-		// 強化
-		createInventory.setItem(12,
-				getButtonItem("強化", "2", Material.LAVA_BUCKET, "アイテムを強化します。", "強化したいアイテムと素材を", "取引画面に置いてください。"));
+		//強化
+		createInventory.setItem(12, getButtonItem("強化", "2", Material.LAVA_BUCKET,
+				"アイテムを強化します。", "強化したいアイテムと素材を", "取引画面に置いてください。"));
 
-		// 魔法石装着
-		createInventory.setItem(14, getButtonItem("魔法石装着", "3", Material.BEACON, "武器に魔法石を装着します。", "武器と魔法石を置いてください。",
+		//魔法石装着
+		createInventory.setItem(14, getButtonItem("魔法石装着", "3", Material.BEACON,
+				"武器に魔法石を装着します。", "武器と魔法石を置いてください。",
 				"成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
 
-		// クラフト
+		//クラフト
 		ItemStack craftButton = getButtonItem("アイテム製作", "4", Material.WORKBENCH, "作りたいアイテムを", "クリックしてください");
 		ItemStackUtil.setNBTTag(craftButton, "the_low_villager_id", npc.getId());
 		createInventory.setItem(16, craftButton);
@@ -64,15 +65,16 @@ public class StrengthMenu implements MenuSelectorInterface {
 	public void open(Player p) {
 		Inventory createInventory = Bukkit.createInventory(null, 9 * 3, getTitle());
 
-		// 修理
+		//修理
 		createInventory.setItem(11, getButtonItem("修理", "1", Material.ANVIL, "アイテムの修理を行います。"));
 
-		// 強化
-		createInventory.setItem(13,
-				getButtonItem("強化", "2", Material.LAVA_BUCKET, "アイテムを強化します。", "強化したいアイテムと素材を", "取引画面に置いてください。"));
+		//強化
+		createInventory.setItem(13, getButtonItem("強化", "2", Material.LAVA_BUCKET,
+				"アイテムを強化します。", "強化したいアイテムと素材を", "取引画面に置いてください。"));
 
-		// 魔法石装着
-		createInventory.setItem(15, getButtonItem("魔法石装着", "3", Material.BEACON, "武器に魔法石を装着します。", "武器と魔法石を置いてください。",
+		//魔法石装着
+		createInventory.setItem(15, getButtonItem("魔法石装着", "3", Material.BEACON,
+				"武器に魔法石を装着します。", "武器と魔法石を置いてください。",
 				"成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
 
 		p.openInventory(createInventory);
@@ -115,7 +117,6 @@ public class StrengthMenu implements MenuSelectorInterface {
 
 	/**
 	 * ボタンのIDを取得
-	 * 
 	 * @param item
 	 * @return
 	 */
@@ -127,13 +128,13 @@ public class StrengthMenu implements MenuSelectorInterface {
 		return nbtTag;
 	}
 
-	private static ItemStack getButtonItem(String name, String id, Material m, String... lore) {
-		for (int i = 0; i < lore.length; i++) {
+	private static ItemStack getButtonItem(String name, String id, Material m, String...lore) {
+		for (int i = 0; i < lore.length ; i++) {
 			lore[i] = ChatColor.GREEN + lore[i];
 		}
-		// 強化
+		//強化
 		ItemStack itemStack = ItemStackUtil.getItem(ChatColor.WHITE + "" + ChatColor.BOLD + name, m, lore);
-		// IDをつける
+		//IDをつける
 		ItemStackUtil.setNBTTag(itemStack, THE_LOW_BACKSMITH_MENU_BUTTON_ID, id);
 
 		return itemStack;

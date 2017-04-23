@@ -10,10 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class ShopItemCommand implements CommandExecutor {
+public class ShopItemCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 		if (paramArrayOfString.length == 0) {
 			return false;
@@ -27,8 +28,7 @@ public class ShopItemCommand implements CommandExecutor {
 
 		Player p = (Player) paramCommandSender;
 		ItemStack itemInHand = p.getItemInHand();
-		CustomShopItem customShopItem = new CustomShopItem(itemInHand, price, itemInHand.getAmount(),
-				RandomStringUtils.randomAlphanumeric(5));
+		CustomShopItem customShopItem = new CustomShopItem(itemInHand, price, itemInHand.getAmount(), RandomStringUtils.randomAlphanumeric(5));
 		p.setItemInHand(customShopItem.getCustomShopItemTemplate());
 		p.updateInventory();
 		return true;

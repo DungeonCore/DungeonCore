@@ -5,7 +5,7 @@ import lbn.mob.mobskill.MobSkillRunnable;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-public class MobSkillKeepAwayTarget extends MobSkillRunnable {
+public class MobSkillKeepAwayTarget extends MobSkillRunnable{
 
 	public MobSkillKeepAwayTarget(String data) {
 		super(data);

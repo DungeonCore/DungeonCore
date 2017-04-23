@@ -12,9 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractTeleportKey extends AbstractKeyItem {
+public abstract class AbstractTeleportKey extends AbstractKeyItem{
 	public AbstractTeleportKey(Location loc) {
-		this.loc = loc;
+		this. loc = loc;
 	}
 
 	protected Location loc;
@@ -26,10 +26,10 @@ public abstract class AbstractTeleportKey extends AbstractKeyItem {
 			new ParticleData(ParticleType.portal, 50).run(loc);
 			p.playSound(loc, Sound.PORTAL_TRAVEL, 1, 1);
 			loc.setDirection(p.getLocation().getDirection());
-			// TPする
+			//TPする
 			p.teleport(loc);
 
-			// アイテムを減らせる
+			//アイテムを減らせる
 			ItemStack itemInHand = p.getItemInHand();
 			if (itemInHand.getAmount() == 1) {
 				p.setItemInHand(new ItemStack(Material.AIR));

@@ -8,7 +8,7 @@ import lbn.mobspawn.point.MobSpawnerPoint;
 
 import org.bukkit.Location;
 
-public class SpredSheetSpawnBossGetter extends SpletSheetSpawnMobGetter {
+public class SpredSheetSpawnBossGetter extends SpletSheetSpawnMobGetter{
 
 	public SpredSheetSpawnBossGetter(int id) {
 		super(id);
@@ -30,7 +30,8 @@ public class SpredSheetSpawnBossGetter extends SpletSheetSpawnMobGetter {
 	}
 
 	@Override
-	public MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxMobCount, SpawnLevel level) {
+	public MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxMobCount,
+			SpawnLevel level) {
 		return new BossSpawnPoint(id, loc, this);
 	}
 

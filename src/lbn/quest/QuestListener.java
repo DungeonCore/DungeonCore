@@ -29,7 +29,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class QuestListener implements Listener {
+public class QuestListener implements Listener{
 	@EventHandler
 	public void onPickUp(PlayerPickupItemEvent e) {
 		Item item = e.getItem();
@@ -52,7 +52,7 @@ public class QuestListener implements Listener {
 		for (PickItemQuest pickItemQuest : quest) {
 			boolean isProcessing = session.getProcessingStatus(pickItemQuest) == QuestProcessingStatus.PROCESSING;
 			pickItemQuest.onPickUp(e, session);
-			// 終了条件を満たしているなら終了する
+			//終了条件を満たしているなら終了する
 			if (isProcessing) {
 				onSatisfyCondition(player, pickItemQuest);
 			}
@@ -63,13 +63,13 @@ public class QuestListener implements Listener {
 	public void onStrength(PlayerStrengthFinishEvent e) {
 		Player player = e.getPlayer();
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(player);
-		// 今実行中のクエスト中からStrengthItemQuestを探しだす
+		//今実行中のクエスト中からStrengthItemQuestを探しだす
 		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.STRENGTH_ITEM_QUEST);
 		for (Quest quest : doingQuest) {
-			// 実行中ならクエストの処理を行う
+			//実行中ならクエストの処理を行う
 			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
-				((StrengthItemQuest) quest).onStrength(e, questSession);
-				// 終了条件を満たしているなら終了する
+				((StrengthItemQuest)quest).onStrength(e, questSession);
+				//終了条件を満たしているなら終了する
 				onSatisfyCondition(player, quest);
 			}
 
@@ -79,12 +79,12 @@ public class QuestListener implements Listener {
 	@EventHandler
 	public void onKillMob(EntityDeathEvent e) {
 		AbstractMob<?> mob = MobHolder.getMob(e);
-		// 死んだのがnull mobなら何もしない
+		//死んだのがnull mobなら何もしない
 		if (mob.isNullMob()) {
 			return;
 		}
 
-		// 最後に倒したのがPlayerでないなら何もしない
+		//最後に倒したのがPlayerでないなら何もしない
 		Player p = LastDamageManager.getLastDamagePlayer(e.getEntity());
 		if (p == null) {
 			return;
@@ -92,13 +92,13 @@ public class QuestListener implements Listener {
 
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 
-		// 今実行中のクエスト中からStrengthItemQuestを探しだす
+		//今実行中のクエスト中からStrengthItemQuestを探しだす
 		Set<Quest> doingQuest = questSession.getDoingQuestListByType(QuestType.KILL_MOB_QUEST);
 		for (Quest quest : doingQuest) {
-			// 実行中ならクエストの処理を行う
+			//実行中ならクエストの処理を行う
 			if (questSession.getProcessingStatus(quest) == QuestProcessingStatus.PROCESSING) {
-				((KillMobQuest) quest).onDeath(e, questSession, mob);
-				// 終了条件を満たしたなら村人の場所へ帰らせる
+				((KillMobQuest)quest).onDeath(e, questSession, mob);
+				//終了条件を満たしたなら村人の場所へ帰らせる
 				onSatisfyCondition(p, quest);
 			}
 

@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class GetItemSign extends InHandItemClickSign {
+public class GetItemSign extends InHandItemClickSign{
 
 	public GetItemSign(PlayerInteractEvent e) {
 		super(e);

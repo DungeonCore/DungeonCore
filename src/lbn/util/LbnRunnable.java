@@ -24,7 +24,6 @@ public abstract class LbnRunnable extends BukkitRunnable {
 	boolean isFirst = true;
 
 	int runCount = 0;
-
 	@Override
 	final public void run() {
 		if (isFirst) {
@@ -48,7 +47,6 @@ public abstract class LbnRunnable extends BukkitRunnable {
 
 	/**
 	 * 0からスタート
-	 * 
 	 * @return
 	 */
 	public int getRunCount() {
@@ -59,8 +57,8 @@ public abstract class LbnRunnable extends BukkitRunnable {
 
 	@Deprecated
 	@Override
-	public synchronized BukkitTask runTaskLaterAsynchronously(Plugin plugin, long delay)
-			throws IllegalArgumentException, IllegalStateException {
+	public synchronized BukkitTask runTaskLaterAsynchronously(Plugin plugin,
+			long delay) throws IllegalArgumentException, IllegalStateException {
 		return super.runTaskLaterAsynchronously(plugin, delay);
 	}
 
@@ -73,24 +71,24 @@ public abstract class LbnRunnable extends BukkitRunnable {
 
 	@Deprecated
 	@Override
-	public synchronized BukkitTask runTaskTimerAsynchronously(Plugin plugin, long delay, long period)
-			throws IllegalArgumentException, IllegalStateException {
+	public synchronized BukkitTask runTaskTimerAsynchronously(Plugin plugin,
+			long delay, long period) throws IllegalArgumentException,
+			IllegalStateException {
 		return super.runTaskTimerAsynchronously(plugin, delay, period);
 	}
 
 	boolean isLater = false;
 
 	@Override
-	public synchronized BukkitTask runTaskTimer(Plugin plugin, long delay, long period)
-			throws IllegalArgumentException, IllegalStateException {
+	public synchronized BukkitTask runTaskTimer(Plugin plugin, long delay,
+			long period) throws IllegalArgumentException, IllegalStateException {
 		this.delay = delay;
 		this.period = period;
 		aliveRunnableList.add(this);
 		return super.runTaskTimer(plugin, delay, period);
 	}
 
-	public synchronized BukkitTask runTaskTimer(long periodTick)
-			throws IllegalArgumentException, IllegalStateException {
+	public synchronized BukkitTask runTaskTimer(long periodTick) throws IllegalArgumentException, IllegalStateException {
 		return runTaskTimer(Main.plugin, 0, periodTick);
 	}
 

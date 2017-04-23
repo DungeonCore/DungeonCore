@@ -38,10 +38,8 @@ public class ItemManager {
 			registItem(itemInterface);
 		}
 	}
-
 	/**
 	 * itemを登録する
-	 * 
 	 * @param item
 	 */
 	public static void registItem(ItemInterface item) {
@@ -51,7 +49,7 @@ public class ItemManager {
 				registItem(clazz, item);
 			}
 		}
-		// 全てのアイテムを登録する
+		//全てのアイテムを登録する
 		allItemNameList.put(ChatColor.stripColor(item.getItemName()).toUpperCase(), item);
 		allItemIdList.put(ChatColor.stripColor(item.getId()).toUpperCase(), item);
 
@@ -66,19 +64,18 @@ public class ItemManager {
 
 	private static void registItem(Class<?> clazz, ItemInterface item) {
 		if (!allItemNameClassList.containsKey(clazz)) {
-			allItemNameClassList.put(clazz, new HashMap<String, ItemInterface>());
+			allItemNameClassList.put(clazz,  new HashMap<String, ItemInterface>());
 		}
 		allItemNameClassList.get(clazz).put(ChatColor.stripColor(item.getItemName()).toUpperCase(), item);
 
 		if (!allItemIdClassList.containsKey(clazz)) {
-			allItemIdClassList.put(clazz, new HashMap<String, ItemInterface>());
+			allItemIdClassList.put(clazz,  new HashMap<String, ItemInterface>());
 		}
 		allItemIdClassList.get(clazz).put(item.getId(), item);
 	}
 
 	/**
 	 * 全てのアイテムを取得する
-	 * 
 	 * @return
 	 */
 	public static List<ItemInterface> getAllItem() {
@@ -87,7 +84,6 @@ public class ItemManager {
 
 	/**
 	 * 全てのアイテム名を取得する
-	 * 
 	 * @return
 	 */
 	public static Set<String> getAllItemName() {
@@ -96,7 +92,6 @@ public class ItemManager {
 
 	/**
 	 * clazz, itemに対応したアイテムを取得する
-	 * 
 	 * @param clazz
 	 * @param item
 	 * @return
@@ -107,7 +102,7 @@ public class ItemManager {
 			return null;
 		}
 
-		// IDが存在するとき
+		//IDが存在するとき
 		String id = ItemStackUtil.getId(item);
 		if (id != null && !id.isEmpty()) {
 			HashMap<String, T> hashMap = (HashMap<String, T>) allItemIdClassList.get(clazz);
@@ -119,31 +114,31 @@ public class ItemManager {
 			}
 		}
 
-		// 名前から取得
+		//名前から取得
 		String name = ItemStackUtil.getName(item);
 		if (name == null || name.isEmpty()) {
 			return null;
 		}
 
-		// ヘルスクリスタルだけ別処理
+		//ヘルスクリスタルだけ別処理
 		if (!name.contains("CRYSTAL")) {
 			return null;
 		}
 
 		name = ChatColor.stripColor(name).toUpperCase();
-		// interfaceが登録されていない場合は無視する
+		//interfaceが登録されていない場合は無視する
 		if (!allItemNameClassList.containsKey(clazz)) {
 			return null;
 		}
 
 		HashMap<String, T> hashMap2 = (HashMap<String, T>) allItemNameClassList.get(clazz);
-		// +1などがついてない場合はそのまま返す
+		//+1などがついてない場合はそのまま返す
 		if (hashMap2.containsKey(name)) {
 			return hashMap2.get(name);
 		}
-		// +1などが付いている場合
+		//+1などが付いている場合
 		if (name.contains("+")) {
-			// +1などを取り除く
+			//+1などを取り除く
 			name = name.substring(0, name.indexOf("+")).trim();
 			return hashMap2.get(name);
 		}
@@ -152,14 +147,13 @@ public class ItemManager {
 
 	/**
 	 * 指定したItemが指定したInterfaceを実装しているかどうかを調べる。(instanceOfの高速版)
-	 * 
 	 * @param clazz
 	 * @param item
 	 * @return
 	 */
 	public static boolean isImplemental(Class<? extends ItemInterface> clazz, ItemInterface item) {
 		HashMap<String, ItemInterface> hashMap = allItemIdClassList.get(clazz);
-		// 指定したInterfaceを実装しているItemがない場合はfalse
+		//指定したInterfaceを実装しているItemがない場合はfalse
 		if (hashMap == null) {
 			return false;
 		}
@@ -170,10 +164,10 @@ public class ItemManager {
 		if (item == null) {
 			return null;
 		}
-		// IDから取るのでコメントアウト
+		//IDから取るのでコメントアウト
 		String id = ItemStackUtil.getId(item);
 		if (id == null) {
-			// IDがない場合は名前から取る
+			//IDがない場合は名前から取る
 			String name = ItemStackUtil.getName(item);
 			return getCustomItemByName(name);
 		} else {
@@ -195,14 +189,14 @@ public class ItemManager {
 		}
 
 		name = ChatColor.stripColor(name).toUpperCase();
-		// +1などがついてない場合はそのまま返す
+		//+1などがついてない場合はそのまま返す
 		if (allItemNameList.containsKey(name)) {
 			return allItemNameList.get(name);
 		}
 
-		// +1などが付いている場合
+		//+1などが付いている場合
 		if (name.contains("+")) {
-			// +1などを取り除く
+			//+1などを取り除く
 			name = name.substring(0, name.indexOf("+")).trim();
 			return allItemNameList.get(name);
 		}
@@ -215,7 +209,6 @@ public class ItemManager {
 
 	/**
 	 * 同じCustomItemならTRUE
-	 * 
 	 * @param item1
 	 * @param item2
 	 * @return
@@ -227,10 +220,10 @@ public class ItemManager {
 		return id1 != null && id1.equals(id2);
 	}
 
-	static {
+	static{
 		registItem(new StrengthScrollArmor());
 		registItem(new StrengthScrollWeapon());
-		// 鉱石
+		//鉱石
 		registItem(new MagicStoneOre(MagicStoneOreType.DIAOMOD_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.IRON_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.GOLD_ORE));
@@ -238,13 +231,13 @@ public class ItemManager {
 		registItem(new MagicStoneOre(MagicStoneOreType.COAL_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.REDSTONE_ORE));
 		registItem(new MagicStoneOre(MagicStoneOreType.LAPIS_ORE));
-		// ピッケル
+		//ピッケル
 		registItem(new WoodPickAxe(0).getAllRelativeItem());
 		registItem(new StonePickaxe(0).getAllRelativeItem());
 		registItem(new GoldPickaxe(0).getAllRelativeItem());
 		registItem(new IronPickaxe(0).getAllRelativeItem());
 		registItem(new DiamondPickaxe(0).getAllRelativeItem());
-		// お金
+		//お金
 		registItem(GalionItem.getInstance(0));
 	}
 }

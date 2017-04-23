@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class ProtectionArmor extends WeaponSkillForOneType {
+public class ProtectionArmor extends WeaponSkillForOneType{
 
 	public ProtectionArmor() {
 		super(ItemType.SWORD);

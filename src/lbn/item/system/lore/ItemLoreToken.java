@@ -25,7 +25,6 @@ public class ItemLoreToken {
 
 	/**
 	 * もしLineがTitleに相当すればTRUEを返す
-	 * 
 	 * @param line
 	 * @return
 	 */
@@ -38,8 +37,7 @@ public class ItemLoreToken {
 
 	/**
 	 * @param title
-	 * @param isFormated
-	 *            すでにフォーマットが終わってるならTRUE
+	 * @param isFormated すでにフォーマットが終わってるならTRUE
 	 */
 	public ItemLoreToken(String title, boolean isFormated) {
 		lore.add("");
@@ -53,7 +51,7 @@ public class ItemLoreToken {
 	}
 
 	public String getTag(String title) {
-		// すでにTagが付いていたら何もしない
+		//すでにTagが付いていたら何もしない
 		if (title.contains(TITLE_TAG)) {
 			return "";
 		}
@@ -62,7 +60,6 @@ public class ItemLoreToken {
 
 	/**
 	 * Loreを追加する
-	 * 
 	 * @param value
 	 */
 	public void addLore(String value) {
@@ -73,7 +70,6 @@ public class ItemLoreToken {
 
 	/**
 	 * フォーマットを変えないでそのまま追加する
-	 * 
 	 * @param value
 	 */
 	public void addLoreAsOriginal(String value) {
@@ -98,7 +94,6 @@ public class ItemLoreToken {
 
 	/**
 	 * 登録したLoreをタイトル付きで取得
-	 * 
 	 * @return
 	 */
 	public List<String> getLoreWithTitle() {
@@ -107,11 +102,10 @@ public class ItemLoreToken {
 
 	/**
 	 * 追加したLoreを取得する(タイトルは含まない)
-	 * 
 	 * @return
 	 */
 	public List<String> getLore() {
-		return lore.subList(2, lore.size());
+			return lore.subList(2, lore.size());
 	}
 
 	/**

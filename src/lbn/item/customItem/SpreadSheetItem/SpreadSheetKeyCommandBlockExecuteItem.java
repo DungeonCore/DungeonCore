@@ -11,10 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class SpreadSheetKeyCommandBlockExecuteItem extends CommandBlockExceteKey {
+public class SpreadSheetKeyCommandBlockExecuteItem extends CommandBlockExceteKey{
 
-	public SpreadSheetKeyCommandBlockExecuteItem(String name, String id, int price, String command, String dungeon,
-			Location dungeonLoc) {
+	public SpreadSheetKeyCommandBlockExecuteItem(String name, String id, int price,
+			String command, String dungeon, Location dungeonLoc) {
 		this.name = name;
 		this.id = id;
 		this.price = price;

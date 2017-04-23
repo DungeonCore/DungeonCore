@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
  * 指定した時間内に指定した回数のクリックを行う際の処理
  *
  */
-public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
+public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType{
 	public WeaponSkillWithMultiClick(ItemType type) {
 		super(type);
 	}
@@ -26,14 +26,14 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
 	@Override
 	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		// クリックしたPlayerを保存する
+		//クリックしたPlayerを保存する
 		UUID uniqueId = p.getUniqueId();
 
-		// 発動中なら処理をおこなう
+		//発動中なら処理をおこなう
 		if (executePlayer.containsKey(uniqueId)) {
 			boolean isEnd = onClick2(p, item, customItem);
 			if (isEnd) {
-				// 発動中のパーティクルを終了する
+				//発動中のパーティクルを終了する
 				LbnRunnable remove = executePlayer.remove(uniqueId);
 				remove.cancel();
 				endSkill(p, item);
@@ -41,7 +41,7 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 			return isEnd;
 		}
 
-		// 5tickに一度、パーティクルを発生させる
+		//5tickに一度、パーティクルを発生させる
 		LbnRunnable runTaskTimer = new LbnRunnable() {
 			@Override
 			public void run2() {
@@ -64,7 +64,6 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
 	/**
 	 * スキル発動時の処理
-	 * 
 	 * @param p
 	 * @param item
 	 */
@@ -72,7 +71,6 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
 	/**
 	 * スキル終了時の処理
-	 * 
 	 * @param p
 	 * @param item
 	 */
@@ -80,7 +78,6 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
 	/**
 	 * 発動中のクリックをした時の処理。
-	 * 
 	 * @param p
 	 * @param item
 	 * @param customItem
@@ -90,21 +87,18 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
 	/**
 	 * 効果が続く時間
-	 * 
 	 * @return
 	 */
 	abstract public double getTimeLimit();
 
 	/**
 	 * 攻撃待機中のパーティクル
-	 * 
 	 * @param loc
 	 * @param i
 	 */
 	abstract protected void runWaitParticleData(Location loc, int i);
 
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
-			PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
 	}
 }

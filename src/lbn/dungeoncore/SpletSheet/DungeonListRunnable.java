@@ -7,6 +7,7 @@ import lbn.common.place.dungeon.DungeonList;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 
+
 public class DungeonListRunnable extends AbstractComplexSheetRunable {
 
 	public DungeonListRunnable(CommandSender sender) {
@@ -20,7 +21,7 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "id", "name", "type", "tploc", "entranceloc", "startloc", "level" };
+		return new String[] {"id",  "name", "type", "tploc", "entranceloc", "startloc", "level"};
 	}
 
 	int count = -1;

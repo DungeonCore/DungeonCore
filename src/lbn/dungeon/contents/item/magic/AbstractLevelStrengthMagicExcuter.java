@@ -5,9 +5,10 @@ import lbn.item.system.strength.StrengthOperator;
 
 import org.bukkit.inventory.ItemStack;
 
-public abstract class AbstractLevelStrengthMagicExcuter implements MagicExcuteable {
+public abstract class AbstractLevelStrengthMagicExcuter implements MagicExcuteable{
 
-	public AbstractLevelStrengthMagicExcuter(String id, ItemStack item, boolean isShowMessage) {
+	public AbstractLevelStrengthMagicExcuter(String id, ItemStack item,
+			boolean isShowMessage) {
 		this.id = id;
 		this.item = item;
 		this.isShowMessage = isShowMessage;

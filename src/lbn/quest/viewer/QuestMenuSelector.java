@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class QuestMenuSelector extends MenuSelector {
+public class QuestMenuSelector extends MenuSelector{
 	public static QuestMenuSelectorRunnable run = new QuestMenuSelectorRunnable();
 
 	static {
@@ -44,7 +44,7 @@ public class QuestMenuSelector extends MenuSelector {
 	}
 }
 
-class QuestMenuSelectorRunnable implements SelectRunnable {
+class QuestMenuSelectorRunnable implements SelectRunnable{
 	static {
 		MenuSelector menuSelecor = new MenuSelector("quest_confirm");
 		menuSelecor.regist();
@@ -53,16 +53,15 @@ class QuestMenuSelectorRunnable implements SelectRunnable {
 
 	@Override
 	public void run(Player p, ItemStack item) {
-		// クエストアイテムでないとき
+		//クエストアイテムでないとき
 		if (!QuestSelectViewIcon.isThisItem(item)) {
-			// Message.sendMessage(p, ChatColor.RED +
-			// "エラーが発生しました。このクエストを開始できません。(1)");
-			// p.closeInventory();
-			// 何もしない
+//			Message.sendMessage(p, ChatColor.RED + "エラーが発生しました。このクエストを開始できません。(1)");
+//			p.closeInventory();
+			//何もしない
 			return;
 		}
 
-		// クエストが存在しないとき
+		//クエストが存在しないとき
 		Quest questByItem = QuestSelectViewIcon.getQuestByItem(item);
 		if (questByItem == null) {
 			Message.sendMessage(p, ChatColor.RED + "エラーが発生しました。このクエストを開始できません。(2)");
@@ -74,3 +73,4 @@ class QuestMenuSelectorRunnable implements SelectRunnable {
 		menuSelecor.open(p);
 	}
 }
+

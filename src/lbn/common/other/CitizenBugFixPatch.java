@@ -37,8 +37,7 @@ public class CitizenBugFixPatch {
 									iterator.remove();
 									// valueがnullでないなら値を入れる
 									if (next.getValue() != null) {
-										addMap.put(((Class<?>) next.getKey()).getSimpleName(),
-												(Class<?>) next.getValue());
+										addMap.put(((Class<?>) next.getKey()).getSimpleName(), (Class<?>) next.getValue());
 									}
 								}
 							}

@@ -17,7 +17,8 @@ public class BeneEffect {
 		return name;
 	}
 
-	public void setDamage(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+	public void setDamage(Player me, EntityDamageEvent e,
+			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
 			LivingEntity mob) {
 
 	}

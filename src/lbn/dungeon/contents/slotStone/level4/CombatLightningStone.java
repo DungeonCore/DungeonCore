@@ -10,7 +10,7 @@ import lbn.util.LivingEntityUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
-public class CombatLightningStone extends CombatSlot {
+public class CombatLightningStone extends CombatSlot{
 
 	@Override
 	public String getSlotName() {
@@ -38,7 +38,6 @@ public class CombatLightningStone extends CombatSlot {
 	}
 
 	static Random rnd = new Random();
-
 	@Override
 	public void onCombat(PlayerCombatEntityEvent e) {
 		int nextInt = rnd.nextInt(4);

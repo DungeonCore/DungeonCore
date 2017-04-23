@@ -58,7 +58,6 @@ public class BookManager {
 
 	/**
 	 * 本を開く
-	 * 
 	 * @param p
 	 * @param id
 	 */

@@ -6,7 +6,7 @@ import lbn.common.particle.ParticleType;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 
-public class KillEffectSlotStone2 extends AbstractKillEffectSlotStone {
+public class KillEffectSlotStone2 extends AbstractKillEffectSlotStone{
 
 	@Override
 	protected String getEffectName() {

@@ -44,10 +44,10 @@ public abstract class AbstractMob<T extends Entity> {
 	protected Random rnd = new Random();
 
 	boolean isBoss = this instanceof BossMobable;
-
 	public boolean isBoss() {
 		return isBoss;
 	}
+
 
 	boolean isSummon = this instanceof SummonMobable;
 
@@ -57,7 +57,6 @@ public abstract class AbstractMob<T extends Entity> {
 
 	/**
 	 * LbnNBTTagを取得
-	 * 
 	 * @return
 	 */
 	public LbnMobTag getLbnMobTag() {
@@ -85,7 +84,6 @@ public abstract class AbstractMob<T extends Entity> {
 
 	/**
 	 * クリエイティブの時、ダメージ量を表示させる
-	 * 
 	 * @param mob
 	 * @param damager
 	 * @param e
@@ -100,20 +98,18 @@ public abstract class AbstractMob<T extends Entity> {
 		if (player == null) {
 			return;
 		}
-		e.setDamage(e.getDamage());
+		e.setDamage(e.getDamage() );
 
 		if (mob.getType().isAlive()) {
-			// クエリの時だけダメージを表示させる
+			//クエリの時だけダメージを表示させる
 			if (player.getGameMode() == GameMode.CREATIVE) {
 				new BukkitRunnable() {
-					double health = ((Damageable) mob).getHealth();
-
+					double health = ((Damageable)mob).getHealth();
 					@Override
 					public void run() {
-						Message.sendMessage(player, "{0}:{1}ダメージ！！(MobHP : {2}/{3})", type.getText(),
-								JavaUtil.round(health - ((Damageable) mob).getHealth(), 2),
-								JavaUtil.round(((Damageable) mob).getHealth(), 2),
-								JavaUtil.round(((Damageable) mob).getMaxHealth(), 2));
+						Message.sendMessage(player, "{0}:{1}ダメージ！！(MobHP : {2}/{3})",
+								type.getText(), JavaUtil.round(health - ((Damageable)mob).getHealth(), 2),
+								JavaUtil.round(((Damageable)mob).getHealth(), 2), JavaUtil.round(((Damageable)mob).getMaxHealth(), 2));
 					}
 				}.runTaskLater(Main.plugin, 2);
 			}
@@ -123,13 +119,12 @@ public abstract class AbstractMob<T extends Entity> {
 	abstract public void onOtherDamage(EntityDamageEvent e);
 
 	public void onDeath(EntityDeathEvent e) {
-		// もしモンスターの上にモンスターが載っているとして上のモンスターが死んだら下のモンスターも殺す
+		//もしモンスターの上にモンスターが載っているとして上のモンスターが死んだら下のモンスターも殺す
 		if (isRiding()) {
 			List<Entity> nearbyEntities = e.getEntity().getNearbyEntities(1, 1, 1);
 			for (Entity entity : nearbyEntities) {
 				if (entity.getType().isAlive()) {
-					if (((LivingEntity) entity).getPassenger() != null
-							&& ((LivingEntity) entity).getPassenger().isDead()) {
+					if (((LivingEntity)entity).getPassenger() != null && ((LivingEntity)entity).getPassenger().isDead()) {
 						entity.remove();
 					}
 				}
@@ -147,28 +142,25 @@ public abstract class AbstractMob<T extends Entity> {
 
 	}
 
-	/**
-	 * モンスターがProjectileを発射した時
-	 * 
-	 * @param mob
-	 * @param target
-	 * @param e
-	 */
-	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	 /**
+	  * モンスターがProjectileを発射した時
+	  * @param mob
+	  * @param target
+	  * @param e
+	  */
+	 public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
 	}
 
-	/**
-	 * Null mobならTRUE
-	 * 
-	 * @return
-	 */
+	 /**
+	  * Null mobならTRUE
+	  * @return
+	  */
 	public boolean isNullMob() {
 		return false;
 	}
 
 	/**
 	 * モンスターがターゲットを定めた時
-	 * 
 	 * @param event
 	 */
 	public void onTarget(EntityTargetLivingEntityEvent event) {
@@ -176,7 +168,6 @@ public abstract class AbstractMob<T extends Entity> {
 
 	/**
 	 * モンスターをスポーンさせる
-	 * 
 	 * @param loc
 	 * @return
 	 */
@@ -187,16 +178,16 @@ public abstract class AbstractMob<T extends Entity> {
 		}
 
 		if ((getName() != null || !getName().isEmpty()) && entity.getType().isAlive()) {
-			((LivingEntity) entity).setCustomName(getName());
+			((LivingEntity)entity).setCustomName(getName());
 		}
 
-		// ボスと召喚モブの時は名前をずっと表示する
+		//ボスと召喚モブの時は名前をずっと表示する
 		if ((isBoss() || SummonPlayerManager.isSummonMob(entity)) && entity.getType().isAlive()) {
-			((LivingEntity) entity).setCustomNameVisible(true);
+			((LivingEntity)entity).setCustomNameVisible(true);
 		}
 
 		if (entity.getType().isAlive()) {
-			// eventを発火させる
+			//eventを発火させる
 			PlayerCustomMobSpawnEvent event = new PlayerCustomMobSpawnEvent((LivingEntity) entity);
 			Bukkit.getServer().getPluginManager().callEvent(event);
 		}
@@ -206,7 +197,7 @@ public abstract class AbstractMob<T extends Entity> {
 
 	@SuppressWarnings("unchecked")
 	protected T spawnPrivate(Location loc) {
-		T spawnCreature = (T) loc.getWorld().spawnEntity(loc, getEntityType());
+		T spawnCreature = (T)loc.getWorld().spawnEntity(loc, getEntityType());
 		return spawnCreature;
 	}
 
@@ -226,7 +217,6 @@ public abstract class AbstractMob<T extends Entity> {
 
 	/**
 	 * ドロップするアイテムを取得する
-	 * 
 	 * @param lastDamagePlayer
 	 * @return
 	 */
@@ -235,49 +225,47 @@ public abstract class AbstractMob<T extends Entity> {
 	}
 
 	/**
-	 * 現在の指定されたアイテムの中で現在受けていないクエストアイテムを削除する
-	 * 
+	 *	現在の指定されたアイテムの中で現在受けていないクエストアイテムを削除する
 	 * @param p
 	 * @param itemList
 	 */
 	public static void removeOtherQuestItem(Player p, List<ItemStack> itemList) {
-		// DropItemが存在しないなら何もしない
+		//DropItemが存在しないなら何もしない
 		if (itemList.isEmpty()) {
 			return;
 		}
 
-		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p.getPlayer());
-		;
+		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p.getPlayer());;
 
-		// DROPするのがクエストアイテムの場合、クエスト進行中でないからドロップさせない
+		//DROPするのがクエストアイテムの場合、クエスト進行中でないからドロップさせない
 		Iterator<ItemStack> iterator = itemList.iterator();
-		label1: while (iterator.hasNext()) {
+		label1:
+		while (iterator.hasNext()) {
 			ItemStack next = iterator.next();
 			ItemInterface customItem = ItemManager.getCustomItem(next);
-			// カスタムアイテムでないなら何もしない
+			//カスタムアイテムでないなら何もしない
 			if (customItem == null) {
 				continue;
 			}
-			// クエストアイテムでないなら何もしない
+			//クエストアイテムでないなら何もしない
 			if (!customItem.isQuestItem()) {
 				continue;
 			}
-			// クエスト実行中か調べる
+			//クエスト実行中か調べる
 			Set<PickItemQuest> quest = PickItemQuest.getQuest(customItem);
 			for (PickItemQuest pickItemQuest : quest) {
-				// 1つでもクエストが実行中なら許可する
+				//1つでもクエストが実行中なら許可する
 				if (questSession.getProcessingStatus(pickItemQuest) == QuestProcessingStatus.PROCESSING) {
 					continue label1;
 				}
 			}
-			// 一つも関連クエストが実行されていないなら許可しない
+			//一つも関連クエストが実行されていないなら許可しない
 			iterator.remove();
 		}
 	}
 
 	/**
 	 * モンスターの名前を更新
-	 * 
 	 * @param islater
 	 */
 	public void updateName(boolean islater) {
@@ -285,9 +273,8 @@ public abstract class AbstractMob<T extends Entity> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null && obj instanceof AbstractMob<?>) {
-			return ((AbstractMob<?>) obj).getName().equals(getName())
-					&& ((AbstractMob<?>) obj).getEntityType() == getEntityType();
+		if (obj  != null && obj instanceof AbstractMob<?>) {
+			return ((AbstractMob<?>)obj).getName().equals(getName()) && ((AbstractMob<?>)obj).getEntityType() == getEntityType();
 		}
 		return false;
 	}
@@ -307,32 +294,31 @@ public abstract class AbstractMob<T extends Entity> {
 
 	/**
 	 * PlayerにExpを加算させる
-	 * 
 	 * @param entity
 	 * @param type
 	 * @param p
 	 */
 	public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
-		// コウモリの場合は経験値を加算しない
+		//コウモリの場合は経験値を加算しない
 		if (entity.getType() == EntityType.BAT) {
 			return;
 		}
 
-		// EXPを与える対象のLEVEL TYPEが存在しない時は無視
+		//EXPを与える対象のLEVEL TYPEが存在しない時は無視
 		if (type.getLevelType() == null) {
 			return;
 		}
 
-		// EXPを加算する
+		//EXPを加算する
 		AbstractMob<?> mob = MobHolder.getMob(entity);
 		int exp = getExp(type);
-		double health = ((Damageable) entity).getMaxHealth();
+		double health = ((Damageable)entity).getMaxHealth();
 
-		// 体力の1.3倍
+		//体力の1.3倍
 		if (mob.isBoss()) {
 			exp = (int) (health * 1.3);
 		} else {
-			// 9~16まで体力に合わせて経験値を決める
+			//9~16まで体力に合わせて経験値を決める
 			if (exp == -1) {
 				if (health < 20) {
 					exp = 9;

@@ -10,10 +10,10 @@ import org.bukkit.entity.Player;
 
 public class QuestSelectorViewer {
 	public static void openSelector(CustomNpcInterface villager, Player p) {
-		// 実行可能クエスト
+		//実行可能クエスト
 		List<Quest> canStartQuestList = NpcQuestHolder.getAvailableQuestList(villager, p);
 
-		// 実行可能クエストがないなら何もしない
+		//実行可能クエストがないなら何もしない
 		if (canStartQuestList.isEmpty()) {
 			return;
 		}
@@ -21,3 +21,4 @@ public class QuestSelectorViewer {
 		questMenuSelector.open(p);
 	}
 }
+

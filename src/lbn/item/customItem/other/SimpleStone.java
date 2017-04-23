@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import lbn.item.customItem.AbstractItem;
 
-public class SimpleStone extends AbstractItem {
+public class SimpleStone extends AbstractItem{
 
 	@Override
 	public String getItemName() {
@@ -29,7 +29,7 @@ public class SimpleStone extends AbstractItem {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "ただの石ころ" };
+		return new String[]{"ただの石ころ"};
 	}
 
 }

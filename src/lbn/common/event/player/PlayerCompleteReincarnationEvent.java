@@ -12,7 +12,6 @@ public class PlayerCompleteReincarnationEvent extends TheLowPlayerEvent {
 
 	/**
 	 * 転生が完了した時のEvent
-	 * 
 	 * @param player
 	 * @param data
 	 */
@@ -23,7 +22,6 @@ public class PlayerCompleteReincarnationEvent extends TheLowPlayerEvent {
 
 	/**
 	 * 今回の転生の転生データを取得する
-	 * 
 	 * @return
 	 */
 	public OneReincarnationData getReincarnationData() {
@@ -43,7 +41,6 @@ public class PlayerCompleteReincarnationEvent extends TheLowPlayerEvent {
 
 	/**
 	 * どのLevelTypeを転生したか
-	 * 
 	 * @return
 	 */
 	public LevelType getLevelType() {

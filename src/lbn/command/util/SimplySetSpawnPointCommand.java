@@ -41,7 +41,7 @@ import org.bukkit.util.Vector;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 
-public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter {
+public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter{
 	static HashMultimap<Player, MobLocation> create = HashMultimap.create();
 	static HashMap<Player, MobLocation> lastSet = new HashMap<Player, MobLocation>();
 	static HashSet<Player> begin = new HashSet<Player>();
@@ -52,7 +52,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		Player p = (Player) arg0;
 		if (arg3.length == 0) {
-			return false;
+			return  false;
 		}
 
 		String operate = arg3[0].toLowerCase();
@@ -91,10 +91,9 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 
 		new LbnRunnable() {
 			int i = 0;
-
 			@Override
 			public void run2() {
-				for (; i < allList.size() || (i != 0 && i % 2000 == 0); i++) {
+				for (;i < allList.size() || (i != 0 && i % 2000 == 0); i++ ) {
 					MobSpawnerPoint mobSpawnerPoint = allList.get(i);
 					if (look_flg) {
 						Chunk chunk = mobSpawnerPoint.getChunk();
@@ -159,7 +158,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 			return;
 		}
 
-		// ピンク羊毛を削除する
+		//ピンク羊毛を削除する
 		mobLocation.setBlock(Material.AIR, 0);
 		create.remove(p, mobLocation);
 		lastSet.remove(p);
@@ -181,18 +180,17 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 			return;
 		}
 
-		// スプレットシートに書き込む
+		//スプレットシートに書き込む
 		SpawnPointSheetRunnable spawnPointSheetRunnable = new SpawnPointSheetRunnable(p);
 		String memo = p.getName();
 
 		Set<MobLocation> set = create.get(p);
 		for (MobLocation mobLocation : set) {
-			// getterにセット
+			//getterにセット
 			SimpleMobSpawnGetter simpleMobSpawnGetter = new SimpleMobSpawnGetter(MobSpawnerPointManager.getNextId());
 			simpleMobSpawnGetter.addMob(mobLocation.getMobList());
 
-			MobSpawnerPoint spawnerPoint = simpleMobSpawnGetter.getMobSpawnerPoint(mobLocation.loc, 3,
-					SpawnLevel.LEVEL3);
+			MobSpawnerPoint spawnerPoint = simpleMobSpawnGetter.getMobSpawnerPoint(mobLocation.loc, 3, SpawnLevel.LEVEL3);
 			MobSpawnerPointManager.addSpawnPoint(spawnerPoint);
 
 			spawnPointSheetRunnable.addData(spawnerPoint, memo);
@@ -241,11 +239,13 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		ItemStack itemInHand = p.getItemInHand();
 		ItemStackUtil.setDispName(itemInHand, ChatColor.GREEN + "SPAWN POINT SETTER");
 		ItemStackUtil.setLore(itemInHand, nameList);
-		ItemStackUtil.addLore(itemInHand, ChatColor.WHITE + "#コマンド /setSpawn beginで仮登録開始",
-				ChatColor.WHITE + "#このアイテムをもって右クリックで仮登録", ChatColor.WHITE + "#コマンド /setSpawn commitで仮登録",
-				ChatColor.WHITE + "#コマンド /setSpawn cancelで仮登録をすべて削除",
-				ChatColor.WHITE + "#コマンド /setSpawn undoで最後に登録した仮登録を削除",
-				ChatColor.WHITE + "#コマンド /setSpawn listで現在の仮登録を確認");
+		ItemStackUtil.addLore(itemInHand,
+				ChatColor.WHITE + "#コマンド /setSpawn beginで仮登録開始",
+						ChatColor.WHITE + "#このアイテムをもって右クリックで仮登録",
+						ChatColor.WHITE + "#コマンド /setSpawn commitで仮登録",
+						ChatColor.WHITE + "#コマンド /setSpawn cancelで仮登録をすべて削除",
+						ChatColor.WHITE + "#コマンド /setSpawn undoで最後に登録した仮登録を削除",
+						ChatColor.WHITE + "#コマンド /setSpawn listで現在の仮登録を確認");
 		p.updateInventory();
 
 		p.sendMessage("モンスターを登録してください。/setSpawn beginで開始し、クリックしスポーンポイントをセットしてください。");
@@ -267,7 +267,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		Vector direction = player.getLocation().getDirection();
 		Snowball spawn = player.getWorld().spawn(player.getLocation().add(0, 1, 0), Snowball.class);
 		spawn.setVelocity(direction.multiply(3));
-		spawn.setShooter((ProjectileSource) player);
+		spawn.setShooter((ProjectileSource)player);
 	}
 
 	public static void ProjectileHitEvent(ProjectileHitEvent e) {
@@ -287,13 +287,12 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		}
 
 		Location location = e.getEntity().getLocation();
-		// 下のブロックを確認
+		//下のブロックを確認
 		if (location.add(0, -1, 0).getBlock().isEmpty()) {
-			// 一つ上の場所の可能性もあるので選択場所を１つ下にする
+			//一つ上の場所の可能性もあるので選択場所を１つ下にする
 			location = location.add(0, -1, 0);
 			if (location.add(0, -1, 0).getBlock().isEmpty()) {
-				p.sendMessage(ChatColor.RED + "雪玉が着地した下のブロックが地面でないため仮登録できません(" + location.getBlockX() + ", "
-						+ location.getBlockY() + ", " + location.getBlockZ() + ")");
+				p.sendMessage(ChatColor.RED + "雪玉が着地した下のブロックが地面でないため仮登録できません(" + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ() + ")");
 				return;
 			}
 		}
@@ -304,7 +303,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		}
 
 		MobLocation mobLocation = new MobLocation(e.getEntity().getLocation());
-		// mobの存在チェック
+		//mobの存在チェック
 		List<String> lore = ItemStackUtil.getLore(itemInHand);
 		for (String name : lore) {
 			if (name.contains("#")) {
@@ -319,7 +318,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		}
 
 		create.put(p, mobLocation);
-		// 仮登録した場所にはピンクの羊毛を置く
+		//仮登録した場所にはピンクの羊毛を置く
 		mobLocation.setBlock(Material.WOOL, 6);
 		int size = create.get(p).size();
 
@@ -332,9 +331,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 		if (arg3.length > 1) {
 			if ("set".equalsIgnoreCase(arg3[0])) {
 				if (arg3.length == 2) {
-					return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(),
-							SpawnMobGetterManager.getNames(),
-							new ArrayList<String>(SpawnMobGetterManager.getNames().size()));
+					return (List<String>)StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(), new ArrayList<String>(SpawnMobGetterManager.getNames().size()));
 				}
 			}
 		}
@@ -384,14 +381,13 @@ class MobLocation {
 		mobList.add(mob);
 	}
 
-	public List<AbstractMob<?>> getMobList() {
+	public  List<AbstractMob<?>> getMobList() {
 		return mobList;
 	}
 
 	@SuppressWarnings("deprecation")
 	public void setBlock(Material m, int data) {
 		loc.getBlock().setType(m);
-		loc.getBlock().setData((byte) data);
-		;
+		loc.getBlock().setData((byte) data);;
 	}
 }

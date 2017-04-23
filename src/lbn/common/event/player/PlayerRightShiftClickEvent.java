@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerRightShiftClickEvent extends PlayerEvent {
+public class PlayerRightShiftClickEvent extends PlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
 	AttackItemStack attackItem;

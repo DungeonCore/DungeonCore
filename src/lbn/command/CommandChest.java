@@ -35,10 +35,9 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 
 	public static HashMap<Player, Location> chestClickMap = new HashMap<Player, Location>();
 
-	// command x y z [refuel_time, allPlayerSameFlg, min, max, x y z]
+	//command x y z [refuel_time, allPlayerSameFlg, min, max, x y z]
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] params) {
+	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] params) {
 		ChestSheetRunnable chestSheetRunable = new ChestSheetRunnable(paramCommandSender);
 
 		if (chestSheetRunable.isTransaction()) {
@@ -81,7 +80,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		Chest c = (Chest) data;
 		BlockFace facing = c.getFacing();
 		Block relative = chestLoc.getBlock().getRelative(facing);
-		// BlockFace oppositeFace = facing.getOppositeFace();
+		//		BlockFace oppositeFace = facing.getOppositeFace();
 		relative.setType(Material.WALL_SIGN);
 		Sign sign = (Sign) relative.getState();
 		sign.setLine(0, "[chest]");
@@ -105,15 +104,14 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 	protected boolean delete(CommandSender paramCommandSender, ChestSheetRunnable chestSheetRunable) {
 		paramCommandSender.sendMessage("現在この機能は使えません。");
 		boolean result;
-		// Player p = (Player) paramCommandSender;
-		// Location chestLoc = getChestLoc(p);
-		// if (chestLoc == null) {
-		// p.sendMessage("削除するchestを先にクリックして下さい");
-		// }
-		// CustomChestManager.removeChest(chestLoc);
-		// chestSheetRunable.deleteData("chest_location=" +
-		// ChestSheetRunable.getLocationString(chestLoc));
-		// SpletSheetExecutor.onExecute(chestSheetRunable);
+		//		Player p = (Player) paramCommandSender;
+		//		Location chestLoc = getChestLoc(p);
+		//		if (chestLoc == null) {
+		//			p.sendMessage("削除するchestを先にクリックして下さい");
+		//		}
+		//		CustomChestManager.removeChest(chestLoc);
+		//		chestSheetRunable.deleteData("chest_location=" + ChestSheetRunable.getLocationString(chestLoc));
+		//		SpletSheetExecutor.onExecute(chestSheetRunable);
 		result = true;
 		return result;
 	}
@@ -131,42 +129,42 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		double moveY = 0;
 		double moveZ = 0;
 		//
-		// if (params.length < 3) {
-		// return false;
-		// }
+		//		if (params.length < 3) {
+		//			return false;
+		//		}
 		//
-		// if (params.length == 8 || params.length == 9) {
-		// paramCommandSender.sendMessage("チェストを開けた後の移動先の座標が足りません。x y z全て必要です");
-		// return true;
-		// }
+		//		if (params.length == 8 || params.length == 9) {
+		//			paramCommandSender.sendMessage("チェストを開けた後の移動先の座標が足りません。x y z全て必要です");
+		//			return true;
+		//		}
 		//
-		// try {
-		// switch (params.length) {
-		// case 10:
-		// moveX = Double.parseDouble(params[9]);
-		// case 9:
-		// moveY = Double.parseDouble(params[8]);
-		// case 8:
-		// moveZ = Double.parseDouble(params[7]);
-		// case 7:
-		// maxItemCount = Integer.parseInt(params[6]);
-		// case 6:
-		// minItemCount = Integer.parseInt(params[5]);
-		// case 5:
-		// allPlayerSameFlg = Boolean.parseBoolean(params[4]);
-		// case 4:
-		// refuelTime = Double.parseDouble(params[3]);
-		// case 3:
-		// x = Double.parseDouble(params[0]);
-		// y = Double.parseDouble(params[1]);
-		// z = Double.parseDouble(params[2]);
-		// default:
-		// break;
-		// }
-		// } catch (Exception e) {
-		// paramCommandSender.sendMessage("入力したデータに誤りがあります。");
-		// return true;
-		// }
+		//		try {
+		//			switch (params.length) {
+		//			case 10:
+		//				moveX = Double.parseDouble(params[9]);
+		//			case 9:
+		//				moveY = Double.parseDouble(params[8]);
+		//			case 8:
+		//				moveZ = Double.parseDouble(params[7]);
+		//			case 7:
+		//				maxItemCount = Integer.parseInt(params[6]);
+		//			case 6:
+		//				minItemCount = Integer.parseInt(params[5]);
+		//			case 5:
+		//				allPlayerSameFlg = Boolean.parseBoolean(params[4]);
+		//			case 4:
+		//				refuelTime = Double.parseDouble(params[3]);
+		//			case 3:
+		//				x = Double.parseDouble(params[0]);
+		//				y = Double.parseDouble(params[1]);
+		//				z = Double.parseDouble(params[2]);
+		//			default:
+		//				break;
+		//			}
+		//		} catch (Exception e) {
+		//			paramCommandSender.sendMessage("入力したデータに誤りがあります。");
+		//			return true;
+		//		}
 		Player p = (Player) paramCommandSender;
 
 		Location contentsLoc = null;
@@ -194,24 +192,20 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 		if (CustomChestManager.containts(chestLoc)) {
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
 			hashMap.put("contentlocation", ChestSheetRunnable.getLocationString(contentsLoc));
-			chestSheetRunable.updateData(hashMap,
-					"chestlocation=\"" + ChestSheetRunnable.getLocationString(chestLoc) + "\"");
+			chestSheetRunable.updateData(hashMap, "chestlocation=\"" + ChestSheetRunnable.getLocationString(chestLoc) + "\"");
 		} else {
 			SpletSheetChest chest;
 			if (allPlayerSameFlg) {
-				chest = new AllPlayerSameContentChest(chestLoc, contentsLoc, (int) (refuelTime * 20), moveLoc,
-						minItemCount, maxItemCount, 10, true);
+				chest = new AllPlayerSameContentChest(chestLoc, contentsLoc, (int) (refuelTime * 20), moveLoc, minItemCount, maxItemCount, 10, true);
 			} else {
-				chest = new EachPlayerContentChest(chestLoc, contentsLoc, (int) (refuelTime * 20), moveLoc,
-						minItemCount, maxItemCount, 10, true);
+				chest = new EachPlayerContentChest(chestLoc, contentsLoc, (int) (refuelTime * 20), moveLoc, minItemCount, maxItemCount, 10, true);
 			}
 			CustomChestManager.registChest(chestLoc, chest);
 
-			// バグるのでなし
-			// chestSheetRunable.deleteData("chestlocation=" +
-			// ChestSheetRunable.getLocationString(chestLoc));
-			chestSheetRunable.addData(ChestSheetRunnable.createDataMap(chestLoc, contentsLoc, refuelTime,
-					allPlayerSameFlg, moveLoc, minItemCount, maxItemCount));
+			//バグるのでなし
+			//		chestSheetRunable.deleteData("chestlocation=" + ChestSheetRunable.getLocationString(chestLoc));
+			chestSheetRunable.addData(
+					ChestSheetRunnable.createDataMap(chestLoc, contentsLoc, refuelTime, allPlayerSameFlg, moveLoc, minItemCount, maxItemCount));
 
 		}
 		SpletSheetExecutor.onExecute(chestSheetRunable);

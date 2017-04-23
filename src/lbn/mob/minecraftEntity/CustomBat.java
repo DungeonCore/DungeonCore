@@ -27,18 +27,15 @@ public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 		super(world);
 		this.tag = tag;
 
-		// //全てのAIを取り除く
-		// try {
-		// AttackAISetter.removeAllAi(this);
-		// this.targetSelector.a(1, new TheLowPathfinderGoalHurtByTarget(this,
-		// true));
-		// tag.setAiType(AIType.NORMAL);
-		// goalSelector.a(6, new TheLowPathfinderGoalMeleeAttackForBat(this,
-		// EntityHuman.class, tag));
-		// } catch (NoSuchFieldException | SecurityException |
-		// IllegalArgumentException | IllegalAccessException e) {
-		// e.printStackTrace();
-		// }
+//		//全てのAIを取り除く
+//		try {
+//			AttackAISetter.removeAllAi(this);
+//			this.targetSelector.a(1, new TheLowPathfinderGoalHurtByTarget(this, true));
+//			tag.setAiType(AIType.NORMAL);
+//			goalSelector.a(6, new TheLowPathfinderGoalMeleeAttackForBat(this, EntityHuman.class, tag));
+//		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -80,8 +77,7 @@ public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 			if (spawnLocation == null) {
 				return;
 			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance()
-					* tag.getRemoveDistance()) {
+			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < tag.getRemoveDistance() * tag.getRemoveDistance()) {
 				return;
 			}
 			if (getMobTag().isBoss()) {
@@ -100,10 +96,10 @@ public class CustomBat extends EntityBat implements ICustomEntity<Bat> {
 
 	Location spawnLocation = null;
 
+
 	@Override
 	public boolean r(Entity entity) {
-		boolean flag = entity.damageEntity(DamageSource.mobAttack(this),
-				(int) getAttributeInstance(GenericAttributes.e).getValue());
+		boolean flag = entity.damageEntity(DamageSource.mobAttack(this), (int) getAttributeInstance(GenericAttributes.e).getValue());
 		if (flag) {
 			a(this, entity);
 		}

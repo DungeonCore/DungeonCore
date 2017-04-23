@@ -6,7 +6,7 @@ import lbn.common.particle.ParticleType;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 
-public class KillEffectSlotStone1 extends AbstractKillEffectSlotStone {
+public class KillEffectSlotStone1 extends AbstractKillEffectSlotStone{
 
 	ParticleData particleData = new ParticleData(ParticleType.lava, 50);
 	{

@@ -14,33 +14,30 @@ import org.bukkit.entity.EntityType;
 
 /**
  * NPCのデータを管理するためのクラス
- * 
  * @author KENSUKE
  *
  */
 public class VillagerData {
 	static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
 
-	public static CustomNpcInterface registSpletsheetVillager(CommandSender p, String name, String type, String texts,
-			String location, String adult, String data, String mobtype, String skin, String id) {
-		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id,
-				null);
+	public static CustomNpcInterface registSpletsheetVillager(CommandSender p ,String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id) {
+		VillagerData villagerData = new VillagerData(p, name, type, texts, location, adult, data, mobtype, skin, id, null);
 		if (villagerData.isError()) {
 			if (type != null && !type.isEmpty() && !(p instanceof ConsoleCommandSender)) {
-				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[] { name, type, texts }, ",") + "]");
+				p.sendMessage("エラーがあったため、スキップしました。[" + StringUtils.join(new Object[]{name, type, texts}, ",") + "]");
 			}
 			return null;
 		}
 		villagerMap.put(id, villagerData);
 
-		// もしまだNPCが登録されていなければ新しく登録する
+		//もしまだNPCが登録されていなければ新しく登録する
 		VillagerNpc villagerNpc = VillagerNpcManager.getVillagerNpcById(id);
 		if (villagerNpc == null) {
 			NpcManager.regist(new VillagerNpc(villagerData));
 		} else {
-			// 登録されている時はデータを上書きする
+			//登録されている時はデータを上書きする
 			villagerNpc.data = villagerData;
-			// NPCを更新する
+			//NPCを更新する
 			villagerNpc.updateNpc();
 		}
 
@@ -67,8 +64,7 @@ public class VillagerData {
 
 	boolean isError = false;
 
-	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult,
-			String data, String mobtype, String skin, String id, String uuid) {
+	private VillagerData(CommandSender p, String name, String type, String texts, String location, String adult, String data, String mobtype, String skin, String id, String uuid) {
 		this.name = name;
 		if (name == null || name.isEmpty()) {
 			sendMsg(p, "名前は絶対必要です。");
@@ -84,11 +80,11 @@ public class VillagerData {
 		this.type = VillagerType.getValue(type);
 		if (this.type == null) {
 			this.type = VillagerType.NORMAL;
-			// sendMsg(p, "typeは[normal, shop, BLACKSMITH]のみ許可されます");
+//			sendMsg(p, "typeは[normal, shop, BLACKSMITH]のみ許可されます");
 			isError = true;
 		}
 
-		// データ処理
+		//データ処理
 		this.data = data;
 
 		this.location = AbstractSheetRunable.getLocationByString(location);
@@ -164,7 +160,7 @@ public class VillagerData {
 
 	@Override
 	public String toString() {
-		return StringUtils.join(new Object[] { "name:", name, ", type:", type, ", texts:", texts });
+		return StringUtils.join(new Object[]{"name:", name, ", type:", type,  ", texts:", texts});
 	}
 
 }

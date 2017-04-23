@@ -16,7 +16,6 @@ import org.bukkit.material.Chest;
 
 /**
  * チェストの場所と中身を管理する
- * 
  * @author kensuke
  *
  */
@@ -29,7 +28,6 @@ public class CustomChestManager {
 
 	/**
 	 * ボスチェストだけ特別処理
-	 * 
 	 * @param e
 	 */
 	public static void setBossRewardChest(BossMobable e) {
@@ -47,7 +45,7 @@ public class CustomChestManager {
 		if (chestList.containsKey(loc)) {
 			AbstractCustomChest abstractCustomChest = chestList.get(loc);
 			if (chest instanceof SpletSheetChest && abstractCustomChest instanceof SpletSheetChest) {
-				((SpletSheetChest) chest).setRefule((SpletSheetChest) abstractCustomChest);
+				((SpletSheetChest)chest).setRefule((SpletSheetChest) abstractCustomChest);
 			}
 		}
 		chestList.put(loc.getBlock().getLocation(), chest);
@@ -56,7 +54,6 @@ public class CustomChestManager {
 
 	/**
 	 * 登録したチェストを取り除く
-	 * 
 	 * @param loc
 	 */
 	public static void removeChest(Location loc) {
@@ -68,7 +65,6 @@ public class CustomChestManager {
 
 	/**
 	 * 場所からチェストを取得する
-	 * 
 	 * @param loc
 	 * @return
 	 */
@@ -78,7 +74,7 @@ public class CustomChestManager {
 			return abstractCustomChest;
 		}
 
-		// チェストが登録されていない場合は看板があるか調べる
+		//チェストが登録されていない場合は看板があるか調べる
 		if (!(loc.getBlock().getState().getData() instanceof Chest)) {
 			return null;
 		}
@@ -91,9 +87,9 @@ public class CustomChestManager {
 
 		Sign state = (Sign) relative.getState();
 		String[] lines = state.getLines();
-		// 看板がある場合は特別処理
+		//看板がある場合は特別処理
 		if (lines[0].equals("[chest]")) {
-			// repositoryチェストの場合
+			//repositoryチェストの場合
 			if (lines[1].equals(ChatColor.GREEN + "REPOSITORY")) {
 				RepositoryType instance = RepositoryType.getInstance(lines[2]);
 				if (instance != null) {

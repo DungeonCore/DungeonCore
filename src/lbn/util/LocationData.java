@@ -7,11 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-public class LocationData implements Serializable {
+public class LocationData implements Serializable{
 	private static final long serialVersionUID = 6380196832013949147L;
 	double x;
 	double y;
-
 	public double getX() {
 		return x;
 	}
@@ -49,7 +48,7 @@ public class LocationData implements Serializable {
 		wolrdID = location.getWorld().getUID();
 	}
 
-	public Location getLocation() {
+	public  Location getLocation() {
 		World world = Bukkit.getWorld(wolrdID);
 		if (world == null) {
 			return null;
@@ -60,7 +59,6 @@ public class LocationData implements Serializable {
 
 	/**
 	 * world@x,y,z,id
-	 * 
 	 * @return
 	 */
 	public String getSerializeString() {
@@ -97,8 +95,7 @@ public class LocationData implements Serializable {
 		UUID id = UUID.fromString(split2[3].trim());
 
 		try {
-			return new LocationData(Double.parseDouble(split2[0]), Double.parseDouble(split2[1]),
-					Double.parseDouble(split2[2]), id);
+			return new LocationData(Double.parseDouble(split2[0]), Double.parseDouble(split2[1]), Double.parseDouble(split2[2]), id);
 		} catch (NumberFormatException e) {
 			return null;
 		}

@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class MagicBookFireLevel3 extends AbstractMagicBook {
+public class MagicBookFireLevel3 extends AbstractMagicBook{
 
 	@Override
 	public String getItemName() {
@@ -40,10 +40,11 @@ public class MagicBookFireLevel3 extends AbstractMagicBook {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "右クリックで広範囲の敵にダメージ極大を与える", "使用者と周囲のプレイヤーに火炎耐性を8秒間付与" };
+		return new String[]{"右クリックで広範囲の敵にダメージ極大を与える", "使用者と周囲のプレイヤーに火炎耐性を8秒間付与"};
 	}
 
-	ParticleData particleData1 = new SpringParticleData(new ParticleData(ParticleType.lava, 3), 6, 8, 1, 10);
+	ParticleData particleData1 = new SpringParticleData(new ParticleData(ParticleType.lava, 3),
+			6, 8, 1, 10);
 
 	ParticleData particleData = new ParticleData(ParticleType.flame, 20);
 
@@ -52,11 +53,11 @@ public class MagicBookFireLevel3 extends AbstractMagicBook {
 		super.excuteOnRightClick2(e);
 
 		Player player = e.getPlayer();
-		// 周りのプレイヤーに火炎耐性をつける
+		//周りのプレイヤーに火炎耐性をつける
 		player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 8, 1));
 		for (Entity entity : player.getNearbyEntities(10, 4, 10)) {
 			if (entity.getType() == EntityType.PLAYER) {
-				((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 10, 1));
+				((LivingEntity)entity).addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 10, 1));
 			}
 		}
 
@@ -71,7 +72,7 @@ public class MagicBookFireLevel3 extends AbstractMagicBook {
 	protected void onDamage(Player player, LivingEntity entity) {
 		super.onDamage(player, entity);
 		entity.setFireTicks(20 * 12);
-		// パーティクル
+		//パーティクル
 		particleData.run(entity.getLocation());
 	}
 

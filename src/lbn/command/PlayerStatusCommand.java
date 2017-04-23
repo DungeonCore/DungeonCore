@@ -18,12 +18,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 /**
- * <command> set type val target <command> load target
+ * <command> set type val target
+ * <command> load target
  *
  */
-public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
+public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 
-	public static String[] oprateName = { "LOAD", "SET" };
+	public static String[] oprateName = {"LOAD", "SET"};
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -32,12 +33,12 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
 			return false;
 		}
 
-		// データをLoadする
+		//データをLoadする
 		if (params[0].equalsIgnoreCase("LOAD")) {
 			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params[1]);
 			loadData(offlinePlayer, sender);
 		} else if (params[0].equalsIgnoreCase("SET")) {
-			// レベルをセットする
+		//レベルをセットする
 			LevelType type = null;
 			OfflinePlayer target = null;
 			int value = 0;
@@ -60,7 +61,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
 			}
 
 			if (value == 0) {
-				sender.sendMessage(ChatColor.GREEN + "レベルが0または不正な値だったので無視しました：" + params[2]);
+				sender.sendMessage(ChatColor.GREEN+ "レベルが0または不正な値だったので無視しました：" + params[2]);
 				return true;
 			}
 
@@ -78,6 +79,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
 		return false;
 	}
 
+
 	private void loadData(OfflinePlayer offlinePlayer, CommandSender paramCommandSender) {
 		if (offlinePlayer == null) {
 			paramCommandSender.sendMessage("指定したPlayerのデータが存在しません。");
@@ -92,8 +94,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender paramCommandSender, Command paramCommand, String paramString,
-			String[] paramArrayOfString) {
+	public List<String> onTabComplete(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
 		if (paramArrayOfString.length == 1) {
 			return Arrays.asList(oprateName);
 		} else if (paramArrayOfString.length == 2 || !paramArrayOfString[0].equalsIgnoreCase("LOAD")) {

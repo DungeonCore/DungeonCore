@@ -20,19 +20,19 @@ public class TheLowPlayerManager {
 	static Set<OfflinePlayer> loadingNow = Collections.synchronizedSet(new HashSet<OfflinePlayer>());
 
 	public static void loadData(OfflinePlayer p) {
-		// もし情報取得中なら無視する
+		//もし情報取得中なら無視する
 		if (loadingNow.contains(p)) {
 			return;
 		}
 
-		// すでにロードされているなら何もしない
+		//すでにロードされているなら何もしない
 		if (loadedPlayerMap.containsKey(p.getUniqueId())) {
 			return;
 		}
-		// TODO ロードする
+		//TODO ロードする
 		CustomPlayer customPlayer = new CustomPlayer(p);
 		customPlayer.init();
-		// eventを発火させる
+		//eventを発火させる
 		new PlayerLoadedDataEvent(customPlayer, p).callEvent();
 		loadedPlayerMap.put(p.getUniqueId(), customPlayer);
 	}
@@ -42,12 +42,11 @@ public class TheLowPlayerManager {
 		if (theLowPlayer == null) {
 			return;
 		}
-		// TODO データをセーブする
+		//TODO データをセーブする
 	}
 
 	/**
 	 * THELoW Playerを取得, ロードされていない場合はNullを返す
-	 * 
 	 * @param p
 	 * @return
 	 */
@@ -57,7 +56,6 @@ public class TheLowPlayerManager {
 
 	/**
 	 * THELoW Playerを取得, ロードされていない場合はNullを返す
-	 * 
 	 * @param id
 	 * @return
 	 */
@@ -67,7 +65,6 @@ public class TheLowPlayerManager {
 
 	/**
 	 * THELoW Playerを取得, ロードされていない場合はNullを返す
-	 * 
 	 * @param id
 	 * @return
 	 */
@@ -76,8 +73,7 @@ public class TheLowPlayerManager {
 	}
 
 	/**
-	 * ロードしていたらTRUE
-	 * 
+	 *ロードしていたらTRUE
 	 * @return
 	 */
 	public static boolean isLoaded(OfflinePlayer p) {
@@ -86,7 +82,6 @@ public class TheLowPlayerManager {
 
 	/**
 	 * ロード中のメッセージを表示
-	 * 
 	 * @param p
 	 */
 	public static void sendLoingingMessage(Player p) {

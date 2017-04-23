@@ -12,10 +12,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class LoopCommand implements CommandExecutor {
+public class LoopCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
+	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
+			String[] arg3) {
 		if (arg3.length < 3) {
 			return false;
 		}
@@ -34,7 +35,6 @@ public class LoopCommand implements CommandExecutor {
 		} else {
 			new BukkitRunnable() {
 				int count = JavaUtil.getInt(arg3[1], 1);
-
 				@Override
 				public void run() {
 					if (count == 0) {

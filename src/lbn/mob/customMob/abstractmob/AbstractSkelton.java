@@ -14,9 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, Skeleton> {
 	/**
 	 * アンデット属性にするかしないかを選択
-	 * 
-	 * @param isNoUndead
-	 *            初期値はFALSE
+	 * @param isNoUndead 初期値はFALSE
 	 */
 	public void setNoUndead(boolean isNoUndead, Skeleton mob) {
 		CustomSkeleton entity = (CustomSkeleton) CustomEntityUtil.getEntity(mob);
@@ -25,7 +23,6 @@ public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, 
 
 	/**
 	 * アンデット属性でないならTRUE。通常はFALSE
-	 * 
 	 * @return
 	 */
 	public boolean isNoUndead() {

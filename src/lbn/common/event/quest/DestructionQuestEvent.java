@@ -5,7 +5,7 @@ import lbn.quest.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class DestructionQuestEvent extends QuestEvent {
+public class DestructionQuestEvent extends QuestEvent{
 
 	public DestructionQuestEvent(Player who, Quest quest) {
 		super(who, quest);

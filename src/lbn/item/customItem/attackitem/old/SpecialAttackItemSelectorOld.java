@@ -24,25 +24,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SpecialAttackItemSelectorOld extends AbstractItem implements RightClickItemable, LeftClickItemable {
+public class SpecialAttackItemSelectorOld extends AbstractItem implements RightClickItemable, LeftClickItemable{
 
 	SpecialAttackItemable specialItem;
-
 	public SpecialAttackItemSelectorOld(SpecialAttackItemable specialItem) {
 		this.specialItem = specialItem;
 
 		MenuSelector menuSelecor = new MenuSelector(specialItem.getId() + " selector");
 
-		// レベルごとにソートする
+		//レベルごとにソートする
 		ArrayList<ItemInterface> allItem = new ArrayList<ItemInterface>(specialItem.getAllItem());
 		Collections.sort(allItem, new Comparator<ItemInterface>() {
 			@Override
 			public int compare(ItemInterface o1, ItemInterface o2) {
 				if (o1 instanceof AvailableLevelItemable && o2 instanceof AvailableLevelItemable) {
-					if (((AvailableLevelItemable) o1).getAvailableLevel() != ((AvailableLevelItemable) o2)
-							.getAvailableLevel()) {
-						return ((AvailableLevelItemable) o1).getAvailableLevel()
-								- ((AvailableLevelItemable) o2).getAvailableLevel();
+					if (((AvailableLevelItemable)o1).getAvailableLevel() != ((AvailableLevelItemable)o2).getAvailableLevel()) {
+						return ((AvailableLevelItemable)o1).getAvailableLevel() - ((AvailableLevelItemable)o2).getAvailableLevel();
 					}
 				}
 				return o1.getId().compareTo(o2.getId());
@@ -50,17 +47,16 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 		});
 
 		int i = 0;
-		// アイテムを登録
+		//アイテムを登録
 		for (ItemInterface itemStack : allItem) {
-			if (itemStack instanceof AvailableLevelItemable
-					&& ((AvailableLevelItemable) itemStack).getAvailableLevel() > 80) {
+			if (itemStack instanceof AvailableLevelItemable && ((AvailableLevelItemable) itemStack).getAvailableLevel() > 80) {
 				continue;
 			}
 			menuSelecor.addMenu(itemStack.getItem(), i, new SelectRunnable() {
 				@Override
 				public void run(Player p, ItemStack item) {
 					ItemStack itemInHand = p.getItemInHand();
-					// 手に持っているのがこのアイテムでないなら何もしない
+					//手に持っているのがこのアイテムでないなら何もしない
 					if (!isThisItem(itemInHand)) {
 						return;
 					}
@@ -81,8 +77,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 	@SuppressWarnings("unchecked")
 	@Override
 	public String getItemName() {
-		return StringUtils.join(ChatColor.BOLD, ChatColor.DARK_GREEN, "アイテムセレクター [", ChatColor.DARK_AQUA,
-				specialItem.getSpecialName(), ChatColor.DARK_GREEN, "]");
+		return StringUtils.join(ChatColor.BOLD , ChatColor.DARK_GREEN , "アイテムセレクター [" , ChatColor.DARK_AQUA , specialItem.getSpecialName() , ChatColor.DARK_GREEN , "]");
 	}
 
 	@Override
@@ -112,7 +107,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "右クリックして欲しいアイテムを選択してください" };
+		return new String[]{"右クリックして欲しいアイテムを選択してください"};
 	}
 
 	@Override

@@ -6,10 +6,11 @@ import lbn.player.magicstoneOre.MagicStoneOreType;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
-public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable {
+public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 
 	public MagicStoneOreSheetRunnable(CommandSender sender) {
 		super(sender);
+
 
 	}
 
@@ -20,7 +21,7 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		String[] s = { "type", "location" };
+		String[] s={"type","location"};
 		return s;
 	}
 
@@ -29,16 +30,16 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable {
 		MagicStoneOreType type = MagicStoneOreType.FromJpName(row[0]);
 		Location loc = getLocationByString(row[1]);
 
-		if (type == null) {
+		if(type == null){
 			sendMessage("鉱石タイプが無効です。:" + row[0]);
 			return;
 		}
-		if (loc == null) {
+		if(loc == null){
 			sendMessage("座標が無効です。:" + row[1]);
 			return;
 		}
 		MagicStoneFactor.regist(loc, type);
-		// ブロックを再配置する
+		//ブロックを再配置する
 		MagicStoneFactor.relocationOre(loc);
 	}
 }

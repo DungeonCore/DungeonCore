@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class MagicItemOld extends AbstractAttackItem_Old implements RightClickItemable, LeftClickItemable {
+public abstract class MagicItemOld extends AbstractAttackItem_Old implements RightClickItemable, LeftClickItemable{
 
 	@Override
 	final public void excuteOnLeftClick(PlayerInteractEvent e) {
-		// レベルなどを確認する
+		//レベルなどを確認する
 		e.setCancelled(true);
 		Player player = e.getPlayer();
 		ItemStack item = player.getItemInHand();
@@ -44,51 +44,48 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 		}
 
 		if (!player.isSneaking()) {
-			// excuteMagic(e, player, e.getItem(),
-			// getRightClickMagic(e.getItem()));
-			// スキルを発動
+//			excuteMagic(e, player, e.getItem(), getRightClickMagic(e.getItem()));
+			//スキルを発動
 			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
 		}
 	}
 
 	/**
 	 * 指定された魔法を発動する
-	 * 
 	 * @param e
 	 * @param player
 	 * @param item
 	 * @param magic
 	 */
 	protected void excuteMagic(PlayerInteractEvent e, Player player, ItemStack item, MagicExcuteable magic) {
-		// 魔法が存在しないなら何もしない
+		//魔法が存在しないなら何もしない
 		if (magic == null) {
 			return;
 		}
-		// クールタイムを確認
+		//クールタイムを確認
 		CooltimeManager cooltime = new CooltimeManager(e, magic);
-		// クールタイム中ならメッセージを表示
+		//クールタイム中ならメッセージを表示
 		if (!cooltime.canUse()) {
 			if (magic.isShowMessageIfUnderCooltime()) {
 				cooltime.sendCooltimeMessage(player);
 			}
 			return;
 		}
-		// マジックポイントを確認し足りなければメッセージを表示
+		//マジックポイントを確認し足りなければメッセージを表示
 		if (!hasMagicPoint(player, magic.getNeedMagicPoint())) {
 			Message.sendMessage(player, "マジックポイントが不足しています。");
 			return;
 		}
-		// 魔法を発動
+		//魔法を発動
 		magic.excuteMagic(player, e);
-		// クールタイムをつける
+		//クールタイムをつける
 		cooltime.setCoolTime();
-		// マジックポイントを消費する
+		//マジックポイントを消費する
 		MagicPointManager.consumeMagicPoint(player, magic.getNeedMagicPoint());
 	}
 
 	/**
 	 * 必要のマジックポイントを持っているか
-	 * 
 	 * @param p
 	 * @param needMagicPoint
 	 * @return
@@ -115,7 +112,6 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 	}
 
 	abstract protected MagicExcuteable getRightClickMagic(ItemStack item);
-
 	abstract protected MagicExcuteable getLeftClickMagic(ItemStack item);
 
 }

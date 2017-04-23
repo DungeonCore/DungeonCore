@@ -26,6 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+
 public class QuestManager {
 	private static HashMap<String, Quest> allQuestByName = new HashMap<String, Quest>();
 
@@ -73,48 +74,48 @@ public class QuestManager {
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 		QuestProcessingStatus processingStatus = session.getProcessingStatus(q);
 
-		// 現在実行中
+		//現在実行中
 		if (processingStatus.isDoing()) {
-			// Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
+//			Message.sendMessage(p, Message.QUEST_DOING_NOW, q.getName());
 			return QuestStartStatus.DOING_NOW;
 		}
 
-		// クエスト数上限
+		//クエスト数上限
 		if (session.getNowQuestSize() >= getMaxQuestCount(p)) {
-			// Message.sendMessage(p, Message.QUEST_OVER_COUNT);
+//			Message.sendMessage(p, Message.QUEST_OVER_COUNT);
 			return QuestStartStatus.RECEIVE_COUNT_MAXIMUM;
 		}
 
-		// クエストのクールタイム
+		//クエストのクールタイム
 		long complateDate = session.getComplateDate(q);
 		if (complateDate + q.getCoolTimeSecound() * 60 * 1000 >= JavaUtil.getJapanTimeInMillis()) {
 			return QuestStartStatus.REMAIND_COOL_TIME;
 		}
 
-		// メインレベルを取得
+		//メインレベルを取得
 		int mainLevel = 0;
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
 		if (theLowPlayer != null) {
 			mainLevel = theLowPlayer.getLevel(LevelType.MAIN);
 		}
-		// 利用可能レベル
+		//利用可能レベル
 		if (q.getAvailableMainLevel() > mainLevel) {
 			return QuestStartStatus.LACK_AVAILAVLE_MAIN_LEVEL;
 		}
 
-		// 重複不可の時
+		//重複不可の時
 		if (!q.isStartOverlap()) {
-			// 完了回数がでないときは利用不可とする
+			//完了回数がでないときは利用不可とする
 			if (session.getComplateCount(q) != 0) {
 				return QuestStartStatus.CANNT_OVERLAP;
 			}
 		}
 
-		// 前提クエストの確認
+		//前提クエストの確認
 		Set<Quest> beforeQuest = q.getBeforeQuest();
 		for (Quest quest : beforeQuest) {
 			if (!session.isComplate(quest)) {
-				// Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
+//				Message.sendMessage(p, "このクエストはまだ受けられません(前提クエスト)");
 				return QuestStartStatus.LACK_BEFORE_QUEST;
 			}
 		}
@@ -124,7 +125,6 @@ public class QuestManager {
 
 	/**
 	 * クエストを開始する
-	 * 
 	 * @param q
 	 * @param p
 	 * @return
@@ -133,27 +133,24 @@ public class QuestManager {
 		return startQuest(q, p, force, status, false);
 	}
 
-	/**
-	 * クエストを開始する
-	 * 
-	 * @param q
-	 * @param p
-	 * @param force
-	 *            強制的にクエストを実行
-	 * @param status
-	 * @param laterTitle
-	 *            Titleなどを遅れて実行する場合はTRUE
-	 * @return
-	 */
+		/**
+		 * クエストを開始する
+		 * @param q
+		 * @param p
+		 * @param force 強制的にクエストを実行
+		 * @param status
+		 * @param laterTitle Titleなどを遅れて実行する場合はTRUE
+		 * @return
+		 */
 	public static boolean startQuest(Quest q, Player p, boolean force, QuestStartStatus status, boolean laterTitle) {
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 
 		if (!status.canStart()) {
-			// 強制実行でないときは実行しない
+			//強制実行でないときは実行しない
 			if (!force) {
 				return false;
 			} else {
-				// 強制実行だがそれでも実行出来ないときは実行しない
+				//強制実行だがそれでも実行出来ないときは実行しない
 				if (!status.canStartIfForce()) {
 					return false;
 				}
@@ -166,11 +163,11 @@ public class QuestManager {
 			return false;
 		}
 
-		// クエスト開始時点で渡すアイテムがあるなら渡す
+		//クエスト開始時点で渡すアイテムがあるなら渡す
 		ItemInterface questBeforeItem = q.getQuestBeforeItem();
 		if (questBeforeItem != null) {
 			ItemStack questBeforeItemStack = questBeforeItem.getItem();
-			// 空きがあるならアイテムを渡す
+			//空きがあるならアイテムを渡す
 			if (ItemStackUtil.canGiveItem(p, questBeforeItem.getItem())) {
 				p.getInventory().addItem(questBeforeItemStack);
 			} else {
@@ -179,7 +176,7 @@ public class QuestManager {
 			}
 		}
 
-		// title表示
+		//title表示
 		if (laterTitle) {
 			new BukkitRunnable() {
 				@Override
@@ -191,27 +188,26 @@ public class QuestManager {
 			showStartEffect(q, p);
 		}
 
-		// 実行中にする
+		//実行中にする
 		session.startQuest(q);
 		return true;
 	}
 
 	/**
 	 * クエストを開始するためのエフェクトを表示する
-	 * 
 	 * @param q
 	 * @param p
 	 */
 	private static void showStartEffect(Quest q, Player p) {
 		if (q.isShowTitle()) {
-			// TITLE表示
+			//TITLE表示
 			TitleSender titleSender = new TitleSender();
 			titleSender.setTitle("[Quest] クエスト開始", ChatColor.GOLD, true);
 			titleSender.setSubTitle(q.getName(), ChatColor.GOLD, false);
 			titleSender.execute(p);
 		}
 
-		// 音を鳴らす
+		//音を鳴らす
 		q.playStartSound(p);
 
 		QuestUtil.sendMessageByVillager(p, q.getTalkOnStart());
@@ -223,11 +219,9 @@ public class QuestManager {
 
 	/**
 	 * クエストを完了する
-	 * 
 	 * @param q
 	 * @param p
-	 * @param force
-	 *            強制的にクエストを終了させる
+	 * @param force 強制的にクエストを終了させる
 	 */
 	public static void complateQuest(Quest q, Player p, boolean force) {
 		if (!force && !q.canGetRewordItem(p)) {
@@ -243,7 +237,7 @@ public class QuestManager {
 
 		q.giveRewardItem(p);
 
-		// 報酬を渡す
+		//報酬を渡す
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 		questSession.complateQuest(q);
 
@@ -253,15 +247,15 @@ public class QuestManager {
 			titleSender.setSubTitle(q.getName(), ChatColor.GOLD, false);
 			titleSender.execute(p);
 		}
-		// 音を鳴らす
+		//音を鳴らす
 		q.playCompleteSound(p);
-		// テキストを表示
+		//テキストを表示
 		QuestUtil.sendMessageByVillager(p, q.getTalkOnComplate());
 
-		// 次のクエストを開始する
+		//次のクエストを開始する
 		Quest autoExecuteNextQuest = q.getAutoExecuteNextQuest();
 		if (autoExecuteNextQuest != null) {
-			// 同時に終了と開始のタイトルコマンドを実行できないので開始のタイトルを遅らせて実行する
+			//同時に終了と開始のタイトルコマンドを実行できないので開始のタイトルを遅らせて実行する
 			boolean laterShow = autoExecuteNextQuest.isShowTitle() && q.isShowTitle();
 			startQuest(autoExecuteNextQuest, p, true, getStartQuestStatus(autoExecuteNextQuest, p), laterShow);
 		}
@@ -270,7 +264,6 @@ public class QuestManager {
 
 	/**
 	 * クエストを破棄する
-	 * 
 	 * @param q
 	 * @param p
 	 */
@@ -296,38 +289,36 @@ public class QuestManager {
 		return true;
 	}
 
-	// Tellrow使わないかもしれないので一旦コメントアウト
-	// static HashMultimap<Quest, Player> canStartQuestByTellrowMap =
-	// HashMultimap.create();
-	// public static String getStartTellrowCommand(final Player p, final Quest
-	// quest) {
-	// canStartQuestByTellrowMap.put(quest, p);
-	// new BukkitRunnable() {
-	// @Override
-	// public void run() {
-	// canStartQuestByTellrowMap.remove(quest, p);
-	// }
-	// }.runTaskLater(Main.plugin, 20 * 10);
-	// return StringUtils.join(new Object[]{"tellraw ", p.getName(), "
-	// {\"text\":\"クエスト受諾(10秒以内にクリック)\",\"bold\":false,\"underlined\":true,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest
-	// start ", quest.getId(),"\"}}"});
-	// }
-	// public static boolean canStartQuestByTellrow(Quest q, Player p) {
-	// return canStartQuestByTellrowMap.containsEntry(q, p);
-	// }
+	//Tellrow使わないかもしれないので一旦コメントアウト
+//	static HashMultimap<Quest, Player> canStartQuestByTellrowMap = HashMultimap.create();
+//	public static String getStartTellrowCommand(final Player p, final Quest quest) {
+//		canStartQuestByTellrowMap.put(quest, p);
+//		new BukkitRunnable() {
+//			@Override
+//			public void run() {
+//				canStartQuestByTellrowMap.remove(quest, p);
+//			}
+//		}.runTaskLater(Main.plugin, 20 * 10);
+//		return StringUtils.join(new Object[]{"tellraw ", p.getName(), " {\"text\":\"クエスト受諾(10秒以内にクリック)\",\"bold\":false,\"underlined\":true,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest start ", quest.getId(),"\"}}"});
+//	}
+//	public static boolean canStartQuestByTellrow(Quest q, Player p) {
+//		return canStartQuestByTellrowMap.containsEntry(q, p);
+//	}
 
 	/**
 	 * クエストを受けることが出来るかどうかを判断するためにのENUM
-	 * 
 	 * @author kensuke
 	 *
 	 */
 	public static enum QuestStartStatus {
-		CAN_START(true, true), UNKNOW_QUEST("クエストが存在しません", false, false), DOING_NOW("同じクエストを同時に受けることはできません", false,
-				false), RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true), REMAIND_COOL_TIME(
-						"現在このクエストを受注できません(時間制限)", false,
-						true), LACK_AVAILAVLE_MAIN_LEVEL("メインレベルが足りません", false, true), CANNT_OVERLAP(
-								"このクエストを再度受けることは出来ません", false, true), LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
+		CAN_START(true, true),
+		UNKNOW_QUEST("クエストが存在しません", false, false),
+		DOING_NOW("同じクエストを同時に受けることはできません", false, false),
+		RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true),
+		REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true),
+		LACK_AVAILAVLE_MAIN_LEVEL("メインレベルが足りません", false, true),
+		CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true),
+		LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
 
 		String errorMessage = null;
 		boolean canStart;
@@ -357,3 +348,4 @@ public class QuestManager {
 		}
 	}
 }
+

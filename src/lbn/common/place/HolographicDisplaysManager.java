@@ -10,7 +10,7 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 
 public class HolographicDisplaysManager {
-	private static boolean useHolographicDisplays = false;
+	private static boolean useHolographicDisplays  = false;
 
 	public static boolean isUseHolographicDisplays() {
 		return useHolographicDisplays;

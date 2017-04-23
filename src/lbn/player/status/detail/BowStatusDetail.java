@@ -6,19 +6,19 @@ import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;
 
-public class BowStatusDetail extends IStatusDetail {
+public class BowStatusDetail extends IStatusDetail{
 	public BowStatusDetail(TheLowPlayer p) {
 		super(p);
 	}
 
 	@Override
 	public String[] getIndexDetail() {
-		return new String[] { "弓で敵を倒すたびに", "レベルが上がっていきます。" };
+		return new String[]{"弓で敵を倒すたびに", "レベルが上がっていきます。"};
 	}
 
 	@Override
 	public String[] getDetailByLevel(int level) {
-		return new String[] {};
+		return new String[]{};
 	}
 
 	@Override

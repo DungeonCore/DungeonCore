@@ -6,7 +6,7 @@ import lbn.item.customItem.armoritem.SpreadSheetArmorData;
 
 import org.bukkit.command.CommandSender;
 
-public class ArmorSheetRunnable extends AbstractSheetRunable {
+public class ArmorSheetRunnable extends AbstractSheetRunable{
 
 	public ArmorSheetRunnable(CommandSender sender) {
 		super(sender);
@@ -24,9 +24,8 @@ public class ArmorSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "id", "name", "detail", "materal", "armorPoint", "armorPointBoss", "dummy1", "durability",
-				"uselevel", "price", "maincraftmaterial", // 10
-				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial3", "craftcount3" };
+		return new String[]{"id", "name", "detail", "materal", "armorPoint", "armorPointBoss", "dummy1", "durability", "uselevel", "price", "maincraftmaterial", //10
+				"craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial3", "craftcount3"};
 	}
 
 	@Override

@@ -17,12 +17,14 @@ public class ChunkWrapper {
 	int x;
 	int z;
 
-	// *16 + 8 y *16+8
+	//*16 + 8 y *16+8
 	public ChunkWrapper(Chunk c) {
 		wolrdName = c.getWorld().getName();
 		x = c.getX();
 		z = c.getZ();
 	}
+
+
 
 	public ChunkWrapper(MobSpawnerPoint point) {
 		this(point.getChunk());
@@ -45,7 +47,8 @@ public class ChunkWrapper {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((wolrdName == null) ? 0 : wolrdName.hashCode());
+		result = prime * result
+				+ ((wolrdName == null) ? 0 : wolrdName.hashCode());
 		result = prime * result + x;
 		result = prime * result + z;
 		return result;

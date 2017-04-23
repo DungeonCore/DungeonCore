@@ -1,8 +1,9 @@
 package lbn.item.customItem.SpreadSheetItem;
 
-public class SpreadSheetQuestItem extends SpreadSheetOtherItem {
+public class SpreadSheetQuestItem extends SpreadSheetOtherItem{
 
-	public SpreadSheetQuestItem(String name, String id, int price, String command, String detail) {
+	public SpreadSheetQuestItem(String name, String id, int price,
+			String command, String detail) {
 		super(name, id, price, command, detail);
 	}
 

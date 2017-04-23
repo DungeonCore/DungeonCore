@@ -18,7 +18,7 @@ import lbn.quest.questData.PlayerQuestSession;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
 
-public class TakeItemQuest extends AbstractQuest {
+public class TakeItemQuest extends AbstractQuest{
 	static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<TakeItemQuest>();
 
 	protected TakeItemQuest(String id, String itemId, int count) {
@@ -28,9 +28,9 @@ public class TakeItemQuest extends AbstractQuest {
 		takeItemQuestMap.add(this);
 	}
 
+
 	/**
 	 * 指定されたクエストからTakeItemQuestならTrue
-	 * 
 	 * @param quest
 	 * @return
 	 */
@@ -45,7 +45,7 @@ public class TakeItemQuest extends AbstractQuest {
 		if (entity == null) {
 			return;
 		}
-		// NPCが同じかチェック
+		//NPCが同じかチェック
 		String name = entity.getCustomName();
 		if (!name.equalsIgnoreCase(getEndVillagerId())) {
 			return;
@@ -53,12 +53,12 @@ public class TakeItemQuest extends AbstractQuest {
 
 		ItemStack item = getNeedItem().getItem();
 		item.setAmount(count);
-		// アイテムを持っているか確認
+		//アイテムを持っているか確認
 		PlayerInventory inventory = p.getInventory();
 		if (!inventory.contains(item)) {
 			return;
 		}
-		// アイテムを削除する
+		//アイテムを削除する
 		inventory.remove(getNeedItem().getItem());
 		session.setQuestData(this, 1);
 	}
@@ -93,7 +93,7 @@ public class TakeItemQuest extends AbstractQuest {
 	public void onStartQuestEvent(StartQuestEvent e) {
 		super.onStartQuestEvent(e);
 		ItemInterface needItem = getNeedItem();
-		// アイテムが存在しなければ無視する
+		//アイテムが存在しなければ無視する
 		if (needItem == null) {
 			QuestAnnouncement.sendQuestError(e.getPlayer(), "現在このクエストを受けることが出来ません");
 			e.setCancelled(true);

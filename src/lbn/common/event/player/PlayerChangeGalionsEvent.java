@@ -5,11 +5,10 @@ import lbn.money.GalionEditReason;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
+public class PlayerChangeGalionsEvent extends TheLowPlayerEvent{
 
 	int val;
 	GalionEditReason reason;
-
 	public PlayerChangeGalionsEvent(TheLowPlayer who, int val, GalionEditReason reason) {
 		super(who);
 		this.reason = reason;
@@ -40,7 +39,6 @@ public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
 	}
 
 	public void setReason(GalionEditReason reason) {
-		this.reason = reason;
-		;
+		this.reason = reason;;
 	}
 }

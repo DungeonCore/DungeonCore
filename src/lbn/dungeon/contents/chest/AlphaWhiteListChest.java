@@ -13,14 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
-public class AlphaWhiteListChest extends WhiteListChest {
+public class AlphaWhiteListChest extends WhiteListChest{
 
-	public AlphaWhiteListChest() {// 134 66 843
-		super(new Location(Bukkit.getWorld("world"), 134, 66, 843),
-				new Location(Bukkit.getWorld("world"), 134, 66, 843), 1,
-				new Location(Bukkit.getWorld("world"), 127, 42, 834).setDirection(new Vector(1, 0, 0)), 400, 400, 10,
-				true);
+	public AlphaWhiteListChest() {//134 66 843
+		super(new Location(Bukkit.getWorld("world"), 134, 66, 843), new Location(Bukkit.getWorld("world"), 134, 66, 843),
+				1, new Location(Bukkit.getWorld("world"), 127, 42, 834).setDirection(new Vector(1, 0, 0)), 400, 400, 10, true);
 	}
+
 
 	static HashSet<UUID> hashSet = new HashSet<UUID>();
 	static {

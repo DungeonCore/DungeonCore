@@ -17,9 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class SpreadSheetArmor extends AbstractArmorItem {
+public class SpreadSheetArmor extends AbstractArmorItem{
 	SpreadSheetArmorData data;
-
 	public SpreadSheetArmor(SpreadSheetArmorData data) {
 		this.data = data;
 	}
@@ -70,6 +69,7 @@ public class SpreadSheetArmor extends AbstractArmorItem {
 		return data.getAvailableLevel();
 	}
 
+
 	@Override
 	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
 		loreToken.addLore(LoreLine.getLoreLine("最大耐久力", (data.getMaxDurability() + getAddDurability(level))));
@@ -84,9 +84,8 @@ public class SpreadSheetArmor extends AbstractArmorItem {
 	@Override
 	public TheLowCraftRecipeInterface getCraftRecipe() {
 		if (recipe == null) {
-			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface
-					.createNewInstance(data.getMainCraftMaterial());
-			// 素材を追加する
+			TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
+			//素材を追加する
 			for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
 				recipe.addMaterial(entry.getKey(), entry.getValue());
 			}
@@ -94,6 +93,7 @@ public class SpreadSheetArmor extends AbstractArmorItem {
 		}
 		return recipe;
 	}
+
 
 	@Override
 	protected Material getMaterial() {
@@ -109,7 +109,7 @@ public class SpreadSheetArmor extends AbstractArmorItem {
 	public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
 		if (!event.isSuccess()) {
 			int level = event.getNextLevel();
-			// +6までの強化の時は失敗しても+0にしないで元にもどす
+			//+6までの強化の時は失敗しても+0にしないで元にもどす
 			if (level <= 6) {
 				ItemStack item = event.getItem();
 				StrengthOperator.updateLore(item, Math.max(0, level - 1));

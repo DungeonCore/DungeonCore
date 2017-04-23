@@ -9,11 +9,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSavePlayer implements CommandExecutor {
+public class CommandSavePlayer implements CommandExecutor{
 
-	// command type [load or save] player
+	//command type [load or save] player
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 
 		Player target = null;
@@ -43,12 +44,12 @@ public class CommandSavePlayer implements CommandExecutor {
 
 		String operate = paramArrayOfString[1];
 
-		if (operate.equalsIgnoreCase("save")) {
+		if  (operate.equalsIgnoreCase("save")) {
 			PlayerIODataManager.save(target);
 			Message.sendMessage(target, "データをセーブしました。");
 		} else if (operate.equalsIgnoreCase("load")) {
 			Message.sendMessage(target, "データをロードしました。");
-			// まずセーブする
+			//まずセーブする
 			PlayerIODataManager.save(target);
 			PlayerIODataManager.load(target, type);
 		} else {

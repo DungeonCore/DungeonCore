@@ -70,7 +70,7 @@ public class MobSpawnerPoint {
 		int xKind = (int) Math.signum(loc.getBlockX() - loc.getChunk().getX() * 16 - 7.5);
 		int zKind = (int) Math.signum(loc.getBlockZ() - loc.getChunk().getZ() * 16 - 7.5);
 
-		// 周囲のチャンクを保存する
+		//周囲のチャンクを保存する
 		nearChunkList.add(new ChunkWrapper(loc.clone().add(8 * xKind, 0, 0).getChunk()));
 		nearChunkList.add(new ChunkWrapper(loc.clone().add(8 * xKind, 0, 8 * zKind).getChunk()));
 		nearChunkList.add(new ChunkWrapper(loc.clone().add(0, 0, 8 * zKind).getChunk()));
@@ -80,14 +80,14 @@ public class MobSpawnerPoint {
 		this.level = level;
 
 		for (AbstractMob<?> mob : mobGetter.getAllMobList()) {
-			// nullmobの時は特別処理
+			//nullmobの時は特別処理
 			if (mob.isNullMob()) {
 				mobNameList.add("normal:" + mob.getEntityType());
 				continue;
 			}
 			mobNameList.add(mob.getName());
 			if (mob instanceof AbstractCombinationMob<?>) {
-				for (AbstractMob<?> subMob : ((AbstractCombinationMob<?>) mob).getCombinationMobListForSpawn()) {
+				for (AbstractMob<?> subMob : ((AbstractCombinationMob<?>)mob).getCombinationMobListForSpawn()) {
 					mobNameList.add(subMob.getName());
 				}
 			}
@@ -116,6 +116,7 @@ public class MobSpawnerPoint {
 
 	Random rnd = new Random();
 
+
 	public long lastSpawnTime = -1;
 	public int lastSpawnCount = -1;
 	public String cancelReson = null;
@@ -134,12 +135,12 @@ public class MobSpawnerPoint {
 		existNearPlayer = false;
 
 		int count = getNearEntity(getChunk(), true);
-		// 周囲のチャンクも調べる
+		//周囲のチャンクも調べる
 		for (ChunkWrapper chunk : nearChunkList) {
 			count += getNearEntity(chunk.getChunk(), lookNearChunk);
 		}
 
-		// 残り召喚できるモブの数(maxMobCount - count)だけ召喚する
+		//残り召喚できるモブの数(maxMobCount - count)だけ召喚する
 		for (int i = 0; i < maxMobCount - count; i++) {
 			int nextInt = rnd.nextInt(mobGetter.getAllMobList().size());
 			AbstractMob<?> abstractMob = mobGetter.getAllMobList().get(nextInt);
@@ -169,10 +170,8 @@ public class MobSpawnerPoint {
 	}
 
 	public ArrayList<LivingEntity> nearMob = new ArrayList<LivingEntity>();
-
 	/**
 	 * このGetterに該当するMobを取得する
-	 * 
 	 * @param c
 	 * @param このチャンクのモンスターを調べるならTRUE
 	 * @return
@@ -186,19 +185,19 @@ public class MobSpawnerPoint {
 		Entity[] entities = c.getEntities();
 		for (Entity entity : entities) {
 			if (entity.getType().isAlive() && entity.getType() != EntityType.PLAYER) {
-				// モブの種類を調べる
+				//モブの種類を調べる
 				if (isSearch) {
-					// モブの名前を調べる
+					//モブの名前を調べる
 					String name = ((LivingEntity) entity).getCustomName();
 					if (name == null || name.isEmpty()) {
 						name = "normal:" + entity.getType();
 					}
-					// mobの名前が一致しなければ別のモブとする
+					//mobの名前が一致しなければ別のモブとする
 					if (!mobNameList.contains(name)) {
 						continue;
 					}
 
-					// yがスポーンポイントから１６以上はなれていたら別のGetterのモブとする
+					//yがスポーンポイントから１６以上はなれていたら別のGetterのモブとする
 					if (Math.abs(entity.getLocation().getY() - locY) >= dungeonHight) {
 						continue;
 					}
@@ -216,7 +215,7 @@ public class MobSpawnerPoint {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj != null && obj instanceof MobSpawnerPoint) {
-			return ((MobSpawnerPoint) obj).getId() == getId();
+			return ((MobSpawnerPoint)obj).getId() == getId();
 		}
 		return false;
 	}
@@ -226,3 +225,4 @@ public class MobSpawnerPoint {
 		return getId();
 	}
 }
+

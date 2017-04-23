@@ -8,7 +8,7 @@ import lbn.chest.BossChest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
-public interface BossMobable {
+public interface BossMobable{
 	public BossChest getBossChest();
 
 	public LivingEntity getEntity();

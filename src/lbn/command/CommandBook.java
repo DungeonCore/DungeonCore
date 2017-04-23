@@ -17,7 +17,7 @@ import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
 
-public class CommandBook implements CommandExecutor, TabCompleter {
+public class CommandBook implements CommandExecutor, TabCompleter{
 
 	@Override
 	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
@@ -46,7 +46,7 @@ public class CommandBook implements CommandExecutor, TabCompleter {
 		}
 
 		if (paramCommandSender instanceof Player && player == null) {
-			player = (Player) paramCommandSender;
+			player = (Player)paramCommandSender;
 		}
 
 		if (player == null) {

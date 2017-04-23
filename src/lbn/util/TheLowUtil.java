@@ -27,25 +27,25 @@ public class TheLowUtil {
 		if (item == null) {
 			return false;
 		}
-
+	
 		ItemMeta itemMeta = item.getItemMeta();
-
+	
 		if (itemMeta == null) {
 			return false;
 		}
-
+	
 		List<String> lore = itemMeta.getLore();
-
+	
 		if (lore == null) {
 			return false;
 		}
-
+	
 		for (String str : lore) {
 			if (str.contains(TheLowUtil.SOUL_BOUND)) {
 				return true;
 			}
 		}
-
+	
 		return false;
 	}
 
@@ -54,16 +54,16 @@ public class TheLowUtil {
 			return;
 		}
 		if (!isSoulBound(item)) {
-
+	
 			ItemMeta itemMeta = item.getItemMeta();
 			List<String> lore = itemMeta.getLore();
-
+	
 			if (lore == null) {
 				lore = new ArrayList<String>();
 			}
 			lore.add(TheLowUtil.SOUL_BOUND);
 			itemMeta.setLore(lore);
-
+	
 			item.setItemMeta(itemMeta);
 		}
 	}

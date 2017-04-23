@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class NullMob extends AbstractMob<LivingEntity> {
+public class NullMob extends AbstractMob<LivingEntity>{
 
 	public NullMob() {
 		this("");
@@ -31,6 +31,7 @@ public class NullMob extends AbstractMob<LivingEntity> {
 	@Override
 	public void onSpawn(PlayerCustomMobSpawnEvent e) {
 	}
+
 
 	@Override
 	public void onDeathPrivate(EntityDeathEvent e) {

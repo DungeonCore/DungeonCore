@@ -16,10 +16,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ToggleSetBlockCommand implements CommandExecutor {
+public class ToggleSetBlockCommand implements CommandExecutor{
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
+	public boolean onCommand(CommandSender arg0, Command arg1, String arg2,
+			String[] arg3) {
 
 		if (arg3.length < 4) {
 			return false;
@@ -43,8 +44,7 @@ public class ToggleSetBlockCommand implements CommandExecutor {
 		for (String string : split) {
 			try {
 				String[] split2 = string.trim().split(" ");
-				Location location = new Location(w, Double.parseDouble(split2[0]), Double.parseDouble(split2[1]),
-						Double.parseDouble(split2[2]));
+				Location location = new Location(w, Double.parseDouble(split2[0]), Double.parseDouble(split2[1]), Double.parseDouble(split2[2]));
 				Block block = location.getBlock();
 				if (block.getType() == Material.AIR) {
 					block.setType(blockData.getM());

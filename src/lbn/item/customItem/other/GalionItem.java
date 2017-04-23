@@ -22,7 +22,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public final class GalionItem extends AbstractItem implements MoneyItemable {
+public final class GalionItem extends AbstractItem implements MoneyItemable{
 
 	/**
 	 * Instance cache
@@ -96,7 +96,6 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
 
 	/**
 	 * 金のインゴットを消してお金を加算させる
-	 * 
 	 * @param player
 	 */
 	public void applyGalionItem(Player player) {
@@ -118,8 +117,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
 					if (isThisItem(entry.getValue())) {
 						int galions = new GalionItem(entry.getValue()).getGalions();
 						indexList.add(entry.getKey());
-						theLowPlayer.addGalions(galions * entry.getValue().getAmount(),
-								GalionEditReason.get_money_item);
+						theLowPlayer.addGalions(galions * entry.getValue().getAmount(), GalionEditReason.get_money_item);
 					}
 				}
 				for (Integer integer : indexList) {

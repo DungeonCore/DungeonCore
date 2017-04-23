@@ -20,10 +20,9 @@ public class LevelUpAbility implements AbilityInterface {
 	}
 
 	HashMap<PlayerStatusType, Double> abilityMap = new HashMap<PlayerStatusType, Double>();
-
 	@Override
 	public HashMap<PlayerStatusType, Double> getAbilityMap() {
-		abilityMap.put(PlayerStatusType.MAX_HP, nextMainLevel / 3.0);
+		abilityMap.put(PlayerStatusType.MAX_HP, nextMainLevel /3.0);
 		return abilityMap;
 	}
 

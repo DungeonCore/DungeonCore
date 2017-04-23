@@ -208,8 +208,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
 		if (loc == null) {
 			return "";
 		}
-		return StringUtils.join(new Object[] { loc.getWorld().getName(), ":", loc.getBlockX(), ",", loc.getBlockY(),
-				",", loc.getBlockZ() });
+		return StringUtils.join(new Object[] { loc.getWorld().getName(), ":", loc.getBlockX(), ",", loc.getBlockY(), ",", loc.getBlockZ() });
 	}
 
 	public static Location getLocationByString(String str) {

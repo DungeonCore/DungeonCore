@@ -9,7 +9,7 @@ import lbn.quest.abstractQuest.QuestType;
 
 import org.bukkit.entity.Player;
 
-public interface Quest {
+public interface Quest{
 	public String getId();
 
 	public String getName();
@@ -42,14 +42,12 @@ public interface Quest {
 
 	/**
 	 * 受けた後の会話
-	 * 
 	 * @return
 	 */
 	public String[] getTalkOnStart();
 
 	/**
 	 * 完了した後の会話
-	 * 
 	 * @return
 	 */
 	public String[] getTalkOnComplate();
@@ -78,14 +76,12 @@ public interface Quest {
 
 	/**
 	 * 進行状況を表示するかどうか
-	 * 
 	 * @return
 	 */
 	public boolean isShowProceessText();
 
 	/**
 	 * クエストを開始したときにもらえるアイテム
-	 * 
 	 * @return
 	 */
 	public ItemInterface getQuestBeforeItem();

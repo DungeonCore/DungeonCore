@@ -16,11 +16,12 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public class RemoveMobCommand implements CommandExecutor {
+public class RemoveMobCommand implements CommandExecutor{
 
-	// command x y z mob_name
+	//command x y z mob_name
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 		Location loc = null;
 
@@ -44,8 +45,9 @@ public class RemoveMobCommand implements CommandExecutor {
 			return false;
 		}
 
+
 		Entity spawnEntity = loc.getWorld().spawnEntity(loc, EntityType.SNOWBALL);
-		List<Entity> nearbyEntities = spawnEntity.getNearbyEntities(x, y, z);
+		List<Entity> nearbyEntities = spawnEntity.getNearbyEntities(x , y, z);
 		spawnEntity.remove();
 
 		for (Entity entity : nearbyEntities) {
@@ -54,7 +56,7 @@ public class RemoveMobCommand implements CommandExecutor {
 			}
 			if (join.equalsIgnoreCase("all")) {
 				entity.remove();
-			} else if (join.equalsIgnoreCase(((LivingEntity) entity).getCustomName())) {
+			} else if (join.equalsIgnoreCase(((LivingEntity)entity).getCustomName())){
 				entity.remove();
 			}
 		}

@@ -8,7 +8,7 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-public class MobSkillHealMob extends MobSkillRunnable {
+public class MobSkillHealMob extends MobSkillRunnable{
 
 	public MobSkillHealMob(String data) {
 		super(data);
@@ -17,7 +17,7 @@ public class MobSkillHealMob extends MobSkillRunnable {
 	@Override
 	public void execute(Entity target, Entity mob) {
 		if (mob.getType().isAlive()) {
-			Stun.addStun((LivingEntity) mob, 20 * 2);
+			Stun.addStun((LivingEntity)mob, 20 * 2);
 
 			double parsent = 20;
 			try {
@@ -25,7 +25,7 @@ public class MobSkillHealMob extends MobSkillRunnable {
 			} catch (Exception e) {
 			}
 
-			LivingEntityUtil.addHealth((LivingEntity) mob, ((Damageable) mob).getMaxHealth() * parsent * 0.01);
+			LivingEntityUtil.addHealth((LivingEntity)mob, ((Damageable)mob).getMaxHealth() * parsent * 0.01);
 		}
 
 	}

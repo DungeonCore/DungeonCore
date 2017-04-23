@@ -9,7 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
-public class NormalMob extends NullMob {
+public class NormalMob extends NullMob{
 	EntityType type;
 
 	public NormalMob(EntityType type) {

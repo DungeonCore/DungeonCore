@@ -26,15 +26,14 @@ import org.bukkit.inventory.ItemStack;
 
 public class SlotSetTableOperation {
 
-	public static ItemStack grayGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
-	public static ItemStack redGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
-	static {
+	public static ItemStack grayGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
+	public static ItemStack redGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
+	static{
 		ItemStackUtil.setDispName(grayGlass, "  ");
-		ItemStackUtil.setDispName(redGlass, ChatColor.RED + ChatColor.BOLD.toString() + "INFORMATION");
-		ItemStackUtil.setLore(redGlass, Arrays.asList(ChatColor.GREEN + "空きスロットのあるアイテムと魔法石を置いてください"));
+		ItemStackUtil.setDispName(redGlass,  ChatColor.RED + ChatColor.BOLD.toString() + "INFORMATION");
+		ItemStackUtil.setLore(redGlass,  Arrays.asList(ChatColor.GREEN + "空きスロットのあるアイテムと魔法石を置いてください"));
 	}
-	static ItemStack[] items = new ItemStack[] { grayGlass, grayGlass, grayGlass, null, redGlass, null, grayGlass,
-			grayGlass, grayGlass };
+	static ItemStack[] items = new ItemStack[]{grayGlass, grayGlass, grayGlass, null, redGlass, null, grayGlass, grayGlass, grayGlass};
 
 	public static void openSlotTable(final Player p) {
 		InventoryView openWorkbench = CraftTableViewManager.openWorkbench(p, CraftTableType.SLOT_TABLE);
@@ -50,7 +49,7 @@ public class SlotSetTableOperation {
 			}
 		}
 
-		// アイテムを１つ減少させる
+		//アイテムを１つ減少させる
 		inv.setItem(4, ItemStackUtil.getDecremented(inv.getItem(4)));
 		inv.setItem(6, ItemStackUtil.getDecremented(inv.getItem(6)));
 	}
@@ -62,7 +61,7 @@ public class SlotSetTableOperation {
 	public static void removeGlass(InventoryCloseEvent e) {
 		int size = e.getInventory().getSize();
 
-		// 灰色の板ガラスを削除
+		//灰色の板ガラスを削除
 		Inventory inv = e.getInventory();
 		for (int i = 0; i < Math.min(9, size); i++) {
 			inv.removeItem((SlotSetTableOperation.grayGlass));
@@ -72,7 +71,7 @@ public class SlotSetTableOperation {
 			return;
 		}
 
-		// 赤の板ガラスを削除
+		//赤の板ガラスを削除
 		ItemStack item = inv.getItem(5);
 		if (item == null) {
 			return;
@@ -94,26 +93,27 @@ public class SlotSetTableOperation {
 		if (i.getType() == null) {
 			return false;
 		}
-		if (i.getData() == null) {
+		if ( i.getData() == null) {
 			return false;
 		}
-		return ItemStackUtil.getName(i).equals(ItemStackUtil.getName(redGlass))
-				&& i.getType().equals(redGlass.getType()) && i.getData().getData() == redGlass.getData().getData();
+		return ItemStackUtil.getName(i).equals(ItemStackUtil.getName(redGlass)) && i.getType().equals(redGlass.getType()) && i.getData().getData() == redGlass.getData().getData();
 	}
 
-	public static void inventoryClick(final InventoryClickEvent e) {
+
+
+	public static void inventoryClick (final InventoryClickEvent e) {
 		if (!isOpenSlotTable(e.getWhoClicked())) {
 			return;
 		}
 
-		// ガラスはクリックしてもキャンセルする
+		//ガラスはクリックしてもキャンセルする
 		ItemStack currentItem = e.getCurrentItem();
 		if (isRedGlass(currentItem) || isGrayGlass(currentItem)) {
 			e.setCancelled(true);
 			return;
 		}
 
-		// 絶対に作業台が開いているはず
+		//絶対に作業台が開いているはず
 		if (!(e.getView().getTopInventory() instanceof CraftingInventory)) {
 			return;
 		}
@@ -132,8 +132,7 @@ public class SlotSetTableOperation {
 				return;
 			}
 			if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
-				new CraeteSlotItemResultLater(top, e, (AttackItemStack) slotItems[0], (SlotInterface) slotItems[1])
-						.runTaskLater(Main.plugin);
+				new CraeteSlotItemResultLater(top, e, (AttackItemStack)slotItems[0], (SlotInterface) slotItems[1]).runTaskLater(Main.plugin);
 			} else {
 				top.setItem(5, SlotSetTableOperation.redGlass);
 				e.setCancelled(true);
@@ -143,7 +142,6 @@ public class SlotSetTableOperation {
 
 	/**
 	 * 4番と6番にSlot関係のアイテムが存在してるならそれを返す。それ以外ならnullを返す
-	 * 
 	 * @param top
 	 * @return
 	 */
@@ -157,16 +155,16 @@ public class SlotSetTableOperation {
 		ItemInterface customItem1 = ItemManager.getCustomItem(item1);
 		ItemInterface customItem2 = ItemManager.getCustomItem(item2);
 
-		if (AttackItemStack.getInstance(item1) != null && customItem2 instanceof SlotInterface) {
+		if (AttackItemStack.getInstance(item1) != null && customItem2 instanceof SlotInterface)  {
 			attackItem = AttackItemStack.getInstance(getCloneItem(item1));
 			magicStone = (SlotInterface) customItem2;
-		} else if (AttackItemStack.getInstance(item2) != null && customItem1 instanceof SlotInterface) {
+		}else if (AttackItemStack.getInstance(item2) != null && customItem1 instanceof SlotInterface)  {
 			attackItem = AttackItemStack.getInstance(getCloneItem(item2));
 			magicStone = (SlotInterface) customItem1;
 		} else {
 			return null;
 		}
-		return new Object[] { attackItem, magicStone };
+		return new Object[]{attackItem, magicStone};
 	}
 
 	protected static ItemStack getCloneItem(ItemStack strengthItem) {

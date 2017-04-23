@@ -6,19 +6,19 @@ import lbn.player.status.IStatusDetail;
 
 import org.bukkit.Material;
 
-public class MainStatusDetail extends IStatusDetail {
+public class MainStatusDetail extends IStatusDetail{
 	public MainStatusDetail(TheLowPlayer p) {
 		super(p);
 	}
 
 	@Override
 	public String[] getIndexDetail() {
-		return new String[] { "プレイヤー自身のレベルです" };
+		return new String[]{"プレイヤー自身のレベルです"};
 	}
 
 	@Override
 	public String[] getDetailByLevel(int level) {
-		return new String[] {};
+		return new String[]{};
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class VillagerNpc implements CustomNpcInterface {
 	public void setNpc(NPC npc) {
 		this.data.location = npc.getStoredLocation();
 		this.npc = npc;
-		// NPCを更新する
+		//NPCを更新する
 		updateNpc();
 	}
 
@@ -67,53 +67,52 @@ public class VillagerNpc implements CustomNpcInterface {
 		Entity entity = e.getNPC().getEntity();
 		Set<TouchVillagerQuest> questForVillager = TouchVillagerQuest.getQuestByTargetVillager(entity);
 
-		// メッセージを取得
+		//メッセージを取得
 		List<String> message = new ArrayList<String>();
 
 		boolean isDoingTouchQuest = false;
 
 		PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p);
 		for (TouchVillagerQuest touchVillagerQuest : questForVillager) {
-			// クエスト実行中なら処理を行う
+			//クエスト実行中なら処理を行う
 			if (questSession.getProcessingStatus(touchVillagerQuest) == QuestProcessingStatus.PROCESSING) {
-				// 村人にタッチしたときの処理を実行
+				//村人にタッチしたときの処理を実行
 				touchVillagerQuest.onTouchVillager(p, entity, questSession);
-				// データを記録
+				//データを記録
 				questSession.setQuestData(touchVillagerQuest, 1);
 				touchVillagerQuest.onSatisfyComplateCondtion(p);
-				// メッセージを格納
+				//メッセージを格納
 				message.addAll(Arrays.asList(touchVillagerQuest.talkOnTouch()));
 				isDoingTouchQuest = true;
 			}
 		}
 
-		// もしクエスト実行中でなければ通常の村人のメッセージを出力する
+		//もしクエスト実行中でなければ通常の村人のメッセージを出力する
 		if (!isDoingTouchQuest) {
 			message = getMessage(p, entity);
 		}
 
-		// メッセージを出力する
+		//メッセージを出力する
 		if (!message.isEmpty()) {
 			QuestUtil.sendMessageByVillager(p, message.toArray(new String[0]));
 		}
 	}
 
-	// /**
-	// * NPCをスポーンさせる
-	// * @param loc
-	// * @return
-	// */
-	// public NPC spawn(Location loc) {
-	// NPC npc = CitizensAPI.getNPCRegistry().createNPC(getEntityType(),
-	// getName());
-	// npc.spawn(loc);
-	// if (npc != null) {
-	// remove();
-	// }
-	// this.npc = npc;
-	// updateNpc();
-	// return npc;
-	// }
+//	/**
+//	 * NPCをスポーンさせる
+//	 * @param loc
+//	 * @return
+//	 */
+//	public NPC spawn(Location loc) {
+//		NPC npc = CitizensAPI.getNPCRegistry().createNPC(getEntityType(), getName());
+//		npc.spawn(loc);
+//		if (npc != null) {
+//			remove();
+//		}
+//		this.npc = npc;
+//		updateNpc();
+//		return npc;
+//	}
 
 	/**
 	 * デスポーンさせる
@@ -126,6 +125,8 @@ public class VillagerNpc implements CustomNpcInterface {
 			npc.despawn(DespawnReason.PLUGIN);
 		}
 	}
+
+
 
 	/**
 	 * NPCを削除する
@@ -151,25 +152,25 @@ public class VillagerNpc implements CustomNpcInterface {
 		if (villagerData == null) {
 			return;
 		}
-		// EntityTypeを変更する
+		//EntityTypeを変更する
 		if (villagerData.getEntityType() != npc.getEntity().getType()) {
 			npc.setBukkitEntityType(villagerData.getEntityType());
 		}
 		if (getEntityType() == EntityType.PLAYER && villagerData.getSkin() != null) {
-			// skinの適用
+			//skinの適用
 			npc.data().setPersistent("player-skin-name", villagerData.getSkin());
 		}
 
-		// 子供にする
+		//子供にする
 		if (!data.isAdult()) {
-			// ageableの処理
+			//ageableの処理
 			if (npc.getEntity() instanceof Ageable) {
 				Age trait = npc.getTrait(Age.class);
 				trait.setAge(-24000);
 				npc.addTrait(trait);
 			}
 
-			// ZombieかPigManの処理
+			//ZombieかPigManの処理
 			if (npc.getEntity().getType() == EntityType.ZOMBIE || npc.getEntity().getType() == EntityType.PIG_ZOMBIE) {
 				boolean toggleBaby = npc.getTrait(ZombieModifier.class).toggleBaby();
 				if (!toggleBaby) {
@@ -184,34 +185,30 @@ public class VillagerNpc implements CustomNpcInterface {
 		}
 	}
 
-	/*
-	 * (非 Javadoc)
-	 * 
-	 * @see
-	 * lbn.npc.CustomNpcInterface#onNPCLeftClickEvent(net.citizensnpcs.api.event
-	 * .NPCLeftClickEvent)
+	/* (非 Javadoc)
+	 * @see lbn.npc.CustomNpcInterface#onNPCLeftClickEvent(net.citizensnpcs.api.event.NPCLeftClickEvent)
 	 */
 	@Override
 	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
 		Player p = e.getClicker();
 
-		// クエスト終了の村人ならここでクエストを終了させる
+		//クエスト終了の村人ならここでクエストを終了させる
 		boolean existTouchQuest = false;
 		PlayerQuestSession session = PlayerQuestSessionManager.getQuestSession(p);
 		Collection<Quest> doingQuestList = session.getDoingQuestList();
 		for (Quest quest : doingQuestList) {
-			// もし終了の村人がこの村人でないなら無視
+			//もし終了の村人がこの村人でないなら無視
 			if (!getId().equals(quest.getEndVillagerId())) {
 				continue;
 			}
 
-			// アイテムを持ってくるクエストなら処理を行う
+			//アイテムを持ってくるクエストなら処理を行う
 			if (TakeItemQuest.isTakeItemQuest(quest)) {
-				((TakeItemQuest) quest).onTouchVillager(p, e.getNPC().getEntity(), session);
+				((TakeItemQuest)quest).onTouchVillager(p, e.getNPC().getEntity(), session);
 				existTouchQuest = true;
 			}
 
-			// もし処理を全て終わらせているなら完了にする
+			//もし処理を全て終わらせているなら完了にする
 			if (session.getProcessingStatus(quest) == QuestProcessingStatus.PROCESS_END) {
 				QuestManager.complateQuest(quest, p, false);
 				existTouchQuest = true;
@@ -219,7 +216,7 @@ public class VillagerNpc implements CustomNpcInterface {
 
 		}
 
-		// 村人タッチのクエストが存在したらここで終了
+		//村人タッチのクエストが存在したらここで終了
 		if (existTouchQuest) {
 			return;
 		}
@@ -251,7 +248,7 @@ public class VillagerNpc implements CustomNpcInterface {
 
 	@Override
 	public void onNPCDamageEvent(NPCDamageEvent e) {
-		// e.setCancelled(true);
+//		e.setCancelled(true);
 	}
 
 	public Location getLocation() {

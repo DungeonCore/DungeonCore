@@ -45,7 +45,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import com.google.common.collect.HashBasedTable;
 
-public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
+public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable{
 
 	static HashMap<String, LivingEntity> entityList = new HashMap<String, LivingEntity>();
 
@@ -55,8 +55,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
 	long spawnTimeMill = -1;
 
-	public static SpreadSheetBossMob getInstance(String[] command, String name, CommandSender sender,
-			Location locationByString) {
+	public static SpreadSheetBossMob getInstance(String[] command, String name, CommandSender sender, Location locationByString) {
 		LbnMobTag nbtTag = MobSpawnerFromCommand.getNBTTagByCommand(command, sender);
 
 		if (nbtTag == null) {
@@ -78,7 +77,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		if (locationByString != null) {
 			AbstractCustomChest customChest = CustomChestManager.getCustomChest(locationByString);
 			if (customChest != null && customChest instanceof SpletSheetChest) {
-				((SpletSheetChest) customChest).setBossChestTemplate(true);
+				((SpletSheetChest)customChest).setBossChestTemplate(true);
 			}
 		}
 
@@ -97,7 +96,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		this.e = e;
 		entityList.put(getName(), e);
 
-		// すでにキャンセルされてる可能性もあるのエラーを無視
+		//すでにキャンセルされてる可能性もあるのエラーを無視
 		try {
 			for (BukkitRunnable rutineRun : runtineMap.values()) {
 				rutineRun.cancel();
@@ -105,9 +104,8 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		} catch (Exception ex) {
 		}
 
-		// mobskillをスタート
-		for (MobSkillExcuteConditionType condtion : Arrays.asList(MobSkillExcuteConditionType.RUNTINE_10SEC,
-				MobSkillExcuteConditionType.RUNTINE_30SEC, MobSkillExcuteConditionType.RUNTINE_60SEC)) {
+		//mobskillをスタート
+		for (MobSkillExcuteConditionType condtion : Arrays.asList(MobSkillExcuteConditionType.RUNTINE_10SEC, MobSkillExcuteConditionType.RUNTINE_30SEC, MobSkillExcuteConditionType.RUNTINE_60SEC)) {
 			RuntineRunnable run = new RuntineRunnable(condtion);
 			run.runtask();
 			runtineMap.put(condtion, run);
@@ -121,12 +119,12 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
 		spawnTimeMill = System.currentTimeMillis();
 
-		// 前のが動いていた場合はキャンセルする
+		//前のが動いていた場合はキャンセルする
 		for (BukkitRunnable val : runtineMap.values()) {
 			if (val == null) {
 				continue;
 			}
-			// 念のため
+			//念のため
 			try {
 				val.cancel();
 			} catch (Exception ex) {
@@ -134,9 +132,8 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 			}
 		}
 
-		// mobskillをスタート
-		for (MobSkillExcuteConditionType condtion : Arrays.asList(MobSkillExcuteConditionType.RUNTINE_10SEC,
-				MobSkillExcuteConditionType.RUNTINE_30SEC, MobSkillExcuteConditionType.RUNTINE_60SEC)) {
+		//mobskillをスタート
+		for (MobSkillExcuteConditionType condtion : Arrays.asList(MobSkillExcuteConditionType.RUNTINE_10SEC, MobSkillExcuteConditionType.RUNTINE_30SEC, MobSkillExcuteConditionType.RUNTINE_60SEC)) {
 			RuntineRunnable run = new RuntineRunnable(condtion);
 			run.runtask();
 			runtineMap.put(condtion, run);
@@ -150,7 +147,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 	@Override
 	public BossChest getBossChest() {
 		AbstractCustomChest customChest = CustomChestManager.getCustomChest(chestloc.getBlock().getLocation());
-		if (customChest != null || customChest instanceof SpletSheetChest) {
+		if (customChest != null ||customChest instanceof SpletSheetChest) {
 			return new BossChest((SpletSheetChest) customChest);
 		} else {
 			return null;
@@ -160,19 +157,18 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 	@Override
 	protected Entity spawnPrivate(Location loc) {
 		Entity spawnPrivate = super.spawnPrivate(loc);
-		// String eInfo = null;
-		// if (e != null) {
-		// eInfo = e + "(isDead:" + e.isDead() + ")";
-		// }
-		//
-		// String eList = null;
-		// LivingEntity livingEntity = entityList.get(getName());
-		// if (livingEntity != null) {
-		// eList = livingEntity + "(isDead:" + livingEntity.isDead() + ")";
-		// }
+//		String eInfo = null;
+//		if (e != null) {
+//			eInfo = e + "(isDead:" + e.isDead() + ")";
+//		}
+//
+//		String eList = null;
+//		LivingEntity livingEntity = entityList.get(getName());
+//		if (livingEntity != null) {
+//			eList = livingEntity + "(isDead:" + livingEntity.isDead() + ")";
+//		}
 
-		// DungeonLog.printDevelopln(getEntity() + " will be spawn!!(" +
-		// getName() + ") entity:" + eInfo + ", entityList:" + eList);
+//		DungeonLog.printDevelopln(getEntity() + " will be spawn!!(" + getName() + ") entity:" + eInfo + ", entityList:" + eList);
 		return spawnPrivate;
 	}
 
@@ -191,7 +187,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
 		super.onDamage(mob, damager, e);
 
-		// 最後に攻撃したPlayerと攻撃方法を取得
+		//最後に攻撃したPlayerと攻撃方法を取得
 		Player player = LastDamageManager.getLastDamagePlayer(mob);
 		if (player == null) {
 			return;
@@ -199,14 +195,14 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		TheLowPlayer p = TheLowPlayerManager.getTheLowPlayer(player);
 		LastDamageMethodType lastDamageType = LastDamageManager.getLastDamageAttackType(mob);
 
-		// 攻撃方法を対応するステータスのTypeに変換
+		//攻撃方法を対応するステータスのTypeに変換
 		LevelType type = lastDamageType.getLevelType();
 
-		// 攻撃者がいる または 攻撃方法に対応するステータスが存在するならダメージを記録する
+		//攻撃者がいる　または　攻撃方法に対応するステータスが存在するならダメージを記録する
 		if (p != null && type != null) {
 			combatPlayerSet.put(p, System.currentTimeMillis());
 
-			// ダメージを記録
+			//ダメージを記録
 			double doubleNowDamage = 0;
 			if (combatDamagePlayerMap.contains(p, type)) {
 				doubleNowDamage = combatDamagePlayerMap.get(p, type);
@@ -214,18 +210,19 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 			combatDamagePlayerMap.put(p, type, doubleNowDamage + e.getDamage());
 		}
 
-		// ボスモブとして認識されていないなら再セットする
-		if ((this.e == null || !this.e.isValid()) && mob != this.e) {
+		//ボスモブとして認識されていないなら再セットする
+		if ((this.e == null || !this.e.isValid()) &&mob != this.e) {
 			setEntity(mob);
 		}
 	}
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 		super.onAttack(mob, target, e);
 
-		// ボスモブとして認識されていないなら再セットする
-		if ((this.e == null || !this.e.isValid()) && mob != this.e) {
+		//ボスモブとして認識されていないなら再セットする
+		if ((this.e == null || !this.e.isValid()) &&mob != this.e) {
 			setEntity(mob);
 		}
 	}
@@ -235,7 +232,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		Iterator<Entry<TheLowPlayer, Long>> iterator = combatPlayerSet.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<TheLowPlayer, Long> entry = iterator.next();
-			// Combatした時間よりも後に死んでいたらCombatを認めない
+			//Combatした時間よりも後に死んでいたらCombatを認めない
 			if (entry.getKey().getLastDeathTimeMillis() > entry.getValue()) {
 				iterator.remove();
 			}
@@ -246,7 +243,6 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 	class RuntineRunnable extends BukkitRunnable {
 		MobSkillExcuteConditionType condtion;
 		int term;
-
 		public RuntineRunnable(MobSkillExcuteConditionType condtion) {
 			this.term = condtion.getTerm();
 			this.condtion = condtion;
@@ -263,9 +259,9 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 				runtineMap.remove(condtion);
 				return;
 			}
-			// ランダムで一番近くのプレイヤー
+			//ランダムで一番近くのプレイヤー
 			for (LivingEntity entity : LivingEntityUtil.getNearFrendly(getEntity(), 30, 20, 30)) {
-				// combatプレイやーでないなら無視
+				//combatプレイやーでないなら無視
 				if (entity.getType() == EntityType.PLAYER && TheLowPlayerManager.isLoaded((Player) entity)) {
 					if (!combatPlayerSet.containsKey(TheLowPlayerManager.getTheLowPlayer((Player) entity))) {
 						continue;
@@ -295,11 +291,11 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 			}
 		}
 
-		// 数チック後に削除する
+		//数チック後に削除する
 		new LbnRunnable() {
 			@Override
 			public void run2() {
-				// コンバットプレイヤーをクリア
+				//コンバットプレイヤーをクリア
 				combatPlayerSet.clear();
 				combatDamagePlayerMap.clear();
 			}
@@ -325,10 +321,9 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 		public void run() {
 			LivingEntity entity = getEntity();
 			if (entity != null) {
-				double maxHealth = ((Damageable) entity).getMaxHealth();
-				double nowHealth = ((Damageable) entity).getHealth();
-				entity.setCustomName(
-						StringUtils.join(getName(), ChatColor.RED, " [", (int) nowHealth, "/", (int) maxHealth, "]"));
+				double maxHealth = ((Damageable)entity).getMaxHealth();
+				double nowHealth = ((Damageable)entity).getHealth();
+				entity.setCustomName(StringUtils.join(getName(), ChatColor.RED , " [" , (int)nowHealth , "/" , (int)maxHealth, "]"));
 
 				if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
 					for (TheLowPlayer p : combatPlayerSet.keySet()) {
@@ -339,8 +334,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 							if (nowHealth <= 0) {
 								ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
 							} else {
-								ActionBarAPI.sendActionBar(p.getOnlinePlayer(), getName() + ChatColor.RED + " ["
-										+ (int) nowHealth + "/" + (int) maxHealth + "]");
+								ActionBarAPI.sendActionBar(p.getOnlinePlayer(), getName() + ChatColor.RED + " [" + (int)nowHealth + "/" + (int)maxHealth+ "]");
 							}
 						}
 					}
@@ -353,23 +347,22 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 	public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
 		int exp = getExp(type);
 		if (exp == -1) {
-			exp = (int) (((Damageable) entity).getMaxHealth() * 1.3);
+			exp = (int) (((Damageable)entity).getMaxHealth() * 1.3);
 		}
 
-		// totalダメージを取得
+		//totalダメージを取得
 		double totalDamage = 0;
 		for (Double damage : combatDamagePlayerMap.values()) {
 			if (damage != null) {
 				totalDamage += damage.doubleValue();
 			}
 		}
-		// 経験値を分配する
+		//経験値を分配する
 		for (Entry<TheLowPlayer, Map<LevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
 			TheLowPlayer theLowPlayer = entry.getKey();
 			for (Entry<LevelType, Double> typeEntry : entry.getValue().entrySet()) {
 				if (typeEntry.getKey() != null) {
-					theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage),
-							StatusAddReason.monster_drop);
+					theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
 				}
 			}
 		}

@@ -7,7 +7,7 @@ import lbn.util.ItemStackUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public abstract class RightClickItem extends AbstractItem implements RightClickItemable {
+public abstract class RightClickItem extends AbstractItem implements RightClickItemable{
 	abstract protected boolean isConsumeWhenUse();
 
 	@Override

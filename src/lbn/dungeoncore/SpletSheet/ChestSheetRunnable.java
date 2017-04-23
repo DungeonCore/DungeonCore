@@ -28,14 +28,13 @@ public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "chestlocation", "contentlocation", "refuel", "type", "min", "max", "movelocation",
-				"movetime", "random" };
+		return new String[]{"chestlocation", "contentlocation", "refuel", "type", "min", "max", "movelocation", "movetime","random"};
 	}
 
-	public static HashMap<String, Object> createDataMap(Location chestLoc, Location contentLoc, double refuelSecond,
-			boolean allPlayerSameflg, Location moveLoc, int minItemCount, int maxItemCount) {
+	public static HashMap<String, Object> createDataMap(Location chestLoc, Location contentLoc, double refuelSecond, boolean allPlayerSameflg,
+			Location moveLoc, int minItemCount, int maxItemCount) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		// setする
+		//setする
 		map.put("chestlocation", getLocationString(chestLoc));
 		map.put("contentlocation", getLocationString(contentLoc));
 		map.put("refuel", refuelSecond);
@@ -67,7 +66,7 @@ public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
 			int moveTime = 10;
 			try {
-				moveTime = (int) Double.parseDouble(row[7]);
+				moveTime = (int)Double.parseDouble(row[7]);
 			} catch (Exception e) {
 				moveTime = 10;
 			}
@@ -76,11 +75,9 @@ public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
 			SpletSheetChest chest;
 			if (allPlayerSameChestFlg) {
-				chest = new AllPlayerSameContentChest(chestLoc, contentLoc, refuelTick, moveLoc, minItemCount,
-						maxItemCount, moveTime, isRandom);
+				chest = new AllPlayerSameContentChest(chestLoc, contentLoc, refuelTick, moveLoc, minItemCount, maxItemCount, moveTime, isRandom);
 			} else {
-				chest = new EachPlayerContentChest(chestLoc, contentLoc, refuelTick, moveLoc, minItemCount,
-						maxItemCount, moveTime, isRandom);
+				chest = new EachPlayerContentChest(chestLoc, contentLoc, refuelTick, moveLoc, minItemCount, maxItemCount, moveTime, isRandom);
 			}
 			CustomChestManager.registChest(chestLoc, chest);
 

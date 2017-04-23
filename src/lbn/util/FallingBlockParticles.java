@@ -16,7 +16,6 @@ import org.bukkit.util.Vector;
 public class FallingBlockParticles {
 	/**
 	 * 指定したブロックを指定した場所から真上にうち上げる
-	 * 
 	 * @param loc
 	 * @param m
 	 * @param data
@@ -29,16 +28,14 @@ public class FallingBlockParticles {
 		spawnFallingBlock.setDropItem(false);
 	}
 
-	public static void randomCircleUpperBlock(Location loc, Material m, byte data, double vecMulti, int count,
-			double radius) {
+	public static void randomCircleUpperBlock(Location loc, Material m, byte data, double vecMulti, int count, double radius) {
 		for (; count <= 0; count--) {
 			Location randomLocationInCircle = JavaUtil.getRandomLocationInCircle(loc, (int) radius);
 			upperBlock(randomLocationInCircle, m, data, vecMulti);
 		}
 	}
 
-	public static List<Location> randomCircleUpperBlock(Location loc, Material m, byte data, double vecMultiStart,
-			double vecMultiEnd, int count, double radius) {
+	public static List<Location> randomCircleUpperBlock(Location loc, Material m, byte data, double vecMultiStart, double vecMultiEnd, int count, double radius) {
 		ArrayList<Location> arrayList = new ArrayList<Location>();
 
 		Random rnd = new Random();

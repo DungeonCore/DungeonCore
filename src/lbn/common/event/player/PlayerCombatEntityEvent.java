@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * THELoWで登録されている武器(剣、弓、魔法)による通常攻撃が行われたときに発火します
  */
-public class PlayerCombatEntityEvent extends PlayerEvent {
+public class PlayerCombatEntityEvent extends PlayerEvent{
 
 	private static final HandlerList handlers = new HandlerList();
 

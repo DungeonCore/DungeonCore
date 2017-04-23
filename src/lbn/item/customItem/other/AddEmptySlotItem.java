@@ -11,7 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public class AddEmptySlotItem extends AbstractItem implements SlotInterface {
+public class AddEmptySlotItem extends AbstractItem implements SlotInterface{
 
 	@Override
 	public String getItemName() {
@@ -72,7 +72,7 @@ public class AddEmptySlotItem extends AbstractItem implements SlotInterface {
 
 	@Override
 	public String[] getDetail() {
-		return new String[] { "鍛冶屋の魔法石装着画面で", "武器に空のスロットを追加できます" };
+		return new String[]{"鍛冶屋の魔法石装着画面で", "武器に空のスロットを追加できます"};
 	}
 
 	@Override

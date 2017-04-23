@@ -15,10 +15,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StrengthItemCommand implements CommandExecutor {
+public class StrengthItemCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
+	public boolean onCommand(CommandSender paramCommandSender,
+			Command paramCommand, String paramString,
 			String[] paramArrayOfString) {
 
 		if (!(paramCommandSender instanceof Player)) {
@@ -28,27 +29,25 @@ public class StrengthItemCommand implements CommandExecutor {
 
 		Player p = (Player) paramCommandSender;
 
-		if (paramArrayOfString.length == 1 && NumberUtils.isDigits(paramArrayOfString[0])) {
+		if (paramArrayOfString.length == 1 && NumberUtils.isDigits(paramArrayOfString[0]) ) {
 			ItemInterface item = ItemManager.getCustomItem(p.getItemInHand());
 			if (item == null) {
 				paramCommandSender.sendMessage("今持っているアイテムは強化できません。");
 			} else if (item instanceof Strengthenable) {
 				StrengthOperator.updateLore(p.getItemInHand(), Integer.parseInt(paramArrayOfString[0]));
 
-				paramCommandSender.sendMessage(
-						item.getItemName() + "を" + StrengthOperator.getLevel(p.getItemInHand()) + "に強化しました。");
+				paramCommandSender.sendMessage(item.getItemName() +  "を" +  StrengthOperator.getLevel(p.getItemInHand()) + "に強化しました。");
 
-				PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent(p,
-						Integer.parseInt(paramArrayOfString[0]), p.getItemInHand(), true);
+				PlayerStrengthFinishEvent playerStrengthItemEvent = new PlayerStrengthFinishEvent(p, Integer.parseInt(paramArrayOfString[0]), p.getItemInHand(), true);
 				Bukkit.getServer().getPluginManager().callEvent(playerStrengthItemEvent);
 			} else if (item instanceof AbstractPickaxe) {
-				((AbstractPickaxe) item).updatePickExp(p.getItemInHand(), Short.parseShort(paramArrayOfString[0]));
-				paramCommandSender.sendMessage(item.getItemName() + "のピッケルレベルを" + paramArrayOfString[0] + "に変更しました");
+				((AbstractPickaxe)item).updatePickExp(p.getItemInHand(), Short.parseShort(paramArrayOfString[0]));
+				paramCommandSender.sendMessage(item.getItemName() +  "のピッケルレベルを" +  paramArrayOfString[0] + "に変更しました");
 			} else {
 				paramCommandSender.sendMessage("今持っているアイテムは強化できません。");
 			}
 			return true;
-		} else if (paramArrayOfString.length == 1 && paramArrayOfString[0].equals("set")) {
+		} else if (paramArrayOfString.length == 1 && paramArrayOfString[0].equals("set") ) {
 			StrengthTables.openStrengthTable(p);
 			return true;
 		}

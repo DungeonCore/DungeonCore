@@ -7,7 +7,7 @@ import lbn.util.JavaUtil;
 
 import org.bukkit.command.CommandSender;
 
-public class FoodSheetRunnable extends AbstractSheetRunable {
+public class FoodSheetRunnable extends AbstractSheetRunable{
 
 	public FoodSheetRunnable(CommandSender sender) {
 		super(sender);
@@ -25,8 +25,7 @@ public class FoodSheetRunnable extends AbstractSheetRunable {
 
 	@Override
 	public String[] getTag() {
-		return new String[] { "id", "name", "command", "buff1", "buff2", "buff3", "sound", "particle", "price",
-				"swordexp", "bowexp", "magicexp", "detail" };
+		return new String[]{"id", "name", "command", "buff1", "buff2", "buff3", "sound", "particle", "price", "swordexp", "bowexp", "magicexp", "detail"};
 	}
 
 	@Override

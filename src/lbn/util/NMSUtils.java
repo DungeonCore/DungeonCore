@@ -16,14 +16,12 @@ import net.minecraft.server.v1_8_R1.MerchantRecipe;
 public class NMSUtils {
 	/**
 	 * オリジナルのEntityを登録する
-	 * 
 	 * @param name
 	 * @param id
 	 * @param nmsClass
 	 * @param customClass
 	 */
-	public static void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass,
-			Class<? extends EntityInsentient> customClass) {
+	public static void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
 		try {
 			List<Map<?, ?>> dataMaps = new ArrayList<Map<?, ?>>();
 			for (Field f : EntityTypes.class.getDeclaredFields()) {
@@ -32,7 +30,7 @@ public class NMSUtils {
 					dataMaps.add((Map<?, ?>) f.get(null));
 				}
 			}
-			// もしidが競合していれば取り除く
+			//もしidが競合していれば取り除く
 			if (dataMaps.get(2).containsKey(id)) {
 				dataMaps.get(0).remove(name);
 				dataMaps.get(2).remove(id);
@@ -42,9 +40,11 @@ public class NMSUtils {
 			method.setAccessible(true);
 			method.invoke(null, customClass, name, id);
 
-			// 全てのバイオームにmodを登録する
+
+			//全てのバイオームにmodを登録する
 			for (Field f : BiomeBase.class.getDeclaredFields()) {
-				if (f.getType().getSimpleName().equals(BiomeBase.class.getSimpleName())) {
+				if (f.getType().getSimpleName()
+						.equals(BiomeBase.class.getSimpleName())) {
 					if (f.get(null) != null) {
 						for (Field list : BiomeBase.class.getDeclaredFields()) {
 							if (list.getType().getSimpleName().equals(List.class.getSimpleName())) {
@@ -69,11 +69,10 @@ public class NMSUtils {
 	}
 
 	/**
-	 * MerchantRecipeのPrivateフィールドにItemをセットする。<br />
-	 * index = 0 : buy1 <br />
-	 * index = 1 : buy2 <br />
-	 * index = 2 : result <br />
-	 * 
+	 *MerchantRecipeのPrivateフィールドにItemをセットする。<br />
+	 *index = 0 : buy1  <br />
+	 *index = 1 : buy2  <br />
+	 *index = 2 : result  <br />
 	 * @param recipe
 	 * @param item
 	 */
@@ -95,7 +94,7 @@ public class NMSUtils {
 		if (fieldName != null) {
 			JavaUtil.setPrivateField(recipe, fieldName, item);
 		} else {
-			throw new RuntimeException("index is invaild : " + index);
+			throw new RuntimeException("index is invaild : "+ index);
 		}
 	}
 }

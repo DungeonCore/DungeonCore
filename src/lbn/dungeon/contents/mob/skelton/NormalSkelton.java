@@ -9,10 +9,11 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public class NormalSkelton extends AbstractSkelton {
+public class NormalSkelton extends AbstractSkelton{
 
 	@Override
-	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onProjectileHitEntity(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 
 	}
 
@@ -27,12 +28,14 @@ public class NormalSkelton extends AbstractSkelton {
 	}
 
 	@Override
-	public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e) {
+	public void onAttack(LivingEntity mob, LivingEntity target,
+			EntityDamageByEntityEvent e) {
 
 	}
 
 	@Override
-	public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
+	public void onDamage(LivingEntity mob, Entity damager,
+			EntityDamageByEntityEvent e) {
 
 	}
 

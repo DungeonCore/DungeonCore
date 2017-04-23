@@ -6,7 +6,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
+public class PlayerLoadedDataEvent extends TheLowPlayerEvent{
 
 	boolean isSuccess;
 
@@ -35,7 +35,6 @@ public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
 
 	/**
 	 * ロードに成功したならTRUE
-	 * 
 	 * @return
 	 */
 	public boolean isSuccess() {

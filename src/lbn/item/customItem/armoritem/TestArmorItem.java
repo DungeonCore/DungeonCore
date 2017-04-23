@@ -14,10 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class TestArmorItem extends AbstractArmorItem {
+public class TestArmorItem extends AbstractArmorItem{
 	int level;
 	private Material m;
-
 	public TestArmorItem(int level, Material m) {
 		this.level = level;
 		this.m = m;
@@ -27,12 +26,12 @@ public class TestArmorItem extends AbstractArmorItem {
 
 	@Override
 	public double getArmorPointForNormalMob() {
-		return 3 + (34.2 - 3) / 60 * level;
+		return 3 + (34.2 - 3)/60 * level;
 	}
 
 	@Override
 	public double getArmorPointForBossMob() {
-		return 3.5 + (40.3 - 3) / 60 * level;
+		return 3.5 + (40.3 - 3)/60 * level;
 	}
 
 	@Override
@@ -69,10 +68,8 @@ public class TestArmorItem extends AbstractArmorItem {
 	protected ItemStack getItemStackBase() {
 		long nextLong = RandomUtils.nextLong();
 
-		String command = "/give @p minecraft:" + getMaterial().toString().toLowerCase()
-				+ " 1 0 {AttributeModifiers:[{Name: HaruEditor,UUIDLeast: " + nextLong++ + "L,UUIDMost: " + nextLong
-				+ "L,Operation: 0,AttributeName: generic.maxHealth,Amount: " + getHealthAdd(getAvailableLevel())
-				+ "d}]}";
+		String command = "/give @p minecraft:" + getMaterial().toString().toLowerCase() + " 1 0 {AttributeModifiers:[{Name: HaruEditor,UUIDLeast: " + nextLong++ + "L,UUIDMost: " + nextLong + "L,Operation: 0,AttributeName: generic.maxHealth,Amount: "
+				+ getHealthAdd(getAvailableLevel()) + "d}]}";
 		ItemStack itemStackBase = ItemStackUtil.getItemStackByCommand(command);
 		return itemStackBase;
 	}
@@ -113,6 +110,6 @@ public class TestArmorItem extends AbstractArmorItem {
 	}
 
 	public static double getHealthAdd(int level) {
-		return (20.0 / (-0.0002 * level * level + 1) - 20.0) / 4.0;
+		return (20.0 / (-0.0002 *level*level +1) - 20.0) / 4.0;
 	}
 }

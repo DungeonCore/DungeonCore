@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
-	// ItemId
+	//ItemId
 	HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
 
 	@Override
@@ -30,9 +30,9 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 	public Map<ItemInterface, Integer> getMaterialMap() {
 		HashMap<ItemInterface, Integer> itemInterfaceMap = new HashMap<ItemInterface, Integer>();
 		for (Entry<String, Integer> entry : materialMap.entrySet()) {
-			// アイテムを取得する
+			//アイテムを取得する
 			ItemInterface customItemById = ItemManager.getCustomItemById(entry.getKey());
-			// もしアイテムが存在しないならクラフトできないとし、nullを返す
+			//もしアイテムが存在しないならクラフトできないとし、nullを返す
 			if (customItemById == null) {
 				return null;
 			}
@@ -58,13 +58,14 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 			if (entry.getKey() == null) {
 				continue;
 			}
-			// 1つでも持ってなかったらFALSE
+			//1つでも持ってなかったらFALSE
 			if (!ItemStackUtil.containsCustomItem(inventory, entry.getKey(), entry.getValue())) {
 				return false;
 			}
 		}
 		return true;
 	}
+
 
 	@Override
 	public void removeMaterial(Inventory inv) {
@@ -78,3 +79,4 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 		CraftViewerForOnlyMaterialRecipe.open(p, craftingItem);
 	}
 }
+

@@ -11,7 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
+public abstract class WeaponSkillForOneType implements WeaponSkillInterface{
 	ItemType type;
 
 	public WeaponSkillForOneType(ItemType type) {
@@ -63,9 +63,9 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
 		return false;
 	}
 
+
 	@Override
-	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity,
-			PlayerCombatEntityEvent event) {
+	public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
 	}
 
 	protected String getDataString(int i) {

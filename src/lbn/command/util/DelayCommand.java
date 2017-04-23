@@ -15,9 +15,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class DelayCommand implements CommandExecutor, UsageCommandable {
+public class DelayCommand implements CommandExecutor, UsageCommandable{
 	static TaskManager taskManager = new TaskManager();
-
 	@Override
 	public boolean onCommand(final CommandSender arg0, Command arg1, String arg2, String[] arg3) {
 		if (arg3.length == 1 && arg3[0].equals("list")) {
@@ -37,7 +36,7 @@ public class DelayCommand implements CommandExecutor, UsageCommandable {
 			return false;
 		}
 
-		// 実行者の座標を取得
+		//実行者の座標を取得
 		Location blockLoc = MinecraftUtil.getSenderLocation(arg0);
 
 		if (blockLoc == null) {
@@ -60,10 +59,12 @@ public class DelayCommand implements CommandExecutor, UsageCommandable {
 
 	@Override
 	public String getUsage() {
-		return "/delaycommand second command " + "\n command を second秒後に実行します。 " + ChatColor.GREEN
-				+ "\n '/delaycommand 10 setblock 100 65 100 2' " + ChatColor.GRAY
-				+ "\n ---- 10秒後に'/setblock 100 65 100 2'を実行します。" + ChatColor.GREEN
-				+ "\n  '/delaycommand 0.5 say こんにちは' " + ChatColor.GRAY + "\n ---- 0.5秒後に'/say こんにちわ'を実行します。";
+		return "/delaycommand second command "
+				+ "\n command を second秒後に実行します。 "
+				+ ChatColor.GREEN + "\n '/delaycommand 10 setblock 100 65 100 2' "
+				+ ChatColor.GRAY + "\n ---- 10秒後に'/setblock 100 65 100 2'を実行します。"
+				+ ChatColor.GREEN + "\n  '/delaycommand 0.5 say こんにちは' "
+				+ ChatColor.GRAY + "\n ---- 0.5秒後に'/say こんにちわ'を実行します。";
 	}
 
 	@Override
