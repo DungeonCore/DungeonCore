@@ -33,7 +33,7 @@ commands:
       aliases: [stats]
    statusCommand:
       description: This is operate status.
-      usage: /<command> set type 値 (target),  /<command> load target 
+      usage: /<command> set type 値 (target),  /<command> load target
       permission: main.lbnDungeonUtil.command.admin.manager
       permission-message: You don't have <permission>
    set_spawn_point:
@@ -254,8 +254,8 @@ commands:
       permission:  main.lbnDungeonUtil.command.player.useable.spawnNpc
       usage: /<command>
       permission-message: You don't have <permission>
-   nametag:
-      description: ネームタグを追加します
+   tag:
+      description: Playerのタグを追加します
       permission:  main.lbnDungeonUtil.command.nametag
       usage: /<command>
       permission-message: You don't have <permission>
