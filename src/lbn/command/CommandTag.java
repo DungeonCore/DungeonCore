@@ -14,13 +14,13 @@ public class CommandTag implements CommandExecutor {
 		if (args.length == 0) {
 			sender.sendMessage(ChatColor.DARK_GREEN + "■■================================================■■");
 			sender.sendMessage(ChatColor.AQUA + "/tag list");
-			sender.sendMessage(ChatColor.BOLD + "タグの一覧を表示します");
+			sender.sendMessage(ChatColor.BOLD + "    タグの一覧を表示します");
 			sender.sendMessage("");
 			sender.sendMessage(ChatColor.AQUA + "/tag settag <tag> <Player>" );
-			sender.sendMessage(ChatColor.BOLD + "↳タグをセットします");
+			sender.sendMessage(ChatColor.BOLD + "    タグをセットします");
 			sender.sendMessage("");
 			sender.sendMessage(ChatColor.AQUA + "/tag removetag <Player>");
-			sender.sendMessage(ChatColor.BOLD + "↳プレイヤーのタグを消します");
+			sender.sendMessage(ChatColor.BOLD + "    プレイヤーのタグを消します");
 			sender.sendMessage(ChatColor.DARK_GREEN + "■■================================================■■");
 			return true;
 		}
