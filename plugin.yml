@@ -254,6 +254,12 @@ commands:
       permission:  main.lbnDungeonUtil.command.player.useable.spawnNpc
       usage: /<command>
       permission-message: You don't have <permission>
+   nametag:
+      description: ネームタグを追加します
+      permission:  main.lbnDungeonUtil.command.nametag
+      usage: /<command>
+      permission-message: You don't have <permission>
+
 
 permissions:
    main.lbnDungeonUtil.command.player.useable.*:
