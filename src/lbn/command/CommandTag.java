@@ -28,7 +28,7 @@ public class CommandTag implements CommandExecutor {
 		TagConfig.setNewTag(commandLabel);
 		Player online = Bukkit.getPlayerExact(args[0]);
 		if (online == null) {
-			sender.sendMessage(ChatColor.RED + "Player" + args[0] + "はOfflineです。");
+			sender.sendMessage(RED + "Player" + args[0] + "はOfflineです。");
 			return true;
 		}
 		TagConfig.setPlayer(args[1]);
