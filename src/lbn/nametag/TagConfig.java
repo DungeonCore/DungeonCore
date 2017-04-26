@@ -1,21 +1,18 @@
 package lbn.nametag;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
+import java.io.File;
 
-public class TagConfig extends JavaPlugin {
+import lbn.dungeoncore.Main;
 
-	public void config() {
-		FileConfiguration tagconfig = new YamlConfiguration();
-		//TODO: tag.yml create
-	}
+public class TagConfig {
+	public final static String directory = Main.dataFolder + File.separator;
 
-	public static void setNewTag(String string) {
-		//TODO: add set tag
+	public void createconfig() {
+		//TODO: create config
+
 	}
 
 	public static void setPlayer(String string) {
-		//TODO: add set player
+		// TODO: add set player
 	}
 }

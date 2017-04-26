@@ -9,25 +9,25 @@ public class Tag {
 		OWNER,
 		CO_OWNER,
 		DEVELOPER,
-		JR_DEVELOPER,
+		MINI_DEVELOPER,
 		ADMIN,
-		JR_ADMIN,
+		MINI_ADMIN,
 		MODERATOR,
-		JR_MODERATOR,
+		MINI_MODERATOR,
 		SENIOR_BUILDER,
 		BUILDER,
-		JR_BUILDER,
+		MINI_BUILDER,
 		MANAGER,
 		HELPER,
 		TRAIAL,
 	}
 
 	public TagType getTagType() {
-		return this.tagtype;
+		return tagtype;
 	}
 
 	public void setName(TagType tag) {
-		this.tagtype = tag;
+		tagtype = tag;
 	}
 
 
