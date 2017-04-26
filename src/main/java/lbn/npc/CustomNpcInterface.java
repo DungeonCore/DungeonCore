@@ -1,11 +1,11 @@
 package lbn.npc;
 
+import org.bukkit.entity.EntityType;
+
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
-
-import org.bukkit.entity.EntityType;
 
 public interface CustomNpcInterface {
 

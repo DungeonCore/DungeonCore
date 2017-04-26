@@ -1,10 +1,10 @@
 package lbn.common.event.player;
 
+import org.bukkit.event.HandlerList;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.StatusAddReason;
-
-import org.bukkit.event.HandlerList;
 
 public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent {
   private static final HandlerList handlers = new HandlerList();

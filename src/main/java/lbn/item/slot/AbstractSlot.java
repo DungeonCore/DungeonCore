@@ -1,14 +1,14 @@
 package lbn.item.slot;
 
-import lbn.item.customItem.AbstractItem;
-import lbn.item.system.lore.ItemLoreToken;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+
+import lbn.item.customItem.AbstractItem;
+import lbn.item.system.lore.ItemLoreToken;
 
 public abstract class AbstractSlot extends AbstractItem implements SlotInterface {
   public SlotType getSlotType() {

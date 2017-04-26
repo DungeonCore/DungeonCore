@@ -1,8 +1,8 @@
 package lbn.item;
 
-import lbn.player.ItemType;
-
 import org.bukkit.inventory.ItemStack;
+
+import lbn.player.ItemType;
 
 public interface ItemInterface {
   String getItemName();

@@ -43,7 +43,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
 
       if (entityhuman.e(l.getX(), l.getY(), l.getZ()) < 4096.0D) {
         ((EntityPlayer) entityhuman).playerConnection
-            .sendPacket(new PacketPlayOutExplosion(l.getX(), l.getY(), l.getZ(), f, Lists.newArrayList(), (Vec3D) this.b().get(entityhuman)));
+            .sendPacket(new PacketPlayOutExplosion(l.getX(), l.getY(), l.getZ(), f, Lists.newArrayList(), this.b().get(entityhuman)));
       }
     }
   }

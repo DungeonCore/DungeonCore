@@ -1,13 +1,13 @@
 package lbn.mobspawn;
 
-import lbn.mobspawn.point.MobSpawnerPoint;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.JavaUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
+
+import lbn.mobspawn.point.MobSpawnerPoint;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.util.JavaUtil;
 
 public class SpawnPointMonitor {
   MobSpawnerPoint point;
@@ -57,7 +57,7 @@ public class SpawnPointMonitor {
       lastSpawnTime = -1;
     }
     sender.sendMessage("lastspawn : " + lastSpawnTime + "秒前 (" + point.lastSpawnCount + "匹), キャンセル理由:" + point.cancelReson);
-    sender.sendMessage("LEVEL:" + point.getLevel() + "(" + (int) (point.getLevel().getSpawnTick() / 20) + "秒に一回スポーン)");
+    sender.sendMessage("LEVEL:" + point.getLevel() + "(" + point.getLevel().getSpawnTick() / 20 + "秒に一回スポーン)");
     sender.sendMessage("最大湧き数:" + point.getMaxMobCount() + ", nearChunk:" + point.isLookNearChunk() + ", hight:" + point.getDungeonHight());
     sender.sendMessage(ChatColor.GREEN + "==========モニター==========");
   }

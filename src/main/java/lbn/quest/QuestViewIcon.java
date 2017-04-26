@@ -3,15 +3,15 @@ package lbn.quest;
 import java.text.MessageFormat;
 import java.util.List;
 
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.quest.questData.PlayerQuestSessionManager;
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.quest.questData.PlayerQuestSessionManager;
+import lbn.util.ItemStackUtil;
 
 public class QuestViewIcon {
   Player p;

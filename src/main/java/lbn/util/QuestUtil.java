@@ -4,15 +4,15 @@ import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.UUID;
 
-import lbn.npc.villagerNpc.VillagerNpc;
-import lbn.npc.villagerNpc.VillagerNpcManager;
-import lbn.quest.QuestAnnouncement;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
+import lbn.quest.QuestAnnouncement;
 
 public class QuestUtil {
   /**

@@ -1,13 +1,13 @@
 package lbn.item.customItem.attackitem.weaponSkill;
 
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.other.ItemStackData;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.player.ItemType;
-
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public interface WeaponSkillInterface {
   /**

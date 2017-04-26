@@ -1,7 +1,6 @@
 package lbn.mob.minecraftEntity.ai;
 
 import lbn.mob.customMob.LbnMobTag;
-import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
@@ -95,7 +94,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
       this.a.getNavigation().n(); // ターゲットを消す
       // 距離が16 ~ 22の時は近づく
     } else if (d0 <= 22 * 22) {
-      this.a.getNavigation().a((Entity) this.c, this.e);
+      this.a.getNavigation().a(this.c, this.e);
     } else {
       this.a.getNavigation().n(); // ターゲットを消す
     }

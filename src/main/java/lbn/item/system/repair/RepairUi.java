@@ -1,5 +1,11 @@
 package lbn.item.system.repair;
 
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.menu.MenuSelector;
@@ -9,12 +15,6 @@ import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
 import net.md_5.bungee.api.ChatColor;
-
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class RepairUi {
   {
@@ -64,7 +64,7 @@ public class RepairUi {
       short durability = (short) (itemStack.getDurability() * waight);
       repairDurability += Math.min(durability, type.getMaxDurability());
     }
-    return (int) (repairDurability);
+    return (repairDurability);
   }
 
   /**

@@ -1,10 +1,10 @@
 package lbn.dungeoncore.SpletSheet;
 
+import org.bukkit.command.CommandSender;
+
 import lbn.item.ItemManager;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetArmor;
 import lbn.item.customItem.armoritem.SpreadSheetArmorData;
-
-import org.bukkit.command.CommandSender;
 
 public class ArmorSheetRunnable extends AbstractSheetRunable {
 

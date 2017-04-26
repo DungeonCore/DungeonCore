@@ -1,11 +1,11 @@
 package lbn.mob.minecraftEntity.ai;
 
-import lbn.util.LivingEntityUtil;
-import net.minecraft.server.v1_8_R1.Entity;
-
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 
 import com.google.common.base.Predicate;
+
+import lbn.util.LivingEntityUtil;
+import net.minecraft.server.v1_8_R1.Entity;
 
 public class AvoidTargetPredicate implements Predicate<Entity> {
 

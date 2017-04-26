@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
-import lbn.npc.villagerNpc.VillagerNpc;
-import lbn.npc.villagerNpc.VillagerNpcManager;
-
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+
+import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
+import lbn.npc.villagerNpc.VillagerNpc;
+import lbn.npc.villagerNpc.VillagerNpcManager;
 
 public class VillagerCommand implements CommandExecutor {
 

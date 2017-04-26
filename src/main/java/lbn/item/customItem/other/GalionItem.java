@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.WeakHashMap;
 
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.dungeoncore.Main;
@@ -14,13 +21,6 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.MoneyItemable;
 import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public final class GalionItem extends AbstractItem implements MoneyItemable {
 

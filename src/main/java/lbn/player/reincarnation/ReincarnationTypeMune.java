@@ -1,7 +1,5 @@
 package lbn.player.reincarnation;
 
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +13,7 @@ import lbn.api.player.TheLowPlayerManager;
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.util.ItemStackUtil;
+import net.md_5.bungee.api.ChatColor;
 
 public class ReincarnationTypeMune implements MenuSelectorInterface {
   static {

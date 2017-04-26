@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import lbn.npc.CustomNpcInterface;
-
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
+
+import lbn.npc.CustomNpcInterface;
 
 /**
  * NPCとクエストの情報を管理するクラス

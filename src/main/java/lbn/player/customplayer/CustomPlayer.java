@@ -3,6 +3,11 @@ package lbn.player.customplayer;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
 import lbn.api.player.AbilityInterface;
@@ -23,11 +28,6 @@ import lbn.player.ability.AbilityType;
 import lbn.player.ability.AbstractTimeLimitAbility;
 import lbn.player.ability.impl.LevelUpAbility;
 import lbn.player.status.StatusAddReason;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public class CustomPlayer implements TheLowPlayer {
   public CustomPlayer(OfflinePlayer p) {

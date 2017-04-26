@@ -6,6 +6,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
@@ -23,18 +35,6 @@ import lbn.item.slot.SlotInterface;
 import lbn.player.ItemType;
 import lbn.util.DungeonLogger;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class CommandGetItem implements CommandExecutor {
 
@@ -288,7 +288,7 @@ public class CommandGetItem implements CommandExecutor {
     return new SelectRunnable() {
       @Override
       public void run(Player p, ItemStack item) {
-        Inventory createInventory = Bukkit.createInventory(null, (int) (((items.size()) / 9) + 2) * 9, "item list");
+        Inventory createInventory = Bukkit.createInventory(null, (((items.size()) / 9) + 2) * 9, "item list");
 
         for (ItemInterface iItem : items) {
           createInventory.addItem(iItem.getItem());

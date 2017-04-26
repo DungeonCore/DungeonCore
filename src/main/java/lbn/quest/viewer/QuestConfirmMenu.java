@@ -2,18 +2,18 @@ package lbn.quest.viewer;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.NbtTagConst;
 import lbn.common.menu.MenuSelector;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.QuestManager.QuestStartStatus;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class QuestConfirmMenu extends MenuSelector {
   static {

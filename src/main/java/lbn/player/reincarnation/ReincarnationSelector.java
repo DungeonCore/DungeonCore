@@ -5,6 +5,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.ReincarnationInterface;
 import lbn.api.player.TheLowPlayer;
@@ -13,12 +19,6 @@ import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.util.ItemStackUtil;
 import net.md_5.bungee.api.ChatColor;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class ReincarnationSelector implements MenuSelectorInterface {
 

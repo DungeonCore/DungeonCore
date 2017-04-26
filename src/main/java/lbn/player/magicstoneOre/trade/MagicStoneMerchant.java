@@ -1,5 +1,9 @@
 package lbn.player.magicstoneOre.trade;
 
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import net.minecraft.server.v1_8_R1.ChatMessage;
@@ -8,10 +12,6 @@ import net.minecraft.server.v1_8_R1.IChatBaseComponent;
 import net.minecraft.server.v1_8_R1.IMerchant;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
-
-import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneMerchant implements IMerchant {
   EntityHuman e;

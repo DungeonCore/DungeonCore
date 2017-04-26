@@ -1,12 +1,12 @@
 package lbn.mob.customMob.abstractmob;
 
-import lbn.mob.AbstractCustomMob;
-import lbn.mob.minecraftEntity.CustomSpider;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
+
+import lbn.mob.AbstractCustomMob;
+import lbn.mob.minecraftEntity.CustomSpider;
 
 public abstract class AbstractSpider extends AbstractCustomMob<CustomSpider, Spider> {
 

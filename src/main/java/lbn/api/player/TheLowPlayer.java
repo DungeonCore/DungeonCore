@@ -2,15 +2,15 @@ package lbn.api.player;
 
 import java.util.UUID;
 
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
 import lbn.common.place.dungeon.DungeonData;
 import lbn.common.place.dungeon.DungeonDataOld;
 import lbn.money.GalionEditReason;
 import lbn.player.status.StatusAddReason;
-
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public interface TheLowPlayer {
   /**

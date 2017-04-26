@@ -2,14 +2,14 @@ package lbn.quest.abstractQuest;
 
 import java.util.Set;
 
-import lbn.npc.NpcManager;
-import lbn.quest.questData.PlayerQuestSession;
-import lbn.util.QuestUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
+
+import lbn.npc.NpcManager;
+import lbn.quest.questData.PlayerQuestSession;
+import lbn.util.QuestUtil;
 
 public class TouchVillagerQuest extends AbstractQuest {
   static HashMultimap<String, TouchVillagerQuest> targetVillagerNameQuestList = HashMultimap.create();

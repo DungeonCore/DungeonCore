@@ -1,16 +1,16 @@
 package lbn.mob.minecraftEntity;
 
-import lbn.mob.customMob.LbnMobTag;
-import net.minecraft.server.v1_8_R1.EntityVillager;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.World;
-import net.minecraft.server.v1_8_R1.WorldServer;
-
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.util.Vector;
+
+import lbn.mob.customMob.LbnMobTag;
+import net.minecraft.server.v1_8_R1.EntityVillager;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
+import net.minecraft.server.v1_8_R1.World;
+import net.minecraft.server.v1_8_R1.WorldServer;
 
 public class CustomVillager extends EntityVillager implements ICustomEntity<Villager> {
   public CustomVillager(World world) {

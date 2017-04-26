@@ -3,6 +3,10 @@ package lbn.item.system.strength;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.common.trade.TheLowMerchantRecipe;
 import lbn.item.ItemManager;
@@ -10,10 +14,6 @@ import lbn.item.itemInterface.Strengthenable;
 import lbn.item.system.lore.ItemLoreData;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class MerchantRecipeCreator {
   /**

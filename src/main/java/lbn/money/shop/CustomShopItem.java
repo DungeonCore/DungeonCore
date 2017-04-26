@@ -3,11 +3,11 @@ package lbn.money.shop;
 import java.util.Iterator;
 import java.util.List;
 
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
 
 public class CustomShopItem extends ShopItem {
 

@@ -1,13 +1,13 @@
 package lbn.dungeon.contents.mob.zombie;
 
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.customMob.abstractmob.AbstractZombie;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.customMob.abstractmob.AbstractZombie;
+import lbn.util.LivingEntityUtil;
 
 public class NormalZombie extends AbstractZombie {
 

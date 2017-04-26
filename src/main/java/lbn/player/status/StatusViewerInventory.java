@@ -1,15 +1,15 @@
 package lbn.player.status;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.detail.BowStatusDetail;
 import lbn.player.status.detail.MagicStatusDetail;
 import lbn.player.status.detail.MainStatusDetail;
 import lbn.player.status.detail.SwordStatusDetail;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 @SuppressWarnings("deprecation")
 public class StatusViewerInventory {

@@ -3,11 +3,11 @@ package lbn.mob.minecraftEntity.ai.bat_ai;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.event.entity.EntityTargetEvent;
+
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
-
-import org.bukkit.event.entity.EntityTargetEvent;
 
 public class TheLowPathfinderGoalHurtByTarget extends TheLowPathfinderGoalTarget {
   private boolean a;

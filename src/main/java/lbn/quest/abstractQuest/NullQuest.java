@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.quest.Quest;
-
-import org.bukkit.entity.Player;
 
 public class NullQuest implements Quest {
 

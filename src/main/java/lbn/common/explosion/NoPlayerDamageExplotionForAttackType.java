@@ -1,10 +1,5 @@
 package lbn.common.explosion;
 
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.mob.SummonPlayerManager;
-import net.minecraft.server.v1_8_R1.DamageSource;
-
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
@@ -12,6 +7,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.mob.SummonPlayerManager;
+import net.minecraft.server.v1_8_R1.DamageSource;
 
 public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion {
 

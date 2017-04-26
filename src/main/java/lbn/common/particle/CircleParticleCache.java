@@ -20,7 +20,7 @@ class CircleParticleCache {
     // キャッシュが存在しない場合は作成する
     if (!cache.containsKey(radius)) {
       ArrayList<Vector> point = new ArrayList<Vector>();
-      for (float i = 0; i < 360; i = (float) (i += stepSize)) {
+      for (float i = 0; i < 360; i = i += stepSize) {
         point.add(new Vector(Math.sin(Math.toRadians(i)) * radius, 0.5, Math.cos(Math.toRadians(i)) * radius));
       }
 

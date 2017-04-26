@@ -3,12 +3,12 @@ package lbn.item.customItem.pic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.item.ItemInterface;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.magicstoneOre.MagicStoneOreType;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class DiamondPickaxe extends AbstractPickaxe {
 

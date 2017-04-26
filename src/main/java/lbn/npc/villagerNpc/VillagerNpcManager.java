@@ -3,16 +3,16 @@ package lbn.npc.villagerNpc;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.dungeoncore.Main;
 import lbn.npc.NpcManager;
 import lbn.npc.citizens.TheLowIdTrail;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.LookClose;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class VillagerNpcManager {
   static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
@@ -36,7 +36,7 @@ public class VillagerNpcManager {
     if (spawnedNpc != null) {
       villagerNpc.setNpc(spawnedNpc);
     }
-    registedVillagerNpcIdMap.put(id, (VillagerNpc) villagerNpc);
+    registedVillagerNpcIdMap.put(id, villagerNpc);
   }
 
   /**

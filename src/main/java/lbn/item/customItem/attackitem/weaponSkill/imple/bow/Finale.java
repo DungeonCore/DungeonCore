@@ -3,18 +3,6 @@ package lbn.item.customItem.attackitem.weaponSkill.imple.bow;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.common.cooltime.Cooltimable;
-import lbn.common.cooltime.CooltimeManager;
-import lbn.common.other.Stun;
-import lbn.common.particle.ParticleData;
-import lbn.common.particle.ParticleType;
-import lbn.common.projectile.ProjectileInterface;
-import lbn.common.projectile.ProjectileManager;
-import lbn.dungeoncore.Main;
-import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiClick;
-import lbn.player.ItemType;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -28,6 +16,18 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import lbn.common.cooltime.Cooltimable;
+import lbn.common.cooltime.CooltimeManager;
+import lbn.common.other.Stun;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.common.projectile.ProjectileInterface;
+import lbn.common.projectile.ProjectileManager;
+import lbn.dungeoncore.Main;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiClick;
+import lbn.player.ItemType;
 
 public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface {
 

@@ -1,11 +1,11 @@
 package lbn.player.magicstoneOre.trade;
 
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+
 import lbn.item.customItem.other.MagicStoneOre;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
-
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 
 public class MagicStoneMerchantRecipe extends MerchantRecipe {
 

@@ -2,6 +2,12 @@ package lbn.mob.minecraftEntity;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Spider;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
@@ -21,12 +27,6 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Spider;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Spider> {
 

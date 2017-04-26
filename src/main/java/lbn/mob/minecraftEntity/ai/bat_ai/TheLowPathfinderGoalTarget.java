@@ -1,5 +1,7 @@
 package lbn.mob.minecraftEntity.ai.bat_ai;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.minecraft.server.v1_8_R1.AttributeInstance;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
@@ -11,8 +13,6 @@ import net.minecraft.server.v1_8_R1.PathEntity;
 import net.minecraft.server.v1_8_R1.PathPoint;
 import net.minecraft.server.v1_8_R1.PathfinderGoal;
 import net.minecraft.server.v1_8_R1.ScoreboardTeamBase;
-
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
   protected final EntityInsentient e;

@@ -1,5 +1,14 @@
 package lbn.item.customItem.itemAbstract;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.cooltime.CooltimeManager;
 import lbn.common.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.common.other.ItemStackData;
@@ -17,15 +26,6 @@ import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicItem extends SpreadSheetAttackItem implements RightClickItemable, LeftClickItemable {
 
@@ -175,15 +175,15 @@ class MagicAttackData {
   static SoundData lv0Sound = new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3);
   static SoundData lv10Sound = new SoundData(Sound.GLASS, 1, (float) 0.1);
   static SoundData lv20Sound = new SoundData(Sound.IRONGOLEM_HIT, 1, (float) 0.7);
-  static SoundData lv30Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1);
-  static SoundData lv40Sound = new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1);
+  static SoundData lv30Sound = new SoundData(Sound.ZOMBIE_METAL, 1, 1);
+  static SoundData lv40Sound = new SoundData(Sound.GHAST_FIREBALL, 1, 1);
   static SoundData lv50Sound = new SoundData(Sound.GLASS, 1, (float) 0.1);
-  static SoundData lv60Sound = new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1);
+  static SoundData lv60Sound = new SoundData(Sound.GHAST_FIREBALL, 1, 1);
   static SoundData lv70Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
   static SoundData lv80Sound = new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1);
 
   public static SoundData getSoundData(int level) {
-    switch ((int) (level / 10)) {
+    switch (level / 10) {
       case 0:
         return lv0Sound;
       case 1:
@@ -219,7 +219,7 @@ class MagicAttackData {
   static ItemStackData lv80Block = new ItemStackData(Material.OBSIDIAN);
 
   public static ItemStackData getItemStackData(int level) {
-    switch ((int) (level / 10)) {
+    switch (level / 10) {
       case 0:
         return lv00Block;
       case 1:

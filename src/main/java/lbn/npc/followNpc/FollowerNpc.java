@@ -2,6 +2,12 @@ package lbn.npc.followNpc;
 
 import java.util.Collection;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.dungeoncore.Main;
@@ -17,12 +23,6 @@ import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.util.Util;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class FollowerNpc implements CustomNpcInterface {
   static {

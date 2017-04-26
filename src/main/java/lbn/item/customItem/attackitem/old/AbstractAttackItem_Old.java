@@ -1,5 +1,9 @@
 package lbn.item.customItem.attackitem.old;
 
+import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -8,10 +12,6 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.util.Message;
-
-import org.bukkit.GameMode;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
   public boolean isAvilable(Player player) {
@@ -153,7 +153,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
   @Override
   public int getBuyPrice(ItemStack item) {
     int availableLevel = Math.min(getAvailableLevel(), 70);
-    return (int) (getBaseBuyPrice() + availableLevel * 5 + ((StrengthOperator.getLevel(item) + 1) * 200));
+    return getBaseBuyPrice() + availableLevel * 5 + ((StrengthOperator.getLevel(item) + 1) * 200);
   }
 
   abstract protected int getBaseBuyPrice();

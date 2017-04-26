@@ -1,10 +1,10 @@
 package lbn.mobspawn;
 
-import lbn.mobspawn.point.MobSpawnerPoint;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+
+import lbn.mobspawn.point.MobSpawnerPoint;
 
 public class ChunkWrapper {
   public ChunkWrapper(String wolrdName, int x, int z) {

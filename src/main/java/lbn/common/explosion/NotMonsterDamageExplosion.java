@@ -1,10 +1,10 @@
 package lbn.common.explosion;
 
-import lbn.mob.SummonPlayerManager;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+
+import lbn.mob.SummonPlayerManager;
 
 public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 

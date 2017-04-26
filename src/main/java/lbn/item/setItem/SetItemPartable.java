@@ -1,8 +1,8 @@
 package lbn.item.setItem;
 
-import lbn.item.ItemInterface;
-
 import org.bukkit.Material;
+
+import lbn.item.ItemInterface;
 
 public interface SetItemPartable extends ItemInterface {
 

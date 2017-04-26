@@ -1,10 +1,10 @@
 package lbn.common.trade;
 
-import lbn.util.NMSUtils;
-import net.minecraft.server.v1_8_R1.MerchantRecipe;
-
 import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.util.NMSUtils;
+import net.minecraft.server.v1_8_R1.MerchantRecipe;
 
 public class TheLowMerchantRecipe {
   MerchantRecipe recipe;

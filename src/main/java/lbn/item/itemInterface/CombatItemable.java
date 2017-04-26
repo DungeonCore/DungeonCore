@@ -1,8 +1,8 @@
 package lbn.item.itemInterface;
 
-import lbn.common.event.player.PlayerCombatEntityEvent;
-
 import org.bukkit.event.player.PlayerDropItemEvent;
+
+import lbn.common.event.player.PlayerCombatEntityEvent;
 
 public interface CombatItemable extends RightClickItemable, EquipItemable {
   /**

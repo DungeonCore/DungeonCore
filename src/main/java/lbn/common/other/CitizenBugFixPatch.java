@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.dungeoncore.Main;
 import net.minecraft.server.v1_8_R1.EntityTypes;
-
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class CitizenBugFixPatch {
   public static void doPatch() {

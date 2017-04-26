@@ -1,16 +1,16 @@
 package lbn.item.customItem.attackitem.weaponSkill.imple.sword;
 
-import lbn.common.particle.ParticleType;
-import lbn.common.particle.Particles;
-import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
-import lbn.player.ItemType;
-
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import lbn.common.particle.ParticleType;
+import lbn.common.particle.Particles;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
+import lbn.player.ItemType;
 
 public class ProtectionArmor extends WeaponSkillForOneType {
 

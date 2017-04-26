@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import lbn.dungeoncore.SpletSheet.MobSkillSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+
+import lbn.dungeoncore.SpletSheet.MobSkillSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class MobSkillManager {
   static HashMap<String, MobSkillInterface> skillMap = new HashMap<String, MobSkillInterface>();

@@ -1,10 +1,10 @@
 package lbn.dungeon.contents.item.questItem;
 
-import lbn.item.customItem.AbstractItem;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+
+import lbn.item.customItem.AbstractItem;
 
 public class Serum extends AbstractItem {
 

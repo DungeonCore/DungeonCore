@@ -3,10 +3,10 @@ package lbn.common.place.dungeon;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.command.CommandSender;
+
 import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-
-import org.bukkit.command.CommandSender;
 
 public class DungeonList {
 

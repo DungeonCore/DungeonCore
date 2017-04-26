@@ -2,15 +2,6 @@ package lbn.item.slot.table;
 
 import java.util.Arrays;
 
-import lbn.dungeoncore.Main;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.item.customItem.attackitem.AttackItemStack;
-import lbn.item.slot.SlotInterface;
-import lbn.player.CraftTableViewManager;
-import lbn.player.crafttable.CraftTableType;
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -23,6 +14,15 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.dungeoncore.Main;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.slot.SlotInterface;
+import lbn.player.CraftTableViewManager;
+import lbn.player.crafttable.CraftTableType;
+import lbn.util.ItemStackUtil;
 
 public class SlotSetTableOperation {
 

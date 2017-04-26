@@ -1,5 +1,13 @@
 package lbn.item.customItem.attackitem.weaponSkill.imple.sword;
 
+import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.other.Stun;
 import lbn.common.particle.ParticleType;
@@ -9,14 +17,6 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
 import lbn.player.ItemType;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class LightningOrder extends WeaponSkillWithCombat {
 

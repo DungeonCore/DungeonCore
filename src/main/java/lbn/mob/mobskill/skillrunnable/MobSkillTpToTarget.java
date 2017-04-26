@@ -1,10 +1,10 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import lbn.mob.mobskill.MobSkillRunnable;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
+
+import lbn.mob.mobskill.MobSkillRunnable;
 
 public class MobSkillTpToTarget extends MobSkillRunnable {
 

@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.projectile.ProjectileInterface;
 import lbn.common.projectile.ProjectileManager;
 import lbn.item.customItem.other.GalionItem;
@@ -21,9 +24,6 @@ import lbn.item.slot.SlotInterface;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
 
 public class ItemManager {
   static HashMap<String, ItemInterface> allItemNameList = new HashMap<>();

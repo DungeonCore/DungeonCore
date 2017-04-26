@@ -2,11 +2,11 @@ package lbn.mob.customMob;
 
 import java.util.Set;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.chest.BossChest;
-
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.chest.BossChest;
 
 public interface BossMobable {
   public BossChest getBossChest();

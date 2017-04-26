@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
+import com.google.common.collect.HashMultimap;
+
 import lbn.api.PlayerStatusType;
 import lbn.api.player.AbilityInterface;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.ability.AbilityType;
-
-import org.bukkit.entity.Player;
-
-import com.google.common.collect.HashMultimap;
 
 /**
  * プレイヤーの追加ステータスを変更・取得を行う <br />

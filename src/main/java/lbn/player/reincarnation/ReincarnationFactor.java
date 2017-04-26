@@ -3,6 +3,9 @@ package lbn.player.reincarnation;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+
 import lbn.api.LevelType;
 import lbn.api.player.ReincarnationInterface;
 import lbn.api.player.TheLowPlayer;
@@ -11,9 +14,6 @@ import lbn.player.reincarnation.imple.MaxHpReincarnation;
 import lbn.player.reincarnation.imple.MaxLevelReincarnation;
 import lbn.player.reincarnation.imple.MaxMagicPointReincarnation;
 import lbn.util.DungeonLogger;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
 public class ReincarnationFactor {
   /**

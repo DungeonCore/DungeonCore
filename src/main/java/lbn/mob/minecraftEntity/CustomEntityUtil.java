@@ -1,8 +1,8 @@
 package lbn.mob.minecraftEntity;
 
-import net.minecraft.server.v1_8_R1.EntityLiving;
-
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
+
+import net.minecraft.server.v1_8_R1.EntityLiving;
 
 public class CustomEntityUtil {
   public static EntityLiving getEntity(org.bukkit.entity.LivingEntity entity) {

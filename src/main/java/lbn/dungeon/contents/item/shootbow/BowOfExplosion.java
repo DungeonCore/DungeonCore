@@ -2,17 +2,6 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.List;
 
-import lbn.common.explosion.NoPlayerDamageExplotionForAttackType;
-import lbn.common.explosion.NotMonsterDamageExplosion;
-import lbn.dungeon.contents.strength_template.StrengthTemplate;
-import lbn.dungeoncore.Main;
-import lbn.item.customItem.attackitem.WeaponStrengthTemplate;
-import lbn.item.customItem.attackitem.old.BowItemOld;
-import lbn.item.itemInterface.Strengthenable;
-import lbn.item.system.strength.StrengthOperator;
-import lbn.mob.LastDamageMethodType;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
@@ -24,6 +13,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
+
+import lbn.common.explosion.NoPlayerDamageExplotionForAttackType;
+import lbn.common.explosion.NotMonsterDamageExplosion;
+import lbn.dungeon.contents.strength_template.StrengthTemplate;
+import lbn.dungeoncore.Main;
+import lbn.item.customItem.attackitem.WeaponStrengthTemplate;
+import lbn.item.customItem.attackitem.old.BowItemOld;
+import lbn.item.itemInterface.Strengthenable;
+import lbn.item.system.strength.StrengthOperator;
+import lbn.mob.LastDamageMethodType;
+import lbn.util.LivingEntityUtil;
 
 public class BowOfExplosion extends BowItemOld implements Strengthenable {
   @Override

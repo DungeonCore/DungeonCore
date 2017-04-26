@@ -3,17 +3,17 @@ package lbn.dungeon.contents.item.click.magicbook;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.item.ItemInterface;
-import lbn.item.customItem.itemAbstract.RightClickItem;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.item.ItemInterface;
+import lbn.item.customItem.itemAbstract.RightClickItem;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.util.LivingEntityUtil;
 
 public abstract class AbstractMagicBook extends RightClickItem {
 

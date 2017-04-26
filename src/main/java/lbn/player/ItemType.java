@@ -1,9 +1,9 @@
 package lbn.player;
 
+import org.bukkit.Material;
+
 import lbn.api.LevelType;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
 
 public enum ItemType {
   SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)), BOW(LevelType.BOW,

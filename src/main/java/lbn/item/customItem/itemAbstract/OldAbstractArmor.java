@@ -2,17 +2,17 @@ package lbn.item.customItem.itemAbstract;
 
 import java.util.List;
 
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.item.customItem.AbstractItem;
 import lbn.item.customItem.armoritem.old.ArmorMaterial;
 import lbn.item.itemInterface.OldArmorItemable;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.strength.StrengthOperator;
-
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class OldAbstractArmor extends AbstractItem implements OldArmorItemable, Strengthenable {
 

@@ -1,11 +1,11 @@
 package lbn.mob.mobskill.skillrunnable;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.dungeoncore.Main;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.JavaUtil;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class MobSkillLightningEffect3 extends MobSkillRunnable {
 

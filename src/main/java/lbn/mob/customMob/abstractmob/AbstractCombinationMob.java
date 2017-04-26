@@ -1,8 +1,5 @@
 package lbn.mob.customMob.abstractmob;
 
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.mob.AbstractMob;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -10,6 +7,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.mob.AbstractMob;
 
 public abstract class AbstractCombinationMob<K extends LivingEntity> extends AbstractMob<K> {
 

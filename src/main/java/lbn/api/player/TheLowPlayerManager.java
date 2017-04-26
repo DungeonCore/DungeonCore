@@ -6,13 +6,13 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import lbn.common.event.player.PlayerLoadedDataEvent;
-import lbn.player.customplayer.CustomPlayer;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEvent;
+
+import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.player.customplayer.CustomPlayer;
+import net.md_5.bungee.api.ChatColor;
 
 public class TheLowPlayerManager {
   static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<UUID, TheLowPlayer>();

@@ -3,12 +3,12 @@ package lbn.item.customItem.SpreadSheetItem;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.item.customItem.AbstractItem;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetOtherItem extends AbstractItem {
   public SpreadSheetOtherItem(String name, String id, int price,

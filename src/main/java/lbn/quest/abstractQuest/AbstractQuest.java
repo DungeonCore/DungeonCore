@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -19,10 +23,6 @@ import lbn.quest.QuestAnnouncement;
 import lbn.quest.QuestManager;
 import lbn.util.ItemStackUtil;
 import lbn.util.QuestUtil;
-
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractQuest implements Quest {
   protected AbstractQuest(String id) {

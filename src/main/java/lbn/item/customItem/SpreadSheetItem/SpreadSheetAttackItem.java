@@ -2,6 +2,9 @@ package lbn.item.customItem.SpreadSheetItem;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
@@ -16,9 +19,6 @@ import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable {
   protected SpreadSheetWeaponData data;

@@ -1,10 +1,10 @@
 package lbn.item.system.strength;
 
+import org.bukkit.inventory.ItemStack;
+
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.Strengthenable;
-
-import org.bukkit.inventory.ItemStack;
 
 /**
  * 一回の強化に使われる情報

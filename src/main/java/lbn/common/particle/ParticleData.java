@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.server.v1_8_R1.EnumParticle;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.util.Vector;
+
+import net.minecraft.server.v1_8_R1.EnumParticle;
 
 /**
  * パーティクル種類を保持するクラス

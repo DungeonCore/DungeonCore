@@ -4,16 +4,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.Config;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.wireless.WireLessChestManager;
 import lbn.dungeoncore.Main;
 import lbn.util.Message;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerIODataManager {
   public static void load(Player p, String saveType) {

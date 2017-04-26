@@ -1,9 +1,9 @@
 package lbn.common.place;
 
+import org.bukkit.Location;
+
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.util.JavaUtil;
-
-import org.bukkit.Location;
 
 public class PlaceBean {
   public int id;

@@ -2,12 +2,12 @@ package lbn.player.customplayer;
 
 import java.util.HashMap;
 
+import org.bukkit.entity.Player;
+
 import lbn.api.PlayerStatusType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.util.LbnRunnable;
-
-import org.bukkit.entity.Player;
 
 public class MagicPointManager {
 

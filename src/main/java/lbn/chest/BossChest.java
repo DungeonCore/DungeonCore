@@ -2,12 +2,6 @@ package lbn.chest;
 
 import java.util.HashMap;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.dungeoncore.Main;
-import lbn.mob.customMob.BossMobable;
-import lbn.util.LbnRunnable;
-import lbn.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,6 +12,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.dungeoncore.Main;
+import lbn.mob.customMob.BossMobable;
+import lbn.util.LbnRunnable;
+import lbn.util.Message;
 
 public class BossChest extends SpletSheetChest {
 

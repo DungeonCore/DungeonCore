@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+
 import lbn.common.event.player.PlayerKillEntityEvent;
 import lbn.common.particle.CircleParticleData;
 import lbn.common.particle.ParticleData;
@@ -12,11 +17,6 @@ import lbn.item.ItemInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.KillSlot;
 import lbn.player.customplayer.MagicPointManager;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 
 public class MagicHealMagicStone extends KillSlot {
 
@@ -73,7 +73,7 @@ public class MagicHealMagicStone extends KillSlot {
     if (nextInt == 0) {
       Player player = e.getPlayer();
       MagicPointManager.addMagicPoint(player, mpHealLevel * 3);
-      e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENDERMAN_DEATH, 1, (float) 2);
+      e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENDERMAN_DEATH, 1, 2);
       // エフェクト
       Location add = player.getLocation().add(0, 1, 0);
       particleData.run(add);

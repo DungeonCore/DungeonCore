@@ -1,5 +1,10 @@
 package lbn.item.customItem.other;
 
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.customItem.AbstractItem;
@@ -7,11 +12,6 @@ import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 

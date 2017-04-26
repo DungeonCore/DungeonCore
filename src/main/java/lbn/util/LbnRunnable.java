@@ -2,12 +2,12 @@ package lbn.util;
 
 import java.util.HashSet;
 
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.dungeoncore.Main;
-
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.dungeoncore.Main;
 
 public abstract class LbnRunnable extends BukkitRunnable {
   private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<LbnRunnable>();

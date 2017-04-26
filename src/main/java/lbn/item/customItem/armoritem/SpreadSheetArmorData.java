@@ -3,13 +3,13 @@ package lbn.item.customItem.armoritem;
 import java.util.HashMap;
 import java.util.Map;
 
-import lbn.util.ItemStackUtil;
-import lbn.util.JavaUtil;
-
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.util.ItemStackUtil;
+import lbn.util.JavaUtil;
 
 /**
  * 武器のデータを保持するためのクラス

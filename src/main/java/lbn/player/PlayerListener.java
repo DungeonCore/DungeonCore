@@ -4,43 +4,6 @@ import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.api.LevelType;
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.command.TpCutCommand;
-import lbn.common.event.player.PlayerBreakMagicOreEvent;
-import lbn.common.event.player.PlayerChangeGalionsEvent;
-import lbn.common.event.player.PlayerChangeStatusExpEvent;
-import lbn.common.event.player.PlayerChangeStatusLevelEvent;
-import lbn.common.event.player.PlayerCompleteReincarnationEvent;
-import lbn.common.event.player.PlayerCraftCustomItemEvent;
-import lbn.common.event.player.PlayerJoinDungeonGameEvent;
-import lbn.common.event.player.PlayerLevelUpEvent;
-import lbn.common.event.player.PlayerLoadedDataEvent;
-import lbn.common.event.player.PlayerStrengthFinishEvent;
-import lbn.common.other.SystemLog;
-import lbn.common.particle.ParticleData;
-import lbn.common.particle.ParticleType;
-import lbn.dungeoncore.Main;
-import lbn.item.customItem.other.MagicStoneOre;
-import lbn.mob.AbstractMob;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.mob.MobHolder;
-import lbn.mob.SummonPlayerManager;
-import lbn.money.GalionEditReason;
-import lbn.player.ability.impl.LevelUpAbility;
-import lbn.player.customplayer.MagicPointManager;
-import lbn.player.customplayer.PlayerChestTpManager;
-import lbn.player.magicstoneOre.MagicStoneFactor;
-import lbn.player.magicstoneOre.MagicStoneOreType;
-import lbn.util.ItemStackUtil;
-import lbn.util.LbnRunnable;
-import lbn.util.LivingEntityUtil;
-import lbn.util.Message;
-import lbn.util.TitleSender;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -77,6 +40,43 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
+
+import lbn.api.LevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayer.CheckIntegrityLevel;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.command.TpCutCommand;
+import lbn.common.event.player.PlayerBreakMagicOreEvent;
+import lbn.common.event.player.PlayerChangeGalionsEvent;
+import lbn.common.event.player.PlayerChangeStatusExpEvent;
+import lbn.common.event.player.PlayerChangeStatusLevelEvent;
+import lbn.common.event.player.PlayerCompleteReincarnationEvent;
+import lbn.common.event.player.PlayerCraftCustomItemEvent;
+import lbn.common.event.player.PlayerJoinDungeonGameEvent;
+import lbn.common.event.player.PlayerLevelUpEvent;
+import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.common.event.player.PlayerStrengthFinishEvent;
+import lbn.common.other.SystemLog;
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.dungeoncore.Main;
+import lbn.item.customItem.other.MagicStoneOre;
+import lbn.mob.AbstractMob;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.mob.MobHolder;
+import lbn.mob.SummonPlayerManager;
+import lbn.money.GalionEditReason;
+import lbn.player.ability.impl.LevelUpAbility;
+import lbn.player.customplayer.MagicPointManager;
+import lbn.player.customplayer.PlayerChestTpManager;
+import lbn.player.magicstoneOre.MagicStoneFactor;
+import lbn.player.magicstoneOre.MagicStoneOreType;
+import lbn.util.ItemStackUtil;
+import lbn.util.LbnRunnable;
+import lbn.util.LivingEntityUtil;
+import lbn.util.Message;
+import lbn.util.TitleSender;
 
 public class PlayerListener implements Listener {
 
@@ -162,7 +162,7 @@ public class PlayerListener implements Listener {
   @EventHandler()
   public void onLevelUp(PlayerChangeStatusLevelEvent e) {
     if (e.isOnline()) {
-      updateSidebar((Player) e.getPlayer());
+      updateSidebar(e.getPlayer());
     }
   }
 

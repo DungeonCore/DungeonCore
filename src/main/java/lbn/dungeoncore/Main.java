@@ -2,6 +2,11 @@ package lbn.dungeoncore;
 
 import java.util.Collection;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.InitManager;
 import lbn.LimitedListener;
 import lbn.RecipeRegister;
@@ -56,11 +61,6 @@ import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin {
 

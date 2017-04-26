@@ -5,6 +5,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+
+import com.google.common.collect.HashMultimap;
+
 import lbn.item.customItem.other.AddEmptySlotItem;
 import lbn.item.customItem.other.AddEmptySlotItem2;
 import lbn.item.customItem.other.RemoveUnavailableSlot;
@@ -13,11 +18,6 @@ import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.slot.slot.UnavailableSlot;
-
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-
-import com.google.common.collect.HashMultimap;
 
 public class SlotManager {
   static HashMap<String, String> idNameMap = new HashMap<String, String>();

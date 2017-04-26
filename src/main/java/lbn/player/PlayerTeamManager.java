@@ -2,13 +2,13 @@ package lbn.player;
 
 import java.util.Collection;
 
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
+
+import lbn.dungeoncore.Main;
 
 public class PlayerTeamManager {
   private static final String DEFAULT_TEAM = "default_team";

@@ -1,9 +1,9 @@
 package lbn.mobspawn.point;
 
+import org.bukkit.Location;
+
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.gettter.SpawnMobGetterInterface;
-
-import org.bukkit.Location;
 
 public class SpletSheetMobSpawnerPoint extends MobSpawnerPoint {
 

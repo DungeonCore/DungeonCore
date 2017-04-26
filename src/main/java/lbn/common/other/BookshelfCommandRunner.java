@@ -1,7 +1,5 @@
 package lbn.common.other;
 
-import lbn.dungeoncore.Main;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,6 +8,8 @@ import org.bukkit.block.CommandBlock;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
 
 public class BookshelfCommandRunner {
   boolean canDo = false;

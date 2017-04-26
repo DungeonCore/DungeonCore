@@ -1,5 +1,7 @@
 package lbn;
 
+import org.bukkit.Bukkit;
+
 import lbn.command.CommandChest;
 import lbn.command.MobCommand;
 import lbn.command.QuestCommand;
@@ -24,8 +26,6 @@ import lbn.player.playerIO.PlayerIODataManager;
 import lbn.player.playerIO.PlayerLastSaveType;
 import lbn.util.DungeonLogger;
 import lbn.util.LbnRunnable;
-
-import org.bukkit.Bukkit;
 
 public class InitManager {
 

@@ -1,10 +1,10 @@
 package lbn.mob.mobskill.skillrunnable;
 
+import org.bukkit.entity.Entity;
+
 import lbn.common.explosion.NotMonsterDamageExplosion;
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.JavaUtil;
-
-import org.bukkit.entity.Entity;
 
 public class MobSkillExplosionNoParticle extends MobSkillRunnable {
 

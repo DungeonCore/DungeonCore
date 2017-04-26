@@ -1,10 +1,10 @@
 package lbn.item.slot.slot;
 
+import org.bukkit.ChatColor;
+
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;
-
-import org.bukkit.ChatColor;
 
 public class UnavailableSlot implements SlotInterface {
 

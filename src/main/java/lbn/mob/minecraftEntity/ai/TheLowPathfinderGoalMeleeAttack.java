@@ -2,7 +2,6 @@ package lbn.mob.minecraftEntity.ai;
 
 import lbn.mob.customMob.LbnMobTag;
 import net.minecraft.server.v1_8_R1.BlockPosition;
-import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.PathEntity;
@@ -66,7 +65,7 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
     } else if (this.g != null && !this.g.isAssignableFrom(entityliving.getClass())) {
       return false;
     } else {
-      this.f = this.b.getNavigation().a((Entity) entityliving);
+      this.f = this.b.getNavigation().a(entityliving);
       return this.f != null;
     }
   }
@@ -115,7 +114,7 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
 
       // キルオーラ発動中は攻撃が当たらないときだけ相手に近づく
       if (!isKillAura || d0 > attackRange * attackRange) {
-        if (!this.b.getNavigation().a((Entity) entityliving, this.d)) {
+        if (!this.b.getNavigation().a(entityliving, this.d)) {
           this.h += 15;
         }
       }
@@ -135,7 +134,7 @@ public class TheLowPathfinderGoalMeleeAttack extends PathfinderGoal {
   }
 
   protected double a(EntityLiving entityliving) {
-    return (double) (this.b.width * 2.0F * this.b.width * 2.0F + entityliving.width);
+    return this.b.width * 2.0F * this.b.width * 2.0F + entityliving.width;
   }
 
   /**

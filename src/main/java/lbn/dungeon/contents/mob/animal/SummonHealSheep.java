@@ -3,17 +3,17 @@ package lbn.dungeon.contents.mob.animal;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.common.particle.ParticleData;
-import lbn.common.particle.ParticleType;
-import lbn.player.ItemType;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.DyeColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.player.ItemType;
+import lbn.util.LivingEntityUtil;
 
 public class SummonHealSheep extends SummonSheep {
 

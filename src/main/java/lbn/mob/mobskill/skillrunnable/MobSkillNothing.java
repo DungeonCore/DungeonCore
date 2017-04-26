@@ -1,8 +1,8 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import lbn.mob.mobskill.MobSkillRunnable;
-
 import org.bukkit.entity.Entity;
+
+import lbn.mob.mobskill.MobSkillRunnable;
 
 public class MobSkillNothing extends MobSkillRunnable {
 

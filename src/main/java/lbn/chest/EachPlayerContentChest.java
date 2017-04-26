@@ -8,13 +8,13 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.UUID;
 
-import lbn.util.DungeonLogger;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+
+import lbn.util.DungeonLogger;
 
 public class EachPlayerContentChest extends SpletSheetChest {
 

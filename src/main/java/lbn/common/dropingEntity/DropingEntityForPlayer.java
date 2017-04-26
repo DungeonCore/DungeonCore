@@ -1,12 +1,12 @@
 package lbn.common.dropingEntity;
 
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
+
+import lbn.util.ItemStackUtil;
 
 public class DropingEntityForPlayer extends AbstractDamageFallingblock {
   public DropingEntityForPlayer(Vector direction, Location start, Material m, byte data) {

@@ -1,11 +1,11 @@
 package lbn.command;
 
-import lbn.money.shop.Shop;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import lbn.money.shop.Shop;
 
 public class ShopCommand implements CommandExecutor {
 

@@ -2,14 +2,14 @@ package lbn.player.customplayer;
 
 import java.util.HashMap;
 
-import lbn.command.TpCutCommand;
-import lbn.util.LbnRunnable;
-import lbn.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import lbn.command.TpCutCommand;
+import lbn.util.LbnRunnable;
+import lbn.util.Message;
 
 public class PlayerChestTpManager {
   static HashMap<String, TpLaterRunnable> tpDataMap = new HashMap<String, TpLaterRunnable>();

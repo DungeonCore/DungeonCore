@@ -2,11 +2,11 @@ package lbn.item.system.craft;
 
 import java.util.Map;
 
-import lbn.item.ItemInterface;
-import lbn.item.itemInterface.CraftItemable;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import lbn.item.ItemInterface;
+import lbn.item.itemInterface.CraftItemable;
 
 public interface TheLowCraftRecipeInterface {
 

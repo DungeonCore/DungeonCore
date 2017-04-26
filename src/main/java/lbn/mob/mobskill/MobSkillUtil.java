@@ -2,11 +2,11 @@ package lbn.mob.mobskill;
 
 import java.util.ArrayList;
 
-import lbn.common.particle.ParticleData;
-import lbn.dungeoncore.Main;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.common.particle.ParticleData;
+import lbn.dungeoncore.Main;
 
 public class MobSkillUtil {
   /**

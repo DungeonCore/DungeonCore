@@ -3,6 +3,12 @@ package lbn.common.book;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.command.SpletSheetCommand;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
@@ -20,12 +26,6 @@ import net.minecraft.server.v1_8_R1.NBTTagList;
 import net.minecraft.server.v1_8_R1.NBTTagString;
 import net.minecraft.server.v1_8_R1.PacketPlayOutSetSlot;
 import net.minecraft.server.v1_8_R1.Slot;
-
-import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class BookManager {
   static HashMap<String, BookData> bookMap = new HashMap<String, BookData>();

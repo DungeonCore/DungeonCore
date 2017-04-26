@@ -2,11 +2,6 @@ package lbn.item.slot.table;
 
 import java.util.Random;
 
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.dungeoncore.Main;
-import lbn.item.customItem.attackitem.AttackItemStack;
-import lbn.item.slot.SlotInterface;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -17,6 +12,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.dungeoncore.Main;
+import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.slot.SlotInterface;
 
 public class CraeteSlotItemResultLater extends BukkitRunnable {
   static Random rnd = new Random();

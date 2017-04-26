@@ -1,5 +1,12 @@
 package lbn.item.customItem.attackitem.old;
 
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.MeleeAttackItemable;
@@ -7,13 +14,6 @@ import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class SwordItemOld extends AbstractAttackItem_Old implements MeleeAttackItemable {
   public int rank() {

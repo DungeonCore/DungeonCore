@@ -1,5 +1,11 @@
 package lbn.mob.minecraftEntity;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Witch;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.customMob.abstractmob.AbstractWitch;
 import lbn.util.JavaUtil;
@@ -7,12 +13,6 @@ import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Witch;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomWitch extends EntityWitch implements ICustomEntity<Witch> {
 

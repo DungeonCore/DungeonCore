@@ -6,6 +6,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Ageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+
 import lbn.money.BuyerShopSelector;
 import lbn.npc.CustomNpcInterface;
 import lbn.npc.NpcManager;
@@ -29,12 +35,6 @@ import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Age;
 import net.citizensnpcs.trait.ZombieModifier;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Ageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 
 public class VillagerNpc implements CustomNpcInterface {
   VillagerData data;

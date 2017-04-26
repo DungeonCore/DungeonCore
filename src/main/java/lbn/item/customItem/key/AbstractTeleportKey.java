@@ -1,9 +1,5 @@
 package lbn.item.customItem.key;
 
-import lbn.common.particle.ParticleData;
-import lbn.common.particle.ParticleType;
-import lbn.dungeon.contents.item.key.AbstractKeyItem;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +7,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.dungeon.contents.item.key.AbstractKeyItem;
 
 public abstract class AbstractTeleportKey extends AbstractKeyItem {
   public AbstractTeleportKey(Location loc) {

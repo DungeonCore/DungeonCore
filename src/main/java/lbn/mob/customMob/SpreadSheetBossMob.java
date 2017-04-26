@@ -7,6 +7,24 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
+import com.google.common.collect.HashBasedTable;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -26,24 +44,6 @@ import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.player.status.StatusAddReason;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
-
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-import com.google.common.collect.HashBasedTable;
 
 public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 

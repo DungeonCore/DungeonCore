@@ -1,13 +1,13 @@
 package lbn.common.dropingEntity;
 
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
+
+import lbn.util.LivingEntityUtil;
 
 public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFallingblock {
 

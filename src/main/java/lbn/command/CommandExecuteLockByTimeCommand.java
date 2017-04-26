@@ -3,16 +3,16 @@ package lbn.command;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import lbn.command.util.TaskManager;
-import lbn.util.JavaUtil;
-import lbn.util.MinecraftUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import lbn.command.util.TaskManager;
+import lbn.util.JavaUtil;
+import lbn.util.MinecraftUtil;
 
 public class CommandExecuteLockByTimeCommand implements CommandExecutor {
   static TaskManager taskManager = new TaskManager();

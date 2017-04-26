@@ -4,26 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import lbn.command.CommandChest;
-import lbn.command.CommandGetItem;
-import lbn.command.util.CommandSpecialSign;
-import lbn.command.util.SimplySetSpawnPointCommand;
-import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.common.menu.MenuSelectorManager;
-import lbn.common.other.BookshelfCommandRunner;
-import lbn.common.other.EndPortalOperator;
-import lbn.common.other.GetItemSign;
-import lbn.common.other.InHandItemClickSign;
-import lbn.common.other.SoulBound;
-import lbn.common.other.Stun;
-import lbn.common.projectile.ProjectileInterface;
-import lbn.common.projectile.ProjectileManager;
-import lbn.item.ItemManager;
-import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.system.strength.StrengthOperator;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.TheLowUtil;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -57,6 +37,26 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+
+import lbn.command.CommandChest;
+import lbn.command.CommandGetItem;
+import lbn.command.util.CommandSpecialSign;
+import lbn.command.util.SimplySetSpawnPointCommand;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.common.menu.MenuSelectorManager;
+import lbn.common.other.BookshelfCommandRunner;
+import lbn.common.other.EndPortalOperator;
+import lbn.common.other.GetItemSign;
+import lbn.common.other.InHandItemClickSign;
+import lbn.common.other.SoulBound;
+import lbn.common.other.Stun;
+import lbn.common.projectile.ProjectileInterface;
+import lbn.common.projectile.ProjectileManager;
+import lbn.item.ItemManager;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.item.system.strength.StrengthOperator;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.util.TheLowUtil;
 
 public class OtherCommonListener implements Listener {
   @EventHandler

@@ -3,10 +3,6 @@ package lbn.common.other;
 import java.util.HashSet;
 import java.util.UUID;
 
-import lbn.common.particle.ParticleData;
-import lbn.common.particle.ParticleType;
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -17,6 +13,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.common.particle.ParticleData;
+import lbn.common.particle.ParticleType;
+import lbn.dungeoncore.Main;
 
 public class Stun {
   static HashSet<UUID> stunList = new HashSet<UUID>();

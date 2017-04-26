@@ -1,10 +1,10 @@
 package lbn.common.event.player;
 
-import lbn.api.player.TheLowPlayer;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+
+import lbn.api.player.TheLowPlayer;
 
 public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
 

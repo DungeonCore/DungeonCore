@@ -2,17 +2,6 @@ package lbn.command;
 
 import java.util.List;
 
-import lbn.api.LevelType;
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.item.customItem.armoritem.TestArmorItem;
-import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
-import lbn.item.customItem.attackitem.test.TestBowWeaponItem;
-import lbn.item.customItem.attackitem.test.TestMagicWeaponItem;
-import lbn.item.customItem.attackitem.test.TestSwordWeaponItem;
-import lbn.util.JavaUtil;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -26,6 +15,17 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.api.LevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.item.customItem.armoritem.TestArmorItem;
+import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
+import lbn.item.customItem.attackitem.test.TestBowWeaponItem;
+import lbn.item.customItem.attackitem.test.TestMagicWeaponItem;
+import lbn.item.customItem.attackitem.test.TestSwordWeaponItem;
+import lbn.util.JavaUtil;
+import lbn.util.LivingEntityUtil;
 
 public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
 

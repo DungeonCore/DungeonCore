@@ -3,6 +3,12 @@ package lbn.quest;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -19,12 +25,6 @@ import lbn.util.JavaUtil;
 import lbn.util.Message;
 import lbn.util.QuestUtil;
 import lbn.util.TitleSender;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class QuestManager {
   private static HashMap<String, Quest> allQuestByName = new HashMap<String, Quest>();

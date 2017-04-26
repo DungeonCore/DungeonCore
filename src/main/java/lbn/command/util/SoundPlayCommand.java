@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import lbn.common.sound.SoundData;
-import lbn.common.sound.SoundManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -20,6 +17,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.common.sound.SoundData;
+import lbn.common.sound.SoundManager;
 
 public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCommandable {
 
@@ -78,7 +78,7 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
       HashSet<String> itemNameList = getNameList();
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+      return StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
     }
     return ImmutableList.of();
   }

@@ -1,5 +1,11 @@
 package lbn.mob.minecraftEntity;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Pig;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import lbn.mob.AIType;
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
@@ -22,12 +28,6 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTempt;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Pig;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomPig extends EntityPig implements ICustomEntity<Pig> {
 

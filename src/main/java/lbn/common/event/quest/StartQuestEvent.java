@@ -1,10 +1,10 @@
 package lbn.common.event.quest;
 
-import lbn.quest.Quest;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import lbn.quest.Quest;
 
 public class StartQuestEvent extends QuestEvent implements Cancellable {
 

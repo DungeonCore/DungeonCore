@@ -5,11 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import lbn.item.setItem.SetItemInterface;
-import lbn.item.setItem.SetItemManager;
-import lbn.item.setItem.SetItemPartable;
-import lbn.item.setItem.SetItemPartsType;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.item.setItem.SetItemInterface;
+import lbn.item.setItem.SetItemManager;
+import lbn.item.setItem.SetItemPartable;
+import lbn.item.setItem.SetItemPartsType;
 
 public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
 
@@ -54,7 +54,7 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
       HashSet<String> itemNameList = getSetItemNameList();
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+      return StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
     }
     return ImmutableList.of();
   }

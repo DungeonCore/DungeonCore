@@ -5,13 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.common.place.dungeon.DungeonData;
-import lbn.common.place.dungeon.DungeonList;
-import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
-import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-import lbn.util.JavaUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,6 +14,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.common.place.dungeon.DungeonData;
+import lbn.common.place.dungeon.DungeonList;
+import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
+import lbn.dungeoncore.SpletSheet.DungeonListRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.util.JavaUtil;
 
 public class SetDungeonCommand implements CommandExecutor, TabCompleter {
 
@@ -91,9 +91,9 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], Arrays.asList(opeList), new ArrayList<String>(opeList.length));
+      return StringUtil.copyPartialMatches(arg3[0], Arrays.asList(opeList), new ArrayList<String>(opeList.length));
     } else if (arg3.length >= 2 && "tp".equalsIgnoreCase(
-        arg3[0])) { return (List<String>) StringUtil.copyPartialMatches(getName(false, arg3), DungeonList.names(), new ArrayList<String>()); }
+        arg3[0])) { return StringUtil.copyPartialMatches(getName(false, arg3), DungeonList.names(), new ArrayList<String>()); }
     return ImmutableList.of();
   }
 

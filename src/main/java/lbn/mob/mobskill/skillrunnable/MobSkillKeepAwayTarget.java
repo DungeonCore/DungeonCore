@@ -1,9 +1,9 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import lbn.mob.mobskill.MobSkillRunnable;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
+
+import lbn.mob.mobskill.MobSkillRunnable;
 
 public class MobSkillKeepAwayTarget extends MobSkillRunnable {
 

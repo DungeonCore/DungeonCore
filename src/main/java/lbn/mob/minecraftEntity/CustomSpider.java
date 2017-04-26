@@ -1,5 +1,14 @@
 package lbn.mob.minecraftEntity;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Spider;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.entity.EntityCombustEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
+
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
@@ -18,15 +27,6 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Spider;
-import org.bukkit.event.entity.EntityCombustEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>, IRangedEntity {
   static final LbnMobTag DEFAULT_TAG = new LbnMobTag(EntityType.SPIDER);

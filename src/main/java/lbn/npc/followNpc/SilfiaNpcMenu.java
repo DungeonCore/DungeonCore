@@ -1,14 +1,14 @@
 package lbn.npc.followNpc;
 
-import lbn.common.menu.MenuSelectorInterface;
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.common.menu.MenuSelectorInterface;
+import lbn.util.ItemStackUtil;
 
 public class SilfiaNpcMenu implements MenuSelectorInterface {
 

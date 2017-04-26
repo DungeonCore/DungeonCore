@@ -1,10 +1,10 @@
 package lbn.item.itemInterface;
 
-import lbn.common.cooltime.Cooltimable;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.common.cooltime.Cooltimable;
 
 public interface MagicExcuteable extends Cooltimable {
   ItemStack getItem();

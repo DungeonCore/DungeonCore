@@ -1,5 +1,9 @@
 package lbn.item.customItem.attackitem.old;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.cooltime.CooltimeManager;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import lbn.item.itemInterface.LeftClickItemable;
@@ -8,10 +12,6 @@ import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.Message;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class MagicItemOld extends AbstractAttackItem_Old implements RightClickItemable, LeftClickItemable {
 

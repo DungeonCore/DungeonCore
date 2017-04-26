@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerBreakMagicOreEvent;
 import lbn.item.ItemInterface;
 import lbn.item.customItem.AbstractItem;
@@ -13,11 +18,6 @@ import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 import lbn.util.TitleSender;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractPickaxe extends AbstractItem implements MagicPickaxeable {
 

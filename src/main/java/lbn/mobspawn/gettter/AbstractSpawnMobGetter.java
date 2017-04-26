@@ -1,9 +1,9 @@
 package lbn.mobspawn.gettter;
 
+import org.bukkit.Location;
+
 import lbn.mobspawn.SpawnLevel;
 import lbn.mobspawn.point.MobSpawnerPoint;
-
-import org.bukkit.Location;
 
 public abstract class AbstractSpawnMobGetter implements SpawnMobGetterInterface {
   @Override

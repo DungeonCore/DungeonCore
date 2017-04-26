@@ -1,5 +1,12 @@
 package lbn.command;
 
+import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
@@ -7,13 +14,6 @@ import lbn.item.customItem.pic.AbstractPickaxe;
 import lbn.item.itemInterface.Strengthenable;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.item.system.strength.StrengthTables;
-
-import org.apache.commons.lang.math.NumberUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class StrengthItemCommand implements CommandExecutor {
 

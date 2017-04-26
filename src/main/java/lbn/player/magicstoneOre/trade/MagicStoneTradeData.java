@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
 import lbn.item.ItemInterface;
 import lbn.item.SlotManager;
@@ -14,9 +17,6 @@ import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneTradeData {
   static Random random = new Random();

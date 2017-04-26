@@ -2,12 +2,12 @@ package lbn.common.place;
 
 import java.util.Collection;
 
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Location;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+
+import lbn.dungeoncore.Main;
 
 public class HolographicDisplaysManager {
   private static boolean useHolographicDisplays = false;

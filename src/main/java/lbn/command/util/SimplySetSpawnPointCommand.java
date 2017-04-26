@@ -7,18 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.mobspawn.SpawnLevel;
-import lbn.mobspawn.gettter.SpawnMobGetterManager;
-import lbn.mobspawn.gettter.SpletSheetSpawnMobGetter;
-import lbn.mobspawn.point.MobSpawnerPoint;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.util.ItemStackUtil;
-import lbn.util.LbnRunnable;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -40,6 +28,18 @@ import org.bukkit.util.Vector;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
+
+import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.mobspawn.SpawnLevel;
+import lbn.mobspawn.gettter.SpawnMobGetterManager;
+import lbn.mobspawn.gettter.SpletSheetSpawnMobGetter;
+import lbn.mobspawn.point.MobSpawnerPoint;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.util.ItemStackUtil;
+import lbn.util.LbnRunnable;
 
 public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter {
   static HashMultimap<Player, MobLocation> create = HashMultimap.create();
@@ -264,7 +264,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
     Vector direction = player.getLocation().getDirection();
     Snowball spawn = player.getWorld().spawn(player.getLocation().add(0, 1, 0), Snowball.class);
     spawn.setVelocity(direction.multiply(3));
-    spawn.setShooter((ProjectileSource) player);
+    spawn.setShooter(player);
   }
 
   public static void ProjectileHitEvent(ProjectileHitEvent e) {
@@ -322,7 +322,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length > 1) {
       if ("set".equalsIgnoreCase(arg3[0])) {
-        if (arg3.length == 2) { return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(),
+        if (arg3.length == 2) { return StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(),
             new ArrayList<String>(SpawnMobGetterManager.getNames().size())); }
       }
     }

@@ -6,18 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import lbn.SystemListener;
-import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-import lbn.mobspawn.SpawnLevel;
-import lbn.mobspawn.SpawnPointMonitor;
-import lbn.mobspawn.gettter.SpawnMobGetterInterface;
-import lbn.mobspawn.gettter.SpawnMobGetterManager;
-import lbn.mobspawn.point.MobSpawnerPoint;
-import lbn.mobspawn.point.MobSpawnerPointManager;
-import lbn.mobspawn.point.SpawnScheduler;
-import lbn.mobspawn.point.SpletSheetMobSpawnerPoint;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -29,6 +17,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.SystemListener;
+import lbn.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
+import lbn.mobspawn.SpawnLevel;
+import lbn.mobspawn.SpawnPointMonitor;
+import lbn.mobspawn.gettter.SpawnMobGetterInterface;
+import lbn.mobspawn.gettter.SpawnMobGetterManager;
+import lbn.mobspawn.point.MobSpawnerPoint;
+import lbn.mobspawn.point.MobSpawnerPointManager;
+import lbn.mobspawn.point.SpawnScheduler;
+import lbn.mobspawn.point.SpletSheetMobSpawnerPoint;
 
 public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 
@@ -227,19 +227,19 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-    if (arg3.length == 1) { return (List<String>) StringUtil.copyPartialMatches(arg3[0].toLowerCase(), operatorList,
+    if (arg3.length == 1) { return StringUtil.copyPartialMatches(arg3[0].toLowerCase(), operatorList,
         new ArrayList<String>(operatorList.size())); }
 
     if (arg3.length > 1) {
       if ("set".equalsIgnoreCase(arg3[0])) {
-        if (arg3.length == 2) { return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(),
+        if (arg3.length == 2) { return StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(),
             new ArrayList<String>(SpawnMobGetterManager.getNames().size())); }
-        if (arg3.length == 4) { return (List<String>) StringUtil.copyPartialMatches(arg3[3].toUpperCase(), SpawnLevel.getNames(),
+        if (arg3.length == 4) { return StringUtil.copyPartialMatches(arg3[3].toUpperCase(), SpawnLevel.getNames(),
             new ArrayList<String>(SpawnLevel.values().length)); }
       } else if ("list".equalsIgnoreCase(arg3[0])) {
         if (arg3.length == 2) {
           List<String> rangeList = Arrays.asList("", "all", "here", "loadedChunk");
-          return (List<String>) StringUtil.copyPartialMatches(arg3[1].toUpperCase(), rangeList, new ArrayList<String>(rangeList.size()));
+          return StringUtil.copyPartialMatches(arg3[1].toUpperCase(), rangeList, new ArrayList<String>(rangeList.size()));
         }
       }
     }

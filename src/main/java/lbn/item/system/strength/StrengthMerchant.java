@@ -3,6 +3,13 @@ package lbn.item.system.strength;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
@@ -13,13 +20,6 @@ import lbn.item.customItem.other.StrengthScrollWeapon;
 import lbn.money.GalionEditReason;
 import lbn.util.ItemStackUtil;
 import lbn.util.JavaUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
 public class StrengthMerchant extends TheLowMerchant {
   public StrengthMerchant(Player p, TheLowPlayer thelowPlayer) {

@@ -3,6 +3,11 @@ package lbn.item.customItem.SpreadSheetItem;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -16,11 +21,6 @@ import lbn.item.customItem.itemAbstract.FoodItem;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.status.StatusAddReason;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetFoodItem extends FoodItem {
 

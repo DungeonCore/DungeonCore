@@ -1,11 +1,11 @@
 package lbn.item.customItem.itemAbstract;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+
 import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 public abstract class RightClickItem extends AbstractItem implements RightClickItemable {
   abstract protected boolean isConsumeWhenUse();

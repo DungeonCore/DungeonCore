@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import lbn.NbtTagConst;
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
+
+import lbn.NbtTagConst;
+import lbn.dungeoncore.Main;
 
 public class FallingBlockParticles {
   /**

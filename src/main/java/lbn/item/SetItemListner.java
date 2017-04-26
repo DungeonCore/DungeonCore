@@ -2,11 +2,6 @@ package lbn.item;
 
 import java.util.Collection;
 
-import lbn.dungeoncore.Main;
-import lbn.item.setItem.SetItemManager;
-import lbn.item.setItem.SetItemPartsType;
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +15,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
+import lbn.item.setItem.SetItemManager;
+import lbn.item.setItem.SetItemPartsType;
+import lbn.util.ItemStackUtil;
 
 public class SetItemListner implements Listener {
   @EventHandler
@@ -52,7 +52,7 @@ public class SetItemListner implements Listener {
   @EventHandler
   public void join(PlayerJoinEvent event) {
     Player player = event.getPlayer();
-    SetItemManager.updateAllSetItem((Player) player);
+    SetItemManager.updateAllSetItem(player);
   }
 
   @EventHandler

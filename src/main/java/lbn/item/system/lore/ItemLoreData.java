@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.inventory.ItemStack;
+
+import lbn.util.ItemStackUtil;
 
 public class ItemLoreData {
   ItemStack item;

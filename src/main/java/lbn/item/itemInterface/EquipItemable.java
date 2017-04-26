@@ -1,8 +1,8 @@
 package lbn.item.itemInterface;
 
-import lbn.item.ItemInterface;
-
 import org.bukkit.inventory.ItemStack;
+
+import lbn.item.ItemInterface;
 
 public interface EquipItemable extends ItemInterface, AvailableLevelItemable {
   /**

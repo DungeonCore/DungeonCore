@@ -3,10 +3,6 @@ package lbn.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.common.book.BookManager;
-import lbn.item.ItemInterface;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,6 +12,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.common.book.BookManager;
+import lbn.item.ItemInterface;
+import net.md_5.bungee.api.ChatColor;
 
 public class CommandBook implements CommandExecutor, TabCompleter {
 
@@ -79,7 +79,7 @@ public class CommandBook implements CommandExecutor, TabCompleter {
 
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-    if (arg3.length == 2) { return (List<String>) StringUtil.copyPartialMatches(arg3[1], BookManager.getNames(),
+    if (arg3.length == 2) { return StringUtil.copyPartialMatches(arg3[1], BookManager.getNames(),
         new ArrayList<String>(BookManager.getNames().size())); }
     return ImmutableList.of();
   }

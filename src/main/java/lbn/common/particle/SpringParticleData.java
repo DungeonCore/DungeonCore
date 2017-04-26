@@ -3,11 +3,11 @@ package lbn.common.particle;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import lbn.util.LbnRunnable;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
+
+import lbn.util.LbnRunnable;
 
 public class SpringParticleData extends ParticleData {
 
@@ -60,7 +60,7 @@ public class SpringParticleData extends ParticleData {
             return;
           }
           Vector vector = pointList.get(i);
-          runParticle(center.getWorld(), center.getX() + vector.getX(), center.getY() + vector.getY() + (double) (hight * allCount / maxTick),
+          runParticle(center.getWorld(), center.getX() + vector.getX(), center.getY() + vector.getY() + hight * allCount / maxTick,
               center.getZ() + vector.getZ());
           i++;
         }

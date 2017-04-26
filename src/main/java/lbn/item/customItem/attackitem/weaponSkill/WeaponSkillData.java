@@ -1,8 +1,8 @@
 package lbn.item.customItem.attackitem.weaponSkill;
 
-import lbn.player.ItemType;
-
 import org.bukkit.Material;
+
+import lbn.player.ItemType;
 
 public class WeaponSkillData {
   double[] data = new double[5];

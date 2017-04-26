@@ -5,17 +5,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import lbn.mob.AbstractMob;
-import lbn.mob.customMob.abstractmob.AbstractCombinationMob;
-import lbn.mobspawn.ChunkWrapper;
-import lbn.mobspawn.SpawnLevel;
-import lbn.mobspawn.gettter.SpawnMobGetterInterface;
-
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+
+import lbn.mob.AbstractMob;
+import lbn.mob.customMob.abstractmob.AbstractCombinationMob;
+import lbn.mobspawn.ChunkWrapper;
+import lbn.mobspawn.SpawnLevel;
+import lbn.mobspawn.gettter.SpawnMobGetterInterface;
 
 public class MobSpawnerPoint {
   public SpawnMobGetterInterface mobGetter;

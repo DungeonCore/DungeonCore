@@ -3,8 +3,6 @@ package lbn.common.projectile;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.dungeoncore.Main;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -12,6 +10,8 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+
+import lbn.dungeoncore.Main;
 
 public class ProjectileManager {
   private static final String THELOW_PROJECTILE_DATA_ITEMSTACK = "thelow_projectile_data_itemstack";

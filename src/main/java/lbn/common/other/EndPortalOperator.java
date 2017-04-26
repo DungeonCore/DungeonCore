@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import lbn.dungeoncore.Main;
-import lbn.player.PlayerChecker;
-
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +14,9 @@ import org.bukkit.event.block.BlockMultiPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
+import lbn.player.PlayerChecker;
 
 public class EndPortalOperator {
   public static void onBlockMultiPlaceEvent(BlockMultiPlaceEvent e) {

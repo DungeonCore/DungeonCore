@@ -1,7 +1,7 @@
 package lbn.command;
 
-import static java.lang.String.join;
-import static lbn.api.other.Announcement.attention;
+import static java.lang.String.*;
+import static lbn.api.other.Announcement.*;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

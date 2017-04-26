@@ -1,12 +1,12 @@
 package lbn.mob.mobskill.skillrunnable;
 
-import lbn.common.other.Stun;
-import lbn.mob.mobskill.MobSkillRunnable;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+
+import lbn.common.other.Stun;
+import lbn.mob.mobskill.MobSkillRunnable;
+import lbn.util.LivingEntityUtil;
 
 public class MobSkillHealMob extends MobSkillRunnable {
 

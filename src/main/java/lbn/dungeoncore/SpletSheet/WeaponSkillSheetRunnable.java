@@ -2,13 +2,13 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
+import org.bukkit.command.CommandSender;
+
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillData;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import lbn.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
 import lbn.player.ItemType;
 import lbn.util.JavaUtil;
-
-import org.bukkit.command.CommandSender;
 
 public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 

@@ -1,15 +1,15 @@
 package lbn.item.customItem.other;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.item.customItem.AbstractItem;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.SlotType;
 import lbn.item.system.lore.ItemLoreToken;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
 
 public class AddEmptySlotItem extends AbstractItem implements SlotInterface {
 

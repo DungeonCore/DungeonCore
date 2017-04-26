@@ -1,5 +1,9 @@
 package lbn.dungeoncore;
 
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
+
 import lbn.command.CommandAnnounce;
 import lbn.command.CommandAttention;
 import lbn.command.CommandBook;
@@ -53,10 +57,6 @@ import lbn.command.util.TimerExcuteCommand;
 import lbn.command.util.TmCommand;
 import lbn.command.util.ToggleSetBlockCommand;
 import lbn.command.util.UsageCommandable;
-
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
 
 public class CommandRegister {
   public static void registCommand() {

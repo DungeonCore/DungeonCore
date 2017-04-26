@@ -2,11 +2,11 @@ package lbn.quest.viewer;
 
 import java.util.List;
 
+import org.bukkit.entity.Player;
+
 import lbn.npc.CustomNpcInterface;
 import lbn.quest.NpcQuestHolder;
 import lbn.quest.Quest;
-
-import org.bukkit.entity.Player;
 
 public class QuestSelectorViewer {
   public static void openSelector(CustomNpcInterface villager, Player p) {

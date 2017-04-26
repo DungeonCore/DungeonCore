@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.menu.MenuSelector;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.common.menu.SelectRunnable;
@@ -16,13 +23,6 @@ import lbn.item.itemInterface.SpecialAttackItemable;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.player.ItemType;
 import lbn.util.Message;
-
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SpecialAttackItemSelectorOld extends AbstractItem implements RightClickItemable, LeftClickItemable {
 

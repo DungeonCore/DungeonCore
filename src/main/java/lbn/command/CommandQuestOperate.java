@@ -6,14 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import lbn.npc.CustomNpcInterface;
-import lbn.npc.villagerNpc.VillagerNpcManager;
-import lbn.quest.NpcQuestHolder;
-import lbn.quest.Quest;
-import lbn.quest.QuestInventory;
-import lbn.quest.QuestManager;
-import lbn.quest.QuestManager.QuestStartStatus;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,6 +14,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import lbn.npc.CustomNpcInterface;
+import lbn.npc.villagerNpc.VillagerNpcManager;
+import lbn.quest.NpcQuestHolder;
+import lbn.quest.Quest;
+import lbn.quest.QuestInventory;
+import lbn.quest.QuestManager;
+import lbn.quest.QuestManager.QuestStartStatus;
 
 public class CommandQuestOperate implements CommandExecutor, TabCompleter {
   @Override
@@ -109,9 +109,9 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender arg0, Command arg1,
       String arg2, String[] arg3) {
     if (arg3.length == 1) {
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], operateList, new ArrayList<String>(operateList.size()));
+      return StringUtil.copyPartialMatches(arg3[0], operateList, new ArrayList<String>(operateList.size()));
     } else if (arg3.length == 2) {
-      if (!arg3[0].equals("npc")) { return (List<String>) StringUtil.copyPartialMatches(arg3[1], QuestManager.getQuestId(),
+      if (!arg3[0].equals("npc")) { return StringUtil.copyPartialMatches(arg3[1], QuestManager.getQuestId(),
           new ArrayList<String>(QuestManager.getQuestId().size())); }
     }
     return null;

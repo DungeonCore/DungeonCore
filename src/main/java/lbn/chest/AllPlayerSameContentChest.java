@@ -2,14 +2,14 @@ package lbn.chest;
 
 import java.util.HashSet;
 
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
 
 /**
  * 全てのプレイヤーが同じ内容のチェストを参照する

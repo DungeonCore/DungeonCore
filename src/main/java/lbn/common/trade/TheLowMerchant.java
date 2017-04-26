@@ -1,19 +1,18 @@
 package lbn.common.trade;
 
-import io.netty.buffer.Unpooled;
-
 import java.util.List;
 
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryView;
+
+import io.netty.buffer.Unpooled;
 import lbn.common.trade.nms.MerchantRecipeListImplemention;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 import net.minecraft.server.v1_8_R1.PacketDataSerializer;
 import net.minecraft.server.v1_8_R1.PacketPlayOutCustomPayload;
-
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 
 public abstract class TheLowMerchant {
   protected Player p;

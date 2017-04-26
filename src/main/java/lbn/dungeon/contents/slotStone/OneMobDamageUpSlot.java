@@ -2,13 +2,13 @@ package lbn.dungeon.contents.slotStone;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.ItemManager;
 import lbn.item.slot.SlotLevel;
 import lbn.item.slot.slot.CombatSlot;
-
-import org.bukkit.ChatColor;
-import org.bukkit.entity.EntityType;
 
 public class OneMobDamageUpSlot extends CombatSlot {
 

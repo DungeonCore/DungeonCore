@@ -2,18 +2,18 @@ package lbn.item.slot.table;
 
 import java.util.ArrayList;
 
-import lbn.dungeoncore.Main;
-import lbn.item.customItem.attackitem.AttackItemStack;
-import lbn.item.slot.SlotInterface;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
+import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.slot.SlotInterface;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
 
 public class SlotSetResultItemRunnable extends BukkitRunnable {
   public SlotSetResultItemRunnable(CraftingInventory top, InventoryClickEvent e) {

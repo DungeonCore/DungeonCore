@@ -2,6 +2,9 @@ package lbn.npc.citizens;
 
 import java.util.List;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.dungeoncore.Main;
 import lbn.npc.NpcManager;
 import lbn.npc.villagerNpc.VillagerNpc;
@@ -10,9 +13,6 @@ import lbn.util.DungeonLogger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.Trait;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class RemoveNearNpcOnSpawnTrait extends Trait {
 

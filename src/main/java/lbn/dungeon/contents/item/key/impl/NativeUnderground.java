@@ -1,9 +1,9 @@
 package lbn.dungeon.contents.item.key.impl;
 
-import lbn.item.customItem.key.CommandBlockExceteKey;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
+
+import lbn.item.customItem.key.CommandBlockExceteKey;
 
 public class NativeUnderground extends CommandBlockExceteKey {
 

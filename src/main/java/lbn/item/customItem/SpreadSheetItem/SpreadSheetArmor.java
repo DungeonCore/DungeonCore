@@ -2,6 +2,12 @@ package lbn.item.customItem.SpreadSheetItem;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.common.event.player.PlayerStrengthFinishEvent;
 import lbn.item.customItem.armoritem.AbstractArmorItem;
@@ -10,12 +16,6 @@ import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
-
-import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetArmor extends AbstractArmorItem {
   SpreadSheetArmorData data;

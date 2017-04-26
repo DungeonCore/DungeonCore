@@ -1,8 +1,8 @@
 package lbn.player.reincarnation.imple;
 
-import lbn.api.PlayerStatusType;
-
 import org.bukkit.Material;
+
+import lbn.api.PlayerStatusType;
 
 public class MaxHpReincarnation extends AbstractAbilityReincarnation {
 

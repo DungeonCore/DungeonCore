@@ -1,10 +1,10 @@
 package lbn.mob.customMob;
 
-import lbn.mob.AIType;
-import lbn.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+
+import lbn.mob.AIType;
+import lbn.util.LivingEntityUtil;
 
 public class LbnMobTag {
   public LbnMobTag(Entity bukkitEntity) {

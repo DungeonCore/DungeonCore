@@ -1,14 +1,14 @@
 package lbn.item.customItem.attackitem.weaponSkill.imple;
 
-import lbn.common.projectile.ProjectileInterface;
-import lbn.common.projectile.ProjectileManager;
-import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.player.ItemType;
-
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.common.projectile.ProjectileInterface;
+import lbn.common.projectile.ProjectileManager;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
+import lbn.player.ItemType;
 
 public abstract class WeaponSkillWithProjectile extends WeaponSkillForOneType implements ProjectileInterface {
   public WeaponSkillWithProjectile(ItemType type) {

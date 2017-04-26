@@ -1,13 +1,13 @@
 package lbn.dungeoncore.SpletSheet;
 
+import org.bukkit.command.CommandSender;
+
 import lbn.item.ItemManager;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
 import lbn.item.customItem.itemAbstract.BowItem;
 import lbn.item.customItem.itemAbstract.MagicItem;
 import lbn.item.customItem.itemAbstract.SwordItem;
-
-import org.bukkit.command.CommandSender;
 
 public class WeaponSheetRunnable extends AbstractSheetRunable {
 

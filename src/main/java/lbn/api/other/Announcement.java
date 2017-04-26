@@ -1,12 +1,8 @@
 package lbn.api.other;
 
-import static java.lang.String.format;
-import static org.bukkit.Bukkit.broadcastMessage;
-import static org.bukkit.ChatColor.AQUA;
-import static org.bukkit.ChatColor.DARK_GRAY;
-import static org.bukkit.ChatColor.DARK_RED;
-import static org.bukkit.ChatColor.GREEN;
-import static org.bukkit.ChatColor.WHITE;
+import static java.lang.String.*;
+import static org.bukkit.Bukkit.*;
+import static org.bukkit.ChatColor.*;
 
 /**
  * This class has utility methods for message broadcasting.

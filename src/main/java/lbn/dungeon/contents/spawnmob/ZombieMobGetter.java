@@ -3,11 +3,11 @@ package lbn.dungeon.contents.spawnmob;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.entity.EntityType;
+
 import lbn.dungeon.contents.mob.NormalMob;
 import lbn.mob.AbstractMob;
 import lbn.mobspawn.gettter.AbstractSpawnMobGetter;
-
-import org.bukkit.entity.EntityType;
 
 public class ZombieMobGetter extends AbstractSpawnMobGetter {
 

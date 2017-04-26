@@ -1,5 +1,12 @@
 package lbn.item.customItem.itemAbstract;
 
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
 import lbn.item.customItem.attackitem.SpreadSheetWeaponData;
@@ -9,13 +16,6 @@ import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItemable {
   public SwordItem(SpreadSheetWeaponData data) {

@@ -1,9 +1,9 @@
 package lbn.mob.mobskill.skillrunnable;
 
+import org.bukkit.entity.Entity;
+
 import lbn.mob.mobskill.MobSkillRunnable;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.entity.Entity;
 
 public class MobSkillLightningEffect extends MobSkillRunnable {
 

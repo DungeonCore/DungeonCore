@@ -2,6 +2,22 @@ package lbn.dungeon.contents.item.shootbow;
 
 import java.util.Random;
 
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+
 import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.common.explosion.NoPlayerDamageExplotionForAttackType;
@@ -18,22 +34,6 @@ import lbn.item.customItem.attackitem.old.BowItemOld;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.LbnRunnable;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 
 public class LaserBow extends BowItemOld implements Cooltimable {
   @Override
@@ -81,7 +81,7 @@ public class LaserBow extends BowItemOld implements Cooltimable {
       final Location shooterLoc = shooter.getLocation();
 
       // 爆発させる
-      if (LivingEntityUtil.isFriendship((LivingEntity) shooter)) {
+      if (LivingEntityUtil.isFriendship(shooter)) {
         new NoPlayerDamageExplotionForAttackType(location, 3, (LivingEntity) shooter, LastDamageMethodType.BOW).runExplosion();
       } else {
         new NotMonsterDamageExplosion(location, 3).runExplosion();

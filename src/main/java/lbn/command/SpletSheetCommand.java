@@ -6,6 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.util.StringUtil;
+
 import lbn.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
 import lbn.dungeoncore.SpletSheet.ArmorSheetRunnable;
@@ -29,15 +38,6 @@ import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import lbn.dungeoncore.SpletSheet.WeaponSkillSheetRunnable;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.util.StringUtil;
 
 public class SpletSheetCommand implements CommandExecutor, TabCompleter {
   static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
@@ -120,7 +120,7 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
       Set<String> sheetNameList = sheetMap.keySet();
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], sheetNameList, new ArrayList<String>(sheetNameList.size()));
+      return StringUtil.copyPartialMatches(arg3[0], sheetNameList, new ArrayList<String>(sheetNameList.size()));
     }
     return null;
   }

@@ -2,15 +2,15 @@ package lbn.quest.viewer;
 
 import java.util.List;
 
-import lbn.common.menu.MenuSelector;
-import lbn.common.menu.SelectRunnable;
-import lbn.quest.Quest;
-import lbn.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.common.menu.MenuSelector;
+import lbn.common.menu.SelectRunnable;
+import lbn.quest.Quest;
+import lbn.util.Message;
 
 public class QuestMenuSelector extends MenuSelector {
   public static QuestMenuSelectorRunnable run = new QuestMenuSelectorRunnable();

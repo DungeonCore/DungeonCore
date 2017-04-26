@@ -1,9 +1,9 @@
 package lbn.item.customItem.armoritem;
 
+import org.bukkit.inventory.ItemStack;
+
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.customItem.other.StrengthScrollArmor;
-
-import org.bukkit.inventory.ItemStack;
 
 public class ArmorStrengthTemplate implements StrengthTemplate {
   static ItemStack strengthScrollArmor = new StrengthScrollArmor().getItem();

@@ -2,11 +2,11 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
+import org.bukkit.command.CommandSender;
+
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.quest.abstractQuest.QuestBuilder;
-
-import org.bukkit.command.CommandSender;
 
 public class QuestSheetRunnable extends AbstractSheetRunable {
 

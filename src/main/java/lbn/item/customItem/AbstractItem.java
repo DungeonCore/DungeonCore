@@ -2,6 +2,10 @@ package lbn.item.customItem;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.NbtTagConst;
 import lbn.item.ItemInterface;
 import lbn.item.itemInterface.Strengthenable;
@@ -11,10 +15,6 @@ import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ItemType;
 import lbn.util.ItemStackUtil;
 import lbn.util.Message;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractItem implements ItemInterface {
   @Override

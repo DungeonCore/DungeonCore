@@ -1,14 +1,14 @@
 package lbn.command;
 
-import lbn.npc.followNpc.FollowerNpc;
-import lbn.npc.followNpc.FollowerNpcManager;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+
+import lbn.npc.followNpc.FollowerNpc;
+import lbn.npc.followNpc.FollowerNpcManager;
 
 public class CommandNpcSpawn implements CommandExecutor {
 

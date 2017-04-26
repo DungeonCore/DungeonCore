@@ -2,15 +2,14 @@ package lbn.common.dropingEntity;
 
 import java.util.List;
 
-import lbn.util.LbnRunnable;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+
+import lbn.util.LbnRunnable;
 
 public abstract class AbstractDamageFallingblock extends LbnRunnable {
   protected Entity spawnEntity;
@@ -45,7 +44,7 @@ public abstract class AbstractDamageFallingblock extends LbnRunnable {
         isAttack = isAttack || damaged;
         if (damaged) {
           // ダメージ時の特殊処理
-          onHitDamagedEntity((LivingEntity) entity);
+          onHitDamagedEntity(entity);
         }
       }
 

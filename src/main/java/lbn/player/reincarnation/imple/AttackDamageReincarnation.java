@@ -1,9 +1,9 @@
 package lbn.player.reincarnation.imple;
 
+import org.bukkit.Material;
+
 import lbn.api.LevelType;
 import lbn.api.PlayerStatusType;
-
-import org.bukkit.Material;
 
 public class AttackDamageReincarnation extends AbstractAbilityReincarnation {
 

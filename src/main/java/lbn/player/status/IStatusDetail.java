@@ -2,16 +2,16 @@ package lbn.player.status;
 
 import java.util.ArrayList;
 
-import lbn.api.LevelType;
-import lbn.api.player.TheLowPlayer;
-import lbn.util.ItemStackUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Wool;
+
+import lbn.api.LevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.util.ItemStackUtil;
 
 public abstract class IStatusDetail {
   protected int level = 0;
@@ -68,7 +68,7 @@ public abstract class IStatusDetail {
     Wool data = (Wool) itemStack.getData();
     data.setColor(c);
     itemStack.setData(data);
-    itemStack.setDurability((short) c.getData());
+    itemStack.setDurability(c.getData());
   }
 
   public ItemStack getLevelViewIcon(int viewIndex) {

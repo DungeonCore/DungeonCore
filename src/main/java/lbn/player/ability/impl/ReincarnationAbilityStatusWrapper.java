@@ -3,8 +3,8 @@ package lbn.player.ability.impl;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
-import lbn.api.PlayerStatusType;
 import lbn.api.LevelType;
+import lbn.api.PlayerStatusType;
 import lbn.player.ability.AbstractReincarnationAbility;
 
 /**

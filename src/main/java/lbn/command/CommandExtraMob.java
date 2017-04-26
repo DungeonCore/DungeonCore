@@ -6,10 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import lbn.mob.AbstractMob;
-import lbn.mob.MobHolder;
-import lbn.util.DungeonLogger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
@@ -23,6 +19,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.mob.AbstractMob;
+import lbn.mob.MobHolder;
+import lbn.util.DungeonLogger;
 
 public class CommandExtraMob implements CommandExecutor, TabCompleter {
 
@@ -146,7 +146,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
       Collection<String> itemNameList = getItemMap();
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList,
+      return StringUtil.copyPartialMatches(arg3[0], itemNameList,
           new ArrayList<String>(itemNameList.size()));
     }
     return ImmutableList.of();

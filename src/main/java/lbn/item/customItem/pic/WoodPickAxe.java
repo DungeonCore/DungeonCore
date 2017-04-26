@@ -3,11 +3,11 @@ package lbn.item.customItem.pic;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.item.ItemInterface;
-import lbn.player.magicstoneOre.MagicStoneOreType;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.item.ItemInterface;
+import lbn.player.magicstoneOre.MagicStoneOreType;
 
 public class WoodPickAxe extends AbstractPickaxe {
 

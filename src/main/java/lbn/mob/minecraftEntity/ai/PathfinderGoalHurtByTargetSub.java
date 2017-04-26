@@ -3,12 +3,12 @@ package lbn.mob.minecraftEntity.ai;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
+
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
-
-import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
   private boolean a;

@@ -2,15 +2,15 @@ package lbn.player;
 
 import java.util.HashMap;
 
-import lbn.dungeoncore.Main;
-import lbn.player.crafttable.CraftTableType;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
+import lbn.player.crafttable.CraftTableType;
 
 public class CraftTableViewManager {
   private static HashMap<Player, CraftTableType> craftTableViewMap = new HashMap<>();

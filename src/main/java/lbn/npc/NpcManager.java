@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+
 import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 import lbn.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import lbn.npc.citizens.RemoveNearNpcOnSpawnTrait;
@@ -20,10 +24,6 @@ import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.trait.LookClose;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-
 public class NpcManager {
   static HashMap<String, NPC> spawnedNpcMap = new HashMap<String, NPC>();
 
@@ -38,7 +38,7 @@ public class NpcManager {
   public static void onTest() {
     Iterator<NPC> it = CitizensAPI.getNPCRegistry().iterator();
     while (it.hasNext()) {
-      NPC npc = (NPC) it.next();
+      NPC npc = it.next();
       TheLowIdTrail trait = npc.getTrait(TheLowIdTrail.class);
       if (trait != null) {
         String id = trait.getId();

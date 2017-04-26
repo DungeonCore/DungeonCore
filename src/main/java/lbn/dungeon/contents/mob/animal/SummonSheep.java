@@ -1,13 +1,5 @@
 package lbn.dungeon.contents.mob.animal;
 
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeoncore.Main;
-import lbn.mob.AbstractMob;
-import lbn.mob.SummonPlayerManager;
-import lbn.mob.customMob.SummonMobable;
-import lbn.util.JavaUtil;
-import lbn.util.LbnRunnable;
-
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -19,6 +11,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeoncore.Main;
+import lbn.mob.AbstractMob;
+import lbn.mob.SummonPlayerManager;
+import lbn.mob.customMob.SummonMobable;
+import lbn.util.JavaUtil;
+import lbn.util.LbnRunnable;
 
 public abstract class SummonSheep extends AbstractMob<Sheep> implements SummonMobable {
 

@@ -2,6 +2,8 @@ package lbn.mob.minecraftEntity;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.entity.EntityType;
+
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.ai.AvoidTargetPredicate;
 import lbn.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
@@ -16,8 +18,6 @@ import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalAvoidTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
-
-import org.bukkit.entity.EntityType;
 
 /**
  * 4,5,6

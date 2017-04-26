@@ -4,15 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import lbn.chest.AllPlayerSameContentChest;
-import lbn.chest.ChestLocationManager;
-import lbn.chest.CustomChestManager;
-import lbn.chest.EachPlayerContentChest;
-import lbn.chest.SpletSheetChest;
-import lbn.chest.wireless.RepositoryType;
-import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,6 +21,15 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.chest.AllPlayerSameContentChest;
+import lbn.chest.ChestLocationManager;
+import lbn.chest.CustomChestManager;
+import lbn.chest.EachPlayerContentChest;
+import lbn.chest.SpletSheetChest;
+import lbn.chest.wireless.RepositoryType;
+import lbn.dungeoncore.SpletSheet.ChestSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class CommandChest implements CommandExecutor, TabCompleter {
 
@@ -224,7 +224,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-    if (arg3.length == 1) { return (List<String>) StringUtil.copyPartialMatches(arg3[0], ChestLocationManager.getNames(),
+    if (arg3.length == 1) { return StringUtil.copyPartialMatches(arg3[0], ChestLocationManager.getNames(),
         new ArrayList<String>(ChestLocationManager.getNames().size())); }
     return ImmutableList.of();
   }

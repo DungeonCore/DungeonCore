@@ -2,13 +2,13 @@ package lbn.common.cooltime;
 
 import java.util.HashMap;
 
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.util.Message;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.util.Message;
+import net.md_5.bungee.api.ChatColor;
 
 public class CooltimeManager {
 
@@ -73,7 +73,7 @@ public class CooltimeManager {
    * @param p
    */
   public void sendCooltimeMessage(Player p) {
-    Message.sendMessage(p, ChatColor.GREEN + "[システム]" + ChatColor.RED + "クールタイム中です。(残り{0}秒)", (int) (getRemainTick() / 20));
+    Message.sendMessage(p, ChatColor.GREEN + "[システム]" + ChatColor.RED + "クールタイム中です。(残り{0}秒)", getRemainTick() / 20);
   }
 }
 

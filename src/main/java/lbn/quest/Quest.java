@@ -3,11 +3,11 @@ package lbn.quest;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import lbn.common.event.quest.StartQuestEvent;
 import lbn.item.ItemInterface;
 import lbn.quest.abstractQuest.QuestType;
-
-import org.bukkit.entity.Player;
 
 public interface Quest {
   public String getId();

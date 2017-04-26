@@ -1,9 +1,9 @@
 package lbn.common.event.player;
 
+import org.bukkit.event.HandlerList;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.money.GalionEditReason;
-
-import org.bukkit.event.HandlerList;
 
 public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
 

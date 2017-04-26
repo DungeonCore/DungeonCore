@@ -1,10 +1,10 @@
 package lbn.common.event.quest;
 
-import lbn.quest.Quest;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
+
+import lbn.quest.Quest;
 
 public class QuestEvent extends PlayerEvent {
 

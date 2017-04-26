@@ -1,17 +1,17 @@
 package lbn.player.ability;
 
-import lbn.api.PlayerStatusType;
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.common.event.player.PlayerCombatEntityEvent;
-import lbn.player.ItemType;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import lbn.api.PlayerStatusType;
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.common.event.player.PlayerCombatEntityEvent;
+import lbn.player.ItemType;
 
 public class PlayerAbilityListener implements Listener {
   @EventHandler

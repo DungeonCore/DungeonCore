@@ -1,11 +1,11 @@
 package lbn.common.other;
 
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import lbn.util.ItemStackUtil;
 
 public class GetItemSign extends InHandItemClickSign {
 

@@ -2,6 +2,14 @@ package lbn.mob.mobskill;
 
 import java.util.ArrayList;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
 import lbn.common.dropingEntity.DamageFallingblockForMonsterSkill;
@@ -15,14 +23,6 @@ import lbn.mob.customMob.BossMobable;
 import lbn.mob.customMob.SpreadSheetMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class OldNormalMobSkill implements MobSkillInterface {
 
@@ -132,7 +132,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
               continue;
             }
           }
-          targetList.add((LivingEntity) entity);
+          targetList.add(entity);
         }
         // 対象のプレイヤーも入れる
         targetList.add(condtionTarget);
@@ -151,7 +151,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
               continue;
             }
           }
-          targetList.add((LivingEntity) entity);
+          targetList.add(entity);
         }
         break;
       default:

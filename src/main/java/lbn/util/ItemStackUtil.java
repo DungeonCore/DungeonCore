@@ -7,11 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import lbn.NbtTagConst;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -25,6 +20,11 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.google.common.base.Joiner;
+
+import lbn.NbtTagConst;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
 public class ItemStackUtil {
   public static ItemMeta getItemMeta(ItemStack item) {

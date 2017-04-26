@@ -1,10 +1,10 @@
 package lbn.common.event.player;
 
+import org.bukkit.event.HandlerList;
+
 import lbn.api.LevelType;
 import lbn.api.player.OneReincarnationData;
 import lbn.api.player.TheLowPlayer;
-
-import org.bukkit.event.HandlerList;
 
 public class PlayerCompleteReincarnationEvent extends TheLowPlayerEvent {
 

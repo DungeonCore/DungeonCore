@@ -1,5 +1,14 @@
 package lbn.mob;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.CustomBat;
@@ -25,15 +34,6 @@ import net.minecraft.server.v1_8_R1.NBTBase;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.WorldServer;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-
 public class MobSpawnerFromCommand {
   public static void spawn(Player p, String[] comand) throws CommandException {
     new CommandSummon().execute(((CraftPlayer) p).getHandle(), comand);
@@ -53,7 +53,7 @@ public class MobSpawnerFromCommand {
       IChatBaseComponent localObject1;
       if (paramArrayOfString.length >= 5) {
         localObject1 = CommandAbstract.a(null, paramArrayOfString, 4);
-        NBTBase localNBTBase = MojangsonParser.parse(((IChatBaseComponent) localObject1).c());
+        NBTBase localNBTBase = MojangsonParser.parse(localObject1.c());
         if ((localNBTBase instanceof NBTTagCompound)) {
           localNBTTagCompound1 = (NBTTagCompound) localNBTBase;
         } else {
@@ -69,10 +69,10 @@ public class MobSpawnerFromCommand {
       Entity localObject1_1 = getEntity(localNBTTagCompound1, world, nbtTag);
       if (localObject1_1 != null) {
         // spawn
-        ((Entity) localObject1_1).setPositionRotation(loc.getX(), loc.getY(), loc.getZ(),
-            ((Entity) localObject1_1).yaw,
-            ((Entity) localObject1_1).pitch);
-        world.addEntity((Entity) localObject1_1);
+        localObject1_1.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(),
+            localObject1_1.yaw,
+            localObject1_1.pitch);
+        world.addEntity(localObject1_1);
 
         Entity localObject2 = localObject1_1;
         NBTTagCompound localNBTTagCompound2 = localNBTTagCompound1;
@@ -172,7 +172,7 @@ public class MobSpawnerFromCommand {
       IChatBaseComponent localObject1;
       if (paramArrayOfString.length >= 5) {
         localObject1 = CommandAbstract.a(null, paramArrayOfString, 4);
-        String c = ((IChatBaseComponent) localObject1).c();
+        String c = localObject1.c();
         NBTBase localNBTBase = MojangsonParser.parse(c);
         if ((localNBTBase instanceof NBTTagCompound)) {
           localNBTTagCompound1 = (NBTTagCompound) localNBTBase;

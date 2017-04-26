@@ -1,5 +1,13 @@
 package lbn.npc.gui;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
 import lbn.item.slot.table.SlotSetTableOperation;
@@ -8,14 +16,6 @@ import lbn.item.system.repair.RepairUi;
 import lbn.item.system.strength.StrengthTables;
 import lbn.npc.villagerNpc.VillagerNpc;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class StrengthMenu implements MenuSelectorInterface {
   private static final String INVENTOY_TITLE = "鍛冶屋メニュー";

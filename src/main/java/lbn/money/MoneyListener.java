@@ -1,15 +1,5 @@
 package lbn.money;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.item.ItemManager;
-import lbn.item.itemInterface.MoneyItemable;
-import lbn.money.buyer.Buyer;
-import lbn.money.shop.CustomShop;
-import lbn.money.shop.ShopItem;
-import lbn.util.ItemStackUtil;
-import lbn.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +13,16 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.item.ItemManager;
+import lbn.item.itemInterface.MoneyItemable;
+import lbn.money.buyer.Buyer;
+import lbn.money.shop.CustomShop;
+import lbn.money.shop.ShopItem;
+import lbn.util.ItemStackUtil;
+import lbn.util.Message;
 
 public class MoneyListener implements Listener {
 

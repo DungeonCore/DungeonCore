@@ -1,8 +1,8 @@
 package lbn.item.setItem;
 
-import lbn.item.itemInterface.Strengthenable;
-
 import org.bukkit.Material;
+
+import lbn.item.itemInterface.Strengthenable;
 
 public abstract class SetStrengthableItemParts extends SetItemParts implements Strengthenable {
 

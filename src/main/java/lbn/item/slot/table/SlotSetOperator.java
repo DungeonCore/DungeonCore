@@ -2,14 +2,14 @@ package lbn.item.slot.table;
 
 import java.util.ArrayList;
 
+import org.bukkit.inventory.ItemStack;
+
 import lbn.dungeoncore.LbnRuntimeException;
 import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotType;
 import lbn.item.slot.slot.EmptySlot;
 import lbn.item.slot.slot.UnavailableSlot;
-
-import org.bukkit.inventory.ItemStack;
 
 public class SlotSetOperator {
   protected SlotSetOperator(AttackItemStack attackItem,
@@ -71,7 +71,7 @@ public class SlotSetOperator {
   }
 
   public int getSuccessRate() {
-    return ((int) magicStone.getLevel().getSucessPer());
+    return (magicStone.getLevel().getSucessPer());
   }
 
   public void rollback(ItemStack cursor) {

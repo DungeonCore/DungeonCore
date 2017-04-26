@@ -2,15 +2,15 @@ package lbn;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.dungeoncore.Main;
 import lbn.quest.QuestProcessingStatus;
 import lbn.quest.abstractQuest.ReachQuest;
 import lbn.quest.questData.PlayerQuestSession;
 import lbn.quest.questData.PlayerQuestSessionManager;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerTickRunner {
   public static void execute() {

@@ -3,17 +3,17 @@ package lbn.money.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.item.ItemInterface;
-import lbn.item.ItemManager;
-import lbn.util.ItemStackUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.item.ItemInterface;
+import lbn.item.ItemManager;
+import lbn.util.ItemStackUtil;
 
 public class Shop {
   public String getName() {
@@ -29,7 +29,7 @@ public class Shop {
     ArrayList<ShopItem> arrayList = getShopItemList();
 
     if (arrayList == null) { return null; }
-    Inventory createInventory = Bukkit.createInventory(null, ((int) (arrayList.size() / 9) + 1) * 9, getName() + " shop");
+    Inventory createInventory = Bukkit.createInventory(null, (arrayList.size() / 9 + 1) * 9, getName() + " shop");
 
     int i = 0;
     for (ShopItem shopItem : arrayList) {

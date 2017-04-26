@@ -1,11 +1,11 @@
 package lbn.dungeon.contents.item.key;
 
-import lbn.item.customItem.AbstractItem;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
+
+import lbn.item.customItem.AbstractItem;
 
 public abstract class AbstractKeyItem extends AbstractItem implements KeyItemable {
   @Override

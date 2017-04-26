@@ -5,13 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import lbn.chest.CustomChestManager;
-import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.dungeoncore.Main;
-import lbn.mob.customMob.BossMobable;
-import lbn.mob.customMob.SummonMobable;
-import lbn.player.PlayerChecker;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -35,6 +28,13 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.chest.CustomChestManager;
+import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.dungeoncore.Main;
+import lbn.mob.customMob.BossMobable;
+import lbn.mob.customMob.SummonMobable;
+import lbn.player.PlayerChecker;
 
 public class MobListener implements Listener {
   public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
@@ -96,14 +96,14 @@ public class MobListener implements Listener {
 
     if (MobHolder.isCustomMob(entity)) {
       // mobがダメージを受けるとき
-      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+      AbstractMob<?> mob = MobHolder.getMob(entity);
       mob.onDamageBefore((LivingEntity) entity, damager, e);
       mob.onDamage((LivingEntity) entity, damager, e);
       mob.updateName(true);
     }
     if (MobHolder.isCustomMob(damager)) {
       // mobがダメージを与える時
-      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) damager);
+      AbstractMob<?> mob = MobHolder.getMob(damager);
       mob.onAttackBefore((LivingEntity) damager, (LivingEntity) entity, e);
       mob.onAttack((LivingEntity) damager, (LivingEntity) entity, e);
     } else if (damager instanceof Projectile) {
@@ -129,7 +129,7 @@ public class MobListener implements Listener {
   public void onDamageOther(EntityDamageEvent e) {
     Entity entity = e.getEntity();
     if (MobHolder.isCustomMob(entity)) {
-      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+      AbstractMob<?> mob = MobHolder.getMob(entity);
       mob.onOtherDamage(e);
       mob.updateName(false);
     }
@@ -170,7 +170,7 @@ public class MobListener implements Listener {
   @EventHandler
   public void onInteractEntity(PlayerInteractEntityEvent e) {
     if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
-      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) e.getRightClicked());
+      AbstractMob<?> mob = MobHolder.getMob(e.getRightClicked());
       mob.onInteractEntity(e);
     }
   }
@@ -200,7 +200,7 @@ public class MobListener implements Listener {
     Entity[] entities = e.getChunk().getEntities();
     for (Entity entity : entities) {
       if (entity.getType().isAlive()) {
-        AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+        AbstractMob<?> mob = MobHolder.getMob(entity);
         if (mob != null && mob.isBoss()) {
           entity.remove();
         }

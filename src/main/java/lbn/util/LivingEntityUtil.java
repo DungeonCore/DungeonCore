@@ -4,17 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.dungeoncore.Main;
-import lbn.mob.LastDamageManager;
-import lbn.mob.LastDamageMethodType;
-import lbn.mob.SummonPlayerManager;
-import lbn.mob.minecraftEntity.CustomVillager;
-import lbn.npc.NpcManager;
-import net.minecraft.server.v1_8_R1.EntityAnimal;
-import net.minecraft.server.v1_8_R1.EntityLightning;
-import net.minecraft.server.v1_8_R1.EntityMonster;
-import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
-
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,6 +24,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.dungeoncore.Main;
+import lbn.mob.LastDamageManager;
+import lbn.mob.LastDamageMethodType;
+import lbn.mob.SummonPlayerManager;
+import lbn.mob.minecraftEntity.CustomVillager;
+import lbn.npc.NpcManager;
+import net.minecraft.server.v1_8_R1.EntityAnimal;
+import net.minecraft.server.v1_8_R1.EntityLightning;
+import net.minecraft.server.v1_8_R1.EntityMonster;
+import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
 
 public class LivingEntityUtil {
   public static boolean isEnemy(Entity e) {

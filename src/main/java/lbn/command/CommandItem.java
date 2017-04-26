@@ -1,11 +1,11 @@
 package lbn.command;
 
-import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
-import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import lbn.dungeoncore.SpletSheet.ItemSheetRunnable;
+import lbn.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class CommandItem implements CommandExecutor {
 

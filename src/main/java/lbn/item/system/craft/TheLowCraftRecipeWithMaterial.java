@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
+
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.CraftItemable;
 import lbn.item.system.craft.craftingViewer.CraftViewerForOnlyMaterialRecipe;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
 
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
   // ItemId

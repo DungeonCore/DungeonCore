@@ -3,17 +3,17 @@ package lbn.npc.followNpc;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import lbn.api.player.TheLowPlayer;
-import lbn.api.player.TheLowPlayerManager;
-import lbn.dungeoncore.Main;
-import lbn.npc.NpcManager;
-import net.citizensnpcs.api.npc.NPC;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import lbn.api.player.TheLowPlayer;
+import lbn.api.player.TheLowPlayerManager;
+import lbn.dungeoncore.Main;
+import lbn.npc.NpcManager;
+import net.citizensnpcs.api.npc.NPC;
 
 public class FollowerNpcManager {
   static HashMap<TheLowPlayer, FollowerNpc> map = new HashMap<>();

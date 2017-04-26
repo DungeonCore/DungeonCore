@@ -1,13 +1,13 @@
 package lbn.mob.customMob.abstractmob;
 
-import lbn.mob.AbstractCustomMob;
-import lbn.mob.minecraftEntity.CustomEntityUtil;
-import lbn.mob.minecraftEntity.CustomZombie;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Zombie;
+
+import lbn.mob.AbstractCustomMob;
+import lbn.mob.minecraftEntity.CustomEntityUtil;
+import lbn.mob.minecraftEntity.CustomZombie;
 
 public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zombie> {
   /**

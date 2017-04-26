@@ -1,5 +1,13 @@
 package lbn.item.system.craft.craftingViewer;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCraftCustomItemEvent;
@@ -14,14 +22,6 @@ import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.lore.ItemLoreData;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
   static {

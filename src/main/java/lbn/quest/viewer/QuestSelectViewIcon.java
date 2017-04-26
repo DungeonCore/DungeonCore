@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.dungeoncore.SpletSheet.QuestSheetRunnable;
 import lbn.quest.Quest;
 import lbn.quest.QuestManager;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class QuestSelectViewIcon {
   private final static String ID_PREFIX = ChatColor.BLACK + "q_view_id:";

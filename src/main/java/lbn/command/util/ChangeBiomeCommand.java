@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lbn.common.other.RouteSearcher;
-import lbn.dungeoncore.Main;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -20,6 +17,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
 
 import com.google.common.collect.ImmutableList;
+
+import lbn.common.other.RouteSearcher;
+import lbn.dungeoncore.Main;
 
 public class ChangeBiomeCommand implements CommandExecutor, TabCompleter {
 
@@ -90,7 +90,7 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter {
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
       Collection<String> itemNameList = getNames();
-      return (List<String>) StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
+      return StringUtil.copyPartialMatches(arg3[0], itemNameList, new ArrayList<String>(itemNameList.size()));
     }
     return ImmutableList.of();
   }

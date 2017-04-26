@@ -3,6 +3,14 @@ package lbn.dungeon.contents.item.magic.normalItems;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.dropingEntity.DamagedFallingBlockForPlayer;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
@@ -17,14 +25,6 @@ import lbn.item.itemInterface.MagicExcuteable;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.mob.AbstractMob;
 
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 public class NormalMagicItem extends MagicItemOld {
 
   public static List<ItemInterface> getAllItem() {
@@ -35,13 +35,13 @@ public class NormalMagicItem extends MagicItemOld {
     arrayList.add(new NormalMagicItem("セイクリッド", 20, Material.STONE_HOE, new BlockData(Material.IRON_BLOCK),
         new SoundData(Sound.IRONGOLEM_HIT, 1, (float) 0.7)));
     arrayList.add(new NormalMagicItem("ジャベラス", 30, Material.IRON_HOE, new BlockData(Material.STAINED_CLAY, (byte) 11),
-        new SoundData(Sound.ZOMBIE_METAL, 1, (float) 1)));
+        new SoundData(Sound.ZOMBIE_METAL, 1, 1)));
     arrayList.add(new NormalMagicItem("ルーク", 40, Material.IRON_HOE, new BlockData(Material.STAINED_CLAY, (byte) 14),
-        new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
+        new SoundData(Sound.GHAST_FIREBALL, 1, 1)));
     arrayList
         .add(new NormalMagicItem("グレス", 50, Material.DIAMOND_HOE, new BlockData(Material.GOLD_BLOCK), new SoundData(Sound.GLASS, 1, (float) 0.1)));
     arrayList.add(new NormalMagicItem("ジュピター", 60, Material.DIAMOND_HOE, new BlockData(Material.DIAMOND_BLOCK),
-        new SoundData(Sound.GHAST_FIREBALL, 1, (float) 1)));
+        new SoundData(Sound.GHAST_FIREBALL, 1, 1)));
     arrayList.add(new NormalMagicItem("エルシオン", 70, Material.DIAMOND_HOE, new BlockData(Material.OBSIDIAN, (byte) 11),
         new SoundData(Sound.ZOMBIE_METAL, 1, (float) 0.1)));
     arrayList.add(new NormalMagicItem("セルシオ", 80, Material.DIAMOND_HOE, new BlockData(Material.OBSIDIAN, (byte) 11),

@@ -3,6 +3,13 @@ package lbn.item.system.craft.craftingViewer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.event.player.PlayerCraftCustomItemEvent;
@@ -16,13 +23,6 @@ import lbn.item.system.craft.TheLowCraftRecipeInterface;
 import lbn.item.system.craft.TheLowCraftRecipeWithMainItem;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 

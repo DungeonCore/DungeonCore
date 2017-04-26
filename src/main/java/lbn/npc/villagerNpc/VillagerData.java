@@ -2,15 +2,15 @@ package lbn.npc.villagerNpc;
 
 import java.util.HashMap;
 
-import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
-import lbn.npc.CustomNpcInterface;
-import lbn.npc.NpcManager;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.EntityType;
+
+import lbn.dungeoncore.SpletSheet.AbstractSheetRunable;
+import lbn.npc.CustomNpcInterface;
+import lbn.npc.NpcManager;
 
 /**
  * NPCのデータを管理するためのクラス

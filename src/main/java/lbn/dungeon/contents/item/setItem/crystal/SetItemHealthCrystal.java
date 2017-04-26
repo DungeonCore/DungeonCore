@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.PlayerStatusType;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
 import lbn.item.ItemManager;
@@ -16,10 +20,6 @@ import lbn.item.system.lore.LoreLine;
 import lbn.item.system.strength.StrengthOperator;
 import lbn.player.ability.impl.SetItemAbility;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class SetItemHealthCrystal extends AbstractAbilitySetItem {
   @Override

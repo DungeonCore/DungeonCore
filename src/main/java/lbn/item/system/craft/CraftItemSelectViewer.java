@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.NbtTagConst;
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
@@ -14,20 +27,6 @@ import lbn.item.itemInterface.CraftItemable;
 import lbn.npc.villagerNpc.VillagerNpc;
 import lbn.npc.villagerNpc.VillagerNpcManager;
 import lbn.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.DoubleChestInventory;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
 public class CraftItemSelectViewer implements MenuSelectorInterface {
   private static final String TITLE = "アイテム制作";
@@ -138,7 +137,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
       Inventory inv = c.getInventory();
 
       if (inv.getSize() == 9 * 6) {
-        return (DoubleChestInventory) inv;
+        return inv;
       } else {
         return inv;
       }

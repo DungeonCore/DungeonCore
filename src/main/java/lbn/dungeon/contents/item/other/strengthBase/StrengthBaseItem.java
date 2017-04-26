@@ -1,5 +1,7 @@
 package lbn.dungeon.contents.item.other.strengthBase;
 
+import org.bukkit.inventory.ItemStack;
+
 import lbn.common.event.player.PlayerSetStrengthItemResultEvent;
 import lbn.dungeon.contents.strength_template.ChangeStrengthItemTemplate;
 import lbn.dungeon.contents.strength_template.StrengthTemplate;
@@ -8,8 +10,6 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.system.lore.ItemLoreToken;
 import lbn.util.Message;
-
-import org.bukkit.inventory.ItemStack;
 
 public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable {
 

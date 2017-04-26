@@ -1,11 +1,11 @@
 package lbn.item.setItem;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.player.ability.impl.SetItemAbility;
-
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAbilitySetItem extends AbstractCommonSetItem {
   protected SetItemAbility emptySetitem = createEmptyAbility();

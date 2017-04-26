@@ -1,10 +1,10 @@
 package lbn.player.status.detail;
 
+import org.bukkit.Material;
+
 import lbn.api.LevelType;
 import lbn.api.player.TheLowPlayer;
 import lbn.player.status.IStatusDetail;
-
-import org.bukkit.Material;
 
 public class BowStatusDetail extends IStatusDetail {
   public BowStatusDetail(TheLowPlayer p) {
