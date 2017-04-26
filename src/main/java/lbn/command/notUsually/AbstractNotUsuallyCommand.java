@@ -36,7 +36,6 @@ public abstract class AbstractNotUsuallyCommand extends CommandAbstract {
 
   public List<Entity> getEntityListByToken(ICommandListener icommandlistener, String token) {
     ArrayList<Entity> rtnList = new ArrayList<Entity>();
-    @SuppressWarnings("unchecked")
     List<net.minecraft.server.v1_8_R1.Entity> list = PlayerSelector.getPlayers(icommandlistener, token, net.minecraft.server.v1_8_R1.Entity.class);
     for (net.minecraft.server.v1_8_R1.Entity entity : list) {
       rtnList.add(entity.getBukkitEntity());

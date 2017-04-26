@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-import lbn.dungeoncore.LbnRuntimeException;
-import lbn.util.DungeonLogger;
-import lbn.util.InOutputUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 import org.bukkit.entity.Player;
+
+import lbn.dungeoncore.LbnRuntimeException;
+import lbn.util.DungeonLogger;
+import lbn.util.InOutputUtil;
 
 public class PlayerLastSaveType {
 
@@ -30,7 +30,6 @@ public class PlayerLastSaveType {
     return useType.get(id);
   }
 
-  @SuppressWarnings("unchecked")
   public static void load() {
     DungeonLogger.development("load last_save_type.txt");
 
