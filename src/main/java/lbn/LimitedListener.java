@@ -2,6 +2,7 @@ package lbn;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -52,7 +53,8 @@ import lbn.dungeoncore.Main;
 public class LimitedListener implements Listener {
   static String targetWorldName = "world";
 
-  public static boolean isTarget(World w) {
+  public static boolean isTarget(World world) {
+    Objects.requireNonNull(world, () -> "world is null");
     return true;
   }
 
