@@ -1,0 +1,267 @@
+name: DungeonCore
+version: 1.2
+main: lbn.dungeoncore.Main
+depend: [Multiverse-Core,TheLowSheetPlugin,HolographicDisplays,Citizens]
+
+commands:
+   getItem:
+      description: This is to get other item.
+      usage: /<command> [item name]
+      permission: main.lbnDungeonUtil.command.admin.item
+      permission-message: You don't have <permission>
+   getSetItem:
+      description: This is to get set item.
+      usage: /<command> [set item name]
+      permission: main.lbnDungeonUtil.command.admin.setitem
+      permission-message: You don't have <permission>
+   spawnmob:
+      description: This is to operate mob.
+      usage: /<command> [mob_Name]
+      permission: main.lbnDungeonUtil.command.mod.mob
+      permission-message: You don't have <permission>
+   viewinfo:
+      description: This is for viewinfo.
+      usage: /<command> [command]
+      permission: debug.viewinfo.view
+      permission-message: You don't have <permission>
+      aliases: [tl]
+   statusview:
+      description: This is to show status.
+      usage: /<command> [player]
+      permission: main.lbnDungeonUtil.command.player.useable.statusview
+      permission-message: You don't have <permission>
+      aliases: [stats]
+   statusCommand:
+      description: This is operate status.
+      usage: /<command> set type 値 (target),  /<command> load target
+      permission: main.lbnDungeonUtil.command.admin.manager
+      permission-message: You don't have <permission>
+   set_spawn_point:
+      description: This is to set spawn point for monster.
+      usage: /<command> set [spawn point name] [max mob count] ([spawn level])
+      permission: main.lbnDungeonUtil.command.mod.set_spawn_point
+      permission-message: You don't have <permission>
+   setSpawn:
+      description: This is to set spawn point for monster whit item.
+      usage: /<command> [set, begin, commit, cancel, undo, list]
+      permission: main.lbnDungeonUtil.command.mod.setspawn
+      permission-message: You don't have <permission>
+   strength_item:
+      description: This is to strength item.
+      usage: /<command> level
+      permission: main.lbnDungeonUtil.command.admin.strengthitem
+      permission-message: You don't have <permission>
+   set_special_sign:
+      description: This is to set special sign.
+      usage: /<command> x y z  (with hand in key item)
+      permission: main.lbnDungeonUtil.command.mod.sign
+      permission-message: You don't have <permission>
+   DELAYCOMMAND:
+      description: delay run command
+      permission: main.lbnDungeonUtil.command.builder.delaycommand
+      usage: /<command> delay_second command
+      permission-message: You don't have <permission>
+   SEQUENCECOMMAND:
+      description: sequence run commands
+      permission: main.lbnDungeonUtil.command.builder.sequencecommand
+      usage: /<command> delay_second command1 & command2 & command3 & ....
+      permission-message: You don't have <permission>
+   SEQUENCE_SETBLOCK:
+      description: sequence run set block commands
+      permission: main.lbnDungeonUtil.command.builder.sequence_setblock
+      usage: /<command> delay_second blockid:data x y z & x y z & x y z & ....
+      permission-message: You don't have <permission>
+   soundPlay:
+      description: play sound for command block
+      permission: main.lbnDungeonUtil.command.builder.soundPlay
+      usage: /<command> sound_name [volume] [pitch] or /<command> list
+      permission-message: You don't have <permission>
+   timer_command:
+      description: aa
+      permission: main.lbnDungeonUtil.command.builder.timer_command
+      usage: aa
+      permission-message: You don't have <permission>
+   quest_operate:
+      description: operate quest
+      permission: main.lbnDungeonUtil.command.admin.quest_operate
+      usage: /<command> start|remove|complate quest_name [player_name]
+      permission-message: You don't have <permission>
+      aliases: [qo]
+   change_biome:
+      description: change biome
+      permission: main.lbnDungeonUtil.command.builder.change_biome
+      usage: /<command> biome x1 z1 x2 z2
+      permission-message: You don't have <permission>
+   quest:
+      description: view quest list
+      permission: main.lbnDungeonUtil.command.player.useable.quest
+      usage: /<command>
+      permission-message: You don't have <permission>
+   tm:
+      description: tp other world
+      permission: main.lbnDungeonUtil.command.debug.tm
+      usage: /<command> worldname
+      permission-message: You don't have <permission>
+   galion:
+      description: show your galion
+      permission:  main.lbnDungeonUtil.command.player.useable.galion
+      usage: /<command>
+      permission-message: You don't have <permission>
+      aliases: [money]
+   shop:
+      description: open shop
+      permission:  main.lbnDungeonUtil.command.admin.shop
+      usage: /<command>
+      permission-message: You don't have <permission>
+   deletemob:
+      description: delete mob
+      permission:  main.lbnDungeonUtil.command.builder.deletemob
+      usage: /<command> mobname
+      permission-message: You don't have <permission>
+   Villager:
+      description: spawn or remove or reload spletsheet villager
+      permission:  main.lbnDungeonUtil.command.mod.villager
+      usage: /<command> reloadまたはspawnまたはremove [villager name(任意)]
+      permission-message: You don't have <permission>
+   Chest:
+      description: chestを設定するためのコマンド
+      permission:  main.lbnDungeonUtil.command.mod.chest
+      usage: /<command> reloadまたはdelete または 中身のチェストのx y z [リフィール時間(秒) TRUE|FALSE アイテムの最小数 アイテムの最大数 チェストを開けたあとの移動先座標x y z]\n []内は省略可 詳しくは下記URLを参照\n https://goo.gl/UJAC8Y
+      permission-message: You don't have <permission>
+   removemob:
+      description: chestを設定するためのコマンド
+      permission:  main.lbnDungeonUtil.command.builder.removemob
+      usage: /<command> x y z [mob_name or all]
+      permission-message: You don't have <permission>
+   mob:
+      description: mobを設定するためのコマンド
+      permission:  main.lbnDungeonUtil.command.mod.mob
+      usage: /<command> reload mob_name
+      permission-message: You don't have <permission>
+   mobskill:
+      description: mobのskillを設定するためのコマンド
+      permission:  main.lbnDungeonUtil.command.mod.mobskill
+      usage: /<command>
+      permission-message: You don't have <permission>
+   item:
+      description: mobのskillを設定するためのコマンド
+      permission:  main.lbnDungeonUtil.command.mod.item
+      usage: /<command>
+      permission-message: You don't have <permission>
+   shopitem:
+      description: ショップ用のアイテムを取得するためのコマンド
+      permission:  main.lbnDungeonUtil.command.admin.shopitem
+      usage: /<command> price
+      permission-message: You don't have <permission>
+   saveplayer:
+      description: プレイヤーのセーブデータをいじる
+      permission:  main.lbnDungeonUtil.command.admin.saveplayer
+      usage: /<command> type [save or load] [player_name]
+      permission-message: You don't have <permission>
+   searchPath:
+      description: 連続してダイヤブロックをおいた座標をコマブロに出力する。ダイヤ鉱石の場所は出力されない
+      permission:  main.lbnDungeonUtil.command.builder.searchPath
+      usage: /<command>
+      permission-message: You don't have <permission>
+   setdungeon:
+      description: ダンジョンを登録するためのコマンド。
+      permission:  main.lbnDungeonUtil.command.builder.setDungeon
+      usage: /<command> reload/set [ダンジョン名]/tp [ダンジョン名]
+      permission-message: You don't have <permission>
+   tpcut:
+      description: テレポートをキャンセルするコマンド。
+      permission:  main.lbnDungeonUtil.command.builder.tpcut
+      usage: /<command>
+      permission-message: You don't have <permission>
+   equip:
+      description: ダンジョンにあった装備を着る
+      permission:  main.lbnDungeonUtil.command.mob.equip
+      usage: ダンジョン攻略時：/<command> level, mobの難易度調整時:/<command> level mob (mobはmob名ではなくmobと打ってください)
+      permission-message: You don't have <permission>
+   timelock:
+      description: 一回実行してから指定した時間の間はそのコマンドブロックは実行されない
+      permission:  main.lbnDungeonUtil.command.builder.timelock
+      usage: /<command> 時間 command
+      permission-message: You don't have <permission>
+   toggleSetblock:
+      description: 指定した場所にブロックにがあったら空気にして、なければ指定したブロックを設置する
+      permission:  main.lbnDungeonUtil.command.builder.toggleSetblock
+      usage: /<command> id:data  x y z & x y z & x y z & ....
+      permission-message: You don't have <permission>
+   tpworld:
+      description: ワールド・座標を指定してTPする
+      permission:  main.lbnDungeonUtil.command.builder.tpworld
+      usage: /<command> player x y z world
+      permission-message: You don't have <permission>
+   mobskillexcute:
+      description: モブスキルを実行する
+      permission:  main.lbnDungeonUtil.command.builder.mobskillexcute
+      usage: /<command> mobskillid target
+      permission-message: You don't have <permission>
+   announce:
+      description: アナウンスする
+      permission: main.lbnDungeonUtil.command.message
+      usage: /<command> message
+      permission-message: You don't have <permission>
+   attention:
+      description: 重大アナウンスする
+      permission: main.lbnDungeonUtil.command.message
+      usage: /<command> message
+      permission-message: You don't have <permission>
+   addBene:
+      description: 手持ちのBene装備にBene効果をつける
+      permission:  main.lbnDungeonUtil.command.mod.addBene
+      usage: /<command> benetype benetype ....
+      permission-message: You don't have <permission>
+   sheet_reload:
+      description: スプレットシートの内容を適応させる
+      permission:  main.lbnDungeonUtil.command.mod.sheet_reload
+      usage: /<command> sheet_name | list
+      permission-message: You don't have <permission>
+      aliases: [sr]
+   setredstone:
+      description: 指定した座標に一瞬だけredstoneを置く
+      permission:  main.lbnDungeonUtil.command.builder.setredstone
+      usage: /<command> x y z
+      permission-message: You don't have <permission>
+   loop:
+      description: 指定した回数、指定した時間間隔で、指定したコマンドを実行する
+      permission:  main.lbnDungeonUtil.command.builder.loop
+      usage: /<command> 実行する間隔(秒) 実行する回数 command
+      permission-message: You don't have <permission>
+   randomExec:
+      description: 指定されたコマンドの中からランダムで1つ実行
+      permission:  main.lbnDungeonUtil.command.builder.randomExec
+      usage: /<command> command1 ? command2 ? command3 ? .....
+      permission-message: You don't have <permission>
+   jumpboost:
+      description: 指定したプレイヤーをジャンプさせる(ランチャーパッドのようにとばす)
+      permission:  main.lbnDungeonUtil.command.builder.jumpboost
+      usage: /<command> player n (向いている方向にnだけとばす) or /<command> player x y z (x y z方向にとばす)
+      permission-message: You don't have <permission>
+   open:
+      description: メニューを開く
+      permission:  main.lbnDungeonUtil.command.admin.open
+      usage: /<command> param
+      permission-message: You don't have <permission>
+   book:
+      description: 書籍を管理するコマンド
+      permission:  main.lbnDungeonUtil.command.admin.open
+      usage: /<command> [open/item]
+      permission-message: You don't have <permission>
+   spawnNpc:
+      description: 自分をフォローしてくれているNPCをスポーンします
+      permission:  main.lbnDungeonUtil.command.player.useable.spawnNpc
+      usage: /<command>
+      permission-message: You don't have <permission>
+   tag:
+      description: Playerのタグを追加します
+      permission:  main.lbnDungeonUtil.command.nametag
+      usage: /<command>
+      permission-message: You don't have <permission>
+
+
+permissions:
+   main.lbnDungeonUtil.command.player.useable.*:
+      description: for player command.
+      default: true
