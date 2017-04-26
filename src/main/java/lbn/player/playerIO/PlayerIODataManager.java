@@ -1,5 +1,7 @@
 package lbn.player.playerIO;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
@@ -24,11 +26,11 @@ public class PlayerIODataManager {
       WireLessChestManager.getInstance().load(p);
     } catch (Exception e) {
       e.printStackTrace();
-      kickPlayerByLoadData(p);
+      kickPlayerByLoadData(p, e);
     }
   }
 
-  public static void kickPlayerByLoadData(Player p) {
+  public static void kickPlayerByLoadData(Player p, Throwable cause) {
     loadErrorList.add(p.getUniqueId());
     Message.sendMessage(p, ChatColor.RED + "PlayerDataのロードに失敗しました。\n"
         + ChatColor.RED + "管理者(twitter:{0})まで連絡ください。\n "
@@ -36,8 +38,12 @@ public class PlayerIODataManager {
     new BukkitRunnable() {
       @Override
       public void run() {
+        StringWriter writer = new StringWriter(1024);
+        cause.printStackTrace(new PrintWriter(writer));
+
         p.kickPlayer("sorry, System cant load your game data. please tell developer (twitter:" + Config.DEVELOPER_TWITTER_ID + ")\n"
-            + "申し訳ありません。あなたのゲームデータをロード出来ませんでした。 開発者(twitter: " + Config.DEVELOPER_TWITTER_ID + ")まで連絡ください。");
+            + "申し訳ありません。あなたのゲームデータをロード出来ませんでした。 開発者(twitter: " + Config.DEVELOPER_TWITTER_ID + ")まで連絡ください。\n"
+            + "技術情報: " + writer.toString());
       }
     }.runTaskLater(Main.plugin, 20 * 10);
   }
