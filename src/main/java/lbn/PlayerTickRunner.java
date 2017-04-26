@@ -22,7 +22,7 @@ public class PlayerTickRunner {
       public void run() {
         // Playerのリストを更新する
         if (tickCount == 0) {
-          onlinePlayers = new ArrayList<Player>(Bukkit.getOnlinePlayers());
+          onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
         }
 
         // 20人ごとにPlayerを操作する
