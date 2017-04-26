@@ -56,11 +56,11 @@ public class LimitedListener implements Listener {
     return true;
   }
 
-  public boolean isTarget(PlayerEvent e) {
+  public static boolean isTarget(PlayerEvent e) {
     return isTarget(e.getPlayer().getWorld());
   }
 
-  public boolean isTarget(EntityEvent e) {
+  public static boolean isTarget(EntityEvent e) {
     return isTarget(e.getEntity().getWorld());
   }
 
@@ -197,7 +197,7 @@ public class LimitedListener implements Listener {
 
   /**
    * 砂と砂利以外はブロックを設置しない
-   * 
+   *
    * @param e
    */
   @EventHandler
@@ -258,7 +258,7 @@ public class LimitedListener implements Listener {
 
   /**
    * クリエ以外は特定のものを除き、クラフトできない
-   * 
+   *
    * @param e
    */
   @EventHandler
