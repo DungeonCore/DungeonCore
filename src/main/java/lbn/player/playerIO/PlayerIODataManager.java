@@ -16,6 +16,7 @@ import lbn.dungeoncore.Main;
 import lbn.util.Message;
 
 public class PlayerIODataManager {
+
   public static void load(Player p, String saveType) {
     try {
       TheLowPlayerManager.loadData(p);
@@ -61,9 +62,7 @@ public class PlayerIODataManager {
 
   public static void allSave() {
     PlayerLastSaveType.save();
-
-    Player[] onlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[0]);
-    for (Player player : onlinePlayers) {
+    for (Player player : Bukkit.getOnlinePlayers()) {
       save(player);
     }
   }
