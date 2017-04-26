@@ -1,6 +1,7 @@
 package lbn;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,12 +18,18 @@ public class Config {
    */
   public static final String DEVELOPER_TWITTER_ID = "@namiken1993";
 
-  private static Set<Material> damageIgnoredBlocks = new HashSet<>();
-  private static Set<Material> clickIgnoredBlocks = new HashSet<>();
-  private static Set<Material> clickCancelledItems = new HashSet<>();
-  private static Set<EntityType> clickCancelledEntityTypes = new HashSet<>();
-  private static Set<EntityType> damageCancelledEntityType = new HashSet<>();
+  private static Set<Material> damageIgnoredBlocks;
+  private static Set<Material> clickIgnoredBlocks;
+  private static Set<Material> clickCancelledItems;
+  private static Set<EntityType> clickCancelledEntityTypes;
+  private static Set<EntityType> damageCancelledEntityType;
   static {
+    Set<Material> damageIgnoredBlocks = new HashSet<>();
+    Set<Material> clickIgnoredBlocks = new HashSet<>();
+    Set<Material> clickCancelledItems = new HashSet<>();
+    Set<EntityType> clickCancelledEntityTypes = new HashSet<>();
+    Set<EntityType> damageCancelledEntityType = new HashSet<>();
+
     clickIgnoredBlocks.add(Material.ANVIL);
     clickIgnoredBlocks.add(Material.ENCHANTMENT_TABLE);
     clickIgnoredBlocks.add(Material.PAINTING);
@@ -54,6 +61,12 @@ public class Config {
 
     clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
     damageCancelledEntityType.add(EntityType.ITEM_FRAME);
+
+    Config.damageIgnoredBlocks = Collections.unmodifiableSet(damageIgnoredBlocks);
+    Config.clickIgnoredBlocks = Collections.unmodifiableSet(clickIgnoredBlocks);
+    Config.clickCancelledItems = Collections.unmodifiableSet(clickCancelledItems);
+    Config.clickCancelledEntityTypes = Collections.unmodifiableSet(clickCancelledEntityTypes);
+    Config.damageCancelledEntityType = Collections.unmodifiableSet(damageCancelledEntityType);
   }
 
   public static Set<Material> getClickCancelblocks() {
@@ -66,7 +79,7 @@ public class Config {
 
   /**
    * ブロックが殴られるのを許可するブロックの種類を取得
-   * 
+   *
    * @return
    */
   public static Set<Material> getDamageAllowBlock() {
