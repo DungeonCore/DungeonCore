@@ -145,6 +145,7 @@ public class LimitedListener implements Listener {
       return;
     }
     EntityType type = event.getEntityType();
+
     if (type == null) {
       notBreakBlock(event);
     } else if (type == EntityType.PRIMED_TNT) {
@@ -154,6 +155,7 @@ public class LimitedListener implements Listener {
     } else if (type == EntityType.UNKNOWN) {
       notBreakBlock(event);
     }
+
   }
 
   private void notBreakBlock(EntityExplodeEvent event) {

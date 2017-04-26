@@ -2,7 +2,6 @@ package lbn;
 
 public class RecipeRegister {
 
-  public static void registerRecipe() {
+  public static void registerRecipe() {}
 
-  }
 }
