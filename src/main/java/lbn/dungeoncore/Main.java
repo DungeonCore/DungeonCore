@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import lbn.InitManager;
 import lbn.LimitedListener;
@@ -178,23 +177,13 @@ public class Main extends JavaPlugin {
   public void startRutinePerHour() {
 
     // 60分に一回ルーチンを行う
-    new BukkitRunnable() {
-      int i = 0;
-
-      @Override
-      public void run() {
-        if (i == 0) {
-          // 一時間に一回セーブする
-          save();
-        } else if (i == 1) {} else if (i == 2) {
-          // TODO 何か処理
-          i = -1;
-        } else {
-          i = -1;
-        }
-        i++;
-      }
-    }.runTaskTimer(this, 20 * 60 * 20, 20 * 60 * 20);
+    Bukkit.getScheduler().runTaskTimerAsynchronously(this,
+        () -> {
+          Bukkit.getScheduler().callSyncMethod(this, () -> {
+            save();
+            return null;
+          });
+        }, 20 * 60 * 20, 20 * 60 * 20);
   }
 
   @Override
