@@ -95,6 +95,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
   /**
    * 強化レベルによって変化するLoreを取得
    */
+  @Override
   public void setStrengthDetail(int level, ItemLoreToken loreToken) {
     if (level != 0) {
       loreToken.addLore(LoreLine.getLoreLine("クリティカル率", getCriticalHitRate(level) + "%"));

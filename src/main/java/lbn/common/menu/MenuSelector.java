@@ -43,6 +43,7 @@ public class MenuSelector implements MenuSelectorInterface {
    * 
    * @param p
    */
+  @Override
   public void open(Player p) {
     p.openInventory(createInventory);
   }
@@ -53,6 +54,7 @@ public class MenuSelector implements MenuSelectorInterface {
    * @param p
    * @param item
    */
+  @Override
   public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
     if (runMap.containsKey(item)) {
       runMap.get(item).run(p, item);

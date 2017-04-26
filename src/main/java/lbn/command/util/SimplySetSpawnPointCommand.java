@@ -121,6 +121,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
         }
       }
 
+      @Override
       protected void runIfServerEnd() {
         for (MobSpawnerPoint mobSpawnerPoint : allList) {
           Chunk chunk = mobSpawnerPoint.getChunk();

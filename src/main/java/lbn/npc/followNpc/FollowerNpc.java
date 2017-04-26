@@ -41,6 +41,7 @@ public class FollowerNpc implements CustomNpcInterface {
 
   NPC npc;
 
+  @Override
   public NPC getNpc() {
     return npc;
   }

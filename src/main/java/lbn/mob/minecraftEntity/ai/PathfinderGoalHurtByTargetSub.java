@@ -24,12 +24,14 @@ public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
     a(1);
   }
 
+  @Override
   public boolean a() {
     int i = this.e.bd();
 
     return (i != this.b) && (a(this.e.getLastDamager(), false));
   }
 
+  @Override
   public void c() {
     this.e.setGoalTarget(this.e.getLastDamager(),
         TargetReason.TARGET_ATTACKED_ENTITY, true);

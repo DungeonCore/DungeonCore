@@ -56,6 +56,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
     nearAttackRange = val * val;
   }
 
+  @Override
   public boolean a() {
     EntityLiving entityliving = this.a.getGoalTarget();
 
@@ -69,16 +70,19 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
     }
   }
 
+  @Override
   public boolean b() {
     return this.a() || !this.a.getNavigation().m();
   }
 
+  @Override
   public void d() {
     this.c = null;
     this.f = 0;
     this.d = -1;
   }
 
+  @Override
   public void e() {
     double d0 = this.a.e(this.c.locX, this.c.getBoundingBox().b, this.c.locZ); // 対象との距離の2乗
     boolean flag = this.a.getEntitySenses().a(this.c);// 対象が見えるかどうか

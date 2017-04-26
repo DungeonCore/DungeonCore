@@ -32,6 +32,7 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
     this.a = paramBoolean2;
   }
 
+  @Override
   public boolean b() {
     EntityLiving localEntityLiving = this.e.getGoalTarget();
     if (localEntityLiving == null) { return false; }
@@ -55,12 +56,14 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
     return localAttributeInstance == null ? 16.0D : localAttributeInstance.getValue();
   }
 
+  @Override
   public void c() {
     this.b = 0;
     this.c = 0;
     this.d = 0;
   }
 
+  @Override
   public void d() {
     this.e.setGoalTarget(null);
   }

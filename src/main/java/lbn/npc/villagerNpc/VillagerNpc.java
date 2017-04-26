@@ -53,6 +53,7 @@ public class VillagerNpc implements CustomNpcInterface {
 
   NPC npc;
 
+  @Override
   public void setNpc(NPC npc) {
     this.data.location = npc.getStoredLocation();
     this.npc = npc;
@@ -234,6 +235,7 @@ public class VillagerNpc implements CustomNpcInterface {
     }
   }
 
+  @Override
   public String getName() {
     return data.getName();
   }

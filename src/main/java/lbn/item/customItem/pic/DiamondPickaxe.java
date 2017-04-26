@@ -75,6 +75,7 @@ public class DiamondPickaxe extends AbstractPickaxe {
     return "diamond_pickaxe";
   }
 
+  @Override
   public List<ItemInterface> getAllLevelPick() {
     ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
     for (int i = 1; i <= 10; i++) {

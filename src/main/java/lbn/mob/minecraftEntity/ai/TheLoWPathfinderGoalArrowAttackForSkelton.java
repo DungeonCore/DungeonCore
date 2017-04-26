@@ -17,6 +17,7 @@ public class TheLoWPathfinderGoalArrowAttackForSkelton extends TheLoWPathfinderG
     super(irangedentity, d0, i, f, tag);
   }
 
+  @Override
   public boolean a() {
     EntityInsentient me = this.a;
     // 手持ちのアイテム

@@ -88,6 +88,7 @@ public class BossChest extends SpletSheetChest {
         runIfServerEnd();
       }
 
+      @Override
       protected void runIfServerEnd() {
         CustomChestManager.removeChest(chestLocation);
         // チャンクがロードされてなかったらロードする

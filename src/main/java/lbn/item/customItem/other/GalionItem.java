@@ -97,6 +97,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
    * 
    * @param player
    */
+  @Override
   public void applyGalionItem(Player player) {
     if (player.getGameMode() == GameMode.CREATIVE) { return; }
 

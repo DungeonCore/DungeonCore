@@ -65,6 +65,7 @@ public abstract class BowItemOld extends AbstractAttackItem_Old implements ItemI
     return ItemType.BOW;
   }
 
+  @Override
   abstract public int getAvailableLevel();
 
   @Override

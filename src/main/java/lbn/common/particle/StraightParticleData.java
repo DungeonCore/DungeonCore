@@ -24,6 +24,7 @@ public class StraightParticleData extends ParticleData {
   /**
    * 実行する
    */
+  @Override
   public void run(Location... locList) {
     for (Location location : locList) {
       straight(center, location);

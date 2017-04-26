@@ -50,5 +50,6 @@ public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, 
     return mob;
   }
 
+  @Override
   public abstract void onProjectileHitEntity(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e);
 }

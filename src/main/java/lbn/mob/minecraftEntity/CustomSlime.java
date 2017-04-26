@@ -34,6 +34,7 @@ public class CustomSlime extends EntitySlime implements ICustomEntity<Slime> {
     this.getAttributeInstance(GenericAttributes.e).setValue(2.0D);
   }
 
+  @Override
   public void setSize(int i) {
     this.datawatcher.watch(16, Byte.valueOf((byte) i));
     a(0.51000005F * i, 0.51000005F * i);

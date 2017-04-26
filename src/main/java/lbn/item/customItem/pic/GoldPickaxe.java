@@ -81,6 +81,7 @@ public class GoldPickaxe extends AbstractPickaxe {
   // return ItemStackUtil.getItemStackByCommand("give @p minecraft:gold_pickaxe 1 0
   // {Unbreakable:1,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\"]}");
   // }
+  @Override
   public List<ItemInterface> getAllLevelPick() {
     ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
     for (int i = 1; i <= 10; i++) {

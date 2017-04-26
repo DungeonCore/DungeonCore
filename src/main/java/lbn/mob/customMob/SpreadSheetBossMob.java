@@ -88,6 +88,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
   HashMap<MobSkillExcuteConditionType, BukkitRunnable> runtineMap = new HashMap<MobSkillExcuteConditionType, BukkitRunnable>();
 
+  @Override
   public void setEntity(LivingEntity e) {
     this.e = e;
     entityList.put(getName(), e);
@@ -179,6 +180,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
   private HashBasedTable<TheLowPlayer, LevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 
+  @Override
   public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
     super.onDamage(mob, damager, e);
 
@@ -294,6 +296,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     }.runTaskLater(Main.plugin, 2);
   }
 
+  @Override
   @EventHandler
   public void updateName(boolean islater) {
     if (isNullMob()) { return; }

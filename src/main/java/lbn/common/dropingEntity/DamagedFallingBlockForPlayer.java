@@ -42,6 +42,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
     return super.runTaskTimer();
   }
 
+  @Override
   protected boolean damageLivingentity(Entity entity) {
     if (LivingEntityUtil.isEnemy(entity)) {
       // すでに死んでいたら何もしない
@@ -72,14 +73,18 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
 
   double[] range = new double[] { 1, 1, 1 };
 
+  @Override
   protected double[] getDamageRange() {
     return range;
   }
 
+  @Override
   abstract public void tickRutine(int count);
 
+  @Override
   abstract public void removedRutine(Entity spawnEntity);
 
+  @Override
   abstract public void onHitDamagedEntity(Entity target);
 
   abstract public void startEntityRutine(Player p);

@@ -11,6 +11,7 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.system.lore.ItemLoreToken;
 
 public abstract class AbstractSlot extends AbstractItem implements SlotInterface {
+  @Override
   public SlotType getSlotType() {
     return SlotType.NORMAL;
   }

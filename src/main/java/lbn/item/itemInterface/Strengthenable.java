@@ -7,6 +7,7 @@ import lbn.item.system.lore.ItemLoreToken;
 public interface Strengthenable extends ItemInterface {
   public StrengthTemplate getStrengthTemplate();
 
+  @Override
   public String getItemName();
 
   public int getMaxStrengthCount();

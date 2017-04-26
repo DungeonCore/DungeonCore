@@ -14,6 +14,7 @@ import lbn.item.system.strength.StrengthOperator;
 import lbn.util.Message;
 
 public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
+  @Override
   public boolean isAvilable(Player player) {
     // クリエイティブなら使えるようにする
     if (player.getGameMode() == GameMode.CREATIVE) { return true; }
@@ -49,6 +50,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
    * 
    * @return
    */
+  @Override
   public int getDefaultSlotCount() {
     return 1;
   }
@@ -58,6 +60,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
    * 
    * @return
    */
+  @Override
   public int getMaxSlotCount() {
     return 3;
   }
@@ -107,6 +110,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
    * @param get_money_item
    * @return
    */
+  @Override
   public double getAttackItemDamage(int strengthLevel) {
     if (b == -1) {
       b = (-a * 0 * 0 + a * getMaxStrengthCount() * getMaxStrengthCount() + getMinAttackDamage() - getMaxAttackDamage())
@@ -130,8 +134,10 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
     return false;
   }
 
+  @Override
   public abstract double getMaterialDamage();
 
+  @Override
   protected void sendNotAvailableMessage(Player p) {
     Message.sendMessage(p, Message.CANCEL_USE_ITEM_BY_LEVEL, getAttackType().getLevelType().getName(), getAvailableLevel());
   }
@@ -144,6 +150,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
     return getAttackType().getMinDamage(getAvailableLevel());
   }
 
+  @Override
   public void setStrengthDetail(int level, ItemLoreToken loreToken) {
     // もう使わないので記載しない
   }

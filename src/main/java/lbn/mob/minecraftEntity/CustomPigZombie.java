@@ -80,6 +80,7 @@ public class CustomPigZombie extends EntityPigZombie implements ICustomEntity<Sp
 
   Location spawnLocation = null;
 
+  @Override
   protected void n() {
     this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityIronGolem.class, 1.0D, true));
     this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true, new Class[] { EntityZombie.class }));

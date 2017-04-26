@@ -104,6 +104,7 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
     return ItemType.MAGIC;
   }
 
+  @Override
   abstract public int getAvailableLevel();
 
   @Override

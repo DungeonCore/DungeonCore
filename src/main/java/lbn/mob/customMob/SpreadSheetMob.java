@@ -82,6 +82,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   LbnMobTag nbtTag;
 
+  @Override
   @EventHandler
   protected Entity spawnPrivate(Location loc) {
     Entity spawn = MobSpawnerFromCommand.spawn(loc, command, nbtTag);
@@ -279,6 +280,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   /**
    * ターゲット時
    */
+  @Override
   public void onTarget(EntityTargetLivingEntityEvent event) {
     LivingEntity target = event.getTarget();
     if (target == null || target == event.getEntity()) {

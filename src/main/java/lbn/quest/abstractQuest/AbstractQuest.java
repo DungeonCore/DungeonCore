@@ -341,6 +341,7 @@ public abstract class AbstractQuest implements Quest {
 
   String questBeforeItem = null;
 
+  @Override
   public ItemInterface getQuestBeforeItem() {
     return ItemManager.getCustomItemById(questBeforeItem);
   }

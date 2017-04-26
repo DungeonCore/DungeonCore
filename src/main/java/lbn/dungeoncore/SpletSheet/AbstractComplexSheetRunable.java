@@ -81,18 +81,22 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
 
   protected static boolean isTransaction = false;
 
+  @Override
   public boolean isTransaction() {
     return isTransaction;
   }
 
+  @Override
   public void closeTransaction() {
     isTransaction = false;
   }
 
   CommandSender sender;
 
+  @Override
   abstract public String getSheetName();
 
+  @Override
   abstract public String[] getTag();
 
   @Override

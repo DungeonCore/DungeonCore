@@ -12,7 +12,9 @@ public abstract class SetStrengthableItemParts extends SetItemParts implements S
     this.type = getItemSetPartsType();
   }
 
+  @Override
   abstract public Material getMaterial();
 
+  @Override
   abstract public SetItemPartsType getItemSetPartsType();
 }

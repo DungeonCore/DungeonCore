@@ -70,12 +70,14 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
         return PathfinderGoalNearestAttackableTargetNotTargetSub.this.a(t0, false);
       }
 
+      @Override
       public boolean apply(EntityLiving object) {
         return a(object);
       }
     };
   }
 
+  @Override
   public boolean a() {
     if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) { return false; }
     // double d0 = f();
@@ -150,6 +152,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
     }
   };
 
+  @Override
   public void c() {
     this.e.setGoalTarget(
         this.d,
@@ -173,6 +176,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
       return d0 > d1 ? 1 : d0 < d1 ? -1 : 0;
     }
 
+    @Override
     public int compare(Entity object, Entity object1) {
       return a(object, object1);
     }

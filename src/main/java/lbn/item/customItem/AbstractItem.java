@@ -33,6 +33,7 @@ public abstract class AbstractItem implements ItemInterface {
     isStrength = this instanceof Strengthenable;
   }
 
+  @Override
   public boolean isStrengthItem() {
     return isStrength;
   }

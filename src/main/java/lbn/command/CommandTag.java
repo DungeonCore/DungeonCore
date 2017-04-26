@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import lbn.nametag.TagConfig;
 
 public class CommandTag implements CommandExecutor {
+  @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
     if (args.length == 0) {
       sender.sendMessage(DARK_GREEN + "■■================================================■■");

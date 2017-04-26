@@ -74,6 +74,7 @@ public abstract class SwordItemOld extends AbstractAttackItem_Old implements Mel
     return ItemType.SWORD;
   }
 
+  @Override
   abstract protected String[] getStrengthDetail2(int level);
 
 }

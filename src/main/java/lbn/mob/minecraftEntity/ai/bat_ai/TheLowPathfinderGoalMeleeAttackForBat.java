@@ -53,6 +53,7 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
     this.a(3);
   }
 
+  @Override
   public boolean a() {
     EntityLiving entityliving = this.b.getGoalTarget();
 
@@ -68,6 +69,7 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
     }
   }
 
+  @Override
   public boolean b() {
     EntityLiving entityliving = this.b.getGoalTarget();
 
@@ -75,15 +77,18 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
         : (!entityliving.isAlive() ? false : (!this.isKillAura ? !this.b.getNavigation().m() : !this.b.getNavigation().m()));
   }
 
+  @Override
   public void c() {
     this.b.getNavigation().a(this.f, this.d);
     this.h = 0;
   }
 
+  @Override
   public void d() {
     this.b.getNavigation().n();
   }
 
+  @Override
   public void e() {
     EntityLiving entityliving = this.b.getGoalTarget();
 
