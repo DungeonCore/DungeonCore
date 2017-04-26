@@ -6,13 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+public interface MagicExcuteable extends Cooltimable {
+  ItemStack getItem();
 
-public interface MagicExcuteable extends Cooltimable{
-	ItemStack getItem();
+  int getNeedMagicPoint();
 
-	int getNeedMagicPoint();
+  boolean isShowMessageIfUnderCooltime();
 
-	boolean isShowMessageIfUnderCooltime();
-
-	void excuteMagic(Player p, PlayerInteractEvent e);
+  void excuteMagic(Player p, PlayerInteractEvent e);
 }

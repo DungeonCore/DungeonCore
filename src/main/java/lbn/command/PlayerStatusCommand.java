@@ -22,85 +22,80 @@ import org.bukkit.entity.Player;
  * <command> load target
  *
  */
-public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
+public class PlayerStatusCommand implements CommandExecutor, TabCompleter {
 
-	public static String[] oprateName = {"LOAD", "SET"};
+  public static String[] oprateName = { "LOAD", "SET" };
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean onCommand(CommandSender sender, Command paramCommand, String paramString, String[] params) {
-		if (params.length < 2) {
-			return false;
-		}
+  @SuppressWarnings("deprecation")
+  @Override
+  public boolean onCommand(CommandSender sender, Command paramCommand, String paramString, String[] params) {
+    if (params.length < 2) { return false; }
 
-		//データをLoadする
-		if (params[0].equalsIgnoreCase("LOAD")) {
-			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params[1]);
-			loadData(offlinePlayer, sender);
-		} else if (params[0].equalsIgnoreCase("SET")) {
-		//レベルをセットする
-			LevelType type = null;
-			OfflinePlayer target = null;
-			int value = 0;
-			switch (params.length) {
-			case 0:
-			case 1:
-				type = LevelType.fromJpName(params[1]);
-			case 2:
-				value = JavaUtil.getInt(params[2], 0);
-			case 3:
-				target = Bukkit.getOfflinePlayer(params[3]);
-				break;
-			default:
-				break;
-			}
+    // データをLoadする
+    if (params[0].equalsIgnoreCase("LOAD")) {
+      OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params[1]);
+      loadData(offlinePlayer, sender);
+    } else if (params[0].equalsIgnoreCase("SET")) {
+      // レベルをセットする
+      LevelType type = null;
+      OfflinePlayer target = null;
+      int value = 0;
+      switch (params.length) {
+        case 0:
+        case 1:
+          type = LevelType.fromJpName(params[1]);
+        case 2:
+          value = JavaUtil.getInt(params[2], 0);
+        case 3:
+          target = Bukkit.getOfflinePlayer(params[3]);
+          break;
+        default:
+          break;
+      }
 
-			if (type == null) {
-				sender.sendMessage(ChatColor.RED + "type:" + params[1] + "が不正です");
-				return true;
-			}
+      if (type == null) {
+        sender.sendMessage(ChatColor.RED + "type:" + params[1] + "が不正です");
+        return true;
+      }
 
-			if (value == 0) {
-				sender.sendMessage(ChatColor.GREEN+ "レベルが0または不正な値だったので無視しました：" + params[2]);
-				return true;
-			}
+      if (value == 0) {
+        sender.sendMessage(ChatColor.GREEN + "レベルが0または不正な値だったので無視しました：" + params[2]);
+        return true;
+      }
 
-			if (target == null) {
-				target = (OfflinePlayer) sender;
-			}
+      if (target == null) {
+        target = (OfflinePlayer) sender;
+      }
 
-			TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(target);
-			if (theLowPlayer == null) {
-				sender.sendMessage(target.getName() + "のPlayerデータはロードされていません。先にロードしてください");
-				return true;
-			}
+      TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(target);
+      if (theLowPlayer == null) {
+        sender.sendMessage(target.getName() + "のPlayerデータはロードされていません。先にロードしてください");
+        return true;
+      }
 
-		}
-		return false;
-	}
+    }
+    return false;
+  }
 
+  private void loadData(OfflinePlayer offlinePlayer, CommandSender paramCommandSender) {
+    if (offlinePlayer == null) {
+      paramCommandSender.sendMessage("指定したPlayerのデータが存在しません。");
+      return;
+    }
+    TheLowPlayerManager.loadData(offlinePlayer);
+  }
 
-	private void loadData(OfflinePlayer offlinePlayer, CommandSender paramCommandSender) {
-		if (offlinePlayer == null) {
-			paramCommandSender.sendMessage("指定したPlayerのデータが存在しません。");
-			return;
-		}
-		TheLowPlayerManager.loadData(offlinePlayer);
-	}
+  protected void setLevel(LevelType type, int value, TheLowPlayer target, Player sender) {
+    target.setLevel(type, value);
+    sender.sendMessage(type.getName() + "が" + target.getLevel(type) + "(" + target.getExp(type) + "xp)になりました。");
+  }
 
-	protected void setLevel(LevelType type, int value, TheLowPlayer target, Player sender) {
-		target.setLevel(type, value);
-		sender.sendMessage(type.getName() + "が" + target.getLevel(type) + "(" + target.getExp(type) + "xp)になりました。");
-	}
-
-	@Override
-	public List<String> onTabComplete(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
-		if (paramArrayOfString.length == 1) {
-			return Arrays.asList(oprateName);
-		} else if (paramArrayOfString.length == 2 || !paramArrayOfString[0].equalsIgnoreCase("LOAD")) {
-			return LevelType.getNames();
-		}
-		return null;
-	}
+  @Override
+  public List<String> onTabComplete(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
+    if (paramArrayOfString.length == 1) {
+      return Arrays.asList(oprateName);
+    } else if (paramArrayOfString.length == 2 || !paramArrayOfString[0].equalsIgnoreCase("LOAD")) { return LevelType.getNames(); }
+    return null;
+  }
 
 }

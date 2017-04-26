@@ -12,53 +12,47 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
-	//ItemId
-	String mainItemId;
-	HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
+  // ItemId
+  String mainItemId;
+  HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
 
-	public TheLowCraftRecipeWithMainItem(String mainItemId) {
-		this.mainItemId = mainItemId;
-	}
+  public TheLowCraftRecipeWithMainItem(String mainItemId) {
+    this.mainItemId = mainItemId;
+  }
 
-	@Override
-	public ItemInterface getMainItem() {
-		return ItemManager.getCustomItemById(mainItemId);
-	}
+  @Override
+  public ItemInterface getMainItem() {
+    return ItemManager.getCustomItemById(mainItemId);
+  }
 
-	@Override
-	public boolean hasMainItem() {
-		return true;
-	}
+  @Override
+  public boolean hasMainItem() {
+    return true;
+  }
 
-	@Override
-	public boolean hasAllMaterial(Player p, boolean withMainItem) {
-		if (!super.hasAllMaterial(p, withMainItem)) {
-			return false;
-		}
-		return !withMainItem || contains(p.getInventory(), getMainItem());
-	}
+  @Override
+  public boolean hasAllMaterial(Player p, boolean withMainItem) {
+    if (!super.hasAllMaterial(p, withMainItem)) { return false; }
+    return !withMainItem || contains(p.getInventory(), getMainItem());
+  }
 
+  /**
+   * 指定されたアイテムが指定されたインベントリに入っていたらTRUE
+   * 
+   * @param inv
+   * @param item
+   * @return
+   */
+  private boolean contains(Inventory inv, ItemInterface item) {
+    if (item == null) { return false; }
+    for (ItemStack i : inv.getContents()) {
+      if (item.isThisItem(i)) { return true; }
+    }
+    return false;
+  }
 
-	/**
-	 * 指定されたアイテムが指定されたインベントリに入っていたらTRUE
-	 * @param inv
-	 * @param item
-	 * @return
-	 */
-	private boolean contains(Inventory inv, ItemInterface item) {
-		if (item == null) {
-			return false;
-		}
-		for (ItemStack i : inv.getContents()) {
-			if (item.isThisItem(i)) {
-					return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public void openCraftingViewer(Player p, CraftItemable craftingItem) {
-		CraftViewerForMainItemRecipe.open(p, craftingItem);
-	}
+  @Override
+  public void openCraftingViewer(Player p, CraftItemable craftingItem) {
+    CraftViewerForMainItemRecipe.open(p, craftingItem);
+  }
 }

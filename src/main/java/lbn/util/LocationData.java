@@ -7,111 +7,109 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-public class LocationData implements Serializable{
-	private static final long serialVersionUID = 6380196832013949147L;
-	double x;
-	double y;
-	public double getX() {
-		return x;
-	}
+public class LocationData implements Serializable {
+  private static final long serialVersionUID = 6380196832013949147L;
+  double x;
+  double y;
 
-	public double getY() {
-		return y;
-	}
+  public double getX() {
+    return x;
+  }
 
-	public double getZ() {
-		return z;
-	}
+  public double getY() {
+    return y;
+  }
 
-	public UUID getWolrdID() {
-		return wolrdID;
-	}
+  public double getZ() {
+    return z;
+  }
 
-	public void setWolrdID(UUID wolrdID) {
-		this.wolrdID = wolrdID;
-	}
+  public UUID getWolrdID() {
+    return wolrdID;
+  }
 
-	double z;
-	UUID wolrdID;
+  public void setWolrdID(UUID wolrdID) {
+    this.wolrdID = wolrdID;
+  }
 
-	public LocationData(double x, double y, double z, UUID wolrdID) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.wolrdID = wolrdID;
-	}
+  double z;
+  UUID wolrdID;
 
-	public LocationData(Location location) {
-		x = location.getX();
-		y = location.getY();
-		z = location.getZ();
-		wolrdID = location.getWorld().getUID();
-	}
+  public LocationData(double x, double y, double z, UUID wolrdID) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.wolrdID = wolrdID;
+  }
 
-	public  Location getLocation() {
-		World world = Bukkit.getWorld(wolrdID);
-		if (world == null) {
-			return null;
-		} else {
-			return new Location(world, x, y, z);
-		}
-	}
+  public LocationData(Location location) {
+    x = location.getX();
+    y = location.getY();
+    z = location.getZ();
+    wolrdID = location.getWorld().getUID();
+  }
 
-	/**
-	 * world@x,y,z,id
-	 * @return
-	 */
-	public String getSerializeString() {
-		StringBuilder sb = new StringBuilder();
-		World world = Bukkit.getWorld(wolrdID);
-		if (world == null) {
-			sb.append("non world");
-		} else {
-			sb.append(Bukkit.getWorld(wolrdID).getName());
-		}
-		sb.append("@");
-		sb.append(x);
-		sb.append(", ");
-		sb.append(y);
-		sb.append(", ");
-		sb.append(z);
-		sb.append(", ");
-		sb.append(wolrdID.toString());
-		return sb.toString();
-	}
+  public Location getLocation() {
+    World world = Bukkit.getWorld(wolrdID);
+    if (world == null) {
+      return null;
+    } else {
+      return new Location(world, x, y, z);
+    }
+  }
 
-	public static LocationData fromSerializeString(String str) {
-		String[] split = str.split("@");
-		if (split.length != 2) {
-			return null;
-		}
+  /**
+   * world@x,y,z,id
+   * 
+   * @return
+   */
+  public String getSerializeString() {
+    StringBuilder sb = new StringBuilder();
+    World world = Bukkit.getWorld(wolrdID);
+    if (world == null) {
+      sb.append("non world");
+    } else {
+      sb.append(Bukkit.getWorld(wolrdID).getName());
+    }
+    sb.append("@");
+    sb.append(x);
+    sb.append(", ");
+    sb.append(y);
+    sb.append(", ");
+    sb.append(z);
+    sb.append(", ");
+    sb.append(wolrdID.toString());
+    return sb.toString();
+  }
 
-		String[] split2 = split[1].split(",");
+  public static LocationData fromSerializeString(String str) {
+    String[] split = str.split("@");
+    if (split.length != 2) { return null; }
 
-		if (split2.length != 4) {
-			return null;
-		}
+    String[] split2 = split[1].split(",");
 
-		UUID id = UUID.fromString(split2[3].trim());
+    if (split2.length != 4) { return null; }
 
-		try {
-			return new LocationData(Double.parseDouble(split2[0]), Double.parseDouble(split2[1]), Double.parseDouble(split2[2]), id);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
+    UUID id = UUID.fromString(split2[3].trim());
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(Bukkit.getWorld(wolrdID).getName());
-		sb.append("[");
-		sb.append(x);
-		sb.append(",");
-		sb.append(y);
-		sb.append(",");
-		sb.append(z);
-		sb.append("]");
-		return sb.toString();
-	}
+    try {
+      return new LocationData(Double.parseDouble(split2[0]), Double.parseDouble(split2[1]), Double.parseDouble(split2[2]), id);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(Bukkit.getWorld(wolrdID).getName());
+    sb.append("[");
+    sb.append(x);
+    sb.append(",");
+    sb.append(y);
+    sb.append(",");
+    sb.append(z);
+    sb.append("]");
+    return sb.toString();
+  }
 }

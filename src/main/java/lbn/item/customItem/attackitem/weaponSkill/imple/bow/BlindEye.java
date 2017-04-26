@@ -10,22 +10,22 @@ import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
 import lbn.player.ItemType;
 
-public class BlindEye extends WeaponSkillForOneType{
+public class BlindEye extends WeaponSkillForOneType {
 
-	public BlindEye() {
-		super(ItemType.BOW);
-	}
+  public BlindEye() {
+    super(ItemType.BOW);
+  }
 
-	@Override
-	public String getId() {
-		return "skill10";
-	}
+  @Override
+  public String getId() {
+    return "skill10";
+  }
 
-	@Override
-	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, (int) (20 * getData(0)), 0));
-		p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 0.8f, 0.8f);
-		return true;
-	}
+  @Override
+  public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, (int) (20 * getData(0)), 0));
+    p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 0.8f, 0.8f);
+    return true;
+  }
 
 }

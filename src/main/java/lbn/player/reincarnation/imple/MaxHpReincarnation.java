@@ -4,31 +4,31 @@ import lbn.api.PlayerStatusType;
 
 import org.bukkit.Material;
 
-public class MaxHpReincarnation extends AbstractAbilityReincarnation{
+public class MaxHpReincarnation extends AbstractAbilityReincarnation {
 
-	@Override
-	public String getTitle() {
-		return "最大体力増加";
-	}
+  @Override
+  public String getTitle() {
+    return "最大体力増加";
+  }
 
-	@Override
-	public String getDetail() {
-		return "最大体力が増加する";
-	}
+  @Override
+  public String getDetail() {
+    return "最大体力が増加する";
+  }
 
-	@Override
-	public Material getMaterial() {
-		return Material.APPLE;
-	}
+  @Override
+  public Material getMaterial() {
+    return Material.APPLE;
+  }
 
-	@Override
-	protected PlayerStatusType getStatusType() {
-		return PlayerStatusType.MAX_HP;
-	}
+  @Override
+  protected PlayerStatusType getStatusType() {
+    return PlayerStatusType.MAX_HP;
+  }
 
-	@Override
-	protected double getAddValue() {
-		return 2;
-	}
+  @Override
+  protected double getAddValue() {
+    return 2;
+  }
 
 }

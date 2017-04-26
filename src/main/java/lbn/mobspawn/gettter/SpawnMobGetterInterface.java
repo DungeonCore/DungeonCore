@@ -9,9 +9,9 @@ import lbn.mobspawn.point.MobSpawnerPoint;
 import org.bukkit.Location;
 
 public interface SpawnMobGetterInterface {
-	String getName();
+  String getName();
 
-	List<AbstractMob<?>> getAllMobList();
+  List<AbstractMob<?>> getAllMobList();
 
-	MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxSpawnMob, SpawnLevel level);
+  MobSpawnerPoint getMobSpawnerPoint(Location loc, int maxSpawnMob, SpawnLevel level);
 }

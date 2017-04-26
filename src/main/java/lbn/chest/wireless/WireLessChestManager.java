@@ -25,14 +25,14 @@ import com.google.common.reflect.TypeToken;
 
 public enum WireLessChestManager {
   INSTANCE;
-  
+
   public static WireLessChestManager getInstance() {
     return WireLessChestManager.INSTANCE;
   }
-  
+
   /** key=player_id, val = chest */
   HashMultimap<UUID, PersonalChestData> create = HashMultimap.create();
-  
+
   /**
    * チェストの座標を取得, 存在しない場合はnull
    *
@@ -44,14 +44,12 @@ public enum WireLessChestManager {
     Set<PersonalChestData> set = create.get(p.getUniqueId());
     if (set != null) {
       for (PersonalChestData personalChestData : set) {
-        if (personalChestData.type.equals(type)) {
-          return personalChestData.getLocation();
-        }
+        if (personalChestData.type.equals(type)) { return personalChestData.getLocation(); }
       }
     }
     return null;
   }
-  
+
   /**
    * チェストが作成されていたらTRUE
    *
@@ -63,14 +61,12 @@ public enum WireLessChestManager {
     Set<PersonalChestData> set = create.get(p.getUniqueId());
     if (set != null) {
       for (PersonalChestData personalChestData : set) {
-        if (personalChestData.type.equals(type)) {
-          return true;
-        }
+        if (personalChestData.type.equals(type)) { return true; }
       }
     }
     return false;
   }
-  
+
   /**
    * チェストを作成する → x ↓ cc cc cc cc cc
    *
@@ -80,15 +76,15 @@ public enum WireLessChestManager {
    *
    */
   public static final World chestWorld = Bukkit.getWorld("chest");
-  
-  transient int             startX     = -1000;
-  transient int             startY     = 2;
-  transient int             startZ     = -1000;
-  
-  int                       nowX       = startX;
-  int                       nowY       = startY;
-  int                       nowZ       = startZ;
-  
+
+  transient int startX = -1000;
+  transient int startY = 2;
+  transient int startZ = -1000;
+
+  int nowX = startX;
+  int nowY = startY;
+  int nowZ = startZ;
+
   public Location createChest(Player p, String type) {
     nowX += 3;
     if (nowX > 1000) {
@@ -100,21 +96,20 @@ public enum WireLessChestManager {
       }
     }
     saveManageData();
-    
+
     Location location = new Location(chestWorld, nowX, nowY, nowZ);
     location.getBlock().setType(Material.CHEST);
     location.clone().add(1, 0, 0).getBlock().setType(Material.CHEST);
-    
+
     // Logに残す
     SystemLog.addLog(p.getName() + "(" + p.getUniqueId() + ")がチェストを購入しました。(" + nowX + "," + nowY + "," + nowZ + ")");
-    
-    
+
     PersonalChestData personalChestData = new PersonalChestData(p, location, type);
     create.put(p.getUniqueId(), personalChestData);
     WireLessChestManager.getInstance().save(p);
     return location;
   }
-  
+
   /**
    * ファイルを保存する
    *
@@ -128,9 +123,7 @@ public enum WireLessChestManager {
         private static final long serialVersionUID = -453957688834487594L;
       }.getType();
       json = gson.toJson(create.get(p.getUniqueId()), type);
-      if (!InOutputUtil.write(json, "chest" + File.separator + p.getUniqueId() + ".txt")) {
-        throw new RuntimeException("IO ERROE");
-      }
+      if (!InOutputUtil.write(json, "chest" + File.separator + p.getUniqueId() + ".txt")) { throw new RuntimeException("IO ERROE"); }
     } catch (Exception e) {
       DungeonLogger.error("===========Chest保存中にエラーが発生しました。:start=============");
       DungeonLogger.error("ファイル名：" + "chest" + File.separator + p.getUniqueId() + ".txt");
@@ -139,15 +132,13 @@ public enum WireLessChestManager {
       e.printStackTrace();
     }
   }
-  
+
   public void saveManageData() {
     String json = "";
     try {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       json = gson.toJson(Arrays.asList(nowX, nowY, nowZ));
-      if (!InOutputUtil.write(json, "chest_world_manage.txt")) {
-        throw new RuntimeException("IO ERROE");
-      }
+      if (!InOutputUtil.write(json, "chest_world_manage.txt")) { throw new RuntimeException("IO ERROE"); }
     } catch (Exception e) {
       DungeonLogger.error("===========Chest保存中にエラーが発生しました。:start=============");
       DungeonLogger.error("ファイル名：" + "chest_world_manage.txt");
@@ -156,14 +147,12 @@ public enum WireLessChestManager {
       e.printStackTrace();
     }
   }
-  
+
   public void loadManageData() {
     try {
       ArrayList<String> readFile = InOutputUtil.readFile("chest_world_manage.txt");
       // ファイルが存在しない時は何もしない
-      if (readFile.isEmpty()) {
-        return;
-      }
+      if (readFile.isEmpty()) { return; }
       StringBuilder sb = new StringBuilder();
       for (String string : readFile) {
         sb.append(string);
@@ -178,7 +167,7 @@ public enum WireLessChestManager {
       e.printStackTrace();
     }
   }
-  
+
   /**
    * ファイルを呼び出す
    *
@@ -188,9 +177,7 @@ public enum WireLessChestManager {
   public void load(Player p) throws IOException {
     ArrayList<String> readFile = InOutputUtil.readFile("chest" + File.separator + p.getUniqueId() + ".txt");
     // ファイルが存在しない時は何もしない
-    if (readFile.isEmpty()) {
-      return;
-    }
+    if (readFile.isEmpty()) { return; }
     StringBuilder sb = new StringBuilder();
     for (String string : readFile) {
       sb.append(string);

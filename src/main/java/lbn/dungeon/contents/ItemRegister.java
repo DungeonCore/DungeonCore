@@ -34,53 +34,51 @@ import lbn.item.ItemManager;
 import lbn.item.setItem.SetItemManager;
 
 public class ItemRegister {
-	public static void registItem() {
-		SetItemManager.regist(new SetItemHealthCrystal());
+  public static void registItem() {
+    SetItemManager.regist(new SetItemHealthCrystal());
 
-		ItemManager.registItem(SuikaCastle.getAllKey());
-		ItemManager.registItem(AllDriedKey.getAllKey());
-		ItemManager.registItem(Fragment.getAllFragment());
-		ItemManager.registItem(new KalgrusKey());
-		ItemManager.registItem(new KalgrusFinishKey());
-		ItemManager.registItem(new MaratKey());
-		ItemManager.registItem(new NativeUnderground());
+    ItemManager.registItem(SuikaCastle.getAllKey());
+    ItemManager.registItem(AllDriedKey.getAllKey());
+    ItemManager.registItem(Fragment.getAllFragment());
+    ItemManager.registItem(new KalgrusKey());
+    ItemManager.registItem(new KalgrusFinishKey());
+    ItemManager.registItem(new MaratKey());
+    ItemManager.registItem(new NativeUnderground());
 
-		//rightClick
-		ItemManager.registItem(AbstractMagicBook.getAllItem());
-		ItemManager.registItem(new JumpBoost());
+    // rightClick
+    ItemManager.registItem(AbstractMagicBook.getAllItem());
+    ItemManager.registItem(new JumpBoost());
 
-		//questitem
-		ItemManager.registItem(new Serum());
+    // questitem
+    ItemManager.registItem(new Serum());
 
+    // 弓
+    ItemManager.registItem(new LaserBow());
+    ItemManager.registItem(new BowOfExplosion());
+    ItemManager.registItem(new DebugBow());
 
-		//弓
-		ItemManager.registItem(new LaserBow());
-		ItemManager.registItem(new BowOfExplosion());
-		ItemManager.registItem(new DebugBow());
+    // 魔法
+    ItemManager.registItem(NormalMagicItem.getAllItem());
 
-		//魔法
-		ItemManager.registItem(NormalMagicItem.getAllItem());
+    // SLOT
+    ItemManager.registItem(new KillEffectTutorial());
+    ItemManager.registItem(new KillEffectSlotStone1());
+    ItemManager.registItem(new KillEffectSlotStone2());
+    ItemManager.registItem(new CombatLightningStone());
+    ItemManager.registItem(new HealSlotStone());
+    ItemManager.registItem(new HealSlotStone2());
+    ItemManager.registItem(new FireAspect1());
+    ItemManager.registItem(new FireAspect2());
+    ItemManager.registItem(new FireAspect3());
+    ItemManager.registItem(new MagicStoneJade());
+    ItemManager.registItem(MagicHealMagicStone.getAllItem());
+    OneMobDamageUpSlot.regist();
 
-		//SLOT
-		ItemManager.registItem(new KillEffectTutorial());
-		ItemManager.registItem(new KillEffectSlotStone1());
-		ItemManager.registItem(new KillEffectSlotStone2());
-		ItemManager.registItem(new CombatLightningStone());
-		ItemManager.registItem(new HealSlotStone());
-		ItemManager.registItem(new HealSlotStone2());
-		ItemManager.registItem(new FireAspect1());
-		ItemManager.registItem(new FireAspect2());
-		ItemManager.registItem(new FireAspect3());
-		ItemManager.registItem(new MagicStoneJade());
-		ItemManager.registItem(MagicHealMagicStone.getAllItem());
-		OneMobDamageUpSlot.regist();
+    // OTHER
+    ItemManager.registItem(new StrengthBaseJade());
 
-		//OTHER
-		ItemManager.registItem(new StrengthBaseJade());
-
-
-		//chest
-		AlphaWhiteListChest alphaWhiteListChest = new AlphaWhiteListChest();
-		CustomChestManager.registChest(alphaWhiteListChest.getChestLocation(), alphaWhiteListChest);
-	}
+    // chest
+    AlphaWhiteListChest alphaWhiteListChest = new AlphaWhiteListChest();
+    CustomChestManager.registChest(alphaWhiteListChest.getChestLocation(), alphaWhiteListChest);
+  }
 }

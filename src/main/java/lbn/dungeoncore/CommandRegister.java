@@ -59,71 +59,71 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 
 public class CommandRegister {
-	public static void registCommand() {
-		registCommand(new CommandAnnounce(), "announce");
-		registCommand(new CommandAttention(), "attention");
-		registCommand(new CommandGetItem(), "getItem");
-		registCommand(new CommandGiveSetItem(), "getSetItem");
-		registCommand(new CommandExtraMob(), "spawnmob");
-		registCommand(new CommandViewInfo(), "viewinfo");
-		registCommand(new CommandStatusView(), "statusview");
-		registCommand(new PlayerStatusCommand(), "statusCommand");
-		registCommand(new SetSpawnPointCommand(), "set_spawn_point");
-		registCommand(new StrengthItemCommand(), "strength_item");
-		registCommand(new CommandSpecialSign(), "set_special_sign");
-		registCommand(new DelayCommand(), "DELAYCOMMAND");
-		registCommand(new SequenceCommand(), "SEQUENCECOMMAND");
-		registCommand(new SequenceSetBlockCommand(), "SEQUENCE_SETBLOCK");
-		registCommand(new SoundPlayCommand(), "soundPlay");
-		registCommand(new TimerExcuteCommand(), "timer_command");
-		registCommand(new CommandQuestOperate(), "quest_operate");
-		registCommand(new ChangeBiomeCommand(), "change_biome");
-		registCommand(new QuestCommand(), "quest");
-		registCommand(new TmCommand(), "tm");
-		registCommand(new MoneyCommand(), "galion");
-		registCommand(new ShopCommand(), "shop");
-		registCommand(new VillagerCommand(), "villager");
-		registCommand(new CommandChest(), "chest");
-		registCommand(new RemoveMobCommand(), "removemob");
-		registCommand(new MobCommand(), "mob");
-		registCommand(new SimplySetSpawnPointCommand(), "setSpawn");
-		registCommand(new CommandMobSkill(), "mobskill");
-		registCommand(new CommandItem(), "item");
-		registCommand(new ShopItemCommand(), "shopitem");
-		registCommand(new CommandSavePlayer(), "saveplayer");
-		registCommand(new SearchPathCommand(), "searchPath");
-		registCommand(new SetDungeonCommand(), "setdungeon");
-		registCommand(new TpCutCommand(), "tpcut");
-		registCommand(new CommandEquipPlayer(), "equip");
-		registCommand(new CommandExecuteLockByTimeCommand(), "timelock");
-		registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
-		registCommand(new CommandTpOtherWorld(), "tpworld");
-		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
-		registCommand(new SpletSheetCommand(), "sheet_reload");
-		registCommand(new SetRedStoneBlockCommand(), "setredstone");
-		registCommand(new LoopCommand(), "loop");
-		registCommand(new RandomExecuteCommand(), "randomExec");
-		registCommand(new JumpCommand(), "jumpboost");
-		registCommand(new OpenCommand(), "open");
-		registCommand(new CommandBook(), "book");
-		registCommand(new CommandNpcSpawn(), "spawnNpc");
-		registCommand(new CommandTag(), "tag");
+  public static void registCommand() {
+    registCommand(new CommandAnnounce(), "announce");
+    registCommand(new CommandAttention(), "attention");
+    registCommand(new CommandGetItem(), "getItem");
+    registCommand(new CommandGiveSetItem(), "getSetItem");
+    registCommand(new CommandExtraMob(), "spawnmob");
+    registCommand(new CommandViewInfo(), "viewinfo");
+    registCommand(new CommandStatusView(), "statusview");
+    registCommand(new PlayerStatusCommand(), "statusCommand");
+    registCommand(new SetSpawnPointCommand(), "set_spawn_point");
+    registCommand(new StrengthItemCommand(), "strength_item");
+    registCommand(new CommandSpecialSign(), "set_special_sign");
+    registCommand(new DelayCommand(), "DELAYCOMMAND");
+    registCommand(new SequenceCommand(), "SEQUENCECOMMAND");
+    registCommand(new SequenceSetBlockCommand(), "SEQUENCE_SETBLOCK");
+    registCommand(new SoundPlayCommand(), "soundPlay");
+    registCommand(new TimerExcuteCommand(), "timer_command");
+    registCommand(new CommandQuestOperate(), "quest_operate");
+    registCommand(new ChangeBiomeCommand(), "change_biome");
+    registCommand(new QuestCommand(), "quest");
+    registCommand(new TmCommand(), "tm");
+    registCommand(new MoneyCommand(), "galion");
+    registCommand(new ShopCommand(), "shop");
+    registCommand(new VillagerCommand(), "villager");
+    registCommand(new CommandChest(), "chest");
+    registCommand(new RemoveMobCommand(), "removemob");
+    registCommand(new MobCommand(), "mob");
+    registCommand(new SimplySetSpawnPointCommand(), "setSpawn");
+    registCommand(new CommandMobSkill(), "mobskill");
+    registCommand(new CommandItem(), "item");
+    registCommand(new ShopItemCommand(), "shopitem");
+    registCommand(new CommandSavePlayer(), "saveplayer");
+    registCommand(new SearchPathCommand(), "searchPath");
+    registCommand(new SetDungeonCommand(), "setdungeon");
+    registCommand(new TpCutCommand(), "tpcut");
+    registCommand(new CommandEquipPlayer(), "equip");
+    registCommand(new CommandExecuteLockByTimeCommand(), "timelock");
+    registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
+    registCommand(new CommandTpOtherWorld(), "tpworld");
+    registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
+    registCommand(new SpletSheetCommand(), "sheet_reload");
+    registCommand(new SetRedStoneBlockCommand(), "setredstone");
+    registCommand(new LoopCommand(), "loop");
+    registCommand(new RandomExecuteCommand(), "randomExec");
+    registCommand(new JumpCommand(), "jumpboost");
+    registCommand(new OpenCommand(), "open");
+    registCommand(new CommandBook(), "book");
+    registCommand(new CommandNpcSpawn(), "spawnNpc");
+    registCommand(new CommandTag(), "tag");
 
-		new ExecuteMobSkillCommand().regist();
-		new CustomKillCommand().regist();
-		new CustomEffectCommand().regist();
-		new CustomSetBlockCommand().regist();
-	}
+    new ExecuteMobSkillCommand().regist();
+    new CustomKillCommand().regist();
+    new CustomEffectCommand().regist();
+    new CustomSetBlockCommand().regist();
+  }
 
-	private  static void registCommand(CommandExecutor instance, String name) {
-		PluginCommand command = Main.plugin.getCommand(name);
-		command.setExecutor(instance);
-		if (instance instanceof TabCompleter) {
-			command.setTabCompleter((TabCompleter) instance);
-		}
-		if (instance instanceof UsageCommandable) {
-			command.setUsage(((UsageCommandable) instance).getUsage());
-			command.setDescription(((UsageCommandable) instance).getDescription());
-		}
-	}
+  private static void registCommand(CommandExecutor instance, String name) {
+    PluginCommand command = Main.plugin.getCommand(name);
+    command.setExecutor(instance);
+    if (instance instanceof TabCompleter) {
+      command.setTabCompleter((TabCompleter) instance);
+    }
+    if (instance instanceof UsageCommandable) {
+      command.setUsage(((UsageCommandable) instance).getUsage());
+      command.setDescription(((UsageCommandable) instance).getDescription());
+    }
+  }
 }

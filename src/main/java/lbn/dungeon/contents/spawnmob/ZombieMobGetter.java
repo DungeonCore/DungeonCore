@@ -9,21 +9,21 @@ import lbn.mobspawn.gettter.AbstractSpawnMobGetter;
 
 import org.bukkit.entity.EntityType;
 
-public class ZombieMobGetter  extends AbstractSpawnMobGetter{
+public class ZombieMobGetter extends AbstractSpawnMobGetter {
 
-	@Override
-	public String getName() {
-		return "zombie";
-	}
+  @Override
+  public String getName() {
+    return "zombie";
+  }
 
-	static ArrayList<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
-	static {
-		mobList.add(new NormalMob(EntityType.ZOMBIE));
-	}
+  static ArrayList<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
+  static {
+    mobList.add(new NormalMob(EntityType.ZOMBIE));
+  }
 
-	@Override
-	public List<AbstractMob<?>> getAllMobList() {
-		return mobList;
-	}
+  @Override
+  public List<AbstractMob<?>> getAllMobList() {
+    return mobList;
+  }
 
 }

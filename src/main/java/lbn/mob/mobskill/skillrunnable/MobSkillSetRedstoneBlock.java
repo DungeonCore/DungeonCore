@@ -7,18 +7,18 @@ import lbn.util.BlockUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-public class MobSkillSetRedstoneBlock extends MobSkillRunnable{
+public class MobSkillSetRedstoneBlock extends MobSkillRunnable {
 
-	public MobSkillSetRedstoneBlock(String data) {
-		super(data);
-	}
+  public MobSkillSetRedstoneBlock(String data) {
+    super(data);
+  }
 
-	@Override
-	public void execute(Entity target, Entity mob) {
-		Location loc = AbstractSheetRunable.getLocationByString(data);
-		if (loc != null) {
-			BlockUtil.setRedstone(loc);
-		}
-	}
+  @Override
+  public void execute(Entity target, Entity mob) {
+    Location loc = AbstractSheetRunable.getLocationByString(data);
+    if (loc != null) {
+      BlockUtil.setRedstone(loc);
+    }
+  }
 
 }

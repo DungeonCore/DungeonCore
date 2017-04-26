@@ -8,28 +8,29 @@ import org.bukkit.entity.EntityType;
 
 public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 
-	public NotMonsterDamageExplosion(Location l, float f) {
-		super(l, f);
-	}
+  public NotMonsterDamageExplosion(Location l, float f) {
+    super(l, f);
+  }
 
+  boolean isRunParticle = true;
 
-	boolean isRunParticle = true;
-	/**
-	 * 爆発のパーティクルを発生させるかどうかセットする
-	 * @param isRunParticle
-	 */
-	public void setRunParticle(boolean isRunParticle) {
-		this.isRunParticle = isRunParticle;
-	}
+  /**
+   * 爆発のパーティクルを発生させるかどうかセットする
+   * 
+   * @param isRunParticle
+   */
+  public void setRunParticle(boolean isRunParticle) {
+    this.isRunParticle = isRunParticle;
+  }
 
-	@Override
-	protected boolean isRunParticle() {
-		return isRunParticle;
-	}
+  @Override
+  protected boolean isRunParticle() {
+    return isRunParticle;
+  }
 
-	@Override
-	boolean isNotDamage(Entity entity) {
-		return entity.getType() != EntityType.PLAYER && !SummonPlayerManager.isSummonMob(entity);
-	}
+  @Override
+  boolean isNotDamage(Entity entity) {
+    return entity.getType() != EntityType.PLAYER && !SummonPlayerManager.isSummonMob(entity);
+  }
 
 }

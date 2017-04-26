@@ -16,140 +16,147 @@ import org.bukkit.util.Vector;
  *
  */
 public class ParticleData {
-	public EnumParticle particleEnum;
-	public int amount;
+  public EnumParticle particleEnum;
+  public int amount;
 
-	public double dx = 0.32D;
-	public double dy = 0.32D;
-	public double dz = 0.32D;
+  public double dx = 0.32D;
+  public double dy = 0.32D;
+  public double dz = 0.32D;
 
-	public ParticleData(ParticleType particle, int amount) {
-		this.amount = amount;
-		this.particleEnum = particle.getEnumType();
-	}
+  public ParticleData(ParticleType particle, int amount) {
+    this.amount = amount;
+    this.particleEnum = particle.getEnumType();
+  }
 
-	public ParticleData(EnumParticle particle, int amount) {
-		this.amount = amount;
-		this.particleEnum = particle;
-	}
+  public ParticleData(EnumParticle particle, int amount) {
+    this.amount = amount;
+    this.particleEnum = particle;
+  }
 
-	public ParticleData(ParticleData data) {
-		this.amount = data.amount;
-		this.lastArgument = data.lastArgument;
-		this.particleEnum = data.particleEnum;
-		this.dx = data.dx;
-		this.dy = data.dy;
-		this.dz = data.dz;
-		this.isFar = data.isFar;
-	}
+  public ParticleData(ParticleData data) {
+    this.amount = data.amount;
+    this.lastArgument = data.lastArgument;
+    this.particleEnum = data.particleEnum;
+    this.dx = data.dx;
+    this.dy = data.dy;
+    this.dz = data.dz;
+    this.isFar = data.isFar;
+  }
 
-	boolean isFar = false;
+  boolean isFar = false;
 
-	/**
-	 * 遠くまで表示させるならTRUE
-	 * @param isFar
-	 * @return
-	 */
-	public ParticleData setFarParticle(boolean isFar) {
-		this.isFar = isFar;
-		return this;
-	}
+  /**
+   * 遠くまで表示させるならTRUE
+   * 
+   * @param isFar
+   * @return
+   */
+  public ParticleData setFarParticle(boolean isFar) {
+    this.isFar = isFar;
+    return this;
+  }
 
-	public ParticleData setParticle(ParticleType particle) {
-		this.particleEnum = particle.getEnumType();
-		return this;
-	}
+  public ParticleData setParticle(ParticleType particle) {
+    this.particleEnum = particle.getEnumType();
+    return this;
+  }
 
-	/**
-	 * パーティクルの量をセットする
-	 * @param amount
-	 * @return
-	 */
-	public ParticleData setAmount(int amount) {
-		this.amount = amount;
-		return this;
-	}
+  /**
+   * パーティクルの量をセットする
+   * 
+   * @param amount
+   * @return
+   */
+  public ParticleData setAmount(int amount) {
+    this.amount = amount;
+    return this;
+  }
 
-	/**
-	 * 分散をセットする
-	 * @param dx
-	 * @param dy
-	 * @param dz
-	 */
-	public ParticleData setDispersion(double dx, double dy, double dz) {
-		if (dx >= 0) {
-			this.dx = dx;
-		}
-		if (dy >= 0) {
-			this.dy = dx;
-		}
-		if (dz >= 0) {
-			this.dz = dx;
-		}
-		return this;
-	}
+  /**
+   * 分散をセットする
+   * 
+   * @param dx
+   * @param dy
+   * @param dz
+   */
+  public ParticleData setDispersion(double dx, double dy, double dz) {
+    if (dx >= 0) {
+      this.dx = dx;
+    }
+    if (dy >= 0) {
+      this.dy = dx;
+    }
+    if (dz >= 0) {
+      this.dz = dx;
+    }
+    return this;
+  }
 
-	public double lastArgument = 0;
+  public double lastArgument = 0;
 
-	public ParticleData setLastArgument(double value) {
-		this.lastArgument = value;
-		return this;
-	}
+  public ParticleData setLastArgument(double value) {
+    this.lastArgument = value;
+    return this;
+  }
 
-	/**
-	 * パーティクル実行
-	 * @param locList
-	 */
-	public void run(Location... locList) {
-		for (Location loc : locList) {
-			run(loc.getWorld(), loc.toVector());
-		}
-	}
+  /**
+   * パーティクル実行
+   * 
+   * @param locList
+   */
+  public void run(Location... locList) {
+    for (Location loc : locList) {
+      run(loc.getWorld(), loc.toVector());
+    }
+  }
 
-	/**
-	 * パーティクル実行
-	 * @param locList
-	 */
-	public void run(Collection<Location> locList) {
-		for (Location loc : locList) {
-			run(loc.getWorld(), loc.toVector());
-		}
-	}
+  /**
+   * パーティクル実行
+   * 
+   * @param locList
+   */
+  public void run(Collection<Location> locList) {
+    for (Location loc : locList) {
+      run(loc.getWorld(), loc.toVector());
+    }
+  }
 
-	/**
-	 * 必ずこのメソッドを通ります
-	 * @param w
-	 * @param v
-	 */
-	protected void run(World w, Vector... v) {
-		for (Vector vector : v) {
-			runParticle(w, vector.getX(), vector.getY(), vector.getZ());
-		}
-	}
+  /**
+   * 必ずこのメソッドを通ります
+   * 
+   * @param w
+   * @param v
+   */
+  protected void run(World w, Vector... v) {
+    for (Vector vector : v) {
+      runParticle(w, vector.getX(), vector.getY(), vector.getZ());
+    }
+  }
 
-	protected void runParticle(World w, double x, double y, double z) {
-		if (particleEnum == EnumParticle.BLOCK_CRACK || particleEnum == EnumParticle.BLOCK_DUST) {
-			((CraftWorld) w).getHandle().a(particleEnum, isFar, x, y, z, amount, dx, dy, dz, lastArgument, (int)lastArgument);
-		} else {
-			((CraftWorld) w).getHandle().a(particleEnum, isFar, x, y, z, amount, dx, dy, dz, lastArgument);
-		}
-	}
+  protected void runParticle(World w, double x, double y, double z) {
+    if (particleEnum == EnumParticle.BLOCK_CRACK || particleEnum == EnumParticle.BLOCK_DUST) {
+      ((CraftWorld) w).getHandle().a(particleEnum, isFar, x, y, z, amount, dx, dy, dz, lastArgument, (int) lastArgument);
+    } else {
+      ((CraftWorld) w).getHandle().a(particleEnum, isFar, x, y, z, amount, dx, dy, dz, lastArgument);
+    }
+  }
 
-	final protected void run(World w, List<Vector> v) {
-		run(w, v.toArray(new Vector[0]));
-	}
+  final protected void run(World w, List<Vector> v) {
+    run(w, v.toArray(new Vector[0]));
+  }
 
-	/**
-	 * パーティクル名を取得
-	 * @return パーティクル名(小文字)
-	 */
-	public String getParticleName() {
-		return particleEnum.toString();
-	}
+  /**
+   * パーティクル名を取得
+   * 
+   * @return パーティクル名(小文字)
+   */
+  public String getParticleName() {
+    return particleEnum.toString();
+  }
 
-	@Override
-	public String toString() {
-		return "name:" + getParticleName() + ", amount:" + amount + ", dispersion:" + Arrays.asList(dx, dy, dz);
-	}
+  @Override
+  public String toString() {
+    return "name:" + getParticleName() + ", amount:" + amount + ", dispersion:" + Arrays.asList(dx, dy, dz);
+  }
 
 }

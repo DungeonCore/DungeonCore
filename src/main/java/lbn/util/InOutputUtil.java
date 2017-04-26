@@ -22,8 +22,7 @@ import lbn.dungeoncore.Main;
 
 public class InOutputUtil {
   public final static String dataFolder = Main.dataFolder + File.separator + "data" + File.separator;
-  
-  
+
   /**
    * データをSerializableする
    *
@@ -44,7 +43,7 @@ public class InOutputUtil {
     }
     return true;
   }
-  
+
   /**
    * ZIPにして保存する
    *
@@ -70,7 +69,7 @@ public class InOutputUtil {
     }
     return true;
   }
-  
+
   /**
    * ディレクトリ圧縮のための再帰処理
    *
@@ -100,7 +99,7 @@ public class InOutputUtil {
       }
     }
   }
-  
+
   /**
    * 圧縮処理
    *
@@ -114,17 +113,17 @@ public class InOutputUtil {
       File targetFile, String entryName, String enc) {
     // 圧縮レベル設定
     outZip.setLevel(5);
-    
+
     // // 文字コードを指定
     // outZip.setEncoding(enc);
     try {
       // ZIPエントリ作成
       outZip.putNextEntry(new ZipEntry(entryName));
-      
+
       // 圧縮ファイル読み込みストリーム取得
       BufferedInputStream in = new BufferedInputStream(
           new FileInputStream(targetFile));
-      
+
       // 圧縮ファイルをZIPファイルに出力
       int readSize = 0;
       byte buffer[] = new byte[1024]; // 読み込みバッファ
@@ -141,17 +140,16 @@ public class InOutputUtil {
     }
     return true;
   }
-  
-  
+
   public static boolean write(String str, String fileName) {
     return write(str, fileName, dataFolder);
   }
-  
+
   public static boolean write(Collection<String> strList, String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
-    
+
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
       for (String string : strList) {
         bw.write(string);
@@ -164,12 +162,12 @@ public class InOutputUtil {
       return false;
     }
   }
-  
+
   public static boolean write(String str, String fileName, String dir) {
     // ファイルに保存する
     File file = new File(dir + fileName);
     file.getParentFile().mkdirs();
-    
+
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
       bw.write(str);
       bw.flush();
@@ -179,7 +177,7 @@ public class InOutputUtil {
       return false;
     }
   }
-  
+
   /**
    * Serializableデータを読み込む
    *
@@ -196,7 +194,7 @@ public class InOutputUtil {
     }
     return null;
   }
-  
+
   /**
    * ファイルを読み込む
    *
@@ -206,7 +204,7 @@ public class InOutputUtil {
    */
   public static ArrayList<String> readFile(String fileName) throws IOException {
     File file = new File(dataFolder + fileName);
-    
+
     try (BufferedReader br = new BufferedReader(new FileReader(file));) {
       ArrayList<String> list = new ArrayList<String>();
       String line = null;

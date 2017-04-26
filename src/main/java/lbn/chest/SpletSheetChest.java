@@ -28,14 +28,14 @@ import org.bukkit.inventory.ItemStack;
 public abstract class SpletSheetChest extends AbstractCustomChest {
 
   Location contentLoc;
-  int      refuelTick;
+  int refuelTick;
   Location moveLoc;
-  int      minItemCount;
-  int      maxItemCount;
-  int      moveSec;
-  boolean  random;
+  int minItemCount;
+  int maxItemCount;
+  int moveSec;
+  boolean random;
 
-  boolean  isBossChestTemplate = false;
+  boolean isBossChestTemplate = false;
 
   public boolean isBossChestTemplate() {
     return isBossChestTemplate;
@@ -79,18 +79,14 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
   @Override
   public boolean canOpen(Player p, Block block, PlayerInteractEvent e) {
     if (isTemplateChest) {
-      if (p.getGameMode() == GameMode.CREATIVE || p.isOp()) {
-        return true;
-      }
+      if (p.getGameMode() == GameMode.CREATIVE || p.isOp()) { return true; }
       Bukkit.broadcast(p.getName() + "が初期街下のテンプレートチェストを開いています。ハックの可能性があります。",
           "main.lbnDungeonUtil.command.mob.sendMessage");
       return false;
     }
 
     if (isBossChestTemplate) {
-      if (p.getGameMode() == GameMode.CREATIVE || p.isOp()) {
-        return true;
-      }
+      if (p.getGameMode() == GameMode.CREATIVE || p.isOp()) { return true; }
       Bukkit.broadcastMessage(ChatColor.YELLOW + "やあジョニー、そんな浮かない顔してどうしたんだい?  " + ChatColor.GREEN + "なぁ、マイケル聞いてくれよ、"
           + p.getDisplayName() + "ったらブロックグリッチをしてチェストを開けようとしたんだ。");
       return false;
@@ -100,8 +96,7 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
   }
 
   @Override
-  public void removeChest(Location loc) {
-  }
+  public void removeChest(Location loc) {}
 
   protected void teleportPlayer(String name) {
     PlayerChestTpManager.teleport(name, moveLoc, moveSec * 20);

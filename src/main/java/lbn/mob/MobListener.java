@@ -37,176 +37,175 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MobListener implements Listener {
-	public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
+  public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
 
-	@EventHandler
-	public void onSpawn2(final PlayerCustomMobSpawnEvent e) {
-		AbstractMob<?> mob = MobHolder.getMob(e);
-		if (mob == null) {
-			Bukkit.broadcastMessage(ChatColor.GRAY + e.getName() + "is not registered");
-		}
-	}
+  @EventHandler
+  public void onSpawn2(final PlayerCustomMobSpawnEvent e) {
+    AbstractMob<?> mob = MobHolder.getMob(e);
+    if (mob == null) {
+      Bukkit.broadcastMessage(ChatColor.GRAY + e.getName() + "is not registered");
+    }
+  }
 
-	@EventHandler
-	public void onSpawn(final PlayerCustomMobSpawnEvent e) {
-		AbstractMob<?> mob = MobHolder.getMob(e);
+  @EventHandler
+  public void onSpawn(final PlayerCustomMobSpawnEvent e) {
+    AbstractMob<?> mob = MobHolder.getMob(e);
 
-		//前のボスが存在する場合は削除する
-		if (mob instanceof BossMobable) {
-			LivingEntity entity = ((BossMobable) mob).getEntity();
-			if (entity == null || !entity.isValid()) {
-			} else {
-				entity.remove();
-			}
-			bossoList.add((BossMobable) mob);
-		}
+    // 前のボスが存在する場合は削除する
+    if (mob instanceof BossMobable) {
+      LivingEntity entity = ((BossMobable) mob).getEntity();
+      if (entity == null || !entity.isValid()) {} else {
+        entity.remove();
+      }
+      bossoList.add((BossMobable) mob);
+    }
 
-		//アイテムを拾わない
-		LivingEntity entity = e.getEntity();
-		entity.setCanPickupItems(false);
+    // アイテムを拾わない
+    LivingEntity entity = e.getEntity();
+    entity.setCanPickupItems(false);
 
-		//スポーンする
-		mob.onSpawn(e);
-		mob.updateName(false);
+    // スポーンする
+    mob.onSpawn(e);
+    mob.updateName(false);
 
-		//もしSummonの場合は指定時間後に削除する
-		if (mob.isSummonMob()) {
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					//チャンクがロードされてなかったらロードする
-					Location loc = entity.getLocation();
-					if (!loc.getChunk().isLoaded()) {
-						loc.getChunk().load();
-					}
-					if (e.getEntity().isValid()) {
-						e.getEntity().damage(10000.0);
-						SummonPlayerManager.removeSummon(e.getEntity());
-					}
-				}
-			}.runTaskLater(Main.plugin, ((SummonMobable)mob).getDeadlineTick());
-		}
-	}
+    // もしSummonの場合は指定時間後に削除する
+    if (mob.isSummonMob()) {
+      new BukkitRunnable() {
+        @Override
+        public void run() {
+          // チャンクがロードされてなかったらロードする
+          Location loc = entity.getLocation();
+          if (!loc.getChunk().isLoaded()) {
+            loc.getChunk().load();
+          }
+          if (e.getEntity().isValid()) {
+            e.getEntity().damage(10000.0);
+            SummonPlayerManager.removeSummon(e.getEntity());
+          }
+        }
+      }.runTaskLater(Main.plugin, ((SummonMobable) mob).getDeadlineTick());
+    }
+  }
 
-	@EventHandler(priority=EventPriority.HIGH)
-	public void onDagame(EntityDamageByEntityEvent e) {
-		//ダメージを与えたEntity
-		Entity damager = e.getDamager();
-		//ダメージを受けたEntity
-		Entity entity = e.getEntity();
+  @EventHandler(priority = EventPriority.HIGH)
+  public void onDagame(EntityDamageByEntityEvent e) {
+    // ダメージを与えたEntity
+    Entity damager = e.getDamager();
+    // ダメージを受けたEntity
+    Entity entity = e.getEntity();
 
-		if (MobHolder.isCustomMob(entity)) {
-		//mobがダメージを受けるとき
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)entity);
-			mob.onDamageBefore((LivingEntity)entity, damager, e);
-			mob.onDamage((LivingEntity)entity, damager, e);
-			mob.updateName(true);
-		}
-		if (MobHolder.isCustomMob(damager)) {
-		//mobがダメージを与える時
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)damager);
-			mob.onAttackBefore((LivingEntity)damager, (LivingEntity)entity, e);
-			mob.onAttack((LivingEntity)damager, (LivingEntity)entity, e);
-		} else if (damager instanceof Projectile) {
-			//mobが放ったProjectileがダメージを与えた時
-			ProjectileSource shooter = ((Projectile)damager).getShooter();
-			if (MobHolder.isExtraMobByProjectile(shooter) && e.getEntity() instanceof LivingEntity) {
-				AbstractMob<?> mob = MobHolder.getMob((LivingEntity) shooter);
-				mob.onProjectileHitEntity((LivingEntity)shooter, (LivingEntity) e.getEntity(), e);
-			}
-		}
+    if (MobHolder.isCustomMob(entity)) {
+      // mobがダメージを受けるとき
+      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+      mob.onDamageBefore((LivingEntity) entity, damager, e);
+      mob.onDamage((LivingEntity) entity, damager, e);
+      mob.updateName(true);
+    }
+    if (MobHolder.isCustomMob(damager)) {
+      // mobがダメージを与える時
+      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) damager);
+      mob.onAttackBefore((LivingEntity) damager, (LivingEntity) entity, e);
+      mob.onAttack((LivingEntity) damager, (LivingEntity) entity, e);
+    } else if (damager instanceof Projectile) {
+      // mobが放ったProjectileがダメージを与えた時
+      ProjectileSource shooter = ((Projectile) damager).getShooter();
+      if (MobHolder.isExtraMobByProjectile(shooter) && e.getEntity() instanceof LivingEntity) {
+        AbstractMob<?> mob = MobHolder.getMob((LivingEntity) shooter);
+        mob.onProjectileHitEntity((LivingEntity) shooter, (LivingEntity) e.getEntity(), e);
+      }
+    }
 
-		if (entity.getType() == EntityType.VILLAGER) {
-			e.setCancelled(true);
-		} else if (entity.getType() == EntityType.ARMOR_STAND) {
-			//管理者でないなら攻撃をキャンセルする
-			if (!PlayerChecker.isNonNormalPlayer(e.getDamager())) {
-				e.setCancelled(true);
-			}
-		}
-	}
+    if (entity.getType() == EntityType.VILLAGER) {
+      e.setCancelled(true);
+    } else if (entity.getType() == EntityType.ARMOR_STAND) {
+      // 管理者でないなら攻撃をキャンセルする
+      if (!PlayerChecker.isNonNormalPlayer(e.getDamager())) {
+        e.setCancelled(true);
+      }
+    }
+  }
 
-	@EventHandler
-	public void onDamageOther(EntityDamageEvent e) {
-		Entity entity = e.getEntity();
-		if (MobHolder.isCustomMob(entity)) {
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)entity);
-			mob.onOtherDamage(e);
-			mob.updateName(false);
-		}
-	}
+  @EventHandler
+  public void onDamageOther(EntityDamageEvent e) {
+    Entity entity = e.getEntity();
+    if (MobHolder.isCustomMob(entity)) {
+      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+      mob.onOtherDamage(e);
+      mob.updateName(false);
+    }
+  }
 
-	static Random rnd = new Random();
+  static Random rnd = new Random();
 
-	@EventHandler
-	public void onDeath(EntityDeathEvent e) {
-		//mobが死んだ時はデフォルトのアイテムドロップはなしにする
-		LivingEntity entity = e.getEntity();
-		if (entity.getType() != EntityType.PLAYER) {
-			e.getDrops().clear();
-		}
+  @EventHandler
+  public void onDeath(EntityDeathEvent e) {
+    // mobが死んだ時はデフォルトのアイテムドロップはなしにする
+    LivingEntity entity = e.getEntity();
+    if (entity.getType() != EntityType.PLAYER) {
+      e.getDrops().clear();
+    }
 
-		AbstractMob<?> mob = MobHolder.getMob(e.getEntity());
-		mob.onDeath(e);
+    AbstractMob<?> mob = MobHolder.getMob(e.getEntity());
+    mob.onDeath(e);
 
-		Player lastDamagePlayer = LastDamageManager.getLastDamagePlayer(e.getEntity());
-		if (lastDamagePlayer != null) {
-			//ドロップアイテムをセットする
-			List<ItemStack> dropItem = mob.getDropItem(lastDamagePlayer);
-			e.getDrops().addAll(dropItem);
-		}
+    Player lastDamagePlayer = LastDamageManager.getLastDamagePlayer(e.getEntity());
+    if (lastDamagePlayer != null) {
+      // ドロップアイテムをセットする
+      List<ItemStack> dropItem = mob.getDropItem(lastDamagePlayer);
+      e.getDrops().addAll(dropItem);
+    }
 
-		//もしボスの場合はチェストを設置する
-		if (mob.isBoss()) {
-			CustomChestManager.setBossRewardChest((BossMobable) mob);
-		}
-	}
+    // もしボスの場合はチェストを設置する
+    if (mob.isBoss()) {
+      CustomChestManager.setBossRewardChest((BossMobable) mob);
+    }
+  }
 
-	@EventHandler
-	public void onShotbow(EntityShootBowEvent e) {
-		AbstractMob<?> mob = MobHolder.getMob(e.getEntity());
-		mob.onShotbow(e);
-	}
+  @EventHandler
+  public void onShotbow(EntityShootBowEvent e) {
+    AbstractMob<?> mob = MobHolder.getMob(e.getEntity());
+    mob.onShotbow(e);
+  }
 
-	@EventHandler
-	public void onInteractEntity(PlayerInteractEntityEvent e) {
-		if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
-			AbstractMob<?> mob = MobHolder.getMob((LivingEntity)e.getRightClicked());
-			mob.onInteractEntity(e);
-		}
-	}
+  @EventHandler
+  public void onInteractEntity(PlayerInteractEntityEvent e) {
+    if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
+      AbstractMob<?> mob = MobHolder.getMob((LivingEntity) e.getRightClicked());
+      mob.onInteractEntity(e);
+    }
+  }
 
-	@EventHandler
-	public void onChangeTarget(EntityTargetLivingEntityEvent event) {
-		AbstractMob<?> mob = MobHolder.getMob(event);
-		mob.onTarget(event);
-	}
+  @EventHandler
+  public void onChangeTarget(EntityTargetLivingEntityEvent event) {
+    AbstractMob<?> mob = MobHolder.getMob(event);
+    mob.onTarget(event);
+  }
 
-	@EventHandler
-	public void onTeleport(EntityTeleportEvent e) {
-		 if (e.getEntityType() == EntityType.ENDERMAN) {
-			 e.setCancelled(true);
-		 }
-	}
+  @EventHandler
+  public void onTeleport(EntityTeleportEvent e) {
+    if (e.getEntityType() == EntityType.ENDERMAN) {
+      e.setCancelled(true);
+    }
+  }
 
-	@EventHandler
-	public void onDisablePlugin(PluginDisableEvent e) {
-		for (AbstractMob<?> mobs : MobHolder.getAllMobs()) {
-			mobs.onDisablePlugin(e);
-		}
-	}
+  @EventHandler
+  public void onDisablePlugin(PluginDisableEvent e) {
+    for (AbstractMob<?> mobs : MobHolder.getAllMobs()) {
+      mobs.onDisablePlugin(e);
+    }
+  }
 
-	@EventHandler
-	public void chunkUnload(ChunkUnloadEvent e) {
-		Entity[] entities = e.getChunk().getEntities();
-		for (Entity entity : entities) {
-			if (entity.getType().isAlive()) {
-				AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
-				if (mob != null && mob.isBoss()) {
-					entity.remove();
-				}
-			}
-		}
-	}
+  @EventHandler
+  public void chunkUnload(ChunkUnloadEvent e) {
+    Entity[] entities = e.getChunk().getEntities();
+    for (Entity entity : entities) {
+      if (entity.getType().isAlive()) {
+        AbstractMob<?> mob = MobHolder.getMob((LivingEntity) entity);
+        if (mob != null && mob.isBoss()) {
+          entity.remove();
+        }
+      }
+    }
+  }
 
 }

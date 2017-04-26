@@ -28,98 +28,99 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class BookManager {
-	static HashMap<String, BookData> bookMap = new HashMap<String, BookData>();
+  static HashMap<String, BookData> bookMap = new HashMap<String, BookData>();
 
-	public static void reloadSpletSheet(CommandSender command) {
-		bookMap.clear();
-		SpletSheetCommand.reloadSheet(command, "book");
-		SpletSheetCommand.reloadSheet(command, "book2");
-	}
+  public static void reloadSpletSheet(CommandSender command) {
+    bookMap.clear();
+    SpletSheetCommand.reloadSheet(command, "book");
+    SpletSheetCommand.reloadSheet(command, "book2");
+  }
 
-	public static Set<String> getNames() {
-		return bookMap.keySet();
-	}
+  public static Set<String> getNames() {
+    return bookMap.keySet();
+  }
 
-	/**
-	 * 本の情報を登録する
-	 *
-	 * @param data
-	 */
-	public static void regist(BookData data) {
-		bookMap.put(data.getId(), data);
-		BookItem bookItem = new BookItem(data);
-		ItemManager.registItem(bookItem);
-	}
+  /**
+   * 本の情報を登録する
+   *
+   * @param data
+   */
+  public static void regist(BookData data) {
+    bookMap.put(data.getId(), data);
+    BookItem bookItem = new BookItem(data);
+    ItemManager.registItem(bookItem);
+  }
 
-	public static ItemInterface getItem(String id) {
-		ItemInterface customItemById = ItemManager.getCustomItemById(id);
-		return customItemById;
-	}
+  public static ItemInterface getItem(String id) {
+    ItemInterface customItemById = ItemManager.getCustomItemById(id);
+    return customItemById;
+  }
 
-	/**
-	 * 本を開く
-	 * @param p
-	 * @param id
-	 */
-	public static void opneBook(Player p, String id) {
-		BookData bookData = bookMap.get(id);
-		if (bookData != null) {
-			openBook(bookData.toBookItem(), p);
+  /**
+   * 本を開く
+   * 
+   * @param p
+   * @param id
+   */
+  public static void opneBook(Player p, String id) {
+    BookData bookData = bookMap.get(id);
+    if (bookData != null) {
+      openBook(bookData.toBookItem(), p);
 
-			p.sendMessage(ChatColor.GOLD + "[BOOK] " + ChatColor.GREEN + bookData.getTitile() + "の本を開きました");
-		}
-	}
+      p.sendMessage(ChatColor.GOLD + "[BOOK] " + ChatColor.GREEN + bookData.getTitile() + "の本を開きました");
+    }
+  }
 
-	public static void openBook(ItemStack book, Player p) {
-		EntityPlayer ePlayer = ((CraftPlayer) p).getHandle();
-		net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(book);
+  public static void openBook(ItemStack book, Player p) {
+    EntityPlayer ePlayer = ((CraftPlayer) p).getHandle();
+    net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(book);
 
-		// 本で無いなら無視
-		if (nmsStack.getItem() instanceof ItemWrittenBook) {
-			ItemStack itemInHand2 = p.getItemInHand();
-			// 一瞬だけ本に持ち帰る
-			changeBook(nmsStack, ePlayer);
-			// 本を開ける
-			ePlayer.openBook(nmsStack);
-			// アイテムを戻す
-			p.setItemInHand(itemInHand2);
-			p.updateInventory();
-		}
-	}
+    // 本で無いなら無視
+    if (nmsStack.getItem() instanceof ItemWrittenBook) {
+      ItemStack itemInHand2 = p.getItemInHand();
+      // 一瞬だけ本に持ち帰る
+      changeBook(nmsStack, ePlayer);
+      // 本を開ける
+      ePlayer.openBook(nmsStack);
+      // アイテムを戻す
+      p.setItemInHand(itemInHand2);
+      p.updateInventory();
+    }
+  }
 
-	public static void changeBook(net.minecraft.server.v1_8_R1.ItemStack itemstack, EntityHuman entityhuman) {
-		if (itemstack != null && itemstack.getTag() != null) {
-			NBTTagCompound nbttagcompound = itemstack.getTag();
+  public static void changeBook(net.minecraft.server.v1_8_R1.ItemStack itemstack, EntityHuman entityhuman) {
+    if (itemstack != null && itemstack.getTag() != null) {
+      NBTTagCompound nbttagcompound = itemstack.getTag();
 
-			// 本を開いているにセットする
-			nbttagcompound.setBoolean("resolved", true);
-			if (ItemWrittenBook.b(nbttagcompound)) {
-				NBTTagList nbttaglist = nbttagcompound.getList("pages", 8);
+      // 本を開いているにセットする
+      nbttagcompound.setBoolean("resolved", true);
+      if (ItemWrittenBook.b(nbttagcompound)) {
+        NBTTagList nbttaglist = nbttagcompound.getList("pages", 8);
 
-				for (int i = 0; i < nbttaglist.size(); ++i) {
-					String s = nbttaglist.getString(i);
+        for (int i = 0; i < nbttaglist.size(); ++i) {
+          String s = nbttaglist.getString(i);
 
-					Object object;
+          Object object;
 
-					try {
-						IChatBaseComponent ichatbasecomponent = ChatSerializer.a(s);
+          try {
+            IChatBaseComponent ichatbasecomponent = ChatSerializer.a(s);
 
-						object = ChatComponentUtils.filterForDisplay(entityhuman, ichatbasecomponent, entityhuman);
-					} catch (Exception exception) {
-						object = new ChatComponentText(s);
-					}
+            object = ChatComponentUtils.filterForDisplay(entityhuman, ichatbasecomponent, entityhuman);
+          } catch (Exception exception) {
+            object = new ChatComponentText(s);
+          }
 
-					nbttaglist.a(i, new NBTTagString(ChatSerializer.a((IChatBaseComponent) object)));
-				}
+          nbttaglist.a(i, new NBTTagString(ChatSerializer.a((IChatBaseComponent) object)));
+        }
 
-				nbttagcompound.set("pages", nbttaglist);
-				Slot slot = entityhuman.activeContainer.getSlot(entityhuman.inventory,
-						entityhuman.inventory.itemInHandIndex);
-				((EntityPlayer) entityhuman).playerConnection
-						.sendPacket(new PacketPlayOutSetSlot(0, slot.rawSlotIndex, itemstack));
+        nbttagcompound.set("pages", nbttaglist);
+        Slot slot = entityhuman.activeContainer.getSlot(entityhuman.inventory,
+            entityhuman.inventory.itemInHandIndex);
+        ((EntityPlayer) entityhuman).playerConnection
+            .sendPacket(new PacketPlayOutSetSlot(0, slot.rawSlotIndex, itemstack));
 
-			}
-		}
+      }
+    }
 
-	}
+  }
 }

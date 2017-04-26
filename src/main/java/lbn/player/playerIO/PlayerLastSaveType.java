@@ -49,9 +49,7 @@ public class PlayerLastSaveType {
         useType.put(UUID.fromString(entry.getKey()), entry.getValue());
       }
 
-      if (useType == null) {
-        throw new LbnRuntimeException("json is invalid: last_save_type.txt");
-      }
+      if (useType == null) { throw new LbnRuntimeException("json is invalid: last_save_type.txt"); }
     } catch (Exception e) {
       e.printStackTrace();
       useType = new HashMap<UUID, String>();

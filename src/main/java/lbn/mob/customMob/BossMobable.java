@@ -8,18 +8,18 @@ import lbn.chest.BossChest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
-public interface BossMobable{
-	public BossChest getBossChest();
+public interface BossMobable {
+  public BossChest getBossChest();
 
-	public LivingEntity getEntity();
+  public LivingEntity getEntity();
 
-	public EntityType getEntityType();
+  public EntityType getEntityType();
 
-	public void updateName(boolean addDamage);
+  public void updateName(boolean addDamage);
 
-	public String getName();
+  public String getName();
 
-	public Set<TheLowPlayer> getCombatPlayer();
+  public Set<TheLowPlayer> getCombatPlayer();
 
-	public void setEntity(LivingEntity e);
+  public void setEntity(LivingEntity e);
 }

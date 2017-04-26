@@ -25,7 +25,7 @@ import org.bukkit.util.StringUtil;
 import com.google.common.collect.ImmutableList;
 
 public class CommandExtraMob implements CommandExecutor, TabCompleter {
-  
+
   @Override
   public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg0 instanceof Player) {
@@ -35,15 +35,13 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
       } else {
         return spawnByPlayer(arg3, (Player) arg0);
       }
-    } else if (arg0 instanceof BlockCommandSender) {
-      return spawnByCommandBlock(arg3, (BlockCommandSender) arg0);
-    }
+    } else if (arg0 instanceof BlockCommandSender) { return spawnByCommandBlock(arg3, (BlockCommandSender) arg0); }
     return false;
-    
+
   }
-  
+
   static int count = 0;
-  
+
   private void spawnAll(Player p) {
     // int i = -1;
     Collection<AbstractMob<?>> allMobs = MobHolder.getAllMobs();
@@ -54,7 +52,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
         return o1.getName().compareTo(o2.getName());
       }
     });
-    
+
     for (AbstractMob<?> mob : arrayList) {
       if (mob.getEntityType() == EntityType.VILLAGER) {
         continue;
@@ -73,7 +71,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
     }
     // count++;
   }
-  
+
   /**
    * mob名 x y z [count]
    *
@@ -88,17 +86,17 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
       if (arg3.length == 5) {
         count = Integer.parseInt(arg3[4]);
       }
-      
+
       if (count > 50) {
         count = 50;
       }
-      
+
       AbstractMob<?> mob = MobHolder.getMob(mobName.replace("_", " "));
       if (mob == null || mob.isNullMob()) {
         arg0.sendMessage("mobが存在しません。");
         return false;
       }
-      
+
       for (int i = 0; i < count; i++) {
         if (arg3.length == 1) {
           mob.spawn(arg0.getBlock().getLocation());
@@ -113,7 +111,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
       return false;
     }
   }
-  
+
   protected boolean spawnByPlayer(String[] arg3, Player p) {
     String mobName = arg3[0];
     int count = 1;
@@ -121,13 +119,13 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
       if (arg3.length == 4) {
         count = Integer.parseInt(arg3[3]);
       }
-      
+
       AbstractMob<?> mob = MobHolder.getMob(mobName.replace("_", " "));
       if (mob == null || mob.isNullMob()) {
         p.sendMessage("mobが存在しません。");
         return false;
       }
-      
+
       for (int i = 0; i < count; i++) {
         if (arg3.length == 1) {
           mob.spawn(p.getLocation());
@@ -143,7 +141,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
       return false;
     }
   }
-  
+
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length == 1) {
@@ -153,7 +151,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
     }
     return ImmutableList.of();
   }
-  
+
   protected Collection<String> getItemMap() {
     ArrayList<String> arrayList = new ArrayList<String>();
     for (AbstractMob<?> mob : MobHolder.getAllMobs()) {

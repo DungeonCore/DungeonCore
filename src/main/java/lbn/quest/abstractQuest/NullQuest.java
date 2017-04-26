@@ -10,176 +10,170 @@ import lbn.quest.Quest;
 
 import org.bukkit.entity.Player;
 
-public class NullQuest implements Quest{
+public class NullQuest implements Quest {
 
-	String id;
+  String id;
 
-	public NullQuest(String id) {
-		this.id = id;
-	}
+  public NullQuest(String id) {
+    this.id = id;
+  }
 
-	@Override
-	public String getId() {
-		return id;
-	}
+  @Override
+  public String getId() {
+    return id;
+  }
 
-	@Override
-	public String getName() {
-		return id;
-	}
+  @Override
+  public String getName() {
+    return id;
+  }
 
-	@Override
-	public String[] getQuestDetail() {
-		return new String[]{"クエストが存在しません"};
-	}
+  @Override
+  public String[] getQuestDetail() {
+    return new String[] { "クエストが存在しません" };
+  }
 
-	@Override
-	public Set<Quest> getBeforeQuest() {
-		return null;
-	}
+  @Override
+  public Set<Quest> getBeforeQuest() {
+    return null;
+  }
 
-	@Override
-	public boolean isMainQuest() {
-		return false;
-	}
+  @Override
+  public boolean isMainQuest() {
+    return false;
+  }
 
-	@Override
-	public boolean isStartOverlap() {
-		return false;
-	}
+  @Override
+  public boolean isStartOverlap() {
+    return false;
+  }
 
-	@Override
-	public String getCurrentInfo(Player p) {
-		return null;
-	}
+  @Override
+  public String getCurrentInfo(Player p) {
+    return null;
+  }
 
-	@Override
-	public void playCompleteSound(Player p) {
+  @Override
+  public void playCompleteSound(Player p) {
 
-	}
+  }
 
-	@Override
-	public void playDistructionSound(Player p) {
+  @Override
+  public void playDistructionSound(Player p) {
 
-	}
+  }
 
-	@Override
-	public void playStartSound(Player p) {
+  @Override
+  public void playStartSound(Player p) {
 
-	}
+  }
 
-	@Override
-	public boolean canDestory() {
-		return false;
-	}
+  @Override
+  public boolean canDestory() {
+    return false;
+  }
 
-	@Override
-	public String[] getTalkOnStart() {
-		return null;
-	}
+  @Override
+  public String[] getTalkOnStart() {
+    return null;
+  }
 
-	@Override
-	public String[] getTalkOnComplate() {
-		return null;
-	}
+  @Override
+  public String[] getTalkOnComplate() {
+    return null;
+  }
 
-	@Override
-	public void giveRewardItem(Player p) {
-	}
+  @Override
+  public void giveRewardItem(Player p) {}
 
-	@Override
-	public Quest getAutoExecuteNextQuest() {
-		return null;
-	}
+  @Override
+  public Quest getAutoExecuteNextQuest() {
+    return null;
+  }
 
-	@Override
-	public boolean isShowTitle() {
-		return false;
-	}
+  @Override
+  public boolean isShowTitle() {
+    return false;
+  }
 
-	@Override
-	public long getCoolTimeSecound() {
-		return 0;
-	}
+  @Override
+  public long getCoolTimeSecound() {
+    return 0;
+  }
 
-	@Override
-	public boolean canGetRewordItem(Player p) {
-		return false;
-	}
+  @Override
+  public boolean canGetRewordItem(Player p) {
+    return false;
+  }
 
-	@Override
-	public boolean isNullQuest() {
-		return true;
-	}
+  @Override
+  public boolean isNullQuest() {
+    return true;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) { return false; }
 
-		if (obj instanceof Quest) {
-			return getId().equals(((Quest) obj).getId());
-		}
-		return true;
-	}
+    if (obj instanceof Quest) { return getId().equals(((Quest) obj).getId()); }
+    return true;
+  }
 
-	@Override
-	public int hashCode() {
-		return getId().hashCode();
-	}
+  @Override
+  public int hashCode() {
+    return getId().hashCode();
+  }
 
-	@Override
-	public QuestType getQuestType() {
-		return QuestType.UnknownQuest;
-	}
+  @Override
+  public QuestType getQuestType() {
+    return QuestType.UnknownQuest;
+  }
 
-	@Override
-	public boolean isComplate(int data) {
-		return false;
-	}
+  @Override
+  public boolean isComplate(int data) {
+    return false;
+  }
 
-	@Override
-	public void onSatisfyComplateCondtion(Player p) {
+  @Override
+  public void onSatisfyComplateCondtion(Player p) {
 
-	}
+  }
 
-	@Override
-	public int getAvailableMainLevel() {
-		return 0;
-	}
+  @Override
+  public int getAvailableMainLevel() {
+    return 0;
+  }
 
-	@Override
-	public List<String> getRewordText() {
-		return Arrays.asList("なし");
-	}
+  @Override
+  public List<String> getRewordText() {
+    return Arrays.asList("なし");
+  }
 
-	@Override
-	public String getStartVillagerId() {
-		return null;
-	}
+  @Override
+  public String getStartVillagerId() {
+    return null;
+  }
 
-	@Override
-	public String getEndVillagerId() {
-		return null;
-	}
+  @Override
+  public String getEndVillagerId() {
+    return null;
+  }
 
-	@Override
-	public String getComplateCondition() {
-		return "クエスト未登録";
-	}
+  @Override
+  public String getComplateCondition() {
+    return "クエスト未登録";
+  }
 
-	@Override
-	public void onStartQuestEvent(StartQuestEvent e) {
-	}
+  @Override
+  public void onStartQuestEvent(StartQuestEvent e) {}
 
-	@Override
-	public boolean isShowProceessText() {
-		return false;
-	}
+  @Override
+  public boolean isShowProceessText() {
+    return false;
+  }
 
-	@Override
-	public ItemInterface getQuestBeforeItem() {
-		return null;
-	}
+  @Override
+  public ItemInterface getQuestBeforeItem() {
+    return null;
+  }
 }

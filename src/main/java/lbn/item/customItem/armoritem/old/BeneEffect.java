@@ -6,21 +6,21 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class BeneEffect {
-	String id;
-	String name;
+  String id;
+  String name;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setDamage(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
-			LivingEntity mob) {
+  public void setDamage(Player me, EntityDamageEvent e,
+      ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+      LivingEntity mob) {
 
-	}
+  }
 
 }

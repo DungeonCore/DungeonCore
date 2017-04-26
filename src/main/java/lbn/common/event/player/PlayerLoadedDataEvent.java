@@ -6,49 +6,50 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 
-public class PlayerLoadedDataEvent extends TheLowPlayerEvent{
+public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
 
-	boolean isSuccess;
+  boolean isSuccess;
 
-	Player onlinePlayer;
-	OfflinePlayer offlinePlayer;
+  Player onlinePlayer;
+  OfflinePlayer offlinePlayer;
 
-	public PlayerLoadedDataEvent(TheLowPlayer player, OfflinePlayer p) {
-		super(player);
-		this.isSuccess = (player != null);
+  public PlayerLoadedDataEvent(TheLowPlayer player, OfflinePlayer p) {
+    super(player);
+    this.isSuccess = (player != null);
 
-		this.offlinePlayer = p;
-		if (p instanceof Player) {
-			onlinePlayer = (Player) p;
-		}
-	}
+    this.offlinePlayer = p;
+    if (p instanceof Player) {
+      onlinePlayer = (Player) p;
+    }
+  }
 
-	@Override
-	public Player getPlayer() {
-		return onlinePlayer;
-	}
+  @Override
+  public Player getPlayer() {
+    return onlinePlayer;
+  }
 
-	@Override
-	public OfflinePlayer getOfflinePlayer() {
-		return offlinePlayer;
-	}
+  @Override
+  public OfflinePlayer getOfflinePlayer() {
+    return offlinePlayer;
+  }
 
-	/**
-	 * ロードに成功したならTRUE
-	 * @return
-	 */
-	public boolean isSuccess() {
-		return isSuccess;
-	}
+  /**
+   * ロードに成功したならTRUE
+   * 
+   * @return
+   */
+  public boolean isSuccess() {
+    return isSuccess;
+  }
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 }

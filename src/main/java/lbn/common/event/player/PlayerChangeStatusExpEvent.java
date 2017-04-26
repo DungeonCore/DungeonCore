@@ -6,38 +6,38 @@ import lbn.player.status.StatusAddReason;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent{
-	private static final HandlerList handlers = new HandlerList();
+public class PlayerChangeStatusExpEvent extends TheLowPlayerEvent {
+  private static final HandlerList handlers = new HandlerList();
 
-	int addExp;
-	LevelType levelType;
-	StatusAddReason reason;
+  int addExp;
+  LevelType levelType;
+  StatusAddReason reason;
 
-	public PlayerChangeStatusExpEvent(TheLowPlayer p, int addExp, LevelType levelType, StatusAddReason reason) {
-		super(p);
-		this.addExp = addExp;
-		this.levelType = levelType;
-		this.reason = reason;
-	}
+  public PlayerChangeStatusExpEvent(TheLowPlayer p, int addExp, LevelType levelType, StatusAddReason reason) {
+    super(p);
+    this.addExp = addExp;
+    this.levelType = levelType;
+    this.reason = reason;
+  }
 
-	public StatusAddReason getReason() {
-		return reason;
-	}
+  public StatusAddReason getReason() {
+    return reason;
+  }
 
-	public int getAddExp() {
-		return addExp;
-	}
+  public int getAddExp() {
+    return addExp;
+  }
 
-	public LevelType getLevelType() {
-		return levelType;
-	}
+  public LevelType getLevelType() {
+    return levelType;
+  }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 }

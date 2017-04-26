@@ -7,29 +7,30 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
-public abstract class TheLowPlayerEvent extends Event{
-	TheLowPlayer player;
-	public TheLowPlayerEvent(TheLowPlayer player) {
-		this.player = player;
-	}
+public abstract class TheLowPlayerEvent extends Event {
+  TheLowPlayer player;
 
-	public Player getPlayer() {
-		return player.getOnlinePlayer();
-	}
+  public TheLowPlayerEvent(TheLowPlayer player) {
+    this.player = player;
+  }
 
-	public OfflinePlayer getOfflinePlayer() {
-		return player.getOfflinePlayer();
-	}
+  public Player getPlayer() {
+    return player.getOnlinePlayer();
+  }
 
-	public TheLowPlayer getTheLowPlayer() {
-		return player;
-	}
+  public OfflinePlayer getOfflinePlayer() {
+    return player.getOfflinePlayer();
+  }
 
-	public void callEvent() {
-		Bukkit.getServer().getPluginManager().callEvent(this);
-	}
+  public TheLowPlayer getTheLowPlayer() {
+    return player;
+  }
 
-	public boolean isOnline() {
-		return player.getOfflinePlayer().isOnline();
-	}
+  public void callEvent() {
+    Bukkit.getServer().getPluginManager().callEvent(this);
+  }
+
+  public boolean isOnline() {
+    return player.getOfflinePlayer().isOnline();
+  }
 }

@@ -18,46 +18,46 @@ import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
 import org.bukkit.entity.Player;
 
 public class TheLowTrades {
-	/**
-	 * 設定したTrade画面を開く
-	 * @param merchant
-	 * @param p
-	 */
-	public static void open(TheLowMerchant merchant, Player p) {
-		openTrade(new MerchantImplemention(merchant), ((CraftPlayer) p).getHandle(), merchant);
-	}
+  /**
+   * 設定したTrade画面を開く
+   * 
+   * @param merchant
+   * @param p
+   */
+  public static void open(TheLowMerchant merchant, Player p) {
+    openTrade(new MerchantImplemention(merchant), ((CraftPlayer) p).getHandle(), merchant);
+  }
 
-	@SuppressWarnings("unchecked")
-	private static void openTrade(MerchantImplemention imerchant, EntityPlayer p, TheLowMerchant merchant) {
-		Container container = CraftEventFactory.callInventoryOpenEvent(p, new ContainerMerchant(p.inventory, imerchant, p.world));
-		if (container == null) {
-			return;
-		}
+  @SuppressWarnings("unchecked")
+  private static void openTrade(MerchantImplemention imerchant, EntityPlayer p, TheLowMerchant merchant) {
+    Container container = CraftEventFactory.callInventoryOpenEvent(p, new ContainerMerchant(p.inventory, imerchant, p.world));
+    if (container == null) { return; }
 
-		imerchant.a_(p);
+    imerchant.a_(p);
 
-		int containerCounter = imerchant.getContainerCounter();
+    int containerCounter = imerchant.getContainerCounter();
 
-		//ココらへんはマイクラの処理のまま
-		p.nextContainerCounter();
-		p.activeContainer = container;
-		p.activeContainer.windowId = containerCounter;
-		p.activeContainer.addSlotListener(p);
-		InventoryMerchant inventorymerchant = ((ContainerMerchant) p.activeContainer).e();
-		IChatBaseComponent ichatbasecomponent = imerchant.getScoreboardDisplayName();
+    // ココらへんはマイクラの処理のまま
+    p.nextContainerCounter();
+    p.activeContainer = container;
+    p.activeContainer.windowId = containerCounter;
+    p.activeContainer.addSlotListener(p);
+    InventoryMerchant inventorymerchant = ((ContainerMerchant) p.activeContainer).e();
+    IChatBaseComponent ichatbasecomponent = imerchant.getScoreboardDisplayName();
 
-		p.playerConnection.sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager", ichatbasecomponent, inventorymerchant.getSize()));
+    p.playerConnection
+        .sendPacket(new PacketPlayOutOpenWindow(containerCounter, "minecraft:villager", ichatbasecomponent, inventorymerchant.getSize()));
 
-		//レシピを登録する
-		MerchantRecipeList merchantrecipelist = new MerchantRecipeListImplemention(merchant);
-		for (TheLowMerchantRecipe recipe : merchant.getInitRecipes()) {
-			merchantrecipelist.add(recipe.toMerchantRecipe());
-		}
+    // レシピを登録する
+    MerchantRecipeList merchantrecipelist = new MerchantRecipeListImplemention(merchant);
+    for (TheLowMerchantRecipe recipe : merchant.getInitRecipes()) {
+      merchantrecipelist.add(recipe.toMerchantRecipe());
+    }
 
-		//レシピのパケットを送る
-		PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
-		packetdataserializer.writeInt(containerCounter);
-		merchantrecipelist.a(packetdataserializer);
-		p.playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
-	}
+    // レシピのパケットを送る
+    PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
+    packetdataserializer.writeInt(containerCounter);
+    merchantrecipelist.a(packetdataserializer);
+    p.playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
+  }
 }

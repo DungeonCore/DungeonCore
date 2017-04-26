@@ -14,131 +14,126 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-public class CustomWitch extends EntityWitch implements ICustomEntity<Witch>{
+public class CustomWitch extends EntityWitch implements ICustomEntity<Witch> {
 
-	private LbnMobTag tag;
+  private LbnMobTag tag;
 
-	public CustomWitch(World w) {
-		this(w, new LbnMobTag(EntityType.WITCH));
-	}
+  public CustomWitch(World w) {
+    this(w, new LbnMobTag(EntityType.WITCH));
+  }
 
-	public CustomWitch(World w, LbnMobTag tag) {
-		super(w);
-		this.tag = tag;
-	}
+  public CustomWitch(World w, LbnMobTag tag) {
+    super(w);
+    this.tag = tag;
+  }
 
-	boolean isChangeItem = true;
+  boolean isChangeItem = true;
 
-	public CustomWitch(org.bukkit.World w, AbstractWitch mobInstance) {
-		super(((CraftWorld)w).getHandle());
+  public CustomWitch(org.bukkit.World w, AbstractWitch mobInstance) {
+    super(((CraftWorld) w).getHandle());
 
-		isChangeItem = mobInstance.isChangeItem();
-	}
+    isChangeItem = mobInstance.isChangeItem();
+  }
 
-	@Override
-	public Witch spawn(Location loc) {
-		WorldServer world = ((CraftWorld)loc.getWorld()).getHandle();
-		//位置を指定
-		setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(),  loc.getPitch());
-		 //ワールドにentityを追加
-		 world.addEntity(this, SpawnReason.CUSTOM);
-		 return (Witch) getBukkitEntity();
-	}
+  @Override
+  public Witch spawn(Location loc) {
+    WorldServer world = ((CraftWorld) loc.getWorld()).getHandle();
+    // 位置を指定
+    setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+    // ワールドにentityを追加
+    world.addEntity(this, SpawnReason.CUSTOM);
+    return (Witch) getBukkitEntity();
+  }
 
-	@Override
-	public void setPosition(double d0, double d1, double d2) {
-		super.setPosition(d0, d1, d2);
-		spawnLocation = new Location(world.getWorld(), d0, d1, d2);
-	}
-	Location spawnLocation = null;
+  @Override
+  public void setPosition(double d0, double d1, double d2) {
+    super.setPosition(d0, d1, d2);
+    spawnLocation = new Location(world.getWorld(), d0, d1, d2);
+  }
 
-//	@Override
-//	public boolean N() {
-//		if (!isIgnoreWater) {
-//			return super.N();
-//		} else {
-//			inWater = false;
-//			return false;
-//		}
-//	}
-//
-//	@Override
-//	public boolean M() {
-//		if (!isIgnoreWater) {
-//			return super.M();
-//		} else {
-//			return false;
-//		}
-//	}
+  Location spawnLocation = null;
 
-	@Override
-	public void a(NBTTagCompound nbttagcompound) {
-		super.a(nbttagcompound);
-		isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
-	}
+  // @Override
+  // public boolean N() {
+  // if (!isIgnoreWater) {
+  // return super.N();
+  // } else {
+  // inWater = false;
+  // return false;
+  // }
+  // }
+  //
+  // @Override
+  // public boolean M() {
+  // if (!isIgnoreWater) {
+  // return super.M();
+  // } else {
+  // return false;
+  // }
+  // }
 
-	@Override
-	public boolean W() {
-		if (!isIgnoreWater) {
-			return super.W();
-		} else {
-			inWater = false;
-			return false;
-		}
-	}
+  @Override
+  public void a(NBTTagCompound nbttagcompound) {
+    super.a(nbttagcompound);
+    isIgnoreWater = nbttagcompound.getBoolean("IsWaterMonster");
+  }
 
-	@Override
-	public boolean V() {
-		if (!isIgnoreWater) {
-			return super.V();
-		} else {
-			return false;
-		}
-	}
+  @Override
+  public boolean W() {
+    if (!isIgnoreWater) {
+      return super.W();
+    } else {
+      inWater = false;
+      return false;
+    }
+  }
 
-	boolean isIgnoreWater = false;
+  @Override
+  public boolean V() {
+    if (!isIgnoreWater) {
+      return super.V();
+    } else {
+      return false;
+    }
+  }
 
-	@Override
-	public LbnMobTag getMobTag() {
-		return tag;
-	}
+  boolean isIgnoreWater = false;
 
-	int spawnCount = 0;
+  @Override
+  public LbnMobTag getMobTag() {
+    return tag;
+  }
 
-	@Override
-	protected void D() {
-		super.D();
+  int spawnCount = 0;
 
-		if (getMobTag() == null) {
-			return;
-		}
+  @Override
+  protected void D() {
+    super.D();
 
-		//指定した距離以上離れていたら殺す
-		spawnCount++;
-		if (spawnCount >= 60) {
-			spawnCount = 0;
-			if (spawnLocation == null) {
-				return;
-			}
-			if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < 100 * 100) {
-				return;
-			}
-			if (getMobTag().isBoss()) {
-				getBukkitEntity().teleport(spawnLocation);
-			} else {
-				die();
-			}
-		}
-	}
+    if (getMobTag() == null) { return; }
 
-//	@Override
-//	public void e() {
-//		ItemStack itemstack = this.be();
-//		super.e();
-//		//持っているアイテムを戻す
-//		if (!isChangeItem) {
-//			setEquipment(0, itemstack);
-//		}
-//
-//	}
+    // 指定した距離以上離れていたら殺す
+    spawnCount++;
+    if (spawnCount >= 60) {
+      spawnCount = 0;
+      if (spawnLocation == null) { return; }
+      if (JavaUtil.getDistanceSquared(spawnLocation, locX, locY, locZ) < 100 * 100) { return; }
+      if (getMobTag().isBoss()) {
+        getBukkitEntity().teleport(spawnLocation);
+      } else {
+        die();
+      }
+    }
+  }
+
+  // @Override
+  // public void e() {
+  // ItemStack itemstack = this.be();
+  // super.e();
+  // //持っているアイテムを戻す
+  // if (!isChangeItem) {
+  // setEquipment(0, itemstack);
+  // }
+  //
+  // }
 }

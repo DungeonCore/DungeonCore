@@ -1,19 +1,15 @@
 package lbn.player.status;
 
 public enum StatusAddReason {
-	monster_drop(true),
-	food_eat(true),
-	quest_reword(true),
-	system(false),
-	commad(true);
+  monster_drop(true), food_eat(true), quest_reword(true), system(false), commad(true);
 
-	boolean isPrintMessageLog;
+  boolean isPrintMessageLog;
 
-	StatusAddReason(boolean isPrintMessageLog) {
-		this.isPrintMessageLog = isPrintMessageLog;
-	}
+  StatusAddReason(boolean isPrintMessageLog) {
+    this.isPrintMessageLog = isPrintMessageLog;
+  }
 
-	public boolean isPrintMessageLog() {
-		return isPrintMessageLog;
-	}
+  public boolean isPrintMessageLog() {
+    return isPrintMessageLog;
+  }
 }

@@ -5,7 +5,7 @@ package lbn.mob;
  *
  */
 public enum AttackReason {
-	ATTACK_MOB, //敵対モブ
-	COUNTER_ATTACK, //反撃
-	DEFAULT;//マイクラ初期値
+  ATTACK_MOB, // 敵対モブ
+  COUNTER_ATTACK, // 反撃
+  DEFAULT;// マイクラ初期値
 }

@@ -9,64 +9,63 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 public enum BeneEffectType {
-	BENE_EFFECT_UNKNOW(new BeneEffectNull(), "????????", "17");
+  BENE_EFFECT_UNKNOW(new BeneEffectNull(), "????????", "17");
 
-	public static final String BENE_ID = "   beneid:";
+  public static final String BENE_ID = "   beneid:";
 
-	static HashMap<String, BeneEffectType> idMap = new HashMap<String, BeneEffectType>();
-	static {
-		for (BeneEffectType type : values()) {
-			idMap.put(type.id, type);
-		}
-	}
+  static HashMap<String, BeneEffectType> idMap = new HashMap<String, BeneEffectType>();
+  static {
+    for (BeneEffectType type : values()) {
+      idMap.put(type.id, type);
+    }
+  }
 
-	BeneEffectExcutor excuter;
-	String title;
-	String id;
-	private BeneEffectType(BeneEffectExcutor excuter, String title, String id) {
-		this.excuter = excuter;
-		this.title = title;
-		this.id = id;
-	}
+  BeneEffectExcutor excuter;
+  String title;
+  String id;
 
-	public void execute(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
-			LivingEntity mob, int level) {
-		excuter.execute(me, e, armor, isArmorCutDamage, isBoss, mob, level);
-	}
+  private BeneEffectType(BeneEffectExcutor excuter, String title, String id) {
+    this.excuter = excuter;
+    this.title = title;
+    this.id = id;
+  }
 
-	public String getLine(int level) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(title);
+  public void execute(Player me, EntityDamageEvent e,
+      ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+      LivingEntity mob, int level) {
+    excuter.execute(me, e, armor, isArmorCutDamage, isBoss, mob, level);
+  }
 
-		if (this != BENE_EFFECT_UNKNOW) {
-			stringBuilder.append("  lv.");
-			stringBuilder.append(level);
-		}
-		stringBuilder.append(ChatColor.BLACK);
-		stringBuilder.append(BENE_ID);
-		stringBuilder.append(id);
-		return stringBuilder.toString();
-	}
+  public String getLine(int level) {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(title);
 
-	public static BeneEffectType getBeneTypeById(String id) {
-		return idMap.get(id);
-	}
+    if (this != BENE_EFFECT_UNKNOW) {
+      stringBuilder.append("  lv.");
+      stringBuilder.append(level);
+    }
+    stringBuilder.append(ChatColor.BLACK);
+    stringBuilder.append(BENE_ID);
+    stringBuilder.append(id);
+    return stringBuilder.toString();
+  }
+
+  public static BeneEffectType getBeneTypeById(String id) {
+    return idMap.get(id);
+  }
 }
 
 interface BeneEffectExcutor {
-	void execute(Player me, EntityDamageEvent e,
-			ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
-			LivingEntity mob, int level);
+  void execute(Player me, EntityDamageEvent e,
+      ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+      LivingEntity mob, int level);
 }
 
 class BeneEffectNull implements BeneEffectExcutor {
 
-	@Override
-	public void execute(Player me, EntityDamageEvent e, ItemStack armor,
-			boolean isArmorCutDamage, boolean isBoss, LivingEntity mob,
-			int level) {
-	}
+  @Override
+  public void execute(Player me, EntityDamageEvent e, ItemStack armor,
+      boolean isArmorCutDamage, boolean isBoss, LivingEntity mob,
+      int level) {}
 
 }
-

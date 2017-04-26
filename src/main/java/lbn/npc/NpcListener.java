@@ -17,64 +17,64 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-public class NpcListener implements Listener{
-	@EventHandler
-	public void onNPCRightClickEvent(NPCRightClickEvent e) {
-		NpcManager.onNPCRightClickEvent(e);
-	}
+public class NpcListener implements Listener {
+  @EventHandler
+  public void onNPCRightClickEvent(NPCRightClickEvent e) {
+    NpcManager.onNPCRightClickEvent(e);
+  }
 
-	@EventHandler
-	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
-		NpcManager.onNPCLeftClickEvent(e);
-	}
+  @EventHandler
+  public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
+    NpcManager.onNPCLeftClickEvent(e);
+  }
 
-	@EventHandler
-	public void onNPCDamageEvent(NPCDamageEntityEvent e) {
-		NpcManager.onNPCDamageEvent(e);
-		e.setCancelled(true);
-	}
+  @EventHandler
+  public void onNPCDamageEvent(NPCDamageEntityEvent e) {
+    NpcManager.onNPCDamageEvent(e);
+    e.setCancelled(true);
+  }
 
-	@EventHandler
-	public void onNPCDamageEvent(NPCDamageByBlockEvent e) {
-		NpcManager.onNPCDamageEvent(e);
-		e.setCancelled(true);
-	}
+  @EventHandler
+  public void onNPCDamageEvent(NPCDamageByBlockEvent e) {
+    NpcManager.onNPCDamageEvent(e);
+    e.setCancelled(true);
+  }
 
-	@EventHandler
-	public void onNPCDamageEvent(NPCDamageByEntityEvent e) {
-		NpcManager.onNPCDamageEvent(e);
-		e.setCancelled(true);
-	}
+  @EventHandler
+  public void onNPCDamageEvent(NPCDamageByEntityEvent e) {
+    NpcManager.onNPCDamageEvent(e);
+    e.setCancelled(true);
+  }
 
-	@EventHandler(priority=EventPriority.MONITOR)
-	public void onDamageEvent(EntityDamageEvent e) {
-		if (NpcManager.isNpc(e.getEntity())) {
-			e.setCancelled(true);
-		}
-	}
+  @EventHandler(priority = EventPriority.MONITOR)
+  public void onDamageEvent(EntityDamageEvent e) {
+    if (NpcManager.isNpc(e.getEntity())) {
+      e.setCancelled(true);
+    }
+  }
 
-	@EventHandler
-	public void onNPCSpawnEvent(NPCSpawnEvent e) {
-		NpcManager.onNPCSpawnEvent(e);
-	}
+  @EventHandler
+  public void onNPCSpawnEvent(NPCSpawnEvent e) {
+    NpcManager.onNPCSpawnEvent(e);
+  }
 
-	@EventHandler
-	public void onNPCDespawnEvent(NPCDespawnEvent e) {
-		NpcManager.onNPCDespawnEvent(e);
-	}
+  @EventHandler
+  public void onNPCDespawnEvent(NPCDespawnEvent e) {
+    NpcManager.onNPCDespawnEvent(e);
+  }
 
-	@EventHandler
-	public void onPlayerLogin(PlayerLoginEvent e) {
-		FollowerNpcManager.hideAllFollowerNpc(e.getPlayer());
-	}
+  @EventHandler
+  public void onPlayerLogin(PlayerLoginEvent e) {
+    FollowerNpcManager.hideAllFollowerNpc(e.getPlayer());
+  }
 
-	@EventHandler
-	public void onTeleportWorld(PlayerChangedWorldEvent e) {
-		FollowerNpcManager.despawn(e.getPlayer());
-	}
+  @EventHandler
+  public void onTeleportWorld(PlayerChangedWorldEvent e) {
+    FollowerNpcManager.despawn(e.getPlayer());
+  }
 
-	@EventHandler
-	public void onShiftPlayer(PlayerToggleSneakEvent e) {
-		FollowerNpcManager.onToggleEvent(e);
-	}
+  @EventHandler
+  public void onShiftPlayer(PlayerToggleSneakEvent e) {
+    FollowerNpcManager.onToggleEvent(e);
+  }
 }

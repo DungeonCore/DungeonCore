@@ -5,19 +5,19 @@ package lbn.quest;
  *
  */
 public enum QuestProcessingStatus {
-	NONE(false),//その他
-	NOT_START(false),//開始していない
-	PROCESSING(true),//実行中
-	PROCESS_END(true);//終了条件を満たしてしるがまだ実行中
+  NONE(false),// その他
+  NOT_START(false),// 開始していない
+  PROCESSING(true),// 実行中
+  PROCESS_END(true);// 終了条件を満たしてしるがまだ実行中
 
-	private QuestProcessingStatus(boolean isDoing) {
-		this.isDoing = isDoing;
-	}
+  private QuestProcessingStatus(boolean isDoing) {
+    this.isDoing = isDoing;
+  }
 
-	private boolean isDoing;
+  private boolean isDoing;
 
-	public boolean isDoing() {
-		return isDoing;
-	}
+  public boolean isDoing() {
+    return isDoing;
+  }
 
 }

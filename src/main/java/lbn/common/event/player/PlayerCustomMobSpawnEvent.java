@@ -5,34 +5,34 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent{
+public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent {
 
-	String name;
+  String name;
 
-	EntityType type;
+  EntityType type;
 
-	public PlayerCustomMobSpawnEvent(LivingEntity spawnee) {
-		super(spawnee, SpawnReason.CUSTOM);
-		name = spawnee.getCustomName();
-		type = spawnee.getType();
-	}
+  public PlayerCustomMobSpawnEvent(LivingEntity spawnee) {
+    super(spawnee, SpawnReason.CUSTOM);
+    name = spawnee.getCustomName();
+    type = spawnee.getType();
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public EntityType getType() {
-		return type;
-	}
+  public EntityType getType() {
+    return type;
+  }
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 }

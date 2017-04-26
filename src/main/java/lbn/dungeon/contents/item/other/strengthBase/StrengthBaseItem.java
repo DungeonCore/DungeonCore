@@ -11,32 +11,30 @@ import lbn.util.Message;
 
 import org.bukkit.inventory.ItemStack;
 
-public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable{
+public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable {
 
-	@Override
-	public void setStrengthDetail(int level, ItemLoreToken loreToken) {
-	}
+  @Override
+  public void setStrengthDetail(int level, ItemLoreToken loreToken) {}
 
+  @Override
+  public StrengthTemplate getStrengthTemplate() {
+    return new ChangeStrengthItemTemplate(getItem(), 1000, 70);
+  }
 
-	@Override
-	public StrengthTemplate getStrengthTemplate() {
-		return new ChangeStrengthItemTemplate(getItem(), 1000, 70);
-	}
+  @Override
+  public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
+    int nextLevel = event.getNextLevel();
+    if (getMaxStrengthCount() == nextLevel) {
+      ItemStack newItem = getLastStrengthResultItem().getItem();
+      event.setItem(newItem);
+    }
+  }
 
-	@Override
-	public void onSetStrengthItemResult(PlayerSetStrengthItemResultEvent event) {
-		int nextLevel = event.getNextLevel();
-		if (getMaxStrengthCount() == nextLevel) {
-			ItemStack newItem = getLastStrengthResultItem().getItem();
-			event.setItem(newItem);
-		}
-	}
+  protected abstract ItemInterface getLastStrengthResultItem();
 
-	protected abstract ItemInterface getLastStrengthResultItem();
-
-	@Override
-	public String[] getDetail() {
-		return Message.getMessage("このアイテムを{0}回強化に成功すると, [{1}]になります。", getMaxStrengthCount(), getLastStrengthResultItem().getSimpleName()).split(",");
-	}
+  @Override
+  public String[] getDetail() {
+    return Message.getMessage("このアイテムを{0}回強化に成功すると, [{1}]になります。", getMaxStrengthCount(), getLastStrengthResultItem().getSimpleName()).split(",");
+  }
 
 }

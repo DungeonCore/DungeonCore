@@ -17,87 +17,82 @@ import lbn.item.customItem.AbstractItem;
 import lbn.item.itemInterface.RightClickItemable;
 import lbn.player.PlayerChecker;
 
-public class PickaxeSelector extends AbstractItem implements RightClickItemable{
+public class PickaxeSelector extends AbstractItem implements RightClickItemable {
 
-	public PickaxeSelector(AbstractPickaxe pickaxe) {
-		this.pickaxe = pickaxe;
-		pickSelectorMenu = new PickSelectorMenu(pickaxe);
-		MenuSelectorManager.regist(pickSelectorMenu);
-	}
+  public PickaxeSelector(AbstractPickaxe pickaxe) {
+    this.pickaxe = pickaxe;
+    pickSelectorMenu = new PickSelectorMenu(pickaxe);
+    MenuSelectorManager.regist(pickSelectorMenu);
+  }
 
-	AbstractPickaxe pickaxe;
-	private PickSelectorMenu pickSelectorMenu;
+  AbstractPickaxe pickaxe;
+  private PickSelectorMenu pickSelectorMenu;
 
-	@Override
-	public String getItemName() {
-		return "ピッケルセレクター : " + pickaxe.getMaterialName() + "のピッケル";
-	}
+  @Override
+  public String getItemName() {
+    return "ピッケルセレクター : " + pickaxe.getMaterialName() + "のピッケル";
+  }
 
-	@Override
-	public String getId() {
-		return "item_selector_" + pickaxe.getGiveItemId();
-	}
+  @Override
+  public String getId() {
+    return "item_selector_" + pickaxe.getGiveItemId();
+  }
 
-	@Override
-	public int getBuyPrice(ItemStack item) {
-		return 0;
-	}
+  @Override
+  public int getBuyPrice(ItemStack item) {
+    return 0;
+  }
 
-	@Override
-	protected Material getMaterial() {
-		return pickaxe.getItemStackBase().getType();
-	}
+  @Override
+  protected Material getMaterial() {
+    return pickaxe.getItemStackBase().getType();
+  }
 
-	@Override
-	public String[] getDetail() {
-		return new String[]{"ピッケルのセレクター。運営のみ使用可能"};
-	}
+  @Override
+  public String[] getDetail() {
+    return new String[] { "ピッケルのセレクター。運営のみ使用可能" };
+  }
 
-	@Override
-	public void excuteOnRightClick(PlayerInteractEvent e) {
-		pickSelectorMenu.open(e.getPlayer());
-	}
+  @Override
+  public void excuteOnRightClick(PlayerInteractEvent e) {
+    pickSelectorMenu.open(e.getPlayer());
+  }
 
-	class PickSelectorMenu implements MenuSelectorInterface{
-		AbstractPickaxe pickaxe;
-		public PickSelectorMenu(AbstractPickaxe pickaxe) {
-			this.pickaxe = pickaxe;
-		}
+  class PickSelectorMenu implements MenuSelectorInterface {
+    AbstractPickaxe pickaxe;
 
-		@Override
-		public void open(Player p) {
-			//もし、Playerなら何もしない
-			if (PlayerChecker.isNormalPlayer(p)) {
-				return;
-			}
+    public PickSelectorMenu(AbstractPickaxe pickaxe) {
+      this.pickaxe = pickaxe;
+    }
 
-			Inventory createInventory = Bukkit.createInventory(null, 9 * 2, getTitle());
-			List<ItemInterface> allLevelPick = pickaxe.getAllLevelPick();
-			//全てのピッケルを表示する
-			for (ItemInterface itemInterface : allLevelPick) {
-				createInventory.addItem(itemInterface.getItem());
-			}
-			p.openInventory(createInventory);
-		}
+    @Override
+    public void open(Player p) {
+      // もし、Playerなら何もしない
+      if (PlayerChecker.isNormalPlayer(p)) { return; }
 
-		@Override
-		public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
-			//もし、Playerなら何もしない
-			if (PlayerChecker.isNormalPlayer(p)) {
-				return;
-			}
+      Inventory createInventory = Bukkit.createInventory(null, 9 * 2, getTitle());
+      List<ItemInterface> allLevelPick = pickaxe.getAllLevelPick();
+      // 全てのピッケルを表示する
+      for (ItemInterface itemInterface : allLevelPick) {
+        createInventory.addItem(itemInterface.getItem());
+      }
+      p.openInventory(createInventory);
+    }
 
-			if (item == null || item.getType() == Material.AIR) {
-				return;
-			}
-			p.setItemInHand(item);
-			p.closeInventory();
-		}
+    @Override
+    public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
+      // もし、Playerなら何もしない
+      if (PlayerChecker.isNormalPlayer(p)) { return; }
 
-		@Override
-		public String getTitle() {
-			return "pick_selec_" + pickaxe.getGiveItemId();
-		}
+      if (item == null || item.getType() == Material.AIR) { return; }
+      p.setItemInHand(item);
+      p.closeInventory();
+    }
 
-	}
+    @Override
+    public String getTitle() {
+      return "pick_selec_" + pickaxe.getGiveItemId();
+    }
+
+  }
 }

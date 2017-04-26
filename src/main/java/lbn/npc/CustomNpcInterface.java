@@ -9,36 +9,40 @@ import org.bukkit.entity.EntityType;
 
 public interface CustomNpcInterface {
 
-	/**
-	 * 右クリック時の処理
-	 * @param e
-	 */
-	public abstract void onNPCRightClickEvent(NPCRightClickEvent e);
+  /**
+   * 右クリック時の処理
+   * 
+   * @param e
+   */
+  public abstract void onNPCRightClickEvent(NPCRightClickEvent e);
 
-	public abstract EntityType getEntityType();
+  public abstract EntityType getEntityType();
 
-	/**
-	 * 左クリック時の処理
-	 * @param e
-	 */
-	public abstract void onNPCLeftClickEvent(NPCLeftClickEvent e);
+  /**
+   * 左クリック時の処理
+   * 
+   * @param e
+   */
+  public abstract void onNPCLeftClickEvent(NPCLeftClickEvent e);
 
-	public abstract void onNPCDamageEvent(NPCDamageEvent e);
+  public abstract void onNPCDamageEvent(NPCDamageEvent e);
 
-	public abstract String getId();
+  public abstract String getId();
 
-	public String getName();
+  public String getName();
 
-	/**
-	 * NPCを取得する
-	 * @return
-	 */
-	public NPC getNpc();
+  /**
+   * NPCを取得する
+   * 
+   * @return
+   */
+  public NPC getNpc();
 
-	/**
-	 * NPCをセットする
-	 * @param npc
-	 */
-	public void setNpc(NPC npc);
+  /**
+   * NPCをセットする
+   * 
+   * @param npc
+   */
+  public void setNpc(NPC npc);
 
 }

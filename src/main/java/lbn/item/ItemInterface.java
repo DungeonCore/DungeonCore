@@ -4,24 +4,24 @@ import lbn.player.ItemType;
 
 import org.bukkit.inventory.ItemStack;
 
-public interface ItemInterface{
-	String getItemName();
+public interface ItemInterface {
+  String getItemName();
 
-	boolean isShowItemList();
+  boolean isShowItemList();
 
-	String getSimpleName();
+  String getSimpleName();
 
-	ItemStack getItem();
+  ItemStack getItem();
 
-	boolean isThisItem(ItemStack item);
+  boolean isThisItem(ItemStack item);
 
-	ItemType getAttackType();
+  ItemType getAttackType();
 
-	boolean isQuestItem();
+  boolean isQuestItem();
 
-	String getId();
+  String getId();
 
-	int getBuyPrice(ItemStack item);
+  int getBuyPrice(ItemStack item);
 
-	boolean isStrengthItem();
+  boolean isStrengthItem();
 }

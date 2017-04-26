@@ -1,24 +1,22 @@
 package lbn.common.place;
 
 public enum PlaceType {
-	DUNGEON("ダンジョン"), DUNGEON_IMMATURE("ダンジョン(未完成)"), TOWN("町"), TEMP("一時的な場所");
+  DUNGEON("ダンジョン"), DUNGEON_IMMATURE("ダンジョン(未完成)"), TOWN("町"), TEMP("一時的な場所");
 
-	private String name;
+  private String name;
 
-	private PlaceType(String name) {
-		this.name = name;
-	}
+  private PlaceType(String name) {
+    this.name = name;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public static PlaceType getInstance(String name) {
-		for (PlaceType type : values()) {
-			if (type.getName().equals(name)) {
-				return type;
-			}
-		}
-		return TEMP;
-	}
+  public static PlaceType getInstance(String name) {
+    for (PlaceType type : values()) {
+      if (type.getName().equals(name)) { return type; }
+    }
+    return TEMP;
+  }
 }

@@ -24,137 +24,129 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class MoneyListener implements Listener{
+public class MoneyListener implements Listener {
 
-	@EventHandler
-	public void onClickShop(InventoryClickEvent e) {
-		Inventory inventory = e.getInventory();
-		String title = inventory.getTitle();
-		if (inventory.getType() != InventoryType.CHEST || !title.endsWith("shop")) {
-			return;
-		}
+  @EventHandler
+  public void onClickShop(InventoryClickEvent e) {
+    Inventory inventory = e.getInventory();
+    String title = inventory.getTitle();
+    if (inventory.getType() != InventoryType.CHEST || !title.endsWith("shop")) { return; }
 
-		e.setCancelled(true);
+    e.setCancelled(true);
 
-		Player p = (Player) e.getWhoClicked();
+    Player p = (Player) e.getWhoClicked();
 
-		//Playerデータがロードされていない時は何もしない
-		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-		if (theLowPlayer == null) {
-			Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
-			return;
-		}
+    // Playerデータがロードされていない時は何もしない
+    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+    if (theLowPlayer == null) {
+      Message.sendMessage(p, ChatColor.RED + "現在Playerデータをロードしています。もう暫くお待ち下さい");
+      return;
+    }
 
-		InventoryView view = e.getView();
-		if (e.getClickedInventory() == null || e.getClickedInventory().equals(view.getBottomInventory())) {
-			return;
-		}
+    InventoryView view = e.getView();
+    if (e.getClickedInventory() == null || e.getClickedInventory().equals(view.getBottomInventory())) { return; }
 
-		if (ItemStackUtil.isEmpty(e.getCurrentItem())) {
-			return;
-		}
+    if (ItemStackUtil.isEmpty(e.getCurrentItem())) { return; }
 
-		CustomShop customShop = new CustomShop(title.replace(" shop", ""));
+    CustomShop customShop = new CustomShop(title.replace(" shop", ""));
 
-		ShopItem shopItem = customShop.fromShopItem(e.getCurrentItem(), true);
-		if (shopItem == null) {
-			Message.sendMessage(p, ChatColor.RED + "エラーが発生したためそのアイテムを購入できませんでした。");
-			p.closeInventory();
-			return;
-		}
+    ShopItem shopItem = customShop.fromShopItem(e.getCurrentItem(), true);
+    if (shopItem == null) {
+      Message.sendMessage(p, ChatColor.RED + "エラーが発生したためそのアイテムを購入できませんでした。");
+      p.closeInventory();
+      return;
+    }
 
-		//お金チェック
-		if (theLowPlayer.getGalions() < shopItem.getPrice()) {
-			Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。");
-			return;
-		}
+    // お金チェック
+    if (theLowPlayer.getGalions() < shopItem.getPrice()) {
+      Message.sendMessage(p, ChatColor.RED + "お金が足りないので購入できません。");
+      return;
+    }
 
-		//インベントリチェック
-		if (p.getInventory().firstEmpty() == -1) {
-			Message.sendMessage(p, ChatColor.RED + "インベントリに空きがないので購入できません。");
-			p.closeInventory();
-			return;
-		}
+    // インベントリチェック
+    if (p.getInventory().firstEmpty() == -1) {
+      Message.sendMessage(p, ChatColor.RED + "インベントリに空きがないので購入できません。");
+      p.closeInventory();
+      return;
+    }
 
-		//インベントリに追加する
-		ItemStack buyItem = shopItem.getItem();
-		buyItem.setAmount(shopItem.getCount());
-		p.getInventory().addItem(buyItem);
+    // インベントリに追加する
+    ItemStack buyItem = shopItem.getItem();
+    buyItem.setAmount(shopItem.getCount());
+    p.getInventory().addItem(buyItem);
 
-		//お金の計算を行う
-		theLowPlayer.addGalions(- shopItem.getPrice(), GalionEditReason.consume_shop);
-	}
+    // お金の計算を行う
+    theLowPlayer.addGalions(-shopItem.getPrice(), GalionEditReason.consume_shop);
+  }
 
-	@EventHandler
-	public void onDragShop(InventoryDragEvent e) {
-		Inventory inventory = e.getInventory();
-		String title = inventory.getTitle();
-		if (inventory.getType() != InventoryType.CHEST || !title.endsWith("shop")) {
-			return;
-		}
-		e.setCancelled(true);
-	}
+  @EventHandler
+  public void onDragShop(InventoryDragEvent e) {
+    Inventory inventory = e.getInventory();
+    String title = inventory.getTitle();
+    if (inventory.getType() != InventoryType.CHEST || !title.endsWith("shop")) { return; }
+    e.setCancelled(true);
+  }
 
-	@EventHandler
-	public void onDropMoney(PlayerDropItemEvent e){
-		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItemDrop().getItemStack());
-		if (customItem != null) {
-			//ドロップさせないで消す
-			e.setCancelled(true);
-			customItem.applyGalionItem(e.getPlayer());
-		}
-	}
+  @EventHandler
+  public void onDropMoney(PlayerDropItemEvent e) {
+    MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItemDrop().getItemStack());
+    if (customItem != null) {
+      // ドロップさせないで消す
+      e.setCancelled(true);
+      customItem.applyGalionItem(e.getPlayer());
+    }
+  }
 
-	@EventHandler
-	public void onPickupMoney(PlayerPickupItemEvent e){
-		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItem().getItemStack());
-		if (customItem != null) {
-			customItem.applyGalionItem(e.getPlayer());
-		}
-	}
+  @EventHandler
+  public void onPickupMoney(PlayerPickupItemEvent e) {
+    MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getItem().getItemStack());
+    if (customItem != null) {
+      customItem.applyGalionItem(e.getPlayer());
+    }
+  }
 
-	@EventHandler
-	public void onClickMoney(InventoryClickEvent e) {
-		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getCurrentItem());
-		if (customItem != null) {
-			customItem.applyGalionItem((Player) e.getWhoClicked());
-			return;
-		}
-		MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
-		if (customItem2 != null) {
-			customItem2.applyGalionItem((Player) e.getWhoClicked());
-			return;
-		}
-	}
+  @EventHandler
+  public void onClickMoney(InventoryClickEvent e) {
+    MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getCurrentItem());
+    if (customItem != null) {
+      customItem.applyGalionItem((Player) e.getWhoClicked());
+      return;
+    }
+    MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
+    if (customItem2 != null) {
+      customItem2.applyGalionItem((Player) e.getWhoClicked());
+      return;
+    }
+  }
 
-	@EventHandler
-	public void onDragMoney(InventoryDragEvent e) {
-		MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getOldCursor());
-		if (customItem != null) {
-			customItem.applyGalionItem((Player) e.getWhoClicked());
-			return;
-		}
-		MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
-		if (customItem2 != null) {
-			customItem2.applyGalionItem((Player) e.getWhoClicked());
-			return;
-		}
-	}
+  @EventHandler
+  public void onDragMoney(InventoryDragEvent e) {
+    MoneyItemable customItem = ItemManager.getCustomItem(MoneyItemable.class, e.getOldCursor());
+    if (customItem != null) {
+      customItem.applyGalionItem((Player) e.getWhoClicked());
+      return;
+    }
+    MoneyItemable customItem2 = ItemManager.getCustomItem(MoneyItemable.class, e.getCursor());
+    if (customItem2 != null) {
+      customItem2.applyGalionItem((Player) e.getWhoClicked());
+      return;
+    }
+  }
 
-	@EventHandler
-	public void onClick(InventoryClickEvent e) {
-		Buyer.onInteractInv(e);
-		BuyerShopSelector.onSelect(e);
-	}
+  @EventHandler
+  public void onClick(InventoryClickEvent e) {
+    Buyer.onInteractInv(e);
+    BuyerShopSelector.onSelect(e);
+  }
 
-	@EventHandler
-	public void onDrag(InventoryDragEvent e) {
-		Buyer.onInteractInv(e);
-		BuyerShopSelector.onSelect(e);
-	}
+  @EventHandler
+  public void onDrag(InventoryDragEvent e) {
+    Buyer.onInteractInv(e);
+    BuyerShopSelector.onSelect(e);
+  }
 
-	@EventHandler
-	public void onPrepareItem(PrepareItemCraftEvent e) {
-		Buyer.onCraftItem(e);
-	}
+  @EventHandler
+  public void onPrepareItem(PrepareItemCraftEvent e) {
+    Buyer.onCraftItem(e);
+  }
 }

@@ -9,45 +9,45 @@ import org.bukkit.inventory.ItemStack;
  * 強化完成形のアイテムがRESULT欄に表示される瞬間
  *
  */
-public class PlayerSetStrengthItemResultEvent extends PlayerEvent{
+public class PlayerSetStrengthItemResultEvent extends PlayerEvent {
 
-	ItemStack item;
+  ItemStack item;
 
-	int nextLevel;
+  int nextLevel;
 
-	private boolean isSuccess;
+  private boolean isSuccess;
 
-	public PlayerSetStrengthItemResultEvent(Player who, ItemStack item, int nextLevel, boolean isSuccess) {
-		super(who);
-		this.item = item;
-		this.nextLevel = nextLevel;
-		this.isSuccess = isSuccess;
-	}
+  public PlayerSetStrengthItemResultEvent(Player who, ItemStack item, int nextLevel, boolean isSuccess) {
+    super(who);
+    this.item = item;
+    this.nextLevel = nextLevel;
+    this.isSuccess = isSuccess;
+  }
 
-	public ItemStack getItem() {
-		return item;
-	}
+  public ItemStack getItem() {
+    return item;
+  }
 
-	public void setItem(ItemStack item) {
-		this.item = item;
-	}
+  public void setItem(ItemStack item) {
+    this.item = item;
+  }
 
-	public int getNextLevel() {
-		return nextLevel;
-	}
+  public int getNextLevel() {
+    return nextLevel;
+  }
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	public boolean isSuccess() {
-		return isSuccess;
-	}
+  public boolean isSuccess() {
+    return isSuccess;
+  }
 }

@@ -18,62 +18,63 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class Explosion extends WeaponSkillForOneType{
+public class Explosion extends WeaponSkillForOneType {
 
-	public Explosion() {
-		super(ItemType.MAGIC);
-	}
+  public Explosion() {
+    super(ItemType.MAGIC);
+  }
 
-	@Override
-	public String getId() {
-		return "skill6";
-	}
+  @Override
+  public String getId() {
+    return "skill6";
+  }
 
-	@Override
-	public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-		new DropItemImplement(p, customItem).runTaskTimer();
-		return true;
-	}
+  @Override
+  public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    new DropItemImplement(p, customItem).runTaskTimer();
+    return true;
+  }
 
-	class DropItemImplement extends DropingEntityForPlayer {
+  class DropItemImplement extends DropingEntityForPlayer {
 
-		Player p;
+    Player p;
 
-		AbstractAttackItem customItem;
-		public DropItemImplement(Player p, AbstractAttackItem customItem) {
-			super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(), Material.NETHER_STAR, (byte) 0);
-			this.customItem = customItem;
-			this.p = p;
-		}
+    AbstractAttackItem customItem;
 
-		ParticleData particleDataLava = new ParticleData(ParticleType.flame, 5);
+    public DropItemImplement(Player p, AbstractAttackItem customItem) {
+      super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(), Material.NETHER_STAR, (byte) 0);
+      this.customItem = customItem;
+      this.p = p;
+    }
 
-		@Override
-		public void tickRutine(int count) {
-			super.tickRutine(count);
+    ParticleData particleDataLava = new ParticleData(ParticleType.flame, 5);
 
-			if (count % 4 == 0) {
-				particleDataLava.run(spawnEntity.getLocation());
-			}
-		}
+    @Override
+    public void tickRutine(int count) {
+      super.tickRutine(count);
 
-		@Override
-		protected boolean damageLivingentity(Entity entity) {
-			return LivingEntityUtil.isEnemy(entity);
-		}
+      if (count % 4 == 0) {
+        particleDataLava.run(spawnEntity.getLocation());
+      }
+    }
 
-		@Override
-		public void onHitDamagedEntity(Entity target) {
-			//生き物のときのみ
-			if (target.getType().isAlive()) {
-				LivingEntity entity = (LivingEntity) target;
-				entity.damage(customItem.getAttackItemDamage(0) * getData(0), p);
-				entity.setFireTicks((int) (20 * getData(1)));
-				Stun.addStun(entity, (int) (20 * getData(2)));
+    @Override
+    protected boolean damageLivingentity(Entity entity) {
+      return LivingEntityUtil.isEnemy(entity);
+    }
 
-				Particles.runParticle(target, ParticleType.hugeexplosion, 1);
-				target.getWorld().playSound(entity.getLocation(), Sound.EXPLODE, 1, 1);
-			}
-		}
-	}
+    @Override
+    public void onHitDamagedEntity(Entity target) {
+      // 生き物のときのみ
+      if (target.getType().isAlive()) {
+        LivingEntity entity = (LivingEntity) target;
+        entity.damage(customItem.getAttackItemDamage(0) * getData(0), p);
+        entity.setFireTicks((int) (20 * getData(1)));
+        Stun.addStun(entity, (int) (20 * getData(2)));
+
+        Particles.runParticle(target, ParticleType.hugeexplosion, 1);
+        target.getWorld().playSound(entity.getLocation(), Sound.EXPLODE, 1, 1);
+      }
+    }
+  }
 }

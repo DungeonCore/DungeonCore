@@ -18,65 +18,66 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public class MagicHealMagicStone extends KillSlot{
+public class MagicHealMagicStone extends KillSlot {
 
-	int mpHealLevel;
-	SlotLevel sLevel;
-	String HealValueString;
-	public MagicHealMagicStone(int mpHealLevel, SlotLevel sLevel, String HealValueString) {
-		this.mpHealLevel = mpHealLevel;
-		this.sLevel = sLevel;
-		this.HealValueString = HealValueString;
-	}
+  int mpHealLevel;
+  SlotLevel sLevel;
+  String HealValueString;
 
-	public static List<ItemInterface> getAllItem() {
-		ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
-		arrayList.add(new MagicHealMagicStone(1, SlotLevel.LEVEL3, "小"));
-		arrayList.add(new MagicHealMagicStone(2, SlotLevel.LEVEL4, "中"));
-		arrayList.add(new MagicHealMagicStone(3, SlotLevel.LEVEL5, "大"));
-		return arrayList;
-	}
+  public MagicHealMagicStone(int mpHealLevel, SlotLevel sLevel, String HealValueString) {
+    this.mpHealLevel = mpHealLevel;
+    this.sLevel = sLevel;
+    this.HealValueString = HealValueString;
+  }
 
-	@Override
-	public String getSlotName() {
-		return "ポーシング Level." + mpHealLevel;
-	}
+  public static List<ItemInterface> getAllItem() {
+    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    arrayList.add(new MagicHealMagicStone(1, SlotLevel.LEVEL3, "小"));
+    arrayList.add(new MagicHealMagicStone(2, SlotLevel.LEVEL4, "中"));
+    arrayList.add(new MagicHealMagicStone(3, SlotLevel.LEVEL5, "大"));
+    return arrayList;
+  }
 
-	@Override
-	public String getSlotDetail() {
-		return "敵を倒した時一定確率でMPを回復";
-	}
+  @Override
+  public String getSlotName() {
+    return "ポーシング Level." + mpHealLevel;
+  }
 
-	@Override
-	public String getId() {
-		return "ms_mp_heal_" + mpHealLevel;
-	}
+  @Override
+  public String getSlotDetail() {
+    return "敵を倒した時一定確率でMPを回復";
+  }
 
-	@Override
-	public ChatColor getNameColor() {
-		return ChatColor.LIGHT_PURPLE;
-	}
+  @Override
+  public String getId() {
+    return "ms_mp_heal_" + mpHealLevel;
+  }
 
-	@Override
-	public SlotLevel getLevel() {
-		return sLevel;
-	}
+  @Override
+  public ChatColor getNameColor() {
+    return ChatColor.LIGHT_PURPLE;
+  }
 
-	Random rnd = new Random();
+  @Override
+  public SlotLevel getLevel() {
+    return sLevel;
+  }
 
-	ParticleData particleData = new CircleParticleData(new ParticleData(ParticleType.enchantmenttable, 3),1.3);
+  Random rnd = new Random();
 
-	@Override
-	public void onKill(PlayerKillEntityEvent e) {
-		int nextInt = rnd.nextInt(5);
-		if (nextInt == 0) {
-			Player player = e.getPlayer();
-			MagicPointManager.addMagicPoint(player, mpHealLevel * 3);
-			e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENDERMAN_DEATH, 1, (float) 2);
-			//エフェクト
-			Location add = player.getLocation().add(0, 1, 0);
-			particleData.run(add);
-		}
-	}
+  ParticleData particleData = new CircleParticleData(new ParticleData(ParticleType.enchantmenttable, 3), 1.3);
+
+  @Override
+  public void onKill(PlayerKillEntityEvent e) {
+    int nextInt = rnd.nextInt(5);
+    if (nextInt == 0) {
+      Player player = e.getPlayer();
+      MagicPointManager.addMagicPoint(player, mpHealLevel * 3);
+      e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENDERMAN_DEATH, 1, (float) 2);
+      // エフェクト
+      Location add = player.getLocation().add(0, 1, 0);
+      particleData.run(add);
+    }
+  }
 
 }

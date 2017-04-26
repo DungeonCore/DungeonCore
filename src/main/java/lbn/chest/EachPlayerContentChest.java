@@ -17,22 +17,21 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
 public class EachPlayerContentChest extends SpletSheetChest {
-  
+
   Location chestLoc;
-  
+
   public EachPlayerContentChest(Location chestLoc, Location contentLoc, int refuelTick, Location moveLoc,
       int minItemCount, int maxItemCount, int movetick, boolean random) {
     super(chestLoc, contentLoc, refuelTick, moveLoc, minItemCount, maxItemCount, movetick, random);
     this.chestLoc = chestLoc;
   }
-  
+
   @Override
   public void open(Player p, Block block, PlayerInteractEvent e) {
     checkAllPlayerRefuelTime();
-    
+
     Inventory inv = invList.get(p.getUniqueId());
-    
-    
+
     if (inv != null) {
       // refuelされていない時
       p.openInventory(inv);
@@ -51,18 +50,16 @@ public class EachPlayerContentChest extends SpletSheetChest {
       p.openInventory(newInventory);
     }
   }
-  
+
   Random rnd = new Random();
-  
+
   /**
    * チェストの中身の入れ替えなどを行う
    */
   protected void checkAllPlayerRefuelTime() {
     long time = System.currentTimeMillis();
     // nullの可能性があるのでそのときは何もしない
-    if (refuelTime == null || refuelTime.keySet() == null || invList == null) {
-      return;
-    }
+    if (refuelTime == null || refuelTime.keySet() == null || invList == null) { return; }
     try {
       Iterator<Entry<UUID, Long>> iterator = refuelTime.entrySet().iterator();
       while (iterator.hasNext()) {
@@ -76,18 +73,17 @@ public class EachPlayerContentChest extends SpletSheetChest {
       DungeonLogger.error("EachPlayerContentsChest is error!!" + chestLoc);
     }
   }
-  
-  Map<UUID, Inventory> invList    = new HashMap<UUID, Inventory>();
-  
-  Map<UUID, Long>      refuelTime = new HashMap<UUID, Long>();
-  
-  
+
+  Map<UUID, Inventory> invList = new HashMap<UUID, Inventory>();
+
+  Map<UUID, Long> refuelTime = new HashMap<UUID, Long>();
+
   HashSet<Player> set = new HashSet<Player>();
-  
+
   protected boolean isFirestOpenWithPlayer(Player p) {
     return invList.containsKey(p.getUniqueId());
   }
-  
+
   @Override
   public void setRefule(SpletSheetChest chest) {
     if (chest instanceof EachPlayerContentChest) {
@@ -95,5 +91,5 @@ public class EachPlayerContentChest extends SpletSheetChest {
       this.refuelTime = ((EachPlayerContentChest) chest).refuelTime;
     }
   }
-  
+
 }

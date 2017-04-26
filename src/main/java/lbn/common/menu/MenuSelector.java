@@ -9,54 +9,58 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuSelector implements MenuSelectorInterface{
-	public void regist() {
-		MenuSelectorManager.regist(this);
-	}
+public class MenuSelector implements MenuSelectorInterface {
+  public void regist() {
+    MenuSelectorManager.regist(this);
+  }
 
-	protected String title;
-	protected Inventory createInventory;
-	public MenuSelector(String title) {
-		this.title = ChatColor.WHITE + title;
-		createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE +  title);
-	}
+  protected String title;
+  protected Inventory createInventory;
 
-	protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
+  public MenuSelector(String title) {
+    this.title = ChatColor.WHITE + title;
+    createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + title);
+  }
 
-	/**
-	 * メニューを追加する
-	 * @param item
-	 * @param index
-	 * @param run
-	 * @return
-	 */
-	public MenuSelector addMenu(ItemStack item, int index, SelectRunnable run) {
-		createInventory.setItem(index, item);
-		runMap.put(item, run);
-		return this;
-	}
+  protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
 
-	/**
-	 * メニューを開く
-	 * @param p
-	 */
-	public void open(Player p) {
-		p.openInventory(createInventory);
-	}
+  /**
+   * メニューを追加する
+   * 
+   * @param item
+   * @param index
+   * @param run
+   * @return
+   */
+  public MenuSelector addMenu(ItemStack item, int index, SelectRunnable run) {
+    createInventory.setItem(index, item);
+    runMap.put(item, run);
+    return this;
+  }
 
-	/**
-	 * アイテムを選択したときの処理
-	 * @param p
-	 * @param item
-	 */
-	public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
-		if (runMap.containsKey(item)) {
-			runMap.get(item).run(p, item);
-		}
-	}
+  /**
+   * メニューを開く
+   * 
+   * @param p
+   */
+  public void open(Player p) {
+    p.openInventory(createInventory);
+  }
 
-	@Override
-	public String getTitle() {
-		return title;
-	}
+  /**
+   * アイテムを選択したときの処理
+   * 
+   * @param p
+   * @param item
+   */
+  public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
+    if (runMap.containsKey(item)) {
+      runMap.get(item).run(p, item);
+    }
+  }
+
+  @Override
+  public String getTitle() {
+    return title;
+  }
 }

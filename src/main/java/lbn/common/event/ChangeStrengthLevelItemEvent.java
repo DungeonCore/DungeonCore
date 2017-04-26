@@ -10,41 +10,42 @@ import org.bukkit.inventory.ItemStack;
  */
 public class ChangeStrengthLevelItemEvent extends Event {
 
-	ItemStack before;
-	ItemStack after;
-	int nextLevel;
-	int beforeLevel;
-	public ChangeStrengthLevelItemEvent(ItemStack before, ItemStack after, int beforeLevel, int nextLevel) {
-		this.before = before;
-		this.after = after;
-		this.nextLevel = nextLevel;
-		this.beforeLevel = beforeLevel;
-	}
+  ItemStack before;
+  ItemStack after;
+  int nextLevel;
+  int beforeLevel;
 
-	public ItemStack getBefore() {
-		return before;
-	}
+  public ChangeStrengthLevelItemEvent(ItemStack before, ItemStack after, int beforeLevel, int nextLevel) {
+    this.before = before;
+    this.after = after;
+    this.nextLevel = nextLevel;
+    this.beforeLevel = beforeLevel;
+  }
 
-	public int getBeforeLevel() {
-		return beforeLevel;
-	}
+  public ItemStack getBefore() {
+    return before;
+  }
 
-	public ItemStack getAfter() {
-		return after;
-	}
+  public int getBeforeLevel() {
+    return beforeLevel;
+  }
 
-	public int getNextLevel() {
-		return nextLevel;
-	}
+  public ItemStack getAfter() {
+    return after;
+  }
 
-	private static final HandlerList handlers = new HandlerList();
+  public int getNextLevel() {
+    return nextLevel;
+  }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  private static final HandlerList handlers = new HandlerList();
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
+
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 }

@@ -5,107 +5,105 @@ import lbn.player.ItemType;
 import org.bukkit.Material;
 
 public class WeaponSkillData {
-	double[] data = new double[5];
+  double[] data = new double[5];
 
+  public WeaponSkillData(String name, ItemType type, String id) {
+    this.name = name;
+    this.type = type;
+    this.id = id;
+  }
 
-	public WeaponSkillData(String name, ItemType type, String id) {
-		this.name = name;
-		this.type = type;
-		this.id = id;
-	}
+  int skillLevel = 0;
+  int cooltime = 0;
+  int needMp = 0;
 
-	int skillLevel = 0;
-	int cooltime = 0;
-	int needMp = 0;
+  String[] detail;
 
-	String[] detail;
+  String name;
 
-	String name;
+  String id;
 
-	String id;
+  ItemType type;
 
-	ItemType type;
+  Material material = Material.STONE;
 
-	Material material = Material.STONE;
+  byte materialdata = 0;
 
-	byte materialdata = 0;
+  public void setMaterial(int materialId) {
+    @SuppressWarnings("deprecation")
+    Material material2 = Material.getMaterial(materialId);
+    if (material2 != null) {
+      material = material2;
+    }
+  }
 
-	public void setMaterial(int materialId) {
-		@SuppressWarnings("deprecation")
-		Material material2 = Material.getMaterial(materialId);
-		if (material2 != null) {
-			material = material2;
-		}
-	}
+  public void setMaterialdata(byte materialdata) {
+    this.materialdata = materialdata;
+  }
 
-	public void setMaterialdata(byte materialdata) {
-		this.materialdata = materialdata;
-	}
+  public Material getMaterial() {
+    return material;
+  }
 
-	public Material getMaterial() {
-		return material;
-	}
+  public byte getMaterialdata() {
+    return materialdata;
+  }
 
-	public byte getMaterialdata() {
-		return materialdata;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public String getId() {
-		return id;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public void setDetail(String detail) {
+    if (detail == null) {
+      this.detail = new String[0];
+    } else {
+      this.detail = detail.split(",");
+    }
+  }
 
-	public void setDetail(String detail) {
-		if (detail == null) {
-			this.detail = new String[0];
-		} else {
-			this.detail = detail.split(",");
-		}
-	}
+  public String[] getDetail() {
+    if (detail == null) { return new String[0]; }
+    return detail;
+  }
 
-	public String[] getDetail() {
-		if (detail == null) {
-			return new String[0];
-		}
-		return detail;
-	}
+  public ItemType getType() {
+    return type;
+  }
 
-	public ItemType getType() {
-		return type;
-	}
+  public int getSkillLevel() {
+    return skillLevel;
+  }
 
-	public int getSkillLevel() {
-		return skillLevel;
-	}
+  public void setSkillLevel(int skillLevel) {
+    this.skillLevel = skillLevel;
+  }
 
-	public void setSkillLevel(int skillLevel) {
-		this.skillLevel = skillLevel;
-	}
+  public int getCooltime() {
+    return cooltime;
+  }
 
-	public int getCooltime() {
-		return cooltime;
-	}
+  public void setCooltime(int cooltime) {
+    this.cooltime = cooltime;
+  }
 
-	public void setCooltime(int cooltime) {
-		this.cooltime = cooltime;
-	}
+  public int getNeedMp() {
+    return needMp;
+  }
 
-	public int getNeedMp() {
-		return needMp;
-	}
+  public void setNeedMp(int needMp) {
+    this.needMp = needMp;
+  }
 
-	public void setNeedMp(int needMp) {
-		this.needMp = needMp;
-	}
+  public double getData(int i) {
+    return data[i];
+  }
 
-	public double getData(int i) {
-		return data[i];
-	}
-
-	public void setData(double data0, int index) {
-		data[index] = data0;;
-	}
+  public void setData(double data0, int index) {
+    data[index] = data0;
+    ;
+  }
 }

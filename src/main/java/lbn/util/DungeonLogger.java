@@ -13,7 +13,7 @@ import org.bukkit.Bukkit;
  * @see LogLevel
  */
 public final class DungeonLogger {
-  
+
   /**
    * ロガーで使用可能なログのレベルを表します。
    *
@@ -36,7 +36,7 @@ public final class DungeonLogger {
     /** 開発情報メッセージ */
     DEVELOPMENT
   }
-  
+
   /**
    * <p>
    * 指定されたログ レベルでメッセージのログをとります。
@@ -79,7 +79,7 @@ public final class DungeonLogger {
         break;
     }
   }
-  
+
   /**
    * <p>
    * 情報メッセージのログをとります。
@@ -90,7 +90,7 @@ public final class DungeonLogger {
   public static void info(String message) {
     log(message, LogLevel.INFO);
   }
-  
+
   /**
    * <p>
    * 警告メッセージのログをとります。
@@ -101,7 +101,7 @@ public final class DungeonLogger {
   public static void warning(String message) {
     log(message, LogLevel.WARNING);
   }
-  
+
   /**
    * <p>
    * エラーメッセージのログをとります。
@@ -115,7 +115,7 @@ public final class DungeonLogger {
   public static void error(String message) {
     log(message, LogLevel.ERROR);
   }
-  
+
   /**
    * <p>
    * SEVEREメッセージのログをとります。
@@ -126,7 +126,7 @@ public final class DungeonLogger {
   public static void severe(String message) {
     log(message, LogLevel.SEVERE);
   }
-  
+
   /**
    * <p>
    * デバッグ情報メッセージのログをとります。
@@ -140,7 +140,7 @@ public final class DungeonLogger {
   public static void debug(String message) {
     log(message, LogLevel.DEBUG);
   }
-  
+
   /**
    * <p>
    * 開発情報メッセージのログをとります。
@@ -154,5 +154,5 @@ public final class DungeonLogger {
   public static void development(String message) {
     log(message, LogLevel.DEVELOPMENT);
   }
-  
+
 }

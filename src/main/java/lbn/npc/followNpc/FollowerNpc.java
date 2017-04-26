@@ -24,118 +24,115 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class FollowerNpc implements CustomNpcInterface{
-	static {
-		MenuSelectorManager.regist(new SilfiaNpcMenu());
-	}
-	private TheLowPlayer p;
+public class FollowerNpc implements CustomNpcInterface {
+  static {
+    MenuSelectorManager.regist(new SilfiaNpcMenu());
+  }
+  private TheLowPlayer p;
 
-	public FollowerNpc(TheLowPlayer p) {
-		this.p = p;
-		spawn();
-	}
+  public FollowerNpc(TheLowPlayer p) {
+    this.p = p;
+    spawn();
+  }
 
-	public TheLowPlayer getOwner() {
-		return p;
-	}
+  public TheLowPlayer getOwner() {
+    return p;
+  }
 
-	NPC npc;
+  NPC npc;
 
-	public NPC getNpc() {
-		return npc;
-	}
+  public NPC getNpc() {
+    return npc;
+  }
 
-	@Override
-	public void setNpc(NPC npc) {
-		this.npc = npc;
-	}
+  @Override
+  public void setNpc(NPC npc) {
+    this.npc = npc;
+  }
 
-	/**
-	 * NPCをスポーンする
-	 */
-	private void spawn() {
-		//CitizenNPC作成
-		NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(getEntityType(),getName());
-		npc = createNPC;
+  /**
+   * NPCをスポーンする
+   */
+  private void spawn() {
+    // CitizenNPC作成
+    NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(getEntityType(), getName());
+    npc = createNPC;
 
-		createNPC.addTrait(TheLowIdTrail.fromId(getId()));
+    createNPC.addTrait(TheLowIdTrail.fromId(getId()));
 
-		//戦闘Traitを追加
-		SentryTrait sentryTrait = new SentryTrait();
-		createNPC.addTrait(sentryTrait);
+    // 戦闘Traitを追加
+    SentryTrait sentryTrait = new SentryTrait();
+    createNPC.addTrait(sentryTrait);
 
-		createNPC.data().setPersistent("player-skin-name", getSkinName());
-		createNPC.spawn(p.getOnlinePlayer().getLocation());
+    createNPC.data().setPersistent("player-skin-name", getSkinName());
+    createNPC.spawn(p.getOnlinePlayer().getLocation());
 
-		SentryInstance instance = sentryTrait.getInstance();
-		instance.setGuardTarget(p.getName(), true);
+    SentryInstance instance = sentryTrait.getInstance();
+    instance.setGuardTarget(p.getName(), true);
 
-		if (createNPC.isSpawned()) {
-			createNPC.despawn(DespawnReason.PENDING_RESPAWN);
-			createNPC.spawn(createNPC.getStoredLocation());
-		}
+    if (createNPC.isSpawned()) {
+      createNPC.despawn(DespawnReason.PENDING_RESPAWN);
+      createNPC.spawn(createNPC.getStoredLocation());
+    }
 
-		hideNpcForOtherPlayer();
-	}
+    hideNpcForOtherPlayer();
+  }
 
-	/**
-	 * 他のPlayerから見えないようにする
-	 */
-	public void hideNpcForOtherPlayer() {
-		if (npc == null) {
-			return;
-		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-				for (Player player : onlinePlayers) {
-					if (!p.equalsPlayer(player)) {
-						player.hidePlayer(((Player)npc.getEntity()));
-					}
-				}
-			}
-		}.runTaskLater(Main.plugin, 2);
-	}
+  /**
+   * 他のPlayerから見えないようにする
+   */
+  public void hideNpcForOtherPlayer() {
+    if (npc == null) { return; }
+    new BukkitRunnable() {
+      @Override
+      public void run() {
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        for (Player player : onlinePlayers) {
+          if (!p.equalsPlayer(player)) {
+            player.hidePlayer(((Player) npc.getEntity()));
+          }
+        }
+      }
+    }.runTaskLater(Main.plugin, 2);
+  }
 
-	public String getSkinName() {
-		return "shilfia";
-	}
+  public String getSkinName() {
+    return "shilfia";
+  }
 
-	@Override
-	public void onNPCRightClickEvent(NPCRightClickEvent e) {
-		if (e.getClicker().isSneaking() && getOwner().equalsPlayer(e.getClicker())) {
-			SilfiaNpcMenu silfiaNpcMenu = new SilfiaNpcMenu();
-			silfiaNpcMenu.open(e.getClicker());
-		}
-	}
+  @Override
+  public void onNPCRightClickEvent(NPCRightClickEvent e) {
+    if (e.getClicker().isSneaking() && getOwner().equalsPlayer(e.getClicker())) {
+      SilfiaNpcMenu silfiaNpcMenu = new SilfiaNpcMenu();
+      silfiaNpcMenu.open(e.getClicker());
+    }
+  }
 
-	@Override
-	public EntityType getEntityType() {
-		return EntityType.PLAYER;
-	}
+  @Override
+  public EntityType getEntityType() {
+    return EntityType.PLAYER;
+  }
 
-	@Override
-	public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
-		if (getOwner().equalsPlayer(e.getClicker())) {
-			//向く方向を設定
-			Util.faceEntity(e.getNPC().getEntity(), e.getClicker());
-			PacketUtil.sendAttackMotionPacket((LivingEntity) e.getNPC().getEntity());
-		}
-	}
+  @Override
+  public void onNPCLeftClickEvent(NPCLeftClickEvent e) {
+    if (getOwner().equalsPlayer(e.getClicker())) {
+      // 向く方向を設定
+      Util.faceEntity(e.getNPC().getEntity(), e.getClicker());
+      PacketUtil.sendAttackMotionPacket((LivingEntity) e.getNPC().getEntity());
+    }
+  }
 
-	@Override
-	public void onNPCDamageEvent(NPCDamageEvent e) {
-	}
+  @Override
+  public void onNPCDamageEvent(NPCDamageEvent e) {}
 
-	@Override
-	public String getId() {
-		return p.getName() + "_" + getName() + "_follower";
-	}
+  @Override
+  public String getId() {
+    return p.getName() + "_" + getName() + "_follower";
+  }
 
-	@Override
-	public String getName() {
-		return "シルフィア";
-	}
+  @Override
+  public String getName() {
+    return "シルフィア";
+  }
 
 }

@@ -4,11 +4,11 @@ import lbn.item.ItemInterface;
 
 import org.bukkit.Material;
 
-public interface SetItemPartable extends ItemInterface{
+public interface SetItemPartable extends ItemInterface {
 
-	public SetItemInterface getBelongSetItem() ;
+  public SetItemInterface getBelongSetItem();
 
-	public SetItemPartsType getItemSetPartsType();
+  public SetItemPartsType getItemSetPartsType();
 
-	public Material getMaterial();
+  public Material getMaterial();
 }

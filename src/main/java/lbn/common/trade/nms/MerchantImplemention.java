@@ -10,53 +10,51 @@ import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 
-public class MerchantImplemention implements IMerchant{
+public class MerchantImplemention implements IMerchant {
 
-	int containerCounter;
-	TheLowMerchant merchant;
-	public MerchantImplemention(TheLowMerchant merchant) {
-		this.containerCounter = merchant.getContainerCounter();
-		this.merchant = merchant;
-	}
+  int containerCounter;
+  TheLowMerchant merchant;
 
-	public int getContainerCounter() {
-		return containerCounter;
-	}
+  public MerchantImplemention(TheLowMerchant merchant) {
+    this.containerCounter = merchant.getContainerCounter();
+    this.merchant = merchant;
+  }
 
-	EntityHuman e;
+  public int getContainerCounter() {
+    return containerCounter;
+  }
 
-	@Override
-	public void a(MerchantRecipe paramMerchantRecipe) {
-		merchant.onFinishTrade(new TheLowMerchantRecipe(paramMerchantRecipe));
-	}
+  EntityHuman e;
 
-	@Override
-	public void a_(EntityHuman paramEntityHuman) {
-		e = paramEntityHuman;
-	}
+  @Override
+  public void a(MerchantRecipe paramMerchantRecipe) {
+    merchant.onFinishTrade(new TheLowMerchantRecipe(paramMerchantRecipe));
+  }
 
-	@Override
-	public void a_(ItemStack paramItemStack) {
-		merchant.onSetItem();
-	}
+  @Override
+  public void a_(EntityHuman paramEntityHuman) {
+    e = paramEntityHuman;
+  }
 
-	@Override
-	public MerchantRecipeList getOffers(EntityHuman paramEntityHuman) {
-		return merchant.getNowRecipeList();
-	}
+  @Override
+  public void a_(ItemStack paramItemStack) {
+    merchant.onSetItem();
+  }
 
-	@Override
-	public IChatBaseComponent getScoreboardDisplayName() {
-		if (merchant.getName() == null) {
-			return new ChatMessage("", new Object[0]);
-		}
-		return new ChatMessage(merchant.getName(), new Object[0]);
-	}
+  @Override
+  public MerchantRecipeList getOffers(EntityHuman paramEntityHuman) {
+    return merchant.getNowRecipeList();
+  }
 
+  @Override
+  public IChatBaseComponent getScoreboardDisplayName() {
+    if (merchant.getName() == null) { return new ChatMessage("", new Object[0]); }
+    return new ChatMessage(merchant.getName(), new Object[0]);
+  }
 
-	@Override
-	public EntityHuman u_() {
-		return e;
-	}
+  @Override
+  public EntityHuman u_() {
+    return e;
+  }
 
 }

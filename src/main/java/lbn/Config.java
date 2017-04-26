@@ -66,10 +66,11 @@ public class Config {
 
   /**
    * ブロックが殴られるのを許可するブロックの種類を取得
+   * 
    * @return
    */
   public static Set<Material> getDamageAllowBlock() {
-	  return damageIgnoredBlocks;
+    return damageIgnoredBlocks;
   }
 
   public static Set<EntityType> getClickCancelEntityTypes() {
@@ -81,9 +82,7 @@ public class Config {
   }
 
   public static boolean allowCraft(ItemStack result, Collection<ItemStack> materials) {
-    if (ItemManager.getCustomItem(result) != null) {
-      return true;
-    }
+    if (ItemManager.getCustomItem(result) != null) { return true; }
     return false;
   }
 

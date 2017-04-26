@@ -16,61 +16,59 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public abstract class BowItemOld extends AbstractAttackItem_Old implements  ItemInterface, BowItemable, LeftClickItemable{
-	@Override
-	protected Material getMaterial() {
-		return Material.BOW;
-	}
+public abstract class BowItemOld extends AbstractAttackItem_Old implements ItemInterface, BowItemable, LeftClickItemable {
+  @Override
+  protected Material getMaterial() {
+    return Material.BOW;
+  }
 
+  @Override
+  public void onProjectileDamage(EntityDamageByEntityEvent e,
+      ItemStack item, LivingEntity owner, LivingEntity target) {}
 
-	@Override
-	public void onProjectileDamage(EntityDamageByEntityEvent e,
-			ItemStack item, LivingEntity owner, LivingEntity target) {
-	}
+  abstract protected void excuteOnShootBow2(EntityShootBowEvent e);
 
-	abstract protected void excuteOnShootBow2(EntityShootBowEvent e);
+  @Override
+  public void excuteOnShootBow(EntityShootBowEvent e) {
+    LivingEntity entity = e.getEntity();
+    if (entity.getType() == EntityType.PLAYER) {
+      if (!isAvilable((Player) entity)) {
+        sendNotAvailableMessage((Player) entity);
+        e.setCancelled(true);
+        return;
+      }
+    }
+    excuteOnShootBow2(e);
+  }
 
-	@Override
-	public void excuteOnShootBow(EntityShootBowEvent e) {
-		LivingEntity entity = e.getEntity();
-		if (entity.getType() == EntityType.PLAYER) {
-			if (!isAvilable((Player) entity)) {
-				sendNotAvailableMessage((Player) entity);
-				e.setCancelled(true);
-				return;
-			}
-		}
-		excuteOnShootBow2(e);
-	}
+  @Override
+  public void excuteOnLeftClick(PlayerInteractEvent e) {
+    // レベルなどを確認する
+    Player player = e.getPlayer();
+    if (!isAvilable(player)) {
+      sendNotAvailableMessage(player);
+      e.setCancelled(true);
+      return;
+    }
+    excuteOnLeftClick2(e);
 
-	@Override
-	public void excuteOnLeftClick(PlayerInteractEvent e) {
-		//レベルなどを確認する
-		Player player = e.getPlayer();
-		if (!isAvilable(player)) {
-			sendNotAvailableMessage(player);
-			e.setCancelled(true);
-			return;
-		}
-		excuteOnLeftClick2(e);
+    if (!player.isSneaking()) {
+      // スキルを発動
+      WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
+    }
+  }
 
-		if (!player.isSneaking()) {
-			//スキルを発動
-			WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
-		}
-	}
+  abstract protected void excuteOnLeftClick2(PlayerInteractEvent e);
 
-	abstract protected void excuteOnLeftClick2(PlayerInteractEvent e);
+  @Override
+  public ItemType getAttackType() {
+    return ItemType.BOW;
+  }
 
-	@Override
-	public ItemType getAttackType() {
-		return ItemType.BOW;
-	}
+  abstract public int getAvailableLevel();
 
-	abstract public int getAvailableLevel();
-
-	@Override
-	public double getMaterialDamage() {
-		return ItemStackUtil.getVanillaDamage(getMaterial());
-	}
+  @Override
+  public double getMaterialDamage() {
+    return ItemStackUtil.getVanillaDamage(getMaterial());
+  }
 }

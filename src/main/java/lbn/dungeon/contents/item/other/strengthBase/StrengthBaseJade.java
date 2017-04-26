@@ -8,40 +8,40 @@ import lbn.item.system.strength.StrengthOperator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class StrengthBaseJade extends StrengthBaseItem{
-	@Override
-	public String getItemName() {
-		return "魔法石ジェイドの欠片";
-	}
+public class StrengthBaseJade extends StrengthBaseItem {
+  @Override
+  public String getItemName() {
+    return "魔法石ジェイドの欠片";
+  }
 
-	@Override
-	public int getMaxStrengthCount() {
-		return 6;
-	}
+  @Override
+  public int getMaxStrengthCount() {
+    return 6;
+  }
 
-	@Override
-	public String getId() {
-		return "strength_base_jade";
-	}
+  @Override
+  public String getId() {
+    return "strength_base_jade";
+  }
 
-	@Override
-	public int getBuyPrice(ItemStack item) {
-		return 200 * StrengthOperator.getLevel(item);
-	}
+  @Override
+  public int getBuyPrice(ItemStack item) {
+    return 200 * StrengthOperator.getLevel(item);
+  }
 
-	@Override
-	protected Material getMaterial() {
-		return Material.REDSTONE;
-	}
+  @Override
+  protected Material getMaterial() {
+    return Material.REDSTONE;
+  }
 
-	@Override
-	protected ItemInterface getLastStrengthResultItem() {
-		return new MagicStoneJade();
-	}
+  @Override
+  protected ItemInterface getLastStrengthResultItem() {
+    return new MagicStoneJade();
+  }
 
-	@Override
-	public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
+  @Override
+  public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {
 
-	}
+  }
 
 }

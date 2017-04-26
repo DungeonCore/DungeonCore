@@ -8,53 +8,54 @@ import net.minecraft.server.v1_8_R1.CommandException;
 import net.minecraft.server.v1_8_R1.ExceptionUsage;
 import net.minecraft.server.v1_8_R1.ICommandListener;
 
-public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand{
+public abstract class AbstractVanillaCommand extends AbstractNotUsuallyCommand {
 
-	protected CommandAbstract command;
-	public AbstractVanillaCommand(CommandAbstract command) {
-		this.command = command;
-	}
+  protected CommandAbstract command;
 
-	@Override
-	final public void execute(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws ExceptionUsage,
-			CommandException {
-			execute2(paramICommandListener,paramArrayOfString);
-	}
+  public AbstractVanillaCommand(CommandAbstract command) {
+    this.command = command;
+  }
 
-	abstract protected void execute2(ICommandListener paramICommandListener,
-			String[] paramArrayOfString) throws ExceptionUsage,	CommandException;
+  @Override
+  final public void execute(ICommandListener paramICommandListener,
+      String[] paramArrayOfString) throws ExceptionUsage,
+      CommandException {
+    execute2(paramICommandListener, paramArrayOfString);
+  }
 
-	@Override
-	public int a() {
-		return command.a();
-	}
+  abstract protected void execute2(ICommandListener paramICommandListener,
+      String[] paramArrayOfString) throws ExceptionUsage, CommandException;
 
-	@Override
-	public String getCommand() {
-		return command.getCommand();
-	}
+  @Override
+  public int a() {
+    return command.a();
+  }
 
-	@Override
-	public String getUsage(ICommandListener paramICommandListener) {
-		return command.getUsage(paramICommandListener);
-	}
+  @Override
+  public String getCommand() {
+    return command.getCommand();
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public int compareTo(Object o) {
-		return command.compareTo(o);
-	}
+  @Override
+  public String getUsage(ICommandListener paramICommandListener) {
+    return command.getUsage(paramICommandListener);
+  }
 
-	@Override
-	public List<?> tabComplete(ICommandListener paramICommandListener,
-			String[] paramArrayOfString, BlockPosition paramBlockPosition) {
-		return command.tabComplete(paramICommandListener, paramArrayOfString,
-				paramBlockPosition);
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  public int compareTo(Object o) {
+    return command.compareTo(o);
+  }
 
-	@Override
-	public boolean isListStart(String[] paramArrayOfString, int paramInt) {
-		return command.isListStart(paramArrayOfString, paramInt);
-	}
+  @Override
+  public List<?> tabComplete(ICommandListener paramICommandListener,
+      String[] paramArrayOfString, BlockPosition paramBlockPosition) {
+    return command.tabComplete(paramICommandListener, paramArrayOfString,
+        paramBlockPosition);
+  }
+
+  @Override
+  public boolean isListStart(String[] paramArrayOfString, int paramInt) {
+    return command.isListStart(paramArrayOfString, paramInt);
+  }
 }

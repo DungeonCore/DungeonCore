@@ -15,80 +15,79 @@ import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class VillagerNpcManager {
-	static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
+  static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
 
-	public static VillagerNpc getVillagerNpcById(String name) {
-		return registedVillagerNpcIdMap.get(name);
-	}
+  public static VillagerNpc getVillagerNpcById(String name) {
+    return registedVillagerNpcIdMap.get(name);
+  }
 
-	public static Map<String, VillagerNpc> getNpcIdMap() {
-		return registedVillagerNpcIdMap;
-	}
+  public static Map<String, VillagerNpc> getNpcIdMap() {
+    return registedVillagerNpcIdMap;
+  }
 
-	/**
-	 * NPCを登録する
-	 * @param villagerNpc
-	 */
-	public static void regist(VillagerNpc villagerNpc) {
-		String id = villagerNpc.getId();
-		NPC spawnedNpc = NpcManager.getSpawnedNpc(id);
-		if (spawnedNpc != null) {
-			villagerNpc.setNpc(spawnedNpc);
-		}
-		registedVillagerNpcIdMap.put(id, (VillagerNpc) villagerNpc);
-	}
+  /**
+   * NPCを登録する
+   * 
+   * @param villagerNpc
+   */
+  public static void regist(VillagerNpc villagerNpc) {
+    String id = villagerNpc.getId();
+    NPC spawnedNpc = NpcManager.getSpawnedNpc(id);
+    if (spawnedNpc != null) {
+      villagerNpc.setNpc(spawnedNpc);
+    }
+    registedVillagerNpcIdMap.put(id, (VillagerNpc) villagerNpc);
+  }
 
-	/**
-	 * NPCをスポーンする
-	 * @param villagerNpc
-	 */
-	public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
-		try {
-			//CitizenNPC作成
-			NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(),villagerNpc.getName());
-			createNPC.addTrait(TheLowIdTrail.fromId(villagerNpc.getId()));
+  /**
+   * NPCをスポーンする
+   * 
+   * @param villagerNpc
+   */
+  public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
+    try {
+      // CitizenNPC作成
+      NPC createNPC = CitizensAPI.getNPCRegistry().createNPC(villagerNpc.getEntityType(), villagerNpc.getName());
+      createNPC.addTrait(TheLowIdTrail.fromId(villagerNpc.getId()));
 
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					//振り向くようにする
-					LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class) : new LookClose();
-					paramTrait.lookClose(true);
-					createNPC.addTrait(paramTrait);
-				}
-			}.runTaskLater(Main.plugin, 20 * 1);
+      new BukkitRunnable() {
+        @Override
+        public void run() {
+          // 振り向くようにする
+          LookClose paramTrait = createNPC.hasTrait(LookClose.class) ? createNPC.getTrait(LookClose.class) : new LookClose();
+          paramTrait.lookClose(true);
+          createNPC.addTrait(paramTrait);
+        }
+      }.runTaskLater(Main.plugin, 20 * 1);
 
-			if (loc != null && loc.getWorld() != null) {
-				//チャンクがロードされてなければロードする
-				if (!loc.getChunk().isLoaded()) {
-					//チャンクをロードする
-					loc.getChunk().load(true);
-				}
+      if (loc != null && loc.getWorld() != null) {
+        // チャンクがロードされてなければロードする
+        if (!loc.getChunk().isLoaded()) {
+          // チャンクをロードする
+          loc.getChunk().load(true);
+        }
 
-				if (!createNPC.isSpawned()) {
-					//スポーンさせる
-					createNPC.spawn(loc);
-				}
-			}
-			villagerNpc.setNpc(createNPC);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        if (!createNPC.isSpawned()) {
+          // スポーンさせる
+          createNPC.spawn(loc);
+        }
+      }
+      villagerNpc.setNpc(createNPC);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-	/**
-	 * EntityからVillagerNpcを取得
-	 * @param entity
-	 * @return
-	 */
-	public static VillagerNpc getVillagerNpc(Entity entity) {
-		if (entity == null) {
-			return null;
-		}
-		if (!NpcManager.isNpc(entity)) {
-			return null;
-		}
-		String id = NpcManager.getId(CitizensAPI.getNPCRegistry().getNPC(entity));
-		return VillagerNpcManager.getVillagerNpcById(id);
-	}
+  /**
+   * EntityからVillagerNpcを取得
+   * 
+   * @param entity
+   * @return
+   */
+  public static VillagerNpc getVillagerNpc(Entity entity) {
+    if (entity == null) { return null; }
+    if (!NpcManager.isNpc(entity)) { return null; }
+    String id = NpcManager.getId(CitizensAPI.getNPCRegistry().getNPC(entity));
+    return VillagerNpcManager.getVillagerNpcById(id);
+  }
 }

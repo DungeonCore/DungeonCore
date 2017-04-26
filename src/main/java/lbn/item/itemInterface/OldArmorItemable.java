@@ -9,10 +9,12 @@ import org.bukkit.inventory.ItemStack;
 
 public interface OldArmorItemable extends ItemInterface {
 
-	public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
-	public double getBaseBossDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
+  public double getBaseDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
 
-	public double getStrengthDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob);
+  public double getBaseBossDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor);
 
-	public void extraDamageCut(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob);
+  public double getStrengthDamageCuteParcent(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss,
+      LivingEntity mob);
+
+  public void extraDamageCut(Player me, EntityDamageEvent e, ItemStack armor, boolean isArmorCutDamage, boolean isBoss, LivingEntity mob);
 }

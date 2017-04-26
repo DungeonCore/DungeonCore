@@ -120,7 +120,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
-	  MobSpawnerPointManager.clear();
+    MobSpawnerPointManager.clear();
 
     super.onCallbackFunction(submit);
 

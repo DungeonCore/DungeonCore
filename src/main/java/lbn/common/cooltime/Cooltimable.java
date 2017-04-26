@@ -3,7 +3,7 @@ package lbn.common.cooltime;
 import org.bukkit.inventory.ItemStack;
 
 public interface Cooltimable {
-	int getCooltimeTick(ItemStack item);
+  int getCooltimeTick(ItemStack item);
 
-	String getId();
+  String getId();
 }

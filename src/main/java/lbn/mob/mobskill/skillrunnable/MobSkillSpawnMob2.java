@@ -13,55 +13,55 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-public class MobSkillSpawnMob2 extends MobSkillRunnable{
+public class MobSkillSpawnMob2 extends MobSkillRunnable {
 
-	public MobSkillSpawnMob2(String data) {
-		super(data);
-	}
+  public MobSkillSpawnMob2(String data) {
+    super(data);
+  }
 
-	Random rnd = new Random();
+  Random rnd = new Random();
 
-	long mobLastUpdate = -1;
+  long mobLastUpdate = -1;
 
-	ArrayList<AbstractMob<?>> customMobList = new ArrayList<AbstractMob<?>>();
+  ArrayList<AbstractMob<?>> customMobList = new ArrayList<AbstractMob<?>>();
 
-	NormalMob normalMob = new NormalMob(EntityType.ZOMBIE);
+  NormalMob normalMob = new NormalMob(EntityType.ZOMBIE);
 
-	@Override
-	public void execute(Entity target, Entity mob) {
-		int count = getCount();
+  @Override
+  public void execute(Entity target, Entity mob) {
+    int count = getCount();
 
-		//initした後にモブを更新してたらinitする
-		long lastUpdate = new MobSheetRunnable(Bukkit.getConsoleSender()).getLastUpdate();
-		if (lastUpdate > mobLastUpdate) {
-			init(lastUpdate);
-		}
+    // initした後にモブを更新してたらinitする
+    long lastUpdate = new MobSheetRunnable(Bukkit.getConsoleSender()).getLastUpdate();
+    if (lastUpdate > mobLastUpdate) {
+      init(lastUpdate);
+    }
 
-		if (customMobList.size() == 0) {
-			for (int i = 0; i < count; i++) {
-				normalMob.spawn(mob.getLocation());
-			}
-		} else {
-			for (int i = 0; i < count; i++) {
-				customMobList.get(rnd.nextInt(customMobList.size())).spawn(mob.getLocation());
-			}
-		}
-	}
+    if (customMobList.size() == 0) {
+      for (int i = 0; i < count; i++) {
+        normalMob.spawn(mob.getLocation());
+      }
+    } else {
+      for (int i = 0; i < count; i++) {
+        customMobList.get(rnd.nextInt(customMobList.size())).spawn(mob.getLocation());
+      }
+    }
+  }
 
-	protected int getCount() {
-		return 3;
-	}
+  protected int getCount() {
+    return 3;
+  }
 
-	protected void init(long lastUpdate) {
-		if (data != null) {
-			for (String mobName : data.split(",")) {
-				AbstractMob<?> mobWithNormal = MobHolder.getMobWithNormal(mobName);
-				if (mobWithNormal != null) {
-					customMobList.add(mobWithNormal);
-				}
-			}
-		}
-		mobLastUpdate = lastUpdate;
-	}
+  protected void init(long lastUpdate) {
+    if (data != null) {
+      for (String mobName : data.split(",")) {
+        AbstractMob<?> mobWithNormal = MobHolder.getMobWithNormal(mobName);
+        if (mobWithNormal != null) {
+          customMobList.add(mobWithNormal);
+        }
+      }
+    }
+    mobLastUpdate = lastUpdate;
+  }
 
 }

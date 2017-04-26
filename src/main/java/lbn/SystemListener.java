@@ -57,13 +57,13 @@ public class SystemListener implements Listener {
     }
   }
 
-	@EventHandler
-	public void onChunkUnLoad(ChunkUnloadEvent e) {
-		//チェストを開いている最中にChunkがUnloadされると閉まるのでチェストワールドのChunkはUnloadしない
-		if (e.getWorld().getName().equals("chest")) {
-			e.setCancelled(true);
-		}
-	}
+  @EventHandler
+  public void onChunkUnLoad(ChunkUnloadEvent e) {
+    // チェストを開いている最中にChunkがUnloadされると閉まるのでチェストワールドのChunkはUnloadしない
+    if (e.getWorld().getName().equals("chest")) {
+      e.setCancelled(true);
+    }
+  }
 
   @EventHandler
   public void joinDungeon(PlayerJoinDungeonGameEvent e) {
@@ -72,9 +72,9 @@ public class SystemListener implements Listener {
     Player player = e.getPlayer();
     PlayerIODataManager.load(player);
 
-//    if (!MobSpawnerPointManager.isRunSpawnManage()) {
-//      MobSpawnerPointManager.startSpawnManage();
-//    }
+    // if (!MobSpawnerPointManager.isRunSpawnManage()) {
+    // MobSpawnerPointManager.startSpawnManage();
+    // }
   }
 
   @EventHandler
@@ -191,29 +191,23 @@ public class SystemListener implements Listener {
   @EventHandler
   public void onCommand(PlayerCommandPreprocessEvent e) {
     Player player = e.getPlayer();
-    if (player.getGameMode() == GameMode.CREATIVE) {
-      return;
-    }
+    if (player.getGameMode() == GameMode.CREATIVE) { return; }
     String message = e.getMessage();
     if (message.trim().equalsIgnoreCase("/kill")) {
 
       TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
       int galion = (int) (theLowPlayer.getGalions() * -0.05);
-		if (theLowPlayer != null) {
-			theLowPlayer.addGalions(galion, GalionEditReason.mob_drop);
-		}
+      if (theLowPlayer != null) {
+        theLowPlayer.addGalions(galion, GalionEditReason.mob_drop);
+      }
     }
   }
 
   @EventHandler
   public void PlayerPortalEvent(PlayerPortalEvent e) {
     Location to = e.getTo();
-    if (to == null) {
-    	return;
-    }
-    if (to.getWorld() == null || to.getWorld().getName() == null) {
-      return;
-    }
+    if (to == null) { return; }
+    if (to.getWorld() == null || to.getWorld().getName() == null) { return; }
     if (to.getWorld().getName().contains("_the_end")
         || to.getWorld().getName().contains("_nether")) {
       e.setCancelled(true);

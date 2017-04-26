@@ -5,40 +5,42 @@ import lbn.money.GalionEditReason;
 
 import org.bukkit.event.HandlerList;
 
-public class PlayerChangeGalionsEvent extends TheLowPlayerEvent{
+public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
 
-	int val;
-	GalionEditReason reason;
-	public PlayerChangeGalionsEvent(TheLowPlayer who, int val, GalionEditReason reason) {
-		super(who);
-		this.reason = reason;
-		this.val = val;
-	}
+  int val;
+  GalionEditReason reason;
 
-	private static final HandlerList handlers = new HandlerList();
+  public PlayerChangeGalionsEvent(TheLowPlayer who, int val, GalionEditReason reason) {
+    super(who);
+    this.reason = reason;
+    this.val = val;
+  }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  private static final HandlerList handlers = new HandlerList();
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public int getAddGalions() {
-		return val;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	public GalionEditReason getReason() {
-		return reason;
-	}
+  public int getAddGalions() {
+    return val;
+  }
 
-	public void setGalions(int val) {
-		this.val = val;
-	}
+  public GalionEditReason getReason() {
+    return reason;
+  }
 
-	public void setReason(GalionEditReason reason) {
-		this.reason = reason;;
-	}
+  public void setGalions(int val) {
+    this.val = val;
+  }
+
+  public void setReason(GalionEditReason reason) {
+    this.reason = reason;
+    ;
+  }
 }

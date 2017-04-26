@@ -12,51 +12,51 @@ import org.bukkit.inventory.ItemStack;
 /**
  * THELoWで登録されている武器(剣、弓、魔法)による通常攻撃が行われたときに発火します
  */
-public class PlayerCombatEntityEvent extends PlayerEvent{
+public class PlayerCombatEntityEvent extends PlayerEvent {
 
-	private static final HandlerList handlers = new HandlerList();
+  private static final HandlerList handlers = new HandlerList();
 
-	LivingEntity entity;
-	double damage;
+  LivingEntity entity;
+  double damage;
 
-	AttackItemStack attackItem;
+  AttackItemStack attackItem;
 
-	public PlayerCombatEntityEvent(Player who, LivingEntity entity, ItemStack item, double damage) {
-		super(who);
-		this.attackItem = AttackItemStack.getInstance(item);
-		this.damage = damage;
-		this.entity = entity;
-	}
+  public PlayerCombatEntityEvent(Player who, LivingEntity entity, ItemStack item, double damage) {
+    super(who);
+    this.attackItem = AttackItemStack.getInstance(item);
+    this.damage = damage;
+    this.entity = entity;
+  }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+  @Override
+  public HandlerList getHandlers() {
+    return handlers;
+  }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+  public static HandlerList getHandlerList() {
+    return handlers;
+  }
 
-	public double getDamage() {
-		return damage;
-	}
+  public double getDamage() {
+    return damage;
+  }
 
-	public void setDamage(double damage) {
-		this.damage = damage;
-	}
+  public void setDamage(double damage) {
+    this.damage = damage;
+  }
 
-	public AttackItemStack getAttackItem() {
-		return attackItem;
-	}
+  public AttackItemStack getAttackItem() {
+    return attackItem;
+  }
 
-	public LivingEntity getEnemy() {
-		return entity;
-	}
+  public LivingEntity getEnemy() {
+    return entity;
+  }
 
-	public void callEvent() {
-		if (attackItem != null) {
-			Bukkit.getServer().getPluginManager().callEvent(this);
-		}
-	}
+  public void callEvent() {
+    if (attackItem != null) {
+      Bukkit.getServer().getPluginManager().callEvent(this);
+    }
+  }
 
 }

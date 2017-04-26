@@ -14,59 +14,59 @@ import lbn.util.JavaUtil;
 
 public class BuffSheetRunnable extends AbstractSheetRunable {
 
-	public BuffSheetRunnable(CommandSender p) {
-		super(p);
-	}
+  public BuffSheetRunnable(CommandSender p) {
+    super(p);
+  }
 
-	@Override
-	protected String getQuery() {
-		return null;
-	}
+  @Override
+  protected String getQuery() {
+    return null;
+  }
 
-	@Override
-	public String getSheetName() {
-		return "buff";
-	}
+  @Override
+  public String getSheetName() {
+    return "buff";
+  }
 
-	@Override
-	public String[] getTag() {
-		return new String[]{"id", "effect", "second", "level"};
-	}
+  @Override
+  public String[] getTag() {
+    return new String[] { "id", "effect", "second", "level" };
+  }
 
-	@Override
-	public void onCallbackFunction(Future<String[][]> submit) throws Exception {
-		BuffDataFactory.clear();
-		super.onCallbackFunction(submit);
-	}
+  @Override
+  public void onCallbackFunction(Future<String[][]> submit) throws Exception {
+    BuffDataFactory.clear();
+    super.onCallbackFunction(submit);
+  }
 
-	@Override
-	protected void excuteOnerow(String[] row) {
+  @Override
+  protected void excuteOnerow(String[] row) {
 
-		String id = row[0];
+    String id = row[0];
 
-		BuffType debuffType = BuffType.getDebuffType(row[1]);
-		if (debuffType == null) {
-			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + row[1]  + "]");
-			return;
-		}
+    BuffType debuffType = BuffType.getDebuffType(row[1]);
+    if (debuffType == null) {
+      sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + row[1] + "]");
+      return;
+    }
 
-		PotionEffectType effect = debuffType.getType();
-		int second = JavaUtil.getInt(row[2], 0);
-		int level = JavaUtil.getInt(row[3], 0);
+    PotionEffectType effect = debuffType.getType();
+    int second = JavaUtil.getInt(row[2], 0);
+    int level = JavaUtil.getInt(row[3], 0);
 
-		BuffData data = BuffDataFactory.create(id, effect, second, level);
-		if(data != null) {
-			BuffDataFactory.register(data);
-		}else{
-			sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + effect + ", second:" + second + ", level:" + level + "]");
-		}
+    BuffData data = BuffDataFactory.create(id, effect, second, level);
+    if (data != null) {
+      BuffDataFactory.register(data);
+    } else {
+      sendMessage("不正なBuffパラメータ[id:" + id + ", effect:" + effect + ", second:" + second + ", level:" + level + "]");
+    }
 
-	}
+  }
 
-	public static void allReload() {
-		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-		BuffSheetRunnable buffSheetRunnable = new BuffSheetRunnable(consoleSender);
-		SpletSheetExecutor.onExecute(buffSheetRunnable);
-	}
+  public static void allReload() {
+    ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
+    BuffSheetRunnable buffSheetRunnable = new BuffSheetRunnable(consoleSender);
+    SpletSheetExecutor.onExecute(buffSheetRunnable);
+  }
 
 }

@@ -20,9 +20,7 @@ import org.bukkit.inventory.ItemStack;
 public class OldArmorBase {
   public static void onArmor(EntityDamageEvent e) {
     Entity entity = e.getEntity();
-    if (entity.getType() != EntityType.PLAYER) {
-      return;
-    }
+    if (entity.getType() != EntityType.PLAYER) { return; }
 
     Player p = (Player) entity;
 
@@ -105,12 +103,11 @@ public class OldArmorBase {
       }
 
       // 強化によるダメージ軽減
-      strengthDamageCuteParcent = strengthDamageCuteParcent* (1 - customItem.getStrengthDamageCuteParcent(p, e, armor, isArmorCut, isBoss, mob));
+      strengthDamageCuteParcent = strengthDamageCuteParcent * (1 - customItem.getStrengthDamageCuteParcent(p, e, armor, isArmorCut, isBoss, mob));
       // その他の特殊ダメージ軽減
       customItem.extraDamageCut(p, e, armor, isArmorCut, isBoss, mob);
     }
     damage = damage * (1 - baseDamageCuteParcent) * strengthDamageCuteParcent;
-
 
     e.setDamage(Math.max(damage, 0));
   }

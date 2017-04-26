@@ -9,80 +9,84 @@ import lbn.quest.abstractQuest.QuestType;
 
 import org.bukkit.entity.Player;
 
-public interface Quest{
-	public String getId();
+public interface Quest {
+  public String getId();
 
-	public String getName();
+  public String getName();
 
-	public String[] getQuestDetail();
+  public String[] getQuestDetail();
 
-	public Set<Quest> getBeforeQuest();
+  public Set<Quest> getBeforeQuest();
 
-	public boolean isMainQuest();
+  public boolean isMainQuest();
 
-	public boolean isStartOverlap();
+  public boolean isStartOverlap();
 
-	public boolean canDestory();
+  public boolean canDestory();
 
-	public void onSatisfyComplateCondtion(Player p);
+  public void onSatisfyComplateCondtion(Player p);
 
-	public String getCurrentInfo(Player p);
+  public String getCurrentInfo(Player p);
 
-	public void playCompleteSound(Player p);
+  public void playCompleteSound(Player p);
 
-	public void playDistructionSound(Player p);
+  public void playDistructionSound(Player p);
 
-	public void playStartSound(Player p);
+  public void playStartSound(Player p);
 
-	public boolean isNullQuest();
+  public boolean isNullQuest();
 
-	public QuestType getQuestType();
+  public QuestType getQuestType();
 
-	public boolean isComplate(int data);
+  public boolean isComplate(int data);
 
-	/**
-	 * 受けた後の会話
-	 * @return
-	 */
-	public String[] getTalkOnStart();
+  /**
+   * 受けた後の会話
+   * 
+   * @return
+   */
+  public String[] getTalkOnStart();
 
-	/**
-	 * 完了した後の会話
-	 * @return
-	 */
-	public String[] getTalkOnComplate();
+  /**
+   * 完了した後の会話
+   * 
+   * @return
+   */
+  public String[] getTalkOnComplate();
 
-	public boolean isShowTitle();
+  public boolean isShowTitle();
 
-	public Quest getAutoExecuteNextQuest();
+  public Quest getAutoExecuteNextQuest();
 
-	public long getCoolTimeSecound();
+  public long getCoolTimeSecound();
 
-	public void giveRewardItem(Player p);
+  public void giveRewardItem(Player p);
 
-	public boolean canGetRewordItem(Player p);
+  public boolean canGetRewordItem(Player p);
 
-	public int getAvailableMainLevel();
+  public int getAvailableMainLevel();
 
-	public List<String> getRewordText();
+  public List<String> getRewordText();
 
-	public String getComplateCondition();
+  public String getComplateCondition();
 
-	public String getStartVillagerId();
+  public String getStartVillagerId();
 
-	public String getEndVillagerId();
+  public String getEndVillagerId();
 
-	public void onStartQuestEvent(StartQuestEvent e);
+  public void onStartQuestEvent(StartQuestEvent e);
 
-	/**
-	 * 進行状況を表示するかどうか
-	 * @return
-	 */
-	public boolean isShowProceessText();
+  /**
+   * 進行状況を表示するかどうか
+   * 
+   * @return
+   */
+  public boolean isShowProceessText();
 
-	/**
-	 * クエストを開始したときにもらえるアイテム
-	 * @return
-	 */
-	public ItemInterface getQuestBeforeItem();
+  /**
+   * クエストを開始したときにもらえるアイテム
+   * 
+   * @return
+   */
+  public ItemInterface getQuestBeforeItem();
 }

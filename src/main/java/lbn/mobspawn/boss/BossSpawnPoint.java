@@ -15,7 +15,7 @@ import org.bukkit.entity.LivingEntity;
 public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
 
   BossMobable boss;
-  Location    spawnPointLoc;
+  Location spawnPointLoc;
 
   protected BossSpawnPoint(int id, Location loc, SpredSheetSpawnBossGetter mobGetter) {
     super(id, loc, mobGetter, 1, SpawnLevel.BOSS);
@@ -65,7 +65,6 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
       return 0;
     }
 
-
     nextSpawn = false;
 
     lastSpawnTime = System.currentTimeMillis();
@@ -83,11 +82,11 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
       }
 
       if (!livingEntity.getType().isAlive()) {
-    	  continue;
+        continue;
       }
 
       if (!livingEntity.isValid()) {
-    	  continue;
+        continue;
       }
 
       if (((LivingEntity) livingEntity).getCustomName() != null
@@ -119,9 +118,7 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
       return false;
     }
 
-    if (((Damageable) entity).getHealth() > 0) {
-      return true;
-    }
+    if (((Damageable) entity).getHealth() > 0) { return true; }
 
     DungeonLogger.development(entity.getCustomName() + " is not alive. So buss will be spawned!!");
     return false;

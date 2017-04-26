@@ -29,102 +29,100 @@ import org.bukkit.Bukkit;
 
 public class InitManager {
 
-	public void init() {
-		try {
-			HolographicDisplaysManager.setUseHolographicDisplays(Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"));
-			//ホログラムを全て削除
-			HolographicDisplaysManager.removeAllHologram();
+  public void init() {
+    try {
+      HolographicDisplaysManager.setUseHolographicDisplays(Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"));
+      // ホログラムを全て削除
+      HolographicDisplaysManager.removeAllHologram();
 
-			ItemRegister.registItem();
-			MobRegister.registMob();
-			SpawnMobGetterRegister.registMobGetter();
+      ItemRegister.registItem();
+      MobRegister.registMob();
+      SpawnMobGetterRegister.registMobGetter();
 
-			SystemLog.init();
+      SystemLog.init();
 
-			SetItemManager.startRutine();
+      SetItemManager.startRutine();
 
-			SetItemManager.initServer();
+      SetItemManager.initServer();
 
-			NpcManager.init();
+      NpcManager.init();
 
-			//スプレットシートを読み込む
-			reloadSpreadSheet();
+      // スプレットシートを読み込む
+      reloadSpreadSheet();
 
-			PlayerLastSaveType.load();
-			PlayerIODataManager.allLoad();
+      PlayerLastSaveType.load();
+      PlayerIODataManager.allLoad();
 
-			//Citizenのバグを治す
-			CitizenBugFixPatch.doPatch();
+      // Citizenのバグを治す
+      CitizenBugFixPatch.doPatch();
 
-			WeaponSkillFactory.allRegist();
+      WeaponSkillFactory.allRegist();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-	public void reloadSpreadSheet() {
-		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
+  public void reloadSpreadSheet() {
+    VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
 
-		SpletSheetCommand.reloadSheet(null, "item");
+    SpletSheetCommand.reloadSheet(null, "item");
 
-		QuestCommand.questReload();
+    QuestCommand.questReload();
 
-		if (Main.isDebugging()) {
-			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
-			return;
-		}
-		SpletSheetCommand.reloadSheet(null, "weapon");
+    if (Main.isDebugging()) {
+      DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
+      return;
+    }
+    SpletSheetCommand.reloadSheet(null, "weapon");
 
-		SpletSheetCommand.reloadSheet(null, "weaponskill");
+    SpletSheetCommand.reloadSheet(null, "weaponskill");
 
-		SpletSheetCommand.reloadSheet(null, "armor");
+    SpletSheetCommand.reloadSheet(null, "armor");
 
+    CommandChest.allReload();
 
-		CommandChest.allReload();
+    SoundSheetRunnable.allReload();
 
-		SoundSheetRunnable.allReload();
+    SpletSheetCommand.reloadSheet(null, "buff");
 
-		SpletSheetCommand.reloadSheet(null, "buff");
+    SpletSheetCommand.reloadSheet(null, "particle");
 
-		SpletSheetCommand.reloadSheet(null, "particle");
+    SpletSheetCommand.reloadSheet(null, "magicore");
 
+    SpletSheetCommand.reloadSheet(null, "food");
 
-		SpletSheetCommand.reloadSheet(null, "magicore");
+    BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
 
-		SpletSheetCommand.reloadSheet(null, "food");
+    // SystemSqlExecutor.execute();
+    new LbnRunnable() {
+      @Override
+      public void run2() {
+        int count = getRunCount();
+        switch (count) {
+          case 0:
+            break;
+          case 3:
+            MobCommand.reloadAllMob(null);
+            break;
+          case 7:
+            MobSpawnerPointManager.load();
+            break;
+          case 12:
+            MobSpawnerPointManager.startSpawnManage();
+            break;
+          default:
+            break;
+        }
 
-		BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
+        if (count > 50) {
+          cancel();
+        }
+      }
+    }.runTaskTimer(20 * 2);
 
-		//	SystemSqlExecutor.execute();
-		new LbnRunnable() {
-			@Override
-			public void run2() {
-				int count = getRunCount();
-				switch (count) {
-				case 0:
-					break;
-				case 3:
-					MobCommand.reloadAllMob(null);
-					break;
-				case 7:
-					MobSpawnerPointManager.load();
-					break;
-				case 12:
-					MobSpawnerPointManager.startSpawnManage();
-					break;
-				default:
-					break;
-				}
+    MobSkillManager.reloadDataBySystem();
 
-				if (count > 50) {
-					cancel();
-				}
-			}
-		}.runTaskTimer(20 * 2);
-
-		MobSkillManager.reloadDataBySystem();
-
-		DungeonList.load(Bukkit.getConsoleSender());
-	}
+    DungeonList.load(Bukkit.getConsoleSender());
+  }
 }
