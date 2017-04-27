@@ -54,7 +54,7 @@ public class LimitedListener implements Listener {
   static String targetWorldName = "world";
 
   public static boolean isTarget(World world) {
-    Objects.requireNonNull(world, () -> "world is null");
+    Objects.requireNonNull(world, "world is null");
     return true;
   }
 
