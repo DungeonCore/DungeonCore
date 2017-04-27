@@ -94,7 +94,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void BlockDamageEvent(BlockDamageEvent e) {
+  public void onBlockDamageEvent(BlockDamageEvent e) {
     if (!Config.getDamageAllowBlock().contains(e.getBlock().getType())) {
       e.setCancelled(true);
     }
@@ -123,7 +123,7 @@ public class LimitedListener implements Listener {
   // }
 
   @EventHandler
-  public void LeavesDecayEvent(LeavesDecayEvent e) {
+  public void onLeavesDecayEvent(LeavesDecayEvent e) {
     e.setCancelled(true);
   }
 
@@ -164,7 +164,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void CreatureSpawnEvent(CreatureSpawnEvent e) {
+  public void onCreatureSpawnEvent(CreatureSpawnEvent e) {
     if (!isTarget(e.getEntity().getWorld())) { return; }
     if (e.getSpawnReason() == SpawnReason.CUSTOM ||
         e.getSpawnReason() == SpawnReason.DEFAULT) { return; }
@@ -172,13 +172,13 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void click2(PlayerInteractEvent e) {
+  public void onItemClicking(PlayerInteractEvent e) {
     if (!isTarget(e)) { return; }
-    ItemStack itemInHand = e.getPlayer().getItemInHand();
-    if (itemInHand == null) { return; }
-
+    /* クリエイティブモードは除外 */
     if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
 
+    ItemStack itemInHand = e.getPlayer().getItemInHand();
+    if (itemInHand == null) { return; }
     if (Config.getClickCancelItems().contains(itemInHand.getType())) {
       e.setCancelled(true);
     }
