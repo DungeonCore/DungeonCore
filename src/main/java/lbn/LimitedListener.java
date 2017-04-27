@@ -67,7 +67,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void onBlockClicked(PlayerInteractEvent event) {
+  public void onBlockClicking(PlayerInteractEvent event) {
     if (!isTarget(event)) { return; }
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
     Block clickedBlock = event.getClickedBlock();
@@ -82,7 +82,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void onTouch(EntityDamageByEntityEvent e) {
+  public void onArmorStandTouching(EntityDamageByEntityEvent e) {
     Entity damager = e.getDamager();
     if (damager.getType() != EntityType.PLAYER) { return; }
     Player p = (Player) damager;
