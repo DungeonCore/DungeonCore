@@ -85,8 +85,8 @@ public class LimitedListener implements Listener {
   public void onArmorStandTouching(EntityDamageByEntityEvent e) {
     Entity damager = e.getDamager();
     if (damager.getType() != EntityType.PLAYER) { return; }
-    Player p = (Player) damager;
 
+    Player p = (Player) damager;
     // クリエイティブでないならアーマースタンドをけさない
     if (e.getEntity().getType() == EntityType.ARMOR_STAND && p.getGameMode() != GameMode.CREATIVE) {
       e.setCancelled(true);
@@ -128,7 +128,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.LOWEST)
-  public void WeatherChange(WeatherChangeEvent event) {
+  public void onWeatherChange(WeatherChangeEvent event) {
     if (!isTarget(event.getWorld())) { return; }
     boolean weatherState = event.toWeatherState();
     if (weatherState) {
@@ -140,24 +140,24 @@ public class LimitedListener implements Listener {
   public void onExplodeEvent(EntityExplodeEvent event) {
     if (!isTarget(event)) { return; }
     if (event.getEntity() == null) {
-      notBreakBlock(event);
+      cancelBlockBreak(event);
       return;
     }
     EntityType type = event.getEntityType();
 
     if (type == null) {
-      notBreakBlock(event);
+      cancelBlockBreak(event);
     } else if (type == EntityType.PRIMED_TNT) {
-      notBreakBlock(event);
+      cancelBlockBreak(event);
     } else if (type == EntityType.MINECART_TNT) {
-      notBreakBlock(event);
+      cancelBlockBreak(event);
     } else if (type == EntityType.UNKNOWN) {
-      notBreakBlock(event);
+      cancelBlockBreak(event);
     }
 
   }
 
-  private void notBreakBlock(EntityExplodeEvent event) {
+  private static void cancelBlockBreak(EntityExplodeEvent event) {
     if (event.blockList() != null) {
       event.blockList().clear();
     }
