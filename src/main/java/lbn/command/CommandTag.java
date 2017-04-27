@@ -15,15 +15,15 @@ public class CommandTag implements CommandExecutor {
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
     if (args.length == 0) {
       sender.sendMessage(
-          DARK_GREEN + "■■================================================■■"
-          + AQUA + "/tag list"
-          + BOLD + "    タグの一覧を表示します"
+          DARK_GREEN + "■■================================================■■\n"
+          + AQUA + "/tag list\n"
+          + BOLD + "    タグの一覧を表示します\n"
           + ""
-          + AQUA + "/tag settag <tag> <Player>"
-          + BOLD + "    タグをセットします"
+          + AQUA + "/tag settag <tag> <Player>\n"
+          + BOLD + "    タグをセットします\n"
           + ""
-          + AQUA + "/tag removetag <Player>"
-          + BOLD + "    プレイヤーのタグを消します"
+          + AQUA + "/tag removetag <Player>\n"
+          + BOLD + "    プレイヤーのタグを消します\n"
           + DARK_GREEN + "■■================================================■■");
       return true;
     }
