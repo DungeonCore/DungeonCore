@@ -67,18 +67,17 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void onClick(PlayerInteractEvent event) {
+  public void onBlockClicked(PlayerInteractEvent event) {
     if (!isTarget(event)) { return; }
     if (event.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
+    Block clickedBlock = event.getClickedBlock();
+    if (clickedBlock == null) { return; }
 
     // クリックをしていけないブロックの処理
-    Block clickedBlock = event.getClickedBlock();
-    if (clickedBlock != null) {
-      Material material = clickedBlock.getType();
-      if (Config.getClickCancelblocks().contains(material)) {
-        event.setCancelled(true);
-        return;
-      }
+    Material material = clickedBlock.getType();
+    if (Config.getClickCancelblocks().contains(material)) {
+      event.setCancelled(true);
+      return;
     }
   }
 
