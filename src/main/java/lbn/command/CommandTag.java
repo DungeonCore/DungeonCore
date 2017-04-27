@@ -14,16 +14,17 @@ public class CommandTag implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
     if (args.length == 0) {
-      sender.sendMessage(DARK_GREEN + "■■================================================■■");
-      sender.sendMessage(AQUA + "/tag list");
-      sender.sendMessage(BOLD + "    タグの一覧を表示します");
-      sender.sendMessage("");
-      sender.sendMessage(AQUA + "/tag settag <tag> <Player>");
-      sender.sendMessage(BOLD + "    タグをセットします");
-      sender.sendMessage("");
-      sender.sendMessage(AQUA + "/tag removetag <Player>");
-      sender.sendMessage(BOLD + "    プレイヤーのタグを消します");
-      sender.sendMessage(DARK_GREEN + "■■================================================■■");
+      sender.sendMessage(
+          DARK_GREEN + "■■================================================■■"
+          + AQUA + "/tag list"
+          + BOLD + "    タグの一覧を表示します"
+          + ""
+          + AQUA + "/tag settag <tag> <Player>"
+          + BOLD + "    タグをセットします"
+          + ""
+          + AQUA + "/tag removetag <Player>"
+          + BOLD + "    プレイヤーのタグを消します"
+          + DARK_GREEN + "■■================================================■■");
       return true;
     }
     Player online = Bukkit.getPlayerExact(args[0]);
