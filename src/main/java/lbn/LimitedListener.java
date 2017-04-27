@@ -145,16 +145,9 @@ public class LimitedListener implements Listener {
     }
     EntityType type = event.getEntityType();
 
-    if (type == null) {
-      cancelBlockBreak(event);
-    } else if (type == EntityType.PRIMED_TNT) {
-      cancelBlockBreak(event);
-    } else if (type == EntityType.MINECART_TNT) {
-      cancelBlockBreak(event);
-    } else if (type == EntityType.UNKNOWN) {
-      cancelBlockBreak(event);
-    }
+    if (type != null && type != EntityType.PRIMED_TNT && type != EntityType.MINECART && type != EntityType.UNKNOWN) { return; }
 
+    cancelBlockBreak(event);
   }
 
   private static void cancelBlockBreak(EntityExplodeEvent event) {
@@ -185,7 +178,7 @@ public class LimitedListener implements Listener {
   }
 
   @EventHandler
-  public void clickEntity(PlayerInteractEntityEvent e) {
+  public void onEntityClicking(PlayerInteractEntityEvent e) {
     if (!isTarget(e)) { return; }
     if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
 
