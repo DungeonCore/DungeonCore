@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import lombok.val;
 import net.l_bulb.dungeoncore.InitManager;
 import net.l_bulb.dungeoncore.LimitedListener;
 import net.l_bulb.dungeoncore.RecipeRegister;
@@ -106,7 +107,7 @@ public class Main extends JavaPlugin {
     }
 
     try {
-      registLintener();
+      registerListener();
       CommandRegister.registCommand();
     } catch (Exception e) {
       e.printStackTrace();
@@ -155,20 +156,21 @@ public class Main extends JavaPlugin {
     return plugin.getServer().getOnlinePlayers();
   }
 
-  public void registLintener() {
-    getServer().getPluginManager().registerEvents(new LimitedListener(), this);
-    getServer().getPluginManager().registerEvents(new SystemListener(), this);
-    getServer().getPluginManager().registerEvents(new MobListener(), this);
-    getServer().getPluginManager().registerEvents(new ChestListner(), this);
-    getServer().getPluginManager().registerEvents(new ItemListener(), this);
-    getServer().getPluginManager().registerEvents(new SetItemListner(), this);
-    getServer().getPluginManager().registerEvents(new PlayerAbilityListener(), this);
-    getServer().getPluginManager().registerEvents(new OtherCommonListener(), this);
-    getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-    getServer().getPluginManager().registerEvents(new QuestListener(), this);
-    getServer().getPluginManager().registerEvents(new MoneyListener(), this);
-    getServer().getPluginManager().registerEvents(new MoneyListener(), this);
-    getServer().getPluginManager().registerEvents(new NpcListener(), this);
+  public void registerListener() {
+    val manager = getServer().getPluginManager();
+    manager.registerEvents(new LimitedListener(), this);
+    manager.registerEvents(new SystemListener(), this);
+    manager.registerEvents(new MobListener(), this);
+    manager.registerEvents(new ChestListner(), this);
+    manager.registerEvents(new ItemListener(), this);
+    manager.registerEvents(new SetItemListner(), this);
+    manager.registerEvents(new PlayerAbilityListener(), this);
+    manager.registerEvents(new OtherCommonListener(), this);
+    manager.registerEvents(new PlayerListener(), this);
+    manager.registerEvents(new QuestListener(), this);
+    manager.registerEvents(new MoneyListener(), this);
+    manager.registerEvents(new MoneyListener(), this);
+    manager.registerEvents(new NpcListener(), this);
   }
 
   /**
