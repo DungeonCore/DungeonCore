@@ -43,8 +43,8 @@ import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer.CheckIntegrityLevel;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.command.TpCutCommand;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerChangeGalionsEvent;
@@ -82,7 +82,7 @@ public class PlayerListener implements Listener {
 
   /**
    * ダメージを受けた時、LastDamageを登録する
-   * 
+   *
    * @param e
    */
   @EventHandler(priority = EventPriority.LOWEST)
@@ -92,7 +92,7 @@ public class PlayerListener implements Listener {
 
   /**
    * 爆発によるダメージを軽減する
-   * 
+   *
    * @param e
    */
   @EventHandler(priority = EventPriority.LOWEST)
@@ -105,7 +105,7 @@ public class PlayerListener implements Listener {
 
   /**
    * mobを倒した際のお金の加算を行う
-   * 
+   *
    * @param e
    */
   @EventHandler
@@ -129,7 +129,7 @@ public class PlayerListener implements Listener {
 
   /**
    * Exp取得時のメッセージを表示
-   * 
+   *
    * @param event
    */
   @EventHandler(priority = EventPriority.MONITOR)
@@ -144,19 +144,19 @@ public class PlayerListener implements Listener {
 
   /**
    * レベル変化時のメッセージをLogに残す
-   * 
+   *
    * @param e
    */
   @EventHandler(priority = EventPriority.MONITOR)
   public void onChangeStatusLevel(PlayerChangeStatusLevelEvent e) {
     String join = StringUtils
-        .join(new Object[] { e.getOfflinePlayer().getName(), "の", e.getLevelType().getName(), "がレベル", e.getLevel(), "(", e.getNowExp(), ")になりました。" });
+        .join(new Object[] { e.getOfflinePlayer().getName(), "の", e.getLeveltype().getName(), "がレベル", e.getLeveltype(), "(", e.getNowExp(), ")になりました。" });
     SystemLog.addLog(join);
   }
 
   /**
    * レベル変化時のメッセージを表示
-   * 
+   *
    * @param e
    */
   @EventHandler()
@@ -168,18 +168,18 @@ public class PlayerListener implements Listener {
 
   /**
    * お金取得時のメッセージを表示、Logに記録を行う
-   * 
+   *
    * @param event
    */
   @EventHandler(priority = EventPriority.MONITOR)
   public void onMoneyExp(PlayerChangeGalionsEvent event) {
     // メッセージを表示
-    event.getReason().sendMessageLog(event.getPlayer(), event.getAddGalions());
+    event.getReason().sendMessageLog(event.getPlayer(), event.getGalions());
 
     // Logを残す
     if (event.getReason() != GalionEditReason.mob_drop) {
       final String format = "%s get %d galions by %s, (total %d galions)";
-      final String message = String.format(format, event.getTheLowPlayer().getName(), event.getAddGalions(), event.getReason().toString(),
+      final String message = String.format(format, event.getTheLowPlayer().getName(), event.getGalions(), event.getReason().toString(),
           event.getTheLowPlayer().getGalions());
       SystemLog.addLog(message);
     }
@@ -288,7 +288,7 @@ public class PlayerListener implements Listener {
 
   /**
    * +2以上のインスタンスヒールの効果をつける
-   * 
+   *
    * @param e
    */
   @EventHandler
@@ -323,7 +323,7 @@ public class PlayerListener implements Listener {
 
   /**
    * レベルアップ時の処理を行う
-   * 
+   *
    * @param event
    */
   @EventHandler
@@ -389,7 +389,7 @@ public class PlayerListener implements Listener {
 
   /**
    * Playerがモンスターを倒した時、Expを追加する
-   * 
+   *
    * @param e
    */
   @EventHandler

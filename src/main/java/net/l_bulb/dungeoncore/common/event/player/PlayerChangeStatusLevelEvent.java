@@ -2,31 +2,25 @@ package net.l_bulb.dungeoncore.common.event.player;
 
 import org.bukkit.event.HandlerList;
 
+import lombok.Getter;
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 
+@Getter
 public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent {
   private static final HandlerList handlers = new HandlerList();
 
   int level;
-  LevelType type;
+  LevelType leveltype;
 
-  public PlayerChangeStatusLevelEvent(TheLowPlayer player, int level, LevelType type) {
+  public PlayerChangeStatusLevelEvent(TheLowPlayer player, int level, LevelType leveltype) {
     super(player);
     this.level = level;
-    this.type = type;
-  }
-
-  public int getLevel() {
-    return level;
+    this.leveltype = leveltype;
   }
 
   public int getNowExp() {
-    return player.getExp(type);
-  }
-
-  public LevelType getLevelType() {
-    return type;
+    return player.getExp(leveltype);
   }
 
   @Override

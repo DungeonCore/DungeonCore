@@ -4,19 +4,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
+import lombok.Getter;
 import net.l_bulb.dungeoncore.quest.Quest;
 
 public class QuestEvent extends PlayerEvent {
-
+  @Getter
   protected Quest quest;
 
   public QuestEvent(Player who, Quest quest) {
     super(who);
     this.quest = quest;
-  }
-
-  public Quest getQuest() {
-    return quest;
   }
 
   private static final HandlerList handlers = new HandlerList();

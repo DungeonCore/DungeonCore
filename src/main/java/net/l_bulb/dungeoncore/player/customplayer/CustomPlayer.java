@@ -124,7 +124,7 @@ public class CustomPlayer implements TheLowPlayer {
 
   /**
    * レベルをアップさせる
-   * 
+   *
    * @param type
    * @param level
    */
@@ -165,7 +165,7 @@ public class CustomPlayer implements TheLowPlayer {
   public void addGalions(int galions, GalionEditReason reason) {
     PlayerChangeGalionsEvent event = new PlayerChangeGalionsEvent(this, galions, reason);
     Bukkit.getServer().getPluginManager().callEvent(event);
-    this.galions += event.getAddGalions();
+    this.galions += event.getGalions();
   }
 
   @Override

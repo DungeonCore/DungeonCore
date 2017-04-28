@@ -7,19 +7,21 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
+@Getter
 public class PlayerKillEntityEvent extends PlayerEvent {
   private static final HandlerList handlers = new HandlerList();
 
-  LivingEntity entity;
+  LivingEntity enemy;
 
   AttackItemStack attackItem;
 
-  public PlayerKillEntityEvent(Player who, LivingEntity entity, ItemStack item) {
+  public PlayerKillEntityEvent(Player who, LivingEntity enemy, ItemStack item) {
     super(who);
     this.attackItem = AttackItemStack.getInstance(item);
-    this.entity = entity;
+    this.enemy = enemy;
   }
 
   @Override
@@ -29,14 +31,6 @@ public class PlayerKillEntityEvent extends PlayerEvent {
 
   public static HandlerList getHandlerList() {
     return handlers;
-  }
-
-  public AttackItemStack getAttackItem() {
-    return attackItem;
-  }
-
-  public LivingEntity getEnemy() {
-    return entity;
   }
 
   public void callEvent() {

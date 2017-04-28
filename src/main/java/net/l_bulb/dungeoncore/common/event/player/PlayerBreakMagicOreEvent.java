@@ -8,7 +8,12 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
-
+/**
+ * <p>
+ * PlayerがMagicOreを破壊した時のEventです
+ * </p>
+ *
+ */
 public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable {
 
   private static final HandlerList handlers = new HandlerList();
@@ -23,7 +28,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
   }
 
   // 破壊したブロックの座標
-  Location loc;
+  Location location;
   // 破壊した魔法鉱石のタイプ
   MagicStoneOreType brokenType;
   // 壊すときに使ったアイテム
@@ -34,13 +39,13 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
   /**
    *
    * @param who
-   * @param loc 破壊した魔法鉱石の座標
+   * @param location 破壊した魔法鉱石の座標
    * @param brokenType 破壊した魔法鉱石のタイプ
    * @param acquisition 取得できるアイテム
    */
-  public PlayerBreakMagicOreEvent(Player who, Location loc, MagicStoneOreType brokenType, ItemStack acquisition) {
+  public PlayerBreakMagicOreEvent(Player who, Location location, MagicStoneOreType brokenType, ItemStack acquisition) {
     super(who);
-    this.loc = loc;
+    this.location = location;
     this.brokenType = brokenType;
     itemInhand = who.getItemInHand();
     this.acquisition = acquisition;
@@ -49,8 +54,8 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 壊すときに使ったアイテムを取得
-   * 
-   * @return
+   *
+   * @return ItemStack
    */
   public ItemStack getUseItem() {
     return itemInhand;
@@ -58,8 +63,8 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 破壊した魔法鉱石のタイプを取得
-   * 
-   * @return
+   *
+   * @return MagicStoneOreType
    */
   public MagicStoneOreType getBrokenType() {
     return brokenType;
@@ -67,8 +72,8 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 取得できるアイテムを取得
-   * 
-   * @return
+   *
+   * @return ItemStack
    */
   public ItemStack getAcquisition() {
     return acquisition;
@@ -76,7 +81,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 取得できるアイテムをセット
-   * 
+   *
    * @param acquisition
    */
   public void setAcquisition(ItemStack acquisition) {
@@ -85,11 +90,11 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 破壊した魔法鉱石の座標を取得
-   * 
-   * @return
+   *
+   * @return location
    */
   public Location getLocation() {
-    return loc;
+    return location;
   }
 
   boolean isCancel = false;

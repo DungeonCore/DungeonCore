@@ -5,14 +5,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
+import lombok.AllArgsConstructor;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 
+@AllArgsConstructor
 public abstract class TheLowPlayerEvent extends Event {
   TheLowPlayer player;
-
-  public TheLowPlayerEvent(TheLowPlayer player) {
-    this.player = player;
-  }
 
   public Player getPlayer() {
     return player.getOnlinePlayer();

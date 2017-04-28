@@ -5,12 +5,16 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 強化完成形のアイテムがRESULT欄に表示される瞬間
  *
  */
+@Getter
 public class PlayerSetStrengthItemResultEvent extends PlayerEvent {
-
+  @Setter
   ItemStack item;
 
   int nextLevel;
@@ -24,18 +28,6 @@ public class PlayerSetStrengthItemResultEvent extends PlayerEvent {
     this.isSuccess = isSuccess;
   }
 
-  public ItemStack getItem() {
-    return item;
-  }
-
-  public void setItem(ItemStack item) {
-    this.item = item;
-  }
-
-  public int getNextLevel() {
-    return nextLevel;
-  }
-
   private static final HandlerList handlers = new HandlerList();
 
   @Override
@@ -47,7 +39,4 @@ public class PlayerSetStrengthItemResultEvent extends PlayerEvent {
     return handlers;
   }
 
-  public boolean isSuccess() {
-    return isSuccess;
-  }
 }
