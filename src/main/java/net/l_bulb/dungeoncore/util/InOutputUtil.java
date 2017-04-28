@@ -21,22 +21,26 @@ import java.util.zip.ZipOutputStream;
 
 import org.bukkit.Bukkit;
 
+import lombok.NonNull;
+import lombok.val;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class InOutputUtil {
+
   public final static String dataFolder = Main.dataFolder + File.separator + "data" + File.separator;
 
   /**
-   * データをシリアライズする
+   * シリアライズ可能なデータをシリアライズし、対象のファイルに書き出します。
    *
-   * @param serializable
-   * @param fileName
-   * @return
+   * @param serializable シリアライズ可能データ
+   * @param fileName 書き出し先のファイル
+   * @return シリアライズに成功したかどうか。成功した場合はtrue、それ以外の場合はfalse。
    */
-  public static boolean serializeObject(Serializable serializable, String fileName) {
+  public static boolean serializeObject(@NonNull Serializable serializable, @NonNull String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
+
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
       oos.writeObject(serializable);
       oos.flush();
@@ -48,15 +52,16 @@ public class InOutputUtil {
   }
 
   /**
-   * ZIPにして保存する
+   * 指定されたファイルを、ZIP圧縮 (Deflateアルゴリズム) して保存します。
    *
-   * @param filePath
-   * @param directory
-   * @return
+   * @param filePath 圧縮する対象のファイル。
+   * @param directory 圧縮されたデータの保存先ディレクトリ
+   * @return 処理に成功したかどうか。成功した場合はtrue、それ以外の場合はfalse。
    */
-  public static boolean compressDirectory(String filePath, String directory) {
-    File baseFile = new File(filePath);
-    File file = new File(directory);
+  public static boolean compressDirectory(@NonNull String filePath, @NonNull String directory) {
+    val baseFile = new File(filePath);
+    val file = new File(directory);
+
     try {
       baseFile.getParentFile().mkdirs();
       baseFile.createNewFile();
@@ -64,7 +69,8 @@ public class InOutputUtil {
       e.printStackTrace();
       return false;
     }
-    try (ZipOutputStream outZip = new ZipOutputStream(new FileOutputStream(baseFile));) {
+
+    try (ZipOutputStream outZip = new ZipOutputStream(new FileOutputStream(baseFile))) {
       archive(outZip, baseFile, file);
     } catch (Exception e) {
       e.printStackTrace();
@@ -73,31 +79,31 @@ public class InOutputUtil {
     return true;
   }
 
+  // FIXME: Javadocを修正する。
   /**
    * ディレクトリ圧縮のための再帰処理
    *
-   * @param outZip ZipOutputStream
-   * @param baseFile File 保存先ファイル
-   * @param file File 圧縮したいファイル
+   * @param outZip 圧縮と書き出しで使用される、ZipOutputStreamのインスタンス。
+   * @param baseFile 保存先ファイル
+   * @param targetDirectory 圧縮したいディレクトリ？ファイル？
    */
-  private static void archive(ZipOutputStream outZip, File baseFile,
-      File targetFile) {
-    if (targetFile.isDirectory()) {
-      File[] files = targetFile.listFiles();
-      for (File f : files) {
-        if (f.isDirectory()) {
-          archive(outZip, baseFile, f);
-        } else {
-          if (!f.getAbsoluteFile().equals(baseFile)) {
-            // 圧縮処理
-            archive(outZip,
-                baseFile,
-                f,
-                f.getAbsolutePath()
-                    .replace(baseFile.getParent(), "")
-                    .substring(1),
-                "Shift_JIS");
-          }
+  private static void archive(@NonNull ZipOutputStream outZip, @NonNull File baseFile, @NonNull File targetDirectory) {
+    if (!targetDirectory.isDirectory()) { return; }
+
+    File[] files = targetDirectory.listFiles();
+    for (File f : files) {
+      if (f.isDirectory()) {
+        archive(outZip, baseFile, f);
+      } else {
+        if (!f.getAbsoluteFile().equals(baseFile)) {
+          // 圧縮処理
+          archive(outZip,
+              baseFile,
+              f,
+              f.getAbsolutePath()
+                  .replace(baseFile.getParent(), "")
+                  .substring(1),
+              "Shift_JIS");
         }
       }
     }
@@ -112,8 +118,7 @@ public class InOutputUtil {
    * @parma entryName 保存ファイル名
    * @param enc 文字コード
    */
-  private static boolean archive(ZipOutputStream outZip, File baseFile,
-      File targetFile, String entryName, String enc) {
+  private static boolean archive(ZipOutputStream outZip, File baseFile, File targetFile, String entryName, String enc) {
 
     // 圧縮レベル設定
     outZip.setLevel(Deflater.BEST_SPEED);
@@ -145,13 +150,13 @@ public class InOutputUtil {
     return write(str, fileName, dataFolder);
   }
 
-  public static boolean write(Collection<String> strList, String fileName) {
+  public static boolean write(Collection<String> strings, String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
 
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-      for (String string : strList) {
+      for (String string : strings) {
         bw.write(string);
         bw.write("\n");
       }
