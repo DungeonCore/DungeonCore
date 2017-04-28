@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
+import lombok.Getter;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class BookData {
@@ -32,35 +33,26 @@ public class BookData {
     return command == null || command.isEmpty();
   }
 
+  @Getter
   String id;
-
+  @Getter
   String title;
-
+  @Getter
   String auther;
 
   ItemStack item = null;
 
   ArrayList<String> contents = new ArrayList<>();
 
-  public String getId() {
-    return id;
-  }
 
-  public String getTitile() {
-    return title;
-  }
 
   public ItemStack getItem() {
     return item;
   }
 
-  public void setTitile(String titile) {
-    if (isNull(titile)) { return; }
-    this.title = titile;
-  }
-
-  public String getAuther() {
-    return auther;
+  public void setTitile(String title) {
+    if (isNull(title)) { return; }
+    this.title = title;
   }
 
   public void setAuther(String auther) {
@@ -111,7 +103,7 @@ public class BookData {
 
   /**
    * 本のアイテムへ変換
-   * 
+   *
    * @return
    */
   public ItemStack toBookItem() {
@@ -120,7 +112,7 @@ public class BookData {
       // アイテムの情報を書きかる
       BookMeta itemMeta = (BookMeta) cacheBookItem.getItemMeta();
       itemMeta.setAuthor(getAuther());
-      itemMeta.setTitle(getTitile());
+      itemMeta.setTitle(getTitle());
       itemMeta.setPages(getContents());
       cacheBookItem.setItemMeta(itemMeta);
     }

@@ -26,14 +26,14 @@ public class BookItem extends AbstractItem implements RightClickItemable {
     // アイテムの情報を書きかる
     BookMeta itemMeta = (BookMeta) itemStack.getItemMeta();
     itemMeta.setAuthor(data.getAuther());
-    itemMeta.setTitle(data.getTitile());
+    itemMeta.setTitle(data.getTitle());
     itemMeta.setPages(data.getContents());
     itemStack.setItemMeta(itemMeta);
   }
 
   @Override
   public String getItemName() {
-    return data.getTitile();
+    return data.getTitle();
   }
 
   @Override
@@ -74,7 +74,7 @@ public class BookItem extends AbstractItem implements RightClickItemable {
 
   /**
    * 本のID
-   * 
+   *
    * @return
    */
   public String getBookId() {

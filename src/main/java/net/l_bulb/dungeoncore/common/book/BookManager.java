@@ -58,7 +58,7 @@ public class BookManager {
 
   /**
    * 本を開く
-   * 
+   *
    * @param p
    * @param id
    */
@@ -67,7 +67,7 @@ public class BookManager {
     if (bookData != null) {
       openBook(bookData.toBookItem(), p);
 
-      p.sendMessage(ChatColor.GOLD + "[BOOK] " + ChatColor.GREEN + bookData.getTitile() + "の本を開きました");
+      p.sendMessage(ChatColor.GOLD + "[BOOK] " + ChatColor.GREEN + bookData.getTitle() + "の本を開きました");
     }
   }
 
