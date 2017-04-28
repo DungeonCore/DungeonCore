@@ -15,21 +15,21 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class SequenceCommand implements CommandExecutor, UsageCommandable {
   @Override
-  public boolean onCommand(final CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-    if (arg3.length == 0) {
-      arg0.sendMessage("実行間隔の秒数が必要です。例) sequencecommand 3 say 123 & say abc ");
+  public boolean onCommand(final CommandSender sender, Command command, String label, String[] args) {
+    if (args.length == 0) {
+      sender.sendMessage("実行間隔の秒数が必要です。例) sequencecommand 3 say 123 & say abc ");
       return false;
     }
 
     double second;
     try {
-      second = Double.parseDouble(arg3[0]);
+      second = Double.parseDouble(args[0]);
     } catch (NumberFormatException e) {
-      arg0.sendMessage(arg3[0] + " is not number!!");
+      sender.sendMessage(args[0] + " is not a valid number!!");
       return false;
     }
 
-    String commandList = StringUtils.join(Arrays.copyOfRange(arg3, 1, arg3.length), " ");
+    String commandList = StringUtils.join(Arrays.copyOfRange(args, 1, args.length), " ");
     final String[] split = commandList.split("&");
 
     new BukkitRunnable() {
@@ -37,7 +37,7 @@ public class SequenceCommand implements CommandExecutor, UsageCommandable {
 
       @Override
       public void run() {
-        Bukkit.dispatchCommand(arg0, split[i].trim());
+        Bukkit.dispatchCommand(sender, split[i].trim());
         i++;
         if (split.length <= i) {
           cancel();
