@@ -1,19 +1,19 @@
 package net.l_bulb.dungeoncore.util;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
@@ -204,19 +204,11 @@ public class InOutputUtil {
    */
   public static ArrayList<String> readFile(String fileName) throws IOException {
     File file = new File(dataFolder + fileName);
-
-    try (BufferedReader br = new BufferedReader(new FileReader(file));) {
-      ArrayList<String> list = new ArrayList<>();
-      String line = null;
-      while ((line = br.readLine()) != null) {
-        list.add(line);
-      }
-      return list;
-    } catch (FileNotFoundException e) {
+    if (!file.isFile()) {
       DungeonLogger.error(fileName + "ファイルが存在しないので読み込みを無視します");
-    } catch (IOException e) {
-      throw e;
+      return new ArrayList<>();
     }
-    return new ArrayList<>();
+    List<String> result = Files.readAllLines(file.toPath());
+    return result instanceof ArrayList ? (ArrayList<String>) result : new ArrayList<>(result);
   }
 }
