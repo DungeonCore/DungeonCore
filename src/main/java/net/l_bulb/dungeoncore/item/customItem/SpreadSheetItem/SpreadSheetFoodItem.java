@@ -124,17 +124,17 @@ public class SpreadSheetFoodItem extends FoodItem {
     BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
     if (buff1 != null && (int) (buff1.getTick() / 20.0) > 0) {
       loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getPotionEffectType().getName(), (buff1.getLevel() + 1), (int) (buff1.getTick() / 20.0)));
+          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getEffect().getName(), (buff1.getLevel() + 1), (int) (buff1.getTick() / 20.0)));
     }
     BuffData buff2 = BuffDataFactory.getBuffFromId(buffId2);
     if (buff2 != null && (int) (buff2.getTick() / 20.0) > 0) {
       loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getPotionEffectType().getName(), (buff2.getLevel() + 1), (int) (buff2.getTick() / 20.0)));
+          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getEffect().getName(), (buff2.getLevel() + 1), (int) (buff2.getTick() / 20.0)));
     }
     BuffData buff3 = BuffDataFactory.getBuffFromId(buffId3);
     if (buff3 != null && (int) (buff3.getTick() / 20.0) > 0) {
       loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getPotionEffectType().getName(), (buff3.getLevel() + 1), (int) (buff3.getTick() / 20.0)));
+          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getEffect().getName(), (buff3.getLevel() + 1), (int) (buff3.getTick() / 20.0)));
     }
     return loreToken;
   }
