@@ -4,10 +4,13 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
+
 /**
  * 強化完了時のLoreが変更される瞬間に呼ばれるイベント(失敗か成功かは問わない)
  *
  */
+@Getter
 public class ChangeStrengthLevelItemEvent extends Event {
 
   ItemStack before;
@@ -20,22 +23,6 @@ public class ChangeStrengthLevelItemEvent extends Event {
     this.after = after;
     this.nextLevel = nextLevel;
     this.beforeLevel = beforeLevel;
-  }
-
-  public ItemStack getBefore() {
-    return before;
-  }
-
-  public int getBeforeLevel() {
-    return beforeLevel;
-  }
-
-  public ItemStack getAfter() {
-    return after;
-  }
-
-  public int getNextLevel() {
-    return nextLevel;
   }
 
   private static final HandlerList handlers = new HandlerList();

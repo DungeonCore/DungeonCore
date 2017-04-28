@@ -5,12 +5,15 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
+
 /**
  * Playerが強化を完了した瞬間
- * 
+ *
  * @author KENSUKE
  *
  */
+@Getter
 public class PlayerStrengthFinishEvent extends PlayerEvent {
   private ItemStack item;
   private int level;
@@ -21,18 +24,6 @@ public class PlayerStrengthFinishEvent extends PlayerEvent {
     this.level = level;
     this.item = item;
     this.isSuccess = isSuccess;
-  }
-
-  public ItemStack getItem() {
-    return item;
-  }
-
-  public int getLevel() {
-    return level;
-  }
-
-  public boolean isSuccess() {
-    return isSuccess;
   }
 
   private static final HandlerList handlers = new HandlerList();

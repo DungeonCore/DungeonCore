@@ -2,18 +2,20 @@ package net.l_bulb.dungeoncore.common.event.player;
 
 import org.bukkit.event.HandlerList;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
-
+@Getter
+@Setter
 public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
-
-  int val;
+  int Galions;
   GalionEditReason reason;
 
-  public PlayerChangeGalionsEvent(TheLowPlayer who, int val, GalionEditReason reason) {
+  public PlayerChangeGalionsEvent(TheLowPlayer who, int Galions, GalionEditReason reason) {
     super(who);
     this.reason = reason;
-    this.val = val;
+    this.Galions = Galions;
   }
 
   private static final HandlerList handlers = new HandlerList();
@@ -27,20 +29,4 @@ public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {
     return handlers;
   }
 
-  public int getAddGalions() {
-    return val;
-  }
-
-  public GalionEditReason getReason() {
-    return reason;
-  }
-
-  public void setGalions(int val) {
-    this.val = val;
-  }
-
-  public void setReason(GalionEditReason reason) {
-    this.reason = reason;
-    ;
-  }
 }

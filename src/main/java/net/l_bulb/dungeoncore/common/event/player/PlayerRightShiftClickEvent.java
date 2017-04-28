@@ -6,8 +6,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import lombok.Getter;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
+@Getter
 public class PlayerRightShiftClickEvent extends PlayerEvent {
   private static final HandlerList handlers = new HandlerList();
 
@@ -25,10 +27,6 @@ public class PlayerRightShiftClickEvent extends PlayerEvent {
 
   public static HandlerList getHandlerList() {
     return handlers;
-  }
-
-  public AttackItemStack getAttackItem() {
-    return attackItem;
   }
 
   public void callEvent() {

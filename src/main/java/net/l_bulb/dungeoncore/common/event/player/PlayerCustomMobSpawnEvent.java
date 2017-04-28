@@ -5,6 +5,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
+import lombok.Getter;
+
+@Getter
 public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent {
 
   String name;
@@ -15,14 +18,6 @@ public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent {
     super(spawnee, SpawnReason.CUSTOM);
     name = spawnee.getCustomName();
     type = spawnee.getType();
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public EntityType getType() {
-    return type;
   }
 
   private static final HandlerList handlers = new HandlerList();

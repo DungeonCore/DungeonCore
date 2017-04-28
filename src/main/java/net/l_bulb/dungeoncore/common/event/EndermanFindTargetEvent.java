@@ -5,16 +5,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityEvent;
 
+import lombok.Getter;
+
+
 public class EndermanFindTargetEvent extends EntityEvent {
-  Player p;
+  @Getter
+  Player target;
 
-  public EndermanFindTargetEvent(Entity what, Player p) {
+  public EndermanFindTargetEvent(Entity what, Player target) {
     super(what);
-    this.p = p;
-  }
-
-  public Player getTarget() {
-    return p;
+    this.target = target;
   }
 
   private static final HandlerList handlers = new HandlerList();
