@@ -74,7 +74,7 @@ public final class DungeonLogger {
         logger.info(prefix.append(message).toString());
         break;
       default:
-        prefix.append(']');
+        prefix.append("] ");
         logger.info(prefix.append(message).toString());
         break;
     }
