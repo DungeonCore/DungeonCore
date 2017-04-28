@@ -1,6 +1,6 @@
 name: DungeonCore
 version: 1.2
-main: lbn.dungeoncore.Main
+main: net.l_bulb.dungeoncore.dungeoncore.Main
 depend: [Multiverse-Core,TheLowSheetPlugin,HolographicDisplays,Citizens]
 
 commands:
