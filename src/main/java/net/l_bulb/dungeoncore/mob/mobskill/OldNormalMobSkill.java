@@ -107,7 +107,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
     AbstractMob<?> mob2 = MobHolder.getMob(mob);
     if (mob2 == null || mob2.isNullMob()) { return; }
 
-    ArrayList<Entity> targetList = new ArrayList<Entity>();
+    ArrayList<Entity> targetList = new ArrayList<>();
     switch (targetingMethod) {
       case DEPEND_ON_CONDTION:
         if (condtionTarget != null && condtionTarget.isValid()) {

@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.player.ability.AbstractReincarnationAbility;
  *
  */
 public class ReincarnationAbilityStatusWrapper extends AbstractReincarnationAbility {
-  HashMap<PlayerStatusType, Double> ability = new HashMap<PlayerStatusType, Double>();
+  HashMap<PlayerStatusType, Double> ability = new HashMap<>();
 
   /**
    * @param status

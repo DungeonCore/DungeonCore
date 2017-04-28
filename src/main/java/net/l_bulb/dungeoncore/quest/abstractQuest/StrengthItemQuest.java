@@ -10,7 +10,7 @@ import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
 
 public class StrengthItemQuest extends AbstractQuest {
 
-  static HashMap<String, StrengthItemQuest> questList = new HashMap<String, StrengthItemQuest>();
+  static HashMap<String, StrengthItemQuest> questList = new HashMap<>();
 
   public StrengthItemQuest(String id, String data1, String data2) {
     super(id);

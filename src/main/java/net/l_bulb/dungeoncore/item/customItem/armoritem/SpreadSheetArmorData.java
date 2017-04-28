@@ -34,7 +34,7 @@ public class SpreadSheetArmorData {
   String[] detail = null;
 
   // クラフトに必要なアイテムとその数
-  HashMap<String, Integer> craftMaterial = new HashMap<String, Integer>();
+  HashMap<String, Integer> craftMaterial = new HashMap<>();
 
   // エラーかどうか
   boolean isCraftItemError = false;

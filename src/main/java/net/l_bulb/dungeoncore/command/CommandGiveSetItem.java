@@ -65,7 +65,7 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
    * @return
    */
   public HashSet<String> getSetItemNameList() {
-    HashSet<String> nameList = new HashSet<String>();
+    HashSet<String> nameList = new HashSet<>();
     for (String name : SetItemManager.getSetItemNameList()) {
       nameList.add(name.replace(" ", "_"));
     }

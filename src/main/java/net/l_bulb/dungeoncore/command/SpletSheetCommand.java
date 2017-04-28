@@ -40,7 +40,7 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.WeaponSkillSheetRunnable;
 
 public class SpletSheetCommand implements CommandExecutor, TabCompleter {
-  static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
+  static HashMap<String, Class<?>> sheetMap = new HashMap<>();
   static {
     ConsoleCommandSender sender = Bukkit.getConsoleSender();
     regist(new ChestSheetRunnable(sender));

@@ -28,7 +28,7 @@ import net.l_bulb.dungeoncore.mob.AbstractMob;
 public class NormalMagicItem extends MagicItemOld {
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList
         .add(new NormalMagicItem("始まりの杖", 0, Material.STICK, new BlockData(Material.WOOD, (byte) 1), new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3)));
     arrayList.add(new NormalMagicItem("アイスジャベリン", 10, Material.WOOD_HOE, new BlockData(Material.ICE), new SoundData(Sound.GLASS, 1, (float) 0.1)));

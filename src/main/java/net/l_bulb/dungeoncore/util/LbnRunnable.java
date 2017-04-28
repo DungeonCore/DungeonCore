@@ -10,7 +10,7 @@ import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public abstract class LbnRunnable extends BukkitRunnable {
-  private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<LbnRunnable>();
+  private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<>();
 
   public String getName() {
     return "nune";

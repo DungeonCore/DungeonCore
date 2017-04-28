@@ -32,7 +32,7 @@ public class MobSpawnerPointManager {
   // 現在起動中のスケジューラー
   static HashMap<SpawnLevel, SpawnScheduler> schedulerList = new HashMap<>();
   // ロードされているチャンク
-  public static HashSet<ChunkWrapper> loadedChunk = new HashSet<ChunkWrapper>();
+  public static HashSet<ChunkWrapper> loadedChunk = new HashSet<>();
 
   // スプレットシートIDの最大値
   static int spletSheetId = 0;
@@ -108,7 +108,7 @@ public class MobSpawnerPointManager {
    * @return
    */
   public static Collection<MobSpawnerPoint> getSpawnerPointListByLoadedChunk() {
-    HashSet<MobSpawnerPoint> rtn = new HashSet<MobSpawnerPoint>();
+    HashSet<MobSpawnerPoint> rtn = new HashSet<>();
     for (ChunkWrapper chunk : loadedChunk) {
       rtn.addAll(spawnPointListAndChunk.get(chunk));
     }

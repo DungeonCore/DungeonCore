@@ -112,7 +112,7 @@ public class CraftItemSelectViewerItems {
     // まずは削除する
     List<String> lore = removeDontHasMaterialLine(item);
     // 一番最初に追加する
-    ArrayList<String> newLore = new ArrayList<String>();
+    ArrayList<String> newLore = new ArrayList<>();
     newLore.add(NOT_CRAFT_LINE);
     newLore.addAll(lore);
     ItemStackUtil.setLore(item, newLore);

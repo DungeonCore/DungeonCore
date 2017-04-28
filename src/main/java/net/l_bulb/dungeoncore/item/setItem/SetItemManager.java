@@ -33,7 +33,7 @@ public class SetItemManager {
 
   private static HashMultimap<Material, SetItemPartsType> partsMaterialMap = HashMultimap.create();
 
-  private static Map<String, SetItemInterface> setItemMap = new HashMap<String, SetItemInterface>();
+  private static Map<String, SetItemInterface> setItemMap = new HashMap<>();
 
   public static void regist(SetItemInterface setitem) {
     setItemMap.put(setitem.getName(), setitem);
@@ -85,9 +85,9 @@ public class SetItemManager {
    */
   public static void updateAllSetItem(Player p) {
     // 現在セットしているセットアイテム一覧
-    HashMap<SetItemInterface, ItemStack[]> setedSetItem = new HashMap<SetItemInterface, ItemStack[]>();
+    HashMap<SetItemInterface, ItemStack[]> setedSetItem = new HashMap<>();
 
-    HashSet<String> setitemCache = new HashSet<String>();
+    HashSet<String> setitemCache = new HashSet<>();
     // 関連する全てのパーツを取得
     for (SetItemPartsType partsType : SetItemPartsType.values()) {
       // プレイヤーが装備しているアイテムを取得

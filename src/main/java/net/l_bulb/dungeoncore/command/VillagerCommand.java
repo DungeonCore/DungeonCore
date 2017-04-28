@@ -71,7 +71,7 @@ public class VillagerCommand implements CommandExecutor {
   }
 
   protected void removeVillager(CommandSender sender, String targetName) {
-    ArrayList<VillagerNpc> npcList = new ArrayList<VillagerNpc>();
+    ArrayList<VillagerNpc> npcList = new ArrayList<>();
 
     // 名前が指定されていない時はプレイヤーの周囲のNPCを調べる
     if (targetName == null) {
@@ -103,7 +103,7 @@ public class VillagerCommand implements CommandExecutor {
     VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(sender);
     for (VillagerNpc villagerNpc : npcList) {
       // locationを更新
-      HashMap<String, Object> map = new HashMap<String, Object>();
+      HashMap<String, Object> map = new HashMap<>();
       map.put("location", "");
       villagerSheetRunnable.updateData(map, "name=" + villagerNpc.getName());
     }
@@ -143,7 +143,7 @@ public class VillagerCommand implements CommandExecutor {
 
     // スプレットシートに書きこむ
     VillagerSheetRunnable villagerSheetRunnable = new VillagerSheetRunnable(arg0);
-    HashMap<String, Object> map = new HashMap<String, Object>();
+    HashMap<String, Object> map = new HashMap<>();
     map.put("location", AbstractComplexSheetRunable.getLocationString(location));
     villagerSheetRunnable.updateData(map, "id=" + villagerNpc.getId());
     SpletSheetExecutor.onExecute(villagerSheetRunnable);

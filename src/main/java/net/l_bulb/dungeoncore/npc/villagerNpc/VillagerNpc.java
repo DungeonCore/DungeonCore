@@ -69,7 +69,7 @@ public class VillagerNpc implements CustomNpcInterface {
     Set<TouchVillagerQuest> questForVillager = TouchVillagerQuest.getQuestByTargetVillager(entity);
 
     // メッセージを取得
-    List<String> message = new ArrayList<String>();
+    List<String> message = new ArrayList<>();
 
     boolean isDoingTouchQuest = false;
 

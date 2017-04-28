@@ -51,7 +51,7 @@ public abstract class AbstractMagicBook extends RightClickItem {
   }
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList.add(new MagicBookLevel1Flame());
     arrayList.add(new MagicBookFireLevel2());
     arrayList.add(new MagicBookFireLevel3());

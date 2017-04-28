@@ -143,7 +143,7 @@ public class CommandGetItem implements CommandExecutor {
   protected static void init() {
     DungeonLogger.development("item list init!!");
     MenuSelector menuSelecor = new MenuSelector("item nemu");
-    Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<Integer, TreeSet<ItemInterface>>();
+    Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<>();
 
     count = 0;
     // アイテムをグループごとに分類分けする
@@ -217,7 +217,7 @@ public class CommandGetItem implements CommandExecutor {
   }
 
   protected static TreeSet<ItemInterface> getTreeSet() {
-    TreeSet<ItemInterface> treeSet = new TreeSet<ItemInterface>(new Comparator<ItemInterface>() {
+    TreeSet<ItemInterface> treeSet = new TreeSet<>(new Comparator<ItemInterface>() {
       @Override
       public int compare(ItemInterface o1, ItemInterface o2) {
         // まずはアイテムの種類ごと
@@ -249,7 +249,7 @@ public class CommandGetItem implements CommandExecutor {
         return o1.getId().compareTo(o2.getId());
       }
 
-      HashMap<ItemInterface, Integer> cache = new HashMap<ItemInterface, Integer>();
+      HashMap<ItemInterface, Integer> cache = new HashMap<>();
 
       // アイテムの並び順
       public int getOrder(ItemInterface item) {

@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class TaskManager {
-  HashMap<Location, CommandTask> taskMap = new HashMap<Location, CommandTask>();
+  HashMap<Location, CommandTask> taskMap = new HashMap<>();
 
   public void regist(CommandSender sender, long laterExecuteTick) {
     CommandTask commandTask = new CommandTask();

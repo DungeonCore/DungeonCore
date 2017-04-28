@@ -16,7 +16,7 @@ public class SkeltonMobGetter extends AbstractSpawnMobGetter {
     return "skelton";
   }
 
-  static ArrayList<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
+  static ArrayList<AbstractMob<?>> mobList = new ArrayList<>();
   static {
     mobList.add(new NormalMob(EntityType.SKELETON));
   }

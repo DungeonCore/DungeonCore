@@ -104,7 +104,7 @@ public class CustomEffectCommand extends AbstractVanillaCommand {
     }
   }
 
-  static HashMap<String, String> nameMap = new HashMap<String, String>();
+  static HashMap<String, String> nameMap = new HashMap<>();
   static {
     nameMap.put("SPEED", "minecraft:speed");
     nameMap.put("SLOW", "minecraft:slowness");

@@ -16,7 +16,7 @@ public class ZombieMobGetter extends AbstractSpawnMobGetter {
     return "zombie";
   }
 
-  static ArrayList<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
+  static ArrayList<AbstractMob<?>> mobList = new ArrayList<>();
   static {
     mobList.add(new NormalMob(EntityType.ZOMBIE));
   }

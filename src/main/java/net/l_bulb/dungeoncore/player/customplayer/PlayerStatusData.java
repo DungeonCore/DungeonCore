@@ -23,7 +23,7 @@ import net.l_bulb.dungeoncore.player.ability.AbilityType;
  */
 public class PlayerStatusData {
   // 実際のステータスデータ値をいれておくMap
-  protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<PlayerStatusType, Double>();
+  protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<>();
 
   /**
    * 現在適応中のAbilityをセットするためのMap
@@ -175,7 +175,7 @@ public class PlayerStatusData {
    */
   public void clear(AbilityType type) {
     // 全て取得し、1つずつ削除する
-    Set<AbilityInterface> set = new HashSet<AbilityInterface>(abilityType.get(type));
+    Set<AbilityInterface> set = new HashSet<>(abilityType.get(type));
     for (AbilityInterface abilityInterface : set) {
       removeData(abilityInterface);
     }

@@ -33,7 +33,7 @@ public class AttackItemStack {
   ItemStack item;
   AbstractAttackItem itemInterface;
 
-  static HashMap<ItemStack, AttackItemStack> cache = new HashMap<ItemStack, AttackItemStack>();
+  static HashMap<ItemStack, AttackItemStack> cache = new HashMap<>();
 
   /**
    * ItemStackから武器情報を取得する
@@ -133,7 +133,7 @@ public class AttackItemStack {
     // すでに初期化しているなら無視する
     if (isInitSlot) { return; }
 
-    slotList = new ArrayList<SlotInterface>();
+    slotList = new ArrayList<>();
     for (String string : ItemStackUtil.getLore(item)) {
       SlotInterface slotByLore = SlotManager.getSlotByLore(string);
       if (slotByLore != null) {

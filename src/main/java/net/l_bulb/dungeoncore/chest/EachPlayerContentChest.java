@@ -74,11 +74,11 @@ public class EachPlayerContentChest extends SpletSheetChest {
     }
   }
 
-  Map<UUID, Inventory> invList = new HashMap<UUID, Inventory>();
+  Map<UUID, Inventory> invList = new HashMap<>();
 
-  Map<UUID, Long> refuelTime = new HashMap<UUID, Long>();
+  Map<UUID, Long> refuelTime = new HashMap<>();
 
-  HashSet<Player> set = new HashSet<Player>();
+  HashSet<Player> set = new HashSet<>();
 
   protected boolean isFirestOpenWithPlayer(Player p) {
     return invList.containsKey(p.getUniqueId());

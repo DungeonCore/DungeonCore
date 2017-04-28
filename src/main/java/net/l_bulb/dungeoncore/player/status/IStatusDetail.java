@@ -95,7 +95,7 @@ public abstract class IStatusDetail {
   }
 
   protected void setViewIconLore(ItemStack item, int viewIndex) {
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
       int level = (viewIndex - 1) * 10 + i;
 

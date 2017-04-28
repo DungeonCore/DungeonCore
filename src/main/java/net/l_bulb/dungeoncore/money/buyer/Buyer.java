@@ -103,7 +103,7 @@ public class Buyer {
     if (!GalionItem.getInstance(0).isThisItem(crafting.getResult())) { return; }
 
     // マテリアルリスト
-    ArrayList<ItemStack> deleteList = new ArrayList<ItemStack>();
+    ArrayList<ItemStack> deleteList = new ArrayList<>();
 
     // setGalionsが必要か？
     ItemStack[] matrix = crafting.getMatrix();

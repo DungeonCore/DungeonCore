@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.player.customplayer.CustomPlayer;
 import net.md_5.bungee.api.ChatColor;
 
 public class TheLowPlayerManager {
-  static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<UUID, TheLowPlayer>();
+  static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<>();
 
   static Set<OfflinePlayer> loadingNow = Collections.synchronizedSet(new HashSet<OfflinePlayer>());
 

@@ -24,7 +24,7 @@ public class NMSUtils {
    */
   public static void registerEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
     try {
-      List<Map<?, ?>> dataMaps = new ArrayList<Map<?, ?>>();
+      List<Map<?, ?>> dataMaps = new ArrayList<>();
       for (Field f : EntityTypes.class.getDeclaredFields()) {
         if (f.getType().getSimpleName().equals(Map.class.getSimpleName())) {
           f.setAccessible(true);

@@ -63,7 +63,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
       return;
     }
 
-    ArrayList<Inventory> validInvList = new ArrayList<Inventory>();
+    ArrayList<Inventory> validInvList = new ArrayList<>();
 
     // 正しいインベントを取得する
     for (String data : dataList.split("&")) {

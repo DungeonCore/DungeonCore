@@ -81,7 +81,7 @@ public class MagicStoneTradeData {
   }
 
   /** レベルごとにAbstractSlotを保持するキャッシュ */
-  static HashMap<SlotLevel, ArrayList<ItemInterface>> magicStoneCache = new HashMap<SlotLevel, ArrayList<ItemInterface>>();
+  static HashMap<SlotLevel, ArrayList<ItemInterface>> magicStoneCache = new HashMap<>();
 
   /**
    * 指定されたSlotLevelからランダムで魔法石アイテムを取得する
@@ -95,7 +95,7 @@ public class MagicStoneTradeData {
       Collection<SlotInterface> slotListByLevel = SlotManager.getSlotListByLevel(level);
       if (slotListByLevel.isEmpty()) { return null; }
       // ItemInterfaceを継承しているものはItem化できるので保持する
-      ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+      ArrayList<ItemInterface> arrayList = new ArrayList<>();
       for (SlotInterface slotInterface : slotListByLevel) {
         if (slotInterface instanceof ItemInterface) {
           arrayList.add((AbstractSlot) slotInterface);

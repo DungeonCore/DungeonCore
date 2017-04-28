@@ -138,7 +138,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<Player> getNearByPlayer(Entity e, double x, double y, double z) {
-    ArrayList<Player> rtn = new ArrayList<Player>();
+    ArrayList<Player> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (entity.getType() == EntityType.PLAYER) {
         rtn.add((Player) entity);
@@ -157,7 +157,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<LivingEntity> getNearFrendly(Entity e, double x, double y, double z) {
-    ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
+    ArrayList<LivingEntity> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (isFriendship(entity)) {
         rtn.add((LivingEntity) entity);
@@ -176,7 +176,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<LivingEntity> getNearEnemy(Entity e, double x, double y, double z) {
-    ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
+    ArrayList<LivingEntity> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (isEnemy(entity)) {
         rtn.add((LivingEntity) entity);

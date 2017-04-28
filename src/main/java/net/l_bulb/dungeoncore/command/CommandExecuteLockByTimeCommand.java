@@ -17,7 +17,7 @@ import net.l_bulb.dungeoncore.util.MinecraftUtil;
 public class CommandExecuteLockByTimeCommand implements CommandExecutor {
   static TaskManager taskManager = new TaskManager();
 
-  static HashMap<Location, Long> executeMap = new HashMap<Location, Long>();
+  static HashMap<Location, Long> executeMap = new HashMap<>();
 
   @Override
   public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,

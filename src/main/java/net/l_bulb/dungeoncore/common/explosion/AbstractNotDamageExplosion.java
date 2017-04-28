@@ -55,7 +55,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
   float size = 0;
   protected World world;
 
-  protected Map<EntityHuman, Vec3D> l = new HashMap<EntityHuman, Vec3D>();
+  protected Map<EntityHuman, Vec3D> l = new HashMap<>();
 
   protected int i = 16;
 

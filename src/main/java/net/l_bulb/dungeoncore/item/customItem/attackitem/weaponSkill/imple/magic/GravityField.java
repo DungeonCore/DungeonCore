@@ -36,7 +36,7 @@ public class GravityField extends WeaponSkillForOneType {
 
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-    HashSet<LivingEntity> enemy = new HashSet<LivingEntity>();
+    HashSet<LivingEntity> enemy = new HashSet<>();
 
     for (Entity entity : p.getNearbyEntities(getData(0), getData(0), getData(0))) {
       if (!entity.getType().isAlive()) {

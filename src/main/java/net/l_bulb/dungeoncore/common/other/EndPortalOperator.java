@@ -41,7 +41,7 @@ public class EndPortalOperator {
     }
 
     // エンドポータルフレームのリスト
-    HashSet<Block> endPortalFrameList = new HashSet<Block>();
+    HashSet<Block> endPortalFrameList = new HashSet<>();
 
     List<BlockFace> faces = Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST);
 

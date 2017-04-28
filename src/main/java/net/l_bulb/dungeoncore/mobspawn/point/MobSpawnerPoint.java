@@ -40,7 +40,7 @@ public class MobSpawnerPoint {
 
   ChunkWrapper chunk;
 
-  private List<ChunkWrapper> nearChunkList = new ArrayList<ChunkWrapper>();
+  private List<ChunkWrapper> nearChunkList = new ArrayList<>();
 
   HashSet<String> mobNameList = new HashSet<>();
 
@@ -168,7 +168,7 @@ public class MobSpawnerPoint {
     this.dungeonHight = dungeonHight;
   }
 
-  public ArrayList<LivingEntity> nearMob = new ArrayList<LivingEntity>();
+  public ArrayList<LivingEntity> nearMob = new ArrayList<>();
 
   /**
    * このGetterに該当するMobを取得する

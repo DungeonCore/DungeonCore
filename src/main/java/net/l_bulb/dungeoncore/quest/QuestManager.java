@@ -27,9 +27,9 @@ import net.l_bulb.dungeoncore.util.QuestUtil;
 import net.l_bulb.dungeoncore.util.TitleSender;
 
 public class QuestManager {
-  private static HashMap<String, Quest> allQuestByName = new HashMap<String, Quest>();
+  private static HashMap<String, Quest> allQuestByName = new HashMap<>();
 
-  private static HashMap<String, Quest> allQuestById = new HashMap<String, Quest>();
+  private static HashMap<String, Quest> allQuestById = new HashMap<>();
 
   public static void clear() {
     allQuestByName.clear();

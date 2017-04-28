@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForMai
 public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
   // ItemId
   String mainItemId;
-  HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
+  HashMap<String, Integer> materialMap = new HashMap<>();
 
   public TheLowCraftRecipeWithMainItem(String mainItemId) {
     this.mainItemId = mainItemId;

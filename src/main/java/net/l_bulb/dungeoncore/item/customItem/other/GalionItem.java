@@ -108,7 +108,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
       @Override
       public void run() {
         HashMap<Integer, ? extends ItemStack> all = player.getInventory().all(getMaterial());
-        ArrayList<Integer> indexList = new ArrayList<Integer>();
+        ArrayList<Integer> indexList = new ArrayList<>();
         for (Entry<Integer, ? extends ItemStack> entry : all.entrySet()) {
           if (isThisItem(entry.getValue())) {
             int galions = new GalionItem(entry.getValue()).getGalions();

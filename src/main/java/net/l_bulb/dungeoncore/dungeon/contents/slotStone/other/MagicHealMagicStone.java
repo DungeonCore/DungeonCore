@@ -31,7 +31,7 @@ public class MagicHealMagicStone extends KillSlot {
   }
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList.add(new MagicHealMagicStone(1, SlotLevel.LEVEL3, "小"));
     arrayList.add(new MagicHealMagicStone(2, SlotLevel.LEVEL4, "中"));
     arrayList.add(new MagicHealMagicStone(3, SlotLevel.LEVEL5, "大"));

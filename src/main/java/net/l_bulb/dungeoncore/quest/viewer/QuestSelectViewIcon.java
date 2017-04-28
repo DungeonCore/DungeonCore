@@ -26,7 +26,7 @@ public class QuestSelectViewIcon {
     return false;
   }
 
-  static HashMap<Quest, ItemStack> itemCache = new HashMap<Quest, ItemStack>();
+  static HashMap<Quest, ItemStack> itemCache = new HashMap<>();
 
   public static ItemStack getItemStack(Quest q) {
     if (q == null || q.isNullQuest()) { return null; }
@@ -42,7 +42,7 @@ public class QuestSelectViewIcon {
     if (itemCache.containsKey(q)) { return itemCache.get(q); }
 
     // Itemを作成
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     for (String detail : q.getQuestDetail()) {
       lore.add(ChatColor.AQUA + detail);
     }

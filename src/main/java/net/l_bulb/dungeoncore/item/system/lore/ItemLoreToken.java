@@ -15,7 +15,7 @@ public class ItemLoreToken {
 
   public static final String TITLE_SLOT = "SLOT";
 
-  ArrayList<String> lore = new ArrayList<String>();
+  ArrayList<String> lore = new ArrayList<>();
 
   String title;
 

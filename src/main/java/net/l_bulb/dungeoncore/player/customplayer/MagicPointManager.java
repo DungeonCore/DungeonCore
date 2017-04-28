@@ -52,7 +52,7 @@ public class MagicPointManager {
 }
 
 class MagicPointRunnable extends LbnRunnable {
-  static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<Player, MagicPointRunnable>();
+  static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<>();
 
   Player p;
 

@@ -85,7 +85,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
     // 全ての転生効果を取得
     Map<String, ReincarnationInterface> allReincanationMap = ReincarnationFactor.getAllReincanationMap();
     // 転生効果のリスト
-    ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<ReincarnationInterface>(allReincanationMap.values());
+    ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<>(allReincanationMap.values());
     // 並び替えを行う
     reincarnationList.sort(new Comparator<ReincarnationInterface>() {
       @Override
@@ -99,7 +99,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
   }
 
   // View用のItemStackのキャッシュ
-  private static Map<ReincarnationInterface, ItemStack> viewItemCache = new HashMap<ReincarnationInterface, ItemStack>();
+  private static Map<ReincarnationInterface, ItemStack> viewItemCache = new HashMap<>();
 
   /**
    * ReincarnationInterfaceからそれに対応するView用のItemStackを取得する

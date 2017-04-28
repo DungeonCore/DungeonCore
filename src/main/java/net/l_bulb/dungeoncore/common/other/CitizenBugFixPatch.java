@@ -25,7 +25,7 @@ public class CitizenBugFixPatch {
               // EntityTypes.cを取得
               Map<String, Class<?>> map = (Map<String, Class<?>>) field.get(null);
               // 追加するMap
-              Map<String, Class<?>> addMap = new HashMap<String, Class<?>>();
+              Map<String, Class<?>> addMap = new HashMap<>();
 
               // １つずつ見て、もしKeyがClassならStringにする
               Iterator<?> iterator = map.entrySet().iterator();

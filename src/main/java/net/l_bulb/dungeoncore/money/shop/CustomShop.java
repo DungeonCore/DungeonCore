@@ -40,7 +40,7 @@ public class CustomShop extends Shop {
 
     if (!(state instanceof Chest)) { return super.getShopItemList(); }
 
-    ArrayList<ShopItem> shopitems = new ArrayList<ShopItem>();
+    ArrayList<ShopItem> shopitems = new ArrayList<>();
 
     Chest chest = (Chest) state;
     for (ItemStack shopItemTemplate : chest.getBlockInventory().getContents()) {

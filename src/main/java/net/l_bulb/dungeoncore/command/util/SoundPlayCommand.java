@@ -87,7 +87,7 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
 
   private HashSet<String> getNameList() {
     if (soundNameList == null) {
-      soundNameList = new HashSet<String>();
+      soundNameList = new HashSet<>();
 
       for (Sound sound : Sound.values()) {
         soundNameList.add(sound.name());

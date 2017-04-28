@@ -53,7 +53,7 @@ public class SpreadSheetWeaponData {
   double damageParcent = 1;
 
   // クラフトに必要なアイテムとその数
-  HashMap<String, Integer> craftMaterial = new HashMap<String, Integer>();
+  HashMap<String, Integer> craftMaterial = new HashMap<>();
 
   // エラーかどうか
   boolean isCraftItemError = false;

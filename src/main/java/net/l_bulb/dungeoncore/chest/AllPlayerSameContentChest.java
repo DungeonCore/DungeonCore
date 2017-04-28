@@ -66,7 +66,7 @@ public class AllPlayerSameContentChest extends SpletSheetChest {
     notOpen = true;
   }
 
-  HashSet<Player> set = new HashSet<Player>();
+  HashSet<Player> set = new HashSet<>();
 
   protected boolean isFirestOpenWithPlayer(Player p) {
     if (set.contains(p)) { return false; }

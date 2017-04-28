@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 public class Particles {
-  static HashMap<ParticleType, ParticleData> cacheParticle = new HashMap<ParticleType, ParticleData>();
+  static HashMap<ParticleType, ParticleData> cacheParticle = new HashMap<>();
 
   /**
    * パーティクルを発生させる

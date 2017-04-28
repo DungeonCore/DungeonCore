@@ -49,7 +49,7 @@ public class Shop {
    */
   protected ArrayList<ShopItem> getShopItemList() {
     if (arrayList != null) { return arrayList; }
-    arrayList = new ArrayList<ShopItem>();
+    arrayList = new ArrayList<>();
 
     // for (ItemInterface item : NormalSwordWrapper.getAllNormalItem()) {
     // arrayList.add(new ShopItem(item.getItem(), Math.max(((NormalSwordWrapper)item).getAvailableLevel() * 200 + 20, 330)));

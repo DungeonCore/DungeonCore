@@ -19,7 +19,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class Stun {
-  static HashSet<UUID> stunList = new HashSet<UUID>();
+  static HashSet<UUID> stunList = new HashSet<>();
 
   static ParticleData particleData = new ParticleData(ParticleType.instantSpell, 70);
   {

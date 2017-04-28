@@ -45,7 +45,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
   private void spawnAll(Player p) {
     // int i = -1;
     Collection<AbstractMob<?>> allMobs = MobHolder.getAllMobs();
-    ArrayList<AbstractMob<?>> arrayList = new ArrayList<AbstractMob<?>>(allMobs);
+    ArrayList<AbstractMob<?>> arrayList = new ArrayList<>(allMobs);
     Collections.sort(arrayList, new Comparator<AbstractMob<?>>() {
       @Override
       public int compare(AbstractMob<?> o1, AbstractMob<?> o2) {
@@ -153,7 +153,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
   }
 
   protected Collection<String> getItemMap() {
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     for (AbstractMob<?> mob : MobHolder.getAllMobs()) {
       if (mob.getEntityType() == EntityType.VILLAGER) {
         continue;

@@ -49,7 +49,7 @@ public class TheLowUtil {
       List<String> lore = itemMeta.getLore();
 
       if (lore == null) {
-        lore = new ArrayList<String>();
+        lore = new ArrayList<>();
       }
       lore.add(TheLowUtil.SOUL_BOUND);
       itemMeta.setLore(lore);

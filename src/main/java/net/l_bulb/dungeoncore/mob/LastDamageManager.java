@@ -27,7 +27,7 @@ public class LastDamageManager {
 
   static HashMap<Integer, LastDamageMethodType> entityAttackTypeMap = new HashMap<>();
 
-  static Queue<Integer> idList = new LinkedList<Integer>();
+  static Queue<Integer> idList = new LinkedList<>();
 
   public static void onDamage(LivingEntity e, Player p, LastDamageMethodType type) {
     if (e == null || p == null) { return; }

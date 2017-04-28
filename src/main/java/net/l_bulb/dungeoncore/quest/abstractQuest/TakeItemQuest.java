@@ -19,7 +19,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class TakeItemQuest extends AbstractQuest {
-  static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<TakeItemQuest>();
+  static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<>();
 
   protected TakeItemQuest(String id, String itemId, int count) {
     super(id);

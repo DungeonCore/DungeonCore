@@ -17,7 +17,7 @@ public class ProjectileManager {
   private static final String THELOW_PROJECTILE_DATA_ITEMSTACK = "thelow_projectile_data_itemstack";
   private static final String THELOW_PROJECTILE_DATA_PROJECTILE = "thelow_projectile_data_projectile";
 
-  static HashMap<String, ProjectileInterface> projectileMap = new HashMap<String, ProjectileInterface>();
+  static HashMap<String, ProjectileInterface> projectileMap = new HashMap<>();
 
   /**
    * Projectileを登録する

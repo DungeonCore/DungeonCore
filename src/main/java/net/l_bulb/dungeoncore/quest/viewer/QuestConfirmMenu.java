@@ -31,7 +31,7 @@ public class QuestConfirmMenu extends MenuSelector {
     this.q = q;
 
     ItemStack reciveItem = ItemStackUtil.getItem(ChatColor.GREEN + "クエストを受注する", Material.WOOL, (byte) 5);
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     arrayList.add(ChatColor.AQUA + "[QUEST] " + q.getName());
 
     for (String detail : q.getQuestDetail()) {

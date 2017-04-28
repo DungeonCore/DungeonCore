@@ -96,7 +96,7 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter {
   }
 
   protected List<String> getNames() {
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     for (Biome biome : Biome.values()) {
       arrayList.add(biome.toString());
     }

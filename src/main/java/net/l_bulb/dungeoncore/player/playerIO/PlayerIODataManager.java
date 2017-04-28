@@ -48,7 +48,7 @@ public class PlayerIODataManager {
     }.runTaskLater(Main.plugin, 20 * 10);
   }
 
-  public static HashSet<UUID> loadErrorList = new HashSet<UUID>();
+  public static HashSet<UUID> loadErrorList = new HashSet<>();
 
   public static void load(Player p) {
     String string = PlayerLastSaveType.getType(p);

@@ -62,10 +62,10 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
     p.openInventory(createInventory);
   }
 
-  static HashMap<WeaponSkillInterface, ItemStack> viewItemCache = new HashMap<WeaponSkillInterface, ItemStack>();
+  static HashMap<WeaponSkillInterface, ItemStack> viewItemCache = new HashMap<>();
 
   // ItemStackと武器スキルを結びつけたMap
-  static HashMap<ItemStack, WeaponSkillInterface> viewItemIdCache = new HashMap<ItemStack, WeaponSkillInterface>();
+  static HashMap<ItemStack, WeaponSkillInterface> viewItemIdCache = new HashMap<>();
 
   private ItemStack getViewItemStack(WeaponSkillInterface skill) {
     // キャッシュから取得する

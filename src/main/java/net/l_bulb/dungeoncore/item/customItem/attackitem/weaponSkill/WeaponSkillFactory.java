@@ -30,9 +30,9 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.sword
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class WeaponSkillFactory {
-  private static HashMap<String, WeaponSkillInterface> skillMap = new HashMap<String, WeaponSkillInterface>();
+  private static HashMap<String, WeaponSkillInterface> skillMap = new HashMap<>();
 
-  private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<WeaponSkillInterface>(new Comparator<WeaponSkillInterface>() {
+  private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<>(new Comparator<WeaponSkillInterface>() {
     @Override
     public int compare(WeaponSkillInterface o1, WeaponSkillInterface o2) {
       // スキル解除は一番最初に表示する
@@ -90,7 +90,7 @@ public class WeaponSkillFactory {
   }
 
   // 一時的なインスンタンスを保持するためのクラス
-  static HashMap<String, WeaponSkillInterface> tempInstanceMap = new HashMap<String, WeaponSkillInterface>();
+  static HashMap<String, WeaponSkillInterface> tempInstanceMap = new HashMap<>();
 
   public static void registTempData(WeaponSkillInterface skill) {
     tempInstanceMap.put(skill.getId(), skill);

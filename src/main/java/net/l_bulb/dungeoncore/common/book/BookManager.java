@@ -28,7 +28,7 @@ import net.minecraft.server.v1_8_R1.PacketPlayOutSetSlot;
 import net.minecraft.server.v1_8_R1.Slot;
 
 public class BookManager {
-  static HashMap<String, BookData> bookMap = new HashMap<String, BookData>();
+  static HashMap<String, BookData> bookMap = new HashMap<>();
 
   public static void reloadSpletSheet(CommandSender command) {
     bookMap.clear();

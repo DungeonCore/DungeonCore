@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.Message;
 
 public class PlayerChestTpManager {
-  static HashMap<String, TpLaterRunnable> tpDataMap = new HashMap<String, TpLaterRunnable>();
+  static HashMap<String, TpLaterRunnable> tpDataMap = new HashMap<>();
 
   public static void executeIfNotTeleported(Player p) {
     TpLaterRunnable tpLaterRunnable = tpDataMap.get(p.getName());

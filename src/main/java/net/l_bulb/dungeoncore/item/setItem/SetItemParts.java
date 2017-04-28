@@ -63,7 +63,7 @@ public class SetItemParts implements SetItemPartable {
     ItemStack itemStack = new ItemStack(getMaterial());
     ItemStackUtil.setDispName(itemStack, getItemName());
 
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     lore.add("SET:" + getBelongSetItem().getName());
     lore.add(ChatColor.GRAY + ItemStackUtil.getLoreForIdLine(getId()));
     lore.add("");

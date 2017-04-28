@@ -33,7 +33,7 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 
 public class CommandChest implements CommandExecutor, TabCompleter {
 
-  public static HashMap<Player, Location> chestClickMap = new HashMap<Player, Location>();
+  public static HashMap<Player, Location> chestClickMap = new HashMap<>();
 
   // command x y z [refuel_time, allPlayerSameFlg, min, max, x y z]
   @Override
@@ -189,7 +189,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
 
     chestClickMap.remove(p);
     if (CustomChestManager.containts(chestLoc)) {
-      HashMap<String, Object> hashMap = new HashMap<String, Object>();
+      HashMap<String, Object> hashMap = new HashMap<>();
       hashMap.put("contentlocation", ChestSheetRunnable.getLocationString(contentsLoc));
       chestSheetRunable.updateData(hashMap, "chestlocation=\"" + ChestSheetRunnable.getLocationString(chestLoc) + "\"");
     } else {

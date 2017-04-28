@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
 
 public class OneMobDamageUpSlot extends CombatSlot {
 
-  public static ArrayList<OneMobDamageUpSlot> slotList = new ArrayList<OneMobDamageUpSlot>();
+  public static ArrayList<OneMobDamageUpSlot> slotList = new ArrayList<>();
 
   static {
     slotList.add(new OneMobDamageUpSlot(SlotLevel.LEVEL2, 1, EntityType.ZOMBIE, "ゾンビ"));

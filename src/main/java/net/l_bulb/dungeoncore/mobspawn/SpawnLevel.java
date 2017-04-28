@@ -28,7 +28,7 @@ public enum SpawnLevel {
   public static ArrayList<String> getNames() {
     if (names != null) { return names; }
 
-    names = new ArrayList<String>();
+    names = new ArrayList<>();
     for (SpawnLevel level : values()) {
       names.add(level.toString());
     }

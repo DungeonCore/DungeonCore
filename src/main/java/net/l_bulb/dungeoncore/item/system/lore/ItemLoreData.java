@@ -20,7 +20,7 @@ public class ItemLoreData {
   TreeMap<String, ItemLoreToken> loreMap = null;
 
   public ItemLoreData() {
-    loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
+    loreMap = new TreeMap<>(new ComparatorImplemention());
   }
 
   // テスト用
@@ -42,9 +42,9 @@ public class ItemLoreData {
 
   public ItemLoreData(List<String> lore, Comparator<String> comparator) {
     if (comparator == null) {
-      loreMap = new TreeMap<String, ItemLoreToken>(new ComparatorImplemention());
+      loreMap = new TreeMap<>(new ComparatorImplemention());
     } else {
-      loreMap = new TreeMap<String, ItemLoreToken>(comparator);
+      loreMap = new TreeMap<>(comparator);
     }
 
     // テスト用
@@ -134,7 +134,7 @@ public class ItemLoreData {
   }
 
   public void setBefore(List<String> line) {
-    beforeDetail = new ArrayList<String>(line);
+    beforeDetail = new ArrayList<>(line);
   }
 
   public void addAfter(String line) {
@@ -146,7 +146,7 @@ public class ItemLoreData {
   }
 
   public void setAfter(List<String> line) {
-    afterDetail = new ArrayList<String>(line);
+    afterDetail = new ArrayList<>(line);
   }
 
   /**
@@ -174,7 +174,7 @@ public class ItemLoreData {
    * @param item
    */
   public List<String> getLore() {
-    List<String> lore = new ArrayList<String>();
+    List<String> lore = new ArrayList<>();
     lore.addAll(beforeDetail);
     for (Entry<String, ItemLoreToken> entry : loreMap.entrySet()) {
       lore.addAll(entry.getValue().getLoreWithTitle());

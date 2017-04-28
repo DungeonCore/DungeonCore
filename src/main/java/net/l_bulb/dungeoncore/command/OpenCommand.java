@@ -38,7 +38,7 @@ public class OpenCommand implements CommandExecutor, TabCompleter {
     return true;
   }
 
-  static ArrayList<String> arrayList = new ArrayList<String>();
+  static ArrayList<String> arrayList = new ArrayList<>();
   static {
     arrayList.add("kajiya");
     arrayList.add("reinc");

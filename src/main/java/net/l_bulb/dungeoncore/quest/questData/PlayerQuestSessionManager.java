@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 public class PlayerQuestSessionManager {
-  static HashMap<UUID, PlayerQuestSession> hashMap = new HashMap<UUID, PlayerQuestSession>();
+  static HashMap<UUID, PlayerQuestSession> hashMap = new HashMap<>();
 
   public static PlayerQuestSession getQuestSession(Player p) {
     if (!hashMap.containsKey(p.getUniqueId())) {

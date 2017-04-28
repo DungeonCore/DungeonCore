@@ -134,7 +134,7 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
 
     Random rnd = new Random();
 
-    ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+    ArrayList<ItemStack> list = new ArrayList<>();
 
     for (ItemStack itemStack : blockInventory) {
       if (itemStack == null || itemStack.getType() == Material.AIR) {

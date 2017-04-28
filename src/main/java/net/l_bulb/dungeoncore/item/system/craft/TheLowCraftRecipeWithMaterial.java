@@ -16,7 +16,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
   // ItemId
-  HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
+  HashMap<String, Integer> materialMap = new HashMap<>();
 
   @Override
   public void addMaterial(String itemid, int amount) {
@@ -26,7 +26,7 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 
   @Override
   public Map<ItemInterface, Integer> getMaterialMap() {
-    HashMap<ItemInterface, Integer> itemInterfaceMap = new HashMap<ItemInterface, Integer>();
+    HashMap<ItemInterface, Integer> itemInterfaceMap = new HashMap<>();
     for (Entry<String, Integer> entry : materialMap.entrySet()) {
       // アイテムを取得する
       ItemInterface customItemById = ItemManager.getCustomItemById(entry.getKey());

@@ -20,8 +20,8 @@ import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
 
 public class SlotManager {
-  static HashMap<String, String> idNameMap = new HashMap<String, String>();
-  static HashMap<String, SlotInterface> slotIDMap = new HashMap<String, SlotInterface>();
+  static HashMap<String, String> idNameMap = new HashMap<>();
+  static HashMap<String, SlotInterface> slotIDMap = new HashMap<>();
   static HashMultimap<SlotLevel, SlotInterface> levelSlotMap = HashMultimap.create();
 
   static {

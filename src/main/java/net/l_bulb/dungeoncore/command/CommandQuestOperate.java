@@ -96,7 +96,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter {
     }
   }
 
-  static HashSet<String> operateList = new HashSet<String>();
+  static HashSet<String> operateList = new HashSet<>();
   static {
     operateList.add("start");
     operateList.add("remove");

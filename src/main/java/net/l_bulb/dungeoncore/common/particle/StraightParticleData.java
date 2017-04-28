@@ -48,7 +48,7 @@ public class StraightParticleData extends ParticleData {
     Location l = center.clone();
     Location direction2 = direction.clone();
     // 実行するロケーションのリスト
-    ArrayList<Location> runLocList = new ArrayList<Location>();
+    ArrayList<Location> runLocList = new ArrayList<>();
     center.add(0, 1.2, 0);
     direction2.add(0, 0.5, 0);
     l.add(0, 1.2, 0);

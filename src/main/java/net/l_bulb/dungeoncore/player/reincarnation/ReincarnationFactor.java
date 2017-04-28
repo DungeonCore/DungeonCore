@@ -19,7 +19,7 @@ public class ReincarnationFactor {
   /**
    * 全ての転生効果を保持するマップ
    */
-  static HashMap<String, ReincarnationInterface> reincarnationMap = new HashMap<String, ReincarnationInterface>();
+  static HashMap<String, ReincarnationInterface> reincarnationMap = new HashMap<>();
 
   public static void openReincarnationInv(Player p) {
     new ReincarnationTypeMune().open(p);
@@ -70,7 +70,7 @@ public class ReincarnationFactor {
  * データが未定義の場合のReincarnation
  */
 class UndefinedReincarnation implements ReincarnationInterface {
-  static Map<String, UndefinedReincarnation> cache = new HashMap<String, UndefinedReincarnation>();
+  static Map<String, UndefinedReincarnation> cache = new HashMap<>();
 
   public static UndefinedReincarnation getInstance(String id) {
     if (!cache.containsKey(id)) {

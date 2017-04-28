@@ -157,7 +157,7 @@ public class OtherCommonListener implements Listener {
   }
   static int i = 0;
 
-  static HashMap<HumanEntity, Integer> foodlevel = new HashMap<HumanEntity, Integer>();
+  static HashMap<HumanEntity, Integer> foodlevel = new HashMap<>();
 
   @EventHandler
   public void onChangeFoodLevel(FoodLevelChangeEvent e) {

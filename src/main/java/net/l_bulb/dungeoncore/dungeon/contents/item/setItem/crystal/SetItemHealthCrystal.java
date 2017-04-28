@@ -37,7 +37,7 @@ public class SetItemHealthCrystal extends AbstractAbilitySetItem {
 
   @Override
   protected List<SetItemPartable> getAllItemParts() {
-    ArrayList<SetItemPartable> list = new ArrayList<SetItemPartable>();
+    ArrayList<SetItemPartable> list = new ArrayList<>();
     list.add(new HealthCystal());
     return list;
   }

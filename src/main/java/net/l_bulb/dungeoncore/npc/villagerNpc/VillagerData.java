@@ -19,7 +19,7 @@ import net.l_bulb.dungeoncore.npc.NpcManager;
  *
  */
 public class VillagerData {
-  static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
+  static HashMap<String, VillagerData> villagerMap = new HashMap<>();
 
   public static CustomNpcInterface registSpletsheetVillager(CommandSender p, String name, String type, String texts, String location, String adult,
       String data, String mobtype, String skin, String id) {

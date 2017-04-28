@@ -54,7 +54,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
       // スプレットシートにデータを送信する
       DungeonListRunnable dungeonListRunnable = new DungeonListRunnable(sender);
 
-      HashMap<String, Object> hashMap = new HashMap<String, Object>();
+      HashMap<String, Object> hashMap = new HashMap<>();
       hashMap.put("name", dungeonName);
       hashMap.put("tploc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));
       hashMap.put("startloc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));

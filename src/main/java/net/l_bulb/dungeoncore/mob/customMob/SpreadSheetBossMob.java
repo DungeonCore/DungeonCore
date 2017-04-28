@@ -47,7 +47,7 @@ import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
-  static HashMap<String, LivingEntity> entityList = new HashMap<String, LivingEntity>();
+  static HashMap<String, LivingEntity> entityList = new HashMap<>();
 
   protected SpreadSheetBossMob(LbnMobTag nbtTag, String[] command, String name) {
     super(nbtTag, command, name);
@@ -86,7 +86,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
   private LivingEntity e;
 
-  HashMap<MobSkillExcuteConditionType, BukkitRunnable> runtineMap = new HashMap<MobSkillExcuteConditionType, BukkitRunnable>();
+  HashMap<MobSkillExcuteConditionType, BukkitRunnable> runtineMap = new HashMap<>();
 
   @Override
   public void setEntity(LivingEntity e) {
@@ -176,7 +176,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     return e;
   }
 
-  private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<TheLowPlayer, Long>();
+  private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<>();
 
   private HashBasedTable<TheLowPlayer, LevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 

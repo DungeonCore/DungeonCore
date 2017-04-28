@@ -124,13 +124,13 @@ public abstract class AbstractQuest implements Quest {
 
     // もし前提クエストがない場合は空を返す
     if (beforeQuestIds == null) {
-      beforeQuests = new HashSet<Quest>();
+      beforeQuests = new HashSet<>();
       isSucessBeforeQuest = true;
       return beforeQuests;
     }
 
     // 前提クエストを空にする
-    beforeQuests = new HashSet<Quest>();
+    beforeQuests = new HashSet<>();
 
     boolean existNullQuest = false;
     // IDからクエストを取得
@@ -290,7 +290,7 @@ public abstract class AbstractQuest implements Quest {
 
   @Override
   public List<String> getRewordText() {
-    ArrayList<String> texts = new ArrayList<String>();
+    ArrayList<String> texts = new ArrayList<>();
     if (swordExe != 0) {
       texts.add("剣レベル: +" + swordExe + "exp");
     }

@@ -33,7 +33,7 @@ public class ItemStackData {
     this.data = (byte) data;
 
     // エンチャントを追加
-    enchantMap = new HashMap<Enchantment, Integer>();
+    enchantMap = new HashMap<>();
     enchantMap.put(enchantment, level);
   }
 
@@ -70,7 +70,7 @@ public class ItemStackData {
    */
   public void addEnchant(Enchantment enchantment, int level) {
     // エンチャントを追加
-    enchantMap = new HashMap<Enchantment, Integer>();
+    enchantMap = new HashMap<>();
     enchantMap.put(enchantment, level);
   }
 

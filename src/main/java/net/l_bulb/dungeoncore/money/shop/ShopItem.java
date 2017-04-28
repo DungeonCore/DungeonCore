@@ -45,7 +45,7 @@ public class ShopItem {
     if (dispItem != null) { return dispItem; }
 
     dispItem = item.clone();
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     // IDがあればプラグイン用のアイテムなのでIDを記載する
     String id = ItemStackUtil.getId(item);
     if (id != null) {

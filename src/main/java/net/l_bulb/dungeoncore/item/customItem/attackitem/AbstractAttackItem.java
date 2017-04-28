@@ -129,7 +129,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
   public ItemStack getItem() {
     ItemStack item = super.getItem();
     // SLOTを追加
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個" + ItemLoreToken.TITLE_TAG);
     EmptySlot slot = new EmptySlot();
     for (int i = 0; i < getDefaultSlotCount(); i++) {

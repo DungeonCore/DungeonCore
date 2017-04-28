@@ -17,7 +17,7 @@ public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
     this.id = id;
   }
 
-  public ArrayList<AbstractMob<?>> moblist = new ArrayList<AbstractMob<?>>();
+  public ArrayList<AbstractMob<?>> moblist = new ArrayList<>();
 
   protected int id;
 

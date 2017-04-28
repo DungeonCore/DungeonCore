@@ -33,7 +33,7 @@ public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
   public static HashMap<String, Object> createDataMap(Location chestLoc, Location contentLoc, double refuelSecond, boolean allPlayerSameflg,
       Location moveLoc, int minItemCount, int maxItemCount) {
-    HashMap<String, Object> map = new HashMap<String, Object>();
+    HashMap<String, Object> map = new HashMap<>();
     // setする
     map.put("chestlocation", getLocationString(chestLoc));
     map.put("contentlocation", getLocationString(contentLoc));

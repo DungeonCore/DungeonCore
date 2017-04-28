@@ -38,7 +38,7 @@ public class FallingBlockParticles {
 
   public static List<Location> randomCircleUpperBlock(Location loc, Material m, byte data, double vecMultiStart, double vecMultiEnd, int count,
       double radius) {
-    ArrayList<Location> arrayList = new ArrayList<Location>();
+    ArrayList<Location> arrayList = new ArrayList<>();
 
     Random rnd = new Random();
     for (; count > 0; count--) {

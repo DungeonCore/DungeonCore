@@ -82,7 +82,7 @@ public class ItemManager {
    * @return
    */
   public static List<ItemInterface> getAllItem() {
-    return new ArrayList<ItemInterface>(allItemIdList.values());
+    return new ArrayList<>(allItemIdList.values());
   }
 
   /**

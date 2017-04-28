@@ -34,7 +34,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
     MenuSelector menuSelecor = new MenuSelector(specialItem.getId() + " selector");
 
     // レベルごとにソートする
-    ArrayList<ItemInterface> allItem = new ArrayList<ItemInterface>(specialItem.getAllItem());
+    ArrayList<ItemInterface> allItem = new ArrayList<>(specialItem.getAllItem());
     Collections.sort(allItem, new Comparator<ItemInterface>() {
       @Override
       public int compare(ItemInterface o1, ItemInterface o2) {

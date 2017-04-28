@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
 
 public class VillagerNpcManager {
-  static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<String, VillagerNpc>();
+  static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<>();
 
   public static VillagerNpc getVillagerNpcById(String name) {
     return registedVillagerNpcIdMap.get(name);

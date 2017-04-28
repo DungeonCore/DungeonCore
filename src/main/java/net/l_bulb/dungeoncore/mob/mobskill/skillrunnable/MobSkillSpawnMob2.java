@@ -23,7 +23,7 @@ public class MobSkillSpawnMob2 extends MobSkillRunnable {
 
   long mobLastUpdate = -1;
 
-  ArrayList<AbstractMob<?>> customMobList = new ArrayList<AbstractMob<?>>();
+  ArrayList<AbstractMob<?>> customMobList = new ArrayList<>();
 
   NormalMob normalMob = new NormalMob(EntityType.ZOMBIE);
 

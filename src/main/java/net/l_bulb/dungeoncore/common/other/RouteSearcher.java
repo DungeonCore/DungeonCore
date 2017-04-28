@@ -22,7 +22,7 @@ public class RouteSearcher {
     this.p = p;
   }
 
-  ArrayList<Location> soilList = new ArrayList<Location>();
+  ArrayList<Location> soilList = new ArrayList<>();
 
   public void startSearchingPath() {
     searchAndSetSoil(start, null);

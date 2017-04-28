@@ -84,7 +84,7 @@ public class Finale extends WeaponSkillWithMultiClick implements ProjectileInter
   }
 
   // 何発目の発射かを記録するためのMap
-  HashMap<Player, Integer> countMap = new HashMap<Player, Integer>();
+  HashMap<Player, Integer> countMap = new HashMap<>();
 
   @Override
   protected boolean onClick2(Player p, ItemStack item, AbstractAttackItem customItem) {

@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class TpCutCommand implements CommandExecutor {
-  static HashSet<String> hashSet = new HashSet<String>();
+  static HashSet<String> hashSet = new HashSet<>();
 
   @Override
   public boolean onCommand(CommandSender arg0, Command arg1, String arg2,

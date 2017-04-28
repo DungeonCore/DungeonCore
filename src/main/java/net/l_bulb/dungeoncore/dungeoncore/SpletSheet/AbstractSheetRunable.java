@@ -25,7 +25,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
     this.sender = sender;
   }
 
-  static HashMap<Class<?>, Long> lastUpDate = new HashMap<Class<?>, Long>();
+  static HashMap<Class<?>, Long> lastUpDate = new HashMap<>();
 
   public long getLastUpdate() {
     Long long1 = lastUpDate.get(this.getClass());
@@ -59,7 +59,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
   public String[][] call() throws Exception {
     DungeonLogger.development("start read spread sheet:" + getSheetName());
     try {
-      ArrayList<String[]> dataList = new ArrayList<String[]>();
+      ArrayList<String[]> dataList = new ArrayList<>();
 
       for (LbnSpreadSheet instance : getInstanceList()) {
         if (instance == null) { return null; }
@@ -90,7 +90,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
    * @throws Exception
    */
   private List<LbnSpreadSheet> getInstanceList() throws Exception {
-    ArrayList<LbnSpreadSheet> instanceList = new ArrayList<LbnSpreadSheet>();
+    ArrayList<LbnSpreadSheet> instanceList = new ArrayList<>();
     instanceList.add(LbnSpreadSheet.getInstance(getSheetName()));
     // 他の参照先がある場合はそちらのインスタンスも作成する
     if (hasSecoundSheet()) {

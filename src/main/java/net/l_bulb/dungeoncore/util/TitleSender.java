@@ -19,7 +19,7 @@ import net.minecraft.server.v1_8_R1.MinecraftServer;
 import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
 
 public class TitleSender {
-  ArrayList<String[]> commandJobList = new ArrayList<String[]>();
+  ArrayList<String[]> commandJobList = new ArrayList<>();
 
   public void setTitle(String text, ChatColor c, boolean isBold) {
     commandJobList.add(new String[] { null, "title",

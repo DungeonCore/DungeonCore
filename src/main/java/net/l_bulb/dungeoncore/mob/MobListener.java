@@ -37,7 +37,7 @@ import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
 import net.l_bulb.dungeoncore.player.PlayerChecker;
 
 public class MobListener implements Listener {
-  public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
+  public static Set<BossMobable> bossoList = new HashSet<>();
 
   @EventHandler
   public void onSpawn2(final PlayerCustomMobSpawnEvent e) {

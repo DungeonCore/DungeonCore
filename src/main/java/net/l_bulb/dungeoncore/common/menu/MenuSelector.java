@@ -22,7 +22,7 @@ public class MenuSelector implements MenuSelectorInterface {
     createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + title);
   }
 
-  protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<ItemStack, SelectRunnable>();
+  protected HashMap<ItemStack, SelectRunnable> runMap = new HashMap<>();
 
   /**
    * メニューを追加する

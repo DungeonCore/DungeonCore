@@ -20,7 +20,7 @@ public class AlphaWhiteListChest extends WhiteListChest {
         1, new Location(Bukkit.getWorld("world"), 127, 42, 834).setDirection(new Vector(1, 0, 0)), 400, 400, 10, true);
   }
 
-  static HashSet<UUID> hashSet = new HashSet<UUID>();
+  static HashSet<UUID> hashSet = new HashSet<>();
   static {
     hashSet.add(UUID.fromString("01ee905e-a45b-3017-b985-136d7e2ac473"));
     hashSet.add(UUID.fromString("0467c9c1-89e6-4a8a-9a5a-231b5b8e300c"));

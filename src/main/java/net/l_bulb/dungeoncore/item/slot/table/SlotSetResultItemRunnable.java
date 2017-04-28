@@ -71,7 +71,7 @@ public class SlotSetResultItemRunnable extends BukkitRunnable {
   protected ItemStack getUpdateRedGlass(double successChance) {
     ItemStack clone = SlotSetTableOperation.redGlass.clone();
 
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     lore.add(ChatColor.WHITE.toString() + ChatColor.BOLD + "・success");
     lore.add(ChatColor.GREEN.toString() + "   - " + successChance + "%");
 
@@ -82,7 +82,7 @@ public class SlotSetResultItemRunnable extends BukkitRunnable {
 
   protected ItemStack getMaxLevelRedGlass() {
     ItemStack clone = SlotSetTableOperation.redGlass.clone();
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     lore.add(ChatColor.RED.toString() + ChatColor.BOLD + "これ以上強化できません");
     ItemStackUtil.setLore(clone, lore);
     return clone;

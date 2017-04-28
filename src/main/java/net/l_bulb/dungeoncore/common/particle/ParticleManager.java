@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 public class ParticleManager {
-  static HashMap<String, ParticleData> dataMap = new HashMap<String, ParticleData>();
+  static HashMap<String, ParticleData> dataMap = new HashMap<>();
 
   public static void regist(String id, ParticleData data) {
     dataMap.put(id, data);

@@ -206,7 +206,7 @@ public class InOutputUtil {
     File file = new File(dataFolder + fileName);
 
     try (BufferedReader br = new BufferedReader(new FileReader(file));) {
-      ArrayList<String> list = new ArrayList<String>();
+      ArrayList<String> list = new ArrayList<>();
       String line = null;
       while ((line = br.readLine()) != null) {
         list.add(line);

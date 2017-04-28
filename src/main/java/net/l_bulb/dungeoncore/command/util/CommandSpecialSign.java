@@ -19,7 +19,7 @@ import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class CommandSpecialSign implements CommandExecutor {
-  public static HashMap<Player, Location> signClickMap = new HashMap<Player, Location>();
+  public static HashMap<Player, Location> signClickMap = new HashMap<>();
 
   @Override
   public boolean onCommand(CommandSender paramCommandSender,

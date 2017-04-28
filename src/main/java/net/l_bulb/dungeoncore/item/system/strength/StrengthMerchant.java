@@ -98,7 +98,7 @@ public class StrengthMerchant extends TheLowMerchant {
 
   @Override
   public List<TheLowMerchantRecipe> getInitRecipes() {
-    ArrayList<TheLowMerchantRecipe> recipes = new ArrayList<TheLowMerchantRecipe>();
+    ArrayList<TheLowMerchantRecipe> recipes = new ArrayList<>();
     recipes.add(new TheLowMerchantRecipe(ItemStackUtil.getItem("強化したい武器", Material.IRON_SWORD, "強化する武器を置いてください"),
         WEAPON_SCROLL, ItemStackUtil.getItem("強化された武器", Material.DIAMOND_SWORD)));
     recipes.add(new TheLowMerchantRecipe(ItemStackUtil.getItem("強化したい防具", Material.IRON_CHESTPLATE, "強化する防具を置いてください"),

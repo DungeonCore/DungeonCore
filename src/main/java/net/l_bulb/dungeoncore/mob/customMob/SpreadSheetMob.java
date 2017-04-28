@@ -261,7 +261,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   @Override
   public List<ItemStack> getDropItem(Player lastDamagePlayer) {
-    List<ItemStack> dropItem = new ArrayList<ItemStack>();
+    List<ItemStack> dropItem = new ArrayList<>();
     if (this.mob != null) {
       dropItem.addAll(this.mob.getDropItem(lastDamagePlayer));
     }
@@ -293,7 +293,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     }
   }
 
-  HashSet<String> skillNameSet = new HashSet<String>();
+  HashSet<String> skillNameSet = new HashSet<>();
 
   /**
    * このモブが持っているSkillIDを取得する

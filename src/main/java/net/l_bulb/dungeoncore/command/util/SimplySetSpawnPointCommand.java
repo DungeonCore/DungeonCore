@@ -43,8 +43,8 @@ import net.l_bulb.dungeoncore.util.LbnRunnable;
 
 public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter {
   static HashMultimap<Player, MobLocation> create = HashMultimap.create();
-  static HashMap<Player, MobLocation> lastSet = new HashMap<Player, MobLocation>();
-  static HashSet<Player> begin = new HashSet<Player>();
+  static HashMap<Player, MobLocation> lastSet = new HashMap<>();
+  static HashSet<Player> begin = new HashSet<>();
 
   static boolean look_flg = false;
 
@@ -221,7 +221,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
   private void executeSet(Player p, String[] arg3) {
     p.sendMessage("アイテムをもってください");
 
-    ArrayList<String> nameList = new ArrayList<String>();
+    ArrayList<String> nameList = new ArrayList<>();
     for (String name : arg3) {
       if (name.equalsIgnoreCase("set")) {
         continue;
@@ -353,7 +353,7 @@ class SimpleMobSpawnGetter extends SpletSheetSpawnMobGetter {
 }
 
 class MobLocation {
-  List<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
+  List<AbstractMob<?>> mobList = new ArrayList<>();
   Location loc;
   String locStr;
 

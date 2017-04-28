@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.InOutputUtil;
 
 public class SystemLog {
-  private static ArrayList<String> logs = new ArrayList<String>();
+  private static ArrayList<String> logs = new ArrayList<>();
 
   public static void addLog(String log) {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

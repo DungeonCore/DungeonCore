@@ -25,9 +25,9 @@ import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 
 public class NpcManager {
-  static HashMap<String, NPC> spawnedNpcMap = new HashMap<String, NPC>();
+  static HashMap<String, NPC> spawnedNpcMap = new HashMap<>();
 
-  static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<String, CustomNpcInterface>();
+  static HashMap<String, CustomNpcInterface> registedNpcIdMap = new HashMap<>();
 
   // static HashMap<String, NPC> spawnedNPCIDMap = new HashMap<String, NPC>();
 

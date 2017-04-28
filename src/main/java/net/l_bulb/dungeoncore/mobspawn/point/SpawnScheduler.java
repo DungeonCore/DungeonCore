@@ -9,7 +9,7 @@ import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
 public class SpawnScheduler {
   int spawnTick;
 
-  ArrayList<MobSpawnerPoint> spawnPointList = new ArrayList<MobSpawnerPoint>();
+  ArrayList<MobSpawnerPoint> spawnPointList = new ArrayList<>();
 
   public SpawnScheduler(SpawnLevel level) {
     spawnTick = level.getSpawnTick();
@@ -54,7 +54,7 @@ public class SpawnScheduler {
     willDeleteList.remove(spawnPoint);
   }
 
-  ArrayList<MobSpawnerPoint> currentSpawnPointList = new ArrayList<MobSpawnerPoint>();
+  ArrayList<MobSpawnerPoint> currentSpawnPointList = new ArrayList<>();
 
   // カウント
   int count = 0;
@@ -78,7 +78,7 @@ public class SpawnScheduler {
     return currentSpawnPointList;
   }
 
-  HashSet<MobSpawnerPoint> willDeleteList = new HashSet<MobSpawnerPoint>();
+  HashSet<MobSpawnerPoint> willDeleteList = new HashSet<>();
 
   public void removeSpawnPoint(boolean isForce, MobSpawnerPoint... deleteSpawnPointList) {
     for (MobSpawnerPoint mobSpawnPointInterface : deleteSpawnPointList) {
