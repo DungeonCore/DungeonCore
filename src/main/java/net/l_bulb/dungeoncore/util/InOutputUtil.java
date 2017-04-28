@@ -27,13 +27,13 @@ public class InOutputUtil {
   public final static String dataFolder = Main.dataFolder + File.separator + "data" + File.separator;
 
   /**
-   * データをSerializableする
+   * データをシリアライズする
    *
    * @param serializable
    * @param fileName
    * @return
    */
-  public static boolean outputStream(Serializable serializable, String fileName) {
+  public static boolean serializeObject(Serializable serializable, String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
@@ -179,12 +179,12 @@ public class InOutputUtil {
   }
 
   /**
-   * Serializableデータを読み込む
+   * データをデシリアライズする
    *
    * @param fileName
    * @return
    */
-  public static Object inputStream(String fileName) {
+  public static Object deserializeObject(String fileName) {
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(dataFolder + fileName)))) {
       return ois.readObject();
     } catch (FileNotFoundException e) {
