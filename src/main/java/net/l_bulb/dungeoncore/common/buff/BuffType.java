@@ -2,6 +2,11 @@ package net.l_bulb.dungeoncore.common.buff;
 
 import org.bukkit.potion.PotionEffectType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum BuffType {
   SLOW(1, PotionEffectType.SLOW, "移動速度減少"),
   CONFUSION(1, PotionEffectType.CONFUSION, "吐き気"),
@@ -28,12 +33,6 @@ public enum BuffType {
   ABSORPTION(1, PotionEffectType.ABSORPTION, "衝撃吸収"),
   SATURATION(1, PotionEffectType.SATURATION, "満腹度回復");
 
-  private BuffType(int num, PotionEffectType type, String jpname) {
-    this.num = num;
-    this.type = type;
-    this.jpname = jpname;
-  }
-
   int num;
   PotionEffectType type;
   String jpname;
@@ -49,13 +48,4 @@ public enum BuffType {
     }
     return null;
   }
-
-  public int getNum() {
-    return num;
-  }
-
-  public PotionEffectType getType() {
-    return type;
-  }
-
 }
