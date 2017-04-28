@@ -35,9 +35,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
@@ -113,12 +111,16 @@ public class PlayerListener implements Listener {
     // お金の計算
     LivingEntity entity = e.getEntity();
     // コウモリの場合はお金を加算しない
-    if (entity.getType() == EntityType.BAT) { return; }
+    if (entity.getType() == EntityType.BAT) {
+      return;
+    }
 
     // 最後に攻撃をしたPlayerを取得
     Player p = LastDamageManager.getLastDamagePlayer(entity);
     AbstractMob<?> mob = MobHolder.getMob(entity);
-    if (mob == null || p == null) { return; }
+    if (mob == null || p == null) {
+      return;
+    }
     int dropGalions = mob.getDropGalions();
 
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
@@ -135,10 +137,13 @@ public class PlayerListener implements Listener {
   @EventHandler(priority = EventPriority.MONITOR)
   public void onGetExp(PlayerChangeStatusExpEvent event) {
     OfflinePlayer player = event.getPlayer();
-    if (!(player instanceof Player)) { return; }
+    if (!(player instanceof Player)) {
+      return;
+    }
 
     if (event.getReason().isPrintMessageLog()) {
-      Message.sendMessage((Player) player, ChatColor.AQUA + "{0} + {1}exp", event.getLevelType().getName(), event.getAddExp());
+      Message.sendMessage((Player) player, ChatColor.AQUA + "{0} + {1}exp", event.getLevelType().getName(),
+          event.getAddExp());
     }
   }
 
@@ -149,8 +154,8 @@ public class PlayerListener implements Listener {
    */
   @EventHandler(priority = EventPriority.MONITOR)
   public void onChangeStatusLevel(PlayerChangeStatusLevelEvent e) {
-    String join = StringUtils
-        .join(new Object[] { e.getOfflinePlayer().getName(), "の", e.getLeveltype().getName(), "がレベル", e.getLeveltype(), "(", e.getNowExp(), ")になりました。" });
+    String join = StringUtils.join(new Object[] { e.getOfflinePlayer().getName(), "の", e.getLeveltype().getName(),
+        "がレベル", e.getLeveltype(), "(", e.getNowExp(), ")になりました。" });
     SystemLog.addLog(join);
   }
 
@@ -179,8 +184,8 @@ public class PlayerListener implements Listener {
     // Logを残す
     if (event.getReason() != GalionEditReason.mob_drop) {
       final String format = "%s get %d galions by %s, (total %d galions)";
-      final String message = String.format(format, event.getTheLowPlayer().getName(), event.getGalions(), event.getReason().toString(),
-          event.getTheLowPlayer().getGalions());
+      final String message = String.format(format, event.getTheLowPlayer().getName(), event.getGalions(),
+          event.getReason().toString(), event.getTheLowPlayer().getGalions());
       SystemLog.addLog(message);
     }
 
@@ -270,17 +275,17 @@ public class PlayerListener implements Listener {
       public void run() {
         ItemStack item = e.getItem();
         switch (item.getType()) {
-          case POTION:
-            e.getPlayer().getInventory().remove(new ItemStack(Material.GLASS_BOTTLE));
-            break;
-          case MILK_BUCKET:
-            e.getPlayer().getInventory().remove(new ItemStack(Material.BUCKET));
-            break;
-          case MUSHROOM_SOUP:
-            e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
-            break;
-          default:
-            break;
+        case POTION:
+          e.getPlayer().getInventory().remove(new ItemStack(Material.GLASS_BOTTLE));
+          break;
+        case MILK_BUCKET:
+          e.getPlayer().getInventory().remove(new ItemStack(Material.BUCKET));
+          break;
+        case MUSHROOM_SOUP:
+          e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
+          break;
+        default:
+          break;
         }
       }
     }.runTaskLater(Main.plugin, 1);
@@ -329,8 +334,8 @@ public class PlayerListener implements Listener {
   @EventHandler
   public void onLevelUp(PlayerLevelUpEvent event) {
     Message.sendMessage(event, ChatColor.GREEN + " === LEVEL UP === ");
-    Message.sendMessage(event,
-        MessageFormat.format("{0} === {1}  {2}レベル === ", ChatColor.YELLOW, event.getLevelType().getName(), event.getNewLevel()));
+    Message.sendMessage(event, MessageFormat.format("{0} === {1}  {2}レベル === ", ChatColor.YELLOW,
+        event.getLevelType().getName(), event.getNewLevel()));
     Message.sendMessage(event, ChatColor.GREEN + " === LEVEL UP === ");
 
     Player player = event.getTheLowPlayer().getOnlinePlayer();
@@ -338,8 +343,8 @@ public class PlayerListener implements Listener {
       // タイトルを表示
       TitleSender titleSender = new TitleSender();
       titleSender.setTitle("== LEVEL UP ==", ChatColor.GREEN, true);
-      titleSender.setSubTitle(MessageFormat.format("{0} {1}  {2}レベル", ChatColor.YELLOW, event.getLevelType().getName(), event.getNewLevel()),
-          ChatColor.YELLOW, false);
+      titleSender.setSubTitle(MessageFormat.format("{0} {1}  {2}レベル", ChatColor.YELLOW, event.getLevelType().getName(),
+          event.getNewLevel()), ChatColor.YELLOW, false);
       titleSender.execute(player);
 
       // 音を鳴らす
@@ -356,7 +361,9 @@ public class PlayerListener implements Listener {
   @EventHandler
   public void onReincarnation(PlayerCompleteReincarnationEvent e) {
     Player player = e.getPlayer();
-    if (player == null) { return; }
+    if (player == null) {
+      return;
+    }
 
     // 花火を表示
     Firework spawn = player.getWorld().spawn(player.getLocation().add(0, 2, 0), Firework.class);
@@ -383,8 +390,8 @@ public class PlayerListener implements Listener {
     titleSender.setSubTitle(levelTypeName + "を転生完了", ChatColor.YELLOW, false);
     titleSender.execute(player);
 
-    player.sendMessage(MessageFormat.format("{0}{1}の転生が完了しました。{2}が{3}レベルになった代わりに選択した特殊効果を得ます。",
-        ChatColor.GREEN, levelTypeName, levelTypeName, e.getTheLowPlayer().getLevel(e.getLevelType())));
+    player.sendMessage(MessageFormat.format("{0}{1}の転生が完了しました。{2}が{3}レベルになった代わりに選択した特殊効果を得ます。", ChatColor.GREEN,
+        levelTypeName, levelTypeName, e.getTheLowPlayer().getLevel(e.getLevelType())));
   }
 
   /**
@@ -401,7 +408,9 @@ public class PlayerListener implements Listener {
     LastDamageMethodType type = LastDamageManager.getLastDamageAttackType(entity);
 
     // 倒したのがSummonの時はExpを与えない
-    if (SummonPlayerManager.isSummonMob(entity)) { return; }
+    if (SummonPlayerManager.isSummonMob(entity)) {
+      return;
+    }
 
     // 攻撃方法が不明な時はEventから取得
     if (p == null || type == null) {
@@ -412,14 +421,20 @@ public class PlayerListener implements Listener {
         type = LastDamageManager.getLastDamageAttackType(entity);
       }
       // ここでも取得出来ない場合は無視する
-      if (p == null || type == null) { return; }
+      if (p == null || type == null) {
+        return;
+      }
       // Logを出しておく
-      new RuntimeException(MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName())).printStackTrace();
+      new RuntimeException(
+          MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName()))
+              .printStackTrace();
     }
 
     // データがロードされていないなら無視する
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-    if (theLowPlayer == null) { return; }
+    if (theLowPlayer == null) {
+      return;
+    }
 
     // mobを取得
     AbstractMob<?> mob = MobHolder.getMob(entity);
@@ -427,8 +442,7 @@ public class PlayerListener implements Listener {
   }
 
   /**
-   * Playerが鉱石を壊した際にその鉱石がSpletSheetに登録されていたら
-   * 直接Inventoryに入れる。
+   * Playerが鉱石を壊した際にその鉱石がSpletSheetに登録されていたら 直接Inventoryに入れる。
    */
   @EventHandler(ignoreCancelled = true)
   public void onPlayerMagicStoneOreBreak(BlockBreakEvent event) {
@@ -500,47 +514,30 @@ public class PlayerListener implements Listener {
 
   @EventHandler
   public void onPlayerCraftCustomItemEvent(PlayerCraftCustomItemEvent event) {
-    event.getPlayer().sendMessage(MessageFormat.format("{0}アイテム{1}[{2}]{3}を作成しました", ChatColor.GREEN, ChatColor.LIGHT_PURPLE,
-        ChatColor.stripColor(ItemStackUtil.getName(event.getCraftedItem())), ChatColor.GREEN));
+    event.getPlayer().sendMessage(MessageFormat.format("{0}アイテム{1}[{2}]{3}を作成しました", ChatColor.GREEN,
+        ChatColor.LIGHT_PURPLE, ChatColor.stripColor(ItemStackUtil.getName(event.getCraftedItem())), ChatColor.GREEN));
     event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ANVIL_USE, (float) 0.8, 1);
   }
 
   public static void updateSidebar(Player p) {
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-    if (theLowPlayer == null) { return; }
+    if (theLowPlayer == null) {
+      return;
+    }
 
-    ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-    Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
-    Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
-    registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-    registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
+    Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+    Objective objective = board.registerNewObjective(ChatColor.GREEN + "player_status", "dummy");
+    objective.setDisplayName(ChatColor.AQUA + "===== THE LoW =====");
+    objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-    Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
-    scoreB.setScore(8);
-
-    Score score = registerNewObjective.getScore("剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル");
-    score.setScore(7);
-
-    Score score2 = registerNewObjective.getScore("弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル");
-    score2.setScore(6);
-
-    Score score3 = registerNewObjective.getScore("魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル");
-    score3.setScore(5);
-
-    Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
-    score4.setScore(4);
-
-    Score score6 = registerNewObjective.getScore("");
-    score6.setScore(3);
-
-    Score score5 = registerNewObjective.getScore("お金 : " + theLowPlayer.getGalions() + " G");
-    score5.setScore(2);
-
-    Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
-    scoreB1.setScore(1);
-
-    Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
-    scoreIp.setScore(0);
-    p.setScoreboard(newScoreboard);
+    objective.getScore(ChatColor.DARK_GREEN + "剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル").setScore(8);
+    objective.getScore(ChatColor.DARK_GREEN + "弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル").setScore(7);
+    objective.getScore(ChatColor.DARK_GREEN + "魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル").setScore(6);
+    objective.getScore(ChatColor.DARK_AQUA + "   /statsで詳細確認").setScore(5);
+    objective.getScore("").setScore(4);
+    objective.getScore(ChatColor.GOLD + "お金 : " + theLowPlayer.getGalions() + " G").setScore(3);
+    objective.getScore(ChatColor.AQUA + "==================").setScore(2);
+    objective.getScore(ChatColor.GOLD + "play.l-bulb.net").setScore(1);
+    p.setScoreboard(board);
   }
 }
