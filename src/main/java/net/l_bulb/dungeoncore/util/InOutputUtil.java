@@ -1,6 +1,5 @@
 package net.l_bulb.dungeoncore.util;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,8 +14,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import org.bukkit.Bukkit;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
@@ -111,18 +114,15 @@ public class InOutputUtil {
    */
   private static boolean archive(ZipOutputStream outZip, File baseFile,
       File targetFile, String entryName, String enc) {
-    // 圧縮レベル設定
-    outZip.setLevel(5);
 
-    // // 文字コードを指定
-    // outZip.setEncoding(enc);
-    try {
+    // 圧縮レベル設定
+    outZip.setLevel(Deflater.BEST_SPEED);
+
+    // 圧縮対象ファイルの入力ストリームを作成
+    // (注: 正常にリソースが解放されない可能性を除去。二重バッファリングはNG！)
+    try (FileInputStream in = new FileInputStream(targetFile)) {
       // ZIPエントリ作成
       outZip.putNextEntry(new ZipEntry(entryName));
-
-      // 圧縮ファイル読み込みストリーム取得
-      BufferedInputStream in = new BufferedInputStream(
-          new FileInputStream(targetFile));
 
       // 圧縮ファイルをZIPファイルに出力
       int readSize = 0;
@@ -130,12 +130,12 @@ public class InOutputUtil {
       while ((readSize = in.read(buffer, 0, buffer.length)) != -1) {
         outZip.write(buffer, 0, readSize);
       }
-      // クローズ処理
-      in.close();
+
       // ZIPエントリクローズ
       outZip.closeEntry();
     } catch (Exception e) {
       // ZIP圧縮失敗
+      Bukkit.getLogger().log(Level.SEVERE, "ZIP圧縮 (Deflate) に失敗しました。", e);
       return false;
     }
     return true;
