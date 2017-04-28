@@ -8,8 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.l_bulb.dungeoncore.nametag.TagConfig;
-
 public class CommandTag implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
@@ -32,7 +30,7 @@ public class CommandTag implements CommandExecutor {
       sender.sendMessage(RED + "Player" + args[0] + "はOfflineです。");
       return true;
     }
-    TagConfig.setPlayer(args[1]);
+    //TODO: 実装
     return true;
   }
 
