@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.command.util;
 
+import java.lang.ref.SoftReference;
 import java.util.Arrays;
 
 import org.apache.commons.lang.StringUtils;
@@ -47,9 +48,18 @@ public class SequenceCommand implements CommandExecutor, UsageCommandable {
     return true;
   }
 
+  private static SoftReference<String> usageCache;
+
   @Override
   public String getUsage() {
-    return "/sequencecommand second command1 & command2 & ... "
+    String message;
+
+    if (usageCache != null) {
+      message = usageCache.get();
+      if (message != null) { return message; }
+    }
+
+    message = "/sequencecommand second command1 & command2 & ... "
         + ChatColor.GREEN + "\n '/sequencecommand 1 say 123 & say 456' & say 789' "
         + ChatColor.GRAY + "\n ---- 1秒間隔で'/say 123'と'/say 456'と'/say 789'を実行します。"
         + ChatColor.GREEN + "\n '/sequencecommand 0 say こんにちは & setblock 60 60 60 1' "
@@ -58,6 +68,9 @@ public class SequenceCommand implements CommandExecutor, UsageCommandable {
         + ChatColor.GRAY + "\n ---- 連続で'/say こんにちわ'と'/delaycommand 5 say こんばんわ'を実行します。"
         + ChatColor.GRAY + "\n ---- つまり'/say こんにちわ'を実行した5秒後、'/say こんばんわ'を実行します。"
         + ChatColor.GREEN + "\n 応用すればコマンド実行後に穴を作り、10秒後に塞ぐというようなことも出来ます。";
+
+    usageCache = new SoftReference<>(message);
+    return message;
   }
 
   @Override
