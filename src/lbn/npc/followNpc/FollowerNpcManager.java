@@ -130,6 +130,7 @@ public class FollowerNpcManager {
 		if (removedNpc != null) {
 			NPC npc = removedNpc.getNpc();
 			if (npc !=null) {
+				npc.despawn();
 				npc.destroy();
 			}
 		}

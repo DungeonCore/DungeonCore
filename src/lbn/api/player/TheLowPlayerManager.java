@@ -1,13 +1,23 @@
 package lbn.api.player;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import lbn.common.event.player.PlayerLoadedDataEvent;
+import lbn.dungeoncore.Main;
 import lbn.player.customplayer.CustomPlayer;
+import lbn.util.InOutputUtil;
 import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.OfflinePlayer;
@@ -19,7 +29,7 @@ public class TheLowPlayerManager {
 
 	static Set<OfflinePlayer> loadingNow = Collections.synchronizedSet(new HashSet<OfflinePlayer>());
 
-	public static void loadData(OfflinePlayer p) {
+	public static void loadData(OfflinePlayer p) throws Exception{
 		//もし情報取得中なら無視する
 		if (loadingNow.contains(p)) {
 			return;
@@ -29,20 +39,68 @@ public class TheLowPlayerManager {
 		if (loadedPlayerMap.containsKey(p.getUniqueId())) {
 			return;
 		}
+
 		//TODO ロードする
-		CustomPlayer customPlayer = new CustomPlayer(p);
-		customPlayer.init();
+		CustomPlayer customPlayer = loadFile(p);
+		customPlayer.init(p);
 		//eventを発火させる
 		new PlayerLoadedDataEvent(customPlayer, p).callEvent();
 		loadedPlayerMap.put(p.getUniqueId(), customPlayer);
 	}
 
 	public static void saveData(OfflinePlayer p) {
-		TheLowPlayer theLowPlayer = getTheLowPlayer(p);
-		if (theLowPlayer == null) {
-			return;
+		try {
+			TheLowPlayer theLowPlayer = getTheLowPlayer(p);
+			if (theLowPlayer == null) {
+				return;
+			}
+			saveFile((CustomPlayer) theLowPlayer);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
-		//TODO データをセーブする
+	}
+
+	/**
+	 * ファイルから読み込む
+	 * @param p
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public static CustomPlayer loadFile(OfflinePlayer p) throws IOException, ClassNotFoundException {
+		try {
+			UUID uniqueId = p.getUniqueId();
+			String folder = Main.dataFolder + File.separator + "player_data" + File.separator;
+			try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(folder + uniqueId + ".dat")))) {
+				return (CustomPlayer) ois.readObject();
+			}
+		} catch (FileNotFoundException e) {
+			return new CustomPlayer(p);
+		}
+	}
+
+	/**
+	 * ファイルへ出力する
+	 * @param p
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public static void saveFile(CustomPlayer p) throws IOException, ClassNotFoundException {
+		String folder = Main.dataFolder + File.separator + "player_data" + File.separator;
+		File file = new File(folder + p.getUUID() + ".dat");
+		if (file.exists()) {
+			String backup = Main.dataFolder + File.separator + "player_data_old" + File.separator;
+			InOutputUtil.moveFile(file, new File(backup + p.getUUID() + "_" + (new Date().getTime()) + ".dat"));
+		}
+
+		if (!file.getParentFile().exists()) {
+			file.getParentFile().mkdirs();
+		}
+
+		try(ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream(file))) {
+			ois.writeObject(p);
+		}
 	}
 
 	/**

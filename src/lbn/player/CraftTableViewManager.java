@@ -1,6 +1,7 @@
 package lbn.player;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import lbn.dungeoncore.Main;
 import lbn.player.crafttable.CraftTableType;
@@ -15,7 +16,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class CraftTableViewManager {
 	private static HashMap<Player, CraftTableType> craftTableViewMap = new HashMap<>();
 
+	static HashMap<UUID, Long> consumMap = new HashMap<UUID, Long>();
+
 	public static InventoryView openWorkbench(Player p, CraftTableType type) {
+		//2重で処理が行われるので無視する
+		long consumeTime = consumMap.getOrDefault(p.getUniqueId(), 0L);
+		if (consumeTime > System.currentTimeMillis()) {
+			return null;
+		}
+		consumMap.put(p.getUniqueId(), System.currentTimeMillis() + 100);
+
 		Location loc = new Location(p.getWorld(), 0, 0, 0);
 		if (loc.getBlock().getType() != Material.WORKBENCH) {
 			loc.getBlock().setType(Material.WORKBENCH);

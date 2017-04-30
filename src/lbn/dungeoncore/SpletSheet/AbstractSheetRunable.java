@@ -61,7 +61,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
 			for (LbnSpreadSheet instance : getInstanceList()) {
 				if (instance == null) {
-					return null;
+					continue;
 				}
 
 				String[][] data = null;
@@ -103,7 +103,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 		try {
 			String[][] allData = submit.get();
 			if (allData == null) {
-				sender.sendMessage("内部でエラーが発生しました。" + getSheetName());
+//				sender.sendMessage("内部でエラーが発生しました。" + getSheetName());
 				return;
 			}
 			sender.sendMessage("処理を開始します。:" + getSheetName());

@@ -1,10 +1,12 @@
 package lbn.money;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.item.ItemManager;
 import lbn.item.itemInterface.MoneyItemable;
-import lbn.money.buyer.Buyer;
 import lbn.money.shop.CustomShop;
 import lbn.money.shop.ShopItem;
 import lbn.util.ItemStackUtil;
@@ -17,7 +19,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
@@ -25,6 +26,8 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class MoneyListener implements Listener{
+
+	static HashMap<UUID, Long> consumMap = new HashMap<UUID, Long>();
 
 	@EventHandler
 	public void onClickShop(InventoryClickEvent e) {
@@ -37,6 +40,12 @@ public class MoneyListener implements Listener{
 		e.setCancelled(true);
 
 		Player p = (Player) e.getWhoClicked();
+
+		long consumeTime = consumMap.getOrDefault(p.getUniqueId(), 0L);
+		if (consumeTime > System.currentTimeMillis()) {
+			return;
+		}
+		consumMap.put(p.getUniqueId(), System.currentTimeMillis() + 100);
 
 		//Playerデータがロードされていない時は何もしない
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
@@ -143,18 +152,11 @@ public class MoneyListener implements Listener{
 
 	@EventHandler
 	public void onClick(InventoryClickEvent e) {
-		Buyer.onInteractInv(e);
 		BuyerShopSelector.onSelect(e);
 	}
 
 	@EventHandler
 	public void onDrag(InventoryDragEvent e) {
-		Buyer.onInteractInv(e);
 		BuyerShopSelector.onSelect(e);
-	}
-
-	@EventHandler
-	public void onPrepareItem(PrepareItemCraftEvent e) {
-		Buyer.onCraftItem(e);
 	}
 }

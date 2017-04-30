@@ -64,7 +64,15 @@ public class GravityField extends WeaponSkillForOneType {
 		new LbnRunnable() {
 			@Override
 			public void run2() {
+				if (getData(0) < getAgeTick() / 20) {
+					cancel();
+				}
+
 				for (LivingEntity livingEntity : enemy) {
+					//モンスターが死んでるなら無視
+					if (!livingEntity.isValid()) {
+						continue;
+					}
 					//ダメージを与える
 					livingEntity.damage(customItem.getAttackItemDamage(StrengthOperator.getLevel(item)) * getData(2));
 					Particles.runParticle(livingEntity, ParticleType.lava, 100);

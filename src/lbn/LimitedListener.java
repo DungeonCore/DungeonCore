@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lbn.dungeoncore.Main;
+import lbn.player.PlayerChecker;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -35,6 +36,7 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.hanging.HangingBreakEvent.RemoveCause;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
@@ -81,6 +83,14 @@ public class LimitedListener implements Listener{
 				event.setCancelled(true);
 				return;
 			}
+		}
+	}
+
+	@EventHandler
+	public void onPlayerArmorStandManipulateEvent(PlayerArmorStandManipulateEvent e) {
+		Player player = e.getPlayer();
+		if (PlayerChecker.isNormalPlayer(player)) {
+			e.setCancelled(true);
 		}
 	}
 
@@ -192,8 +202,9 @@ public class LimitedListener implements Listener{
 			return;
 		}
 
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			return ;
+		// 管理者なら無視
+		if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) {
+			return;
 		}
 
 		if (Config.getClickCancelItems().contains(itemInHand.getType())) {
@@ -206,7 +217,8 @@ public class LimitedListener implements Listener{
 		if (!isTarget(e)) {
 			return;
 		}
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+		// 管理者なら無視
+		if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) {
 			return;
 		}
 
@@ -352,23 +364,27 @@ public class LimitedListener implements Listener{
 
 		e.setCancelled(true);
 	}
+
 	@EventHandler
 	public void PlayerBucketEmptyEvent(PlayerBucketEmptyEvent e) {
 		if (!isTarget(e)) {
 			return;
 		}
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+		// 管理者なら無視
+		if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) {
 			return;
 		}
 
 		e.setCancelled(true);
 	}
+
 	@EventHandler
 	public void PlayerBucketFillEvent(PlayerBucketFillEvent e) {
 		if (!isTarget(e)) {
 			return;
 		}
-		if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+		// 管理者なら無視
+		if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) {
 			return;
 		}
 		e.setCancelled(true);

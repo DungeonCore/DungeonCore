@@ -9,6 +9,7 @@ import java.util.Set;
 import lbn.money.BuyerShopSelector;
 import lbn.npc.CustomNpcInterface;
 import lbn.npc.NpcManager;
+import lbn.npc.gui.RestVillagerGUI;
 import lbn.npc.gui.StrengthMenu;
 import lbn.player.magicstoneOre.trade.MagicStoneTrade;
 import lbn.player.reincarnation.ReincarnationFactor;
@@ -236,6 +237,9 @@ public class VillagerNpc implements CustomNpcInterface {
 			break;
 		case MAGIC_ORE:
 			MagicStoneTrade.open(p);
+			break;
+		case REST:
+			RestVillagerGUI.open(p, this);
 			break;
 		default:
 			break;

@@ -13,7 +13,7 @@ public class BuffDataFactory {
 	private BuffDataFactory() {
 	}
 
-	public static BuffData create(String id, PotionEffectType effect, int second, int level) {
+	public static BuffData create(String id, PotionEffectType effect, double second, int level) {
 		if(id == null || effect == null) {
 			return null;
 		}

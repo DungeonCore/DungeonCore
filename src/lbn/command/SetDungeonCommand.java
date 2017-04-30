@@ -107,9 +107,9 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter{
 		StringBuilder sb = new StringBuilder();
 		if (args.length >= 2) {
 			for (int i = 1; i < (withOutLast ? args.length - 1 : args.length); i++) {
-				sb.append(args[i]);
+				sb.append(args[i] + " ");
 			}
 		}
-		return sb.toString();
+		return sb.toString().trim();
 	}
 }

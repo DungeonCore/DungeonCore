@@ -1,5 +1,6 @@
 package lbn.player.customplayer;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
@@ -20,7 +21,9 @@ import com.google.common.collect.HashMultimap;
  * @see AbilityInterface
  *
  */
-public class PlayerStatusData {
+public class PlayerStatusData implements Serializable{
+	private static final long serialVersionUID = 5162626958325984577L;
+
 	//実際のステータスデータ値をいれておくMap
 	protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<PlayerStatusType, Double>();
 

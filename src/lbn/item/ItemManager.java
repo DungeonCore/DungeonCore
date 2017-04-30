@@ -15,6 +15,7 @@ import lbn.item.customItem.other.StrengthScrollWeapon;
 import lbn.item.customItem.pic.DiamondPickaxe;
 import lbn.item.customItem.pic.GoldPickaxe;
 import lbn.item.customItem.pic.IronPickaxe;
+import lbn.item.customItem.pic.MagicOreRegistPic;
 import lbn.item.customItem.pic.StonePickaxe;
 import lbn.item.customItem.pic.WoodPickAxe;
 import lbn.item.slot.SlotInterface;
@@ -237,7 +238,9 @@ public class ItemManager {
 		registItem(new GoldPickaxe(0).getAllRelativeItem());
 		registItem(new IronPickaxe(0).getAllRelativeItem());
 		registItem(new DiamondPickaxe(0).getAllRelativeItem());
+		registItem(new MagicOreRegistPic());
 		//お金
 		registItem(GalionItem.getInstance(0));
+
 	}
 }

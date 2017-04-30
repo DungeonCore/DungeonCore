@@ -22,6 +22,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class ReincarnationSelector implements MenuSelectorInterface{
 
+	public static final int REINC_LEVEL = 20;
+
 	static {
 		MenuSelectorManager.regist(new ReincarnationSelector(LevelType.SWORD));
 		MenuSelectorManager.regist(new ReincarnationSelector(LevelType.BOW));

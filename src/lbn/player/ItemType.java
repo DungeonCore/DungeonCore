@@ -8,7 +8,7 @@ import org.bukkit.Material;
 public enum ItemType {
 	SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
 	BOW(LevelType.BOW, ItemStackUtil.getVanillaDamage(Material.BOW)),
-	MAGIC(LevelType.BOW, 6),
+	MAGIC(LevelType.MAGIC, 6),
 	OTHER(),
 	IGNORE();
 

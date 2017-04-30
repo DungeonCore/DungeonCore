@@ -64,31 +64,33 @@ public class InitManager {
 	}
 
 	public void reloadSpreadSheet() {
-		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
-
-		SpletSheetCommand.reloadSheet(null, "item");
-
-		QuestCommand.questReload();
+		SpletSheetCommand.reloadSheet(null, "buff");
 
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
 		}
+		MobSkillManager.reloadDataBySystem();
+
 		SpletSheetCommand.reloadSheet(null, "weapon");
 
 		SpletSheetCommand.reloadSheet(null, "weaponskill");
 
 		SpletSheetCommand.reloadSheet(null, "armor");
 
-
 		CommandChest.allReload();
 
 		SoundSheetRunnable.allReload();
 
-		SpletSheetCommand.reloadSheet(null, "buff");
+		VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
+
+		SpletSheetCommand.reloadSheet(null, "item");
+
+		MobCommand.reloadAllMob(null);
+
+		QuestCommand.questReload();
 
 		SpletSheetCommand.reloadSheet(null, "particle");
-
 
 		SpletSheetCommand.reloadSheet(null, "magicore");
 
@@ -105,7 +107,6 @@ public class InitManager {
 				case 0:
 					break;
 				case 3:
-					MobCommand.reloadAllMob(null);
 					break;
 				case 7:
 					MobSpawnerPointManager.load();
@@ -122,8 +123,6 @@ public class InitManager {
 				}
 			}
 		}.runTaskTimer(20 * 2);
-
-		MobSkillManager.reloadDataBySystem();
 
 		DungeonList.load(Bukkit.getConsoleSender());
 	}

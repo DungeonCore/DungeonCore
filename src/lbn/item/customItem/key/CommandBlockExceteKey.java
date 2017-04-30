@@ -1,7 +1,7 @@
 package lbn.item.customItem.key;
 
 import lbn.dungeon.contents.item.key.AbstractKeyItem;
-import lbn.dungeoncore.Main;
+import lbn.util.BlockUtil;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public abstract class CommandBlockExceteKey  extends AbstractKeyItem{
 
@@ -30,8 +29,6 @@ public abstract class CommandBlockExceteKey  extends AbstractKeyItem{
 			return;
 		}
 
-		final Location add3 = add2.add(0, 1, 0);
-		add3.getBlock().setType(Material.REDSTONE_TORCH_ON);
 
 		//アイテムを減らせる
 		ItemStack itemInHand = p.getItemInHand();
@@ -42,12 +39,8 @@ public abstract class CommandBlockExceteKey  extends AbstractKeyItem{
 			p.setItemInHand(itemInHand);
 		}
 
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				add3.getBlock().setType(Material.BEDROCK);
-			}
-		}.runTaskLater(Main.plugin, 1);
+		final Location add3 = add2.add(0, 1, 0);
+		BlockUtil.setRedstone(add3);
 	}
 
 	private void sendError(Player player, String string) {

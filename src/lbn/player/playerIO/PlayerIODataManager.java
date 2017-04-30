@@ -8,6 +8,7 @@ import lbn.Config;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.chest.wireless.WireLessChestManager;
 import lbn.dungeoncore.Main;
+import lbn.quest.questData.PlayerQuestSessionManager;
 import lbn.util.Message;
 
 import org.bukkit.Bukkit;
@@ -16,11 +17,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerIODataManager {
+	public static boolean ignoreSave = false;
+
 	public static void load(Player p, String saveType) {
+		//セーブを無視する
+		if (ignoreSave) {
+			p.sendMessage("Playerセーブ機能は無視されます。");
+			return;
+		}
 		try {
 			TheLowPlayerManager.loadData(p);
 			//チェストをロードする
 			WireLessChestManager.getInstance().load(p);
+			//クエストをロードする
+			PlayerQuestSessionManager.loadSession(p);
 		} catch (Exception e) {
 			e.printStackTrace();
 			kickPlayerByLoadData(p);
@@ -35,6 +45,10 @@ public class PlayerIODataManager {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
+				//セーブを無視する
+				if (ignoreSave) {
+					return;
+				}
 				p.kickPlayer("sorry, System cant load your game data. please tell developer (twitter:" + Config.DEVELOPER_TWITTER_ID + ")\n"
 						+ "申し訳ありません。あなたのゲームデータをロード出来ませんでした。 開発者(twitter: "+ Config.DEVELOPER_TWITTER_ID + ")まで連絡ください。");
 			}
@@ -78,5 +92,7 @@ public class PlayerIODataManager {
 
 	public static void save(Player player) {
 		TheLowPlayerManager.saveData(player);
+		//クエストをセーブする
+		PlayerQuestSessionManager.saveSession(player);
 	}
 }

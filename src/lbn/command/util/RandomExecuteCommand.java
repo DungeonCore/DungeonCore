@@ -1,7 +1,11 @@
 package lbn.command.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+
+import lbn.util.JavaUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -19,15 +23,23 @@ public class RandomExecuteCommand implements CommandExecutor{
 			return false;
 		}
 
-		String commandList = StringUtils.join(Arrays.copyOfRange(arg3, 0, arg3.length), " ");
-		String[] split = commandList.split("\\?");
+		int execuCount = 1;
+		if (arg3[0].startsWith("-")) {
+			execuCount = JavaUtil.getInt(arg3[0].replace("-", ""), 1);
+			arg3 = Arrays.copyOfRange(arg3, 1, arg3.length);
+		}
 
-		if (split.length == 0) {
+		String commandList = StringUtils.join(arg3, " ");
+		List<String> asList = new ArrayList<String>(Arrays.asList(commandList.split("\\?")));
+
+		if (asList.size() == 0) {
 			return false;
 		}
 
-		String command = split[rnd.nextInt(split.length)];
-		Bukkit.dispatchCommand(arg0, command.trim());
+		for (int i = 0; i < Math.min(execuCount, asList.size()); i++) {
+			String command = asList.remove(rnd.nextInt(asList.size()));
+			Bukkit.dispatchCommand(arg0, command.trim());
+		}
 		return true;
 	}
 

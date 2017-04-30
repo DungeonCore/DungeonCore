@@ -37,8 +37,10 @@ public class SlotSetTableOperation {
 
 	public static void openSlotTable(final Player p) {
 		InventoryView openWorkbench = CraftTableViewManager.openWorkbench(p, CraftTableType.SLOT_TABLE);
-		final CraftingInventory inv = (CraftingInventory) openWorkbench.getTopInventory();
-		setInitInv(inv);
+		if (openWorkbench != null) {
+			final CraftingInventory inv = (CraftingInventory) openWorkbench.getTopInventory();
+			setInitInv(inv);
+		}
 	}
 
 	public static void setInitInv(final CraftingInventory inv) {

@@ -82,7 +82,7 @@ class MagicPointRunnable extends LbnRunnable {
 	public void startTask() {
 		if (!isRun()) {
 			hashSet.put(p, this);
-			super.runTaskTimer(15);
+			super.runTaskTimer(20 * 3);
 		}
 	}
 

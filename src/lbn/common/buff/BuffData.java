@@ -10,12 +10,14 @@ public class BuffData {
 	private int tick;
 	private int level = 1;
 
-	public BuffData(String id, PotionEffectType effect, int second, int level) {
+	public BuffData(String id, PotionEffectType effect, double second, int level) {
 		this.id = id;
 		this.effect = effect;
-		this.tick = second * 20;
+		this.tick = (int) (second * 20);
 		if (level < 1) {
 			this.level = 1;
+		} else {
+			this.level = level;
 		}
 		this.level--;
 	}

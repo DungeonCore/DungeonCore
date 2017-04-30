@@ -9,7 +9,6 @@ import lbn.common.particle.ParticleManager;
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
 import lbn.dungeoncore.Main;
-import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
 import lbn.mob.customMob.BossMobable;
 import lbn.mob.customMob.SpreadSheetMob;
@@ -105,10 +104,7 @@ public class OldNormalMobSkill implements MobSkillInterface{
 	 * @param mob
 	 */
 	protected void executeDamageOther(Entity condtionTarget, Entity mob) {
-		AbstractMob<?> mob2 = MobHolder.getMob(mob);
-		if (mob2 == null || mob2.isNullMob()) {
-			return;
-		}
+		boolean isBoss = MobHolder.getMob(mob).isBoss();
 
 		ArrayList<Entity> targetList = new ArrayList<Entity>();
 		switch (targetingMethod) {
@@ -130,8 +126,8 @@ public class OldNormalMobSkill implements MobSkillInterface{
 					continue;
 				}
 				//bossの時, combatプレイヤーでないなら無視
-				if (entity.getType() == EntityType.PLAYER && mob2.isBoss()) {
-					if (!((BossMobable)mob2).getCombatPlayer().contains(entity)) {
+				if (entity.getType() == EntityType.PLAYER && isBoss) {
+					if (!((BossMobable)MobHolder.getMob(mob)).getCombatPlayer().contains(entity)) {
 						continue;
 					}
 				}
@@ -149,8 +145,8 @@ public class OldNormalMobSkill implements MobSkillInterface{
 					continue;
 				}
 				//bossの時, combatプレイヤーでないなら無視
-				if (entity.getType() == EntityType.PLAYER && mob2.isBoss()) {
-					if (!((BossMobable)mob2).getCombatPlayer().contains(entity)) {
+				if (entity.getType() == EntityType.PLAYER && isBoss) {
+					if (!((BossMobable)MobHolder.getMob(mob)).getCombatPlayer().contains(entity)) {
 						continue;
 					}
 				}

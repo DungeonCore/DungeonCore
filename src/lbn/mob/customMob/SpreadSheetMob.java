@@ -17,6 +17,7 @@ import lbn.mob.SummonPlayerManager;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
+import lbn.player.ExpTable;
 import lbn.player.ItemType;
 import lbn.util.BlockUtil;
 
@@ -32,6 +33,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -138,12 +140,28 @@ public class SpreadSheetMob extends AbstractMob<Entity>{
 		e.setDamage(e.getDamage() * attackPoint);
 	}
 
+	double attackValue = 0;
+
+	public void setAttackValue(double attackValue) {
+		this.attackValue = attackValue;
+	}
+
+	public double getAttackValue() {
+		return attackValue;
+	}
+
 	@Override
 	public void onAttack(LivingEntity mob, LivingEntity target,
 			EntityDamageByEntityEvent e) {
 		if (mob == target) {
 			e.setCancelled(true);
 			return;
+		}
+
+		if (getAttackValue() >= 0) {
+			if (e.isApplicable(DamageModifier.BASE)) {
+				e.setDamage(DamageModifier.BASE, getAttackValue());
+			}
 		}
 
 		//skill
@@ -358,7 +376,10 @@ public class SpreadSheetMob extends AbstractMob<Entity>{
 
 	 @Override
 	public int getExp(LastDamageMethodType type) {
-		 return exp;
+		 if (exp >= 0) {
+			 return exp;
+		 }
+		 return (int) ExpTable.getMobExp(getLbnMobTag().getLevel());
 	}
 
 	 @Override

@@ -22,9 +22,9 @@ public class ReincarnationTypeMune implements MenuSelectorInterface{
 	}
 
 	//転生出来るときの表示用アイテム
-	static ItemStack swordSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "剣レベルをリンカーする", Material.DIAMOND_SWORD, ChatColor.WHITE  + "現在の剣レベルから60レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
-	static ItemStack magicSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "魔法レベルをリンカーする", Material.DIAMOND_HOE, ChatColor.WHITE  + "現在の魔法レベルから60レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
-	static ItemStack bowSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "弓レベルをリンカーする", Material.BOW, ChatColor.WHITE  + "現在の弓レベルから60レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
+	static ItemStack swordSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "剣レベルをリンカーする", Material.DIAMOND_SWORD, ChatColor.WHITE  + "現在の剣レベルから" + ReincarnationSelector.REINC_LEVEL +"レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
+	static ItemStack magicSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "魔法レベルをリンカーする", Material.DIAMOND_HOE, ChatColor.WHITE  + "現在の魔法レベルから" + ReincarnationSelector.REINC_LEVEL +"レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
+	static ItemStack bowSelectItem = ItemStackUtil.getItem(ChatColor.AQUA+ "弓レベルをリンカーする", Material.BOW, ChatColor.WHITE  + "現在の弓レベルから" + ReincarnationSelector.REINC_LEVEL +"レベル消費し、", ChatColor.WHITE  + "特殊効果を得ます。");
 
 	//転生出来ないときの表示用アイテム
 	static ItemStack swordCantSelectItem = ItemStackUtil.getItem(ChatColor.RED+ "剣レベルリンカー不可", Material.COBBLESTONE, ChatColor.WHITE  + "条件に達していないため転生できません");

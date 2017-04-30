@@ -87,8 +87,7 @@ public enum MagicStoneOreType {
 	 * @return
 	 */
 	public long getRelocationTick () {
-//		return random.nextInt((int) (getMaxRelocationTick() - getMinRelocationTick())) + getMinRelocationTick();
-		return 3 * 20;
+		return random.nextInt((int) (getMaxRelocationTick() - getMinRelocationTick())) + getMinRelocationTick();
 	}
 
 	/**

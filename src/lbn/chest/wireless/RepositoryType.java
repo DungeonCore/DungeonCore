@@ -3,7 +3,7 @@ package lbn.chest.wireless;
 import java.util.StringJoiner;
 
 public enum RepositoryType {
-	TYPE_A("TypeA", 5000), TYPE_B("TypeB", 10000), TYPE_C("TypeC", 20000), TYPE_D("TypeD", 40000), TYPE_E("TypeE", 80000), TYPE_F("TypeF", 160000);
+	TYPE_A("TypeA", 2000), TYPE_B("TypeB", 5000), TYPE_C("TypeC", 10000), TYPE_D("TypeD", 20000), TYPE_E("TypeE", 20000), TYPE_F("TypeF", 20000);
 
 	String type;
 	int price;

@@ -46,8 +46,8 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 		return new String[]{"name", "command", "ignorewater", "dropitem1", "droprate1", "dropitem2", "droprate2",
 				"chestlocation", "skill1", "skill2", "skill3", "skill4", "skill5", "money", "exp",
 				"swordresistance", "bowresistance", "magicresistance", "redstonelocation", "dummy1", "attackpoint", "defencePoint",//21
-				"aitype", "reach", "jumpattack", "cps", "sps", "dropitem3", "droprate3", "dropitem4", "droprate4", "level","autohp"
-				};
+				"aitype", "reach", "jumpattack", "cps", "sps", "dropitem3", "droprate3", "dropitem4", "droprate4", "level","autohp"//32
+				,"attackvalue"};
 	}
 
 	@Override
@@ -144,6 +144,9 @@ public class MobSheetRunnable extends AbstractSheetRunable{
 			if (!isEmpty(row, 14)) {
 				instance.setExp(JavaUtil.getInt(row[14], -1));
 			}
+
+			//攻撃力を設定
+			instance.setAttackValue(JavaUtil.getInt(row[33], -1));
 
 			//モブがまだ存在していればそのままセットする
 			AbstractMob<?> mob = MobHolder.getMob(name);

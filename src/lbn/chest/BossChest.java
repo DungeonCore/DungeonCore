@@ -8,7 +8,6 @@ import lbn.mob.customMob.BossMobable;
 import lbn.util.LbnRunnable;
 import lbn.util.Message;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,11 +36,8 @@ public class BossChest extends SpletSheetChest{
 	 */
 	public Location setChest(BossMobable e) {
 		if (moveLoc != null) {
-			for (Player p : rewordInventoryMap.keySet()) {
-				//もし途中でログアウトとかしていればテレポートしない
-				if (p.equals(Bukkit.getPlayerExact(p.getName()))) {
-					teleportPlayer(p.getName());
-				}
+			for (TheLowPlayer p :  e.getCombatPlayer()) {
+				teleportPlayer(p.getName());
 			}
 		}
 

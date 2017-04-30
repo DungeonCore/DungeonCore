@@ -38,10 +38,23 @@ public class GoldPickaxe extends AbstractPickaxe{
 		}
 	}
 
+	static short[] needExp = {
+		2500,
+		2500,
+		2000,
+		2000,
+		1000,
+		1000,
+		1500,
+		2000,
+		2500,
+		3000
+		};
 
 	@Override
 	public short getMaxExp() {
-		return 40;
+		int level2 = getLevel();
+		return needExp[Math.min(needExp.length - 1, level2)];
 	}
 
 	@Override

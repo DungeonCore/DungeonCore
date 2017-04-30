@@ -12,6 +12,7 @@ import lbn.item.customItem.other.SimpleStone;
 import lbn.item.slot.AbstractSlot;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotLevel;
+import lbn.item.slot.slot.UnUseSlot;
 import lbn.player.magicstoneOre.MagicStoneOreType;
 import lbn.util.ItemStackUtil;
 
@@ -99,6 +100,10 @@ public class MagicStoneTradeData {
 			// ItemInterfaceを継承しているものはItem化できるので保持する
 			ArrayList< ItemInterface> arrayList = new ArrayList< ItemInterface>();
 			for (SlotInterface slotInterface : slotListByLevel) {
+				//今使えないSlotは無視する
+				if (slotInterface instanceof UnUseSlot) {
+					continue;
+				}
 				if (slotInterface instanceof ItemInterface) {
 					arrayList.add((AbstractSlot) slotInterface);
 				}

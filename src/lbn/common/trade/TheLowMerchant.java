@@ -90,6 +90,35 @@ public abstract class TheLowMerchant {
 		}
 	}
 
+	/**
+	 * レシピのパケットを送信する
+	 * @param recipeList
+	 */
+	@SuppressWarnings("unchecked")
+	protected void sendRecipeList(TheLowMerchantRecipe...recipeList) {
+		// リストを作成
+		MerchantRecipeList merchantrecipelist = new MerchantRecipeList();
+		for (TheLowMerchantRecipe recipe : recipeList) {
+			merchantrecipelist.add(recipe.toMerchantRecipe());
+		}
+
+		//パケットを送信する
+		PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
+		packetdataserializer.writeInt(getContainerCounter());
+		merchantrecipelist.a(packetdataserializer);
+		((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
+
+		//一旦全て削除し、入れ直す
+		if (nowRecipeList != null) {
+			nowRecipeList.clear();
+		} else {
+			nowRecipeList = new MerchantRecipeListImplemention(this);
+		}
+		for (TheLowMerchantRecipe theLowMerchantRecipe : recipeList) {
+			nowRecipeList.addTheLowRecipe(theLowMerchantRecipe);
+		}
+	}
+
 	MerchantRecipeListImplemention nowRecipeList = null;
 
 	/**

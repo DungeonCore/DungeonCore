@@ -2,15 +2,15 @@ package lbn.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.potion.PotionEffectType;
-
 import lbn.common.buff.BuffData;
 import lbn.common.buff.BuffDataFactory;
 import lbn.common.buff.BuffType;
 import lbn.util.JavaUtil;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.potion.PotionEffectType;
 
 public class BuffSheetRunnable extends AbstractSheetRunable {
 
@@ -51,7 +51,7 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
 		}
 
 		PotionEffectType effect = debuffType.getType();
-		int second = JavaUtil.getInt(row[2], 0);
+		double second = JavaUtil.getDouble(row[2], 0.0);
 		int level = JavaUtil.getInt(row[3], 0);
 
 		BuffData data = BuffDataFactory.create(id, effect, second, level);

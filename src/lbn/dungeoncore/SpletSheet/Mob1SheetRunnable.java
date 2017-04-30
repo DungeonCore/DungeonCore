@@ -95,6 +95,10 @@ public class Mob1SheetRunnable extends AbstractSheetRunable{
 			setDropItem(row[11], row[12], instance);
 			setDropItem(row[13], row[14], instance);
 
+			instance.addSkill(row[15]);
+			instance.addSkill(row[16]);
+			instance.addSkill(row[17]);
+
 
 			//モブがまだ存在していればそのままセットする
 			AbstractMob<?> mob = MobHolder.getMob(name);

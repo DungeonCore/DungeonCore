@@ -1,5 +1,6 @@
 package lbn.item.system.repair;
 
+import lbn.NbtTagConst;
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
 import lbn.common.menu.MenuSelector;
@@ -134,6 +135,7 @@ public class RepairUi {
 		}
 		//アイテムの耐久を０にする
 		item.setDurability((short) 0);
+		ItemStackUtil.setNBTTag(item, NbtTagConst.THELOW_DURABILITY, (short)0);
 		return true;
 	}
 }

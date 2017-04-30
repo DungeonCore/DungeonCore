@@ -42,6 +42,7 @@ public class ExecuteMobSkillCommand extends AbstractPluginCommand{
 
 		List<Entity> executeEntitys = getEntityListByToken(paramICommandListener, paramArrayOfString[1]);
 		List<Entity> targetEntitys = getEntityListByToken(paramICommandListener, paramArrayOfString[2]);
+
 		for (Entity executeor : executeEntitys) {
 			for (Entity target : targetEntitys) {
 				//スキルを発動する

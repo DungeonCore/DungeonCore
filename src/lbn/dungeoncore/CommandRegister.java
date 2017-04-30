@@ -18,7 +18,6 @@ import lbn.command.CommandTpOtherWorld;
 import lbn.command.CommandViewInfo;
 import lbn.command.JumpCommand;
 import lbn.command.MobCommand;
-import lbn.command.MobSkillExecuteCommand;
 import lbn.command.MoneyCommand;
 import lbn.command.OpenCommand;
 import lbn.command.PlayerStatusCommand;
@@ -97,7 +96,6 @@ public class CommandRegister {
 		registCommand(new CommandExecuteLockByTimeCommand(), "timelock");
 		registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
 		registCommand(new CommandTpOtherWorld(), "tpworld");
-		registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
 		registCommand(new SpletSheetCommand(), "sheet_reload");
 		registCommand(new SetRedStoneBlockCommand(), "setredstone");
 		registCommand(new LoopCommand(), "loop");

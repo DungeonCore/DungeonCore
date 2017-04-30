@@ -36,7 +36,12 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 		//データをLoadする
 		if (params[0].equalsIgnoreCase("LOAD")) {
 			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(params[1]);
-			loadData(offlinePlayer, sender);
+			try {
+				loadData(offlinePlayer, sender);
+			} catch (Exception e) {
+				sender.sendMessage("loadに失敗しました");
+				return true;
+			}
 		} else if (params[0].equalsIgnoreCase("SET")) {
 		//レベルをセットする
 			LevelType type = null;
@@ -80,7 +85,7 @@ public class PlayerStatusCommand implements CommandExecutor, TabCompleter{
 	}
 
 
-	private void loadData(OfflinePlayer offlinePlayer, CommandSender paramCommandSender) {
+	private void loadData(OfflinePlayer offlinePlayer, CommandSender paramCommandSender) throws Exception {
 		if (offlinePlayer == null) {
 			paramCommandSender.sendMessage("指定したPlayerのデータが存在しません。");
 			return;

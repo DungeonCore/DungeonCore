@@ -23,7 +23,9 @@ import lbn.common.other.SystemLog;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
 import lbn.dungeoncore.Main;
+import lbn.item.ItemManager;
 import lbn.item.customItem.other.MagicStoneOre;
+import lbn.item.itemInterface.BreakBlockItemable;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
@@ -48,10 +50,12 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -69,6 +73,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -428,6 +433,18 @@ public class PlayerListener implements Listener{
 	}
 
 	/**
+	 * ブロックを壊した時のイベント
+	 * @param event
+	 */
+	@EventHandler(ignoreCancelled=true)
+	public void onBlockBreakEvent(BlockBreakEvent event){
+		//ブロックを壊した時のイベント
+		BreakBlockItemable customItem = ItemManager.getCustomItem(BreakBlockItemable.class, event.getPlayer().getItemInHand());
+		if (customItem != null) {
+			customItem.onBlockBreakEvent(event, event.getPlayer().getItemInHand());
+		}
+	}
+	/**
 	 * Playerが鉱石を壊した際にその鉱石がSpletSheetに登録されていたら
 	 * 直接Inventoryに入れる。
 	 */
@@ -504,6 +521,10 @@ public class PlayerListener implements Listener{
 		event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ANVIL_USE, (float) 0.8, 1);
 	}
 
+	@EventHandler
+	public void onChangeMoney(PlayerChangeGalionsEvent e) {
+		updateSidebar(e.getPlayer());
+	}
 
 	public static void updateSidebar(Player p) {
 		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
@@ -511,38 +532,69 @@ public class PlayerListener implements Listener{
 			return;
 		}
 
-		ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-		Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
-		Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
-		registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+				Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
+				Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
+				registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
+				registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
 
-		Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
-		scoreB.setScore(8);
+				Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
+				scoreB.setScore(8);
 
-		Score score = registerNewObjective.getScore("剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル");
-		score.setScore(7);
+				Score score = registerNewObjective.getScore("剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル");
+				score.setScore(7);
 
-		Score score2 = registerNewObjective.getScore("弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル");
-		score2.setScore(6);
+				Score score2 = registerNewObjective.getScore("弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル");
+				score2.setScore(6);
 
-		Score score3 = registerNewObjective.getScore("魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル");
-		score3.setScore(5);
+				Score score3 = registerNewObjective.getScore("魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル");
+				score3.setScore(5);
 
-		Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
-		score4.setScore(4);
+				Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
+				score4.setScore(4);
 
-		Score score6 = registerNewObjective.getScore("");
-		score6.setScore(3);
+				Score score6 = registerNewObjective.getScore("");
+				score6.setScore(3);
 
-		Score score5 = registerNewObjective.getScore("お金 : " + theLowPlayer.getGalions() + " G");
-		score5.setScore(2);
+				Score score5 = registerNewObjective.getScore("お金 : " + theLowPlayer.getGalions() + " G");
+				score5.setScore(2);
 
-		Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
-		scoreB1.setScore(1);
+				Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
+				scoreB1.setScore(1);
 
-		Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
-		scoreIp.setScore(0);
-		p.setScoreboard(newScoreboard);
+				Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
+				scoreIp.setScore(0);
+				p.setScoreboard(newScoreboard);
+			}
+		}.runTaskLater(Main.plugin, 1);
+
 	}
+
+	@EventHandler(priority=EventPriority.LOWEST)
+	public void onPlayerDamagePlayer(EntityDamageByEntityEvent e) {
+		//Playerでないなら無視
+		if (e.getEntity().getType() != EntityType.PLAYER) {
+			return;
+		}
+
+		Entity damager = e.getDamager();
+		//攻撃者がPlayerならキャンセルする
+		if (damager.getType() == EntityType.PLAYER) {
+			e.setCancelled(true);
+			return;
+		}
+
+		//Projectileの場合
+		if (damager instanceof Projectile) {
+			ProjectileSource shooter = ((Projectile) damager).getShooter();
+			if (shooter instanceof Player) {
+				e.setCancelled(true);
+				return;
+			}
+		}
+	}
+
 }

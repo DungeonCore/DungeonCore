@@ -98,6 +98,9 @@ public class CommandViewInfo implements CommandExecutor{
 				e.printStackTrace();
 			}
 			break;
+		case "nosave":
+			PlayerIODataManager.ignoreSave = true;
+			break;
 		case "save":
 			PlayerIODataManager.saveAsZip();
 			break;

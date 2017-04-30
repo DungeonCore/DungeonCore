@@ -1,5 +1,6 @@
 package lbn.dungeoncore.SpletSheet;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.concurrent.Future;
 
@@ -62,9 +63,11 @@ public class ItemSheetRunnable extends AbstractSheetRunable{
 			}
 
 			String command = row[2];
-			ItemStack itemByCommand = ItemStackUtil.getItemStackByCommand(command);
+
+			ItemStack itemByCommand = ItemStackUtil.getItemStackByCommand(command, sender);
 			if (itemByCommand == null || itemByCommand.getType() == Material.AIR) {
-				sendMessage("commandが不正です。");
+				sendMessage(MessageFormat.format("commandが不正です。 コマンド:{0}, itemid:{1}", command, id));
+				return;
 			}
 
 			String data = row[4];

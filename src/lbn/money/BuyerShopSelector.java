@@ -48,7 +48,7 @@ public class BuyerShopSelector {
 
 		ItemStack currentItem = event.getCurrentItem();
 		if (currentItem != null && currentItem.equals(getBuyerButton(p))) {
-			Buyer.onOpen(p);
+			Buyer.open(p);
 		} else if (currentItem != null && currentItem.equals(getShopButton(p))) {
 			CustomShop customShop = new CustomShop(villagerID);
 			customShop.openShop(p);

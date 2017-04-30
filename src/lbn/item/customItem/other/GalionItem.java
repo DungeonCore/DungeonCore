@@ -3,9 +3,7 @@ package lbn.item.customItem.other;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.WeakHashMap;
 
 import lbn.api.player.TheLowPlayer;
 import lbn.api.player.TheLowPlayerManager;
@@ -25,11 +23,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class GalionItem extends AbstractItem implements MoneyItemable{
 
 	/**
-	 * Instance cache
-	 */
-	private static Map<Integer, GalionItem> cache = new WeakHashMap<>();
-
-	/**
 	 * Get instance of GalionItem.
 	 *
 	 * @param galions
@@ -37,13 +30,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable{
 	 * @return instance
 	 */
 	public static GalionItem getInstance(int galions) {
-		Integer key = Integer.valueOf(galions);
-		if (cache.containsKey(key)) {
-			return cache.get(key);
-		}
-		GalionItem item = new GalionItem(galions);
-		cache.put(key, item);
-		return item;
+		return new GalionItem(galions);
 	}
 
 	private GalionItem(int galions) {

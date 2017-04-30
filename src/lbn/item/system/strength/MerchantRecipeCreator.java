@@ -74,8 +74,10 @@ public class MerchantRecipeCreator {
 				StrengthOperator.getItem(item1.clone(), nextLevel));
 
 		//強化できるかどうかの情報をセットする
+		ItemStack cloneItem2 = item2.clone();
+		cloneItem2.setAmount(1);
 		ItemStack recipe2Result = getShowResult(isSufficientMoney, isSufficientMaterial);
-		TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, item2, recipe2Result);
+		TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, cloneItem2, recipe2Result);
 
 		//素材が違っている　かつ　素材が置かれていないなら本来のレシピを表示
 		if (!isSufficientMaterial && ItemStackUtil.isEmpty(item2)) {
