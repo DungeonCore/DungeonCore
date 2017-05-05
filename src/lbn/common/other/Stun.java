@@ -81,7 +81,10 @@ public class Stun {
 	 * @param e
 	 * @return
 	 */
-	public static boolean isStun(LivingEntity e) {
+	public static boolean isStun(Entity e) {
+		if (e == null) {
+			return false;
+		}
 		return stunList.contains(e.getUniqueId());
 	}
 
