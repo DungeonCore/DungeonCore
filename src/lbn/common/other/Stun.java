@@ -62,10 +62,8 @@ public class Stun {
 
 	public static void onDamage(EntityDamageByEntityEvent e) {
 		Entity damager = e.getDamager();
-		if (damager instanceof LivingEntity) {
-			if (isStun((LivingEntity) damager)) {
-				e.setCancelled(true);
-			}
+		if (isStun(damager)) {
+			e.setCancelled(true);
 		}
 	}
 

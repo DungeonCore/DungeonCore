@@ -8,10 +8,8 @@ import lbn.common.dropingEntity.DamageFallingblockForMonsterSkill;
 import lbn.common.particle.ParticleManager;
 import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
-import lbn.dungeoncore.Main;
 import lbn.mob.MobHolder;
 import lbn.mob.customMob.BossMobable;
-import lbn.mob.customMob.SpreadSheetMob;
 import lbn.util.JavaUtil;
 import lbn.util.LivingEntityUtil;
 
@@ -21,7 +19,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class OldNormalMobSkill implements MobSkillInterface{
 
@@ -76,17 +73,12 @@ public class OldNormalMobSkill implements MobSkillInterface{
 		if (mob == null) {
 			return;
 		}
+		executeMobSkill(condtionTarget, mob);
+	}
 
-		if (laterTick == 0) {
-			executeMobSkill(condtionTarget, mob);
-		} else {
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					executeMobSkill(condtionTarget, mob);
-				}
-			}.runTaskLater(Main.plugin, laterTick);
-		}
+	@Override
+	public int getLaterTick() {
+		return laterTick;
 	}
 
 	public void executeMobSkill(Entity condtionTarget, Entity mob) {
@@ -127,7 +119,7 @@ public class OldNormalMobSkill implements MobSkillInterface{
 				}
 				//bossの時, combatプレイヤーでないなら無視
 				if (entity.getType() == EntityType.PLAYER && isBoss) {
-					if (!((BossMobable)MobHolder.getMob(mob)).getCombatPlayer().contains(entity)) {
+					if (!((BossMobable)MobHolder.getMob(mob)).isCombatPlayer((Player)entity)) {
 						continue;
 					}
 				}
@@ -146,7 +138,7 @@ public class OldNormalMobSkill implements MobSkillInterface{
 				}
 				//bossの時, combatプレイヤーでないなら無視
 				if (entity.getType() == EntityType.PLAYER && isBoss) {
-					if (!((BossMobable)MobHolder.getMob(mob)).getCombatPlayer().contains(entity)) {
+					if (!((BossMobable)MobHolder.getMob(mob)).isCombatPlayer((Player)entity)) {
 						continue;
 					}
 				}
@@ -293,7 +285,7 @@ public class OldNormalMobSkill implements MobSkillInterface{
 		if (chainId != null && !chainId.equals(id)) {
 			MobSkillInterface fromId = MobSkillManager.fromId(chainId);
 			if (fromId != null) {
-				SpreadSheetMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+				MobSkillExecutor.executor(mob, condtionTarget, fromId);
 			}
 		}
 	}

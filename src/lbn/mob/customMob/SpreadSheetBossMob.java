@@ -367,4 +367,18 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable{
 			}
 		}
 	}
+
+	@Override
+	public boolean isCombatPlayer(Player player) {
+		TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
+		if (theLowPlayer == null) {
+			return false;
+		}
+
+		if (combatPlayerSet.containsKey(theLowPlayer)) {
+			//攻撃をした時よりも後に死んだらコンバットと認めない
+			return theLowPlayer.getLastDeathTimeMillis() < combatPlayerSet.get(theLowPlayer);
+		}
+		return false;
+	}
 }

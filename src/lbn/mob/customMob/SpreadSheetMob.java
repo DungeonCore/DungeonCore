@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.Set;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
-import lbn.common.other.Stun;
 import lbn.item.customItem.attackitem.AttackDamageValue;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
@@ -16,6 +15,7 @@ import lbn.mob.MobHolder;
 import lbn.mob.MobSpawnerFromCommand;
 import lbn.mob.SummonPlayerManager;
 import lbn.mob.mobskill.MobSkillExcuteConditionType;
+import lbn.mob.mobskill.MobSkillExecutor;
 import lbn.mob.mobskill.MobSkillInterface;
 import lbn.mob.mobskill.MobSkillManager;
 import lbn.player.ExpTable;
@@ -337,35 +337,11 @@ public class SpreadSheetMob extends AbstractMob<Entity>{
 		skillNameSet.add(skillName);
 	}
 
-	static protected Random rnd = new Random();
-
 	public void executeMobSkill(LivingEntity mob, LivingEntity target, MobSkillExcuteConditionType type) {
 		Set<MobSkillInterface> skillList = MobSkillManager.getSkill(skillNameSet, type);
 		for (MobSkillInterface skill : skillList) {
-			MobSkillExecutor(mob, target, skill);
+			MobSkillExecutor.executor(mob, target, skill);
 		}
-	}
-
-
-	public static void MobSkillExecutor(Entity mob, Entity target, MobSkillInterface skill) {
-		System.out.println("1@" + !skill.canUseWhenStun());
-		System.out.println("2@" + Stun.isStun(mob));
-		//スタンなら発動しない
-		if (!skill.canUseWhenStun() && Stun.isStun(mob)) {
-			return;
-		}
-		System.out.println("発動");
-
-		//発動タイミングを調べる
-		if (!skill.getTiming().canExecute(mob)) {
-			return;
-		}
-
-		//確立を調べる
-		if (rnd.nextInt(100) + 1 > skill.excutePercent()) {
-			return;
-		}
-		skill.execute(target, mob);
 	}
 
 	 int money = 10;

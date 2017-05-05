@@ -51,6 +51,10 @@ public class MobSkillInplemention implements MobSkillInterface{
 	protected void executeBefore(Entity target, Entity mob) {
 
 	}
+	@Override
+	public int getLaterTick() {
+		return data.getLaterTick();
+	}
 
 //	DamageFallingblockForMonsterSkill damageFallingblockForMonsterSkill = new DamageFallingblockForMonsterSkill(mob, condtionTarget.getLocation(), getMaterialById(blockId), (byte)data, speed){
 //		ArrayList<Entity> damagedList = new ArrayList<>();
