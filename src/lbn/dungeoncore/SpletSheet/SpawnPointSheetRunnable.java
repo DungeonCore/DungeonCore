@@ -1,5 +1,6 @@
 package lbn.dungeoncore.SpletSheet;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.Future;
 
@@ -106,7 +107,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
       MobSpawnerPointManager.addSpawnPoint(mobSpawnerPoint);
     } catch (Exception e) {
       e.printStackTrace();
-      sendMessage("入力されたデータが不正です。(spawn mob 設定)");
+      sendMessage("入力されたデータが不正です。(spawn mob 設定):" + Arrays.toString(row));
     }
   }
 

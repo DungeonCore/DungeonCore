@@ -10,8 +10,6 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 
 	public MagicStoneOreSheetRunnable(CommandSender sender) {
 		super(sender);
-
-
 	}
 
 	@Override
@@ -21,7 +19,7 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable{
 
 	@Override
 	public String[] getTag() {
-		String[] s={"type","location"};
+		String[] s = {"type","location"};
 		return s;
 	}
 

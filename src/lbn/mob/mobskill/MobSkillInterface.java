@@ -14,4 +14,8 @@ public interface MobSkillInterface {
 	public int excutePercent();
 
 	public void execute(Entity target, Entity mob);
+
+	default public boolean canUseWhenStun() {
+		return false;
+	}
 }

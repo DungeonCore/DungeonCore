@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import lbn.common.event.player.PlayerCustomMobSpawnEvent;
+import lbn.common.other.Stun;
 import lbn.item.customItem.attackitem.AttackDamageValue;
 import lbn.mob.AbstractMob;
 import lbn.mob.LastDamageManager;
@@ -347,6 +348,14 @@ public class SpreadSheetMob extends AbstractMob<Entity>{
 
 
 	public static void MobSkillExecutor(Entity mob, Entity target, MobSkillInterface skill) {
+		System.out.println("1@" + !skill.canUseWhenStun());
+		System.out.println("2@" + Stun.isStun(mob));
+		//スタンなら発動しない
+		if (!skill.canUseWhenStun() && Stun.isStun(mob)) {
+			return;
+		}
+		System.out.println("発動");
+
 		//発動タイミングを調べる
 		if (!skill.getTiming().canExecute(mob)) {
 			return;
