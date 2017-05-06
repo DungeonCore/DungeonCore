@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.slot.table.MagicStoneEditor;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,11 +11,11 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerRightShiftClickEvent extends PlayerEvent{
 	private static final HandlerList handlers = new HandlerList();
 
-	AttackItemStack attackItem;
+	MagicStoneEditor attackItem;
 
 	public PlayerRightShiftClickEvent(Player who, ItemStack item) {
 		super(who);
-		this.attackItem = AttackItemStack.getInstance(item);
+		this.attackItem = MagicStoneEditor.getInstance(item);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PlayerRightShiftClickEvent extends PlayerEvent{
 		return handlers;
 	}
 
-	public AttackItemStack getAttackItem() {
+	public MagicStoneEditor getAttackItem() {
 		return attackItem;
 	}
 

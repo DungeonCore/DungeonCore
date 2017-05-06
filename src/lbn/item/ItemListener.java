@@ -25,7 +25,6 @@ import lbn.item.itemInterface.StrengthChangeItemable;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.CombatSlot;
 import lbn.item.slot.slot.KillSlot;
-import lbn.item.slot.table.SlotSetTableOperation;
 import lbn.mob.LastDamageManager;
 import lbn.mob.LastDamageMethodType;
 import lbn.util.ItemStackUtil;
@@ -45,8 +44,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -178,16 +175,6 @@ public class ItemListener implements Listener{
 		if (customItem != null) {
 			customItem.onPlayerStrengthFinishEvent(event);
 		}
-	}
-
-	@EventHandler
-	public void closeCraftingTable(InventoryCloseEvent e) {
-		SlotSetTableOperation.removeGlass(e);
-	}
-
-	@EventHandler
-	public void inventoryClick (final InventoryClickEvent e) {
-		SlotSetTableOperation.inventoryClick(e);
 	}
 
 	@EventHandler

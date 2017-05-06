@@ -3,7 +3,6 @@ package lbn.item.slot.table;
 import java.util.ArrayList;
 
 import lbn.dungeoncore.LbnRuntimeException;
-import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.SlotType;
 import lbn.item.slot.slot.EmptySlot;
@@ -12,15 +11,26 @@ import lbn.item.slot.slot.UnavailableSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class SlotSetOperator {
-	protected SlotSetOperator(AttackItemStack attackItem,
+	protected SlotSetOperator(MagicStoneEditor attackItem,
 			SlotInterface magicStone) {
 		this.attackItem = attackItem;
 		this.magicStone = magicStone;
 	}
 
-	AttackItemStack attackItem;
+	MagicStoneEditor attackItem;
 	SlotInterface magicStone;
 
+	public MagicStoneEditor getAttackItem() {
+		return attackItem;
+	}
+
+	public SlotInterface getMagicStone() {
+		return magicStone;
+	}
+
+	/**
+	 * スロットに魔法石をセットする
+	 */
 	public void setSlot() {
 		SlotType slotType = magicStone.getSlotType();
 		if (slotType == SlotType.NORMAL) {
@@ -37,6 +47,10 @@ public class SlotSetOperator {
 		attackItem.updateItem();
 	}
 
+	/**
+	 * 魔法石をセットできるかセットする
+	 * @return
+	 */
 	public String check() {
 		ArrayList<SlotInterface> useSlot = attackItem.getUseSlot();
 
@@ -78,12 +92,20 @@ public class SlotSetOperator {
 		return null;
 	}
 
+	/**
+	 * 成功確率
+	 * @return
+	 */
 	public int getSuccessRate() {
-		return ((int)magicStone.getLevel().getSucessPer());
+		return magicStone.getLevel().getSucessPer();
 	}
 
+	/**
+	 * 装着失敗時の処理
+	 * @param cursor
+	 */
 	public void rollback(ItemStack cursor) {
-		AttackItemStack instance = AttackItemStack.getInstance(cursor);
+		MagicStoneEditor instance = MagicStoneEditor.getInstance(cursor);
 		//nullの可能性がある
 		if (instance == null) {
 			new LbnRuntimeException("magic stone is null").printStackTrace();;
@@ -102,30 +124,20 @@ public class SlotSetOperator {
 		instance.updateItem();
 	}
 
+	/**
+	 * 成功時のコメント
+	 * @return
+	 */
 	public String getScuessComment() {
-		 SlotType type = magicStone.getSlotType();
-
-			if (type == SlotType.NORMAL) {
-				return "魔法石の装着に成功しました。";
-			} else if (type == SlotType.ADD_EMPTY) {
-				return "空のスロットの追加に成功しました。";
-			} else if (type== SlotType.REMOVE_UNAVAILABLE) {
-				return "使用不可のスロットを取り除きました。";
-			}
-			return "成功しました";
+		 return magicStone.getSlotType().getSuccessComment();
 	}
 
+	/**
+	 * 失敗時のコメント
+	 * @return
+	 */
 	public String getFailureComment() {
-		SlotType type = magicStone.getSlotType();
-
-		if (type == SlotType.NORMAL) {
-			return "魔法石の装着に失敗しました。";
-		} else if (type == SlotType.ADD_EMPTY) {
-			return "空のスロットの追加に失敗しました。";
-		} else if (type== SlotType.REMOVE_UNAVAILABLE) {
-			return "使用不可のスロットを取り除くのに失敗しました。";
-		}
-		return "失敗しました。";
+		return magicStone.getSlotType().getFailureComment();
 	}
 
 }

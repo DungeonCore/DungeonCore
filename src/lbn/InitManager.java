@@ -66,15 +66,20 @@ public class InitManager {
 	public void reloadSpreadSheet() {
 		SpletSheetCommand.reloadSheet(null, "buff");
 
+		SpletSheetCommand.reloadSheet(null, "particle");
+
+		SpletSheetCommand.reloadSheet(null, "weaponskill");
+
+		MobCommand.reloadAllMob(null);
+
+		MobSkillManager.reloadDataBySystem();
+
 		if (Main.isDebugging()) {
 			DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
 			return;
 		}
-		MobSkillManager.reloadDataBySystem();
 
 		SpletSheetCommand.reloadSheet(null, "weapon");
-
-		SpletSheetCommand.reloadSheet(null, "weaponskill");
 
 		SpletSheetCommand.reloadSheet(null, "armor");
 
@@ -86,11 +91,7 @@ public class InitManager {
 
 		SpletSheetCommand.reloadSheet(null, "item");
 
-		MobCommand.reloadAllMob(null);
-
 		QuestCommand.questReload();
-
-		SpletSheetCommand.reloadSheet(null, "particle");
 
 		SpletSheetCommand.reloadSheet(null, "magicore");
 

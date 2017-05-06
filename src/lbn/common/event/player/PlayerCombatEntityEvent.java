@@ -1,6 +1,6 @@
 package lbn.common.event.player;
 
-import lbn.item.customItem.attackitem.AttackItemStack;
+import lbn.item.slot.table.MagicStoneEditor;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -19,11 +19,11 @@ public class PlayerCombatEntityEvent extends PlayerEvent{
 	LivingEntity entity;
 	double damage;
 
-	AttackItemStack attackItem;
+	MagicStoneEditor attackItem;
 
 	public PlayerCombatEntityEvent(Player who, LivingEntity entity, ItemStack item, double damage) {
 		super(who);
-		this.attackItem = AttackItemStack.getInstance(item);
+		this.attackItem = MagicStoneEditor.getInstance(item);
 		this.damage = damage;
 		this.entity = entity;
 	}
@@ -45,7 +45,7 @@ public class PlayerCombatEntityEvent extends PlayerEvent{
 		this.damage = damage;
 	}
 
-	public AttackItemStack getAttackItem() {
+	public MagicStoneEditor getAttackItem() {
 		return attackItem;
 	}
 

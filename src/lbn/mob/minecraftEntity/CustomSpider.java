@@ -1,7 +1,6 @@
 package lbn.mob.minecraftEntity;
 
 import lbn.mob.customMob.LbnMobTag;
-import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
@@ -11,7 +10,6 @@ import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLeapAtTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
@@ -24,9 +22,9 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>, IRangedEntity{
 	static final LbnMobTag DEFAULT_TAG = new LbnMobTag(EntityType.SPIDER);
@@ -52,10 +50,8 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
 			this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 
-			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+    		//攻撃対象のAIをセットする
+    		AttackAISetter.setTargetAI(this, tag);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -7,8 +7,8 @@ import lbn.common.cooltime.Cooltimable;
 import lbn.common.cooltime.CooltimeManager;
 import lbn.common.event.player.PlayerCombatEntityEvent;
 import lbn.item.customItem.attackitem.AbstractAttackItem;
-import lbn.item.customItem.attackitem.AttackItemStack;
 import lbn.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
+import lbn.item.slot.table.MagicStoneEditor;
 import lbn.player.ItemType;
 import lbn.player.customplayer.MagicPointManager;
 import lbn.util.ItemStackUtil;
@@ -93,7 +93,7 @@ public class WeaponSkillExecutor {
 	 * 攻撃をした時、スキルを発動
 	 */
 	public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
-		AttackItemStack attackItem = e.getAttackItem();
+		MagicStoneEditor attackItem = e.getAttackItem();
 		ItemStack item = attackItem.getItem();
 		Player player = e.getPlayer();
 		AbstractAttackItem customItem = attackItem.getItemInterface();

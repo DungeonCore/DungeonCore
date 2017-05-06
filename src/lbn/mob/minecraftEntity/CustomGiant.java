@@ -1,13 +1,11 @@
 package lbn.mob.minecraftEntity;
 
 import lbn.mob.customMob.LbnMobTag;
-import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -32,11 +30,8 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
 		this.tag = tag;
 		try {
 			AttackAISetter.removeAllAi(this);
-    		//ターゲットAIを設定
-    		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
-    		PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+    		//攻撃対象のAIをセットする
+    		AttackAISetter.setTargetAI(this, tag);
 
     		this.goalSelector.a(0, new PathfinderGoalFloat(this));
     		//戦闘AIをセットする

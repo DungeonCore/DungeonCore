@@ -39,11 +39,11 @@ public class RestVillagerGUI implements MenuSelectorInterface{
 
 		Inventory createInventory = Bukkit.createInventory(null, 3 * 9, TITLE);
 
-		ItemStack item1 = ItemStackUtil.getItem("この街をスポーン地点にする", Material.WOOL,  (byte)5, PRICE + "ガリオンでこの街を", "スポーン地点にします。");
+		ItemStack item1 = ItemStackUtil.getItem(ChatColor.WHITE + "この街をスポーン地点にする", Material.WOOL,  ChatColor.GREEN.toString() + (byte)5, PRICE + "ガリオンでこの街を", "スポーン地点にします。");
 		ItemStackUtil.setNBTTag(item1, "spawn_location", npc.getData());
 		createInventory.setItem(11, item1);
 
-		ItemStack item2 = ItemStackUtil.getItem("画面を閉じる", Material.WOOL,  (byte)14);
+		ItemStack item2 = ItemStackUtil.getItem(ChatColor.WHITE + "画面を閉じる", Material.WOOL,  (byte)14);
 		ItemStackUtil.setNBTTag(item2, "spawn_location", "close");
 		createInventory.setItem(15, item2);
 

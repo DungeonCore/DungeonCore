@@ -2,7 +2,6 @@ package lbn.mob.minecraftEntity;
 
 import lbn.mob.AIType;
 import lbn.mob.customMob.LbnMobTag;
-import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.EntityCreature;
@@ -13,7 +12,6 @@ import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.Items;
 import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -53,10 +51,8 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
 			//AIを初期化する
 			AttackAISetter.removeAllAi(this);
 
-			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
-			PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-			pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-			this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+    		//攻撃対象のAIをセットする
+    		AttackAISetter.setTargetAI(this, tag);
 
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 

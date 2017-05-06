@@ -1,8 +1,6 @@
 package lbn.mob.minecraftEntity;
 
 import lbn.mob.customMob.LbnMobTag;
-import lbn.mob.minecraftEntity.ai.PathfinderGoalHurtByTargetSub;
-import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
@@ -54,11 +52,8 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
     		//全てのAIを取り除く
     		AttackAISetter.removeAllAi(this);
 
-    		//ターゲットAIを設定
-    		this.targetSelector.a(1, new PathfinderGoalHurtByTargetSub(this, true));
-    		PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
-    		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-    		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+    		//攻撃対象のAIをセットする
+    		AttackAISetter.setTargetAI(this, tag);
 
     		this.goalSelector.a(0, new PathfinderGoalFloat(this));
     		//戦闘AIをセットする

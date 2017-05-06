@@ -18,7 +18,7 @@ import lbn.dungeoncore.Main;
 import lbn.item.ItemManager;
 import lbn.item.customItem.armoritem.ArmorBase;
 import lbn.item.itemInterface.ArmorItemable;
-import lbn.item.slot.table.SlotSetTableOperation;
+import lbn.item.slot.table.SlotMerchant;
 import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.mob.AbstractMob;
 import lbn.mob.MobHolder;
@@ -83,7 +83,7 @@ public class CommandViewInfo implements CommandExecutor{
 
 		switch (param) {
 		case "slot":
-			SlotSetTableOperation.openSlotTable(target);
+			new SlotMerchant(target).open();;
 			break;
 		case "cooltime":
 			CooltimeManager.clear();

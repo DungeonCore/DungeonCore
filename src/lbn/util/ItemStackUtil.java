@@ -27,6 +27,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.google.common.base.Joiner;
 
 public class ItemStackUtil {
+	/**
+	 * アイテムの素材を取得する
+	 * @param item
+	 * @return
+	 */
+	public static Material getMaterial(ItemStack item) {
+		if (item == null) {
+			return null;
+		}
+		return item.getType();
+	}
+
 	public static ItemMeta getItemMeta(ItemStack item) {
 		if (item == null) {
 			return null;

@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import lbn.mob.customMob.LbnMobTag;
 import lbn.mob.minecraftEntity.ai.AvoidTargetPredicate;
+import lbn.mob.minecraftEntity.ai.PathfinderGoalHurtByTargetSub;
+import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
 import lbn.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import lbn.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
@@ -146,6 +148,18 @@ public class AttackAISetter {
 		Field field2 = EntityInsentient.class.getDeclaredField("goalSelector");
 		field2.setAccessible(true);
 		field2.set(e, new PathfinderGoalSelector((e.world != null) && (e.world.methodProfiler != null) ? e.world.methodProfiler : null));
+	}
 
+	/**
+	 * 攻撃対象のAIをセットする
+	 * @param entityLiving
+	 * @param tag
+	 */
+	public static void setTargetAI(EntityCreature e, LbnMobTag tag) {
+		//ターゲットAIを設定
+		e.targetSelector.a(1, new PathfinderGoalHurtByTargetSub(e, true));
+		PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(e);
+		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
+		e.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
 	}
 }

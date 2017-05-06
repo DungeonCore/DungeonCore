@@ -2,7 +2,7 @@ package lbn.npc.gui;
 
 import lbn.common.menu.MenuSelectorInterface;
 import lbn.common.menu.MenuSelectorManager;
-import lbn.item.slot.table.SlotSetTableOperation;
+import lbn.item.slot.table.SlotMerchant;
 import lbn.item.system.craft.CraftItemSelectViewer;
 import lbn.item.system.repair.RepairUi;
 import lbn.item.system.strength.StrengthTables;
@@ -95,7 +95,7 @@ public class StrengthMenu implements MenuSelectorInterface{
 			StrengthTables.openStrengthTable(p);
 			break;
 		case "3":
-			SlotSetTableOperation.openSlotTable(p);
+			new SlotMerchant(p).open();
 			break;
 		case "4":
 			String nbtTag = ItemStackUtil.getNBTTag(item, "the_low_villager_id");

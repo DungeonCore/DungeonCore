@@ -1,4 +1,4 @@
-package lbn.item.customItem.attackitem;
+package lbn.item.slot.table;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.List;
 import lbn.item.ItemInterface;
 import lbn.item.ItemManager;
 import lbn.item.SlotManager;
+import lbn.item.customItem.attackitem.AbstractAttackItem;
 import lbn.item.slot.AbstractSlot;
 import lbn.item.slot.SlotInterface;
 import lbn.item.slot.slot.EmptySlot;
@@ -18,13 +19,13 @@ import lbn.util.ItemStackUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-public class AttackItemStack {
+public class MagicStoneEditor {
 	/**
 	 * インスタンスを取得、通常はクラス内からしか呼ばれない
 	 * @param item
 	 * @param itemInterface
 	 */
-	private AttackItemStack(ItemStack item, AbstractAttackItem itemInterface) {
+	private MagicStoneEditor(ItemStack item, AbstractAttackItem itemInterface) {
 		this.item = item;
 		this.itemInterface = itemInterface;
 	}
@@ -32,23 +33,26 @@ public class AttackItemStack {
 	ItemStack item;
 	AbstractAttackItem itemInterface;
 
-	static HashMap<ItemStack, AttackItemStack> cache = new HashMap<ItemStack, AttackItemStack>();
+	static HashMap<ItemStack, MagicStoneEditor> cache = new HashMap<ItemStack, MagicStoneEditor>();
 
 	/**
 	 * ItemStackから武器情報を取得する
 	 * @param item
 	 * @return
 	 */
-	public static AttackItemStack getInstance(ItemStack item) {
+	public static MagicStoneEditor getInstance(ItemStack item) {
 		ItemInterface customItem = ItemManager.getCustomItem(item);
 		if (customItem == null) {
+			System.out.println("aaaaaaaaaa1");
 			return null;
 		}
 		//武器でないならnullを返す
 		if (customItem instanceof AbstractAttackItem) {
-			AttackItemStack attackItemStack = getCache(item);
+			MagicStoneEditor attackItemStack = getCache(item);
+			System.out.println("aaaaaaaaaa2");
 			return attackItemStack;
 		}
+		System.out.println("aaaaaaaaaa3");
 		return null;
 	}
 
@@ -57,12 +61,12 @@ public class AttackItemStack {
 	 * @param item
 	 * @return
 	 */
-	private static AttackItemStack getCache(ItemStack item) {
+	private static MagicStoneEditor getCache(ItemStack item) {
 		//キャッシュがあるならそれを取得
 		if (cache.containsKey(item)) {
 			return cache.get(item);
 		}
-		return new AttackItemStack(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
+		return new MagicStoneEditor(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
 	}
 
 	/**
@@ -82,31 +86,11 @@ public class AttackItemStack {
 	}
 
 	/**
-	 * 武器の強化レベルを取得
-	 * @return
-	 */
-	public int getStrengthLevel() {
-		//すでに強化レベルをセットしたならそれを返す
-		if (strengthLevel != -1) {
-			return strengthLevel;
-		}
-		return StrengthOperator.getLevel(item);
-	}
-
-	/**
 	 * 武器のアイテムタイプを取得
 	 * @return
 	 */
 	public ItemType getItemType() {
 		return itemInterface.getAttackType();
-	}
-
-	/**
-	 * 利用可能レベルを取得
-	 * @return
-	 */
-	public int getAvailableLevel() {
-		return itemInterface.getAvailableLevel();
 	}
 
 	ArrayList<SlotInterface> slotList = null;
