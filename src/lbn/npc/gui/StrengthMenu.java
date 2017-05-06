@@ -48,8 +48,7 @@ public class StrengthMenu implements MenuSelectorInterface{
 
 		//魔法石装着
 		createInventory.setItem(14, getButtonItem("魔法石装着", "3", Material.BEACON,
-				"武器に魔法石を装着します。", "武器と魔法石を置いてください。",
-				"成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
+				"武器に魔法石を装着します。", "武器と魔法石を取引画面に置いてください。"));
 
 		//クラフト
 		ItemStack craftButton = getButtonItem("アイテム製作", "4", Material.WORKBENCH, "作りたいアイテムを", "クリックしてください");
@@ -74,8 +73,7 @@ public class StrengthMenu implements MenuSelectorInterface{
 
 		//魔法石装着
 		createInventory.setItem(15, getButtonItem("魔法石装着", "3", Material.BEACON,
-				"武器に魔法石を装着します。", "武器と魔法石を置いてください。",
-				"成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
+				"武器に魔法石を装着します。", "武器と魔法石を取引画面に置いてください。"));
 
 		p.openInventory(createInventory);
 	}
