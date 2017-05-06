@@ -1,6 +1,7 @@
 package lbn.mob.minecraftEntity;
 
 import lbn.mob.customMob.LbnMobTag;
+import lbn.mob.minecraftEntity.ai.PathfinderGoalHurtByTargetSub;
 import lbn.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import lbn.util.JavaUtil;
 import net.minecraft.server.v1_8_R1.Enchantment;
@@ -11,7 +12,6 @@ import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -26,6 +26,7 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zombie>, IRangedEntity{
     public CustomZombie(org.bukkit.World bukkitWorld, LbnMobTag tag) {
@@ -34,6 +35,11 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 
     public CustomZombie(World world) {
     	this(world, new LbnMobTag(EntityType.ZOMBIE));
+    }
+
+    @Override
+    protected void doTick() {
+    	super.doTick();
     }
 
     LbnMobTag tag;
@@ -49,7 +55,7 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
     		AttackAISetter.removeAllAi(this);
 
     		//ターゲットAIを設定
-    		this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
+    		this.targetSelector.a(1, new PathfinderGoalHurtByTargetSub(this, true));
     		PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(this);
     		pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
     		this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
@@ -239,6 +245,22 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 	}
 
 	@Override
+	public void setGoalTarget(EntityLiving entityliving, TargetReason reason, boolean fireEvent) {
+//		String target = null;
+//		String lastDamager = null;
+//		if (entityliving != null) {
+//			target = entityliving.getName();
+//		}
+//		if (getLastDamager() != null) {
+//			lastDamager = getLastDamager().getName();
+//		}
+//		System.out.println(reason + "@aaaa@" + target + "@" + lastDamager);
+		super.setGoalTarget(entityliving, reason, fireEvent);
+	}
+
+
+
+	@Override
 	public LbnMobTag getMobTag() {
 		return tag;
 	}
@@ -256,6 +278,11 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
 		//指定した距離以上離れていたら殺す
 		spawnCount++;
 		if (spawnCount >= 60) {
+//			if (getLastDamager() != null) {
+//				System.out.println("@" + getLastDamager().getName());
+//			} else {
+//				System.out.println("no damage");
+//			}
 			spawnCount = 0;
 			if (spawnLocation == null) {
 				return;
