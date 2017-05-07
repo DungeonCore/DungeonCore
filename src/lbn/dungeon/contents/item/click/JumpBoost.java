@@ -3,6 +3,7 @@ package lbn.dungeon.contents.item.click;
 import lbn.common.particle.ParticleData;
 import lbn.common.particle.ParticleType;
 import lbn.item.customItem.itemAbstract.RightClickItem;
+import lbn.player.PlayerChecker;
 import lbn.util.LivingEntityUtil;
 import lbn.util.Message;
 
@@ -22,7 +23,7 @@ public class JumpBoost extends RightClickItem{
 
 	@Override
 	protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
-		final Player player = e.getPlayer();
+		Player player = e.getPlayer();
 		Location location = player.getLocation();
 		location.setY(0);
 		Material type = location.getBlock().getType();
@@ -31,6 +32,10 @@ public class JumpBoost extends RightClickItem{
 			return false;
 		}
 
+		//このアイテムは使えません
+		if (PlayerChecker.isNormalPlayer(player)) {
+			return false;
+		}
 
 		player.setVelocity(new Vector(0, 2, 0));
 		player.getWorld().playSound(player.getLocation(), Sound.BAT_LOOP, 1, 3);

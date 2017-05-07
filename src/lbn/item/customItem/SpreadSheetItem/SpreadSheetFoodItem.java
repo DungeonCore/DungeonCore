@@ -14,6 +14,7 @@ import lbn.common.sound.SoundData;
 import lbn.common.sound.SoundManager;
 import lbn.item.customItem.itemAbstract.FoodItem;
 import lbn.item.system.lore.ItemLoreToken;
+import lbn.player.customplayer.MagicPointManager;
 import lbn.player.status.StatusAddReason;
 import lbn.util.ItemStackUtil;
 
@@ -76,6 +77,13 @@ public class SpreadSheetFoodItem extends FoodItem{
 				}
 			}
 		}
+
+		//MPを回復させる
+		if (data.getRecoveryMp() > 0) {
+			MagicPointManager.addMagicPoint(player, data.getRecoveryMp());
+		} else if (data.getRecoveryMp() < 0) {
+			MagicPointManager.consumeMagicPoint(player, data.getRecoveryMp());
+		}
 	}
 
 	@Override
@@ -132,6 +140,20 @@ public class SpreadSheetFoodItem extends FoodItem{
 		if (buff3 != null && (int)(buff3.getTick() / 20.0) > 0) {
 			loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getPotionEffectType().getName(), (buff3.getLevel() + 1), (int)(buff3.getTick() / 20.0)));
 		}
+
+		//mp回復
+		if (data.getRecoveryMp() != 0) {
+			loreToken.addLore("MP + " + data.getRecoveryMp());
+		}
+
+		//exp追加
+		for (LevelType levelType : Arrays.asList(LevelType.SWORD, LevelType.BOW, LevelType.MAGIC)) {
+			int exp = data.getExp(levelType);
+			if (exp != 0) {
+				loreToken.addLore(MessageFormat.format("{0} + {1} exp", levelType.getName(), exp));
+			}
+		}
+
 		return loreToken;
 	}
 
