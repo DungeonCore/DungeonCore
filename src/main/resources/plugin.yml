@@ -193,11 +193,6 @@ commands:
       permission:  main.lbnDungeonUtil.command.builder.tpworld
       usage: /<command> player x y z world
       permission-message: You don't have <permission>
-   mobskillexcute:
-      description: モブスキルを実行する
-      permission:  main.lbnDungeonUtil.command.builder.mobskillexcute
-      usage: /<command> mobskillid target
-      permission-message: You don't have <permission>
    announce:
       description: アナウンスする
       permission: main.lbnDungeonUtil.command.message
