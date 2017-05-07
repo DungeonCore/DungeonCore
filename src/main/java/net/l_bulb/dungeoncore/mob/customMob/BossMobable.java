@@ -1,0 +1,25 @@
+package net.l_bulb.dungeoncore.mob.customMob;
+
+import java.util.Set;
+
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.chest.BossChest;
+
+public interface BossMobable {
+  public BossChest getBossChest();
+
+  public LivingEntity getEntity();
+
+  public EntityType getEntityType();
+
+  public void updateName(boolean addDamage);
+
+  public String getName();
+
+  public Set<TheLowPlayer> getCombatPlayer();
+
+  public void setEntity(LivingEntity e);
+}

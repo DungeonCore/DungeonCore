@@ -3,7 +3,6 @@ spigot-1.8.jar
 /.classpath
 /.project
 .settings/
-*.jar
 .idea/.name
 .idea/libraries/Spigot.xml
 .idea/misc.xml
@@ -11,3 +10,4 @@ spigot-1.8.jar
 .idea/vcs.xml
 .idea/workspace.xml
 THE-LoW.iml
+/target/
