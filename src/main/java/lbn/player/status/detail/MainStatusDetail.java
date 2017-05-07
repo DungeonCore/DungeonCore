@@ -1,0 +1,38 @@
+package lbn.player.status.detail;
+
+import org.bukkit.Material;
+
+import lbn.api.LevelType;
+import lbn.api.player.TheLowPlayer;
+import lbn.player.status.IStatusDetail;
+
+public class MainStatusDetail extends IStatusDetail {
+  public MainStatusDetail(TheLowPlayer p) {
+    super(p);
+  }
+
+  @Override
+  public String[] getIndexDetail() {
+    return new String[] { "プレイヤー自身のレベルです" };
+  }
+
+  @Override
+  public String[] getDetailByLevel(int level) {
+    return new String[] {};
+  }
+
+  @Override
+  public String getDisplayName() {
+    return "PLAYER LEVEL";
+  }
+
+  @Override
+  public Material getViewIconMaterial() {
+    return Material.SKULL_ITEM;
+  }
+
+  @Override
+  public LevelType getLevelType() {
+    return LevelType.MAIN;
+  }
+}
