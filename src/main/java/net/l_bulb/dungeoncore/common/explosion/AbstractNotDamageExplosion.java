@@ -5,13 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
-
-import com.google.common.collect.Lists;
-
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.EnchantmentProtection;
@@ -25,6 +18,13 @@ import net.minecraft.server.v1_8_R1.MathHelper;
 import net.minecraft.server.v1_8_R1.PacketPlayOutExplosion;
 import net.minecraft.server.v1_8_R1.Vec3D;
 import net.minecraft.server.v1_8_R1.World;
+
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
+
+import com.google.common.collect.Lists;
 
 public abstract class AbstractNotDamageExplosion extends Explosion {
 
@@ -123,6 +123,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
     int i1 = MathHelper.floor(this.posY + f3 + 1.0D);
     int j1 = MathHelper.floor(this.posZ - f3 - 1.0D);
     int k1 = MathHelper.floor(this.posZ + f3 + 1.0D);
+    @SuppressWarnings("unchecked")
     List<Entity> list = this.world.getEntities(this.source, new AxisAlignedBB(i, l,
         j1, j, i1, k1));
     Vec3D vec3d = new Vec3D(this.posX, this.posY, this.posZ);

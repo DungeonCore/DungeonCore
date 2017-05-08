@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
+import net.l_bulb.dungeoncore.common.other.SystemLog;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
+import net.l_bulb.dungeoncore.util.InOutputUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,10 +22,6 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.reflect.TypeToken;
-
-import net.l_bulb.dungeoncore.common.other.SystemLog;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-import net.l_bulb.dungeoncore.util.InOutputUtil;
 
 public enum WireLessChestManager {
   INSTANCE;
@@ -158,6 +158,7 @@ public enum WireLessChestManager {
         sb.append(string);
       }
       Gson gson = new Gson();
+      @SuppressWarnings("unchecked")
       ArrayList<Double> fromJson = gson.fromJson(sb.toString(), ArrayList.class);
       nowX = (int) (double) fromJson.get(0);
       nowY = (int) (double) fromJson.get(1);

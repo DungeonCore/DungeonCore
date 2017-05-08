@@ -4,14 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityTargetEvent;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
@@ -20,6 +12,14 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
+
+import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityTargetEvent;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget {
   protected final Class<EntityLiving> a;
@@ -82,6 +82,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
     if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) { return false; }
     // double d0 = f();
     double d0 = 16;
+    @SuppressWarnings("unchecked")
     List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0), Predicates.and(this.c, predicateEntity));
 
     Collections.sort(list, this.b);
