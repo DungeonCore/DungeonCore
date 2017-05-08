@@ -1,9 +1,9 @@
 package lbn.player;
 
-import org.bukkit.Material;
-
 import lbn.api.LevelType;
 import lbn.util.ItemStackUtil;
+
+import org.bukkit.Material;
 
 public enum ItemType {
   SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)), BOW(LevelType.BOW,
@@ -11,14 +11,11 @@ public enum ItemType {
 
   private ItemType(LevelType type, double level0MinDamage) {
     this.levelType = type;
-    this.level0MinDamage = level0MinDamage;
   }
 
   private ItemType() {
     this.levelType = LevelType.MAIN;
   }
-
-  double level0MinDamage = 4;
 
   LevelType levelType;
 
@@ -28,7 +25,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最小ダメージ
-   * 
+   *
    * @param level
    * @return
    */
@@ -46,7 +43,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最大ダメージを取得
-   * 
+   *
    * @param availableLevel 利用可能レベル
    * @return
    */
