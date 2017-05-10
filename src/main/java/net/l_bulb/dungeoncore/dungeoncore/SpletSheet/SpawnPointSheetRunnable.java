@@ -4,6 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.Future;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
 import net.l_bulb.dungeoncore.mobspawn.boss.SpredSheetSpawnBossGetter;
@@ -14,12 +20,6 @@ import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-
 public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   public SpawnPointSheetRunnable(CommandSender p) {
@@ -27,7 +27,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
   }
 
   public void addData(MobSpawnerPoint point, String memo) {
-    HashMap<String, Object> map = new HashMap<String, Object>();
+    HashMap<String, Object> map = new HashMap<>();
     map.put("id", point.getId());
     Location location = point.getLocation();
     map.put("world", location.getWorld().getName());

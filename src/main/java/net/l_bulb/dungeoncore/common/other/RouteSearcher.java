@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class RouteSearcher {
   Block start;
@@ -22,7 +22,7 @@ public class RouteSearcher {
     this.p = p;
   }
 
-  ArrayList<Location> soilList = new ArrayList<Location>();
+  ArrayList<Location> soilList = new ArrayList<>();
 
   public void startSearchingPath() {
     searchAndSetSoil(start, null);

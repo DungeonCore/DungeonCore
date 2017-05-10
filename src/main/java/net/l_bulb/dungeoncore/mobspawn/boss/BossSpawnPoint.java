@@ -2,17 +2,17 @@ package net.l_bulb.dungeoncore.mobspawn.boss;
 
 import java.text.MessageFormat;
 
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.point.SpletSheetMobSpawnerPoint;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
+
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
+import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.point.SpletSheetMobSpawnerPoint;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
 

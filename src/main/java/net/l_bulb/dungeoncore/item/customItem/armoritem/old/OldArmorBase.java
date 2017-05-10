@@ -1,11 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.armoritem.old;
 
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.OldArmorItemable;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -16,6 +10,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.itemInterface.OldArmorItemable;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class OldArmorBase {
   public static void onArmor(EntityDamageEvent e) {

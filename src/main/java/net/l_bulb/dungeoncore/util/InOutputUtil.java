@@ -1,40 +1,47 @@
 package net.l_bulb.dungeoncore.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import net.l_bulb.dungeoncore.common.other.SystemLog;
+import lombok.NonNull;
+import lombok.val;
+
+import org.bukkit.Bukkit;
+
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class InOutputUtil {
+
   public final static String dataFolder = Main.dataFolder + File.separator + "data" + File.separator;
 
   /**
-   * データをSerializableする
+   * シリアライズ可能なデータをシリアライズし、対象のファイルに書き出します。
    *
-   * @param serializable
-   * @param fileName
-   * @return
+   * @param serializable シリアライズ可能データ
+   * @param fileName 書き出し先のファイル
+   * @return シリアライズに成功したかどうか。成功した場合はtrue、それ以外の場合はfalse。
    */
-  public static boolean outputStream(Serializable serializable, String fileName) {
+  public static boolean serializeObject(@NonNull Serializable serializable, @NonNull String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
+
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
       oos.writeObject(serializable);
       oos.flush();
@@ -46,15 +53,16 @@ public class InOutputUtil {
   }
 
   /**
-   * ZIPにして保存する
+   * 指定されたファイルを、ZIP圧縮 (Deflateアルゴリズム) して保存します。
    *
-   * @param filePath
-   * @param directory
-   * @return
+   * @param filePath 圧縮する対象のファイル。
+   * @param directory 圧縮されたデータの保存先ディレクトリ
+   * @return 処理に成功したかどうか。成功した場合はtrue、それ以外の場合はfalse。
    */
-  public static boolean compressDirectory(String filePath, String directory) {
-    File baseFile = new File(filePath);
-    File file = new File(directory);
+  public static boolean compressDirectory(@NonNull String filePath, @NonNull String directory) {
+    val baseFile = new File(filePath);
+    val file = new File(directory);
+
     try {
       baseFile.getParentFile().mkdirs();
       baseFile.createNewFile();
@@ -62,7 +70,8 @@ public class InOutputUtil {
       e.printStackTrace();
       return false;
     }
-    try (ZipOutputStream outZip = new ZipOutputStream(new FileOutputStream(baseFile));) {
+
+    try (ZipOutputStream outZip = new ZipOutputStream(new FileOutputStream(baseFile))) {
       archive(outZip, baseFile, file);
     } catch (Exception e) {
       e.printStackTrace();
@@ -71,31 +80,31 @@ public class InOutputUtil {
     return true;
   }
 
+  // FIXME: Javadocを修正する。
   /**
    * ディレクトリ圧縮のための再帰処理
    *
-   * @param outZip ZipOutputStream
-   * @param baseFile File 保存先ファイル
-   * @param file File 圧縮したいファイル
+   * @param outZip 圧縮と書き出しで使用される、ZipOutputStreamのインスタンス。
+   * @param baseFile 保存先ファイル
+   * @param targetDirectory 圧縮したいディレクトリ？ファイル？
    */
-  private static void archive(ZipOutputStream outZip, File baseFile,
-      File targetFile) {
-    if (targetFile.isDirectory()) {
-      File[] files = targetFile.listFiles();
-      for (File f : files) {
-        if (f.isDirectory()) {
-          archive(outZip, baseFile, f);
-        } else {
-          if (!f.getAbsoluteFile().equals(baseFile)) {
-            // 圧縮処理
-            archive(outZip,
-                baseFile,
-                f,
-                f.getAbsolutePath()
-                    .replace(baseFile.getParent(), "")
-                    .substring(1),
-                "Shift_JIS");
-          }
+  private static void archive(@NonNull ZipOutputStream outZip, @NonNull File baseFile, @NonNull File targetDirectory) {
+    if (!targetDirectory.isDirectory()) { return; }
+
+    File[] files = targetDirectory.listFiles();
+    for (File f : files) {
+      if (f.isDirectory()) {
+        archive(outZip, baseFile, f);
+      } else {
+        if (!f.getAbsoluteFile().equals(baseFile)) {
+          // 圧縮処理
+          archive(outZip,
+              baseFile,
+              f,
+              f.getAbsolutePath()
+                  .replace(baseFile.getParent(), "")
+                  .substring(1),
+              "Shift_JIS");
         }
       }
     }
@@ -110,20 +119,16 @@ public class InOutputUtil {
    * @parma entryName 保存ファイル名
    * @param enc 文字コード
    */
-  private static boolean archive(ZipOutputStream outZip, File baseFile,
-      File targetFile, String entryName, String enc) {
-    // 圧縮レベル設定
-    outZip.setLevel(5);
+  private static boolean archive(ZipOutputStream outZip, File baseFile, File targetFile, String entryName, String enc) {
 
-    // // 文字コードを指定
-    // outZip.setEncoding(enc);
-    try {
+    // 圧縮レベル設定
+    outZip.setLevel(Deflater.BEST_SPEED);
+
+    // 圧縮対象ファイルの入力ストリームを作成
+    // (注: 正常にリソースが解放されない可能性を除去。二重バッファリングはNG！)
+    try (FileInputStream in = new FileInputStream(targetFile)) {
       // ZIPエントリ作成
       outZip.putNextEntry(new ZipEntry(entryName));
-
-      // 圧縮ファイル読み込みストリーム取得
-      BufferedInputStream in = new BufferedInputStream(
-          new FileInputStream(targetFile));
 
       // 圧縮ファイルをZIPファイルに出力
       int readSize = 0;
@@ -131,12 +136,12 @@ public class InOutputUtil {
       while ((readSize = in.read(buffer, 0, buffer.length)) != -1) {
         outZip.write(buffer, 0, readSize);
       }
-      // クローズ処理
-      in.close();
+
       // ZIPエントリクローズ
       outZip.closeEntry();
     } catch (Exception e) {
       // ZIP圧縮失敗
+      Bukkit.getLogger().log(Level.SEVERE, "ZIP圧縮 (Deflate) に失敗しました。", e);
       return false;
     }
     return true;
@@ -146,13 +151,13 @@ public class InOutputUtil {
     return write(str, fileName, dataFolder);
   }
 
-  public static boolean write(Collection<String> strList, String fileName) {
+  public static boolean write(Collection<String> strings, String fileName) {
     // ファイルに保存する
     File file = new File(dataFolder + fileName);
     file.getParentFile().mkdirs();
 
     try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-      for (String string : strList) {
+      for (String string : strings) {
         bw.write(string);
         bw.write("\n");
       }
@@ -180,17 +185,16 @@ public class InOutputUtil {
   }
 
   /**
-   * Serializableデータを読み込む
+   * データをデシリアライズする
    *
    * @param fileName
    * @return
    */
-  public static Object inputStream(String fileName) {
+  public static Object deserializeObject(String fileName) {
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(dataFolder + fileName)))) {
       return ois.readObject();
     } catch (FileNotFoundException e) {
-      // DungeonLogger.error(fileName + "ファイルが存在しないので読み込みを無視します");
-      SystemLog.addLog(fileName + "ファイルが存在しないので読み込みを無視します");
+      DungeonLogger.error(fileName + "ファイルが存在しないので読み込みを無視します");
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
@@ -206,25 +210,17 @@ public class InOutputUtil {
    */
   public static ArrayList<String> readFile(String fileName) throws IOException {
     File file = new File(dataFolder + fileName);
-
-    try (BufferedReader br = new BufferedReader(new FileReader(file));) {
-      ArrayList<String> list = new ArrayList<String>();
-      String line = null;
-      while ((line = br.readLine()) != null) {
-        list.add(line);
-      }
-      return list;
-    } catch (FileNotFoundException e) {
+    if (!file.isFile()) {
       DungeonLogger.error(fileName + "ファイルが存在しないので読み込みを無視します");
-    } catch (IOException e) {
-      throw e;
+      return new ArrayList<>();
     }
-    return new ArrayList<>();
+    List<String> result = Files.readAllLines(file.toPath());
+    return result instanceof ArrayList ? (ArrayList<String>) result : new ArrayList<>(result);
   }
 
   /**
    * ファイルを移動する。
-   * 
+   *
    * @param from
    * @param to
    */

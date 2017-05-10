@@ -6,10 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
@@ -21,6 +17,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 import com.google.common.collect.ImmutableList;
 
@@ -45,7 +45,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
   private void spawnAll(Player p) {
     // int i = -1;
     Collection<AbstractMob<?>> allMobs = MobHolder.getAllMobs();
-    ArrayList<AbstractMob<?>> arrayList = new ArrayList<AbstractMob<?>>(allMobs);
+    ArrayList<AbstractMob<?>> arrayList = new ArrayList<>(allMobs);
     Collections.sort(arrayList, new Comparator<AbstractMob<?>>() {
       @Override
       public int compare(AbstractMob<?> o1, AbstractMob<?> o2) {
