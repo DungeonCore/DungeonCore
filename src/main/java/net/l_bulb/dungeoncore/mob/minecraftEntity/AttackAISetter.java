@@ -85,7 +85,8 @@ public class AttackAISetter {
   private static void setShortLongAI(EntityInsentient e, LbnMobTag tag) {
     if (tag.getType() == EntityType.SKELETON) {
       // 遠距離用のAI
-      TheLoWPathfinderGoalArrowAttackForShortLongAI theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton((IRangedEntity) e,
+      TheLoWPathfinderGoalArrowAttackForShortLongAI theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(
+          (IRangedEntity) e,
           1.25D, 20, 20.0F, tag);
       e.goalSelector.a(5, theLoWPathfinderGoalArrowAttack);
       // 近距離攻撃のAI

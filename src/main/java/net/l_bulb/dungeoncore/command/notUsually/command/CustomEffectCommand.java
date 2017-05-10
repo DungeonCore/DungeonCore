@@ -55,7 +55,7 @@ public class CustomEffectCommand extends AbstractVanillaCommand {
     int m = 0;
     if ((i < 0) || (i >= MobEffectList.byId.length)
         || (MobEffectList.byId[i] == null)) { throw new ExceptionInvalidNumber("commands.effect.notFound",
-            new Object[] { Integer.valueOf(i) }); }
+        new Object[] { Integer.valueOf(i) }); }
     MobEffectList localMobEffectList2 = MobEffectList.byId[i];
     if (paramArrayOfString.length >= 3) {
       k = a(paramArrayOfString[2], 0, 1000000);

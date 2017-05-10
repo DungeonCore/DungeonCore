@@ -302,7 +302,7 @@ public class QuestManager {
   public static enum QuestStartStatus {
     CAN_START(true, true), UNKNOW_QUEST("クエストが存在しません", false, false), DOING_NOW("同じクエストを同時に受けることはできません", false, false), RECEIVE_COUNT_MAXIMUM(
         "クエスト数が上限に達しました。どれかを破棄してください。", false, true), REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true), LACK_AVAILAVLE_MAIN_LEVEL(
-            "メインレベルが足りません", false, true), CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true), LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
+        "メインレベルが足りません", false, true), CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true), LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
 
     String errorMessage = null;
     boolean canStart;

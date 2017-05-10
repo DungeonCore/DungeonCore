@@ -38,13 +38,9 @@ public enum BuffType {
   String jpname;
 
   public static BuffType getDebuffType(String jpname) {
-    if (jpname == null || jpname.isEmpty()) {
-      return null;
-    }
+    if (jpname == null || jpname.isEmpty()) { return null; }
     for (BuffType debuff : values()) {
-      if (debuff.jpname.equals(jpname)) {
-        return debuff;
-      }
+      if (debuff.jpname.equals(jpname)) { return debuff; }
     }
     return null;
   }

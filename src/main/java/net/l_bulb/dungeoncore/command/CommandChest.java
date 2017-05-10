@@ -28,6 +28,7 @@ import net.l_bulb.dungeoncore.chest.CustomChestManager;
 import net.l_bulb.dungeoncore.chest.EachPlayerContentChest;
 import net.l_bulb.dungeoncore.chest.SpletSheetChest;
 import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ChestSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 
@@ -190,8 +191,8 @@ public class CommandChest implements CommandExecutor, TabCompleter {
     chestClickMap.remove(p);
     if (CustomChestManager.containts(chestLoc)) {
       HashMap<String, Object> hashMap = new HashMap<>();
-      hashMap.put("contentlocation", ChestSheetRunnable.getLocationString(contentsLoc));
-      chestSheetRunable.updateData(hashMap, "chestlocation=\"" + ChestSheetRunnable.getLocationString(chestLoc) + "\"");
+      hashMap.put("contentlocation", AbstractComplexSheetRunable.getLocationString(contentsLoc));
+      chestSheetRunable.updateData(hashMap, "chestlocation=\"" + AbstractComplexSheetRunable.getLocationString(chestLoc) + "\"");
     } else {
       SpletSheetChest chest;
       if (allPlayerSameFlg) {

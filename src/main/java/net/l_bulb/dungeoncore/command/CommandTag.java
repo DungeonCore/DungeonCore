@@ -14,15 +14,15 @@ public class CommandTag implements CommandExecutor {
     if (args.length == 0) {
       sender.sendMessage(
           DARK_GREEN + "■■================================================■■\n"
-          + AQUA + "/tag list\n"
-          + BOLD + "    タグの一覧を表示します\n"
-          + ""
-          + AQUA + "/tag settag <tag> <Player>\n"
-          + BOLD + "    タグをセットします\n"
-          + ""
-          + AQUA + "/tag removetag <Player>\n"
-          + BOLD + "    プレイヤーのタグを消します\n"
-          + DARK_GREEN + "■■================================================■■");
+              + AQUA + "/tag list\n"
+              + BOLD + "    タグの一覧を表示します\n"
+              + ""
+              + AQUA + "/tag settag <tag> <Player>\n"
+              + BOLD + "    タグをセットします\n"
+              + ""
+              + AQUA + "/tag removetag <Player>\n"
+              + BOLD + "    プレイヤーのタグを消します\n"
+              + DARK_GREEN + "■■================================================■■");
       return true;
     }
     Player online = Bukkit.getPlayerExact(args[0]);
@@ -30,7 +30,7 @@ public class CommandTag implements CommandExecutor {
       sender.sendMessage(RED + "Player" + args[0] + "はOfflineです。");
       return true;
     }
-    //TODO: 実装
+    // TODO: 実装
     return true;
   }
 

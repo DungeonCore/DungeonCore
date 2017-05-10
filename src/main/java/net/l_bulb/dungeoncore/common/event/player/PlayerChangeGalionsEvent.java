@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
+
 @Getter
 @Setter
 public class PlayerChangeGalionsEvent extends TheLowPlayerEvent {

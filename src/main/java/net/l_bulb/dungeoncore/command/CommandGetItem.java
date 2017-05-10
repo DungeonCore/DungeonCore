@@ -243,7 +243,7 @@ public class CommandGetItem implements CommandExecutor {
 
           if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel()
               .getSucessPer()) { return Double.compare(((SlotInterface) o2).getLevel().getSucessPer(),
-                  ((SlotInterface) o1).getLevel().getSucessPer()); }
+              ((SlotInterface) o1).getLevel().getSucessPer()); }
         }
 
         return o1.getId().compareTo(o2.getId());

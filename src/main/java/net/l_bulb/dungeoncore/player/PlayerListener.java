@@ -111,16 +111,12 @@ public class PlayerListener implements Listener {
     // お金の計算
     LivingEntity entity = e.getEntity();
     // コウモリの場合はお金を加算しない
-    if (entity.getType() == EntityType.BAT) {
-      return;
-    }
+    if (entity.getType() == EntityType.BAT) { return; }
 
     // 最後に攻撃をしたPlayerを取得
     Player p = LastDamageManager.getLastDamagePlayer(entity);
     AbstractMob<?> mob = MobHolder.getMob(entity);
-    if (mob == null || p == null) {
-      return;
-    }
+    if (mob == null || p == null) { return; }
     int dropGalions = mob.getDropGalions();
 
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
@@ -137,9 +133,7 @@ public class PlayerListener implements Listener {
   @EventHandler(priority = EventPriority.MONITOR)
   public void onGetExp(PlayerChangeStatusExpEvent event) {
     OfflinePlayer player = event.getPlayer();
-    if (!(player instanceof Player)) {
-      return;
-    }
+    if (!(player instanceof Player)) { return; }
 
     if (event.getReason().isPrintMessageLog()) {
       Message.sendMessage((Player) player, ChatColor.AQUA + "{0} + {1}exp", event.getLevelType().getName(),
@@ -275,17 +269,17 @@ public class PlayerListener implements Listener {
       public void run() {
         ItemStack item = e.getItem();
         switch (item.getType()) {
-        case POTION:
-          e.getPlayer().getInventory().remove(new ItemStack(Material.GLASS_BOTTLE));
-          break;
-        case MILK_BUCKET:
-          e.getPlayer().getInventory().remove(new ItemStack(Material.BUCKET));
-          break;
-        case MUSHROOM_SOUP:
-          e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
-          break;
-        default:
-          break;
+          case POTION:
+            e.getPlayer().getInventory().remove(new ItemStack(Material.GLASS_BOTTLE));
+            break;
+          case MILK_BUCKET:
+            e.getPlayer().getInventory().remove(new ItemStack(Material.BUCKET));
+            break;
+          case MUSHROOM_SOUP:
+            e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
+            break;
+          default:
+            break;
         }
       }
     }.runTaskLater(Main.plugin, 1);
@@ -361,9 +355,7 @@ public class PlayerListener implements Listener {
   @EventHandler
   public void onReincarnation(PlayerCompleteReincarnationEvent e) {
     Player player = e.getPlayer();
-    if (player == null) {
-      return;
-    }
+    if (player == null) { return; }
 
     // 花火を表示
     Firework spawn = player.getWorld().spawn(player.getLocation().add(0, 2, 0), Firework.class);
@@ -408,9 +400,7 @@ public class PlayerListener implements Listener {
     LastDamageMethodType type = LastDamageManager.getLastDamageAttackType(entity);
 
     // 倒したのがSummonの時はExpを与えない
-    if (SummonPlayerManager.isSummonMob(entity)) {
-      return;
-    }
+    if (SummonPlayerManager.isSummonMob(entity)) { return; }
 
     // 攻撃方法が不明な時はEventから取得
     if (p == null || type == null) {
@@ -421,20 +411,16 @@ public class PlayerListener implements Listener {
         type = LastDamageManager.getLastDamageAttackType(entity);
       }
       // ここでも取得出来ない場合は無視する
-      if (p == null || type == null) {
-        return;
-      }
+      if (p == null || type == null) { return; }
       // Logを出しておく
       new RuntimeException(
           MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName()))
-              .printStackTrace();
+          .printStackTrace();
     }
 
     // データがロードされていないなら無視する
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-    if (theLowPlayer == null) {
-      return;
-    }
+    if (theLowPlayer == null) { return; }
 
     // mobを取得
     AbstractMob<?> mob = MobHolder.getMob(entity);
@@ -521,9 +507,7 @@ public class PlayerListener implements Listener {
 
   public static void updateSidebar(Player p) {
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
-    if (theLowPlayer == null) {
-      return;
-    }
+    if (theLowPlayer == null) { return; }
 
     Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
     Objective objective = board.registerNewObjective(ChatColor.GREEN + "player_status", "dummy");

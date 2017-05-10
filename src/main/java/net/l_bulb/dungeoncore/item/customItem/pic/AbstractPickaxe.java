@@ -189,8 +189,10 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   @Override
   protected ItemStack getItemStackBase() {
-    return ItemStackUtil.getItemStackByCommand("/give @p minecraft:" + getGiveItemId()
-        + " 1 0 {Unbreakable:1,HideFlags:8,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\",\"minecraft:redstone_ore\",\"minecraft:gold_ore\",\"minecraft:diamond_ore\", \"minecraft:lit_redstone_ore\"]}");
+    return ItemStackUtil
+        .getItemStackByCommand("/give @p minecraft:"
+            + getGiveItemId()
+            + " 1 0 {Unbreakable:1,HideFlags:8,CanDestroy:[\"minecraft:coal_ore\",\"minecraft:iron_ore\",\"minecraft:lapis_ore\",\"minecraft:redstone_ore\",\"minecraft:gold_ore\",\"minecraft:diamond_ore\", \"minecraft:lit_redstone_ore\"]}");
   }
 
   /**

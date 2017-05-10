@@ -32,8 +32,8 @@ public class MerchantRecipeListImplemention extends MerchantRecipeList {
       if (ItemStack.c(paramItemStack1, localMerchantRecipe2.getBuyItem1())
           && paramItemStack1.count >= localMerchantRecipe2.getBuyItem1().count
           && ((!localMerchantRecipe2.hasSecondItem()) && (paramItemStack2 == null) ||
-              (localMerchantRecipe2.hasSecondItem() && ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2())
-                  && (paramItemStack2.count >= localMerchantRecipe2.getBuyItem2().count)))) {
+          (localMerchantRecipe2.hasSecondItem() && ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2())
+          && (paramItemStack2.count >= localMerchantRecipe2.getBuyItem2().count)))) {
         TheLowMerchantRecipe recipe = new TheLowMerchantRecipe(localMerchantRecipe2);
         recipe = merchant.getShowResult(recipe);
         if (recipe != null) {

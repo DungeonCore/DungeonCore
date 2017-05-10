@@ -44,8 +44,6 @@ public class BookData {
 
   ArrayList<String> contents = new ArrayList<>();
 
-
-
   public ItemStack getItem() {
     return item;
   }

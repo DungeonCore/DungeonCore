@@ -243,15 +243,15 @@ public class MobSpawnerFromCommand {
   // Entity localObject1_1 = EntityTypes.a(localNBTTagCompound1, world);
   // if (localObject1_1 != null) {
   // //spawn
-  //// ((Entity) localObject1_1).setPositionRotation(d1, d2, d3,
-  //// ((Entity) localObject1_1).yaw,
-  //// ((Entity) localObject1_1).pitch);
+  // // ((Entity) localObject1_1).setPositionRotation(d1, d2, d3,
+  // // ((Entity) localObject1_1).yaw,
+  // // ((Entity) localObject1_1).pitch);
   // if (i == 0) {
   // if ((localObject1_1 instanceof EntityInsentient)) {
   // ((EntityInsentient) localObject1_1).prepare(null);
   // }
   // }
-  //// localWorld.addEntity((Entity) localObject1_1);
+  // // localWorld.addEntity((Entity) localObject1_1);
   //
   // Entity localObject2 = localObject1_1;
   // NBTTagCompound localNBTTagCompound2 = localNBTTagCompound1;
@@ -262,10 +262,10 @@ public class MobSpawnerFromCommand {
   // world);
   // if (localEntity != null) {
   // //spawn
-  //// localEntity.setPositionRotation(d1, d2, d3,
-  //// localEntity.yaw, localEntity.pitch);
-  //// localWorld.addEntity(localEntity);
-  //// localObject2.mount(localEntity);
+  // // localEntity.setPositionRotation(d1, d2, d3,
+  // // localEntity.yaw, localEntity.pitch);
+  // // localWorld.addEntity(localEntity);
+  // // localObject2.mount(localEntity);
   // }
   // localObject2 = localEntity;
   // localNBTTagCompound2 = localNBTTagCompound2

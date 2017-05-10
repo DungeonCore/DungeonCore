@@ -68,6 +68,7 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
   }
 
   protected void n() {}
+
   // public CustomGiant(World arg0) {
   // super(arg0);
   // ((Navigation) getNavigation()).b(true);
@@ -85,24 +86,24 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
   // }
   //
   // protected void n() {
-  //// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-  //// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-  //// EntityVillager.class, 1.0D, true));
-  //// }
-  //// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-  //// EntityIronGolem.class, 1.0D, true));
-  //// this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
-  //// false));
+  // // if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+  // // this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+  // // EntityVillager.class, 1.0D, true));
+  // // }
+  // // this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+  // // EntityIronGolem.class, 1.0D, true));
+  // // this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
+  // // false));
   // this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true,
   // new Class[] { EntityPigZombie.class }));
   // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
   // this, EntityHuman.class, true));
-  //// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-  //// this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
-  //// this, EntityVillager.class, false));
-  //// }
-  //// this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
-  //// this, EntityIronGolem.class, true));
+  // // if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+  // // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+  // // this, EntityVillager.class, false));
+  // // }
+  // // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+  // // this, EntityIronGolem.class, true));
   // }
 
   @Override

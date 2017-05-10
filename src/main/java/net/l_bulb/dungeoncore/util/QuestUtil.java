@@ -41,16 +41,17 @@ public class QuestUtil {
     }
 
     ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-    String command = MessageFormat.format(
-        "tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
-        p.getName(),
-        "クエストクリア!!!  ",
-        npc.getName(),
-        npc.getEntityType(),
-        loc,
-        "のところに戻ろう",
-        QuestAnnouncement.QUEST_INFO_PREFIX,
-        "{");
+    String command = MessageFormat
+        .format(
+            "tellraw {0} [\"\",{7}\"text\":\"{6}{1}\"},{7}\"text\":\"{2}\",\"hoverEvent\":{7}\"action\":\"show_text\",\"value\":\"Type : {3} ,Location : {4}\"}},{7}\"text\":\"{5}\"}]",
+            p.getName(),
+            "クエストクリア!!!  ",
+            npc.getName(),
+            npc.getEntityType(),
+            loc,
+            "のところに戻ろう",
+            QuestAnnouncement.QUEST_INFO_PREFIX,
+            "{");
     Bukkit.dispatchCommand(consoleSender, command);
   }
 
