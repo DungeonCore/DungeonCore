@@ -6,12 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetBossMob;
-import net.l_bulb.dungeoncore.player.customplayer.PlayerChestTpManager;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -24,6 +18,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetBossMob;
+import net.l_bulb.dungeoncore.player.customplayer.PlayerChestTpManager;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public abstract class SpletSheetChest extends AbstractCustomChest {
 
@@ -134,7 +134,7 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
 
     Random rnd = new Random();
 
-    ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+    ArrayList<ItemStack> list = new ArrayList<>();
 
     for (ItemStack itemStack : blockInventory) {
       if (itemStack == null || itemStack.getType() == Material.AIR) {
