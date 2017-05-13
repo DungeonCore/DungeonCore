@@ -15,6 +15,7 @@ import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
+
 import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
 
 public class NpcListener implements Listener {

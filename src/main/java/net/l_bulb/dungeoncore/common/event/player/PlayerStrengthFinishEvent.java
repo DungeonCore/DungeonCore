@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
+import lombok.Getter;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lombok.Getter;
 
 /**
  * Playerが強化を完了した瞬間

@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
+import lombok.Getter;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-
-import lombok.Getter;
 
 @Getter
 public class PlayerCustomMobSpawnEvent extends CreatureSpawnEvent {

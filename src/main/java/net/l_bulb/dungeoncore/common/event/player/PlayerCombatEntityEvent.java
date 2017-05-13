@@ -1,5 +1,8 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -7,8 +10,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
 /**

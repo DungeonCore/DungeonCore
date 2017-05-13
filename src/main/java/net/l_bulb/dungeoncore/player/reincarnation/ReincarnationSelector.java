@@ -18,6 +18,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class ReincarnationSelector implements MenuSelectorInterface {

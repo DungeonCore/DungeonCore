@@ -2,11 +2,12 @@ package net.l_bulb.dungeoncore.dungeoncore;
 
 import java.util.Collection;
 
+import lombok.val;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import lombok.val;
 import net.l_bulb.dungeoncore.InitManager;
 import net.l_bulb.dungeoncore.LimitedListener;
 import net.l_bulb.dungeoncore.RecipeRegister;
@@ -45,6 +46,7 @@ import net.l_bulb.dungeoncore.quest.QuestListener;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.NMSUtils;
+
 import net.minecraft.server.v1_8_R1.AttributeRanged;
 import net.minecraft.server.v1_8_R1.EntityBat;
 import net.minecraft.server.v1_8_R1.EntityChicken;

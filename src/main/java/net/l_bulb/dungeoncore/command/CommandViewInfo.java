@@ -26,8 +26,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.google.common.collect.HashMultimap;
-
 import net.l_bulb.dungeoncore.common.buff.BuffData;
 import net.l_bulb.dungeoncore.common.buff.BuffDataFactory;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
@@ -48,6 +46,8 @@ import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.util.InOutputUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
+
+import com.google.common.collect.HashMultimap;
 
 public class CommandViewInfo implements CommandExecutor {
   @Override

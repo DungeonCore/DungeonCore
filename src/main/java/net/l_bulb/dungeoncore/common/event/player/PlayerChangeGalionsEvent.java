@@ -1,9 +1,10 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import org.bukkit.event.HandlerList;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import org.bukkit.event.HandlerList;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 

@@ -8,8 +8,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 
-import com.google.common.collect.HashMultimap;
-
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem;
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem2;
 import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot;
@@ -18,6 +16,8 @@ import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
+
+import com.google.common.collect.HashMultimap;
 
 public class SlotManager {
   static HashMap<String, String> idNameMap = new HashMap<>();

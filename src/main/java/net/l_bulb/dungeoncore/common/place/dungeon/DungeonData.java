@@ -3,14 +3,14 @@ package net.l_bulb.dungeoncore.common.place.dungeon;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
-
 import net.l_bulb.dungeoncore.common.place.HolographicDisplaysManager;
 import net.l_bulb.dungeoncore.common.place.PlaceBean;
 import net.l_bulb.dungeoncore.common.place.PlaceInterface;
 import net.l_bulb.dungeoncore.common.place.PlaceType;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 
 public class DungeonData implements PlaceInterface {
 

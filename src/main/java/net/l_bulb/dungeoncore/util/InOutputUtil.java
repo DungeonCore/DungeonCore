@@ -19,10 +19,11 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.bukkit.Bukkit;
-
 import lombok.NonNull;
 import lombok.val;
+
+import org.bukkit.Bukkit;
+
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class InOutputUtil {

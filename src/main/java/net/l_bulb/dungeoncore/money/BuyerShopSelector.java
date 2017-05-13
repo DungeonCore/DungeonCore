@@ -2,11 +2,6 @@ package net.l_bulb.dungeoncore.money;
 
 import java.text.MessageFormat;
 
-import net.l_bulb.dungeoncore.money.buyer.Buyer;
-import net.l_bulb.dungeoncore.money.shop.CustomShop;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +10,12 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.money.buyer.Buyer;
+import net.l_bulb.dungeoncore.money.shop.CustomShop;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class BuyerShopSelector {
   private static final String SHOP_MENU = ChatColor.WHITE + "- Shop - ";

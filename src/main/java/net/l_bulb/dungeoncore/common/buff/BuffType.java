@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.common.buff;
 
-import org.bukkit.potion.PotionEffectType;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import org.bukkit.potion.PotionEffectType;
 
 @Getter
 @AllArgsConstructor

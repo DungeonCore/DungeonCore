@@ -19,12 +19,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.google.common.base.Joiner;
-
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
+
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
+
+import com.google.common.base.Joiner;
 
 public class ItemStackUtil {
   public static ItemMeta getItemMeta(ItemStack item) {

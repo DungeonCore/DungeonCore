@@ -20,8 +20,6 @@ import org.bukkit.material.Chest;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.StringUtil;
 
-import com.google.common.collect.ImmutableList;
-
 import net.l_bulb.dungeoncore.chest.AllPlayerSameContentChest;
 import net.l_bulb.dungeoncore.chest.ChestLocationManager;
 import net.l_bulb.dungeoncore.chest.CustomChestManager;
@@ -31,6 +29,8 @@ import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ChestSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
+
+import com.google.common.collect.ImmutableList;
 
 public class CommandChest implements CommandExecutor, TabCompleter {
 

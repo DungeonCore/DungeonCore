@@ -8,10 +8,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.common.other.SystemLog;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-import net.l_bulb.dungeoncore.util.InOutputUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +15,10 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.common.other.SystemLog;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
+import net.l_bulb.dungeoncore.util.InOutputUtil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.reflect.TypeToken;

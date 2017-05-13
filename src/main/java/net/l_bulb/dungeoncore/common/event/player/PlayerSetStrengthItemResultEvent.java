@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 強化完成形のアイテムがRESULT欄に表示される瞬間

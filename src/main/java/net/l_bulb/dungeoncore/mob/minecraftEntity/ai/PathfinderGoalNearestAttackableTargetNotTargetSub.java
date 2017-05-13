@@ -4,7 +4,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityTargetEvent;
+
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityCreature;
@@ -12,11 +18,6 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
-
-import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;

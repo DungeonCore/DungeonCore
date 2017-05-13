@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerEvent;
 
 import net.l_bulb.dungeoncore.common.event.player.PlayerLoadedDataEvent;
 import net.l_bulb.dungeoncore.player.customplayer.CustomPlayer;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class TheLowPlayerManager {

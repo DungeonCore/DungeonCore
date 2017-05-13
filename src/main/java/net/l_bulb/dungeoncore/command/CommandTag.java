@@ -1,6 +1,9 @@
 package net.l_bulb.dungeoncore.command;
 
-import static org.bukkit.ChatColor.*;
+import static org.bukkit.ChatColor.AQUA;
+import static org.bukkit.ChatColor.BOLD;
+import static org.bukkit.ChatColor.DARK_GREEN;
+import static org.bukkit.ChatColor.RED;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

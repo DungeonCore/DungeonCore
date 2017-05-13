@@ -1,7 +1,7 @@
 package net.l_bulb.dungeoncore.command;
 
-import static java.lang.String.*;
-import static net.l_bulb.dungeoncore.api.other.Announcement.*;
+import static java.lang.String.join;
+import static net.l_bulb.dungeoncore.api.other.Announcement.announce;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

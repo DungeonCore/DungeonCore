@@ -2,11 +2,12 @@ package net.l_bulb.dungeoncore.common.book;
 
 import java.util.ArrayList;
 
+import lombok.Getter;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import lombok.Getter;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class BookData {

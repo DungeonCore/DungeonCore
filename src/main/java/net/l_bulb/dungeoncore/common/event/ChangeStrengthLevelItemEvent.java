@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.common.event;
 
+import lombok.Getter;
+
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
-
-import lombok.Getter;
 
 /**
  * 強化完了時のLoreが変更される瞬間に呼ばれるイベント(失敗か成功かは問わない)

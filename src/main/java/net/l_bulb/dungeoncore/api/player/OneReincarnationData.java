@@ -23,7 +23,7 @@ public class OneReincarnationData {
 
   /**
    * 転生効果を取得
-   * 
+   *
    * @return
    */
   public ReincarnationInterface getReincarnationInterface() {
@@ -32,7 +32,7 @@ public class OneReincarnationData {
 
   /**
    * このレベルタイプで何回目の転生かを取得
-   * 
+   *
    * @return
    */
   public int getCount() {
@@ -41,7 +41,7 @@ public class OneReincarnationData {
 
   /**
    * なんのレベルタイプで転生したかを取得
-   * 
+   *
    * @return
    */
   public LevelType getLevelType() {

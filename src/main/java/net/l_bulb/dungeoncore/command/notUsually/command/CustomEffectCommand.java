@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.command.notUsually.command;
 import java.util.HashMap;
 
 import net.l_bulb.dungeoncore.command.notUsually.AbstractVanillaCommand;
+
 import net.minecraft.server.v1_8_R1.ChatMessage;
 import net.minecraft.server.v1_8_R1.CommandEffect;
 import net.minecraft.server.v1_8_R1.CommandException;

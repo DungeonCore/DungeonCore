@@ -31,6 +31,7 @@ import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomVillager;
 import net.l_bulb.dungeoncore.npc.NpcManager;
+
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityLightning;
 import net.minecraft.server.v1_8_R1.EntityMonster;

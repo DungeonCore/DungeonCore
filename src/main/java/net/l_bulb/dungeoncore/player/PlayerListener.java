@@ -37,8 +37,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer.CheckIntegrityLevel;
@@ -75,6 +73,8 @@ import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 import net.l_bulb.dungeoncore.util.Message;
 import net.l_bulb.dungeoncore.util.TitleSender;
+
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
 
 public class PlayerListener implements Listener {
 

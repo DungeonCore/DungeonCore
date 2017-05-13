@@ -19,6 +19,7 @@ import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.Age;
 import net.citizensnpcs.trait.ZombieModifier;
+
 import net.l_bulb.dungeoncore.money.BuyerShopSelector;
 import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
 import net.l_bulb.dungeoncore.npc.NpcManager;

@@ -17,6 +17,7 @@ import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.trait.LookClose;
+
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import net.l_bulb.dungeoncore.npc.citizens.RemoveNearNpcOnSpawnTrait;
