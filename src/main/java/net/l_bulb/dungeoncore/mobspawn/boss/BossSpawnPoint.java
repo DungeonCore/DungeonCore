@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.mobspawn.boss;
 
+import java.text.MessageFormat;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -51,9 +53,11 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
     }
 
     // スポーンの周りを調べる
-    if (existMobInNear()) {
+    Entity existMobInNear = existMobInNear();
+    if (existMobInNear != null) {
       nextSpawn = false;
-      cancelReson = "occure mob is alive yet error. mob is exist yet!!";
+      cancelReson = MessageFormat.format("mob is alive yet error.({0},{1},{2}) mob is exist yet!!", existMobInNear.getLocation().getBlockX(),
+          existMobInNear.getLocation().getBlockY(), existMobInNear.getLocation().getBlockZ());
       return 0;
     }
 
@@ -74,7 +78,7 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
     return 1;
   }
 
-  private boolean existMobInNear() {
+  private Entity existMobInNear() {
     ExperienceOrb spawn = spawnPointLoc.getWorld().spawn(spawnPointLoc, ExperienceOrb.class);
     for (Entity livingEntity : spawn.getNearbyEntities(60, 20, 60)) {
       if (!boss.getEntityType().equals(livingEntity.getType())) {
@@ -99,11 +103,11 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
               boss.getName() + "が存在してるのにも関わらず、システムはボスモンスターを再召喚しようとしました。 entity is dead:" + boss.getEntity().isDead());
         }
         spawn.remove();
-        return true;
+        return livingEntity;
       }
     }
     spawn.remove();
-    return false;
+    return null;
   }
 
   public boolean isAliveEntity(LivingEntity entity) {
@@ -113,7 +117,7 @@ public class BossSpawnPoint extends SpletSheetMobSpawnerPoint {
       return false;
     }
 
-    if (entity.isDead()) {
+    if (!entity.isValid()) {
       // DungeonLog.printDevelopln(boss.getName() + " is dead!!");
       return false;
     }

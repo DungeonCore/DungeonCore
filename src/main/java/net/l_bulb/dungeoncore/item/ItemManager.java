@@ -18,6 +18,7 @@ import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollWeapon;
 import net.l_bulb.dungeoncore.item.customItem.pic.DiamondPickaxe;
 import net.l_bulb.dungeoncore.item.customItem.pic.GoldPickaxe;
 import net.l_bulb.dungeoncore.item.customItem.pic.IronPickaxe;
+import net.l_bulb.dungeoncore.item.customItem.pic.MagicOreRegistPic;
 import net.l_bulb.dungeoncore.item.customItem.pic.StonePickaxe;
 import net.l_bulb.dungeoncore.item.customItem.pic.WoodPickAxe;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
@@ -41,7 +42,7 @@ public class ItemManager {
 
   /**
    * itemを登録する
-   * 
+   *
    * @param item
    */
   public static void registItem(ItemInterface item) {
@@ -78,7 +79,7 @@ public class ItemManager {
 
   /**
    * 全てのアイテムを取得する
-   * 
+   *
    * @return
    */
   public static List<ItemInterface> getAllItem() {
@@ -87,7 +88,7 @@ public class ItemManager {
 
   /**
    * 全てのアイテム名を取得する
-   * 
+   *
    * @return
    */
   public static Set<String> getAllItemName() {
@@ -96,7 +97,7 @@ public class ItemManager {
 
   /**
    * clazz, itemに対応したアイテムを取得する
-   * 
+   *
    * @param clazz
    * @param item
    * @return
@@ -140,7 +141,7 @@ public class ItemManager {
 
   /**
    * 指定したItemが指定したInterfaceを実装しているかどうかを調べる。(instanceOfの高速版)
-   * 
+   *
    * @param clazz
    * @param item
    * @return
@@ -193,7 +194,7 @@ public class ItemManager {
 
   /**
    * 同じCustomItemならTRUE
-   * 
+   *
    * @param item1
    * @param item2
    * @return
@@ -222,6 +223,7 @@ public class ItemManager {
     registItem(new GoldPickaxe(0).getAllRelativeItem());
     registItem(new IronPickaxe(0).getAllRelativeItem());
     registItem(new DiamondPickaxe(0).getAllRelativeItem());
+    registItem(new MagicOreRegistPic());
     // お金
     registItem(GalionItem.getInstance(0));
   }

@@ -11,10 +11,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import com.google.common.collect.ImmutableList;
-
 import net.l_bulb.dungeoncore.common.book.BookManager;
 import net.l_bulb.dungeoncore.item.ItemInterface;
+
+import com.google.common.collect.ImmutableList;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class CommandBook implements CommandExecutor, TabCompleter {

@@ -3,14 +3,14 @@ package net.l_bulb.dungeoncore.common.place.dungeon;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
-
 import net.l_bulb.dungeoncore.common.place.HolographicDisplaysManager;
 import net.l_bulb.dungeoncore.common.place.PlaceBean;
 import net.l_bulb.dungeoncore.common.place.PlaceInterface;
 import net.l_bulb.dungeoncore.common.place.PlaceType;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 
 public class DungeonData implements PlaceInterface {
 
@@ -71,7 +71,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * 対象のレベル
-   * 
+   *
    * @return
    */
   public int getLevel() {
@@ -80,7 +80,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * ダンジョンの入口の座標
-   * 
+   *
    * @return
    */
   public Location getEntranceLocation() {
@@ -89,7 +89,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * ダンジョンのスタート地点の座標
-   * 
+   *
    * @return
    */
   public Location getStartLocation() {

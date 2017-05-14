@@ -4,8 +4,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-import lombok.Getter;
 import net.l_bulb.dungeoncore.quest.Quest;
+
+import lombok.Getter;
 
 public class QuestEvent extends PlayerEvent {
   @Getter

@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSkeleton;
 public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, Skeleton> {
   /**
    * アンデット属性にするかしないかを選択
-   * 
+   *
    * @param isNoUndead 初期値はFALSE
    */
   public void setNoUndead(boolean isNoUndead, Skeleton mob) {
@@ -24,7 +24,7 @@ public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, 
 
   /**
    * アンデット属性でないならTRUE。通常はFALSE
-   * 
+   *
    * @return
    */
   public boolean isNoUndead() {

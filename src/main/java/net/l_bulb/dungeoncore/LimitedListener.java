@@ -34,6 +34,7 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.hanging.HangingBreakEvent.RemoveCause;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
@@ -49,6 +50,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 
 public class LimitedListener implements Listener {
   static String targetWorldName = "world";
@@ -81,6 +83,14 @@ public class LimitedListener implements Listener {
     }
   }
 
+  @EventHandler
+  public void onPlayerArmorStandManipulateEvent(PlayerArmorStandManipulateEvent e) {
+    Player player = e.getPlayer();
+    if (PlayerChecker.isNormalPlayer(player)) {
+      e.setCancelled(true);
+    }
+  }
+  
   @EventHandler
   public void onArmorStandTouching(EntityDamageByEntityEvent e) {
     Entity damager = e.getDamager();
@@ -144,10 +154,15 @@ public class LimitedListener implements Listener {
       return;
     }
     EntityType type = event.getEntityType();
-
-    if (type != null && type != EntityType.PRIMED_TNT && type != EntityType.MINECART && type != EntityType.UNKNOWN) { return; }
-
-    cancelBlockBreak(event);
+    if (type == null) {
+      cancelBlockBreak(event);
+    } else if (type == EntityType.PRIMED_TNT) {
+      cancelBlockBreak(event);
+    } else if (type == EntityType.MINECART_TNT) {
+      cancelBlockBreak(event);
+    } else if (type == EntityType.UNKNOWN) {
+      cancelBlockBreak(event);
+    }
   }
 
   private static void cancelBlockBreak(EntityExplodeEvent event) {
@@ -167,11 +182,12 @@ public class LimitedListener implements Listener {
   @EventHandler
   public void onItemClicking(PlayerInteractEvent e) {
     if (!isTarget(e)) { return; }
-    /* クリエイティブモードは除外 */
-    if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
-
     ItemStack itemInHand = e.getPlayer().getItemInHand();
     if (itemInHand == null) { return; }
+
+    // 管理者なら無視
+    if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) { return; }
+
     if (Config.getClickCancelItems().contains(itemInHand.getType())) {
       e.setCancelled(true);
     }
@@ -180,7 +196,8 @@ public class LimitedListener implements Listener {
   @EventHandler
   public void onEntityClicking(PlayerInteractEntityEvent e) {
     if (!isTarget(e)) { return; }
-    if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
+    // 管理者なら無視
+    if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) { return; }
 
     Entity rightClicked = e.getRightClicked();
     if (rightClicked == null) { return; }
@@ -298,7 +315,8 @@ public class LimitedListener implements Listener {
   @EventHandler
   public void PlayerBucketEmptyEvent(PlayerBucketEmptyEvent e) {
     if (!isTarget(e)) { return; }
-    if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
+    // 管理者なら無視
+    if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) { return; }
 
     e.setCancelled(true);
   }
@@ -306,7 +324,8 @@ public class LimitedListener implements Listener {
   @EventHandler
   public void PlayerBucketFillEvent(PlayerBucketFillEvent e) {
     if (!isTarget(e)) { return; }
-    if (e.getPlayer().getGameMode() == GameMode.CREATIVE) { return; }
+    // 管理者なら無視
+    if (PlayerChecker.isNonNormalPlayer(e.getPlayer())) { return; }
     e.setCancelled(true);
   }
 

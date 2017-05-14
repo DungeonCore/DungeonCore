@@ -15,6 +15,7 @@ import net.l_bulb.dungeoncore.item.customItem.other.SimpleStone;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
+import net.l_bulb.dungeoncore.item.slot.slot.UnUseSlot;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
@@ -25,7 +26,7 @@ public class MagicStoneTradeData {
 
   /**
    * マジックストーンのタイプからランダムでアイテムを取得する
-   * 
+   *
    * @param type
    * @return
    */
@@ -85,7 +86,7 @@ public class MagicStoneTradeData {
 
   /**
    * 指定されたSlotLevelからランダムで魔法石アイテムを取得する
-   * 
+   *
    * @param level
    * @return
    */
@@ -97,6 +98,10 @@ public class MagicStoneTradeData {
       // ItemInterfaceを継承しているものはItem化できるので保持する
       ArrayList<ItemInterface> arrayList = new ArrayList<>();
       for (SlotInterface slotInterface : slotListByLevel) {
+        // 今使えないSlotは無視する
+        if (slotInterface instanceof UnUseSlot) {
+          continue;
+        }
         if (slotInterface instanceof ItemInterface) {
           arrayList.add((AbstractSlot) slotInterface);
         }

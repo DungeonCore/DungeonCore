@@ -8,6 +8,8 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
+import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
+
 import net.citizensnpcs.api.event.NPCDamageByBlockEvent;
 import net.citizensnpcs.api.event.NPCDamageByEntityEvent;
 import net.citizensnpcs.api.event.NPCDamageEntityEvent;
@@ -15,7 +17,6 @@ import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.event.NPCSpawnEvent;
-import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
 
 public class NpcListener implements Listener {
   @EventHandler

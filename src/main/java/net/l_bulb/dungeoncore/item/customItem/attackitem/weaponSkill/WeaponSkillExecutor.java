@@ -12,18 +12,19 @@ import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class WeaponSkillExecutor {
   /**
    * 右クリックした時の武器スキルの発動
-   * 
+   *
    * @param e
    * @param customItem
    */
@@ -63,7 +64,7 @@ public class WeaponSkillExecutor {
 
   /**
    * 周囲のPlayerにメッセージを表示する
-   * 
+   *
    * @param player
    * @param skill
    */
@@ -91,7 +92,7 @@ public class WeaponSkillExecutor {
    * 攻撃をした時、スキルを発動
    */
   public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
-    AttackItemStack attackItem = e.getAttackItem();
+    MagicStoneEditor attackItem = e.getAttackItem();
     ItemStack item = attackItem.getItem();
     Player player = e.getPlayer();
     AbstractAttackItem customItem = attackItem.getItemInterface();
@@ -107,7 +108,7 @@ public class WeaponSkillExecutor {
 
   /**
    * ItemStackから武器スキルを取得
-   * 
+   *
    * @param item
    * @return
    */

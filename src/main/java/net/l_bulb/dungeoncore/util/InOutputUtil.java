@@ -21,9 +21,10 @@ import java.util.zip.ZipOutputStream;
 
 import org.bukkit.Bukkit;
 
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 import lombok.NonNull;
 import lombok.val;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class InOutputUtil {
 
@@ -215,5 +216,18 @@ public class InOutputUtil {
     }
     List<String> result = Files.readAllLines(file.toPath());
     return result instanceof ArrayList ? (ArrayList<String>) result : new ArrayList<>(result);
+  }
+
+  /**
+   * ファイルを移動する。
+   *
+   * @param from
+   * @param to
+   */
+  public static void moveFile(File from, File to) {
+    if (!to.getParentFile().exists()) {
+      to.mkdirs();
+    }
+    from.renameTo(to);
   }
 }

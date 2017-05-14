@@ -21,7 +21,7 @@ public class MobHolder {
 
   /**
    * CustomMobならTRUE
-   * 
+   *
    * @param e
    * @return
    */
@@ -42,7 +42,7 @@ public class MobHolder {
 
   /**
    * mobを登録する
-   * 
+   *
    * @param mob
    */
   public static void registMob(AbstractMob<?> mob) {
@@ -53,7 +53,7 @@ public class MobHolder {
 
   /**
    * CustomMobならTRUE
-   * 
+   *
    * @param e
    * @return
    */
@@ -67,7 +67,7 @@ public class MobHolder {
 
   /**
    * mobInstanceを取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -82,7 +82,7 @@ public class MobHolder {
 
   /**
    * Normal mobを含めたMobを取得
-   * 
+   *
    * @param name
    * @return
    */
@@ -119,7 +119,7 @@ public class MobHolder {
 
   /**
    * mobInstanceを取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -144,7 +144,7 @@ public class MobHolder {
 
   /**
    * mobInstanceを取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -160,7 +160,7 @@ public class MobHolder {
 
   /**
    * 全てのモブの名前を取得
-   * 
+   *
    * @return
    */
   public static Collection<String> getAllNames() {
@@ -169,7 +169,7 @@ public class MobHolder {
 
   /**
    * 全てのモブを取得
-   * 
+   *
    * @return
    */
   public static Collection<AbstractMob<?>> getAllMobs() {

@@ -19,6 +19,7 @@ import net.l_bulb.dungeoncore.common.sound.SoundData;
 import net.l_bulb.dungeoncore.common.sound.SoundManager;
 import net.l_bulb.dungeoncore.item.customItem.itemAbstract.FoodItem;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
+import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
@@ -76,6 +77,13 @@ public class SpreadSheetFoodItem extends FoodItem {
         }
       }
     }
+
+    // MPを回復させる
+    if (data.getRecoveryMp() > 0) {
+      MagicPointManager.addMagicPoint(player, data.getRecoveryMp());
+    } else if (data.getRecoveryMp() < 0) {
+      MagicPointManager.consumeMagicPoint(player, data.getRecoveryMp());
+    }
   }
 
   @Override
@@ -123,19 +131,33 @@ public class SpreadSheetFoodItem extends FoodItem {
 
     BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
     if (buff1 != null && (int) (buff1.getTick() / 20.0) > 0) {
-      loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getEffect().getName(), (buff1.getLevel() + 1), (int) (buff1.getTick() / 20.0)));
+      loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getEffect().getName(), (buff1.getLevel() + 1),
+          (int) (buff1.getTick() / 20.0)));
     }
     BuffData buff2 = BuffDataFactory.getBuffFromId(buffId2);
     if (buff2 != null && (int) (buff2.getTick() / 20.0) > 0) {
-      loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getEffect().getName(), (buff2.getLevel() + 1), (int) (buff2.getTick() / 20.0)));
+      loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff2.getEffect().getName(), (buff2.getLevel() + 1),
+          (int) (buff2.getTick() / 20.0)));
     }
     BuffData buff3 = BuffDataFactory.getBuffFromId(buffId3);
     if (buff3 != null && (int) (buff3.getTick() / 20.0) > 0) {
-      loreToken.addLore(
-          MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getEffect().getName(), (buff3.getLevel() + 1), (int) (buff3.getTick() / 20.0)));
+      loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff3.getEffect().getName(), (buff3.getLevel() + 1),
+          (int) (buff3.getTick() / 20.0)));
     }
+
+    // mp回復
+    if (data.getRecoveryMp() != 0) {
+      loreToken.addLore("MP + " + data.getRecoveryMp());
+    }
+
+    // exp追加
+    for (LevelType levelType : Arrays.asList(LevelType.SWORD, LevelType.BOW, LevelType.MAGIC)) {
+      int exp = data.getExp(levelType);
+      if (exp != 0) {
+        loreToken.addLore(MessageFormat.format("{0} + {1} exp", levelType.getName(), exp));
+      }
+    }
+
     return loreToken;
   }
 

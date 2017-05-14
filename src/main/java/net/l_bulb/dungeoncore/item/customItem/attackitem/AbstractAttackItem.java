@@ -28,7 +28,7 @@ import net.l_bulb.dungeoncore.util.Message;
 public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, CombatItemable, LeftClickItemable {
   /**
    * この武器が使用可能ならTRUE
-   * 
+   *
    * @param player
    * @return
    */
@@ -78,14 +78,14 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
   /**
    * スキルレベルを取得
-   * 
+   *
    * @return
    */
   abstract protected int getSkillLevel();
 
   /**
    * 武器のダメージを取得 (武器本体のダメージも含まれます)
-   * 
+   *
    * @param p
    * @param strengthLevel 強化レベル
    * @return
@@ -94,7 +94,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
   /**
    * クラフトレベルを取得する
-   * 
+   *
    * @return
    */
   abstract public int getWeaponLevel();
@@ -106,7 +106,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
   /**
    * この武器のアイテムのデフォルトの攻撃力を取得
-   * 
+   *
    * @return
    */
   public double getMaterialDamage() {
@@ -142,7 +142,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
 
   /**
    * 使用不可のときに表示するメッセージ
-   * 
+   *
    * @param p
    */
   protected void sendNotAvailableMessage(Player p) {

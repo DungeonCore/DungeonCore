@@ -16,10 +16,10 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import com.google.common.collect.ImmutableList;
-
 import net.l_bulb.dungeoncore.common.sound.SoundData;
 import net.l_bulb.dungeoncore.common.sound.SoundManager;
+
+import com.google.common.collect.ImmutableList;
 
 public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCommandable {
 

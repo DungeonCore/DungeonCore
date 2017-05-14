@@ -1,6 +1,6 @@
 package net.l_bulb.dungeoncore.money;
 
-import java.util.Arrays;
+import java.text.MessageFormat;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.money.buyer.Buyer;
 import net.l_bulb.dungeoncore.money.shop.CustomShop;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.Message;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class BuyerShopSelector {
@@ -44,7 +44,7 @@ public class BuyerShopSelector {
 
     ItemStack currentItem = event.getCurrentItem();
     if (currentItem != null && currentItem.equals(getBuyerButton(p))) {
-      Buyer.onOpen(p);
+      Buyer.open(p);
     } else if (currentItem != null && currentItem.equals(getShopButton(p))) {
       CustomShop customShop = new CustomShop(villagerID);
       customShop.openShop(p);
@@ -52,16 +52,12 @@ public class BuyerShopSelector {
   }
 
   private static ItemStack getBuyerButton(Player p) {
-    ItemStack itemStack = new ItemStack(Material.GOLD_INGOT);
-    ItemStackUtil.setDispName(itemStack, ChatColor.WHITE + "" + ChatColor.BOLD + Message.getMessage(p, "売却"));
-    ItemStackUtil.setLore(itemStack, Arrays.asList(Message.getMessage(p, "アイテムを売却する")));
-    return itemStack;
+    return ItemStackUtil.getItem(MessageFormat.format("{0}{1}売却", ChatColor.WHITE, ChatColor.BOLD), Material.GOLD_INGOT, ChatColor.GREEN
+        + "アイテムを売却する");
   }
 
   private static ItemStack getShopButton(Player p) {
-    ItemStack itemStack = new ItemStack(Material.NETHER_STAR);
-    ItemStackUtil.setDispName(itemStack, ChatColor.WHITE + "" + ChatColor.BOLD + Message.getMessage(p, "購入"));
-    ItemStackUtil.setLore(itemStack, Arrays.asList(Message.getMessage(p, "アイテムを購入する")));
-    return itemStack;
+    return ItemStackUtil.getItem(MessageFormat.format("{0}{1}購入", ChatColor.WHITE, ChatColor.BOLD), Material.NETHER_BRICK, ChatColor.GREEN
+        + "アイテムを購入する");
   }
 }

@@ -13,7 +13,7 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 /**
  * 全てのプレイヤーが同じ内容のチェストを参照する
- * 
+ *
  * @author kensuke
  *
  */

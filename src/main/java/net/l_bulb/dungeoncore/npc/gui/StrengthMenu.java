@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.item.slot.table.SlotSetTableOperation;
+import net.l_bulb.dungeoncore.item.slot.table.SlotMerchant;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewer;
 import net.l_bulb.dungeoncore.item.system.repair.RepairUi;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthTables;
@@ -48,8 +48,7 @@ public class StrengthMenu implements MenuSelectorInterface {
 
     // 魔法石装着
     createInventory.setItem(14, getButtonItem("魔法石装着", "3", Material.BEACON,
-        "武器に魔法石を装着します。", "武器と魔法石を置いてください。",
-        "成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
+        "武器に魔法石を装着します。", "武器と魔法石を取引画面に置いてください。"));
 
     // クラフト
     ItemStack craftButton = getButtonItem("アイテム製作", "4", Material.WORKBENCH, "作りたいアイテムを", "クリックしてください");
@@ -74,8 +73,7 @@ public class StrengthMenu implements MenuSelectorInterface {
 
     // 魔法石装着
     createInventory.setItem(15, getButtonItem("魔法石装着", "3", Material.BEACON,
-        "武器に魔法石を装着します。", "武器と魔法石を置いてください。",
-        "成功確率などの情報が、", "赤いガラスの部分に表示されます。"));
+        "武器に魔法石を装着します。", "武器と魔法石を取引画面に置いてください。"));
 
     p.openInventory(createInventory);
   }
@@ -93,7 +91,7 @@ public class StrengthMenu implements MenuSelectorInterface {
         StrengthTables.openStrengthTable(p);
         break;
       case "3":
-        SlotSetTableOperation.openSlotTable(p);
+        new SlotMerchant(p).open();
         break;
       case "4":
         String nbtTag = ItemStackUtil.getNBTTag(item, "the_low_villager_id");
@@ -115,7 +113,7 @@ public class StrengthMenu implements MenuSelectorInterface {
 
   /**
    * ボタンのIDを取得
-   * 
+   *
    * @param item
    * @return
    */

@@ -28,7 +28,7 @@ public class Stun {
 
   /**
    * スタン状態にする
-   * 
+   *
    * @param e
    * @param tick
    */
@@ -60,10 +60,8 @@ public class Stun {
 
   public static void onDamage(EntityDamageByEntityEvent e) {
     Entity damager = e.getDamager();
-    if (damager instanceof LivingEntity) {
-      if (isStun((LivingEntity) damager)) {
-        e.setCancelled(true);
-      }
+    if (isStun(damager)) {
+      e.setCancelled(true);
     }
   }
 
@@ -76,17 +74,18 @@ public class Stun {
 
   /**
    * スタン状態ならTRUE
-   * 
+   *
    * @param e
    * @return
    */
-  public static boolean isStun(LivingEntity e) {
+  public static boolean isStun(Entity e) {
+    if (e == null) { return false; }
     return stunList.contains(e.getUniqueId());
   }
 
   /**
    * スタン状態を解除する
-   * 
+   *
    * @param e
    */
   public static void removeStun(LivingEntity e) {

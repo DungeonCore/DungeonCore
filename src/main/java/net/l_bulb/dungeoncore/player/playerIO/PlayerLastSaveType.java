@@ -43,6 +43,7 @@ public class PlayerLastSaveType {
       String json = StringUtils.join(readFile.iterator(), "");
       Gson gson = new Gson();
 
+      @SuppressWarnings("unchecked")
       HashMap<String, String> data = gson.fromJson(json, HashMap.class);
       for (Entry<String, String> entry : data.entrySet()) {
         useType.put(UUID.fromString(entry.getKey()), entry.getValue());

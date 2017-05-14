@@ -18,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -32,8 +33,10 @@ import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExcuteConditionType;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExecutor;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillInterface;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
+import net.l_bulb.dungeoncore.player.ExpTable;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.BlockUtil;
 
@@ -133,12 +136,28 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     e.setDamage(e.getDamage() * attackPoint);
   }
 
+  double attackValue = 0;
+
+  public void setAttackValue(double attackValue) {
+    this.attackValue = attackValue;
+  }
+
+  public double getAttackValue() {
+    return attackValue;
+  }
+
   @Override
   public void onAttack(LivingEntity mob, LivingEntity target,
       EntityDamageByEntityEvent e) {
     if (mob == target) {
       e.setCancelled(true);
       return;
+    }
+
+    if (getAttackValue() >= 0) {
+      if (e.isApplicable(DamageModifier.BASE)) {
+        e.setDamage(DamageModifier.BASE, getAttackValue());
+      }
     }
 
     // skill
@@ -297,7 +316,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   /**
    * このモブが持っているSkillIDを取得する
-   * 
+   *
    * @return
    */
   public HashSet<String> getSkillIdList() {
@@ -308,22 +327,11 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     skillNameSet.add(skillName);
   }
 
-  static protected Random rnd = new Random();
-
   public void executeMobSkill(LivingEntity mob, LivingEntity target, MobSkillExcuteConditionType type) {
     Set<MobSkillInterface> skillList = MobSkillManager.getSkill(skillNameSet, type);
     for (MobSkillInterface skill : skillList) {
-      MobSkillExecutor(mob, target, skill);
+      MobSkillExecutor.executor(mob, target, skill);
     }
-  }
-
-  public static void MobSkillExecutor(Entity mob, Entity target, MobSkillInterface skill) {
-    // 発動タイミングを調べる
-    if (!skill.getTiming().canExecute(mob)) { return; }
-
-    // 確立を調べる
-    if (rnd.nextInt(100) + 1 > skill.excutePercent()) { return; }
-    skill.execute(target, mob);
   }
 
   int money = 10;
@@ -343,7 +351,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   @Override
   public int getExp(LastDamageMethodType type) {
-    return exp;
+    if (exp >= 0) { return exp; }
+    return (int) ExpTable.getMobExp(getLbnMobTag().getLevel());
   }
 
   @Override

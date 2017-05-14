@@ -60,7 +60,7 @@ public class LocationData implements Serializable {
 
   /**
    * world@x,y,z,id
-   * 
+   *
    * @return
    */
   public String getSerializeString() {

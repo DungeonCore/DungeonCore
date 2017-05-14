@@ -51,6 +51,7 @@ public class IronPickaxe extends AbstractPickaxe {
       case LAPIS_ORE:
       case REDSTONE_ORE:
       case GOLD_ORE:
+      case DIAOMOD_ORE:
         return true;
       default:
         break;

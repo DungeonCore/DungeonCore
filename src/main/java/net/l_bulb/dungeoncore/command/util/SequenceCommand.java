@@ -3,7 +3,7 @@ package net.l_bulb.dungeoncore.command.util;
 import java.lang.ref.SoftReference;
 import java.util.Arrays;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

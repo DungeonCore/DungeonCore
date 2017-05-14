@@ -7,8 +7,9 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
+
 import lombok.Getter;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
 @Getter
 public class PlayerKillEntityEvent extends PlayerEvent {
@@ -16,11 +17,11 @@ public class PlayerKillEntityEvent extends PlayerEvent {
 
   LivingEntity enemy;
 
-  AttackItemStack attackItem;
+  MagicStoneEditor attackItem;
 
   public PlayerKillEntityEvent(Player who, LivingEntity enemy, ItemStack item) {
     super(who);
-    this.attackItem = AttackItemStack.getInstance(item);
+    this.attackItem = MagicStoneEditor.getInstance(item);
     this.enemy = enemy;
   }
 

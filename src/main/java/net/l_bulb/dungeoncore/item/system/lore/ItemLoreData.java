@@ -25,9 +25,9 @@ public class ItemLoreData {
 
   // テスト用
   // public static void main(String[] args) {
-  // String[] aa = new String[]{"§8id:pvp2", "", "§a機能性能§ctitle", " §e最大強化 ： §6+10", " §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル", " §e耐久値 ： §6120", "
-  // §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル", "§e耐久値 ： §6120", "", "", "§a強化性能§ctitle", " §eADD:ダメージ §6+1.8", "", "§aSLOT §b最大1個", "§f ■
-  // 空のスロット§0id:empty", ""};
+  // String[] aa = new String[]{"§8id:pvp2", "", "§a機能性能§ctitle", " §e最大強化 ： §6+10", " §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル",
+  // " §e耐久値 ： §6120", " §e使用可能 ： §6弓レベル0以上", " §eスキルレベル ： §660レベル", "§e耐久値 ： §6120", "", "", "§a強化性能§ctitle", " §eADD:ダメージ §6+1.8", "",
+  // "§aSLOT §b最大1個", "§f ■ 空のスロット§0id:empty", ""};
   // List<String> asList = java.util.Arrays.asList(aa);
   // new ItemLoreData(asList);
   // }
@@ -116,7 +116,7 @@ public class ItemLoreData {
 
   /**
    * タイトルからLoreTokenを生成する
-   * 
+   *
    * @param line
    * @return
    */
@@ -151,7 +151,7 @@ public class ItemLoreData {
 
   /**
    * 指定したタイトルのLoreを削除する
-   * 
+   *
    * @param title
    */
   public void removeLore(String title) {
@@ -160,7 +160,7 @@ public class ItemLoreData {
 
   /**
    * 指定したLoreTokenを取得する。もし存在しない場合は新規作成して生成する
-   * 
+   *
    * @param title
    * @return
    */
@@ -170,7 +170,7 @@ public class ItemLoreData {
 
   /**
    * Loreを取得する
-   * 
+   *
    * @param item
    */
   public List<String> getLore() {
@@ -187,7 +187,7 @@ public class ItemLoreData {
 
   /**
    * Loreを追加する
-   * 
+   *
    * @param loreToken
    */
   public void addLore(ItemLoreToken loreToken) {

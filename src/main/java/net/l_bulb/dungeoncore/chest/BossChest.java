@@ -2,7 +2,6 @@ package net.l_bulb.dungeoncore.chest;
 
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,17 +31,14 @@ public class BossChest extends SpletSheetChest {
 
   /**
    * チェストを設置する
-   * 
+   *
    * @param e
    * @return 設置後のチェストの座標
    */
   public Location setChest(BossMobable e) {
     if (moveLoc != null) {
-      for (Player p : rewordInventoryMap.keySet()) {
-        // もし途中でログアウトとかしていればテレポートしない
-        if (p.equals(Bukkit.getPlayerExact(p.getName()))) {
-          teleportPlayer(p.getName());
-        }
+      for (TheLowPlayer p : e.getCombatPlayer()) {
+        teleportPlayer(p.getName());
       }
     }
 
@@ -59,7 +55,7 @@ public class BossChest extends SpletSheetChest {
 
   /**
    * 指定された場所に実際にチェストを設置する
-   * 
+   *
    * @param chestLocation
    */
   @SuppressWarnings("deprecation")

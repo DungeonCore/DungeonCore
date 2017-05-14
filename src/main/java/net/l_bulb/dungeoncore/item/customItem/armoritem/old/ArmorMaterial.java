@@ -25,7 +25,7 @@ public enum ArmorMaterial {
 
   /**
    * 強化してない状態でザコ敵に関してダメージをカットする倍率
-   * 
+   *
    * @return
    */
   public double getBaseDamageCut() {
@@ -34,7 +34,7 @@ public enum ArmorMaterial {
 
   /**
    * 強化してない状態でボスに関してダメージをカットする倍率
-   * 
+   *
    * @return
    */
   public double getBaseBossDamageCut() {
@@ -43,7 +43,7 @@ public enum ArmorMaterial {
 
   /**
    * 最大強化の時、追加でザコ敵に関してダメージをカットする割合
-   * 
+   *
    * @return
    */
   public double getStrengthTotalDamageCut() {
@@ -52,7 +52,7 @@ public enum ArmorMaterial {
 
   /**
    * 最大強化の時、追加でボスに関してダメージをカットする割合
-   * 
+   *
    * @return
    */
   public double getStrengthBossTotalDamageCut() {

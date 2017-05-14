@@ -17,7 +17,7 @@ public class DungeonList {
 
   /**
    * IDから検索する
-   * 
+   *
    * @param id
    * @return
    */
@@ -27,7 +27,7 @@ public class DungeonList {
 
   /**
    * 名前の一覧を取得
-   * 
+   *
    * @return
    */
   public static Set<String> names() {
@@ -36,7 +36,7 @@ public class DungeonList {
 
   /**
    * 名前から検索する
-   * 
+   *
    * @param name
    * @return
    */

@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+
 import net.minecraft.server.v1_8_R1.DamageSource;
 
 public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion {

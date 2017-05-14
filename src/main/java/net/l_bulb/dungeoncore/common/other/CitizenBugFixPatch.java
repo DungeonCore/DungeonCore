@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 import net.minecraft.server.v1_8_R1.EntityTypes;
 
 public class CitizenBugFixPatch {

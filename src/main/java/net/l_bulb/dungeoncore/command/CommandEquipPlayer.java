@@ -14,8 +14,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
-import com.google.common.collect.ImmutableList;
-
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
@@ -26,6 +24,8 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestMagicWeaponIte
 import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestSwordWeaponItem;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
+
+import com.google.common.collect.ImmutableList;
 
 public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
 

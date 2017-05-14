@@ -53,9 +53,9 @@ public class Config {
     damageIgnoredBlocks.add(Material.GLOWING_REDSTONE_ORE);
 
     clickCancelledItems.add(Material.ENDER_PEARL);
-    clickCancelledItems.add(Material.BUCKET);
-    clickCancelledItems.add(Material.LAVA_BUCKET);
-    clickCancelledItems.add(Material.WATER_BUCKET);
+    // clickCancelledItems.add(Material.BUCKET);
+    // clickCancelledItems.add(Material.LAVA_BUCKET);
+    // clickCancelledItems.add(Material.WATER_BUCKET);
     clickCancelledItems.add(Material.FLINT_AND_STEEL);
     clickCancelledItems.add(Material.ARMOR_STAND);
 

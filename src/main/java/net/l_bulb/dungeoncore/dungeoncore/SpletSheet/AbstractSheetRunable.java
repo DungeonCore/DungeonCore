@@ -12,8 +12,9 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
-import lbn.spread.api.LbnSpreadSheet;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
+
+import lbn.spread.api.LbnSpreadSheet;
 
 /**
  * SpletSheetから読み込む処理だけを実装するための抽象クラス
@@ -62,7 +63,9 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
       ArrayList<String[]> dataList = new ArrayList<>();
 
       for (LbnSpreadSheet instance : getInstanceList()) {
-        if (instance == null) { return null; }
+        if (instance == null) {
+          continue;
+        }
 
         String[][] data = null;
         if (getQuery() != null) {
@@ -85,7 +88,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
   /**
    * スプレットシート接続のセッション用インスタンスを作成する
-   * 
+   *
    * @return
    * @throws Exception
    */
@@ -104,7 +107,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
     try {
       String[][] allData = submit.get();
       if (allData == null) {
-        sender.sendMessage("内部でエラーが発生しました。" + getSheetName());
+        // sender.sendMessage("内部でエラーが発生しました。" + getSheetName());
         return;
       }
       sender.sendMessage("処理を開始します。:" + getSheetName());

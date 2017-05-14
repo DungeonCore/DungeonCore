@@ -16,8 +16,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -48,7 +46,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
 import net.l_bulb.dungeoncore.item.slot.slot.KillSlot;
-import net.l_bulb.dungeoncore.item.slot.table.SlotSetTableOperation;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -101,7 +98,7 @@ public class ItemListener implements Listener {
 
   /**
    * プレイヤーが敵にダメージを与える
-   * 
+   *
    * @param e
    */
   @EventHandler(priority = EventPriority.LOW)
@@ -125,7 +122,7 @@ public class ItemListener implements Listener {
 
   /**
    * 防具の処理
-   * 
+   *
    * @param e
    */
   @EventHandler
@@ -170,16 +167,6 @@ public class ItemListener implements Listener {
     if (customItem != null) {
       customItem.onPlayerStrengthFinishEvent(event);
     }
-  }
-
-  @EventHandler
-  public void closeCraftingTable(InventoryCloseEvent e) {
-    SlotSetTableOperation.removeGlass(e);
-  }
-
-  @EventHandler
-  public void inventoryClick(final InventoryClickEvent e) {
-    SlotSetTableOperation.inventoryClick(e);
   }
 
   @EventHandler

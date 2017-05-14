@@ -7,12 +7,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.trait.LookClose;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
+
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.trait.LookClose;
 
 public class VillagerNpcManager {
   static HashMap<String, VillagerNpc> registedVillagerNpcIdMap = new HashMap<>();
@@ -27,7 +28,7 @@ public class VillagerNpcManager {
 
   /**
    * NPCを登録する
-   * 
+   *
    * @param villagerNpc
    */
   public static void regist(VillagerNpc villagerNpc) {
@@ -41,7 +42,7 @@ public class VillagerNpcManager {
 
   /**
    * NPCをスポーンする
-   * 
+   *
    * @param villagerNpc
    */
   public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
@@ -80,7 +81,7 @@ public class VillagerNpcManager {
 
   /**
    * EntityからVillagerNpcを取得
-   * 
+   *
    * @param entity
    * @return
    */

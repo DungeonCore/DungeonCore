@@ -10,7 +10,7 @@ public class Particles {
 
   /**
    * パーティクルを発生させる
-   * 
+   *
    * @param loc
    */
   public static void runParticle(Location loc, ParticleType type) {
@@ -25,7 +25,7 @@ public class Particles {
 
   /**
    * パーティクルを発生させる
-   * 
+   *
    * @param entity
    */
   public static void runParticle(Entity entity, ParticleType type, int amount) {
@@ -34,7 +34,7 @@ public class Particles {
 
   /**
    * パーティクルを発生させる
-   * 
+   *
    * @param loc
    */
   public static void runParticle(Location loc, ParticleType type, int amount) {
@@ -43,7 +43,7 @@ public class Particles {
 
   /**
    * 円のパーティクルを発生させる
-   * 
+   *
    * @param loc
    * @param type
    */
@@ -53,7 +53,7 @@ public class Particles {
 
   /**
    * 円のパーティクルを発生させる
-   * 
+   *
    * @param loc
    * @param type
    */

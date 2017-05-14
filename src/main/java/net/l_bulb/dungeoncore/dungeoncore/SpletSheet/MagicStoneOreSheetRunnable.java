@@ -10,7 +10,6 @@ public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable {
 
   public MagicStoneOreSheetRunnable(CommandSender sender) {
     super(sender);
-
   }
 
   @Override

@@ -18,9 +18,12 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class ReincarnationSelector implements MenuSelectorInterface {
+
+  public static final int REINC_LEVEL = 60;
 
   static {
     MenuSelectorManager.regist(new ReincarnationSelector(LevelType.SWORD));
@@ -75,7 +78,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
 
   /**
    * ソート済みの全ての転生効果を取得
-   * 
+   *
    * @return
    */
   public ArrayList<ReincarnationInterface> allReincarnationList() {
@@ -103,7 +106,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
 
   /**
    * ReincarnationInterfaceからそれに対応するView用のItemStackを取得する
-   * 
+   *
    * @param reincarnation
    * @param p
    * @return

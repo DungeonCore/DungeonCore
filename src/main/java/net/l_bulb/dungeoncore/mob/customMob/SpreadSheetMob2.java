@@ -21,9 +21,9 @@ public class SpreadSheetMob2 extends SpreadSheetMob {
 
     // HPが設定されてるならHPをセットする
     double mobHp = mobData.getHp();
-    if (mobHp >= 0 && spawnPrivate.getType().isAlive()) {
+    if (mobHp > 0 && spawnPrivate.getType().isAlive()) {
       ((LivingEntity) spawnPrivate).setMaxHealth(mobHp);
-      ((LivingEntity) spawnPrivate).setHealth(mobHp);
+      ((LivingEntity) spawnPrivate).setHealth(((LivingEntity) spawnPrivate).getMaxHealth());
     }
     return spawnPrivate;
   }

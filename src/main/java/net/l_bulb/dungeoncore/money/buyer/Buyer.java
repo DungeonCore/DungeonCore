@@ -1,188 +1,111 @@
 package net.l_bulb.dungeoncore.money.buyer;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.InventoryType.SlotType;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.inventory.CraftingInventory;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.common.trade.TheLowMerchant;
+import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
+import net.l_bulb.dungeoncore.common.trade.TheLowTrades;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
-import net.l_bulb.dungeoncore.player.CraftTableViewManager;
-import net.l_bulb.dungeoncore.player.crafttable.CraftTableType;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
-public class Buyer {
-  public static void onOpen(Player p) {
-    CraftTableViewManager.openWorkbench(p, CraftTableType.BUYER_TABLE);
-  }
+import net.md_5.bungee.api.ChatColor;
 
-  public static boolean isOpenBuyer(Player p) {
-    return CraftTableViewManager.isOpenCraftingTable(p, CraftTableType.BUYER_TABLE);
-  }
+public class Buyer extends TheLowMerchant {
 
   /**
-   * Buyer用のクラフトテーブルでは通常のクラフトは行えない
-   * 
-   * @param event
+   * Buyer画面を開く
+   *
+   * @param p
    */
-  public static void onCraftItem(PrepareItemCraftEvent event) {
-    Player p = (Player) event.getView().getPlayer();
-    if (!isOpenBuyer(p)) { return; }
-
-    ItemStack result = event.getRecipe().getResult();
-    // 生成されたアイテムがお金なら何もしない
-    if (GalionItem.getInstance(0).isThisItem(result)) { return; }
-
-    // もし別なアイテムが生成されたなら削除する
-    new BukkitRunnable() {
-      @Override
-      public void run() {
-        event.getInventory().setResult(new ItemStack(Material.AIR));
-        p.updateInventory();
-      }
-    }.runTaskLater(Main.plugin, 1);
+  public static void open(Player p) {
+    Buyer buyer = new Buyer(p);
+    TheLowTrades.open(buyer, p);
   }
 
-  /**
-   * 材料欄をクリックした場合はお金を計算し、resultをクリックした場合は全ての材料欄のアイテムを削除する
-   * 
-   * @param event
-   */
-  public static void onInteractInv(InventoryInteractEvent event) {
-    Player p = (Player) event.getWhoClicked();
-    if (!isOpenBuyer(p)) { return; }
+  public Buyer(Player p) {
+    super(p);
+  }
 
-    InventoryView view = event.getView();
-    Inventory topInventory = view.getTopInventory();
+  @Override
+  protected void onSetItem(InventoryView inv) {
+    int galions = 0;
 
-    // 見ているものがクラフティングテーブルでないことは起こり得ないはず
-    if (topInventory.getType() != InventoryType.WORKBENCH) {
-      // 強制的にインベントリを閉じる
-      CraftTableViewManager.forceCloseInventory(p);
-      // 起こり得ないのでエラーにする
-      new LbnRuntimeException("crafting table manager system is dont work!! type:" + topInventory.getType()).printStackTrace();
+    ItemStack item1 = inv.getItem(0);
+    ItemStack item2 = inv.getItem(1);
+
+    if ((item1 == null && item2 == null) || (item1.getType() == Material.AIR && item2.getType() == Material.AIR)) {
+      sendRecipeList(new TheLowMerchantRecipe(ItemStackUtil.getItem("売りたいアイテム1", Material.DIAMOND_AXE), ItemStackUtil.getItem("値段",
+          Material.GOLD_INGOT)));
       return;
     }
 
-    // クリック以外は認めない
-    if (!(event instanceof InventoryClickEvent)) {
-      event.setCancelled(true);
+    int price1 = getPrice(item1);
+
+    // Price1が売ることの出来ないアイテムなら何もしない
+    if (price1 < 0) {
+      sendRecipeList(new TheLowMerchantRecipe(item1, item2, ItemStackUtil.getItem(ChatColor.RED + "このアイテムは売却できません", Material.BARRIER)));
+      p.updateInventory();
       return;
     }
 
-    InventoryClickEvent e = (InventoryClickEvent) event;
+    galions = price1;
 
-    CraftingInventory crafting = (CraftingInventory) topInventory;
-    // お金を計算し、セットする
-    if (1 <= e.getRawSlot() && e.getRawSlot() <= 9) {
-      setGalions(crafting, e);
-    } else if (e.getSlotType() == SlotType.RESULT) {
-      if (e.getClick() == ClickType.LEFT || e.getClick() == ClickType.RIGHT) {
-        allClearMaterial(crafting, e);
-      } else {
-        e.setCancelled(true);
-      }
-    }
+    TheLowMerchantRecipe newRecipe = null;
+    // price2が売ることの出来ないアイテムなら何もしない
+    newRecipe = new TheLowMerchantRecipe(item1, GalionItem.getInstance(galions).getItem());
+    sendRecipeList(newRecipe);
+
+    p.updateInventory();
   }
 
-  private static void allClearMaterial(CraftingInventory crafting, InventoryClickEvent e) {
-    // 生成されたアイテムがお金なら何もしない
-    if (!GalionItem.getInstance(0).isThisItem(crafting.getResult())) { return; }
+  @Override
+  public String getName() {
+    return "Buyer";
+  }
 
-    // マテリアルリスト
-    ArrayList<ItemStack> deleteList = new ArrayList<>();
-
-    // setGalionsが必要か？
-    ItemStack[] matrix = crafting.getMatrix();
-    for (ItemStack itemStack : matrix) {
-      ItemInterface customItem = ItemManager.getCustomItem(itemStack);
-      // カスタムアイテムでないなら削除する
-      if (customItem == null) {
-        // 削除する
-        deleteList.add(itemStack);
-        continue;
-      }
-      int buyPrice = customItem.getBuyPrice(itemStack);
-      if (buyPrice == -1) {
-        continue;
-      } else {
-        deleteList.add(itemStack);
-      }
-    }
-
-    // 素材を削除する
-    new BukkitRunnable() {
-      @Override
-      public void run() {
-        for (ItemStack itemStack : matrix) {
-          crafting.remove(itemStack);
-        }
-      }
-    }.runTaskLater(Main.plugin, 1);
+  @Override
+  public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe) {
+    if (recipe.getResult() != null && recipe.getResult().getType() == Material.BARRIER) { return null; }
+    return recipe;
   }
 
   /**
-   * 材料をすべて調べてGalionsをセットする
-   * 
-   * @param crafting
-   * @param e
+   * ItemStackから値段を取得する
+   *
+   * @param item
+   * @return
    */
-  private static void setGalions(CraftingInventory crafting, InventoryClickEvent e) {
-    new BukkitRunnable() {
+  public int getPrice(ItemStack item) {
+    // nullなら何もしない
+    if (item == null) { return -1; }
 
-      // 押した直後にアイテムを検出する
-      @Override
-      public void run() {
-        ItemStack[] matrix = crafting.getMatrix();
+    ItemInterface customItem = ItemManager.getCustomItem(item);
+    if (customItem == null) { return -1; }
 
-        boolean emptyItemFlg = true;
+    if (customItem.getBuyPrice(item) < 0) {
+      return -1;
+    } else {
+      return customItem.getBuyPrice(item) * item.getAmount();
+    }
+  }
 
-        int galions = 0;
-        for (ItemStack itemStack : matrix) {
-          // アイテムが設置されていればTRUE
-          if (itemStack != null && itemStack.getType() != Material.AIR) {
-            emptyItemFlg = false;
-          } else {
-            continue;
-          }
+  @Override
+  public List<TheLowMerchantRecipe> getInitRecipes() {
+    return Arrays.asList(new TheLowMerchantRecipe(ItemStackUtil.getItem("売りたいアイテム1", Material.DIAMOND_AXE), ItemStackUtil.getItem("値段",
+        Material.GOLD_INGOT)));
+  }
 
-          ItemInterface customItem = ItemManager.getCustomItem(itemStack);
+  @Override
+  public void onFinishTrade(TheLowMerchantRecipe recipe) {
 
-          // カスタムアイテムでないなら0Galionsなので無視する
-          if (customItem == null) {
-            continue;
-          }
-
-          int buyPrice = customItem.getBuyPrice(itemStack);
-          if (buyPrice == -1) {
-            continue;
-          }
-          // TODO バグで１つしかアイテムが減らないことがあるので要注意。その場合は下の処理をコメントアウトする
-          buyPrice *= itemStack.getAmount();
-          galions += buyPrice;
-        }
-
-        // 売上が0より大きいならアイテムをセットする
-        if (galions >= 0 && !emptyItemFlg) {
-          crafting.setResult(GalionItem.getInstance(galions).getItem());
-          ((Player) e.getWhoClicked()).updateInventory();
-        }
-
-      }
-    }.runTaskLater(Main.plugin, 1);
   }
 
 }

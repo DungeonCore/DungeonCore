@@ -44,7 +44,7 @@ public class StatusViewerInventory {
 
   /**
    * Viewer(インベントリに表示するアイテムをセットする)
-   * 
+   *
    * @param viewer 対象のインベントリ
    * @param row 行番号
    * @param detail 詳細クラス

@@ -5,6 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.PacketPlayOutAnimation;
 import net.minecraft.server.v1_8_R1.WorldServer;
@@ -12,7 +13,7 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 public class PacketUtil {
   /**
    * 攻撃のモーション
-   * 
+   *
    * @param e
    */
   public static void sendAttackMotionPacket(LivingEntity e) {

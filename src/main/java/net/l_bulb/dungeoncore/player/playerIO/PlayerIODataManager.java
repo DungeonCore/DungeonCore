@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.player.playerIO;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
@@ -15,22 +13,31 @@ import net.l_bulb.dungeoncore.Config;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.chest.wireless.WireLessChestManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
 import net.l_bulb.dungeoncore.util.Message;
 
 public class PlayerIODataManager {
+  public static boolean ignoreSave = false;
 
   public static void load(Player p, String saveType) {
+    // セーブを無視する
+    if (ignoreSave) {
+      p.sendMessage("Playerセーブ機能は無視されます。");
+      return;
+    }
     try {
       TheLowPlayerManager.loadData(p);
       // チェストをロードする
       WireLessChestManager.getInstance().load(p);
+      // クエストをロードする
+      PlayerQuestSessionManager.loadSession(p);
     } catch (Exception e) {
       e.printStackTrace();
-      kickPlayerByLoadData(p, e);
+      kickPlayerByLoadData(p);
     }
   }
 
-  public static void kickPlayerByLoadData(Player p, Throwable cause) {
+  public static void kickPlayerByLoadData(Player p) {
     loadErrorList.add(p.getUniqueId());
     Message.sendMessage(p, ChatColor.RED + "PlayerDataのロードに失敗しました。\n"
         + ChatColor.RED + "管理者(twitter:{0})まで連絡ください。\n "
@@ -38,12 +45,10 @@ public class PlayerIODataManager {
     new BukkitRunnable() {
       @Override
       public void run() {
-        StringWriter writer = new StringWriter(1024);
-        cause.printStackTrace(new PrintWriter(writer));
-
+        // セーブを無視する
+        if (ignoreSave) { return; }
         p.kickPlayer("sorry, System cant load your game data. please tell developer (twitter:" + Config.DEVELOPER_TWITTER_ID + ")\n"
-            + "申し訳ありません。あなたのゲームデータをロード出来ませんでした。 開発者(twitter: " + Config.DEVELOPER_TWITTER_ID + ")まで連絡ください。\n"
-            + "技術情報: " + writer.toString());
+            + "申し訳ありません。あなたのゲームデータをロード出来ませんでした。 開発者(twitter: " + Config.DEVELOPER_TWITTER_ID + ")まで連絡ください。");
       }
     }.runTaskLater(Main.plugin, 20 * 10);
   }
@@ -68,7 +73,9 @@ public class PlayerIODataManager {
 
   public static void allSave() {
     PlayerLastSaveType.save();
-    for (Player player : Bukkit.getOnlinePlayers()) {
+
+    Player[] onlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[0]);
+    for (Player player : onlinePlayers) {
       save(player);
     }
   }
@@ -83,5 +90,7 @@ public class PlayerIODataManager {
 
   public static void save(Player player) {
     TheLowPlayerManager.saveData(player);
+    // クエストをセーブする
+    PlayerQuestSessionManager.saveSession(player);
   }
 }

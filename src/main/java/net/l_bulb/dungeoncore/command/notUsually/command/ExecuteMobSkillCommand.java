@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import net.l_bulb.dungeoncore.command.notUsually.AbstractPluginCommand;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillInterface;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
+
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_8_R1.ChatComponentText;
 import net.minecraft.server.v1_8_R1.CommandException;
@@ -42,6 +43,7 @@ public class ExecuteMobSkillCommand extends AbstractPluginCommand {
 
     List<Entity> executeEntitys = getEntityListByToken(paramICommandListener, paramArrayOfString[1]);
     List<Entity> targetEntitys = getEntityListByToken(paramICommandListener, paramArrayOfString[2]);
+    
     for (Entity executeor : executeEntitys) {
       for (Entity target : targetEntitys) {
         // スキルを発動する

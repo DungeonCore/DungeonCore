@@ -29,7 +29,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   /**
    * 同じレベルのMobを倒すのにかかる攻撃回数
-   * 
+   *
    * @return
    */
   public double getCombatLoad() {
@@ -85,7 +85,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   /**
    * クリティカル時、減算される戦闘負荷量
-   * 
+   *
    * @return
    */
   public double getMinusCombatLoadForCritical() {
@@ -111,7 +111,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   /**
    * クリティカル確率
-   * 
+   *
    * @param level
    * @return
    */

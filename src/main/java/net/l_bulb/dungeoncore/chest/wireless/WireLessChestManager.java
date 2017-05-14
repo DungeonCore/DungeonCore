@@ -16,12 +16,12 @@ import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 import org.bukkit.entity.Player;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.reflect.TypeToken;
-
 import net.l_bulb.dungeoncore.common.other.SystemLog;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.InOutputUtil;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.reflect.TypeToken;
 
 public enum WireLessChestManager {
   INSTANCE;
@@ -158,6 +158,7 @@ public enum WireLessChestManager {
         sb.append(string);
       }
       Gson gson = new Gson();
+      @SuppressWarnings("unchecked")
       ArrayList<Double> fromJson = gson.fromJson(sb.toString(), ArrayList.class);
       nowX = (int) (double) fromJson.get(0);
       nowY = (int) (double) fromJson.get(1);

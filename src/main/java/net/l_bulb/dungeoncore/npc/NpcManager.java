@@ -8,6 +8,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.VillagerSheetRunnable;
+import net.l_bulb.dungeoncore.npc.citizens.RemoveNearNpcOnSpawnTrait;
+import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
+
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.event.NPCDamageEvent;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
@@ -17,12 +24,6 @@ import net.citizensnpcs.api.event.NPCSpawnEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.TraitInfo;
 import net.citizensnpcs.trait.LookClose;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.VillagerSheetRunnable;
-import net.l_bulb.dungeoncore.npc.citizens.RemoveNearNpcOnSpawnTrait;
-import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 
 public class NpcManager {
   static HashMap<String, NPC> spawnedNpcMap = new HashMap<>();
@@ -56,7 +57,7 @@ public class NpcManager {
 
   /**
    * NPCを登録する
-   * 
+   *
    * @param villagerNpc
    */
   public static void regist(CustomNpcInterface villagerNpc) {
@@ -71,7 +72,7 @@ public class NpcManager {
 
   /**
    * 指定されたエンチティがNPCならTRUE
-   * 
+   *
    * @param entity
    * @return
    */
@@ -81,7 +82,7 @@ public class NpcManager {
 
   /**
    * EntityからVillagerIdを取得
-   * 
+   *
    * @param npc
    * @return
    */
@@ -101,7 +102,7 @@ public class NpcManager {
 
   /**
    * NPCを右クリックをした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCRightClickEvent(NPCRightClickEvent e) {
@@ -114,7 +115,7 @@ public class NpcManager {
 
   /**
    * NPCを左クリックをした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCLeftClickEvent(NPCLeftClickEvent e) {
@@ -127,7 +128,7 @@ public class NpcManager {
 
   /**
    * NPCがダメージを受けたときの処理
-   * 
+   *
    * @param e
    */
   public static void onNPCDamageEvent(NPCDamageEvent e) {
@@ -140,7 +141,7 @@ public class NpcManager {
 
   /**
    * NPCがスポーンした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCSpawnEvent(NPCSpawnEvent e) {
@@ -154,14 +155,14 @@ public class NpcManager {
 
   /**
    * NPCがデスポーンした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCDespawnEvent(NPCDespawnEvent e) {}
 
   /**
    * スプレットシートのデータを取得する
-   * 
+   *
    * @param sender
    */
   public static void allReload(CommandSender sender) {
@@ -175,7 +176,7 @@ public class NpcManager {
 
   /**
    * IDからNPCを取得する
-   * 
+   *
    * @return
    */
   public static NPC getSpawnedNpc(String id) {
@@ -184,7 +185,7 @@ public class NpcManager {
 
   /**
    * EntityからIDを取得する
-   * 
+   *
    * @param e
    * @return
    */

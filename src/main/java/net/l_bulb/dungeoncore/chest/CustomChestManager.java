@@ -12,11 +12,12 @@ import org.bukkit.material.Chest;
 import net.l_bulb.dungeoncore.chest.wireless.RepositoryChest;
 import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
+
 import net.md_5.bungee.api.ChatColor;
 
 /**
  * チェストの場所と中身を管理する
- * 
+ *
  * @author kensuke
  *
  */
@@ -29,7 +30,7 @@ public class CustomChestManager {
 
   /**
    * ボスチェストだけ特別処理
-   * 
+   *
    * @param e
    */
   public static void setBossRewardChest(BossMobable e) {
@@ -56,7 +57,7 @@ public class CustomChestManager {
 
   /**
    * 登録したチェストを取り除く
-   * 
+   *
    * @param loc
    */
   public static void removeChest(Location loc) {
@@ -68,7 +69,7 @@ public class CustomChestManager {
 
   /**
    * 場所からチェストを取得する
-   * 
+   *
    * @param loc
    * @return
    */

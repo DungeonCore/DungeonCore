@@ -53,7 +53,7 @@ public class SpreadSheetArmorData {
 
   /**
    * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
-   * 
+   *
    * @param sender
    * @return
    */
@@ -93,7 +93,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 最大耐久を取得, もし設定されていない場合は-1を返す
-   * 
+   *
    * @return
    */
   public short getMaxDurability() {
@@ -102,7 +102,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 最大耐久をセットする
-   * 
+   *
    * @param maxDurability
    */
   public void setMaxDurability(String maxDurability) {
@@ -111,7 +111,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテム名を取得
-   * 
+   *
    * @return
    */
   public String getName() {
@@ -120,7 +120,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテム名をセットする
-   * 
+   *
    * @param name
    */
   public void setName(String name) {
@@ -129,7 +129,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテムIDを取得する
-   * 
+   *
    * @return
    */
   public String getId() {
@@ -138,7 +138,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテムIDを取得する
-   * 
+   *
    * @param id
    */
   public void setId(String id) {
@@ -147,7 +147,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテム自体の素材, またはコマンドをセットする
-   * 
+   *
    * @param item
    */
   public void setItemMaterial(String item, CommandSender sender) {
@@ -171,7 +171,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 使用可能レベルを取得
-   * 
+   *
    * @return
    */
   public int getAvailableLevel() {
@@ -180,7 +180,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 使用可能レベルをセット
-   * 
+   *
    * @param availableLevel
    */
   public void setAvailableLevel(String availableLevel) {
@@ -189,7 +189,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテム制作に使うアイテムIDと個数をセットする
-   * 
+   *
    * @param itemid アイテムID
    * @param count 個数
    */
@@ -199,7 +199,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 制作に必要なアイテムIDと個数を取得
-   * 
+   *
    * @return
    */
   public Map<String, Integer> getCraftItem() {
@@ -208,7 +208,7 @@ public class SpreadSheetArmorData {
 
   /**
    * メインのクラフト素材をセットする
-   * 
+   *
    * @param mainCraftMaterial
    */
   public void setMainCraftMaterial(String mainCraftMaterial) {
@@ -217,7 +217,7 @@ public class SpreadSheetArmorData {
 
   /**
    * メインのクラフト素材を取得する
-   * 
+   *
    * @return
    */
   public String getMainCraftMaterial() {
@@ -226,7 +226,7 @@ public class SpreadSheetArmorData {
 
   /**
    * コンソール以外の時、エラーを送信する
-   * 
+   *
    * @param sender
    */
   public void sendError(CommandSender sender, String error) {
@@ -237,7 +237,7 @@ public class SpreadSheetArmorData {
 
   /**
    * ItemStackを取得する
-   * 
+   *
    * @return
    */
   public ItemStack getItemStack() {
@@ -246,7 +246,7 @@ public class SpreadSheetArmorData {
 
   /**
    * 詳細を取得する
-   * 
+   *
    * @return
    */
   public String[] getDetail() {
@@ -258,7 +258,7 @@ public class SpreadSheetArmorData {
 
   /**
    * アイテムの詳細をセットする
-   * 
+   *
    * @param detail
    */
   public void setDetail(String detail) {

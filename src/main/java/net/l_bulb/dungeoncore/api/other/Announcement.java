@@ -1,8 +1,12 @@
 package net.l_bulb.dungeoncore.api.other;
 
-import static java.lang.String.*;
-import static org.bukkit.Bukkit.*;
-import static org.bukkit.ChatColor.*;
+import static java.lang.String.format;
+import static org.bukkit.Bukkit.broadcastMessage;
+import static org.bukkit.ChatColor.AQUA;
+import static org.bukkit.ChatColor.DARK_GRAY;
+import static org.bukkit.ChatColor.DARK_RED;
+import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.WHITE;
 
 /**
  * This class has utility methods for message broadcasting.
@@ -21,7 +25,7 @@ public final class Announcement {
 
   /**
    * Broadcast messages with "Announce" prefixes.
-   * 
+   *
    * @param message Message for broadcasting
    */
   public static void announce(String message) {
@@ -30,7 +34,7 @@ public final class Announcement {
 
   /**
    * Broadcast messages with "Attention" prefixes.
-   * 
+   *
    * @param message Message for broadcasting
    */
   public static void attention(String message) {

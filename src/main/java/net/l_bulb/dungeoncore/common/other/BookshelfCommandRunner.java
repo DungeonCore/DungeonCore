@@ -1,10 +1,13 @@
 package net.l_bulb.dungeoncore.common.other;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CommandBlock;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,6 +20,8 @@ public class BookshelfCommandRunner {
   String commad = null;
 
   Location bedRockLoc;
+
+  Player clickPlayer;
 
   public BookshelfCommandRunner(PlayerInteractEvent e) {
     if (e.getAction() == Action.PHYSICAL || e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_AIR) { return; }
@@ -53,6 +58,11 @@ public class BookshelfCommandRunner {
     }
 
     commad = state.getCommand();
+    // コマンドがない場合は無視
+    if (commad == null) { return; }
+
+    clickPlayer = e.getPlayer();
+
     canDo = true;
   }
 
@@ -61,6 +71,18 @@ public class BookshelfCommandRunner {
   }
 
   public void doCommand() {
+    // open bookコマンド
+    commad = commad.replaceFirst("/", "").toLowerCase();
+    if (commad.toLowerCase().startsWith("book open")) {
+      // 本棚をクリックしたPlayerを実行者にする
+      String[] split = commad.split(" ");
+      if (split.length == 4 && split[3].contains("@p")) {
+        split[3] = clickPlayer.getName();
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), StringUtils.join(split, " "));
+        return;
+      }
+    }
+
     bedRockLoc.getBlock().setType(Material.REDSTONE_BLOCK);
 
     new BukkitRunnable() {

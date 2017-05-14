@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.chest.BossChest;
@@ -20,6 +21,8 @@ public interface BossMobable {
   public String getName();
 
   public Set<TheLowPlayer> getCombatPlayer();
+
+  public boolean isCombatPlayer(Player e);
 
   public void setEntity(LivingEntity e);
 }

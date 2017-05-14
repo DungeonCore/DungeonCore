@@ -47,7 +47,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
 
   /**
    * デフォルトのスロットの数
-   * 
+   *
    * @return
    */
   @Override
@@ -57,7 +57,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
 
   /**
    * デフォルトのスロットの数
-   * 
+   *
    * @return
    */
   @Override
@@ -105,7 +105,7 @@ public abstract class AbstractAttackItem_Old extends AbstractAttackItem {
 
   /**
    * 武器のダメージを取得 (武器本体のダメージも含まれます)
-   * 
+   *
    * @param p
    * @param get_money_item
    * @return

@@ -35,7 +35,7 @@ public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
 
   /**
    * ロードに成功したならTRUE
-   * 
+   *
    * @return
    */
   public boolean isSuccess() {

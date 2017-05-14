@@ -23,7 +23,6 @@ import net.l_bulb.dungeoncore.command.CommandTpOtherWorld;
 import net.l_bulb.dungeoncore.command.CommandViewInfo;
 import net.l_bulb.dungeoncore.command.JumpCommand;
 import net.l_bulb.dungeoncore.command.MobCommand;
-import net.l_bulb.dungeoncore.command.MobSkillExecuteCommand;
 import net.l_bulb.dungeoncore.command.MoneyCommand;
 import net.l_bulb.dungeoncore.command.OpenCommand;
 import net.l_bulb.dungeoncore.command.PlayerStatusCommand;
@@ -98,7 +97,6 @@ public class CommandRegister {
     registCommand(new CommandExecuteLockByTimeCommand(), "timelock");
     registCommand(new ToggleSetBlockCommand(), "toggleSetblock");
     registCommand(new CommandTpOtherWorld(), "tpworld");
-    registCommand(new MobSkillExecuteCommand(), "mobskillexcute");
     registCommand(new SpletSheetCommand(), "sheet_reload");
     registCommand(new SetRedStoneBlockCommand(), "setredstone");
     registCommand(new LoopCommand(), "loop");

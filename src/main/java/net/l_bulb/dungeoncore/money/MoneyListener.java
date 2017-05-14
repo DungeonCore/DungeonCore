@@ -1,5 +1,8 @@
 package net.l_bulb.dungeoncore.money;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
@@ -18,13 +20,14 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.MoneyItemable;
-import net.l_bulb.dungeoncore.money.buyer.Buyer;
 import net.l_bulb.dungeoncore.money.shop.CustomShop;
 import net.l_bulb.dungeoncore.money.shop.ShopItem;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
 public class MoneyListener implements Listener {
+
+  static HashMap<UUID, Long> consumMap = new HashMap<>();
 
   @EventHandler
   public void onClickShop(InventoryClickEvent e) {
@@ -35,6 +38,10 @@ public class MoneyListener implements Listener {
     e.setCancelled(true);
 
     Player p = (Player) e.getWhoClicked();
+
+    long consumeTime = consumMap.getOrDefault(p.getUniqueId(), 0L);
+    if (consumeTime > System.currentTimeMillis()) { return; }
+    consumMap.put(p.getUniqueId(), System.currentTimeMillis() + 100);
 
     // Playerデータがロードされていない時は何もしない
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
@@ -135,18 +142,11 @@ public class MoneyListener implements Listener {
 
   @EventHandler
   public void onClick(InventoryClickEvent e) {
-    Buyer.onInteractInv(e);
     BuyerShopSelector.onSelect(e);
   }
 
   @EventHandler
   public void onDrag(InventoryDragEvent e) {
-    Buyer.onInteractInv(e);
     BuyerShopSelector.onSelect(e);
-  }
-
-  @EventHandler
-  public void onPrepareItem(PrepareItemCraftEvent e) {
-    Buyer.onCraftItem(e);
   }
 }

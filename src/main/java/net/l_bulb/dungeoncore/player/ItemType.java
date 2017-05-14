@@ -7,7 +7,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public enum ItemType {
   SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)), BOW(LevelType.BOW,
-      ItemStackUtil.getVanillaDamage(Material.BOW)), MAGIC(LevelType.BOW, 6), OTHER(), IGNORE();
+	      ItemStackUtil.getVanillaDamage(Material.BOW)), MAGIC(LevelType.MAGIC, 6), OTHER(), IGNORE();
 
   private ItemType(LevelType type, double level0MinDamage) {
     this.levelType = type;
@@ -28,7 +28,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最小ダメージ
-   * 
+   *
    * @param level
    * @return
    */
@@ -46,7 +46,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最大ダメージを取得
-   * 
+   *
    * @param availableLevel 利用可能レベル
    * @return
    */

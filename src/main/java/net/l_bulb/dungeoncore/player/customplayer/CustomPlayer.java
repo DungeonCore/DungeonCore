@@ -1,5 +1,9 @@
 package net.l_bulb.dungeoncore.player.customplayer;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,23 +28,40 @@ import net.l_bulb.dungeoncore.common.place.dungeon.DungeonDataOld;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
+import net.l_bulb.dungeoncore.player.ExpTable;
 import net.l_bulb.dungeoncore.player.ability.AbilityType;
 import net.l_bulb.dungeoncore.player.ability.AbstractTimeLimitAbility;
 import net.l_bulb.dungeoncore.player.ability.impl.LevelUpAbility;
+import net.l_bulb.dungeoncore.player.reincarnation.ReincarnationFactor;
+import net.l_bulb.dungeoncore.player.reincarnation.ReincarnationSelector;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 
-public class CustomPlayer implements TheLowPlayer {
+public class CustomPlayer implements TheLowPlayer, Serializable {
+  private static final long serialVersionUID = 2400114842430732048L;
+
   public CustomPlayer(OfflinePlayer p) {
     this.player = Bukkit.getOfflinePlayer(p.getUniqueId());
+    levelData = new PlayerLevelIntData(0, 0, 0);
+    expData = new PlayerLevelIntData(0, 0, 0);
+    maxLevelData = new PlayerLevelIntData(ReincarnationSelector.REINC_LEVEL, ReincarnationSelector.REINC_LEVEL, ReincarnationSelector.REINC_LEVEL);
   }
 
   /**
    * プレイヤーデータ初期者処理
    */
-  public void init() {
-    levelData = new PlayerLevelIntData(0, 0, 0);
-    expData = new PlayerLevelIntData(0, 0, 0);
-    maxLevelData = new PlayerLevelIntData(60, 60, 60);
+  public void init(OfflinePlayer player) {
+    this.player = player;
+
+    maxLevelData = new PlayerLevelIntData(ReincarnationSelector.REINC_LEVEL, ReincarnationSelector.REINC_LEVEL, ReincarnationSelector.REINC_LEVEL);
+    playerStatusData = new PlayerStatusData(this);
+    reincarnationData = new PlayerReincarnationData(this);
+
+    // 転生データを適用させる
+    for (Entry<LevelType, ArrayList<String>> entry : reincNameData.entrySet()) {
+      for (String id : entry.getValue()) {
+        reincarnationData.addReincarnation(ReincarnationFactor.getReincarnationInterface(id), entry.getKey());
+      }
+    }
   }
 
   // レベル
@@ -55,16 +76,19 @@ public class CustomPlayer implements TheLowPlayer {
   // 所持金
   int galions = 0;
 
-  OfflinePlayer player;
+  transient OfflinePlayer player;
 
   // 現在いるダンジョンID
   transient int inDungeonId = -1;
 
   // PlayerStatusData
-  PlayerStatusData playerStatusData = new PlayerStatusData(this);
+  transient PlayerStatusData playerStatusData = new PlayerStatusData(this);
 
   // 転生データを管理するクラス
-  PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
+  transient PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
+
+  // 転生名だけのデータ
+  HashMap<LevelType, ArrayList<String>> reincNameData = new HashMap<>();
 
   transient Location lastOverWorldLocation = null;
 
@@ -148,7 +172,7 @@ public class CustomPlayer implements TheLowPlayer {
 
   @Override
   public int getNeedExp(LevelType type, int level) {
-    return (int) Math.ceil(180 + 1.3 * Math.pow(level, 2.5));
+    return (int) ExpTable.getNeedExp(level);
   }
 
   @Override
@@ -170,12 +194,12 @@ public class CustomPlayer implements TheLowPlayer {
 
   @Override
   public OfflinePlayer getOfflinePlayer() {
-    return player;
+    return Bukkit.getOfflinePlayer(getUUID());
   }
 
   @Override
   public Player getOnlinePlayer() {
-    return player.getPlayer();
+    return Bukkit.getPlayer(getUUID());
   }
 
   @Override
@@ -280,8 +304,13 @@ public class CustomPlayer implements TheLowPlayer {
     // 転生を行う
     OneReincarnationData oneReincarnationData = reincarnationData.addReincarnation(reincarnationInterface, levelType);
 
+    // 保存しておく
+    ArrayList<String> reincList = reincNameData.getOrDefault(levelType, new ArrayList<String>());
+    reincList.add(reincarnationInterface.getId());
+    reincNameData.put(levelType, reincList);
+
     // 60レベル引いたレベルをセットする
-    setLevel(levelType, getLevel(levelType) - 60);
+    setLevel(levelType, getLevel(levelType) - ReincarnationSelector.REINC_LEVEL);
     // Eventを発火させる
     new PlayerCompleteReincarnationEvent(this, oneReincarnationData).callEvent();
     return true;
@@ -291,7 +320,7 @@ public class CustomPlayer implements TheLowPlayer {
   public boolean canReincarnation(LevelType levelType) {
     int level = getLevel(levelType);
     // 現在のレベルが60レベル以下なら転生できない
-    if (level < 60) { return false; }
+    if (level < ReincarnationSelector.REINC_LEVEL) { return false; }
     return true;
   }
 

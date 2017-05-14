@@ -50,12 +50,17 @@ public class MobSkillInplemention implements MobSkillInterface {
 
   /**
    * スキル発動時に一回だけ実行
-   * 
+   *
    * @param target
    * @param mob
    */
   protected void executeBefore(Entity target, Entity mob) {
 
+  }
+
+  @Override
+  public int getLaterTick() {
+    return data.getLaterTick();
   }
 
   // DamageFallingblockForMonsterSkill damageFallingblockForMonsterSkill = new DamageFallingblockForMonsterSkill(mob, condtionTarget.getLocation(),

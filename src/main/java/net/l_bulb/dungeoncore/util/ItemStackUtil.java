@@ -19,14 +19,26 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.google.common.base.Joiner;
-
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
+
+import com.google.common.base.Joiner;
+
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
 public class ItemStackUtil {
+  /**
+   * アイテムの素材を取得する
+   *
+   * @param item
+   * @return
+   */
+  public static Material getMaterial(ItemStack item) {
+    if (item == null) { return null; }
+    return item.getType();
+  }
+
   public static ItemMeta getItemMeta(ItemStack item) {
     if (item == null) { return null; }
 
@@ -102,7 +114,7 @@ public class ItemStackUtil {
 
   /**
    * unsafeなエンチャントならTRUE
-   * 
+   *
    * @param itemMeta
    * @return
    */
@@ -207,7 +219,7 @@ public class ItemStackUtil {
 
   /**
    * IDからアイテムを取得
-   * 
+   *
    * @param id
    * @return
    */
@@ -242,7 +254,7 @@ public class ItemStackUtil {
 
   /**
    * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
-   * 
+   *
    * @param command
    * @return
    */
@@ -252,13 +264,14 @@ public class ItemStackUtil {
 
   /**
    * GiveコマンドからItemStackを取得する。エラー内容はコンソールに表示される
-   * 
+   *
    * @param command
    * @param sender
    * @return
    */
   @SuppressWarnings("deprecation")
   public static ItemStack getItemStackByCommand(String command, CommandSender sender) {
+    try {
     if (command == null) { return null; }
     command = command.trim();
     if (command.startsWith("/give ") || command.startsWith("give ")) {
@@ -294,12 +307,15 @@ public class ItemStackUtil {
       return stack;
     }
     sender.sendMessage("materialが不正です。");
+    } catch (Exception e) {
+      sender.sendMessage("コマンドが不正です。:" + command);
+    }
     return null;
   }
 
   /**
    * アイテムの個数を1つ減少させる
-   * 
+   *
    * @param item
    * @return
    */
@@ -318,7 +334,7 @@ public class ItemStackUtil {
 
   /**
    * インベントリから同じアイテムのものを取得する
-   * 
+   *
    * @param inv
    * @param item
    * @return
@@ -338,7 +354,7 @@ public class ItemStackUtil {
 
   /**
    * 指定したアイテムを追加できるならTRUE
-   * 
+   *
    * @param p
    * @param item
    * @return
@@ -363,7 +379,7 @@ public class ItemStackUtil {
 
   /**
    * 手に持っているアイテムを1つ消費する
-   * 
+   *
    * @param player
    */
   public static void consumeItemInHand(Player player) {
@@ -379,7 +395,7 @@ public class ItemStackUtil {
 
   /**
    * NTBTagをセットする
-   * 
+   *
    * @param item
    * @param name
    * @param value
@@ -395,7 +411,7 @@ public class ItemStackUtil {
 
   /**
    * NTBTagを取得する
-   * 
+   *
    * @param item
    * @param name
    */
@@ -408,7 +424,7 @@ public class ItemStackUtil {
 
   /**
    * NTBTagをセットする
-   * 
+   *
    * @param item
    * @param name
    * @param value
@@ -424,7 +440,7 @@ public class ItemStackUtil {
 
   /**
    * NTBTagを取得する
-   * 
+   *
    * @param item
    * @param name
    */
@@ -436,7 +452,7 @@ public class ItemStackUtil {
 
   /**
    * インベントリから指定したCustomアイテムを指定した数量削除する
-   * 
+   *
    * @param inv
    * @param itemId
    * @param deleteAmount 数量
@@ -466,7 +482,7 @@ public class ItemStackUtil {
 
   /**
    * 指定したIDのアイテムが指定した個数持っていた場合はTRUE
-   * 
+   *
    * @param inv
    * @param itemId
    * @param amount

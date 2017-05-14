@@ -55,6 +55,7 @@ public class MobCommand implements CommandExecutor {
     }
 
     SpletSheetCommand.reloadSheet(null, "mob2");
+    SpletSheetCommand.reloadSheet(null, "mob1");
     MobSheetRunnable mobSheetRunnable = new MobSheetRunnable(sender);
     SpletSheetExecutor.onExecute(mobSheetRunnable);
   }

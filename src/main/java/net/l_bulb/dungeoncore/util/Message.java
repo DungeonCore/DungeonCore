@@ -49,7 +49,8 @@ public class Message {
     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), getMessage(p, message, arg).replace("{player_name}", p.getName()));
   }
 
-  public static String QUEST_START_MESSAGE = "tellraw {player_name} [\"\",{\"text\":\"" + getQuestName("{0}")
+  public static String QUEST_START_MESSAGE = "tellraw {player_name} [\"\",{\"text\":\""
+      + getQuestName("{0}")
       + "を開始しました。(\"},{\"text\":\"/quest\",\"bold\":false,\"underlined\":false,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest\"}},{\"text\":\"でクエストを確認)\"}]";
 
   public static String QUEST_REMOVE_MESSAGE = getQuestName("{0}") + "を破棄しました。";

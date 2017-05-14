@@ -25,6 +25,20 @@ public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
   }
 
   @Override
+  public boolean b() {
+    if (super.b()) {
+      if (e.getLastDamager() != null) {
+        // もし最後に攻撃した人が攻撃対象のターゲットでないならFALSE
+        return this.e.getGoalTarget() == e.getLastDamager();
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  @Override
   public boolean a() {
     int i = this.e.bd();
 

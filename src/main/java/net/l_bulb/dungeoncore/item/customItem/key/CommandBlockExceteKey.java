@@ -6,10 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.util.BlockUtil;
 
 public abstract class CommandBlockExceteKey extends AbstractKeyItem {
 
@@ -30,9 +29,6 @@ public abstract class CommandBlockExceteKey extends AbstractKeyItem {
       return;
     }
 
-    final Location add3 = add2.add(0, 1, 0);
-    add3.getBlock().setType(Material.REDSTONE_TORCH_ON);
-
     // アイテムを減らせる
     ItemStack itemInHand = p.getItemInHand();
     if (itemInHand.getAmount() == 1) {
@@ -42,12 +38,8 @@ public abstract class CommandBlockExceteKey extends AbstractKeyItem {
       p.setItemInHand(itemInHand);
     }
 
-    new BukkitRunnable() {
-      @Override
-      public void run() {
-        add3.getBlock().setType(Material.BEDROCK);
-      }
-    }.runTaskLater(Main.plugin, 1);
+    final Location add3 = add2.add(0, 1, 0);
+    BlockUtil.setRedstone(add3);
   }
 
   private void sendError(Player player, String string) {

@@ -39,7 +39,12 @@ public class CommandStatusView implements CommandExecutor {
 
       // もしロードされていなかったらロードする
       if (target == null) {
+        try {
         TheLowPlayerManager.loadData(player);
+        } catch (Exception e) {
+          e.printStackTrace();
+          sender.sendMessage("loadに失敗しました");
+        }
       }
     }
 

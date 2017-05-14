@@ -1,8 +1,12 @@
 package net.l_bulb.dungeoncore.player.customplayer;
 
+import java.io.Serializable;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 
-public class PlayerLevelIntData {
+public class PlayerLevelIntData implements Serializable {
+  private static final long serialVersionUID = -8739766999079900117L;
+
   public PlayerLevelIntData(int swordData, int bowData, int magicData) {
     this.swordData = swordData;
     this.bowData = bowData;

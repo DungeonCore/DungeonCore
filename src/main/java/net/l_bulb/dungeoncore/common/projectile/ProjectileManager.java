@@ -28,7 +28,7 @@ public class ProjectileManager {
 
   /**
    * Projectileを発射した時の処理
-   * 
+   *
    * @param projectile
    * @param projectileInterface
    */
@@ -39,7 +39,7 @@ public class ProjectileManager {
 
   /**
    * Entity(Projectile)から対応するProjectileInterfaceを取得。もし存在しない場合はnullを返す
-   * 
+   *
    * @param entity
    */
   public static ProjectileInterface getProjectileInterface(Entity entity) {
@@ -59,7 +59,7 @@ public class ProjectileManager {
 
   /**
    * Entity(Projectile)から対応するItemStackを取得。もし存在しない場合はnullを返す
-   * 
+   *
    * @param entity
    */
   public static ItemStack getItemStack(Entity entity) {
@@ -77,7 +77,7 @@ public class ProjectileManager {
 
   /**
    * ProjectileLaunchEvent時の処理
-   * 
+   *
    * @param e
    */
   public static void onProjectileLaunchEvent(ProjectileLaunchEvent e) {
@@ -94,7 +94,7 @@ public class ProjectileManager {
 
   /**
    * ProjectileHitEvent時の処理
-   * 
+   *
    * @param e
    */
   public static void onProjectileHit(ProjectileHitEvent e) {

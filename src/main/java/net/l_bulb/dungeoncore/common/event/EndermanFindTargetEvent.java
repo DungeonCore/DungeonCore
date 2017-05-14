@@ -7,7 +7,6 @@ import org.bukkit.event.entity.EntityEvent;
 
 import lombok.Getter;
 
-
 public class EndermanFindTargetEvent extends EntityEvent {
   @Getter
   Player target;

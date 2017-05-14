@@ -9,9 +9,9 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.l_bulb.dungeoncore.mob.AIType;
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
@@ -19,7 +19,6 @@ import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.Items;
 import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -51,11 +50,8 @@ public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntit
       // AIを初期化する
       AttackAISetter.removeAllAi(this);
 
-      this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
-      PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
-          this);
-      pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-      this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+      // 攻撃対象のAIをセットする
+      AttackAISetter.setTargetAI(this, tag);
 
       this.goalSelector.a(1, new PathfinderGoalFloat(this));
 

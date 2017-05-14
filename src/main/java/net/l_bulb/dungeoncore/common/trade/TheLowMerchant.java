@@ -6,9 +6,10 @@ import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
 
-import io.netty.buffer.Unpooled;
 import net.l_bulb.dungeoncore.common.trade.nms.MerchantRecipeListImplemention;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
+import io.netty.buffer.Unpooled;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 import net.minecraft.server.v1_8_R1.PacketDataSerializer;
@@ -37,7 +38,7 @@ public abstract class TheLowMerchant {
 
   /**
    * Playerがアイテムを動かした時の処理
-   * 
+   *
    * @param inv
    */
   protected abstract void onSetItem(InventoryView inv);
@@ -63,7 +64,7 @@ public abstract class TheLowMerchant {
 
   /**
    * レシピのパケットを送信する
-   * 
+   *
    * @param recipeList
    */
   @SuppressWarnings("unchecked")
@@ -91,11 +92,41 @@ public abstract class TheLowMerchant {
     }
   }
 
+  /**
+   * レシピのパケットを送信する
+   *
+   * @param recipeList
+   */
+  @SuppressWarnings("unchecked")
+  protected void sendRecipeList(TheLowMerchantRecipe... recipeList) {
+    // リストを作成
+    MerchantRecipeList merchantrecipelist = new MerchantRecipeList();
+    for (TheLowMerchantRecipe recipe : recipeList) {
+      merchantrecipelist.add(recipe.toMerchantRecipe());
+    }
+
+    // パケットを送信する
+    PacketDataSerializer packetdataserializer = new PacketDataSerializer(Unpooled.buffer());
+    packetdataserializer.writeInt(getContainerCounter());
+    merchantrecipelist.a(packetdataserializer);
+    ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutCustomPayload("MC|TrList", packetdataserializer));
+
+    // 一旦全て削除し、入れ直す
+    if (nowRecipeList != null) {
+      nowRecipeList.clear();
+    } else {
+      nowRecipeList = new MerchantRecipeListImplemention(this);
+    }
+    for (TheLowMerchantRecipe theLowMerchantRecipe : recipeList) {
+      nowRecipeList.addTheLowRecipe(theLowMerchantRecipe);
+    }
+  }
+
   MerchantRecipeListImplemention nowRecipeList = null;
 
   /**
    * 現在開いているレシピリストを取得
-   * 
+   *
    * @return
    */
   public MerchantRecipeListImplemention getNowRecipeList() {
@@ -110,7 +141,7 @@ public abstract class TheLowMerchant {
 
   /**
    * 一番最初に表示されるレシピを取得する
-   * 
+   *
    * @return
    */
   abstract public List<TheLowMerchantRecipe> getInitRecipes();

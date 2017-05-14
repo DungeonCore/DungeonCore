@@ -16,7 +16,7 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 public class FallingBlockParticles {
   /**
    * 指定したブロックを指定した場所から真上にうち上げる
-   * 
+   *
    * @param loc
    * @param m
    * @param data

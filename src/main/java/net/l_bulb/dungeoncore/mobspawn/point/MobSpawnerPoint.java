@@ -172,7 +172,7 @@ public class MobSpawnerPoint {
 
   /**
    * このGetterに該当するMobを取得する
-   * 
+   *
    * @param c
    * @param このチャンクのモンスターを調べるならTRUE
    * @return

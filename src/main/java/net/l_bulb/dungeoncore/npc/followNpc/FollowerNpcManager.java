@@ -9,11 +9,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.citizensnpcs.api.npc.NPC;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.npc.NpcManager;
+
+import net.citizensnpcs.api.npc.NPC;
 
 public class FollowerNpcManager {
   static HashMap<TheLowPlayer, FollowerNpc> map = new HashMap<>();
@@ -40,7 +41,7 @@ public class FollowerNpcManager {
 
   /**
    * NPCを削除する
-   * 
+   *
    * @param p
    */
   public static void remove(Player p) {
@@ -62,7 +63,7 @@ public class FollowerNpcManager {
 
   /**
    * FollowerNpcを作成しスポーンする
-   * 
+   *
    * @param p
    * @return
    */
@@ -83,7 +84,7 @@ public class FollowerNpcManager {
 
   /**
    * FollowNpcを取得する
-   * 
+   *
    * @param p
    * @return
    */
@@ -99,7 +100,7 @@ public class FollowerNpcManager {
 
   /**
    * 自分のNPC以外を削除する
-   * 
+   *
    * @param p
    */
   public static void hideAllFollowerNpc(Player p) {
@@ -133,6 +134,7 @@ public class FollowerNpcManager {
     if (removedNpc != null) {
       NPC npc = removedNpc.getNpc();
       if (npc != null) {
+        npc.despawn();
         npc.destroy();
       }
     }
@@ -140,7 +142,7 @@ public class FollowerNpcManager {
 
   /**
    * Playerがシフトした時のイベント
-   * 
+   *
    * @param e
    */
   public static void onToggleEvent(PlayerToggleSneakEvent e) {

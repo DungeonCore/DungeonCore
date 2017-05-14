@@ -42,13 +42,29 @@ public class StonePickaxe extends AbstractPickaxe {
   public short getMaxExp() {
     switch (level) {
       case 1:
-        return 3000;
+        return 500;
       case 2:
-        return 5000;
+        return 1000;
+      case 3:
+        return 1000;
+      case 4:
+        return 500;
+      case 5:
+        return 500;
+      case 6:
+        return 500;
+      case 7:
+        return 500;
+      case 8:
+        return 500;
+      case 9:
+        return 1500;
+      case 10:
+        return 2000;
       default:
         break;
     }
-    return 5000;
+    return 2000;
   }
 
   @Override
@@ -92,7 +108,7 @@ public class StonePickaxe extends AbstractPickaxe {
 
   /**
    * 全てのレベルの石のピッケルを取得する
-   * 
+   *
    * @return
    */
   @Override

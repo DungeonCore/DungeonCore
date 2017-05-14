@@ -12,16 +12,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import net.citizensnpcs.api.event.DespawnReason;
-import net.citizensnpcs.api.event.NPCDamageEvent;
-import net.citizensnpcs.api.event.NPCLeftClickEvent;
-import net.citizensnpcs.api.event.NPCRightClickEvent;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.trait.Age;
-import net.citizensnpcs.trait.ZombieModifier;
 import net.l_bulb.dungeoncore.money.BuyerShopSelector;
 import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
 import net.l_bulb.dungeoncore.npc.NpcManager;
+import net.l_bulb.dungeoncore.npc.gui.RestVillagerGUI;
 import net.l_bulb.dungeoncore.npc.gui.StrengthMenu;
 import net.l_bulb.dungeoncore.player.magicstoneOre.trade.MagicStoneTrade;
 import net.l_bulb.dungeoncore.player.reincarnation.ReincarnationFactor;
@@ -35,6 +29,14 @@ import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
 import net.l_bulb.dungeoncore.quest.viewer.QuestSelectorViewer;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.QuestUtil;
+
+import net.citizensnpcs.api.event.DespawnReason;
+import net.citizensnpcs.api.event.NPCDamageEvent;
+import net.citizensnpcs.api.event.NPCLeftClickEvent;
+import net.citizensnpcs.api.event.NPCRightClickEvent;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.trait.Age;
+import net.citizensnpcs.trait.ZombieModifier;
 
 public class VillagerNpc implements CustomNpcInterface {
   VillagerData data;
@@ -180,7 +182,7 @@ public class VillagerNpc implements CustomNpcInterface {
 
   /*
    * (非 Javadoc)
-   * 
+   *
    * @see lbn.npc.CustomNpcInterface#onNPCLeftClickEvent(net.citizensnpcs.api.event.NPCLeftClickEvent)
    */
   @Override
@@ -229,6 +231,9 @@ public class VillagerNpc implements CustomNpcInterface {
         break;
       case MAGIC_ORE:
         MagicStoneTrade.open(p);
+        break;
+      case REST:
+        RestVillagerGUI.open(p, this);
         break;
       default:
         break;

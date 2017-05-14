@@ -13,5 +13,11 @@ public interface MobSkillInterface {
 
   public int excutePercent();
 
+  public int getLaterTick();
+
   public void execute(Entity target, Entity mob);
+
+  default public boolean canUseWhenStun() {
+    return false;
+  }
 }

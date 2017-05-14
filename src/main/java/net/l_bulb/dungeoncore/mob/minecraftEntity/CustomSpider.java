@@ -10,8 +10,8 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
 import net.minecraft.server.v1_8_R1.EntityArrow;
@@ -20,7 +20,6 @@ import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLeapAtTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
@@ -52,11 +51,8 @@ public class CustomSpider extends EntitySpider implements ICustomEntity<Spider>,
       this.goalSelector.a(8, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
       this.goalSelector.a(8, new PathfinderGoalRandomLookaround(this));
 
-      this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false, new Class[0]));
-      PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
-          this);
-      pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-      this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+      // 攻撃対象のAIをセットする
+      AttackAISetter.setTargetAI(this, tag);
     } catch (Exception e) {
       e.printStackTrace();
     }

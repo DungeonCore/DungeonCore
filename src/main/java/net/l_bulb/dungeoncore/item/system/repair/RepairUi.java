@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
@@ -14,6 +15,7 @@ import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
+
 import net.md_5.bungee.api.ChatColor;
 
 public class RepairUi {
@@ -69,7 +71,7 @@ public class RepairUi {
 
   /**
    * プレイヤーの全てのアイテムを修理する
-   * 
+   *
    * @param p
    */
   public static void repairItemAll(Player p) {
@@ -123,7 +125,7 @@ public class RepairUi {
 
   /**
    * 指定されたアイテムを修理する
-   * 
+   *
    * @param item
    * @return アイテムを修理したならTRUE
    */
@@ -133,6 +135,7 @@ public class RepairUi {
     if (type.getMaxDurability() < 30) { return false; }
     // アイテムの耐久を０にする
     item.setDurability((short) 0);
+    ItemStackUtil.setNBTTag(item, NbtTagConst.THELOW_DURABILITY, (short) 0);
     return true;
   }
 }

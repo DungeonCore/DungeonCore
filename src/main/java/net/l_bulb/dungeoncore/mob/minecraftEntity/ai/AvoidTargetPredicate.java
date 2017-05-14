@@ -2,9 +2,10 @@ package net.l_bulb.dungeoncore.mob.minecraftEntity.ai;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
+
 import com.google.common.base.Predicate;
 
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 import net.minecraft.server.v1_8_R1.Entity;
 
 public class AvoidTargetPredicate implements Predicate<Entity> {

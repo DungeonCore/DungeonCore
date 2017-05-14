@@ -19,11 +19,20 @@ public class FoodItemData {
   int swordExp;
   int bowExp;
   int magicExp;
+  int recoveryMp;
 
   String[] detail;
 
   public String getName() {
     return name;
+  }
+
+  public int getRecoveryMp() {
+    return recoveryMp;
+  }
+
+  public void setRecoveryMp(int recoveryMp) {
+    this.recoveryMp = recoveryMp;
   }
 
   public void setName(String name) {

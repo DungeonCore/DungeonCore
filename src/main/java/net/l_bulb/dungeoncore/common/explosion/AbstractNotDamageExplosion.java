@@ -123,6 +123,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
     int i1 = MathHelper.floor(this.posY + f3 + 1.0D);
     int j1 = MathHelper.floor(this.posZ - f3 - 1.0D);
     int k1 = MathHelper.floor(this.posZ + f3 + 1.0D);
+    @SuppressWarnings("unchecked")
     List<Entity> list = this.world.getEntities(this.source, new AxisAlignedBB(i, l,
         j1, j, i1, k1));
     Vec3D vec3d = new Vec3D(this.posX, this.posY, this.posZ);

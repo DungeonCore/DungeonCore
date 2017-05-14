@@ -13,14 +13,14 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-import com.google.common.collect.ImmutableList;
-
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.DungeonListRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
+import com.google.common.collect.ImmutableList;
 
 public class SetDungeonCommand implements CommandExecutor, TabCompleter {
 
@@ -99,7 +99,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
 
   /**
    * ダンジョン名を取得する
-   * 
+   *
    * @param args
    * @return
    */
@@ -107,7 +107,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
     StringBuilder sb = new StringBuilder();
     if (args.length >= 2) {
       for (int i = 1; i < (withOutLast ? args.length - 1 : args.length); i++) {
-        sb.append(args[i]);
+        sb.append(args[i] + " ");
       }
     }
     return sb.toString();

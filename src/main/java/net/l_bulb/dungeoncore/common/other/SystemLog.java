@@ -20,7 +20,7 @@ public class SystemLog {
 
     log = "[" + format + "]" + log;
 
-    DungeonLogger.info(log);
+    //DungeonLogger.info(log);
     logs.add(log);
   }
 

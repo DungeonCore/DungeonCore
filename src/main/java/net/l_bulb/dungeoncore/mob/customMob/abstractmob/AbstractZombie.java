@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomZombie;
 public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zombie> {
   /**
    * アンデット属性にするかしないかを選択
-   * 
+   *
    * @param isNoUndead 初期値はFALSE
    */
   public void setNoUndead(boolean isNoUndead, Zombie mob) {
@@ -31,7 +31,7 @@ public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zom
 
   /**
    * アンデット属性でないならTRUE。通常はFALSE
-   * 
+   *
    * @return
    */
   public boolean isNoUndead() {

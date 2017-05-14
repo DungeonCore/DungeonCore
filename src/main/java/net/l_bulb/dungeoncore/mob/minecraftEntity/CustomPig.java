@@ -10,6 +10,7 @@ import net.l_bulb.dungeoncore.mob.AIType;
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityHuman;

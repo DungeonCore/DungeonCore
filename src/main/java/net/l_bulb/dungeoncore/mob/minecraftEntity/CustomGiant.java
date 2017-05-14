@@ -7,13 +7,12 @@ import org.bukkit.entity.Giant;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.GenericAttributes;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -33,12 +32,8 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
     this.tag = tag;
     try {
       AttackAISetter.removeAllAi(this);
-      // ターゲットAIを設定
-      this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
-      PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
-          this);
-      pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-      this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+      // 攻撃対象のAIをセットする
+      AttackAISetter.setTargetAI(this, tag);
 
       this.goalSelector.a(0, new PathfinderGoalFloat(this));
       // 戦闘AIをセットする
@@ -68,6 +63,7 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
   }
 
   protected void n() {}
+
   // public CustomGiant(World arg0) {
   // super(arg0);
   // ((Navigation) getNavigation()).b(true);
@@ -85,24 +81,24 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
   // }
   //
   // protected void n() {
-  //// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-  //// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-  //// EntityVillager.class, 1.0D, true));
-  //// }
-  //// this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
-  //// EntityIronGolem.class, 1.0D, true));
-  //// this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
-  //// false));
+  // // if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+  // // this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+  // // EntityVillager.class, 1.0D, true));
+  // // }
+  // // this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this,
+  // // EntityIronGolem.class, 1.0D, true));
+  // // this.goalSelector.a(6, new PathfinderGoalMoveThroughVillage(this, 1.0D,
+  // // false));
   // this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true,
   // new Class[] { EntityPigZombie.class }));
   // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
   // this, EntityHuman.class, true));
-  //// if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
-  //// this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
-  //// this, EntityVillager.class, false));
-  //// }
-  //// this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
-  //// this, EntityIronGolem.class, true));
+  // // if (this.world.spigotConfig.zombieAggressiveTowardsVillager) {
+  // // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+  // // this, EntityVillager.class, false));
+  // // }
+  // // this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(
+  // // this, EntityIronGolem.class, true));
   // }
 
   @Override

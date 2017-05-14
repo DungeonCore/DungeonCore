@@ -33,7 +33,7 @@ public class StraightParticleData extends ParticleData {
 
   /**
    * 実行する
-   * 
+   *
    * @param entity
    */
   public void run(Entity... entity) {

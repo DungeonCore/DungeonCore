@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.common.trade.nms;
 
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchant;
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
+
 import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
@@ -17,7 +18,7 @@ public class MerchantRecipeListImplemention extends MerchantRecipeList {
 
   /**
    * レシピを追加する
-   * 
+   *
    * @param recipe
    */
   @SuppressWarnings("unchecked")

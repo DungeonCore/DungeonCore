@@ -48,7 +48,7 @@ public abstract class LbnRunnable extends BukkitRunnable {
 
   /**
    * 0からスタート
-   * 
+   *
    * @return
    */
   public int getRunCount() {

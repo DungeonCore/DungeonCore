@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.mob.minecraftEntity.ai;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
+
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
@@ -12,7 +13,7 @@ import net.minecraft.server.v1_8_R1.PathfinderGoal;
  *
  * 近接攻撃範囲^2+5なら無視
  * 距離が16から22の場合は近づく
- * 
+ *
  * @author KENSUKE
  *
  */
@@ -126,7 +127,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 
   /**
    * 一秒間に何発打つかセットする
-   * 
+   *
    * @param val
    */
   public void setShotTerm(int val) {

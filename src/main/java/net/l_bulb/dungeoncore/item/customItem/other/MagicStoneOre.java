@@ -19,7 +19,7 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 
   /**
    * MagicStoneOreTypeからインスタンスを取得する
-   * 
+   *
    * @param type
    * @return
    */
@@ -32,7 +32,7 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 
   /**
    * 魔法鉱石の種類
-   * 
+   *
    * @param type
    */
   public MagicStoneOre(MagicStoneOreType type) {

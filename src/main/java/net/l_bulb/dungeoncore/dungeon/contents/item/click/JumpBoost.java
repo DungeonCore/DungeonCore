@@ -11,6 +11,7 @@ import org.bukkit.util.Vector;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
@@ -22,7 +23,7 @@ public class JumpBoost extends RightClickItem {
 
   @Override
   protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
-    final Player player = e.getPlayer();
+    Player player = e.getPlayer();
     Location location = player.getLocation();
     location.setY(0);
     Material type = location.getBlock().getType();
@@ -30,6 +31,9 @@ public class JumpBoost extends RightClickItem {
       Message.sendMessage(player, "この場所はこのアイテムが使えないエリアです");
       return false;
     }
+
+    // このアイテムは使えません
+    if (PlayerChecker.isNormalPlayer(player)) { return false; }
 
     player.setVelocity(new Vector(0, 2, 0));
     player.getWorld().playSound(player.getLocation(), Sound.BAT_LOOP, 1, 3);

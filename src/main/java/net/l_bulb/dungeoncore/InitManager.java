@@ -28,72 +28,50 @@ import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 
 public class InitManager {
-
   public void init() {
     try {
       HolographicDisplaysManager.setUseHolographicDisplays(Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"));
       // ホログラムを全て削除
       HolographicDisplaysManager.removeAllHologram();
-
       ItemRegister.registItem();
       MobRegister.registMob();
       SpawnMobGetterRegister.registMobGetter();
-
       SystemLog.init();
-
       SetItemManager.startRutine();
-
       SetItemManager.initServer();
-
       NpcManager.init();
-
       // スプレットシートを読み込む
       reloadSpreadSheet();
-
       PlayerLastSaveType.load();
       PlayerIODataManager.allLoad();
-
       // Citizenのバグを治す
       CitizenBugFixPatch.doPatch();
-
       WeaponSkillFactory.allRegist();
-
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   public void reloadSpreadSheet() {
-    VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
-
-    SpletSheetCommand.reloadSheet(null, "item");
-
-    QuestCommand.questReload();
-
+    SpletSheetCommand.reloadSheet(null, "buff");
+    SpletSheetCommand.reloadSheet(null, "particle");
+    SpletSheetCommand.reloadSheet(null, "weaponskill");
+    MobCommand.reloadAllMob(null);
+    MobSkillManager.reloadDataBySystem();
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
     SpletSheetCommand.reloadSheet(null, "weapon");
-
-    SpletSheetCommand.reloadSheet(null, "weaponskill");
-
     SpletSheetCommand.reloadSheet(null, "armor");
-
     CommandChest.allReload();
-
     SoundSheetRunnable.allReload();
-
-    SpletSheetCommand.reloadSheet(null, "buff");
-
-    SpletSheetCommand.reloadSheet(null, "particle");
-
+    VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
+    SpletSheetCommand.reloadSheet(null, "item");
+    QuestCommand.questReload();
     SpletSheetCommand.reloadSheet(null, "magicore");
-
     SpletSheetCommand.reloadSheet(null, "food");
-
     BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
-
     // SystemSqlExecutor.execute();
     new LbnRunnable() {
       @Override
@@ -103,7 +81,6 @@ public class InitManager {
           case 0:
             break;
           case 3:
-            MobCommand.reloadAllMob(null);
             break;
           case 7:
             MobSpawnerPointManager.load();
@@ -114,15 +91,11 @@ public class InitManager {
           default:
             break;
         }
-
         if (count > 50) {
           cancel();
         }
       }
     }.runTaskTimer(20 * 2);
-
-    MobSkillManager.reloadDataBySystem();
-
     DungeonList.load(Bukkit.getConsoleSender());
   }
 }

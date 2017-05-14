@@ -6,7 +6,7 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 public interface MagicPickaxeable extends ItemInterface {
   /**
    * 魔法鉱石を壊した時の処理
-   * 
+   *
    * @param e
    */
   public void onPlayerBreakMagicOreEvent(PlayerBreakMagicOreEvent e);

@@ -6,9 +6,9 @@ import java.util.Set;
 
 import org.bukkit.entity.Player;
 
-import com.google.common.collect.HashMultimap;
-
 import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
+
+import com.google.common.collect.HashMultimap;
 
 /**
  * NPCとクエストの情報を管理するクラス
@@ -34,7 +34,7 @@ public class NpcQuestHolder {
 
   /**
    * 村人から全てのクエストを取得
-   * 
+   *
    * @param npc
    * @param p
    * @return

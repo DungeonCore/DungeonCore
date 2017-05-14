@@ -7,9 +7,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
+
 import lombok.Getter;
 import lombok.Setter;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
 /**
  * THELoWで登録されている武器(剣、弓、魔法)による通常攻撃が行われたときに発火します
@@ -23,11 +24,11 @@ public class PlayerCombatEntityEvent extends PlayerEvent {
   @Setter
   double damage;
 
-  AttackItemStack attackItem;
+  MagicStoneEditor attackItem;
 
   public PlayerCombatEntityEvent(Player who, LivingEntity enemy, ItemStack item, double damage) {
     super(who);
-    this.attackItem = AttackItemStack.getInstance(item);
+    this.attackItem = MagicStoneEditor.getInstance(item);
     this.damage = damage;
     this.enemy = enemy;
   }

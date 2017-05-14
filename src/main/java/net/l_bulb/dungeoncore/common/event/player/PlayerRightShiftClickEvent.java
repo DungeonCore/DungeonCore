@@ -6,18 +6,19 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
+
 import lombok.Getter;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
 
 @Getter
 public class PlayerRightShiftClickEvent extends PlayerEvent {
   private static final HandlerList handlers = new HandlerList();
 
-  AttackItemStack attackItem;
+  MagicStoneEditor attackItem;
 
   public PlayerRightShiftClickEvent(Player who, ItemStack item) {
     super(who);
-    this.attackItem = AttackItemStack.getInstance(item);
+    this.attackItem = MagicStoneEditor.getInstance(item);
   }
 
   @Override

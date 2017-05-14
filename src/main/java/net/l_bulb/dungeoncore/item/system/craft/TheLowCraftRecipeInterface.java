@@ -12,7 +12,7 @@ public interface TheLowCraftRecipeInterface {
 
   /**
    * 材料を追加する
-   * 
+   *
    * @param itemid
    * @param amount
    */
@@ -20,14 +20,14 @@ public interface TheLowCraftRecipeInterface {
 
   /**
    * 必要素材を取得する。もし登録された素材が不正、もしくはクラフトできないならnullを返す
-   * 
+   *
    * @return
    */
   public abstract Map<ItemInterface, Integer> getMaterialMap();
 
   /**
    * 新しいインスタンスを生成する
-   * 
+   *
    * @param mainItemId
    * @return
    */
@@ -38,21 +38,21 @@ public interface TheLowCraftRecipeInterface {
 
   /**
    * クラフトに使うもとのアイテムを取得する。存在しないならnull
-   * 
+   *
    * @return
    */
   public ItemInterface getMainItem();
 
   /**
    * メインアイテムが存在するならTRUE
-   * 
+   *
    * @return
    */
   public boolean hasMainItem();
 
   /**
    * 指定されたPlayerが全てのクラフト素材を持っているか確認する
-   * 
+   *
    * @param p
    * @param withMainItem メインアイテムも含めて考えるならTRUE
    * @return
@@ -61,14 +61,14 @@ public interface TheLowCraftRecipeInterface {
 
   /**
    * インベントリから素材を削除する
-   * 
+   *
    * @param inv
    */
   public void removeMaterial(Inventory inv);
 
   /**
    * クラフト画面を開く
-   * 
+   *
    * @param p
    * @param craftingItem
    */

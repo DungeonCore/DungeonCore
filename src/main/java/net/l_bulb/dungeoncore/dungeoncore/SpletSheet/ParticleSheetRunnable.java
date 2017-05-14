@@ -10,6 +10,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleManager;
 import net.l_bulb.dungeoncore.common.particle.SpringParticleData;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.EnumParticle;
 
 public class ParticleSheetRunnable extends AbstractSheetRunable {

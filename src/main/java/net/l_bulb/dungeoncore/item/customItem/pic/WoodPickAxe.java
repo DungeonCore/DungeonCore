@@ -44,27 +44,27 @@ public class WoodPickAxe extends AbstractPickaxe {
       case 1:
         return 50;
       case 2:
-        return 100;
+        return 50;
       case 3:
-        return 150;
+        return 50;
       case 4:
-        return 300;
+        return 150;
       case 5:
-        return 500;
+        return 200;
       case 6:
-        return 600;
+        return 100;
       case 7:
-        return 700;
+        return 100;
       case 8:
-        return 800;
+        return 100;
       case 9:
-        return 1000;
+        return 200;
       case 10:
-        return 1500;
+        return 500;
       default:
         break;
     }
-    return 1500;
+    return 500;
   }
 
   @Override
@@ -94,7 +94,7 @@ public class WoodPickAxe extends AbstractPickaxe {
 
   /**
    * 全てのレベルの木のピッケルを取得する
-   * 
+   *
    * @return
    */
   @Override

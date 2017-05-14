@@ -51,7 +51,7 @@ public class BuffSheetRunnable extends AbstractSheetRunable {
     }
 
     PotionEffectType effect = debuffType.getType();
-    int second = JavaUtil.getInt(row[2], 0);
+    double second = JavaUtil.getDouble(row[2], 0.0);
     int level = JavaUtil.getInt(row[3], 0);
 
     BuffData data = BuffDataFactory.create(id, effect, second, level);

@@ -6,9 +6,12 @@ import org.bukkit.entity.EntityType;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.AvoidTargetPredicate;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalHurtByTargetSub;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
+
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
@@ -21,7 +24,7 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 
 /**
  * 4,5,6
- * 
+ *
  * @author KENSUKE
  *
  */
@@ -50,7 +53,7 @@ public class AttackAISetter {
 
   /**
    * 遠距離AI(強い)
-   * 
+   *
    * @param e
    * @param tag
    */
@@ -66,7 +69,7 @@ public class AttackAISetter {
 
   /**
    * 遠距離AI(弱い)
-   * 
+   *
    * @param e
    * @param tag
    */
@@ -78,14 +81,15 @@ public class AttackAISetter {
 
   /**
    * 遠距離中距離用のAIをセットする
-   * 
+   *
    * @param e
    * @param tag
    */
   private static void setShortLongAI(EntityInsentient e, LbnMobTag tag) {
     if (tag.getType() == EntityType.SKELETON) {
       // 遠距離用のAI
-      TheLoWPathfinderGoalArrowAttackForShortLongAI theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton((IRangedEntity) e,
+      TheLoWPathfinderGoalArrowAttackForShortLongAI theLoWPathfinderGoalArrowAttack = new TheLoWPathfinderGoalArrowAttackForSkelton(
+          (IRangedEntity) e,
           1.25D, 20, 20.0F, tag);
       e.goalSelector.a(5, theLoWPathfinderGoalArrowAttack);
       // 近距離攻撃のAI
@@ -106,7 +110,7 @@ public class AttackAISetter {
 
   /**
    * 通常時のAIをセットする
-   * 
+   *
    * @param e
    * @param tag
    * @throws IllegalArgumentException
@@ -125,7 +129,7 @@ public class AttackAISetter {
 
   /**
    * 攻撃対象のクラスを取得
-   * 
+   *
    * @param isSummon summon mobならTRUE
    * @return
    */
@@ -139,7 +143,7 @@ public class AttackAISetter {
 
   /**
    * 全てのAIを取り除く
-   * 
+   *
    * @throws SecurityException
    * @throws NoSuchFieldException
    * @throws IllegalAccessException
@@ -154,6 +158,20 @@ public class AttackAISetter {
     Field field2 = EntityInsentient.class.getDeclaredField("goalSelector");
     field2.setAccessible(true);
     field2.set(e, new PathfinderGoalSelector((e.world != null) && (e.world.methodProfiler != null) ? e.world.methodProfiler : null));
+  }
 
+  /**
+   * 攻撃対象のAIをセットする
+   *
+   * @param entityLiving
+   * @param tag
+   */
+  public static void setTargetAI(EntityCreature e, LbnMobTag tag) {
+    // ターゲットAIを設定
+    e.targetSelector.a(1, new PathfinderGoalHurtByTargetSub(e, true));
+    PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
+        e);
+    pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
+    e.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
   }
 }

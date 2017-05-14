@@ -6,8 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import lombok.Getter;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
+import lombok.Getter;
 
 public class BookData {
   public BookData(String command, String id) {
@@ -43,8 +44,6 @@ public class BookData {
   ItemStack item = null;
 
   ArrayList<String> contents = new ArrayList<>();
-
-
 
   public ItemStack getItem() {
     return item;

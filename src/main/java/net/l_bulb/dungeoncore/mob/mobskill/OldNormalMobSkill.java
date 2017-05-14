@@ -8,7 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.common.buff.BuffData;
 import net.l_bulb.dungeoncore.common.buff.BuffDataFactory;
@@ -16,11 +15,8 @@ import net.l_bulb.dungeoncore.common.dropingEntity.DamageFallingblockForMonsterS
 import net.l_bulb.dungeoncore.common.particle.ParticleManager;
 import net.l_bulb.dungeoncore.common.sound.SoundData;
 import net.l_bulb.dungeoncore.common.sound.SoundManager;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
-import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetMob;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -75,17 +71,12 @@ public class OldNormalMobSkill implements MobSkillInterface {
   @Override
   public void execute(Entity condtionTarget, Entity mob) {
     if (mob == null) { return; }
+    executeMobSkill(condtionTarget, mob);
+  }
 
-    if (laterTick == 0) {
-      executeMobSkill(condtionTarget, mob);
-    } else {
-      new BukkitRunnable() {
-        @Override
-        public void run() {
-          executeMobSkill(condtionTarget, mob);
-        }
-      }.runTaskLater(Main.plugin, laterTick);
-    }
+  @Override
+  public int getLaterTick() {
+    return laterTick;
   }
 
   public void executeMobSkill(Entity condtionTarget, Entity mob) {
@@ -99,13 +90,12 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 指定されたターゲット方法でターゲットを取り、スキルを実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */
   protected void executeDamageOther(Entity condtionTarget, Entity mob) {
-    AbstractMob<?> mob2 = MobHolder.getMob(mob);
-    if (mob2 == null || mob2.isNullMob()) { return; }
+    boolean isBoss = MobHolder.getMob(mob).isBoss();
 
     ArrayList<Entity> targetList = new ArrayList<>();
     switch (targetingMethod) {
@@ -127,8 +117,8 @@ public class OldNormalMobSkill implements MobSkillInterface {
             continue;
           }
           // bossの時, combatプレイヤーでないなら無視
-          if (entity.getType() == EntityType.PLAYER && mob2.isBoss()) {
-            if (!((BossMobable) mob2).getCombatPlayer().contains(entity)) {
+          if (entity.getType() == EntityType.PLAYER && isBoss) {
+            if (!((BossMobable) MobHolder.getMob(mob)).isCombatPlayer((Player) entity)) {
               continue;
             }
           }
@@ -146,8 +136,8 @@ public class OldNormalMobSkill implements MobSkillInterface {
             continue;
           }
           // bossの時, combatプレイヤーでないなら無視
-          if (entity.getType() == EntityType.PLAYER && mob2.isBoss()) {
-            if (!((BossMobable) mob2).getCombatPlayer().contains(entity)) {
+          if (entity.getType() == EntityType.PLAYER && isBoss) {
+            if (!((BossMobable) MobHolder.getMob(mob)).isCombatPlayer((Player) entity)) {
               continue;
             }
           }
@@ -169,7 +159,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 対象にブロックかアイテムを当ててスキルを実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */
@@ -228,7 +218,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * スキル発動成功時、一回だけ実行される
-   * 
+   *
    * @param targetList
    * @param mob
    */
@@ -255,7 +245,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 一人のターゲットに対してスキルを即時実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */
@@ -300,7 +290,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
     if (chainId != null && !chainId.equals(id)) {
       MobSkillInterface fromId = MobSkillManager.fromId(chainId);
       if (fromId != null) {
-        SpreadSheetMob.MobSkillExecutor(mob, condtionTarget, MobSkillManager.fromId(chainId));
+        MobSkillExecutor.executor(mob, condtionTarget, fromId);
       }
     }
   }

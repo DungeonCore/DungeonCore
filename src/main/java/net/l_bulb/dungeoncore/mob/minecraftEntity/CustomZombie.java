@@ -10,8 +10,8 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttackableTargetNotTargetSub;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import net.minecraft.server.v1_8_R1.Enchantment;
 import net.minecraft.server.v1_8_R1.EnchantmentManager;
 import net.minecraft.server.v1_8_R1.EntityArrow;
@@ -20,7 +20,6 @@ import net.minecraft.server.v1_8_R1.EntityZombie;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
 import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalMoveTowardsRestriction;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
@@ -48,12 +47,8 @@ public class CustomZombie extends EntityZombie implements ICustomUndeadEntity<Zo
       // 全てのAIを取り除く
       AttackAISetter.removeAllAi(this);
 
-      // ターゲットAIを設定
-      this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
-      PathfinderGoalNearestAttackableTargetNotTargetSub pathfinderGoalNearestAttackableTargetNotTargetSub = new PathfinderGoalNearestAttackableTargetNotTargetSub(
-          this);
-      pathfinderGoalNearestAttackableTargetNotTargetSub.setSummon(tag.isSummonMob());
-      this.targetSelector.a(2, pathfinderGoalNearestAttackableTargetNotTargetSub);
+      // 攻撃対象のAIをセットする
+      AttackAISetter.setTargetAI(this, tag);
 
       this.goalSelector.a(0, new PathfinderGoalFloat(this));
       // 戦闘AIをセットする
