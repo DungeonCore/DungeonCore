@@ -9,11 +9,11 @@ public enum ParticleType {
   townaura(EnumParticle.TOWN_AURA), // 奈落
   crit, magicCrit(EnumParticle.CRIT_MAGIC), smoke(EnumParticle.SMOKE_NORMAL), mobSpell(EnumParticle.SPELL_MOB), mobSpellAmbient(
       EnumParticle.SPELL_MOB_AMBIENT), spell(EnumParticle.SPELL), instantSpell(EnumParticle.SPELL_INSTANT), witchMagic(
-      EnumParticle.SPELL_WITCH), note, portal, enchantmenttable(EnumParticle.ENCHANTMENT_TABLE), explode(
-      EnumParticle.EXPLOSION_NORMAL), flame, lava, footstep, splash(EnumParticle.WATER_SPLASH), largesmoke(
-      EnumParticle.SMOKE_LARGE), cloud, reddust(EnumParticle.REDSTONE), snowballpoof(EnumParticle.SNOWBALL), dripWater(
-      EnumParticle.DRIP_WATER), dripLava(EnumParticle.DRIP_LAVA), snowshovel(EnumParticle.SNOW_SHOVEL), slime, heart, angryVillager(
-      EnumParticle.VILLAGER_ANGRY), happyVillager(EnumParticle.VILLAGER_HAPPY), water_wake, barrier, water_drop;
+          EnumParticle.SPELL_WITCH), note, portal, enchantmenttable(EnumParticle.ENCHANTMENT_TABLE), explode(
+              EnumParticle.EXPLOSION_NORMAL), flame, lava, footstep, splash(EnumParticle.WATER_SPLASH), largesmoke(
+                  EnumParticle.SMOKE_LARGE), cloud, reddust(EnumParticle.REDSTONE), snowballpoof(EnumParticle.SNOWBALL), dripWater(
+                      EnumParticle.DRIP_WATER), dripLava(EnumParticle.DRIP_LAVA), snowshovel(EnumParticle.SNOW_SHOVEL), slime, heart, angryVillager(
+                          EnumParticle.VILLAGER_ANGRY), happyVillager(EnumParticle.VILLAGER_HAPPY), water_wake, barrier, water_drop;
 
   EnumParticle enumType;
 

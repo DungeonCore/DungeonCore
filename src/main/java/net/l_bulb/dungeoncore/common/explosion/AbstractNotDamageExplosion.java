@@ -10,6 +10,8 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.EnchantmentProtection;
@@ -23,8 +25,6 @@ import net.minecraft.server.v1_8_R1.MathHelper;
 import net.minecraft.server.v1_8_R1.PacketPlayOutExplosion;
 import net.minecraft.server.v1_8_R1.Vec3D;
 import net.minecraft.server.v1_8_R1.World;
-
-import com.google.common.collect.Lists;
 
 public abstract class AbstractNotDamageExplosion extends Explosion {
 

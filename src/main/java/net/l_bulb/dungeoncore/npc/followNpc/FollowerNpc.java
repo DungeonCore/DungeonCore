@@ -8,6 +8,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
+import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
+import net.l_bulb.dungeoncore.util.PacketUtil;
+
 import net.aufdemrand.sentry.SentryInstance;
 import net.aufdemrand.sentry.SentryTrait;
 import net.citizensnpcs.api.CitizensAPI;
@@ -17,13 +24,6 @@ import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.util.Util;
-
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
-import net.l_bulb.dungeoncore.npc.citizens.TheLowIdTrail;
-import net.l_bulb.dungeoncore.util.PacketUtil;
 
 public class FollowerNpc implements CustomNpcInterface {
   static {

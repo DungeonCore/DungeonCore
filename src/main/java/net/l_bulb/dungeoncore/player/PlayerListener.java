@@ -415,7 +415,7 @@ public class PlayerListener implements Listener {
       // Logを出しておく
       new RuntimeException(
           MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName()))
-          .printStackTrace();
+              .printStackTrace();
     }
 
     // データがロードされていないなら無視する

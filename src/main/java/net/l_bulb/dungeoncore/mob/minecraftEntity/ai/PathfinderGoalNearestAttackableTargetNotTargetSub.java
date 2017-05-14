@@ -11,6 +11,9 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityCreature;
@@ -18,9 +21,6 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget {
   protected final Class<EntityLiving> a;

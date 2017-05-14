@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.common.trade;
 
-import io.netty.buffer.Unpooled;
-
 import java.util.List;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
@@ -11,6 +9,7 @@ import org.bukkit.inventory.InventoryView;
 import net.l_bulb.dungeoncore.common.trade.nms.MerchantRecipeListImplemention;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
+import io.netty.buffer.Unpooled;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
 import net.minecraft.server.v1_8_R1.PacketDataSerializer;

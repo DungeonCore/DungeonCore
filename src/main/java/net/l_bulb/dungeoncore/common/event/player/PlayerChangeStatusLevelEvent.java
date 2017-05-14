@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import lombok.Getter;
-
 import org.bukkit.event.HandlerList;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+
+import lombok.Getter;
 
 @Getter
 public class PlayerChangeStatusLevelEvent extends TheLowPlayerEvent {

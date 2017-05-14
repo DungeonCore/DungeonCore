@@ -120,7 +120,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
         ChatColor.GREEN + reincarnation.getTitle(),		// アイテム名
         reincarnation.getMaterial(),								// 素材
         (byte) reincarnation.getItemStackData()			// データ値
-        );	// 詳細
+    );	// 詳細
 
     // ID情報をNBTTagにセットする
     ItemStackUtil.setNBTTag(item, REINCARNATION_ID, reincarnation.getId());

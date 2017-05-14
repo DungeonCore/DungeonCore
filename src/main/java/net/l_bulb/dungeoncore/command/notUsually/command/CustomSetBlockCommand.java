@@ -73,7 +73,7 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand {
         }
       } else if ((paramArrayOfString[5].equals("keep"))
           && (!localWorld.isEmpty(localBlockPosition))) { throw new CommandException("commands.setblock.noChange",
-          new Object[0]); }
+              new Object[0]); }
     }
     Object localObject = localWorld.getTileEntity(localBlockPosition);
     if (localObject != null) {

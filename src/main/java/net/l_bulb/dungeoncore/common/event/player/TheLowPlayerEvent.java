@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import lombok.AllArgsConstructor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public abstract class TheLowPlayerEvent extends Event {

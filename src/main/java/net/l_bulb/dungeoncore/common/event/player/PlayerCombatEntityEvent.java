@@ -1,8 +1,5 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -11,6 +8,9 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackItemStack;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * THELoWで登録されている武器(剣、弓、魔法)による通常攻撃が行われたときに発火します

@@ -14,9 +14,9 @@ import org.bukkit.util.StringUtil;
 import net.l_bulb.dungeoncore.common.book.BookManager;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 
-import net.md_5.bungee.api.ChatColor;
-
 import com.google.common.collect.ImmutableList;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class CommandBook implements CommandExecutor, TabCompleter {
 
