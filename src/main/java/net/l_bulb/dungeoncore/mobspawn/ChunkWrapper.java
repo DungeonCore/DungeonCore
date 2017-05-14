@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.mobspawn;
 
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+
+import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
 
 public class ChunkWrapper {
   public ChunkWrapper(String wolrdName, int x, int z) {

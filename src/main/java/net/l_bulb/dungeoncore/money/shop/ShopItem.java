@@ -3,16 +3,16 @@ package net.l_bulb.dungeoncore.money.shop;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.AvailableLevelItemable;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class ShopItem {
   public ShopItem(ItemStack item, int price, int count) {
@@ -45,7 +45,7 @@ public class ShopItem {
     if (dispItem != null) { return dispItem; }
 
     dispItem = item.clone();
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     // IDがあればプラグイン用のアイテムなのでIDを記載する
     String id = ItemStackUtil.getId(item);
     if (id != null) {

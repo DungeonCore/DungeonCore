@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.command.notUsually.command;
 
 import net.l_bulb.dungeoncore.command.notUsually.AbstractVanillaCommand;
+
 import net.minecraft.server.v1_8_R1.CommandKill;
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityPlayer;

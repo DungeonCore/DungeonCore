@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.NbtTagConst;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class FallingBlockParticles {
   /**
@@ -38,7 +38,7 @@ public class FallingBlockParticles {
 
   public static List<Location> randomCircleUpperBlock(Location loc, Material m, byte data, double vecMultiStart, double vecMultiEnd, int count,
       double radius) {
-    ArrayList<Location> arrayList = new ArrayList<Location>();
+    ArrayList<Location> arrayList = new ArrayList<>();
 
     Random rnd = new Random();
     for (; count > 0; count--) {

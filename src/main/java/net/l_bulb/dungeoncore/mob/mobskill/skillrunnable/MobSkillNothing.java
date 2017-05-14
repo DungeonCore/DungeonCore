@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.mob.mobskill.skillrunnable;
 
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
-
 import org.bukkit.entity.Entity;
+
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
 
 public class MobSkillNothing extends MobSkillRunnable {
 

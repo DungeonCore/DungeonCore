@@ -153,7 +153,7 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
   }
 
   protected Collection<String> getItemMap() {
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     for (AbstractMob<?> mob : MobHolder.getAllMobs()) {
       if (mob.getEntityType() == EntityType.VILLAGER) {
         continue;

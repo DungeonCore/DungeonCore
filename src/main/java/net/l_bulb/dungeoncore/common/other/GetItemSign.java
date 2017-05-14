@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.common.other;
 
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class GetItemSign extends InHandItemClickSign {
 

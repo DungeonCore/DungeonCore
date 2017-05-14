@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.player.magicstoneOre.trade;
 
-import net.minecraft.server.v1_8_R1.EntityPlayer;
-
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+
+import net.minecraft.server.v1_8_R1.EntityPlayer;
 
 public class MagicStoneTrade {
   /**

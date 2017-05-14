@@ -3,12 +3,6 @@ package net.l_bulb.dungeoncore.command;
 import java.util.Arrays;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.api.LevelType;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -16,6 +10,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.api.LevelType;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * <command> set type val target

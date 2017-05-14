@@ -1,15 +1,15 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.magic.normalItems.magicExcutor;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.dropingEntity.DamagedFallingBlockForPlayer;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.AvailableLevelItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.MagicExcuteable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class FallingBlockMagicExcutor implements MagicExcuteable {
   int availableLevel = 0;

@@ -10,7 +10,7 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public class MenuSelectorManager {
-  static HashMap<String, MenuSelectorInterface> selectorMap = new HashMap<String, MenuSelectorInterface>();
+  static HashMap<String, MenuSelectorInterface> selectorMap = new HashMap<>();
 
   public static MenuSelectorInterface getSelector(String title) {
     return selectorMap.get(ChatColor.stripColor(title).trim());

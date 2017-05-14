@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore.api.player;
 
 import java.util.UUID;
 
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonDataOld;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
-
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public interface TheLowPlayer {
   /**

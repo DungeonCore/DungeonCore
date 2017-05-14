@@ -5,13 +5,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.chest.CustomChestManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
-import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
-import net.l_bulb.dungeoncore.player.PlayerChecker;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -36,8 +29,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import net.l_bulb.dungeoncore.chest.CustomChestManager;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
+import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
+
 public class MobListener implements Listener {
-  public static Set<BossMobable> bossoList = new HashSet<BossMobable>();
+  public static Set<BossMobable> bossoList = new HashSet<>();
 
   @EventHandler
   public void onSpawn2(final PlayerCustomMobSpawnEvent e) {

@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.mob.mobskill.skillrunnable;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class MobSkillMobJump extends MobSkillRunnable {
 

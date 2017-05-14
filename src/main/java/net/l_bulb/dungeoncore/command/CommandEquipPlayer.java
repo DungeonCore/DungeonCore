@@ -2,17 +2,6 @@ package net.l_bulb.dungeoncore.command;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.api.LevelType;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.item.customItem.armoritem.TestArmorItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestBowWeaponItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestMagicWeaponItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestSwordWeaponItem;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -24,6 +13,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
+
+import net.l_bulb.dungeoncore.api.LevelType;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.item.customItem.armoritem.TestArmorItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestBowWeaponItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestMagicWeaponItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestSwordWeaponItem;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 import com.google.common.collect.ImmutableList;
 
@@ -68,8 +68,7 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
         magic,
         bow,
         new ItemStack(Material.ARROW, 64),
-        new ItemStack(Material.BREAD, 64)
-        );
+        new ItemStack(Material.BREAD, 64));
 
     Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
     potion.setSplash(true);

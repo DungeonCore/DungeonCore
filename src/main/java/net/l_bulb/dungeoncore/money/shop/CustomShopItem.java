@@ -3,11 +3,11 @@ package net.l_bulb.dungeoncore.money.shop;
 import java.util.Iterator;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class CustomShopItem extends ShopItem {
 
@@ -15,9 +15,9 @@ public class CustomShopItem extends ShopItem {
 
   /**
    * @param item 実際に買われる商品
-   * @param price　値段
-   * @param amount　個数
-   * @param shopItemId　ID
+   * @param price 値段
+   * @param amount 個数
+   * @param shopItemId ID
    */
   public CustomShopItem(ItemStack item, int price, int amount, String shopItemId) {
     super(item, price, amount);
@@ -80,8 +80,7 @@ public class CustomShopItem extends ShopItem {
     ItemStackUtil.addLore(clone, Message.getMessage("Price : {0} Galions", price),
         Message.getMessage("Quantity : {0}", count),
         Message.getMessage("使用可能レベル : {0}", getAvailableLevel(item)),
-        Message.getMessage("shopitemid: {0}", shopItemId)
-        );
+        Message.getMessage("shopitemid: {0}", shopItemId));
     return clone;
   }
 

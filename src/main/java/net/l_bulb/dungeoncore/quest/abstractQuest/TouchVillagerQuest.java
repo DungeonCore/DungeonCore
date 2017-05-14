@@ -2,12 +2,12 @@ package net.l_bulb.dungeoncore.quest.abstractQuest;
 
 import java.util.Set;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
 import net.l_bulb.dungeoncore.util.QuestUtil;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 

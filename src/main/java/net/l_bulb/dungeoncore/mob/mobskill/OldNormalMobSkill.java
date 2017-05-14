@@ -2,6 +2,13 @@ package net.l_bulb.dungeoncore.mob.mobskill;
 
 import java.util.ArrayList;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.common.buff.BuffData;
 import net.l_bulb.dungeoncore.common.buff.BuffDataFactory;
 import net.l_bulb.dungeoncore.common.dropingEntity.DamageFallingblockForMonsterSkill;
@@ -12,13 +19,6 @@ import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
 public class OldNormalMobSkill implements MobSkillInterface {
 
@@ -97,7 +97,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
   protected void executeDamageOther(Entity condtionTarget, Entity mob) {
     boolean isBoss = MobHolder.getMob(mob).isBoss();
 
-    ArrayList<Entity> targetList = new ArrayList<Entity>();
+    ArrayList<Entity> targetList = new ArrayList<>();
     switch (targetingMethod) {
       case DEPEND_ON_CONDTION:
         if (condtionTarget != null && condtionTarget.isValid()) {

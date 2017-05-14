@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.api.player;
 
-import net.l_bulb.dungeoncore.api.LevelType;
-
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.api.LevelType;
 
 public interface ReincarnationInterface {
   /**

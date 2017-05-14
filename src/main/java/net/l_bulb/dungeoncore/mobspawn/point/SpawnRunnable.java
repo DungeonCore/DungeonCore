@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.SystemListener;
 import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpawnRunnable extends BukkitRunnable {
   public SpawnRunnable(boolean isRunManage,

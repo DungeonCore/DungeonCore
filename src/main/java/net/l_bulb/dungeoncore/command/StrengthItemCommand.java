@@ -1,5 +1,12 @@
 package net.l_bulb.dungeoncore.command;
 
+import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
@@ -7,13 +14,6 @@ import net.l_bulb.dungeoncore.item.customItem.pic.AbstractPickaxe;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthTables;
-
-import org.apache.commons.lang.math.NumberUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class StrengthItemCommand implements CommandExecutor {
 

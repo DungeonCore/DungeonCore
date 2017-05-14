@@ -19,7 +19,7 @@ public class LevelUpAbility implements AbilityInterface {
     return "MainLevelUp";
   }
 
-  HashMap<PlayerStatusType, Double> abilityMap = new HashMap<PlayerStatusType, Double>();
+  HashMap<PlayerStatusType, Double> abilityMap = new HashMap<>();
 
   @Override
   public HashMap<PlayerStatusType, Double> getAbilityMap() {

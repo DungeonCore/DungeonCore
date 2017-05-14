@@ -2,9 +2,9 @@ package net.l_bulb.dungeoncore.common.place;
 
 import java.util.Collection;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Location;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;

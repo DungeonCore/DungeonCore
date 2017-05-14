@@ -2,10 +2,6 @@ package net.l_bulb.dungeoncore.quest;
 
 import java.util.Collection;
 
-import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
-import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,6 +10,10 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
+import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class QuestInventory {
   public static void openQuestViewer(Player p) {

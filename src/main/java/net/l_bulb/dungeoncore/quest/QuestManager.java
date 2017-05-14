@@ -3,6 +3,12 @@ package net.l_bulb.dungeoncore.quest;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
@@ -20,16 +26,10 @@ import net.l_bulb.dungeoncore.util.Message;
 import net.l_bulb.dungeoncore.util.QuestUtil;
 import net.l_bulb.dungeoncore.util.TitleSender;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
-
 public class QuestManager {
-  private static HashMap<String, Quest> allQuestByName = new HashMap<String, Quest>();
+  private static HashMap<String, Quest> allQuestByName = new HashMap<>();
 
-  private static HashMap<String, Quest> allQuestById = new HashMap<String, Quest>();
+  private static HashMap<String, Quest> allQuestById = new HashMap<>();
 
   public static void clear() {
     allQuestByName.clear();
@@ -286,7 +286,9 @@ public class QuestManager {
   // }
   // }.runTaskLater(Main.plugin, 20 * 10);
   // return StringUtils.join(new Object[]{"tellraw ", p.getName(),
-  // " {\"text\":\"クエスト受諾(10秒以内にクリック)\",\"bold\":false,\"underlined\":true,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest start ",
+  // "
+  // {\"text\":\"クエスト受諾(10秒以内にクリック)\",\"bold\":false,\"underlined\":true,\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/quest
+  // start ",
   // quest.getId(),"\"}}"});
   // }
   // public static boolean canStartQuestByTellrow(Quest q, Player p) {
@@ -300,14 +302,9 @@ public class QuestManager {
    *
    */
   public static enum QuestStartStatus {
-    CAN_START(true, true),
-    UNKNOW_QUEST("クエストが存在しません", false, false),
-    DOING_NOW("同じクエストを同時に受けることはできません", false, false),
-    RECEIVE_COUNT_MAXIMUM("クエスト数が上限に達しました。どれかを破棄してください。", false, true),
-    REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true),
-    LACK_AVAILAVLE_MAIN_LEVEL("メインレベルが足りません", false, true),
-    CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true),
-    LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
+    CAN_START(true, true), UNKNOW_QUEST("クエストが存在しません", false, false), DOING_NOW("同じクエストを同時に受けることはできません", false, false), RECEIVE_COUNT_MAXIMUM(
+        "クエスト数が上限に達しました。どれかを破棄してください。", false, true), REMAIND_COOL_TIME("現在このクエストを受注できません(時間制限)", false, true), LACK_AVAILAVLE_MAIN_LEVEL(
+            "メインレベルが足りません", false, true), CANNT_OVERLAP("このクエストを再度受けることは出来ません", false, true), LACK_BEFORE_QUEST("前提クエストを完了していません", false, true);
 
     String errorMessage = null;
     boolean canStart;

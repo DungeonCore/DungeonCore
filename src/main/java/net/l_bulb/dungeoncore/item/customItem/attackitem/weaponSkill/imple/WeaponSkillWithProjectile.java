@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple;
 
-import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
-import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
+import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public abstract class WeaponSkillWithProjectile extends WeaponSkillForOneType implements ProjectileInterface {
   public WeaponSkillWithProjectile(ItemType type) {

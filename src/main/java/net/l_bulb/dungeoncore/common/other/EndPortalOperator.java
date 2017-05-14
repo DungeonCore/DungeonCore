@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.player.PlayerChecker;
-
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +14,9 @@ import org.bukkit.event.block.BlockMultiPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 
 public class EndPortalOperator {
   public static void onBlockMultiPlaceEvent(BlockMultiPlaceEvent e) {
@@ -41,7 +41,7 @@ public class EndPortalOperator {
     }
 
     // エンドポータルフレームのリスト
-    HashSet<Block> endPortalFrameList = new HashSet<Block>();
+    HashSet<Block> endPortalFrameList = new HashSet<>();
 
     List<BlockFace> faces = Arrays.asList(BlockFace.EAST, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST);
 

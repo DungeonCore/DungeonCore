@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
-import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneFactor;
-import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
-
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+
+import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneFactor;
+import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 
 public class MagicStoneOreSheetRunnable extends AbstractComplexSheetRunable {
 

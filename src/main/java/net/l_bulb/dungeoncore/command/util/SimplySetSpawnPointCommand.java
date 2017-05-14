@@ -7,18 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterManager;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpletSheetSpawnMobGetter;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -38,13 +26,25 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.Vector;
 
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterManager;
+import net.l_bulb.dungeoncore.mobspawn.gettter.SpletSheetSpawnMobGetter;
+import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.LbnRunnable;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 
 public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter {
   static HashMultimap<Player, MobLocation> create = HashMultimap.create();
-  static HashMap<Player, MobLocation> lastSet = new HashMap<Player, MobLocation>();
-  static HashSet<Player> begin = new HashSet<Player>();
+  static HashMap<Player, MobLocation> lastSet = new HashMap<>();
+  static HashSet<Player> begin = new HashSet<>();
 
   static boolean look_flg = false;
 
@@ -221,7 +221,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
   private void executeSet(Player p, String[] arg3) {
     p.sendMessage("アイテムをもってください");
 
-    ArrayList<String> nameList = new ArrayList<String>();
+    ArrayList<String> nameList = new ArrayList<>();
     for (String name : arg3) {
       if (name.equalsIgnoreCase("set")) {
         continue;
@@ -353,7 +353,7 @@ class SimpleMobSpawnGetter extends SpletSheetSpawnMobGetter {
 }
 
 class MobLocation {
-  List<AbstractMob<?>> mobList = new ArrayList<AbstractMob<?>>();
+  List<AbstractMob<?>> mobList = new ArrayList<>();
   Location loc;
   String locStr;
 

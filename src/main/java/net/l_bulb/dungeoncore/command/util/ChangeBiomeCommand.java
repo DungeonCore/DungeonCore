@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.other.RouteSearcher;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,6 +15,9 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.common.other.RouteSearcher;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 import com.google.common.collect.ImmutableList;
 
@@ -96,7 +96,7 @@ public class ChangeBiomeCommand implements CommandExecutor, TabCompleter {
   }
 
   protected List<String> getNames() {
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     for (Biome biome : Biome.values()) {
       arrayList.add(biome.toString());
     }

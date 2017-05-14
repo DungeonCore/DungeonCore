@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.common.event.quest;
 
-import net.l_bulb.dungeoncore.quest.Quest;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import net.l_bulb.dungeoncore.quest.Quest;
 
 public class StartQuestEvent extends QuestEvent implements Cancellable {
 

@@ -7,16 +7,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.QuestSheetRunnable;
 import net.l_bulb.dungeoncore.quest.Quest;
 import net.l_bulb.dungeoncore.quest.QuestManager;
 import net.l_bulb.dungeoncore.quest.QuestProcessingStatus;
 import net.l_bulb.dungeoncore.quest.abstractQuest.QuestType;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
@@ -88,7 +88,7 @@ public class PlayerQuestSession implements Serializable {
    */
   public HashSet<Quest> getQuestListFromIds(Collection<String> set) {
     // IDをQuestに変換してから返す
-    HashSet<Quest> doingQuestList = new HashSet<Quest>();
+    HashSet<Quest> doingQuestList = new HashSet<>();
     for (String questId : set) {
       doingQuestList.add(QuestManager.getQuestById(questId));
     }

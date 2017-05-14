@@ -6,10 +6,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.minecraft.server.v1_8_R1.EntityTypes;
-
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+
+import net.minecraft.server.v1_8_R1.EntityTypes;
 
 public class CitizenBugFixPatch {
   public static void doPatch() {
@@ -25,7 +26,7 @@ public class CitizenBugFixPatch {
               // EntityTypes.cを取得
               Map<String, Class<?>> map = (Map<String, Class<?>>) field.get(null);
               // 追加するMap
-              Map<String, Class<?>> addMap = new HashMap<String, Class<?>>();
+              Map<String, Class<?>> addMap = new HashMap<>();
 
               // １つずつ見て、もしKeyがClassならStringにする
               Iterator<?> iterator = map.entrySet().iterator();

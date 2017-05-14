@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
+import org.bukkit.command.CommandSender;
+
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetArmor;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.SpreadSheetArmorData;
-
-import org.bukkit.command.CommandSender;
 
 public class ArmorSheetRunnable extends AbstractSheetRunable {
 

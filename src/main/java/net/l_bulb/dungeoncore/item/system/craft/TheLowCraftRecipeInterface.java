@@ -2,11 +2,11 @@ package net.l_bulb.dungeoncore.item.system.craft;
 
 import java.util.Map;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 
 public interface TheLowCraftRecipeInterface {
 

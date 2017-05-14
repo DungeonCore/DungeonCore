@@ -2,12 +2,12 @@ package net.l_bulb.dungeoncore.player.customplayer;
 
 import java.util.HashMap;
 
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
-
-import org.bukkit.entity.Player;
 
 public class MagicPointManager {
 
@@ -52,7 +52,7 @@ public class MagicPointManager {
 }
 
 class MagicPointRunnable extends LbnRunnable {
-  static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<Player, MagicPointRunnable>();
+  static HashMap<Player, MagicPointRunnable> hashSet = new HashMap<>();
 
   Player p;
 

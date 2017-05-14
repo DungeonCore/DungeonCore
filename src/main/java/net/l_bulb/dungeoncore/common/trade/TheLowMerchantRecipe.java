@@ -1,10 +1,11 @@
 package net.l_bulb.dungeoncore.common.trade;
 
-import net.l_bulb.dungeoncore.util.NMSUtils;
-import net.minecraft.server.v1_8_R1.MerchantRecipe;
-
 import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.util.NMSUtils;
+
+import net.minecraft.server.v1_8_R1.MerchantRecipe;
 
 public class TheLowMerchantRecipe {
   MerchantRecipe recipe;

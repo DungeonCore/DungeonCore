@@ -5,11 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.item.setItem.SetItemInterface;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
-import net.l_bulb.dungeoncore.item.setItem.SetItemPartable;
-import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,6 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.item.setItem.SetItemInterface;
+import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
+import net.l_bulb.dungeoncore.item.setItem.SetItemPartable;
+import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
 
 import com.google.common.collect.ImmutableList;
 
@@ -65,7 +65,7 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
    * @return
    */
   public HashSet<String> getSetItemNameList() {
-    HashSet<String> nameList = new HashSet<String>();
+    HashSet<String> nameList = new HashSet<>();
     for (String name : SetItemManager.getSetItemNameList()) {
       nameList.add(name.replace(" ", "_"));
     }

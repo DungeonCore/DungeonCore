@@ -1,5 +1,13 @@
 package net.l_bulb.dungeoncore.npc.gui;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
@@ -9,15 +17,8 @@ import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
 import net.l_bulb.dungeoncore.player.PlayerChecker;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.md_5.bungee.api.ChatColor;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import net.md_5.bungee.api.ChatColor;
 
 public class RestVillagerGUI implements MenuSelectorInterface {
   static {

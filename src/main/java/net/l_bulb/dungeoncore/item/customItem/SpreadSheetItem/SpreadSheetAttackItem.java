@@ -2,6 +2,9 @@ package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -16,9 +19,6 @@ import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable {
   protected SpreadSheetWeaponData data;

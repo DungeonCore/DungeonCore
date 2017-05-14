@@ -2,17 +2,18 @@ package net.l_bulb.dungeoncore.chest;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.chest.wireless.RepositoryChest;
-import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
-import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.material.Chest;
+
+import net.l_bulb.dungeoncore.chest.wireless.RepositoryChest;
+import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
+import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
+
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * チェストの場所と中身を管理する

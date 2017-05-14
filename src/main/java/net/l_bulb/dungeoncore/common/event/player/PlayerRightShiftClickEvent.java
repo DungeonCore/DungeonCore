@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
 
 public class PlayerRightShiftClickEvent extends PlayerEvent {
   private static final HandlerList handlers = new HandlerList();

@@ -5,6 +5,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.ReincarnationInterface;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
@@ -12,13 +18,8 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.md_5.bungee.api.ChatColor;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import net.md_5.bungee.api.ChatColor;
 
 public class ReincarnationSelector implements MenuSelectorInterface {
 
@@ -87,7 +88,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
     // 全ての転生効果を取得
     Map<String, ReincarnationInterface> allReincanationMap = ReincarnationFactor.getAllReincanationMap();
     // 転生効果のリスト
-    ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<ReincarnationInterface>(allReincanationMap.values());
+    ArrayList<ReincarnationInterface> reincarnationList = new ArrayList<>(allReincanationMap.values());
     // 並び替えを行う
     reincarnationList.sort(new Comparator<ReincarnationInterface>() {
       @Override
@@ -101,7 +102,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
   }
 
   // View用のItemStackのキャッシュ
-  private static Map<ReincarnationInterface, ItemStack> viewItemCache = new HashMap<ReincarnationInterface, ItemStack>();
+  private static Map<ReincarnationInterface, ItemStack> viewItemCache = new HashMap<>();
 
   /**
    * ReincarnationInterfaceからそれに対応するView用のItemStackを取得する
@@ -121,7 +122,7 @@ public class ReincarnationSelector implements MenuSelectorInterface {
         ChatColor.GREEN + reincarnation.getTitle(),		// アイテム名
         reincarnation.getMaterial(),								// 素材
         (byte) reincarnation.getItemStackData()			// データ値
-        );	// 詳細
+    );	// 詳細
 
     // ID情報をNBTTagにセットする
     ItemStackUtil.setNBTTag(item, REINCARNATION_ID, reincarnation.getId());

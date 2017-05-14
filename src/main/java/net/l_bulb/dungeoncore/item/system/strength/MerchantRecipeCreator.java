@@ -3,6 +3,10 @@ package net.l_bulb.dungeoncore.item.system.strength;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
 import net.l_bulb.dungeoncore.item.ItemManager;
@@ -10,10 +14,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class MerchantRecipeCreator {
   /**
@@ -78,7 +78,7 @@ public class MerchantRecipeCreator {
     ItemStack recipe2Result = getShowResult(isSufficientMoney, isSufficientMaterial);
     TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, cloneItem2, recipe2Result);
 
-    // 素材が違っている　かつ　素材が置かれていないなら本来のレシピを表示
+    // 素材が違っている かつ 素材が置かれていないなら本来のレシピを表示
     if (!isSufficientMaterial && ItemStackUtil.isEmpty(item2)) {
       return Arrays.asList(recipe1, recipe2);
     } else {
@@ -99,7 +99,7 @@ public class MerchantRecipeCreator {
 
   private boolean isSufficientMaterial(ItemStack item2, TheLowPlayer player, int nextLevel) {
     ItemStack strengthMaterials = strengthData.getMaterial();
-    // 強化素材がいらない　かつ　強化素材がセットされていないならTRUE
+    // 強化素材がいらない かつ 強化素材がセットされていないならTRUE
     if (ItemStackUtil.isEmpty(strengthMaterials) && ItemStackUtil.isEmpty(item2)) { return true; }
 
     // TODO ID比較にする

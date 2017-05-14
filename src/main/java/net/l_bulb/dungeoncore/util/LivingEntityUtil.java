@@ -4,17 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
-import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomVillager;
-import net.l_bulb.dungeoncore.npc.NpcManager;
-import net.minecraft.server.v1_8_R1.EntityAnimal;
-import net.minecraft.server.v1_8_R1.EntityLightning;
-import net.minecraft.server.v1_8_R1.EntityMonster;
-import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
-
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,6 +24,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mob.LastDamageManager;
+import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomVillager;
+import net.l_bulb.dungeoncore.npc.NpcManager;
+
+import net.minecraft.server.v1_8_R1.EntityAnimal;
+import net.minecraft.server.v1_8_R1.EntityLightning;
+import net.minecraft.server.v1_8_R1.EntityMonster;
+import net.minecraft.server.v1_8_R1.PacketPlayOutSpawnEntityWeather;
 
 public class LivingEntityUtil {
   public static boolean isEnemy(Entity e) {
@@ -138,7 +139,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<Player> getNearByPlayer(Entity e, double x, double y, double z) {
-    ArrayList<Player> rtn = new ArrayList<Player>();
+    ArrayList<Player> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (entity.getType() == EntityType.PLAYER) {
         rtn.add((Player) entity);
@@ -157,7 +158,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<LivingEntity> getNearFrendly(Entity e, double x, double y, double z) {
-    ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
+    ArrayList<LivingEntity> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (isFriendship(entity)) {
         rtn.add((LivingEntity) entity);
@@ -176,7 +177,7 @@ public class LivingEntityUtil {
    * @return
    */
   public static ArrayList<LivingEntity> getNearEnemy(Entity e, double x, double y, double z) {
-    ArrayList<LivingEntity> rtn = new ArrayList<LivingEntity>();
+    ArrayList<LivingEntity> rtn = new ArrayList<>();
     for (Entity entity : e.getNearbyEntities(x, y, z)) {
       if (isEnemy(entity)) {
         rtn.add((LivingEntity) entity);

@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.mob.mobskill.skillrunnable;
 
+import org.bukkit.entity.Entity;
+
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
-import org.bukkit.entity.Entity;
 
 public class MobSkillLightningEffect extends MobSkillRunnable {
 

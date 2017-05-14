@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.common.explosion;
 
-import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+
+import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
 
 public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 

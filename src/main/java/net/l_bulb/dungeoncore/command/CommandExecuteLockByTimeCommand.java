@@ -3,10 +3,6 @@ package net.l_bulb.dungeoncore.command;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.command.util.TaskManager;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.l_bulb.dungeoncore.util.MinecraftUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,10 +10,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import net.l_bulb.dungeoncore.command.util.TaskManager;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+import net.l_bulb.dungeoncore.util.MinecraftUtil;
+
 public class CommandExecuteLockByTimeCommand implements CommandExecutor {
   static TaskManager taskManager = new TaskManager();
 
-  static HashMap<Location, Long> executeMap = new HashMap<Location, Long>();
+  static HashMap<Location, Long> executeMap = new HashMap<>();
 
   @Override
   public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString,
@@ -53,7 +53,7 @@ public class CommandExecuteLockByTimeCommand implements CommandExecutor {
     }
 
     long beforeExecuteTime = executeMap.get(blockLoc);
-    // もし(前実行した時間 + 指定した待ち時間) < (今の時間)　ならコマンド実行
+    // もし(前実行した時間 + 指定した待ち時間) < (今の時間) ならコマンド実行
     if (beforeExecuteTime + second * 1000 < System.currentTimeMillis()) {
       String command = StringUtils.join(Arrays.copyOfRange(paramArrayOfString, 1, paramArrayOfString.length), " ");
       Bukkit.dispatchCommand(paramCommandSender, command);

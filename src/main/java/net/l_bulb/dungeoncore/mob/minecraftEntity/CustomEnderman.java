@@ -1,17 +1,18 @@
 package net.l_bulb.dungeoncore.mob.minecraftEntity;
 
-import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.minecraft.server.v1_8_R1.EntityEnderman;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-import net.minecraft.server.v1_8_R1.World;
-import net.minecraft.server.v1_8_R1.WorldServer;
-
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
+import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+
+import net.minecraft.server.v1_8_R1.EntityEnderman;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
+import net.minecraft.server.v1_8_R1.World;
+import net.minecraft.server.v1_8_R1.WorldServer;
 
 public class CustomEnderman extends EntityEnderman implements ICustomEntity<Enderman> {
 

@@ -7,6 +7,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
@@ -27,27 +42,12 @@ import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import com.google.common.collect.HashBasedTable;
 
 public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
-  static HashMap<String, LivingEntity> entityList = new HashMap<String, LivingEntity>();
+  static HashMap<String, LivingEntity> entityList = new HashMap<>();
 
   protected SpreadSheetBossMob(LbnMobTag nbtTag, String[] command, String name) {
     super(nbtTag, command, name);
@@ -86,7 +86,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
 
   private LivingEntity e;
 
-  HashMap<MobSkillExcuteConditionType, BukkitRunnable> runtineMap = new HashMap<MobSkillExcuteConditionType, BukkitRunnable>();
+  HashMap<MobSkillExcuteConditionType, BukkitRunnable> runtineMap = new HashMap<>();
 
   @Override
   public void setEntity(LivingEntity e) {
@@ -176,7 +176,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     return e;
   }
 
-  private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<TheLowPlayer, Long>();
+  private HashMap<TheLowPlayer, Long> combatPlayerSet = new HashMap<>();
 
   private HashBasedTable<TheLowPlayer, LevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 
@@ -193,7 +193,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     // 攻撃方法を対応するステータスのTypeに変換
     LevelType type = lastDamageType.getLevelType();
 
-    // 攻撃者がいる　または　攻撃方法に対応するステータスが存在するならダメージを記録する
+    // 攻撃者がいる または 攻撃方法に対応するステータスが存在するならダメージを記録する
     if (p != null && type != null) {
       combatPlayerSet.put(p, System.currentTimeMillis());
 

@@ -6,22 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
-import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExcuteConditionType;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExecutor;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillInterface;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
-import net.l_bulb.dungeoncore.player.ExpTable;
-import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.BlockUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -39,6 +23,22 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.LastDamageManager;
+import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
+import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExcuteConditionType;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExecutor;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillInterface;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
+import net.l_bulb.dungeoncore.player.ExpTable;
+import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.BlockUtil;
 
 public class SpreadSheetMob extends AbstractMob<Entity> {
 
@@ -95,8 +95,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
         double oldHp = ((LivingEntity) spawn).getMaxHealth();
         ((LivingEntity) spawn).setMaxHealth(
             AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(nbtTag.getLevel(), ItemType.SWORD), nbtTag.getLevel())
-                / AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(9, ItemType.SWORD), 9) * oldHp
-            );
+                / AttackDamageValue.getAttackDamageValue(AttackDamageValue.getCombatLoad(9, ItemType.SWORD), 9) * oldHp);
         ((LivingEntity) spawn).setHealth(((LivingEntity) spawn).getMaxHealth());
       }
     }
@@ -281,7 +280,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   @Override
   public List<ItemStack> getDropItem(Player lastDamagePlayer) {
-    List<ItemStack> dropItem = new ArrayList<ItemStack>();
+    List<ItemStack> dropItem = new ArrayList<>();
     if (this.mob != null) {
       dropItem.addAll(this.mob.getDropItem(lastDamagePlayer));
     }
@@ -313,7 +312,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     }
   }
 
-  HashSet<String> skillNameSet = new HashSet<String>();
+  HashSet<String> skillNameSet = new HashSet<>();
 
   /**
    * このモブが持っているSkillIDを取得する

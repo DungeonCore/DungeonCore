@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.item;
 
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public interface ItemInterface {
   String getItemName();

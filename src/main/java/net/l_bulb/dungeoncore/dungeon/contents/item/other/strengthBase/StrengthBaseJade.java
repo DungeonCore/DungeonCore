@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.other.strengthBase;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.other.MagicStoneJade;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class StrengthBaseJade extends StrengthBaseItem {
   @Override

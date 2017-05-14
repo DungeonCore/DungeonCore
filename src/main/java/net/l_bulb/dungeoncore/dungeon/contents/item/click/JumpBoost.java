@@ -1,12 +1,5 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.click;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
-import net.l_bulb.dungeoncore.player.PlayerChecker;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -14,6 +7,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class JumpBoost extends RightClickItem {
   @Override

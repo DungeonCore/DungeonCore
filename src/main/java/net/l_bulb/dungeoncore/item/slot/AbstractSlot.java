@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.item.slot;
 
-import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
-import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 
 public abstract class AbstractSlot extends AbstractItem implements SlotInterface {
   @Override

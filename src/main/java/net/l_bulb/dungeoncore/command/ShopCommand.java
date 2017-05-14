@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.command;
 
-import net.l_bulb.dungeoncore.money.shop.Shop;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.money.shop.Shop;
 
 public class ShopCommand implements CommandExecutor {
 

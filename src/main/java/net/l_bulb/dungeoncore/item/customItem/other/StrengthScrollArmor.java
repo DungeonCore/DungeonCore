@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.item.customItem.other;
 
-import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 
 public class StrengthScrollArmor extends AbstractItem {
 

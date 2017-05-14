@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.common.event.quest.StartQuestEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.quest.Quest;
-
-import org.bukkit.entity.Player;
 
 public class NullQuest implements Quest {
 

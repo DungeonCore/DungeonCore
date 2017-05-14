@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.dungeon.contents.mob;
 
+import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+
 import net.l_bulb.dungeoncore.dungeon.contents.mob.skelton.NormalSkelton;
 import net.l_bulb.dungeoncore.dungeon.contents.mob.zombie.NormalZombie;
 import net.l_bulb.dungeoncore.mob.customMob.NullMob;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
-import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 
 public class NormalMob extends NullMob {
   EntityType type;

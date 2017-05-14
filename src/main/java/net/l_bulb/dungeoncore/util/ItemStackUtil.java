@@ -7,11 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.minecraft.server.v1_8_R1.NBTTagCompound;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,7 +19,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.l_bulb.dungeoncore.NbtTagConst;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+
 import com.google.common.base.Joiner;
+
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
 public class ItemStackUtil {
   /**

@@ -2,12 +2,6 @@ package net.l_bulb.dungeoncore.chest;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +11,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
+import net.l_bulb.dungeoncore.util.LbnRunnable;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class BossChest extends SpletSheetChest {
 
@@ -33,7 +33,7 @@ public class BossChest extends SpletSheetChest {
    * チェストを設置する
    * 
    * @param e
-   * @return　設置後のチェストの座標
+   * @return 設置後のチェストの座標
    */
   public Location setChest(BossMobable e) {
     if (moveLoc != null) {

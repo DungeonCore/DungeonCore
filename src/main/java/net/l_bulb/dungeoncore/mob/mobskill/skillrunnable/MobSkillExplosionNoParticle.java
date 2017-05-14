@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.mob.mobskill.skillrunnable;
 
+import org.bukkit.entity.Entity;
+
 import net.l_bulb.dungeoncore.common.explosion.NotMonsterDamageExplosion;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.entity.Entity;
 
 public class MobSkillExplosionNoParticle extends MobSkillRunnable {
 

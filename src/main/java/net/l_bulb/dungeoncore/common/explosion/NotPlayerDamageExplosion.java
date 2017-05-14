@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.common.explosion;
 
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
 
 public abstract class NotPlayerDamageExplosion extends AbstractNotDamageExplosion {
 

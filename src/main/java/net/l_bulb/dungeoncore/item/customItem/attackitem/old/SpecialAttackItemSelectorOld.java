@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
@@ -17,13 +24,6 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.Message;
 
-import org.apache.commons.lang3.StringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 public class SpecialAttackItemSelectorOld extends AbstractItem implements RightClickItemable, LeftClickItemable {
 
   SpecialAttackItemable specialItem;
@@ -34,14 +34,13 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
     MenuSelector menuSelecor = new MenuSelector(specialItem.getId() + " selector");
 
     // レベルごとにソートする
-    ArrayList<ItemInterface> allItem = new ArrayList<ItemInterface>(specialItem.getAllItem());
+    ArrayList<ItemInterface> allItem = new ArrayList<>(specialItem.getAllItem());
     Collections.sort(allItem, new Comparator<ItemInterface>() {
       @Override
       public int compare(ItemInterface o1, ItemInterface o2) {
         if (o1 instanceof AvailableLevelItemable && o2 instanceof AvailableLevelItemable) {
-          if (((AvailableLevelItemable) o1).getAvailableLevel() != ((AvailableLevelItemable) o2).getAvailableLevel()) {
-          return ((AvailableLevelItemable) o1).getAvailableLevel() - ((AvailableLevelItemable) o2).getAvailableLevel();
-          }
+          if (((AvailableLevelItemable) o1).getAvailableLevel() != ((AvailableLevelItemable) o2)
+              .getAvailableLevel()) { return ((AvailableLevelItemable) o1).getAvailableLevel() - ((AvailableLevelItemable) o2).getAvailableLevel(); }
         }
         return o1.getId().compareTo(o2.getId());
       }
@@ -58,9 +57,7 @@ public class SpecialAttackItemSelectorOld extends AbstractItem implements RightC
         public void run(Player p, ItemStack item) {
           ItemStack itemInHand = p.getItemInHand();
           // 手に持っているのがこのアイテムでないなら何もしない
-          if (!isThisItem(itemInHand)) {
-          return;
-          }
+          if (!isThisItem(itemInHand)) { return; }
           if (itemInHand.getAmount() != 1) {
             Message.sendMessage(p, "スタックしない状態でクリックしてください。");
             return;

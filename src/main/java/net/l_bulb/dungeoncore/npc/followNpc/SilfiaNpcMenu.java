@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.npc.followNpc;
 
-import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class SilfiaNpcMenu implements MenuSelectorInterface {
 

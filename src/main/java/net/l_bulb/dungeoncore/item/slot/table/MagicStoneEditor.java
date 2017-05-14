@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.SlotManager;
@@ -15,9 +18,6 @@ import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneEditor {
   /**
@@ -34,7 +34,7 @@ public class MagicStoneEditor {
   ItemStack item;
   AbstractAttackItem itemInterface;
 
-  static HashMap<ItemStack, MagicStoneEditor> cache = new HashMap<ItemStack, MagicStoneEditor>();
+  static HashMap<ItemStack, MagicStoneEditor> cache = new HashMap<>();
 
   /**
    * ItemStackから武器情報を取得する
@@ -119,7 +119,7 @@ public class MagicStoneEditor {
     // すでに初期化しているなら無視する
     if (isInitSlot) { return; }
 
-    slotList = new ArrayList<SlotInterface>();
+    slotList = new ArrayList<>();
     for (String string : ItemStackUtil.getLore(item)) {
       SlotInterface slotByLore = SlotManager.getSlotByLore(string);
       if (slotByLore != null) {

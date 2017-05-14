@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.util;
 
-import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
-
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -11,11 +9,13 @@ import org.bukkit.craftbukkit.v1_8_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
+
 public class MinecraftUtil {
 
   /**
    *
-   //http://wiki.vg/Protocol#Sound_Effect
+   * //http://wiki.vg/Protocol#Sound_Effect
    * 
    * @param center
    * @param sound

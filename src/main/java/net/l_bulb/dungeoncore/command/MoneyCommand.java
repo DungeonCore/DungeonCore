@@ -1,17 +1,17 @@
 package net.l_bulb.dungeoncore.command;
 
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
-import net.l_bulb.dungeoncore.money.GalionEditReason;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
+import net.l_bulb.dungeoncore.money.GalionEditReason;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class MoneyCommand implements CommandExecutor {
 

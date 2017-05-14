@@ -3,20 +3,21 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 import java.util.Collection;
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
-import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
-import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.Message;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.Message;
+
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * 武器スキルを選択する
@@ -62,10 +63,10 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
     p.openInventory(createInventory);
   }
 
-  static HashMap<WeaponSkillInterface, ItemStack> viewItemCache = new HashMap<WeaponSkillInterface, ItemStack>();
+  static HashMap<WeaponSkillInterface, ItemStack> viewItemCache = new HashMap<>();
 
   // ItemStackと武器スキルを結びつけたMap
-  static HashMap<ItemStack, WeaponSkillInterface> viewItemIdCache = new HashMap<ItemStack, WeaponSkillInterface>();
+  static HashMap<ItemStack, WeaponSkillInterface> viewItemIdCache = new HashMap<>();
 
   private ItemStack getViewItemStack(WeaponSkillInterface skill) {
     // キャッシュから取得する

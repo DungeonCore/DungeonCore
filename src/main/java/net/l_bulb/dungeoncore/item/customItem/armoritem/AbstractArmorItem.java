@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.item.customItem.armoritem;
 
+import org.bukkit.ChatColor;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
@@ -7,8 +9,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.Message;
-
-import org.bukkit.ChatColor;
 
 public abstract class AbstractArmorItem extends AbstractItem implements ArmorItemable, StrengthChangeItemable {
   @Override

@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.magic;
 
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.itemInterface.MagicExcuteable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractLevelStrengthMagicExcuter implements MagicExcuteable {
 

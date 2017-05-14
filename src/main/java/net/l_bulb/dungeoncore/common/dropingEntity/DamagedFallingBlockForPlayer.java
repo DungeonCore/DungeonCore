@@ -1,11 +1,5 @@
 package net.l_bulb.dungeoncore.common.dropingEntity;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
-import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -14,6 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
+import net.l_bulb.dungeoncore.mob.LastDamageManager;
+import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFallingblock {
 

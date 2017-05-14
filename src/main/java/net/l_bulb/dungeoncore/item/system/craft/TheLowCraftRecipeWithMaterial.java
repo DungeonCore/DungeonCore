@@ -4,19 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
+
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForOnlyMaterialRecipe;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
-
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
   // ItemId
-  HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
+  HashMap<String, Integer> materialMap = new HashMap<>();
 
   @Override
   public void addMaterial(String itemid, int amount) {
@@ -26,7 +26,7 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
 
   @Override
   public Map<ItemInterface, Integer> getMaterialMap() {
-    HashMap<ItemInterface, Integer> itemInterfaceMap = new HashMap<ItemInterface, Integer>();
+    HashMap<ItemInterface, Integer> itemInterfaceMap = new HashMap<>();
     for (Entry<String, Integer> entry : materialMap.entrySet()) {
       // アイテムを取得する
       ItemInterface customItemById = ItemManager.getCustomItemById(entry.getKey());

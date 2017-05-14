@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.mobspawn.point;
 
+import org.bukkit.Location;
+
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
 import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
-
-import org.bukkit.Location;
 
 public class SpletSheetMobSpawnerPoint extends MobSpawnerPoint {
 

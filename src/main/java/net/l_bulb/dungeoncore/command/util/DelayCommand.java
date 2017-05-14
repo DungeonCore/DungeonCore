@@ -2,9 +2,6 @@ package net.l_bulb.dungeoncore.command.util;
 
 import java.util.Arrays;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.util.MinecraftUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
@@ -14,6 +11,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.util.MinecraftUtil;
 
 public class DelayCommand implements CommandExecutor, UsageCommandable {
   static TaskManager taskManager = new TaskManager();

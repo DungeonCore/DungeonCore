@@ -1,19 +1,12 @@
 package net.l_bulb.dungeoncore.money;
 
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import net.l_bulb.dungeoncore.util.Message;
+
 public enum GalionEditReason {
-  mob_drop(true),
-  penalty(true),
-  consume_shop(true),
-  consume_strength(true),
-  command(true),
-  get_money_item(true),
-  quest_reword(true),
-  system(false);
+  mob_drop(true), penalty(true), consume_shop(true), consume_strength(true), command(true), get_money_item(true), quest_reword(true), system(false);
 
   boolean isPrintMessageLog;
 

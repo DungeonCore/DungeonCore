@@ -1,10 +1,5 @@
 package net.l_bulb.dungeoncore.common.other;
 
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.KeyItemable;
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.GettingItemable;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -12,6 +7,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.KeyItemable;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.itemInterface.GettingItemable;
 
 public class InHandItemClickSign {
   boolean isSuccess = false;

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
@@ -12,11 +17,6 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.KillSlot;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 
 public class MagicHealMagicStone extends KillSlot {
 
@@ -31,7 +31,7 @@ public class MagicHealMagicStone extends KillSlot {
   }
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList.add(new MagicHealMagicStone(1, SlotLevel.LEVEL3, "小"));
     arrayList.add(new MagicHealMagicStone(2, SlotLevel.LEVEL4, "中"));
     arrayList.add(new MagicHealMagicStone(3, SlotLevel.LEVEL5, "大"));

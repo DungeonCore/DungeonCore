@@ -2,16 +2,6 @@ package net.l_bulb.dungeoncore.item.customItem.armoritem;
 
 import java.text.MessageFormat;
 
-import net.l_bulb.dungeoncore.api.LevelType;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.player.PlayerChecker;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -24,6 +14,16 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.api.LevelType;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class ArmorBase {
   public static void onArmor(EntityDamageEvent e) {

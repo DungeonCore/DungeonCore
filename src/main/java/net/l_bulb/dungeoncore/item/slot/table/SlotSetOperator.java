@@ -2,13 +2,13 @@ package net.l_bulb.dungeoncore.item.slot.table;
 
 import java.util.ArrayList;
 
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
-
-import org.bukkit.inventory.ItemStack;
 
 public class SlotSetOperator {
   protected SlotSetOperator(MagicStoneEditor attackItem,

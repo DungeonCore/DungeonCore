@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.quest.QuestProcessingStatus;
 import net.l_bulb.dungeoncore.quest.abstractQuest.ReachQuest;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerTickRunner {
   public static void execute() {
@@ -22,7 +22,7 @@ public class PlayerTickRunner {
       public void run() {
         // Playerのリストを更新する
         if (tickCount == 0) {
-          onlinePlayers = new ArrayList<Player>(Bukkit.getOnlinePlayers());
+          onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
         }
 
         // 20人ごとにPlayerを操作する

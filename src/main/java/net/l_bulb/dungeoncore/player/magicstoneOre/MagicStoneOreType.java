@@ -11,13 +11,10 @@ import org.bukkit.Material;
  *
  */
 public enum MagicStoneOreType {
-  DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 60 * 60 * 1, 60 * 60 * 3, 10),
-  REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 60 * 40, (long) (60 * 60 * 1.5), 75),
-  GOLD_ORE("金鉱石", Material.GOLD_ORE, 20 * 30, (long) (20 * 60 * 1.5), 50),
-  EMERALD_ORE("エメラルド鉱石", Material.EMERALD_ORE, 60 * 30, (long) (60 * 60 * 1.5), 0),
-  IRON_ORE("鉄鉱石", Material.IRON_ORE, 60 * 10, 60 * 30, 30),
-  COAL_ORE("石炭鉱石", Material.COAL_ORE, 60 * 10, 60 * 30, 10),
-  LAPIS_ORE("ラピス鉱石", Material.LAPIS_ORE, 60 * 10, 60 * 30, 15);
+  DIAOMOD_ORE("ダイヤ鉱石", Material.DIAMOND_ORE, 60 * 60 * 1, 60 * 60 * 3, 10), REDSTONE_ORE("レッドストーン鉱石", Material.REDSTONE_ORE, 60 * 40,
+      (long) (60 * 60 * 1.5), 75), GOLD_ORE("金鉱石", Material.GOLD_ORE, 20 * 30, (long) (20 * 60 * 1.5), 50), EMERALD_ORE("エメラルド鉱石",
+          Material.EMERALD_ORE, 60 * 30, (long) (60 * 60 * 1.5), 0), IRON_ORE("鉄鉱石", Material.IRON_ORE, 60 * 10, 60 * 30,
+              30), COAL_ORE("石炭鉱石", Material.COAL_ORE, 60 * 10, 60 * 30, 10), LAPIS_ORE("ラピス鉱石", Material.LAPIS_ORE, 60 * 10, 60 * 30, 15);
 
   // 日本語名
   String jpName;

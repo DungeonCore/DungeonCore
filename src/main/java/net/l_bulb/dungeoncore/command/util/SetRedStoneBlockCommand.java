@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.command.util;
 
-import net.l_bulb.dungeoncore.util.BlockUtil;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.util.BlockUtil;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SetRedStoneBlockCommand implements CommandExecutor {
 

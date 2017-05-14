@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.dungeon.contents.slotStone.level3;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.UnUseSlot;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
 
 public class HealSlotStone extends UnUseSlot implements Cooltimable {
 

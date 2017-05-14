@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.common.dropingEntity;
 
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public abstract class DamageFallingblockForMonsterSkill extends AbstractDamageFallingblock {
 

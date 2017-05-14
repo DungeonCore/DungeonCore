@@ -3,12 +3,12 @@ package net.l_bulb.dungeoncore.mobspawn.gettter;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.bukkit.entity.EntityType;
+
 import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.customMob.NullMob;
-
-import org.bukkit.entity.EntityType;
 
 public class SpawnMobGetterManager {
   static HashMap<String, SpawnMobGetterInterface> spawnMobList = new HashMap<>();

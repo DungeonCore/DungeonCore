@@ -2,10 +2,6 @@ package net.l_bulb.dungeoncore.dungeon.contents.item.key.impl;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
-import net.l_bulb.dungeoncore.item.itemInterface.GettingItemable;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,6 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
+import net.l_bulb.dungeoncore.item.itemInterface.GettingItemable;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
 

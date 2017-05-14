@@ -4,17 +4,17 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.Config;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.chest.wireless.WireLessChestManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
 import net.l_bulb.dungeoncore.util.Message;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerIODataManager {
   public static boolean ignoreSave = false;
@@ -53,7 +53,7 @@ public class PlayerIODataManager {
     }.runTaskLater(Main.plugin, 20 * 10);
   }
 
-  public static HashSet<UUID> loadErrorList = new HashSet<UUID>();
+  public static HashSet<UUID> loadErrorList = new HashSet<>();
 
   public static void load(Player p) {
     String string = PlayerLastSaveType.getType(p);

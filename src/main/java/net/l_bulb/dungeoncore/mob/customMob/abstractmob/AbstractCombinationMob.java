@@ -1,8 +1,5 @@
 package net.l_bulb.dungeoncore.mob.customMob.abstractmob;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -10,6 +7,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
 
 public abstract class AbstractCombinationMob<K extends LivingEntity> extends AbstractMob<K> {
 

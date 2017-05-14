@@ -3,9 +3,6 @@ package net.l_bulb.dungeoncore;
 import java.util.Collection;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.player.PlayerChecker;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -50,6 +47,9 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 
 public class LimitedListener implements Listener {
   static String targetWorldName = "world";

@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.item.setItem;
 
-import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 
 public abstract class SetStrengthableItemParts extends SetItemParts implements Strengthenable {
 

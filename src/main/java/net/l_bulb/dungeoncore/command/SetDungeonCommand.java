@@ -5,13 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
-import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.DungeonListRunnable;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
+import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.DungeonListRunnable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 import com.google.common.collect.ImmutableList;
 
@@ -54,7 +54,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
       // スプレットシートにデータを送信する
       DungeonListRunnable dungeonListRunnable = new DungeonListRunnable(sender);
 
-      HashMap<String, Object> hashMap = new HashMap<String, Object>();
+      HashMap<String, Object> hashMap = new HashMap<>();
       hashMap.put("name", dungeonName);
       hashMap.put("tploc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));
       hashMap.put("startloc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));

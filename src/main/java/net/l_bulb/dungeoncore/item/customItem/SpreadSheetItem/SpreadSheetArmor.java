@@ -2,6 +2,12 @@ package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.AbstractArmorItem;
@@ -10,12 +16,6 @@ import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-
-import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetArmor extends AbstractArmorItem {
   SpreadSheetArmorData data;

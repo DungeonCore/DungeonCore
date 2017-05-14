@@ -1,5 +1,9 @@
 package net.l_bulb.dungeoncore.dungeoncore;
 
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
+
 import net.l_bulb.dungeoncore.command.CommandAnnounce;
 import net.l_bulb.dungeoncore.command.CommandAttention;
 import net.l_bulb.dungeoncore.command.CommandBook;
@@ -51,10 +55,6 @@ import net.l_bulb.dungeoncore.command.util.TimerExcuteCommand;
 import net.l_bulb.dungeoncore.command.util.TmCommand;
 import net.l_bulb.dungeoncore.command.util.ToggleSetBlockCommand;
 import net.l_bulb.dungeoncore.command.util.UsageCommandable;
-
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
 
 public class CommandRegister {
   public static void registCommand() {

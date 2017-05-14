@@ -3,6 +3,13 @@ package net.l_bulb.dungeoncore.item.system.strength;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -13,13 +20,6 @@ import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollWeapon;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
 public class StrengthMerchant extends TheLowMerchant {
   public StrengthMerchant(Player p, TheLowPlayer thelowPlayer) {
@@ -98,7 +98,7 @@ public class StrengthMerchant extends TheLowMerchant {
 
   @Override
   public List<TheLowMerchantRecipe> getInitRecipes() {
-    ArrayList<TheLowMerchantRecipe> recipes = new ArrayList<TheLowMerchantRecipe>();
+    ArrayList<TheLowMerchantRecipe> recipes = new ArrayList<>();
     recipes.add(new TheLowMerchantRecipe(ItemStackUtil.getItem("強化したい武器", Material.IRON_SWORD, "強化する武器を置いてください"),
         WEAPON_SCROLL, ItemStackUtil.getItem("強化された武器", Material.DIAMOND_SWORD)));
     recipes.add(new TheLowMerchantRecipe(ItemStackUtil.getItem("強化したい防具", Material.IRON_CHESTPLATE, "強化する防具を置いてください"),

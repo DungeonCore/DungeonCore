@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.command;
 
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.util.JavaUtil;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class JumpCommand implements CommandExecutor {
 

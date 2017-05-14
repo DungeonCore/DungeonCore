@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore;
 
+import org.bukkit.Bukkit;
+
 import net.l_bulb.dungeoncore.command.CommandChest;
 import net.l_bulb.dungeoncore.command.MobCommand;
 import net.l_bulb.dungeoncore.command.QuestCommand;
@@ -24,8 +26,6 @@ import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerLastSaveType;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
-
-import org.bukkit.Bukkit;
 
 public class InitManager {
 

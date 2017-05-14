@@ -3,16 +3,6 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.magi
 import java.util.HashSet;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.FallingBlockParticles;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -22,6 +12,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.common.particle.Particles;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
+import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.FallingBlockParticles;
+import net.l_bulb.dungeoncore.util.LbnRunnable;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class GravityField extends WeaponSkillForOneType {
 
@@ -36,7 +36,7 @@ public class GravityField extends WeaponSkillForOneType {
 
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-    HashSet<LivingEntity> enemy = new HashSet<LivingEntity>();
+    HashSet<LivingEntity> enemy = new HashSet<>();
 
     for (Entity entity : p.getNearbyEntities(getData(0), getData(0), getData(0))) {
       if (!entity.getType().isAlive()) {

@@ -5,6 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
+
+import com.google.common.collect.Lists;
+
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.DamageSource;
 import net.minecraft.server.v1_8_R1.EnchantmentProtection;
@@ -18,13 +25,6 @@ import net.minecraft.server.v1_8_R1.MathHelper;
 import net.minecraft.server.v1_8_R1.PacketPlayOutExplosion;
 import net.minecraft.server.v1_8_R1.Vec3D;
 import net.minecraft.server.v1_8_R1.World;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
-
-import com.google.common.collect.Lists;
 
 public abstract class AbstractNotDamageExplosion extends Explosion {
 
@@ -55,7 +55,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
   float size = 0;
   protected World world;
 
-  protected Map<EntityHuman, Vec3D> l = new HashMap<EntityHuman, Vec3D>();
+  protected Map<EntityHuman, Vec3D> l = new HashMap<>();
 
   protected int i = 16;
 

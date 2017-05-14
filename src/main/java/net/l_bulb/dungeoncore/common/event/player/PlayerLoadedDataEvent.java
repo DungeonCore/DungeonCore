@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 
 public class PlayerLoadedDataEvent extends TheLowPlayerEvent {
 

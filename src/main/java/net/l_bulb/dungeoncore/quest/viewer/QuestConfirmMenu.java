@@ -2,18 +2,18 @@ package net.l_bulb.dungeoncore.quest.viewer;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
 import net.l_bulb.dungeoncore.quest.Quest;
 import net.l_bulb.dungeoncore.quest.QuestManager;
 import net.l_bulb.dungeoncore.quest.QuestManager.QuestStartStatus;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class QuestConfirmMenu extends MenuSelector {
   static {
@@ -31,7 +31,7 @@ public class QuestConfirmMenu extends MenuSelector {
     this.q = q;
 
     ItemStack reciveItem = ItemStackUtil.getItem(ChatColor.GREEN + "クエストを受注する", Material.WOOL, (byte) 5);
-    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayList<String> arrayList = new ArrayList<>();
     arrayList.add(ChatColor.AQUA + "[QUEST] " + q.getName());
 
     for (String detail : q.getQuestDetail()) {

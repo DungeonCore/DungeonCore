@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.item.slot.slot;
 
+import org.bukkit.ChatColor;
+
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
-
-import org.bukkit.ChatColor;
 
 public class EmptySlot implements SlotInterface {
 

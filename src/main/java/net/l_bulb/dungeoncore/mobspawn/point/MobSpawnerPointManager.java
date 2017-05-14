@@ -6,6 +6,13 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockBreakEvent;
+
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
@@ -14,13 +21,6 @@ import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.event.block.BlockBreakEvent;
 
 import com.google.common.collect.HashMultimap;
 
@@ -32,7 +32,7 @@ public class MobSpawnerPointManager {
   // 現在起動中のスケジューラー
   static HashMap<SpawnLevel, SpawnScheduler> schedulerList = new HashMap<>();
   // ロードされているチャンク
-  public static HashSet<ChunkWrapper> loadedChunk = new HashSet<ChunkWrapper>();
+  public static HashSet<ChunkWrapper> loadedChunk = new HashSet<>();
 
   // スプレットシートIDの最大値
   static int spletSheetId = 0;
@@ -108,7 +108,7 @@ public class MobSpawnerPointManager {
    * @return
    */
   public static Collection<MobSpawnerPoint> getSpawnerPointListByLoadedChunk() {
-    HashSet<MobSpawnerPoint> rtn = new HashSet<MobSpawnerPoint>();
+    HashSet<MobSpawnerPoint> rtn = new HashSet<>();
     for (ChunkWrapper chunk : loadedChunk) {
       rtn.addAll(spawnPointListAndChunk.get(chunk));
     }

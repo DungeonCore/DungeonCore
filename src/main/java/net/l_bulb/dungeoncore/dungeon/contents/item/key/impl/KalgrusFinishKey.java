@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.key.impl;
 
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class KalgrusFinishKey extends SuikaCastle {
 

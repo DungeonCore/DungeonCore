@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.mob.customMob.abstractmob;
 
-import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomWitch;
-
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Witch;
+
+import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomWitch;
 
 public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch> {
   @Override

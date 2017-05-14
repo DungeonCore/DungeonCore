@@ -5,17 +5,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.customMob.abstractmob.AbstractCombinationMob;
-import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
-
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.customMob.abstractmob.AbstractCombinationMob;
+import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
+import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
 
 public class MobSpawnerPoint {
   public SpawnMobGetterInterface mobGetter;
@@ -40,7 +40,7 @@ public class MobSpawnerPoint {
 
   ChunkWrapper chunk;
 
-  private List<ChunkWrapper> nearChunkList = new ArrayList<ChunkWrapper>();
+  private List<ChunkWrapper> nearChunkList = new ArrayList<>();
 
   HashSet<String> mobNameList = new HashSet<>();
 
@@ -168,7 +168,7 @@ public class MobSpawnerPoint {
     this.dungeonHight = dungeonHight;
   }
 
-  public ArrayList<LivingEntity> nearMob = new ArrayList<LivingEntity>();
+  public ArrayList<LivingEntity> nearMob = new ArrayList<>();
 
   /**
    * このGetterに該当するMobを取得する

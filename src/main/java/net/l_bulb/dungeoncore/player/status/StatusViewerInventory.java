@@ -1,15 +1,15 @@
 package net.l_bulb.dungeoncore.player.status;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.player.status.detail.BowStatusDetail;
 import net.l_bulb.dungeoncore.player.status.detail.MagicStatusDetail;
 import net.l_bulb.dungeoncore.player.status.detail.MainStatusDetail;
 import net.l_bulb.dungeoncore.player.status.detail.SwordStatusDetail;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 @SuppressWarnings("deprecation")
 public class StatusViewerInventory {

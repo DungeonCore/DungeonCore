@@ -6,6 +6,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
@@ -23,18 +35,6 @@ import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.InventoryInteractEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class CommandGetItem implements CommandExecutor {
 
@@ -143,7 +143,7 @@ public class CommandGetItem implements CommandExecutor {
   protected static void init() {
     DungeonLogger.development("item list init!!");
     MenuSelector menuSelecor = new MenuSelector("item nemu");
-    Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<Integer, TreeSet<ItemInterface>>();
+    Map<Integer, TreeSet<ItemInterface>> allItem = new HashMap<>();
 
     count = 0;
     // アイテムをグループごとに分類分けする
@@ -217,15 +217,13 @@ public class CommandGetItem implements CommandExecutor {
   }
 
   protected static TreeSet<ItemInterface> getTreeSet() {
-    TreeSet<ItemInterface> treeSet = new TreeSet<ItemInterface>(new Comparator<ItemInterface>() {
+    TreeSet<ItemInterface> treeSet = new TreeSet<>(new Comparator<ItemInterface>() {
       @Override
       public int compare(ItemInterface o1, ItemInterface o2) {
         // まずはアイテムの種類ごと
         int order1 = getOrder(o1);
         int order2 = getOrder(o2);
-        if (order1 != order2) {
-        return order1 - order2;
-        }
+        if (order1 != order2) { return order1 - order2; }
 
         // アイテムのレベルごと
         int level1 = -1;
@@ -236,32 +234,26 @@ public class CommandGetItem implements CommandExecutor {
         if (o2 instanceof AvailableLevelItemable) {
           level2 = ((AvailableLevelItemable) o2).getAvailableLevel();
         }
-        if (level1 != level2) {
-        return Integer.compare(level1, level2);
-        }
+        if (level1 != level2) { return Integer.compare(level1, level2); }
 
         // 魔法石の場合は特別
         if (o1 instanceof SlotInterface && o2 instanceof SlotInterface) {
-          if (((SlotInterface) o1).getSlotType() != ((SlotInterface) o2).getSlotType()) {
-          return ((SlotInterface) o1).getSlotType().compareTo(((SlotInterface) o2).getSlotType());
-          }
+          if (((SlotInterface) o1).getSlotType() != ((SlotInterface) o2)
+              .getSlotType()) { return ((SlotInterface) o1).getSlotType().compareTo(((SlotInterface) o2).getSlotType()); }
 
-          if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel().getSucessPer()) {
-          return Double.compare(((SlotInterface) o2).getLevel().getSucessPer(),
-              ((SlotInterface) o1).getLevel().getSucessPer());
-          }
+          if (((SlotInterface) o1).getLevel().getSucessPer() != ((SlotInterface) o2).getLevel()
+              .getSucessPer()) { return Double.compare(((SlotInterface) o2).getLevel().getSucessPer(),
+                  ((SlotInterface) o1).getLevel().getSucessPer()); }
         }
 
         return o1.getId().compareTo(o2.getId());
       }
 
-      HashMap<ItemInterface, Integer> cache = new HashMap<ItemInterface, Integer>();
+      HashMap<ItemInterface, Integer> cache = new HashMap<>();
 
       // アイテムの並び順
       public int getOrder(ItemInterface item) {
-        if (cache.containsKey(item)) {
-        return cache.get(item);
-        }
+        if (cache.containsKey(item)) { return cache.get(item); }
 
         int rtn;
         if (item.getAttackType() == ItemType.SWORD) {

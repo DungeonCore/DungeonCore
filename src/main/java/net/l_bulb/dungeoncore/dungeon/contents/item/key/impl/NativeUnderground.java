@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.key.impl;
 
-import net.l_bulb.dungeoncore.item.customItem.key.CommandBlockExceteKey;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.item.customItem.key.CommandBlockExceteKey;
 
 public class NativeUnderground extends CommandBlockExceteKey {
 

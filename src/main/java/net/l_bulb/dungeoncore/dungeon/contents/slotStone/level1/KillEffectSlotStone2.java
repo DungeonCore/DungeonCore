@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.dungeon.contents.slotStone.level1;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
 
 public class KillEffectSlotStone2 extends AbstractKillEffectSlotStone {
 

@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.player.status.detail;
 
+import org.bukkit.Material;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.player.status.IStatusDetail;
-
-import org.bukkit.Material;
 
 public class MagicStatusDetail extends IStatusDetail {
   public MagicStatusDetail(TheLowPlayer p) {

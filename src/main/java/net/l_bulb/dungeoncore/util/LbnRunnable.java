@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore.util;
 
 import java.util.HashSet;
 
-import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 public abstract class LbnRunnable extends BukkitRunnable {
-  private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<LbnRunnable>();
+  private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<>();
 
   public String getName() {
     return "nune";

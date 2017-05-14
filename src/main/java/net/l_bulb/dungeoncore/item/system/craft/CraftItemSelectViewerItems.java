@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
@@ -17,10 +21,6 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class CraftItemSelectViewerItems {
   private static final String NOT_CRAFT_LINE = ChatColor.RED + "" + ChatColor.BOLD + "素材が足りないためアイテムを作成出来ません";
@@ -112,7 +112,7 @@ public class CraftItemSelectViewerItems {
     // まずは削除する
     List<String> lore = removeDontHasMaterialLine(item);
     // 一番最初に追加する
-    ArrayList<String> newLore = new ArrayList<String>();
+    ArrayList<String> newLore = new ArrayList<>();
     newLore.add(NOT_CRAFT_LINE);
     newLore.addAll(lore);
     ItemStackUtil.setLore(item, newLore);

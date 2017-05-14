@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.mob.customMob.abstractmob;
 
-import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEntityUtil;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomZombie;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Zombie;
+
+import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEntityUtil;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomZombie;
 
 public abstract class AbstractZombie extends AbstractCustomMob<CustomZombie, Zombie> {
   /**

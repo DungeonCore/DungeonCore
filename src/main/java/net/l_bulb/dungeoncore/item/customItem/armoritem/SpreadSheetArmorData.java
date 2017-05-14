@@ -3,13 +3,13 @@ package net.l_bulb.dungeoncore.item.customItem.armoritem;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 /**
  * 武器のデータを保持するためのクラス
@@ -34,7 +34,7 @@ public class SpreadSheetArmorData {
   String[] detail = null;
 
   // クラフトに必要なアイテムとその数
-  HashMap<String, Integer> craftMaterial = new HashMap<String, Integer>();
+  HashMap<String, Integer> craftMaterial = new HashMap<>();
 
   // エラーかどうか
   boolean isCraftItemError = false;

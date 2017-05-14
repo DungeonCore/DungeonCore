@@ -16,7 +16,7 @@ import net.l_bulb.dungeoncore.util.InOutputUtil;
 
 public class PlayerLastSaveType {
 
-  private static HashMap<UUID, String> useType = new HashMap<UUID, String>();
+  private static HashMap<UUID, String> useType = new HashMap<>();
 
   public static void regist(Player p, String type) {
     useType.put(p.getUniqueId(), type);
@@ -38,7 +38,7 @@ public class PlayerLastSaveType {
     try {
       readFile = InOutputUtil.readFile("last_save_type.txt");
       if (readFile.isEmpty()) {
-        useType = new HashMap<UUID, String>();
+        useType = new HashMap<>();
       }
 
       String json = StringUtils.join(readFile.iterator(), "");
@@ -52,7 +52,7 @@ public class PlayerLastSaveType {
       if (useType == null) { throw new LbnRuntimeException("json is invalid: last_save_type.txt"); }
     } catch (Exception e) {
       e.printStackTrace();
-      useType = new HashMap<UUID, String>();
+      useType = new HashMap<>();
     }
   }
 

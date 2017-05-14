@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.util.BlockUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,6 +19,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.util.BlockUtil;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;

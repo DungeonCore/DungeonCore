@@ -2,17 +2,18 @@ package net.l_bulb.dungeoncore.npc.citizens;
 
 import java.util.List;
 
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.trait.Trait;
+import org.bukkit.entity.Entity;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.scheduler.BukkitRunnable;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.trait.Trait;
 
 public class RemoveNearNpcOnSpawnTrait extends Trait {
 

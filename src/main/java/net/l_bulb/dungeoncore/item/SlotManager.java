@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+import org.bukkit.ChatColor;
+
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem;
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem2;
 import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot;
@@ -14,14 +17,11 @@ import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-
 import com.google.common.collect.HashMultimap;
 
 public class SlotManager {
-  static HashMap<String, String> idNameMap = new HashMap<String, String>();
-  static HashMap<String, SlotInterface> slotIDMap = new HashMap<String, SlotInterface>();
+  static HashMap<String, String> idNameMap = new HashMap<>();
+  static HashMap<String, SlotInterface> slotIDMap = new HashMap<>();
   static HashMultimap<SlotLevel, SlotInterface> levelSlotMap = HashMultimap.create();
 
   static {
@@ -79,7 +79,7 @@ public class SlotManager {
     // }
     // else {
     // lore = new String[2];
-    // lore[1] = StringUtils.join(new Object[]{ChatColor.DARK_AQUA, "        - ", slot.getSlotDetail()});
+    // lore[1] = StringUtils.join(new Object[]{ChatColor.DARK_AQUA, " - ", slot.getSlotDetail()});
     // }
     lore[0] = StringUtils.join(new Object[] { slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId() });
     return lore;

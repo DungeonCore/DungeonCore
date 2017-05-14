@@ -3,6 +3,14 @@ package net.l_bulb.dungeoncore.dungeon.contents.item.magic.normalItems;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.dropingEntity.DamagedFallingBlockForPlayer;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
@@ -17,18 +25,10 @@ import net.l_bulb.dungeoncore.item.itemInterface.MagicExcuteable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 public class NormalMagicItem extends MagicItemOld {
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList
         .add(new NormalMagicItem("始まりの杖", 0, Material.STICK, new BlockData(Material.WOOD, (byte) 1), new SoundData(Sound.ZOMBIE_WOODBREAK, 1, 3)));
     arrayList.add(new NormalMagicItem("アイスジャベリン", 10, Material.WOOD_HOE, new BlockData(Material.ICE), new SoundData(Sound.GLASS, 1, (float) 0.1)));

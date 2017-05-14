@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
@@ -19,10 +23,6 @@ import net.l_bulb.dungeoncore.quest.QuestAnnouncement;
 import net.l_bulb.dungeoncore.quest.QuestManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.QuestUtil;
-
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractQuest implements Quest {
   protected AbstractQuest(String id) {
@@ -124,13 +124,13 @@ public abstract class AbstractQuest implements Quest {
 
     // もし前提クエストがない場合は空を返す
     if (beforeQuestIds == null) {
-      beforeQuests = new HashSet<Quest>();
+      beforeQuests = new HashSet<>();
       isSucessBeforeQuest = true;
       return beforeQuests;
     }
 
     // 前提クエストを空にする
-    beforeQuests = new HashSet<Quest>();
+    beforeQuests = new HashSet<>();
 
     boolean existNullQuest = false;
     // IDからクエストを取得
@@ -290,7 +290,7 @@ public abstract class AbstractQuest implements Quest {
 
   @Override
   public List<String> getRewordText() {
-    ArrayList<String> texts = new ArrayList<String>();
+    ArrayList<String> texts = new ArrayList<>();
     if (swordExe != 0) {
       texts.add("剣レベル: +" + swordExe + "exp");
     }

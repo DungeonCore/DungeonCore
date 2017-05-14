@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.command;
 
-import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpc;
-import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+
+import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpc;
+import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
 
 public class CommandNpcSpawn implements CommandExecutor {
 

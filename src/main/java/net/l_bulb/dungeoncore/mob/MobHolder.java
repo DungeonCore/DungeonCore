@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
-import net.l_bulb.dungeoncore.mob.customMob.NullMob;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
+
+import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
+import net.l_bulb.dungeoncore.mob.customMob.NullMob;
 
 public class MobHolder {
   private static final NullMob NULL_MOB = new NullMob();

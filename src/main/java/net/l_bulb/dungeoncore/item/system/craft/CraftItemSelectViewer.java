@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
@@ -14,20 +27,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.DoubleChestInventory;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
 public class CraftItemSelectViewer implements MenuSelectorInterface {
   private static final String TITLE = "アイテム制作";
@@ -64,7 +63,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
       return;
     }
 
-    ArrayList<Inventory> validInvList = new ArrayList<Inventory>();
+    ArrayList<Inventory> validInvList = new ArrayList<>();
 
     // 正しいインベントを取得する
     for (String data : dataList.split("&")) {

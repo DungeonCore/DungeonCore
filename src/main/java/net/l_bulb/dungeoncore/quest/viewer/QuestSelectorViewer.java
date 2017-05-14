@@ -2,11 +2,11 @@ package net.l_bulb.dungeoncore.quest.viewer;
 
 import java.util.List;
 
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
 import net.l_bulb.dungeoncore.quest.NpcQuestHolder;
 import net.l_bulb.dungeoncore.quest.Quest;
-
-import org.bukkit.entity.Player;
 
 public class QuestSelectorViewer {
   public static void openSelector(CustomNpcInterface villager, Player p) {

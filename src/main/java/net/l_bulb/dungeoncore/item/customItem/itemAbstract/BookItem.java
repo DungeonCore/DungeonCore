@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.item.customItem.itemAbstract;
 
-import net.l_bulb.dungeoncore.common.book.BookData;
-import net.l_bulb.dungeoncore.common.book.BookManager;
-import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
-import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
-
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+
+import net.l_bulb.dungeoncore.common.book.BookData;
+import net.l_bulb.dungeoncore.common.book.BookManager;
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 
 public class BookItem extends AbstractItem implements RightClickItemable {
 

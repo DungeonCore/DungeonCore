@@ -3,15 +3,15 @@ package net.l_bulb.dungeoncore.quest;
 import java.text.MessageFormat;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
-import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
+import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class QuestViewIcon {
   Player p;

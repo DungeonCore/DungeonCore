@@ -3,17 +3,17 @@ package net.l_bulb.dungeoncore.dungeon.contents.item.click.magicbook;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
+import net.l_bulb.dungeoncore.mob.LastDamageManager;
+import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public abstract class AbstractMagicBook extends RightClickItem {
 
@@ -51,7 +51,7 @@ public abstract class AbstractMagicBook extends RightClickItem {
   }
 
   public static List<ItemInterface> getAllItem() {
-    ArrayList<ItemInterface> arrayList = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> arrayList = new ArrayList<>();
     arrayList.add(new MagicBookLevel1Flame());
     arrayList.add(new MagicBookFireLevel2());
     arrayList.add(new MagicBookFireLevel3());

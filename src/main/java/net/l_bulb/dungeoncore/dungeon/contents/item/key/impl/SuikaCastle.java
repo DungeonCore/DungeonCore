@@ -1,9 +1,5 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.key.impl;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -12,6 +8,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
 
 public class SuikaCastle extends AbstractKeyItem {
   public SuikaCastle(String no, String loc) {

@@ -1,12 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.old;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
-import net.l_bulb.dungeoncore.item.itemInterface.BowItemable;
-import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
-import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -15,6 +8,13 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
+import net.l_bulb.dungeoncore.item.itemInterface.BowItemable;
+import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
+import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public abstract class BowItemOld extends AbstractAttackItem_Old implements ItemInterface, BowItemable, LeftClickItemable {
   @Override

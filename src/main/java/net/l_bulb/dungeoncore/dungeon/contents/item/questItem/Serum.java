@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.questItem;
 
-import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 
 public class Serum extends AbstractItem {
 

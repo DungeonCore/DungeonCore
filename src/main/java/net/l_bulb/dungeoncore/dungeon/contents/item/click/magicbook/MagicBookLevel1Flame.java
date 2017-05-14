@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore.dungeon.contents.item.click.magicbook;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
 
 public class MagicBookLevel1Flame extends AbstractMagicBook {
 

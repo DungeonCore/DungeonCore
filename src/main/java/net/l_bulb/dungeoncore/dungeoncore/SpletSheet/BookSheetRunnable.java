@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
+import org.bukkit.command.CommandSender;
+
 import net.l_bulb.dungeoncore.common.book.BookData;
 import net.l_bulb.dungeoncore.common.book.BookManager;
-
-import org.bukkit.command.CommandSender;
 
 public class BookSheetRunnable extends AbstractSheetRunable {
 

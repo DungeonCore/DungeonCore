@@ -2,13 +2,13 @@ package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
 import java.util.concurrent.Future;
 
+import org.bukkit.command.CommandSender;
+
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.command.CommandSender;
 
 public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 
@@ -54,11 +54,8 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
     double data4 = JavaUtil.getDouble(row[10], 0);
 
     String detail = getNull(row[5]);
-    detail = detail.replace("{0}", getNull(row[6])).
-        replace("{1}", getNull(row[7])).
-        replace("{2}", getNull(row[8])).
-        replace("{3}", getNull(row[9])).
-        replace("{4}", getNull(row[10]));
+    detail = detail.replace("{0}", getNull(row[6])).replace("{1}", getNull(row[7])).replace("{2}", getNull(row[8])).replace("{3}", getNull(row[9]))
+        .replace("{4}", getNull(row[10]));
 
     if (level == -1 || cooltime == -1 || needMp == -1) {
       sendMessage("level, cooltime, needMpが不正です(name:" + name + ")");

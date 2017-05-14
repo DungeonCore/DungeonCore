@@ -3,12 +3,12 @@ package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetOtherItem extends AbstractItem {
   public SpreadSheetOtherItem(String name, String id, int price,

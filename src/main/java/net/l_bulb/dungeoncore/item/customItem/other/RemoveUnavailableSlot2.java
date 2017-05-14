@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.item.customItem.other;
 
-import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 
 public class RemoveUnavailableSlot2 extends RemoveUnavailableSlot {
   @Override

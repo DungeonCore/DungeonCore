@@ -2,11 +2,6 @@ package net.l_bulb.dungeoncore.command.util;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.KeyItemable;
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -18,8 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.KeyItemable;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
 public class CommandSpecialSign implements CommandExecutor {
-  public static HashMap<Player, Location> signClickMap = new HashMap<Player, Location>();
+  public static HashMap<Player, Location> signClickMap = new HashMap<>();
 
   @Override
   public boolean onCommand(CommandSender paramCommandSender,

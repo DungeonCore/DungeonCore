@@ -3,6 +3,11 @@ package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
@@ -17,11 +22,6 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class SpreadSheetFoodItem extends FoodItem {
 

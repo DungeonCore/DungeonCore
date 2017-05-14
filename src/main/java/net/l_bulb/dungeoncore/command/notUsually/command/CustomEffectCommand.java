@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.command.notUsually.command;
 import java.util.HashMap;
 
 import net.l_bulb.dungeoncore.command.notUsually.AbstractVanillaCommand;
+
 import net.minecraft.server.v1_8_R1.ChatMessage;
 import net.minecraft.server.v1_8_R1.CommandEffect;
 import net.minecraft.server.v1_8_R1.CommandException;
@@ -55,7 +56,7 @@ public class CustomEffectCommand extends AbstractVanillaCommand {
     int m = 0;
     if ((i < 0) || (i >= MobEffectList.byId.length)
         || (MobEffectList.byId[i] == null)) { throw new ExceptionInvalidNumber("commands.effect.notFound",
-        new Object[] { Integer.valueOf(i) }); }
+            new Object[] { Integer.valueOf(i) }); }
     MobEffectList localMobEffectList2 = MobEffectList.byId[i];
     if (paramArrayOfString.length >= 3) {
       k = a(paramArrayOfString[2], 0, 1000000);
@@ -92,17 +93,19 @@ public class CustomEffectCommand extends AbstractVanillaCommand {
           "commands.effect.success.removed",
           new Object[] {
               new ChatMessage(localMobEffectList2.a(),
-                  new Object[0]), localEntityLiving.getName() });
+                  new Object[0]),
+              localEntityLiving.getName() });
     } else {
       throw new CommandException(
           "commands.effect.failure.notActive",
           new Object[] {
               new ChatMessage(localMobEffectList2.a(),
-                  new Object[0]), localEntityLiving.getName() });
+                  new Object[0]),
+              localEntityLiving.getName() });
     }
   }
 
-  static HashMap<String, String> nameMap = new HashMap<String, String>();
+  static HashMap<String, String> nameMap = new HashMap<>();
   static {
     nameMap.put("SPEED", "minecraft:speed");
     nameMap.put("SLOW", "minecraft:slowness");

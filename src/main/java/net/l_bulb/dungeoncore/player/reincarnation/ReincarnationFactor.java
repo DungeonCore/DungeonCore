@@ -3,6 +3,9 @@ package net.l_bulb.dungeoncore.player.reincarnation;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.ReincarnationInterface;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
@@ -12,14 +15,11 @@ import net.l_bulb.dungeoncore.player.reincarnation.imple.MaxLevelReincarnation;
 import net.l_bulb.dungeoncore.player.reincarnation.imple.MaxMagicPointReincarnation;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-
 public class ReincarnationFactor {
   /**
    * 全ての転生効果を保持するマップ
    */
-  static HashMap<String, ReincarnationInterface> reincarnationMap = new HashMap<String, ReincarnationInterface>();
+  static HashMap<String, ReincarnationInterface> reincarnationMap = new HashMap<>();
 
   public static void openReincarnationInv(Player p) {
     new ReincarnationTypeMune().open(p);
@@ -70,7 +70,7 @@ public class ReincarnationFactor {
  * データが未定義の場合のReincarnation
  */
 class UndefinedReincarnation implements ReincarnationInterface {
-  static Map<String, UndefinedReincarnation> cache = new HashMap<String, UndefinedReincarnation>();
+  static Map<String, UndefinedReincarnation> cache = new HashMap<>();
 
   public static UndefinedReincarnation getInstance(String id) {
     if (!cache.containsKey(id)) {

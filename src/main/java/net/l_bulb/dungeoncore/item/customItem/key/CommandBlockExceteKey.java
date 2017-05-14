@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.item.customItem.key;
 
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
-import net.l_bulb.dungeoncore.util.BlockUtil;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
+import net.l_bulb.dungeoncore.util.BlockUtil;
 
 public abstract class CommandBlockExceteKey extends AbstractKeyItem {
 

@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.common.other;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class BookshelfCommandRunner {
   boolean canDo = false;

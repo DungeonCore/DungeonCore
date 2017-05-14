@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.util.InOutputUtil;
-
 import org.bukkit.entity.Player;
 
+import net.l_bulb.dungeoncore.util.InOutputUtil;
+
 public class PlayerQuestSessionManager {
-  static HashMap<UUID, PlayerQuestSession> hashMap = new HashMap<UUID, PlayerQuestSession>();
+  static HashMap<UUID, PlayerQuestSession> hashMap = new HashMap<>();
 
   public static PlayerQuestSession getQuestSession(Player p) {
     if (!hashMap.containsKey(p.getUniqueId())) {

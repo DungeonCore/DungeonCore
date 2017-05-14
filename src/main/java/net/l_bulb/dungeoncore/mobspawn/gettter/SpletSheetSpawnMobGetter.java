@@ -3,13 +3,13 @@ package net.l_bulb.dungeoncore.mobspawn.gettter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Location;
+
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
 import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
 import net.l_bulb.dungeoncore.mobspawn.point.SpletSheetMobSpawnerPoint;
-
-import org.bukkit.Location;
 
 public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
 
@@ -17,7 +17,7 @@ public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
     this.id = id;
   }
 
-  public ArrayList<AbstractMob<?>> moblist = new ArrayList<AbstractMob<?>>();
+  public ArrayList<AbstractMob<?>> moblist = new ArrayList<>();
 
   protected int id;
 

@@ -3,15 +3,6 @@ package net.l_bulb.dungeoncore.money;
 import java.util.HashMap;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.MoneyItemable;
-import net.l_bulb.dungeoncore.money.shop.CustomShop;
-import net.l_bulb.dungeoncore.money.shop.ShopItem;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,9 +16,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.itemInterface.MoneyItemable;
+import net.l_bulb.dungeoncore.money.shop.CustomShop;
+import net.l_bulb.dungeoncore.money.shop.ShopItem;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.Message;
+
 public class MoneyListener implements Listener {
 
-  static HashMap<UUID, Long> consumMap = new HashMap<UUID, Long>();
+  static HashMap<UUID, Long> consumMap = new HashMap<>();
 
   @EventHandler
   public void onClickShop(InventoryClickEvent e) {

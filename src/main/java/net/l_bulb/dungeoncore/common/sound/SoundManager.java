@@ -3,7 +3,7 @@ package net.l_bulb.dungeoncore.common.sound;
 import java.util.HashMap;
 
 public class SoundManager {
-  static HashMap<String, SoundData> soundMap = new HashMap<String, SoundData>();
+  static HashMap<String, SoundData> soundMap = new HashMap<>();
 
   public static void regist(String id, SoundData data) {
     soundMap.put(id, data);

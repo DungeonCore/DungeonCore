@@ -1,10 +1,17 @@
 package net.l_bulb.dungeoncore.mob.minecraftEntity;
 
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+
 import net.l_bulb.dungeoncore.mob.AIType;
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.minecraft.server.v1_8_R1.EntityCreature;
+
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
 import net.minecraft.server.v1_8_R1.EnumMonsterType;
@@ -17,13 +24,6 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_8_R1.World;
 import net.minecraft.server.v1_8_R1.WorldServer;
-
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 public class CustomSkeleton extends EntitySkeleton implements ICustomUndeadEntity<Skeleton> {
   boolean isUndead = true;

@@ -8,13 +8,13 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+
+import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 public class EachPlayerContentChest extends SpletSheetChest {
 
@@ -74,11 +74,11 @@ public class EachPlayerContentChest extends SpletSheetChest {
     }
   }
 
-  Map<UUID, Inventory> invList = new HashMap<UUID, Inventory>();
+  Map<UUID, Inventory> invList = new HashMap<>();
 
-  Map<UUID, Long> refuelTime = new HashMap<UUID, Long>();
+  Map<UUID, Long> refuelTime = new HashMap<>();
 
-  HashSet<Player> set = new HashSet<Player>();
+  HashSet<Player> set = new HashSet<>();
 
   protected boolean isFirestOpenWithPlayer(Player p) {
     return invList.containsKey(p.getUniqueId());

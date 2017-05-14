@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.player.reincarnation.imple;
 
+import org.bukkit.Material;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.ReincarnationInterface;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-
-import org.bukkit.Material;
 
 public class MaxLevelReincarnation implements ReincarnationInterface {
 

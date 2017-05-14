@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.mob;
 
-import net.l_bulb.dungeoncore.mob.minecraftEntity.ICustomEntity;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
+import net.l_bulb.dungeoncore.mob.minecraftEntity.ICustomEntity;
 
 public abstract class AbstractCustomMob<T extends ICustomEntity<?>, K extends LivingEntity> extends AbstractMob<K> {
 

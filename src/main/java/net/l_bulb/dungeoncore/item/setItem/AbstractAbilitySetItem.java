@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.item.setItem;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.player.ability.impl.SetItemAbility;
-
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class AbstractAbilitySetItem extends AbstractCommonSetItem {
   protected SetItemAbility emptySetitem = createEmptyAbility();

@@ -3,11 +3,11 @@ package net.l_bulb.dungeoncore.common.particle;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.util.LbnRunnable;
 
 public class SpringParticleData extends ParticleData {
 

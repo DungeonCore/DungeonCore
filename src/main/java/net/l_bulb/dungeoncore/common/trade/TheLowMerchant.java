@@ -1,19 +1,19 @@
 package net.l_bulb.dungeoncore.common.trade;
 
-import io.netty.buffer.Unpooled;
-
 import java.util.List;
-
-import net.l_bulb.dungeoncore.common.trade.nms.MerchantRecipeListImplemention;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.minecraft.server.v1_8_R1.EntityPlayer;
-import net.minecraft.server.v1_8_R1.MerchantRecipeList;
-import net.minecraft.server.v1_8_R1.PacketDataSerializer;
-import net.minecraft.server.v1_8_R1.PacketPlayOutCustomPayload;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
+
+import net.l_bulb.dungeoncore.common.trade.nms.MerchantRecipeListImplemention;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+
+import io.netty.buffer.Unpooled;
+import net.minecraft.server.v1_8_R1.EntityPlayer;
+import net.minecraft.server.v1_8_R1.MerchantRecipeList;
+import net.minecraft.server.v1_8_R1.PacketDataSerializer;
+import net.minecraft.server.v1_8_R1.PacketPlayOutCustomPayload;
 
 public abstract class TheLowMerchant {
   protected Player p;

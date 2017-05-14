@@ -1,17 +1,17 @@
 package net.l_bulb.dungeoncore.player.ability;
 
-import net.l_bulb.dungeoncore.api.PlayerStatusType;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import net.l_bulb.dungeoncore.api.PlayerStatusType;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public class PlayerAbilityListener implements Listener {
   @EventHandler

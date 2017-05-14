@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.mob.customMob;
 
-import net.l_bulb.dungeoncore.mob.AIType;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+
+import net.l_bulb.dungeoncore.mob.AIType;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class LbnMobTag {
   public LbnMobTag(Entity bukkitEntity) {

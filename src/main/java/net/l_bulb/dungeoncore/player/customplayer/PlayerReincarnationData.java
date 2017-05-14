@@ -19,14 +19,14 @@ public class PlayerReincarnationData {
   }
 
   // 剣の転生データ
-  ArrayList<OneReincarnationData> swordReincarnationData = new ArrayList<OneReincarnationData>();
+  ArrayList<OneReincarnationData> swordReincarnationData = new ArrayList<>();
   // 魔法の転生データ
-  ArrayList<OneReincarnationData> magicReincarnationData = new ArrayList<OneReincarnationData>();
+  ArrayList<OneReincarnationData> magicReincarnationData = new ArrayList<>();
   // 弓の転生データ
-  ArrayList<OneReincarnationData> bowReincarnationData = new ArrayList<OneReincarnationData>();
+  ArrayList<OneReincarnationData> bowReincarnationData = new ArrayList<>();
 
   // すべての転生データ (剣＋魔法＋弓の転生データ)
-  ArrayList<OneReincarnationData> allReincarnationData = new ArrayList<OneReincarnationData>();
+  ArrayList<OneReincarnationData> allReincarnationData = new ArrayList<>();
 
   /**
    * 転生を行うときのデータを追加

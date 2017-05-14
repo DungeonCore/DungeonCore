@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.common.other;
 
-import net.l_bulb.dungeoncore.util.TheLowUtil;
-
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -12,6 +10,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class SoulBound {
   public static final String EXTRA_INV_NAME = "extra inventory";

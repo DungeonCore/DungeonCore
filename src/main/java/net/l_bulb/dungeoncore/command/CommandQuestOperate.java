@@ -6,14 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
-import net.l_bulb.dungeoncore.quest.NpcQuestHolder;
-import net.l_bulb.dungeoncore.quest.Quest;
-import net.l_bulb.dungeoncore.quest.QuestInventory;
-import net.l_bulb.dungeoncore.quest.QuestManager;
-import net.l_bulb.dungeoncore.quest.QuestManager.QuestStartStatus;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,6 +14,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
+import net.l_bulb.dungeoncore.quest.NpcQuestHolder;
+import net.l_bulb.dungeoncore.quest.Quest;
+import net.l_bulb.dungeoncore.quest.QuestInventory;
+import net.l_bulb.dungeoncore.quest.QuestManager;
+import net.l_bulb.dungeoncore.quest.QuestManager.QuestStartStatus;
 
 public class CommandQuestOperate implements CommandExecutor, TabCompleter {
   @Override
@@ -96,7 +96,7 @@ public class CommandQuestOperate implements CommandExecutor, TabCompleter {
     }
   }
 
-  static HashSet<String> operateList = new HashSet<String>();
+  static HashSet<String> operateList = new HashSet<>();
   static {
     operateList.add("start");
     operateList.add("remove");

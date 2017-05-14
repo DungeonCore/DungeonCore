@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.mobspawn.boss;
 
+import org.bukkit.Location;
+
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
 import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
 import net.l_bulb.dungeoncore.mobspawn.gettter.SpletSheetSpawnMobGetter;
 import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-
-import org.bukkit.Location;
 
 public class SpredSheetSpawnBossGetter extends SpletSheetSpawnMobGetter {
 

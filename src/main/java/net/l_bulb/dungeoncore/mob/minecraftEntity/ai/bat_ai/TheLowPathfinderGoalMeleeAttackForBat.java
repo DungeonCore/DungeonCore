@@ -1,7 +1,7 @@
 package net.l_bulb.dungeoncore.mob.minecraftEntity.ai.bat_ai;
 
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
-import net.minecraft.server.v1_8_R1.Entity;
+
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.PathEntity;
@@ -105,7 +105,8 @@ public class TheLowPathfinderGoalMeleeAttackForBat extends PathfinderGoal {
     if (isJump && d0 <= d1 + 1) { // ジャンプ斬り
       this.b.getControllerJump().a();
     } else if ((this.isKillAura || this.b.getEntitySenses().a(entityliving)) && this.h <= 0
-        && (this.i == 0.0D && this.j == 0.0D && this.k == 0.0D || entityliving.e(this.i, this.j, this.k) >= 1.0D || this.b.bb().nextFloat() < 0.05F)) {
+        && (this.i == 0.0D && this.j == 0.0D && this.k == 0.0D || entityliving.e(this.i, this.j, this.k) >= 1.0D
+            || this.b.bb().nextFloat() < 0.05F)) {
       this.i = entityliving.locX;
       this.j = entityliving.getBoundingBox().b;
       this.k = entityliving.locZ;

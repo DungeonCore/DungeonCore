@@ -6,6 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.util.StringUtil;
+
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractComplexSheetRunable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ArmorSheetRunnable;
@@ -31,17 +40,8 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.VillagerSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.WeaponSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.WeaponSkillSheetRunnable;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.util.StringUtil;
-
 public class SpletSheetCommand implements CommandExecutor, TabCompleter {
-  static HashMap<String, Class<?>> sheetMap = new HashMap<String, Class<?>>();
+  static HashMap<String, Class<?>> sheetMap = new HashMap<>();
   static {
     ConsoleCommandSender sender = Bukkit.getConsoleSender();
     regist(new ChestSheetRunnable(sender));

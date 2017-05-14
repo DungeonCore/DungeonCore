@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore.npc.villagerNpc;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
-import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
-import net.l_bulb.dungeoncore.npc.NpcManager;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.EntityType;
+
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
+import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
+import net.l_bulb.dungeoncore.npc.NpcManager;
 
 /**
  * NPCのデータを管理するためのクラス
@@ -19,7 +19,7 @@ import org.bukkit.entity.EntityType;
  *
  */
 public class VillagerData {
-  static HashMap<String, VillagerData> villagerMap = new HashMap<String, VillagerData>();
+  static HashMap<String, VillagerData> villagerMap = new HashMap<>();
 
   public static CustomNpcInterface registSpletsheetVillager(CommandSender p, String name, String type, String texts, String location, String adult,
       String data, String mobtype, String skin, String id) {

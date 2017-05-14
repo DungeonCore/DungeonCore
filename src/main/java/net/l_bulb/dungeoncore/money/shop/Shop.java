@@ -3,17 +3,17 @@ package net.l_bulb.dungeoncore.money.shop;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class Shop {
   public String getName() {
@@ -49,7 +49,7 @@ public class Shop {
    */
   protected ArrayList<ShopItem> getShopItemList() {
     if (arrayList != null) { return arrayList; }
-    arrayList = new ArrayList<ShopItem>();
+    arrayList = new ArrayList<>();
 
     // for (ItemInterface item : NormalSwordWrapper.getAllNormalItem()) {
     // arrayList.add(new ShopItem(item.getItem(), Math.max(((NormalSwordWrapper)item).getAvailableLevel() * 200 + 20, 330)));

@@ -1,9 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.key;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +7,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.AbstractKeyItem;
 
 public abstract class AbstractTeleportKey extends AbstractKeyItem {
   public AbstractTeleportKey(Location loc) {

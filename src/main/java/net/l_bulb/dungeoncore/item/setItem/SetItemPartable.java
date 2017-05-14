@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.item.setItem;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
 
 public interface SetItemPartable extends ItemInterface {
 

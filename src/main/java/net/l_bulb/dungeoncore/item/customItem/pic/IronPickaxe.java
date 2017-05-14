@@ -3,11 +3,11 @@ package net.l_bulb.dungeoncore.item.customItem.pic;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 
 public class IronPickaxe extends AbstractPickaxe {
 
@@ -81,7 +81,7 @@ public class IronPickaxe extends AbstractPickaxe {
 
   @Override
   public List<ItemInterface> getAllLevelPick() {
-    ArrayList<ItemInterface> woodPicks = new ArrayList<ItemInterface>();
+    ArrayList<ItemInterface> woodPicks = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
       woodPicks.add(new IronPickaxe(i));
     }

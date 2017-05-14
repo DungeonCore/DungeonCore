@@ -1,16 +1,13 @@
 package net.l_bulb.dungeoncore.player;
 
+import org.bukkit.Material;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
-import org.bukkit.Material;
-
 public enum ItemType {
-  SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)),
-  BOW(LevelType.BOW, ItemStackUtil.getVanillaDamage(Material.BOW)),
-  MAGIC(LevelType.MAGIC, 6),
-  OTHER(),
-  IGNORE();
+  SWORD(LevelType.SWORD, ItemStackUtil.getVanillaDamage(Material.WOOD_SWORD)), BOW(LevelType.BOW,
+      ItemStackUtil.getVanillaDamage(Material.BOW)), MAGIC(LevelType.MAGIC, 6), OTHER(), IGNORE();
 
   private ItemType(LevelType type, double level0MinDamage) {
     this.levelType = type;

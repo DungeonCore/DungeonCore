@@ -4,7 +4,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityTargetEvent;
+
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import net.minecraft.server.v1_8_R1.Entity;
 import net.minecraft.server.v1_8_R1.EntityAnimal;
 import net.minecraft.server.v1_8_R1.EntityCreature;
@@ -12,14 +21,6 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
-
-import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityTargetEvent;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 public class PathfinderGoalNearestAttackableTargetNotTargetSub extends PathfinderGoalTarget {
   protected final Class<EntityLiving> a;
@@ -52,9 +53,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
     a(1);
     this.c = new Predicate<EntityLiving>() {
       public boolean a(EntityLiving t0) {
-        if ((predicate != null) && (!predicate.apply(t0))) {
-        return false;
-        }
+        if ((predicate != null) && (!predicate.apply(t0))) { return false; }
         if ((t0 instanceof EntityHuman)) {
           double d0 = f();
           if (t0.isSneaking()) {
@@ -67,9 +66,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
             }
             d0 *= 0.7F * f;
           }
-          if (t0.g(PathfinderGoalNearestAttackableTargetNotTargetSub.this.e) > d0) {
-          return false;
-          }
+          if (t0.g(PathfinderGoalNearestAttackableTargetNotTargetSub.this.e) > d0) { return false; }
         }
         return PathfinderGoalNearestAttackableTargetNotTargetSub.this.a(t0, false);
       }
@@ -150,8 +147,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
   }
 
   // IEntitySelector.d の代わり
-  public final Predicate<EntityLiving> predicateEntity = new Predicate<EntityLiving>()
-  {
+  public final Predicate<EntityLiving> predicateEntity = new Predicate<EntityLiving>() {
     @Override
     public boolean apply(EntityLiving e) {
       return (!(e instanceof EntityHuman)) || (((EntityHuman) e).getBukkitEntity().getGameMode() != GameMode.SPECTATOR);
@@ -163,7 +159,8 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
     this.e.setGoalTarget(
         this.d,
         (this.d instanceof EntityPlayer) ? EntityTargetEvent.TargetReason.CLOSEST_PLAYER
-            : EntityTargetEvent.TargetReason.CLOSEST_ENTITY, true);
+            : EntityTargetEvent.TargetReason.CLOSEST_ENTITY,
+        true);
     super.c();
   }
 

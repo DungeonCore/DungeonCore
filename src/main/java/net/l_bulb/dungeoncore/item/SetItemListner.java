@@ -2,11 +2,6 @@ package net.l_bulb.dungeoncore.item;
 
 import java.util.Collection;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
-import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +15,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
+import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class SetItemListner implements Listener {
   @EventHandler

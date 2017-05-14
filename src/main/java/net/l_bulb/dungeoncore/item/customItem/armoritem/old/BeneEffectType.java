@@ -13,7 +13,7 @@ public enum BeneEffectType {
 
   public static final String BENE_ID = "   beneid:";
 
-  static HashMap<String, BeneEffectType> idMap = new HashMap<String, BeneEffectType>();
+  static HashMap<String, BeneEffectType> idMap = new HashMap<>();
   static {
     for (BeneEffectType type : values()) {
       idMap.put(type.id, type);

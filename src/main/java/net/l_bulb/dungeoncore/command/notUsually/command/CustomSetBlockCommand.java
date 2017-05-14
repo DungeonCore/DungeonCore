@@ -1,6 +1,10 @@
 package net.l_bulb.dungeoncore.command.notUsually.command;
 
+import org.apache.commons.lang3.math.NumberUtils;
+import org.bukkit.Material;
+
 import net.l_bulb.dungeoncore.command.notUsually.AbstractVanillaCommand;
+
 import net.minecraft.server.v1_8_R1.Block;
 import net.minecraft.server.v1_8_R1.BlockPosition;
 import net.minecraft.server.v1_8_R1.Blocks;
@@ -16,9 +20,6 @@ import net.minecraft.server.v1_8_R1.MojangsonParser;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.TileEntity;
 import net.minecraft.server.v1_8_R1.World;
-
-import org.apache.commons.lang3.math.NumberUtils;
-import org.bukkit.Material;
 
 public class CustomSetBlockCommand extends AbstractVanillaCommand {
 
@@ -72,7 +73,7 @@ public class CustomSetBlockCommand extends AbstractVanillaCommand {
         }
       } else if ((paramArrayOfString[5].equals("keep"))
           && (!localWorld.isEmpty(localBlockPosition))) { throw new CommandException("commands.setblock.noChange",
-          new Object[0]); }
+              new Object[0]); }
     }
     Object localObject = localWorld.getTileEntity(localBlockPosition);
     if (localObject != null) {

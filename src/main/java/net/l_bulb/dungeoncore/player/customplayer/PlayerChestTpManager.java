@@ -2,17 +2,17 @@ package net.l_bulb.dungeoncore.player.customplayer;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.command.TpCutCommand;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import net.l_bulb.dungeoncore.command.TpCutCommand;
+import net.l_bulb.dungeoncore.util.LbnRunnable;
+import net.l_bulb.dungeoncore.util.Message;
+
 public class PlayerChestTpManager {
-  static HashMap<String, TpLaterRunnable> tpDataMap = new HashMap<String, TpLaterRunnable>();
+  static HashMap<String, TpLaterRunnable> tpDataMap = new HashMap<>();
 
   public static void executeIfNotTeleported(Player p) {
     TpLaterRunnable tpLaterRunnable = tpDataMap.get(p.getName());

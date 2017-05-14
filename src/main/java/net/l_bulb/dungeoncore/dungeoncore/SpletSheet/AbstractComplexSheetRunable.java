@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import lbn.spread.api.LbnSpreadSheet;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,19 +14,23 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 
+import net.l_bulb.dungeoncore.util.DungeonLogger;
+
+import lbn.spread.api.LbnSpreadSheet;
+
 /**
  * SpletSheetから読み込みと編集の処理を実装するための抽象クラス
  *
  */
 public abstract class AbstractComplexSheetRunable implements SheetRunnable<String[][]> {
-  ArrayList<Task> taskList = new ArrayList<Task>();
+  ArrayList<Task> taskList = new ArrayList<>();
 
   public static final int TASK_KIND_ADD = 1;
   public static final int TASK_KIND_DELETE = 2;
   public static final int TASK_KIND_GET = 3;
   public static final int TASK_KIND_UPDATE = 4;
 
-  static HashMap<Class<?>, Long> lastUpDate = new HashMap<Class<?>, Long>();
+  static HashMap<Class<?>, Long> lastUpDate = new HashMap<>();
 
   public long getLastUpdate() {
     Long long1 = lastUpDate.get(this.getClass());
@@ -103,7 +104,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
   public String[][] call() throws Exception {
     isTransaction = true;
     try {
-      ArrayList<String[]> arrayList = new ArrayList<String[]>();
+      ArrayList<String[]> arrayList = new ArrayList<>();
 
       for (LbnSpreadSheet instance : getInstanceList()) {
         String[][] rtn = new String[0][0];
@@ -158,7 +159,7 @@ public abstract class AbstractComplexSheetRunable implements SheetRunnable<Strin
    * @throws Exception
    */
   private List<LbnSpreadSheet> getInstanceList() throws Exception {
-    ArrayList<LbnSpreadSheet> instanceList = new ArrayList<LbnSpreadSheet>();
+    ArrayList<LbnSpreadSheet> instanceList = new ArrayList<>();
     instanceList.add(LbnSpreadSheet.getInstance(getSheetName()));
     // 他の参照先がある場合はそちらのインスタンスも作成する
     if (hasSecoundSheet()) {

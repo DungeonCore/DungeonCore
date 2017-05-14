@@ -1,13 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.bow;
 
-import net.l_bulb.dungeoncore.common.other.Stun;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithProjectile;
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -16,6 +8,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.common.other.Stun;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.common.particle.Particles;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithProjectile;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public class IceArrow extends WeaponSkillWithProjectile {
 

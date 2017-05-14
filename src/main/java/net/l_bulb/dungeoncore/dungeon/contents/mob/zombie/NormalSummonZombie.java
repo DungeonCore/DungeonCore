@@ -2,11 +2,6 @@ package net.l_bulb.dungeoncore.dungeon.contents.mob.zombie;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -14,6 +9,11 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class NormalSummonZombie extends AbstractSummonZombie {
   public NormalSummonZombie(int level, int strengthLevel) {

@@ -2,15 +2,15 @@ package net.l_bulb.dungeoncore.quest.viewer;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.menu.MenuSelector;
-import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
-import net.l_bulb.dungeoncore.quest.Quest;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.menu.MenuSelector;
+import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
+import net.l_bulb.dungeoncore.quest.Quest;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class QuestMenuSelector extends MenuSelector {
   public static QuestMenuSelectorRunnable run = new QuestMenuSelectorRunnable();

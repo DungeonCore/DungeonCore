@@ -3,8 +3,6 @@ package net.l_bulb.dungeoncore.common.projectile;
 import java.util.HashMap;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -13,11 +11,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 public class ProjectileManager {
   private static final String THELOW_PROJECTILE_DATA_ITEMSTACK = "thelow_projectile_data_itemstack";
   private static final String THELOW_PROJECTILE_DATA_PROJECTILE = "thelow_projectile_data_projectile";
 
-  static HashMap<String, ProjectileInterface> projectileMap = new HashMap<String, ProjectileInterface>();
+  static HashMap<String, ProjectileInterface> projectileMap = new HashMap<>();
 
   /**
    * Projectileを登録する

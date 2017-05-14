@@ -3,11 +3,11 @@ package net.l_bulb.dungeoncore.quest;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.common.event.quest.StartQuestEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.quest.abstractQuest.QuestType;
-
-import org.bukkit.entity.Player;
 
 public interface Quest {
   public String getId();

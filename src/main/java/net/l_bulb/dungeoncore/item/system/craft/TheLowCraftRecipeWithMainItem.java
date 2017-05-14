@@ -2,19 +2,19 @@ package net.l_bulb.dungeoncore.item.system.craft;
 
 import java.util.HashMap;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForMainItemRecipe;
 
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
   // ItemId
   String mainItemId;
-  HashMap<String, Integer> materialMap = new HashMap<String, Integer>();
+  HashMap<String, Integer> materialMap = new HashMap<>();
 
   public TheLowCraftRecipeWithMainItem(String mainItemId) {
     this.mainItemId = mainItemId;

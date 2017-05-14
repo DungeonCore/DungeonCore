@@ -2,6 +2,8 @@ package net.l_bulb.dungeoncore.mob.minecraftEntity;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.entity.EntityType;
+
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.AvoidTargetPredicate;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalHurtByTargetSub;
@@ -9,6 +11,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.PathfinderGoalNearestAttack
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForShortLongAI;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLoWPathfinderGoalArrowAttackForSkelton;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.ai.TheLowPathfinderGoalMeleeAttack;
+
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
 import net.minecraft.server.v1_8_R1.EntityLiving;
@@ -18,8 +21,6 @@ import net.minecraft.server.v1_8_R1.IRangedEntity;
 import net.minecraft.server.v1_8_R1.PathfinderGoalArrowAttack;
 import net.minecraft.server.v1_8_R1.PathfinderGoalAvoidTarget;
 import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
-
-import org.bukkit.entity.EntityType;
 
 /**
  * 4,5,6
@@ -128,7 +129,7 @@ public class AttackAISetter {
   /**
    * 攻撃対象のクラスを取得
    * 
-   * @param isSummon summon　mobならTRUE
+   * @param isSummon summon mobならTRUE
    * @return
    */
   public static Class<?> getTargetEntityClass(boolean isSummon) {

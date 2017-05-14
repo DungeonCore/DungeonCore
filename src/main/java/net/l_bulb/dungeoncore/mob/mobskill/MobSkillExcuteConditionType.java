@@ -1,14 +1,8 @@
 package net.l_bulb.dungeoncore.mob.mobskill;
 
 public enum MobSkillExcuteConditionType {
-  MOB_ATTACK("モンスターが攻撃する時"),
-  MOB_DAMAGED("モンスターが攻撃を受けた時"),
-  TARGET_PLAYER("ターゲットを定めた時"),
-  MOB_DEATH("モンスターが死んだ時"),
-  MOB_SPAWN("モンスターがスポーンされる時"),
-  RUNTINE_10SEC("10秒に一度(ボスのみ)", 10),
-  RUNTINE_30SEC("30秒に一度(ボスのみ)", 30),
-  RUNTINE_60SEC("60秒に一度(ボスのみ)", 60);
+  MOB_ATTACK("モンスターが攻撃する時"), MOB_DAMAGED("モンスターが攻撃を受けた時"), TARGET_PLAYER("ターゲットを定めた時"), MOB_DEATH("モンスターが死んだ時"), MOB_SPAWN(
+      "モンスターがスポーンされる時"), RUNTINE_10SEC("10秒に一度(ボスのみ)", 10), RUNTINE_30SEC("30秒に一度(ボスのみ)", 30), RUNTINE_60SEC("60秒に一度(ボスのみ)", 60);
 
   String detail;
   int term = 0;

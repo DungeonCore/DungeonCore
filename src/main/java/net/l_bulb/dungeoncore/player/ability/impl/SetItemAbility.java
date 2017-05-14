@@ -23,7 +23,7 @@ public class SetItemAbility extends AbstractItemEquipAbility {
     return id;
   }
 
-  HashMap<PlayerStatusType, Double> statusMap = new HashMap<PlayerStatusType, Double>();
+  HashMap<PlayerStatusType, Double> statusMap = new HashMap<>();
 
   @Override
   public HashMap<PlayerStatusType, Double> getAbilityMap() {

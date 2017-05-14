@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.AbilityInterface;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.player.ability.AbilityType;
-
-import org.bukkit.entity.Player;
 
 import com.google.common.collect.HashMultimap;
 
@@ -26,7 +26,7 @@ public class PlayerStatusData implements Serializable {
   private static final long serialVersionUID = 5162626958325984577L;
 
   // 実際のステータスデータ値をいれておくMap
-  protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<PlayerStatusType, Double>();
+  protected HashMap<PlayerStatusType, Double> dataMapDouble = new HashMap<>();
 
   /**
    * 現在適応中のAbilityをセットするためのMap
@@ -178,7 +178,7 @@ public class PlayerStatusData implements Serializable {
    */
   public void clear(AbilityType type) {
     // 全て取得し、1つずつ削除する
-    Set<AbilityInterface> set = new HashSet<AbilityInterface>(abilityType.get(type));
+    Set<AbilityInterface> set = new HashSet<>(abilityType.get(type));
     for (AbilityInterface abilityInterface : set) {
       removeData(abilityInterface);
     }

@@ -3,12 +3,7 @@ package net.l_bulb.dungeoncore.mobspawn;
 import java.util.ArrayList;
 
 public enum SpawnLevel {
-  LEVEL1(20 * 30),
-  LEVEL2(20 * 35),
-  LEVEL3(20 * 40),
-  LEVEL4(20 * 45),
-  LEVEL5(20 * 50),
-  BOSS(20 * 35);
+  LEVEL1(20 * 30), LEVEL2(20 * 35), LEVEL3(20 * 40), LEVEL4(20 * 45), LEVEL5(20 * 50), BOSS(20 * 35);
 
   int num;
 
@@ -33,7 +28,7 @@ public enum SpawnLevel {
   public static ArrayList<String> getNames() {
     if (names != null) { return names; }
 
-    names = new ArrayList<String>();
+    names = new ArrayList<>();
     for (SpawnLevel level : values()) {
       names.add(level.toString());
     }

@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class RandomExecuteCommand implements CommandExecutor {
   Random rnd = new Random();
@@ -28,7 +28,7 @@ public class RandomExecuteCommand implements CommandExecutor {
     }
 
     String commandList = StringUtils.join(arg3, " ");
-    List<String> asList = new ArrayList<String>(Arrays.asList(commandList.split("\\?")));
+    List<String> asList = new ArrayList<>(Arrays.asList(commandList.split("\\?")));
 
     if (asList.size() == 0) { return false; }
 

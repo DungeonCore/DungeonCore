@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.mob.minecraftEntity.ai.bat_ai;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.minecraft.server.v1_8_R1.AttributeInstance;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
@@ -11,8 +13,6 @@ import net.minecraft.server.v1_8_R1.PathEntity;
 import net.minecraft.server.v1_8_R1.PathPoint;
 import net.minecraft.server.v1_8_R1.PathfinderGoal;
 import net.minecraft.server.v1_8_R1.ScoreboardTeamBase;
-
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
   protected final EntityInsentient e;
@@ -80,7 +80,8 @@ public abstract class TheLowPathfinderGoalTarget extends PathfinderGoal {
       if (((paramEntityLiving instanceof EntityOwnable))
           && (((EntityOwnable) paramEntityInsentient).getOwnerUUID().equals(((EntityOwnable) paramEntityLiving).getOwnerUUID()))) { return false; }
       if (paramEntityLiving == ((EntityOwnable) paramEntityInsentient).getOwner()) { return false; }
-    } else if (((paramEntityLiving instanceof EntityHuman)) && (!paramBoolean1) && (((EntityHuman) paramEntityLiving).abilities.isInvulnerable)) { return false; }
+    } else if (((paramEntityLiving instanceof EntityHuman)) && (!paramBoolean1)
+        && (((EntityHuman) paramEntityLiving).abilities.isInvulnerable)) { return false; }
     if ((paramBoolean2) && (!paramEntityInsentient.getEntitySenses().a(paramEntityLiving))) { return false; }
     return true;
   }

@@ -1,18 +1,18 @@
 package net.l_bulb.dungeoncore.item.customItem.armoritem;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
-import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
-import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.apache.commons.lang.math.RandomUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class TestArmorItem extends AbstractArmorItem {
   int level;

@@ -1,10 +1,10 @@
 package net.l_bulb.dungeoncore.item.system.strength;
 
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-
-import org.bukkit.inventory.ItemStack;
 
 /**
  * 一回の強化に使われる情報

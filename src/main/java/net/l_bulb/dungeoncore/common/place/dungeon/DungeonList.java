@@ -3,10 +3,10 @@ package net.l_bulb.dungeoncore.common.place.dungeon;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.command.CommandSender;
+
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.DungeonListRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-
-import org.bukkit.command.CommandSender;
 
 public class DungeonList {
 

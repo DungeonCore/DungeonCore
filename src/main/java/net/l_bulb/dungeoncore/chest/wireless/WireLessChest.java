@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.chest.wireless;
 
-import net.l_bulb.dungeoncore.chest.AbstractCustomChest;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+
+import net.l_bulb.dungeoncore.chest.AbstractCustomChest;
 
 public abstract class WireLessChest extends AbstractCustomChest {
   abstract public Location getContainsLocation(Player p, Block block, PlayerInteractEvent e);

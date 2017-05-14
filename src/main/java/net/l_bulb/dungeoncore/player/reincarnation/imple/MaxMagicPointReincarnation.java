@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.player.reincarnation.imple;
 
-import net.l_bulb.dungeoncore.api.PlayerStatusType;
-
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.api.PlayerStatusType;
 
 public class MaxMagicPointReincarnation extends AbstractAbilityReincarnation {
 

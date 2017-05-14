@@ -1,14 +1,14 @@
 package net.l_bulb.dungeoncore.command.util;
 
-import net.l_bulb.dungeoncore.money.shop.CustomShopItem;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.money.shop.CustomShopItem;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class ShopItemCommand implements CommandExecutor {
 

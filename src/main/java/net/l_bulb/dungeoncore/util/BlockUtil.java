@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.util;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -9,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class BlockUtil {
 

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.ItemManager;
@@ -16,10 +20,6 @@ import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ability.impl.SetItemAbility;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class SetItemHealthCrystal extends AbstractAbilitySetItem {
   @Override
@@ -37,7 +37,7 @@ public class SetItemHealthCrystal extends AbstractAbilitySetItem {
 
   @Override
   protected List<SetItemPartable> getAllItemParts() {
-    ArrayList<SetItemPartable> list = new ArrayList<SetItemPartable>();
+    ArrayList<SetItemPartable> list = new ArrayList<>();
     list.add(new HealthCystal());
     return list;
   }

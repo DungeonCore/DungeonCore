@@ -1,5 +1,10 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.shootbow;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -9,11 +14,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.EntityKillable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class DebugBow extends BowItem implements StrengthChangeItemable, EntityKillable {
 

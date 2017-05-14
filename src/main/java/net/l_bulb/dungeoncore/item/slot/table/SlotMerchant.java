@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchant;
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
 import net.l_bulb.dungeoncore.common.trade.TheLowTrades;
@@ -15,15 +23,8 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.md_5.bungee.api.ChatColor;
 
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
+import net.md_5.bungee.api.ChatColor;
 
 public class SlotMerchant extends TheLowMerchant {
 
@@ -126,7 +127,7 @@ public class SlotMerchant extends TheLowMerchant {
   public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe) {
     this.slotSetOperator = null;
 
-    // バリアブロック　または　初期アイテムなら無視する
+    // バリアブロック または 初期アイテムなら無視する
     if (ItemStackUtil.getMaterial(recipe.getResult()) == Material.BARRIER || INIT_RESULT_ITEM.equals(recipe.getResult())) { return null; }
 
     // 表示できるアイテムでないなら何もしない
@@ -168,7 +169,7 @@ public class SlotMerchant extends TheLowMerchant {
   SlotSetOperator slotSetOperator = null;
 
   // 最初に表示するレシピ
-  static final List<TheLowMerchantRecipe> INIT_RECIPE = new ArrayList<TheLowMerchantRecipe>();
+  static final List<TheLowMerchantRecipe> INIT_RECIPE = new ArrayList<>();
   static final ItemStack INIT_ITEM1 = ItemStackUtil.getItem(ChatColor.WHITE + "武器", Material.IRON_SWORD, ChatColor.GREEN + "魔法石をつける武器");
   static final ItemStack INIT_ITEM2 = ItemStackUtil.getItem(ChatColor.WHITE + "魔法石", Material.INK_SACK, (byte) 1, ChatColor.GREEN + "装着する魔法石");
   static final ItemStack INIT_RESULT_ITEM = ItemStackUtil.getItem(ChatColor.WHITE + "魔法石装着後の武器", Material.DIAMOND_SWORD, ChatColor.GREEN

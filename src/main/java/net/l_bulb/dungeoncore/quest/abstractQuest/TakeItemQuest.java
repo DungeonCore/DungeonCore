@@ -3,6 +3,11 @@ package net.l_bulb.dungeoncore.quest.abstractQuest;
 import java.text.MessageFormat;
 import java.util.HashSet;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
 import net.l_bulb.dungeoncore.common.event.quest.StartQuestEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
@@ -13,13 +18,8 @@ import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-
 public class TakeItemQuest extends AbstractQuest {
-  static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<TakeItemQuest>();
+  static HashSet<TakeItemQuest> takeItemQuestMap = new HashSet<>();
 
   protected TakeItemQuest(String id, String itemId, int count) {
     super(id);

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
-
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
 
 import com.google.common.collect.HashMultimap;
 
@@ -21,7 +21,7 @@ public class NpcQuestHolder {
   }
 
   public static List<Quest> getAvailableQuestList(CustomNpcInterface npc, Player p) {
-    ArrayList<Quest> availableQuestList = new ArrayList<Quest>();
+    ArrayList<Quest> availableQuestList = new ArrayList<>();
 
     Set<Quest> set = villagerIDQuestMap.get(npc.getId());
     for (Quest quest : set) {

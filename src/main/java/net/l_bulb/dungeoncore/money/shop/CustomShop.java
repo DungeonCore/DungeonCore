@@ -2,16 +2,16 @@ package net.l_bulb.dungeoncore.money.shop;
 
 import java.util.ArrayList;
 
-import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 
 public class CustomShop extends Shop {
   public CustomShop(String villagerID) {
@@ -40,7 +40,7 @@ public class CustomShop extends Shop {
 
     if (!(state instanceof Chest)) { return super.getShopItemList(); }
 
-    ArrayList<ShopItem> shopitems = new ArrayList<ShopItem>();
+    ArrayList<ShopItem> shopitems = new ArrayList<>();
 
     Chest chest = (Chest) state;
     for (ItemStack shopItemTemplate : chest.getBlockInventory().getContents()) {

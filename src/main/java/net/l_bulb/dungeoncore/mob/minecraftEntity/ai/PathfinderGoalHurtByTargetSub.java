@@ -3,12 +3,12 @@ package net.l_bulb.dungeoncore.mob.minecraftEntity.ai;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
+
 import net.minecraft.server.v1_8_R1.AxisAlignedBB;
 import net.minecraft.server.v1_8_R1.EntityCreature;
 import net.minecraft.server.v1_8_R1.EntityLiving;
 import net.minecraft.server.v1_8_R1.PathfinderGoalTarget;
-
-import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
   private boolean a;
@@ -56,7 +56,7 @@ public class PathfinderGoalHurtByTargetSub extends PathfinderGoalTarget {
           .a(this.e.getClass(), new AxisAlignedBB(this.e.locX,
               this.e.locY, this.e.locZ, this.e.locX + 1.0D,
               this.e.locY + 1.0D, this.e.locZ + 1.0D).grow(d0,
-              10.0D, d0));
+                  10.0D, d0));
       Iterator<?> iterator = list.iterator();
       while (iterator.hasNext()) {
         EntityCreature entitycreature = (EntityCreature) iterator.next();

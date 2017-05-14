@@ -3,6 +3,11 @@ package net.l_bulb.dungeoncore.util;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.libs.com.google.gson.JsonParseException;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+
 import net.minecraft.server.v1_8_R1.ChatComponentUtils;
 import net.minecraft.server.v1_8_R1.ChatSerializer;
 import net.minecraft.server.v1_8_R1.CommandAbstract;
@@ -13,13 +18,8 @@ import net.minecraft.server.v1_8_R1.ICommandListener;
 import net.minecraft.server.v1_8_R1.MinecraftServer;
 import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
 
-import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.libs.com.google.gson.JsonParseException;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
-
 public class TitleSender {
-  ArrayList<String[]> commandJobList = new ArrayList<String[]>();
+  ArrayList<String[]> commandJobList = new ArrayList<>();
 
   public void setTitle(String text, ChatColor c, boolean isBold) {
     commandJobList.add(new String[] { null, "title",

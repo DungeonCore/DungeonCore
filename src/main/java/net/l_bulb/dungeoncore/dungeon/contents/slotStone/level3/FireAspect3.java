@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.dungeon.contents.slotStone.level3;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 
 public class FireAspect3 extends CombatSlot {
 

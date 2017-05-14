@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.mob.customMob.abstractmob;
 
-import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSpider;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
+
+import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSpider;
 
 public abstract class AbstractSpider extends AbstractCustomMob<CustomSpider, Spider> {
 

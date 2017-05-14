@@ -3,15 +3,15 @@ package net.l_bulb.dungeoncore.dungeon.contents.chest;
 import java.util.HashSet;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.chest.WhiteListChest;
-import net.l_bulb.dungeoncore.util.Message;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.chest.WhiteListChest;
+import net.l_bulb.dungeoncore.util.Message;
 
 public class AlphaWhiteListChest extends WhiteListChest {
 
@@ -20,7 +20,7 @@ public class AlphaWhiteListChest extends WhiteListChest {
         1, new Location(Bukkit.getWorld("world"), 127, 42, 834).setDirection(new Vector(1, 0, 0)), 400, 400, 10, true);
   }
 
-  static HashSet<UUID> hashSet = new HashSet<UUID>();
+  static HashSet<UUID> hashSet = new HashSet<>();
   static {
     hashSet.add(UUID.fromString("01ee905e-a45b-3017-b985-136d7e2ac473"));
     hashSet.add(UUID.fromString("0467c9c1-89e6-4a8a-9a5a-231b5b8e300c"));

@@ -3,17 +3,18 @@ package net.l_bulb.dungeoncore.npc.followNpc;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import net.citizensnpcs.api.npc.NPC;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.npc.NpcManager;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.npc.NpcManager;
+
+import net.citizensnpcs.api.npc.NPC;
 
 public class FollowerNpcManager {
   static HashMap<TheLowPlayer, FollowerNpc> map = new HashMap<>();

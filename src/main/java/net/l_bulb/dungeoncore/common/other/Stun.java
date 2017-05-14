@@ -3,10 +3,6 @@ package net.l_bulb.dungeoncore.common.other;
 import java.util.HashSet;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -18,8 +14,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+
 public class Stun {
-  static HashSet<UUID> stunList = new HashSet<UUID>();
+  static HashSet<UUID> stunList = new HashSet<>();
 
   static ParticleData particleData = new ParticleData(ParticleType.instantSpell, 70);
   {

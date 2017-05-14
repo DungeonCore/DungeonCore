@@ -2,16 +2,16 @@ package net.l_bulb.dungeoncore.player.status;
 
 import java.util.ArrayList;
 
-import net.l_bulb.dungeoncore.api.LevelType;
-import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Wool;
+
+import net.l_bulb.dungeoncore.api.LevelType;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public abstract class IStatusDetail {
   protected int level = 0;
@@ -95,12 +95,12 @@ public abstract class IStatusDetail {
   }
 
   protected void setViewIconLore(ItemStack item, int viewIndex) {
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     for (int i = 1; i <= 10; i++) {
       int level = (viewIndex - 1) * 10 + i;
 
       ChatColor color = null;
-      // ex)3列目の4項目目(24レベルの場所)　→　(3-1)*10 + 4 が　現在のレベルよりも大きい場合
+      // ex)3列目の4項目目(24レベルの場所) → (3-1)*10 + 4 が 現在のレベルよりも大きい場合
       // すなわちLOCKされている場所
       if (level <= this.level) {
         color = ChatColor.LIGHT_PURPLE;

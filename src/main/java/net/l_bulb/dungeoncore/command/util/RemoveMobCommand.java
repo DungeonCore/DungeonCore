@@ -3,8 +3,6 @@ package net.l_bulb.dungeoncore.command.util;
 import java.util.Arrays;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.command.BlockCommandSender;
@@ -15,6 +13,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class RemoveMobCommand implements CommandExecutor {
 

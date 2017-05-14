@@ -2,11 +2,11 @@ package net.l_bulb.dungeoncore.player.magicstoneOre;
 
 import java.util.HashMap;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class MagicStoneFactor {
 
@@ -75,7 +75,7 @@ public class MagicStoneFactor {
   }
 
   /**
-   * ブロックをランダム時間後に再配置する　すでに再配置スケジューラーが動いているなら何もしない
+   * ブロックをランダム時間後に再配置する すでに再配置スケジューラーが動いているなら何もしない
    * 
    * @param loc
    */

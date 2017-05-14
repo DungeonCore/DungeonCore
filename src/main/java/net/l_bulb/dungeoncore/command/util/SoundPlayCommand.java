@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.sound.SoundData;
-import net.l_bulb.dungeoncore.common.sound.SoundManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -18,6 +15,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
+import net.l_bulb.dungeoncore.common.sound.SoundData;
+import net.l_bulb.dungeoncore.common.sound.SoundManager;
 
 import com.google.common.collect.ImmutableList;
 
@@ -87,7 +87,7 @@ public class SoundPlayCommand implements CommandExecutor, TabCompleter, UsageCom
 
   private HashSet<String> getNameList() {
     if (soundNameList == null) {
-      soundNameList = new HashSet<String>();
+      soundNameList = new HashSet<>();
 
       for (Sound sound : Sound.values()) {
         soundNameList.add(sound.name());

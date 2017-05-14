@@ -2,14 +2,14 @@ package net.l_bulb.dungeoncore.chest;
 
 import java.util.HashSet;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 /**
  * 全てのプレイヤーが同じ内容のチェストを参照する
@@ -66,7 +66,7 @@ public class AllPlayerSameContentChest extends SpletSheetChest {
     notOpen = true;
   }
 
-  HashSet<Player> set = new HashSet<Player>();
+  HashSet<Player> set = new HashSet<>();
 
   protected boolean isFirestOpenWithPlayer(Player p) {
     if (set.contains(p)) { return false; }

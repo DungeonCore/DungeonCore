@@ -1,16 +1,16 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.sword;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.common.particle.Particles;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public class ProtectionArmor extends WeaponSkillForOneType {
 

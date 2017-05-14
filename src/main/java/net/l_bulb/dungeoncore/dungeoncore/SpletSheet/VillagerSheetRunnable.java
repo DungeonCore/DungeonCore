@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerData;
-
 import org.bukkit.command.CommandSender;
+
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerData;
 
 public class VillagerSheetRunnable extends AbstractComplexSheetRunable {
 

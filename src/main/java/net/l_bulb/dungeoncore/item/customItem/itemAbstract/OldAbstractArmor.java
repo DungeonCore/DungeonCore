@@ -2,17 +2,17 @@ package net.l_bulb.dungeoncore.item.customItem.itemAbstract;
 
 import java.util.List;
 
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.old.ArmorMaterial;
 import net.l_bulb.dungeoncore.item.itemInterface.OldArmorItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class OldAbstractArmor extends AbstractItem implements OldArmorItemable, Strengthenable {
 

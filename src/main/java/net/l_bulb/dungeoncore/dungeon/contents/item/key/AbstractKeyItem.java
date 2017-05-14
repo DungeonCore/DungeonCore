@@ -1,11 +1,11 @@
 package net.l_bulb.dungeoncore.dungeon.contents.item.key;
 
-import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 
 public abstract class AbstractKeyItem extends AbstractItem implements KeyItemable {
   @Override

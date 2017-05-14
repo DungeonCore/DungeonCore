@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.Material;
+
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public class WeaponSkillData {
   double[] data = new double[5];

@@ -2,8 +2,6 @@ package net.l_bulb.dungeoncore.command.util;
 
 import java.util.Arrays;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,6 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class SequenceCommand implements CommandExecutor, UsageCommandable {
   @Override

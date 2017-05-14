@@ -3,18 +3,6 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.bow;
 import java.util.HashMap;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
-import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
-import net.l_bulb.dungeoncore.common.other.Stun;
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
-import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiClick;
-import net.l_bulb.dungeoncore.player.ItemType;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -28,6 +16,18 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
+import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
+import net.l_bulb.dungeoncore.common.other.Stun;
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
+import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiClick;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface {
 
@@ -84,7 +84,7 @@ public class Finale extends WeaponSkillWithMultiClick implements ProjectileInter
   }
 
   // 何発目の発射かを記録するためのMap
-  HashMap<Player, Integer> countMap = new HashMap<Player, Integer>();
+  HashMap<Player, Integer> countMap = new HashMap<>();
 
   @Override
   protected boolean onClick2(Player p, ItemStack item, AbstractAttackItem customItem) {

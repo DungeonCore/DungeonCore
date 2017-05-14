@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.QuestSheetRunnable;
 import net.l_bulb.dungeoncore.quest.Quest;
 import net.l_bulb.dungeoncore.quest.QuestManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class QuestSelectViewIcon {
   private final static String ID_PREFIX = ChatColor.BLACK + "q_view_id:";
@@ -26,7 +26,7 @@ public class QuestSelectViewIcon {
     return false;
   }
 
-  static HashMap<Quest, ItemStack> itemCache = new HashMap<Quest, ItemStack>();
+  static HashMap<Quest, ItemStack> itemCache = new HashMap<>();
 
   public static ItemStack getItemStack(Quest q) {
     if (q == null || q.isNullQuest()) { return null; }
@@ -42,7 +42,7 @@ public class QuestSelectViewIcon {
     if (itemCache.containsKey(q)) { return itemCache.get(q); }
 
     // Itemを作成
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     for (String detail : q.getQuestDetail()) {
       lore.add(ChatColor.AQUA + detail);
     }

@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MobSkillSheetRunnable;
-import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MobSkillSheetRunnable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
+
 public class MobSkillManager {
-  static HashMap<String, MobSkillInterface> skillMap = new HashMap<String, MobSkillInterface>();
+  static HashMap<String, MobSkillInterface> skillMap = new HashMap<>();
 
   public static void registSkill(MobSkillInterface skill) {
     skillMap.put(skill.getName(), skill);
@@ -22,7 +22,7 @@ public class MobSkillManager {
   }
 
   public static Set<MobSkillInterface> getSkill(Set<String> nameList, MobSkillExcuteConditionType timing) {
-    HashSet<MobSkillInterface> skillSet = new HashSet<MobSkillInterface>();
+    HashSet<MobSkillInterface> skillSet = new HashSet<>();
     for (String string : nameList) {
       if (skillMap.containsKey(string)) {
         MobSkillInterface skill = skillMap.get(string);

@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.mob.mobskill.skillrunnable;
 
-import net.l_bulb.dungeoncore.common.other.Stun;
-import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+
+import net.l_bulb.dungeoncore.common.other.Stun;
+import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class MobSkillHealMob extends MobSkillRunnable {
 

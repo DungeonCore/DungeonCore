@@ -2,11 +2,11 @@ package net.l_bulb.dungeoncore.mob.mobskill;
 
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.common.other.Stun;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import net.l_bulb.dungeoncore.common.other.Stun;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 public class MobSkillExecutor {
   static protected Random rnd = new Random();

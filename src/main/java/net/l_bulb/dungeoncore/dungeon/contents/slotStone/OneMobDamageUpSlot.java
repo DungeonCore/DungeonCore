@@ -2,17 +2,17 @@ package net.l_bulb.dungeoncore.dungeon.contents.slotStone;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.EntityType;
+
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.EntityType;
-
 public class OneMobDamageUpSlot extends CombatSlot {
 
-  public static ArrayList<OneMobDamageUpSlot> slotList = new ArrayList<OneMobDamageUpSlot>();
+  public static ArrayList<OneMobDamageUpSlot> slotList = new ArrayList<>();
 
   static {
     slotList.add(new OneMobDamageUpSlot(SlotLevel.LEVEL2, 1, EntityType.ZOMBIE, "ゾンビ"));
@@ -95,7 +95,7 @@ public class OneMobDamageUpSlot extends CombatSlot {
   }
 
   /**
-   * 9 →　10 →　11　→　12 →　13
+   * 9 → 10 → 11 → 12 → 13
    * 
    * @return
    */

@@ -1,13 +1,13 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 
 public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable {
 

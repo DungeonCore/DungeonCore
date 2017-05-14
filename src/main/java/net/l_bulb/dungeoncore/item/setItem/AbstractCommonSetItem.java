@@ -73,7 +73,7 @@ public abstract class AbstractCommonSetItem implements SetItemInterface {
   public HashMap<SetItemPartsType, SetItemPartable> getFullSetItem() {
     // もしまだ生成されてないならMapを生成する
     if (itemPartsMap == null) {
-      itemPartsMap = new HashMap<SetItemPartsType, SetItemPartable>();
+      itemPartsMap = new HashMap<>();
       for (SetItemPartable setItemParts : getAllItemParts()) {
         itemPartsMap.put(setItemParts.getItemSetPartsType(), setItemParts);
       }

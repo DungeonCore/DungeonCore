@@ -3,15 +3,15 @@ package net.l_bulb.dungeoncore.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.particle.ParticleData;
-import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
-
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import net.l_bulb.dungeoncore.common.particle.ParticleData;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
+import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
 
 public class TheLowUtil {
 
@@ -49,7 +49,7 @@ public class TheLowUtil {
       List<String> lore = itemMeta.getLore();
 
       if (lore == null) {
-        lore = new ArrayList<String>();
+        lore = new ArrayList<>();
       }
       lore.add(TheLowUtil.SOUL_BOUND);
       itemMeta.setLore(lore);

@@ -1,5 +1,9 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.old;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
@@ -8,10 +12,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.util.Message;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public abstract class MagicItemOld extends AbstractAttackItem_Old implements RightClickItemable, LeftClickItemable {
 

@@ -3,16 +3,16 @@ package net.l_bulb.dungeoncore.item.setItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class SetItemParts implements SetItemPartable {
   SetItemInterface belongSetItem;
@@ -63,7 +63,7 @@ public class SetItemParts implements SetItemPartable {
     ItemStack itemStack = new ItemStack(getMaterial());
     ItemStackUtil.setDispName(itemStack, getItemName());
 
-    ArrayList<String> lore = new ArrayList<String>();
+    ArrayList<String> lore = new ArrayList<>();
     lore.add("SET:" + getBelongSetItem().getName());
     lore.add(ChatColor.GRAY + ItemStackUtil.getLoreForIdLine(getId()));
     lore.add("");

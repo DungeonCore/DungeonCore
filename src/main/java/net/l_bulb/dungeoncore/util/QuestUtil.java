@@ -4,15 +4,15 @@ import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.UUID;
 
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
-import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
-import net.l_bulb.dungeoncore.quest.QuestAnnouncement;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
+import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
+import net.l_bulb.dungeoncore.quest.QuestAnnouncement;
 
 public class QuestUtil {
   /**
@@ -51,8 +51,7 @@ public class QuestUtil {
             loc,
             "のところに戻ろう",
             QuestAnnouncement.QUEST_INFO_PREFIX,
-            "{"
-        );
+            "{");
     Bukkit.dispatchCommand(consoleSender, command);
   }
 

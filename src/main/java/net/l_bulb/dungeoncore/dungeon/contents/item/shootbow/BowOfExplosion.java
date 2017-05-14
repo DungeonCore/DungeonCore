@@ -2,17 +2,6 @@ package net.l_bulb.dungeoncore.dungeon.contents.item.shootbow;
 
 import java.util.List;
 
-import net.l_bulb.dungeoncore.common.explosion.NoPlayerDamageExplotionForAttackType;
-import net.l_bulb.dungeoncore.common.explosion.NotMonsterDamageExplosion;
-import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.WeaponStrengthTemplate;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.old.BowItemOld;
-import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
@@ -24,6 +13,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.projectiles.ProjectileSource;
+
+import net.l_bulb.dungeoncore.common.explosion.NoPlayerDamageExplotionForAttackType;
+import net.l_bulb.dungeoncore.common.explosion.NotMonsterDamageExplosion;
+import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.WeaponStrengthTemplate;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.old.BowItemOld;
+import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
+import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
+import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class BowOfExplosion extends BowItemOld implements Strengthenable {
   @Override

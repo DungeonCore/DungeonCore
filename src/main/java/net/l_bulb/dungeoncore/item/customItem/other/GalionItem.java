@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
@@ -12,13 +19,6 @@ import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.itemInterface.MoneyItemable;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public final class GalionItem extends AbstractItem implements MoneyItemable {
 
@@ -97,7 +97,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
       @Override
       public void run() {
         HashMap<Integer, ? extends ItemStack> all = player.getInventory().all(getMaterial());
-        ArrayList<Integer> indexList = new ArrayList<Integer>();
+        ArrayList<Integer> indexList = new ArrayList<>();
         for (Entry<Integer, ? extends ItemStack> entry : all.entrySet()) {
           if (isThisItem(entry.getValue())) {
             int galions = new GalionItem(entry.getValue()).getGalions();

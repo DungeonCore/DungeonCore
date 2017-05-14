@@ -1,5 +1,10 @@
 package net.l_bulb.dungeoncore.item.customItem.other;
 
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
@@ -7,11 +12,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 

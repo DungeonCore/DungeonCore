@@ -1,15 +1,15 @@
 package net.l_bulb.dungeoncore.mob.customMob.abstractmob;
 
-import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEntityUtil;
-import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSkeleton;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import net.l_bulb.dungeoncore.mob.AbstractCustomMob;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEntityUtil;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSkeleton;
 
 public abstract class AbstractSkelton extends AbstractCustomMob<CustomSkeleton, Skeleton> {
   /**

@@ -3,15 +3,15 @@ package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 import java.util.HashMap;
 import java.util.concurrent.Future;
 
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.chest.AllPlayerSameContentChest;
 import net.l_bulb.dungeoncore.chest.CustomChestManager;
 import net.l_bulb.dungeoncore.chest.EachPlayerContentChest;
 import net.l_bulb.dungeoncore.chest.SpletSheetChest;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
@@ -33,7 +33,7 @@ public class ChestSheetRunnable extends AbstractComplexSheetRunable {
 
   public static HashMap<String, Object> createDataMap(Location chestLoc, Location contentLoc, double refuelSecond, boolean allPlayerSameflg,
       Location moveLoc, int minItemCount, int maxItemCount) {
-    HashMap<String, Object> map = new HashMap<String, Object>();
+    HashMap<String, Object> map = new HashMap<>();
     // setする
     map.put("chestlocation", getLocationString(chestLoc));
     map.put("contentlocation", getLocationString(contentLoc));

@@ -14,18 +14,19 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerLoadedDataEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.player.customplayer.CustomPlayer;
-import net.l_bulb.dungeoncore.util.InOutputUtil;
-import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEvent;
 
+import net.l_bulb.dungeoncore.common.event.player.PlayerLoadedDataEvent;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.player.customplayer.CustomPlayer;
+import net.l_bulb.dungeoncore.util.InOutputUtil;
+
+import net.md_5.bungee.api.ChatColor;
+
 public class TheLowPlayerManager {
-  static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<UUID, TheLowPlayer>();
+  static ConcurrentHashMap<UUID, TheLowPlayer> loadedPlayerMap = new ConcurrentHashMap<>();
 
   static Set<OfflinePlayer> loadingNow = Collections.synchronizedSet(new HashSet<OfflinePlayer>());
 

@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
@@ -22,9 +25,6 @@ import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
-
-import org.bukkit.ChatColor;
-import org.bukkit.inventory.ItemStack;
 
 public class ItemManager {
   static HashMap<String, ItemInterface> allItemNameList = new HashMap<>();
@@ -83,7 +83,7 @@ public class ItemManager {
    * @return
    */
   public static List<ItemInterface> getAllItem() {
-    return new ArrayList<ItemInterface>(allItemIdList.values());
+    return new ArrayList<>(allItemIdList.values());
   }
 
   /**

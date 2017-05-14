@@ -1,11 +1,12 @@
 package net.l_bulb.dungeoncore.player.magicstoneOre.trade;
 
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+
 import net.l_bulb.dungeoncore.item.customItem.other.MagicStoneOre;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
+
 import net.minecraft.server.v1_8_R1.ItemStack;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
-
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
 
 public class MagicStoneMerchantRecipe extends MerchantRecipe {
 

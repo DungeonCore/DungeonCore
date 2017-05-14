@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import net.l_bulb.dungeoncore.util.DungeonLogger;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -18,6 +15,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
+import net.l_bulb.dungeoncore.util.DungeonLogger;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
 /**
  * Playerが最後に攻撃したMobを管理するためのクラス
  *
@@ -27,7 +27,7 @@ public class LastDamageManager {
 
   static HashMap<Integer, LastDamageMethodType> entityAttackTypeMap = new HashMap<>();
 
-  static Queue<Integer> idList = new LinkedList<Integer>();
+  static Queue<Integer> idList = new LinkedList<>();
 
   public static void onDamage(LivingEntity e, Player p, LastDamageMethodType type) {
     if (e == null || p == null) { return; }

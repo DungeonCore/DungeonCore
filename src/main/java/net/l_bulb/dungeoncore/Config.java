@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.item.ItemManager;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemManager;
 
 public class Config {
 

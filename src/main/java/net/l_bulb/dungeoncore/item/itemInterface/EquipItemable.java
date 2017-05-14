@@ -1,8 +1,8 @@
 package net.l_bulb.dungeoncore.item.itemInterface;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-
 import org.bukkit.inventory.ItemStack;
+
+import net.l_bulb.dungeoncore.item.ItemInterface;
 
 public interface EquipItemable extends ItemInterface, AvailableLevelItemable {
   /**

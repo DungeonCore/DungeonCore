@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.common.dropingEntity;
 
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.util.Vector;
+
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class DropingEntityForPlayer extends AbstractDamageFallingblock {
   public DropingEntityForPlayer(Vector direction, Location start, Material m, byte data) {

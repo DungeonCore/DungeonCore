@@ -159,7 +159,7 @@ public class JavaUtil {
 }
 
 class InterfaceGetter {
-  private Set<Class<?>> interfaceList = new HashSet<Class<?>>();
+  private Set<Class<?>> interfaceList = new HashSet<>();
 
   private Class<?> clazz;
 

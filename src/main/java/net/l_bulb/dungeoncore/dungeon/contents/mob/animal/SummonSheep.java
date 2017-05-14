@@ -1,13 +1,5 @@
 package net.l_bulb.dungeoncore.dungeon.contents.mob.animal;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
-import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
-
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -19,6 +11,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mob.AbstractMob;
+import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
+import net.l_bulb.dungeoncore.util.JavaUtil;
+import net.l_bulb.dungeoncore.util.LbnRunnable;
 
 public abstract class SummonSheep extends AbstractMob<Sheep> implements SummonMobable {
 

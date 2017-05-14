@@ -1,17 +1,18 @@
 package net.l_bulb.dungeoncore.player.magicstoneOre.trade;
 
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+
 import net.minecraft.server.v1_8_R1.ChatMessage;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
 import net.minecraft.server.v1_8_R1.IMerchant;
 import net.minecraft.server.v1_8_R1.MerchantRecipe;
 import net.minecraft.server.v1_8_R1.MerchantRecipeList;
-
-import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
-import org.bukkit.inventory.ItemStack;
 
 public class MagicStoneMerchant implements IMerchant {
   EntityHuman e;
@@ -44,7 +45,8 @@ public class MagicStoneMerchant implements IMerchant {
     MerchantRecipe merchantRecipe4 = new MagicStoneMerchantRecipe(MagicStoneOreType.EMERALD_ORE, CraftItemStack.asNMSCopy(new ItemStack(
         Material.ANVIL)));
     // 金鉱石
-    MerchantRecipe merchantRecipe5 = new MagicStoneMerchantRecipe(MagicStoneOreType.GOLD_ORE, CraftItemStack.asNMSCopy(new ItemStack(Material.ANVIL)));
+    MerchantRecipe merchantRecipe5 = new MagicStoneMerchantRecipe(MagicStoneOreType.GOLD_ORE,
+        CraftItemStack.asNMSCopy(new ItemStack(Material.ANVIL)));
 
     MerchantRecipeList merchantRecipeList = new MagicStoneMerchantRecipeList();
     merchantRecipeList.add(merchantRecipe1);
@@ -79,7 +81,7 @@ class MagicStoneMerchantRecipeList extends MerchantRecipeList {
   private static final long serialVersionUID = 2598462579436583041L;
 
   /**
-   * 取引時,　取得するアイテムをランダムで変更する
+   * 取引時, 取得するアイテムをランダムで変更する
    */
   @Override
   public MerchantRecipe
@@ -91,8 +93,9 @@ class MagicStoneMerchantRecipeList extends MerchantRecipeList {
       if ((net.minecraft.server.v1_8_R1.ItemStack.c(paramItemStack1, localMerchantRecipe2.getBuyItem1()))
           && (paramItemStack1.count >= localMerchantRecipe2.getBuyItem1().count)
           && (((!localMerchantRecipe2.hasSecondItem()) && (paramItemStack2 == null)) || ((localMerchantRecipe2.hasSecondItem())
-              && (net.minecraft.server.v1_8_R1.ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2())) && (paramItemStack2.count >= localMerchantRecipe2
-              .getBuyItem2().count)))) {
+              && (net.minecraft.server.v1_8_R1.ItemStack.c(paramItemStack2, localMerchantRecipe2.getBuyItem2()))
+              && (paramItemStack2.count >= localMerchantRecipe2
+                  .getBuyItem2().count)))) {
         recipe = localMerchantRecipe2;
       }
     }

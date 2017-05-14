@@ -7,6 +7,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.AbilityInterface;
@@ -30,11 +35,6 @@ import net.l_bulb.dungeoncore.player.ability.impl.LevelUpAbility;
 import net.l_bulb.dungeoncore.player.reincarnation.ReincarnationFactor;
 import net.l_bulb.dungeoncore.player.reincarnation.ReincarnationSelector;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public class CustomPlayer implements TheLowPlayer, Serializable {
   private static final long serialVersionUID = 2400114842430732048L;
@@ -90,7 +90,7 @@ public class CustomPlayer implements TheLowPlayer, Serializable {
   transient PlayerReincarnationData reincarnationData = new PlayerReincarnationData(this);
 
   // 転生名だけのデータ
-  HashMap<LevelType, ArrayList<String>> reincNameData = new HashMap<LevelType, ArrayList<String>>();
+  HashMap<LevelType, ArrayList<String>> reincNameData = new HashMap<>();
 
   transient Location lastOverWorldLocation = null;
 

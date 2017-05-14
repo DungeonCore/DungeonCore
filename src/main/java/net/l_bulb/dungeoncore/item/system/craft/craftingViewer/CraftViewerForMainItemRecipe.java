@@ -3,6 +3,13 @@ package net.l_bulb.dungeoncore.item.system.craft.craftingViewer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCraftCustomItemEvent;
@@ -16,13 +23,6 @@ import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeWithMainItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 

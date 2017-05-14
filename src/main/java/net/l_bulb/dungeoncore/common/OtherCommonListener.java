@@ -4,26 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import net.l_bulb.dungeoncore.command.CommandChest;
-import net.l_bulb.dungeoncore.command.CommandGetItem;
-import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
-import net.l_bulb.dungeoncore.command.util.SimplySetSpawnPointCommand;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
-import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
-import net.l_bulb.dungeoncore.common.other.EndPortalOperator;
-import net.l_bulb.dungeoncore.common.other.GetItemSign;
-import net.l_bulb.dungeoncore.common.other.InHandItemClickSign;
-import net.l_bulb.dungeoncore.common.other.SoulBound;
-import net.l_bulb.dungeoncore.common.other.Stun;
-import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
-import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
-import net.l_bulb.dungeoncore.util.TheLowUtil;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -57,6 +37,26 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+
+import net.l_bulb.dungeoncore.command.CommandChest;
+import net.l_bulb.dungeoncore.command.CommandGetItem;
+import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
+import net.l_bulb.dungeoncore.command.util.SimplySetSpawnPointCommand;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
+import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
+import net.l_bulb.dungeoncore.common.other.EndPortalOperator;
+import net.l_bulb.dungeoncore.common.other.GetItemSign;
+import net.l_bulb.dungeoncore.common.other.InHandItemClickSign;
+import net.l_bulb.dungeoncore.common.other.SoulBound;
+import net.l_bulb.dungeoncore.common.other.Stun;
+import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
+import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
+import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class OtherCommonListener implements Listener {
   @EventHandler
@@ -157,7 +157,7 @@ public class OtherCommonListener implements Listener {
   }
   static int i = 0;
 
-  static HashMap<HumanEntity, Integer> foodlevel = new HashMap<HumanEntity, Integer>();
+  static HashMap<HumanEntity, Integer> foodlevel = new HashMap<>();
 
   @EventHandler
   public void onChangeFoodLevel(FoodLevelChangeEvent e) {
