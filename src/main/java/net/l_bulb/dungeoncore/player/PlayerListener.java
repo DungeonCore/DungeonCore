@@ -38,9 +38,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
@@ -539,39 +537,20 @@ public class PlayerListener implements Listener {
     new BukkitRunnable() {
       @Override
       public void run() {
-        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-        Scoreboard newScoreboard = scoreboardManager.getNewScoreboard();
-        Objective registerNewObjective = newScoreboard.registerNewObjective("player_status", "dummy");
-        registerNewObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        registerNewObjective.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "THE LoW  ");
+        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+        Objective objective = board.registerNewObjective(ChatColor.GREEN + "player_status", "dummy");
+        objective.setDisplayName(ChatColor.AQUA + "===== THE LoW =====");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        Score scoreB = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝ ");
-        scoreB.setScore(8);
-
-        Score score = registerNewObjective.getScore("剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル");
-        score.setScore(7);
-
-        Score score2 = registerNewObjective.getScore("弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル");
-        score2.setScore(6);
-
-        Score score3 = registerNewObjective.getScore("魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル");
-        score3.setScore(5);
-
-        Score score4 = registerNewObjective.getScore(ChatColor.GRAY + "   /statsで詳細確認");
-        score4.setScore(4);
-
-        Score score6 = registerNewObjective.getScore("");
-        score6.setScore(3);
-
-        Score score5 = registerNewObjective.getScore("お金 : " + theLowPlayer.getGalions() + " G");
-        score5.setScore(2);
-
-        Score scoreB1 = registerNewObjective.getScore(ChatColor.AQUA + "＝＝＝＝＝＝＝＝");
-        scoreB1.setScore(1);
-
-        Score scoreIp = registerNewObjective.getScore("play.l-bulb.net");
-        scoreIp.setScore(0);
-        p.setScoreboard(newScoreboard);
+        objective.getScore(ChatColor.DARK_GREEN + "剣術 : " + theLowPlayer.getLevel(LevelType.SWORD) + "レベル").setScore(8);
+        objective.getScore(ChatColor.DARK_GREEN + "弓術 : " + theLowPlayer.getLevel(LevelType.BOW) + "レベル").setScore(7);
+        objective.getScore(ChatColor.DARK_GREEN + "魔術 : " + theLowPlayer.getLevel(LevelType.MAGIC) + "レベル").setScore(6);
+        objective.getScore(ChatColor.DARK_AQUA + "   /statsで詳細確認").setScore(5);
+        objective.getScore("").setScore(4);
+        objective.getScore(ChatColor.GOLD + "お金 : " + theLowPlayer.getGalions() + " G").setScore(3);
+        objective.getScore(ChatColor.AQUA + "==================").setScore(2);
+        objective.getScore(ChatColor.GOLD + "play.l-bulb.net").setScore(1);
+        p.setScoreboard(board);
       }
     }.runTaskLater(Main.plugin, 1);
 
