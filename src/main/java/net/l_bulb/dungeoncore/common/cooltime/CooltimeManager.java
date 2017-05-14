@@ -70,7 +70,7 @@ public class CooltimeManager {
 
   /**
    * プレイヤーに残りクールタイムのメッセージを送る
-   * 
+   *
    * @param p
    */
   public void sendCooltimeMessage(Player p) {

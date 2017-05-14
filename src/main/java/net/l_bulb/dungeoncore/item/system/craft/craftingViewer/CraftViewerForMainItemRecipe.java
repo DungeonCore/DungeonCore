@@ -63,7 +63,7 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 
   /**
    * クラフト後のアイテムを取得する
-   * 
+   *
    * @param baseItem 元となるアイテム
    * @return
    */

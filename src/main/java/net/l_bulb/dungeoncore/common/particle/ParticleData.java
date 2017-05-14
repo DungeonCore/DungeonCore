@@ -47,7 +47,7 @@ public class ParticleData {
 
   /**
    * 遠くまで表示させるならTRUE
-   * 
+   *
    * @param isFar
    * @return
    */
@@ -63,7 +63,7 @@ public class ParticleData {
 
   /**
    * パーティクルの量をセットする
-   * 
+   *
    * @param amount
    * @return
    */
@@ -74,7 +74,7 @@ public class ParticleData {
 
   /**
    * 分散をセットする
-   * 
+   *
    * @param dx
    * @param dy
    * @param dz
@@ -101,7 +101,7 @@ public class ParticleData {
 
   /**
    * パーティクル実行
-   * 
+   *
    * @param locList
    */
   public void run(Location... locList) {
@@ -112,7 +112,7 @@ public class ParticleData {
 
   /**
    * パーティクル実行
-   * 
+   *
    * @param locList
    */
   public void run(Collection<Location> locList) {
@@ -123,7 +123,7 @@ public class ParticleData {
 
   /**
    * 必ずこのメソッドを通ります
-   * 
+   *
    * @param w
    * @param v
    */
@@ -147,7 +147,7 @@ public class ParticleData {
 
   /**
    * パーティクル名を取得
-   * 
+   *
    * @return パーティクル名(小文字)
    */
   public String getParticleName() {

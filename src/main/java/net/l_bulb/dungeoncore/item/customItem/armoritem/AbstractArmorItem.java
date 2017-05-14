@@ -28,7 +28,7 @@ public abstract class AbstractArmorItem extends AbstractItem implements ArmorIte
 
   /**
    * 加算される耐久力
-   * 
+   *
    * @param level
    * @return
    */

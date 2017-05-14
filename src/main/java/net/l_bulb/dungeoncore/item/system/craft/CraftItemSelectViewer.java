@@ -46,7 +46,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
 
   /**
    * 指定したクラフト後のアイテムが入ったインベントリを開く
-   * 
+   *
    * @param p
    * @param invList
    * @param index
@@ -91,7 +91,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
 
   /**
    * 指定したクラフト後のアイテムが入ったインベントリを開く
-   * 
+   *
    * @param p
    * @param invList
    * @param index
@@ -127,7 +127,7 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
 
   /**
    * 指定したチェストのインベントリを開く。もしダブルチェストならダブルチェストで開く
-   * 
+   *
    * @param b
    * @return
    */

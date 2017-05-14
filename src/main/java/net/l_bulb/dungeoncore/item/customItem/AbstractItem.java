@@ -79,7 +79,7 @@ public abstract class AbstractItem implements ItemInterface {
 
   /**
    * 基本性能のLoreTokenを取得する
-   * 
+   *
    * @return
    */
   public ItemLoreToken getStandardLoreToken() {

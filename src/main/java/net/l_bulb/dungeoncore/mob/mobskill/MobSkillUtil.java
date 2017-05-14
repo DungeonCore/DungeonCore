@@ -11,7 +11,7 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 public class MobSkillUtil {
   /**
    * MobSkill用のパーティクルを実行する
-   * 
+   *
    * @param particleData
    * @param targetList
    * @param mob

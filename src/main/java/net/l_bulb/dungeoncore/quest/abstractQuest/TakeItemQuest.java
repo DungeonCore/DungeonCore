@@ -30,7 +30,7 @@ public class TakeItemQuest extends AbstractQuest {
 
   /**
    * 指定されたクエストからTakeItemQuestならTrue
-   * 
+   *
    * @param quest
    * @return
    */

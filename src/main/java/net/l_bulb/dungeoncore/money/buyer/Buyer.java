@@ -22,7 +22,7 @@ public class Buyer extends TheLowMerchant {
 
   /**
    * Buyer画面を開く
-   * 
+   *
    * @param p
    */
   public static void open(Player p) {
@@ -79,7 +79,7 @@ public class Buyer extends TheLowMerchant {
 
   /**
    * ItemStackから値段を取得する
-   * 
+   *
    * @param item
    * @return
    */

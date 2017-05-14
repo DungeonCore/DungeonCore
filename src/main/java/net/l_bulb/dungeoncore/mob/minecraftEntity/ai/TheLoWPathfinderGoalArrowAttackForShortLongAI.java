@@ -13,7 +13,7 @@ import net.minecraft.server.v1_8_R1.PathfinderGoal;
  *
  * 近接攻撃範囲^2+5なら無視
  * 距離が16から22の場合は近づく
- * 
+ *
  * @author KENSUKE
  *
  */
@@ -127,7 +127,7 @@ public class TheLoWPathfinderGoalArrowAttackForShortLongAI extends PathfinderGoa
 
   /**
    * 一秒間に何発打つかセットする
-   * 
+   *
    * @param val
    */
   public void setShotTerm(int val) {

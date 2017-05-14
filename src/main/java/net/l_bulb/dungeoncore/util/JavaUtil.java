@@ -87,7 +87,7 @@ public class JavaUtil {
 
   /**
    * Privateなメソッドに値を挿入する
-   * 
+   *
    * @param target_object
    * @param field_name
    * @param value
@@ -106,7 +106,7 @@ public class JavaUtil {
 
   /**
    * 指定された座標間の距離の2乗を返す
-   * 
+   *
    * @param loc
    * @param x
    * @param y
@@ -119,7 +119,7 @@ public class JavaUtil {
 
   /**
    * 指定された座標間の距離の2乗を返す
-   * 
+   *
    * @param loc
    * @param x
    * @param y
@@ -132,7 +132,7 @@ public class JavaUtil {
 
   /**
    * NullならnullValueを返す。nullじゃないならそのままvalueを返す
-   * 
+   *
    * @param value
    * @param nullValue
    * @return
@@ -144,7 +144,7 @@ public class JavaUtil {
 
   /**
    * 指定した場所から指定した半径内のランダムな場所を取得する
-   * 
+   *
    * @param add
    * @param radius
    * @return

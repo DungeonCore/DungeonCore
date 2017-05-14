@@ -84,7 +84,7 @@ public abstract class AbstractQuest implements Quest {
 
   /**
    * クエスト進展メッセージ
-   * 
+   *
    * @param player
    */
   protected void sendProgressMessage(Player player, int needCount, int nowCount) {
@@ -202,7 +202,7 @@ public abstract class AbstractQuest implements Quest {
 
   /**
    * クエストがもし存在すればTRUE
-   * 
+   *
    * @param questId
    * @return
    */

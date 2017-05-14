@@ -38,7 +38,7 @@ public abstract class TheLowMerchant {
 
   /**
    * Playerがアイテムを動かした時の処理
-   * 
+   *
    * @param inv
    */
   protected abstract void onSetItem(InventoryView inv);
@@ -64,7 +64,7 @@ public abstract class TheLowMerchant {
 
   /**
    * レシピのパケットを送信する
-   * 
+   *
    * @param recipeList
    */
   @SuppressWarnings("unchecked")
@@ -94,7 +94,7 @@ public abstract class TheLowMerchant {
 
   /**
    * レシピのパケットを送信する
-   * 
+   *
    * @param recipeList
    */
   @SuppressWarnings("unchecked")
@@ -126,7 +126,7 @@ public abstract class TheLowMerchant {
 
   /**
    * 現在開いているレシピリストを取得
-   * 
+   *
    * @return
    */
   public MerchantRecipeListImplemention getNowRecipeList() {
@@ -141,7 +141,7 @@ public abstract class TheLowMerchant {
 
   /**
    * 一番最初に表示されるレシピを取得する
-   * 
+   *
    * @return
    */
   abstract public List<TheLowMerchantRecipe> getInitRecipes();

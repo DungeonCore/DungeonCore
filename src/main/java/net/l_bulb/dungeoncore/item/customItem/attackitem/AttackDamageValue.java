@@ -12,7 +12,7 @@ public class AttackDamageValue {
 
   /**
    * 与えられた戦闘負荷から攻撃力を取得する
-   * 
+   *
    * @param combatLoad
    * @param availableLevel
    * @return
@@ -24,7 +24,7 @@ public class AttackDamageValue {
 
   /**
    * 戦闘負荷を取得
-   * 
+   *
    * @param weaponLevel
    * @param type
    * @return

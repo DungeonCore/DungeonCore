@@ -27,7 +27,7 @@ public class LoreLine {
 
   /**
    * subTitleからLoreの１行を取得する
-   * 
+   *
    * @param subTitle
    * @param value
    * @return

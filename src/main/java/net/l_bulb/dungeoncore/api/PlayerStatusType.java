@@ -14,7 +14,7 @@ public enum PlayerStatusType {
 
   /**
    * 百分率ではなく割合で表しているならTRUE
-   * 
+   *
    * @return
    */
   public boolean isPercentage() {

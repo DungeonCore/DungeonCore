@@ -28,7 +28,7 @@ public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
 
   /**
    * 追加に成功したらTRUE
-   * 
+   *
    * @param name
    * @return
    */

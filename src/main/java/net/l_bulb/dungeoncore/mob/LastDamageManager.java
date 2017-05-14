@@ -62,7 +62,7 @@ public class LastDamageManager {
 
   /**
    * Player以外のMobがダメージを与えたときのLastDamage情報を登録
-   * 
+   *
    * @param target ダメージを受けたmob
    * @param damager ダメージを与えたmob
    */
@@ -80,7 +80,7 @@ public class LastDamageManager {
 
   /**
    * Projectileがダメージを与えたときのLastDamage情報を登録
-   * 
+   *
    * @param target ダメージを受けたmob
    * @param projectile ダメージを与えたProjectile
    */
@@ -107,7 +107,7 @@ public class LastDamageManager {
 
   /**
    * 最後に攻撃したPlayerを取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -117,7 +117,7 @@ public class LastDamageManager {
 
   /**
    * 最後ダメージの攻撃方法を取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -137,7 +137,7 @@ public class LastDamageManager {
 
   /**
    * EventからLastDamage情報を登録する
-   * 
+   *
    * @param e
    */
   public static void registLastDamageByEvent(EntityDamageByEntityEvent e) {

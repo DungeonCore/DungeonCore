@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  * Playerが強化を完了した瞬間
- * 
+ *
  * @author KENSUKE
  *
  */

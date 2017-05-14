@@ -131,7 +131,7 @@ public class LivingEntityUtil {
 
   /**
    * 周りのプレイヤーを取得
-   * 
+   *
    * @param e
    * @param x
    * @param y
@@ -150,7 +150,7 @@ public class LivingEntityUtil {
 
   /**
    * 指定したEntityの周囲にいるPlayerと友好的なmobを取得
-   * 
+   *
    * @param e
    * @param x
    * @param y
@@ -169,7 +169,7 @@ public class LivingEntityUtil {
 
   /**
    * 指定したEntityの周囲にいるPlayerと敵対するmobを取得
-   * 
+   *
    * @param e
    * @param x
    * @param y
@@ -188,7 +188,7 @@ public class LivingEntityUtil {
 
   /**
    * handleのクラス名を取得
-   * 
+   *
    * @param e
    * @return
    */
@@ -285,7 +285,7 @@ public class LivingEntityUtil {
 
   /**
    * 雷のエフェクトを周囲のPlayerの知らせる
-   * 
+   *
    * @param location
    */
   public static void strikeLightningEffect(Location location) {

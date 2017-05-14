@@ -79,7 +79,7 @@ public class SlotMerchant extends TheLowMerchant {
 
   /**
    * SlotOperatorを生成する
-   * 
+   *
    * @param attackItem
    * @param magicStone
    * @return もし魔法石を装着できるアイテムでないならnullを返す
@@ -101,7 +101,7 @@ public class SlotMerchant extends TheLowMerchant {
 
   /**
    * 魔法石を装着する時の表示アイテムを取得する
-   * 
+   *
    * @return
    */
   private ItemStack getResultItem(SlotSetOperator slotSetOperator) {

@@ -83,7 +83,7 @@ public final class GalionItem extends AbstractItem implements MoneyItemable {
 
   /**
    * 金のインゴットを消してお金を加算させる
-   * 
+   *
    * @param player
    */
   @Override

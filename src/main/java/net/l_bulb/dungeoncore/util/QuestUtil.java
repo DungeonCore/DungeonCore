@@ -17,7 +17,7 @@ import net.l_bulb.dungeoncore.quest.QuestAnnouncement;
 public class QuestUtil {
   /**
    * 村人から受けたクエストのクリア条件が満たされたときの処理
-   * 
+   *
    * @param villagerName
    * @param p
    */

@@ -27,7 +27,7 @@ public class NormalWeaponStrengthTemplate extends AbstractSelectMaxMinStrengthTe
 
   /**
    * 武器の使用可能レベル
-   * 
+   *
    * @return
    */
   public int getAvailableLevel() {

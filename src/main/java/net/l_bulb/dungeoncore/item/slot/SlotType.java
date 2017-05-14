@@ -27,7 +27,7 @@ public enum SlotType {
 
   /**
    * 装着成功時のコメントを取得する
-   * 
+   *
    * @return
    */
   public String getSuccessComment() {
@@ -36,7 +36,7 @@ public enum SlotType {
 
   /**
    * 装着失敗時のコメントを取得する
-   * 
+   *
    * @return
    */
   public String getFailureComment() {

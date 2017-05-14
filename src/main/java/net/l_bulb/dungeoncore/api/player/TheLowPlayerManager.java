@@ -57,7 +57,7 @@ public class TheLowPlayerManager {
 
   /**
    * ファイルから読み込む
-   * 
+   *
    * @param p
    * @return
    * @throws IOException
@@ -77,7 +77,7 @@ public class TheLowPlayerManager {
 
   /**
    * ファイルへ出力する
-   * 
+   *
    * @param p
    * @return
    * @throws IOException
@@ -102,7 +102,7 @@ public class TheLowPlayerManager {
 
   /**
    * THELoW Playerを取得, ロードされていない場合はNullを返す
-   * 
+   *
    * @param p
    * @return
    */
@@ -112,7 +112,7 @@ public class TheLowPlayerManager {
 
   /**
    * THELoW Playerを取得, ロードされていない場合はNullを返す
-   * 
+   *
    * @param id
    * @return
    */
@@ -122,7 +122,7 @@ public class TheLowPlayerManager {
 
   /**
    * THELoW Playerを取得, ロードされていない場合はNullを返す
-   * 
+   *
    * @param id
    * @return
    */
@@ -132,7 +132,7 @@ public class TheLowPlayerManager {
 
   /**
    * ロードしていたらTRUE
-   * 
+   *
    * @return
    */
   public static boolean isLoaded(OfflinePlayer p) {
@@ -141,7 +141,7 @@ public class TheLowPlayerManager {
 
   /**
    * ロード中のメッセージを表示
-   * 
+   *
    * @param p
    */
   public static void sendLoingingMessage(Player p) {

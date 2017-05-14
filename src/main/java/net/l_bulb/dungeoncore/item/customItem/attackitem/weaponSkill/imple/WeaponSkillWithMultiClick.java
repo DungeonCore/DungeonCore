@@ -64,7 +64,7 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
   /**
    * スキル発動時の処理
-   * 
+   *
    * @param p
    * @param item
    */
@@ -72,7 +72,7 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
   /**
    * スキル終了時の処理
-   * 
+   *
    * @param p
    * @param item
    */
@@ -80,7 +80,7 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
   /**
    * 発動中のクリックをした時の処理。
-   * 
+   *
    * @param p
    * @param item
    * @param customItem
@@ -90,14 +90,14 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
 
   /**
    * 効果が続く時間
-   * 
+   *
    * @return
    */
   abstract public double getTimeLimit();
 
   /**
    * 攻撃待機中のパーティクル
-   * 
+   *
    * @param loc
    * @param i
    */

@@ -65,7 +65,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 
   /**
    * 指定された魔法を発動する
-   * 
+   *
    * @param e
    * @param player
    * @param item
@@ -106,7 +106,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
 
   /**
    * 必要のマジックポイントを持っているか
-   * 
+   *
    * @param p
    * @param needMagicPoint
    * @return

@@ -4,7 +4,7 @@ public class ExpTable {
 
   /**
    * 必要経験値を取得
-   * 
+   *
    * @param level
    * @return
    */
@@ -14,7 +14,7 @@ public class ExpTable {
 
   /**
    * モブ経験値を取得
-   * 
+   *
    * @param level
    * @return
    */

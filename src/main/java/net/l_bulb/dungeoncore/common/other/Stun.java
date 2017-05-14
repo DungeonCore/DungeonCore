@@ -28,7 +28,7 @@ public class Stun {
 
   /**
    * スタン状態にする
-   * 
+   *
    * @param e
    * @param tick
    */
@@ -74,7 +74,7 @@ public class Stun {
 
   /**
    * スタン状態ならTRUE
-   * 
+   *
    * @param e
    * @return
    */
@@ -85,7 +85,7 @@ public class Stun {
 
   /**
    * スタン状態を解除する
-   * 
+   *
    * @param e
    */
   public static void removeStun(LivingEntity e) {

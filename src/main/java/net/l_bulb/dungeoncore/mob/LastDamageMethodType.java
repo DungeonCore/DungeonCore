@@ -32,7 +32,7 @@ public enum LastDamageMethodType {
 
   /**
    * 日本語による説明を取得
-   * 
+   *
    * @return
    */
   public String getText() {
@@ -70,7 +70,7 @@ public enum LastDamageMethodType {
 
   /**
    * 攻撃方法に対応するLevelTypeを取得。どれにも当てはまらない場合はnullを返す
-   * 
+   *
    * @return
    */
   public LevelType getLevelType() {

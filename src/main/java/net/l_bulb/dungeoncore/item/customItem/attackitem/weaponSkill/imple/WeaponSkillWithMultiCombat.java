@@ -49,7 +49,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 
   /**
    * 効果が続く時間
-   * 
+   *
    * @return
    */
   public double getTimeLimit() {
@@ -58,7 +58,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 
   /**
    * 攻撃待機中のパーティクル
-   * 
+   *
    * @param loc
    * @param i
    */
@@ -82,14 +82,14 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 
   /**
    * 攻撃を行った時の効果が発動する最大回数を取得
-   * 
+   *
    * @return
    */
   abstract protected int getMaxAttackCount();
 
   /**
    * 効果発動条件を満たして攻撃を行うときの処理
-   * 
+   *
    * @param p
    * @param item
    * @param customItem
@@ -111,7 +111,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 
     /**
      * カウントを1増加する
-     * 
+     *
      * @return
      */
     public void incremantCount() {
@@ -120,7 +120,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
 
     /**
      * カウントを取得
-     * 
+     *
      * @return
      */
     public int getCount() {

@@ -13,7 +13,7 @@ public class MobSkillExecutor {
 
   /**
    * mobスキルを実行する
-   * 
+   *
    * @param mob
    * @param target
    * @param skill

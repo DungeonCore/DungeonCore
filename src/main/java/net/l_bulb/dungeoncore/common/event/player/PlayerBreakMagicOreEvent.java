@@ -49,7 +49,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 壊すときに使ったアイテムを取得
-   * 
+   *
    * @return
    */
   public ItemStack getUseItem() {
@@ -58,7 +58,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 破壊した魔法鉱石のタイプを取得
-   * 
+   *
    * @return
    */
   public MagicStoneOreType getBrokenType() {
@@ -67,7 +67,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 取得できるアイテムを取得
-   * 
+   *
    * @return
    */
   public ItemStack getAcquisition() {
@@ -76,7 +76,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 取得できるアイテムをセット
-   * 
+   *
    * @param acquisition
    */
   public void setAcquisition(ItemStack acquisition) {
@@ -85,7 +85,7 @@ public class PlayerBreakMagicOreEvent extends PlayerEvent implements Cancellable
 
   /**
    * 破壊した魔法鉱石の座標を取得
-   * 
+   *
    * @return
    */
   public Location getLocation() {

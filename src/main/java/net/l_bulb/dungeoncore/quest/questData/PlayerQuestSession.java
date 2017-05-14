@@ -46,7 +46,7 @@ public class PlayerQuestSession implements Serializable {
 
   /**
    * オンラインのPlayerを取得
-   * 
+   *
    * @return
    */
   public Player getOnlinePlayer() {
@@ -59,7 +59,7 @@ public class PlayerQuestSession implements Serializable {
 
   /**
    * 指定したクエストを受けていたらTRUE
-   * 
+   *
    * @param q
    * @return
    */
@@ -82,7 +82,7 @@ public class PlayerQuestSession implements Serializable {
 
   /**
    * IDのリストからクエストリストを取得する
-   * 
+   *
    * @param set
    * @return
    */
@@ -134,7 +134,7 @@ public class PlayerQuestSession implements Serializable {
 
   /**
    * クエストのデータ値を渡す
-   * 
+   *
    * @param q
    * @return
    */

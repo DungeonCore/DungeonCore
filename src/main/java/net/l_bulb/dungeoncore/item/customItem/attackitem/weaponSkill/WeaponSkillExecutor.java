@@ -24,7 +24,7 @@ import net.md_5.bungee.api.ChatColor;
 public class WeaponSkillExecutor {
   /**
    * 右クリックした時の武器スキルの発動
-   * 
+   *
    * @param e
    * @param customItem
    */
@@ -64,7 +64,7 @@ public class WeaponSkillExecutor {
 
   /**
    * 周囲のPlayerにメッセージを表示する
-   * 
+   *
    * @param player
    * @param skill
    */
@@ -108,7 +108,7 @@ public class WeaponSkillExecutor {
 
   /**
    * ItemStackから武器スキルを取得
-   * 
+   *
    * @param item
    * @return
    */

@@ -42,7 +42,7 @@ public class ItemManager {
 
   /**
    * itemを登録する
-   * 
+   *
    * @param item
    */
   public static void registItem(ItemInterface item) {
@@ -79,7 +79,7 @@ public class ItemManager {
 
   /**
    * 全てのアイテムを取得する
-   * 
+   *
    * @return
    */
   public static List<ItemInterface> getAllItem() {
@@ -88,7 +88,7 @@ public class ItemManager {
 
   /**
    * 全てのアイテム名を取得する
-   * 
+   *
    * @return
    */
   public static Set<String> getAllItemName() {
@@ -97,7 +97,7 @@ public class ItemManager {
 
   /**
    * clazz, itemに対応したアイテムを取得する
-   * 
+   *
    * @param clazz
    * @param item
    * @return
@@ -141,7 +141,7 @@ public class ItemManager {
 
   /**
    * 指定したItemが指定したInterfaceを実装しているかどうかを調べる。(instanceOfの高速版)
-   * 
+   *
    * @param clazz
    * @param item
    * @return
@@ -194,7 +194,7 @@ public class ItemManager {
 
   /**
    * 同じCustomItemならTRUE
-   * 
+   *
    * @param item1
    * @param item2
    * @return

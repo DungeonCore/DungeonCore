@@ -42,7 +42,7 @@ public class QuestInventory {
 
   /**
    * クエストを破棄するとき
-   * 
+   *
    * @param e
    */
   public static void drop(PlayerDropItemEvent e) {

@@ -45,7 +45,7 @@ public class TitleSender {
 
   /**
    * Titileを実行
-   * 
+   *
    * @param p
    */
   public void execute(Player p) {

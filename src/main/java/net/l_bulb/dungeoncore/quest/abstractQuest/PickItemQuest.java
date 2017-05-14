@@ -54,7 +54,7 @@ public class PickItemQuest extends AbstractQuest {
 
   /**
    * クエストアイテムを拾ったときの処理
-   * 
+   *
    * @param e
    * @param session
    * @return もし完了メッセージを出力するならTRUE

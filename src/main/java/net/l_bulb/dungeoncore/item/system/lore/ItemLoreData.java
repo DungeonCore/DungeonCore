@@ -116,7 +116,7 @@ public class ItemLoreData {
 
   /**
    * タイトルからLoreTokenを生成する
-   * 
+   *
    * @param line
    * @return
    */
@@ -151,7 +151,7 @@ public class ItemLoreData {
 
   /**
    * 指定したタイトルのLoreを削除する
-   * 
+   *
    * @param title
    */
   public void removeLore(String title) {
@@ -160,7 +160,7 @@ public class ItemLoreData {
 
   /**
    * 指定したLoreTokenを取得する。もし存在しない場合は新規作成して生成する
-   * 
+   *
    * @param title
    * @return
    */
@@ -170,7 +170,7 @@ public class ItemLoreData {
 
   /**
    * Loreを取得する
-   * 
+   *
    * @param item
    */
   public List<String> getLore() {
@@ -187,7 +187,7 @@ public class ItemLoreData {
 
   /**
    * Loreを追加する
-   * 
+   *
    * @param loreToken
    */
   public void addLore(ItemLoreToken loreToken) {

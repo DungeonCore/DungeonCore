@@ -15,7 +15,7 @@ public class SpawnMobGetterManager {
 
   /**
    * SpawnMobGetterを登録する
-   * 
+   *
    * @param spawnMob
    */
   public static void registSpawnMobGetter(SpawnMobGetterInterface spawnMob) {
@@ -24,7 +24,7 @@ public class SpawnMobGetterManager {
 
   /**
    * SpawnMobGetterをnameから取得する
-   * 
+   *
    * @param name
    * @return
    */

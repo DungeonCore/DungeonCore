@@ -112,7 +112,7 @@ public class QuestManager {
 
   /**
    * クエストを開始する
-   * 
+   *
    * @param q
    * @param p
    * @return
@@ -123,7 +123,7 @@ public class QuestManager {
 
   /**
    * クエストを開始する
-   * 
+   *
    * @param q
    * @param p
    * @param force 強制的にクエストを実行
@@ -180,7 +180,7 @@ public class QuestManager {
 
   /**
    * クエストを開始するためのエフェクトを表示する
-   * 
+   *
    * @param q
    * @param p
    */
@@ -205,7 +205,7 @@ public class QuestManager {
 
   /**
    * クエストを完了する
-   * 
+   *
    * @param q
    * @param p
    * @param force 強制的にクエストを終了させる
@@ -249,7 +249,7 @@ public class QuestManager {
 
   /**
    * クエストを破棄する
-   * 
+   *
    * @param q
    * @param p
    */
@@ -297,7 +297,7 @@ public class QuestManager {
 
   /**
    * クエストを受けることが出来るかどうかを判断するためにのENUM
-   * 
+   *
    * @author kensuke
    *
    */

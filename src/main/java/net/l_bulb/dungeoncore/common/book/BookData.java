@@ -111,7 +111,7 @@ public class BookData {
 
   /**
    * 本のアイテムへ変換
-   * 
+   *
    * @return
    */
   public ItemStack toBookItem() {

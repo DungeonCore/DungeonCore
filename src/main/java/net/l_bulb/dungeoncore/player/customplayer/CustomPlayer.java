@@ -150,7 +150,7 @@ public class CustomPlayer implements TheLowPlayer, Serializable {
 
   /**
    * レベルをアップさせる
-   * 
+   *
    * @param type
    * @param level
    */

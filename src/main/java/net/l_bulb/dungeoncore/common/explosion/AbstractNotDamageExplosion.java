@@ -176,7 +176,7 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
 
   /**
    * 爆発のParticleありならTRUE
-   * 
+   *
    * @return
    */
   protected boolean isRunParticle() {

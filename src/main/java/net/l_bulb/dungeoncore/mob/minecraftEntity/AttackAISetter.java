@@ -24,7 +24,7 @@ import net.minecraft.server.v1_8_R1.PathfinderGoalSelector;
 
 /**
  * 4,5,6
- * 
+ *
  * @author KENSUKE
  *
  */
@@ -53,7 +53,7 @@ public class AttackAISetter {
 
   /**
    * 遠距離AI(強い)
-   * 
+   *
    * @param e
    * @param tag
    */
@@ -69,7 +69,7 @@ public class AttackAISetter {
 
   /**
    * 遠距離AI(弱い)
-   * 
+   *
    * @param e
    * @param tag
    */
@@ -81,7 +81,7 @@ public class AttackAISetter {
 
   /**
    * 遠距離中距離用のAIをセットする
-   * 
+   *
    * @param e
    * @param tag
    */
@@ -109,7 +109,7 @@ public class AttackAISetter {
 
   /**
    * 通常時のAIをセットする
-   * 
+   *
    * @param e
    * @param tag
    * @throws IllegalArgumentException
@@ -128,7 +128,7 @@ public class AttackAISetter {
 
   /**
    * 攻撃対象のクラスを取得
-   * 
+   *
    * @param isSummon summon mobならTRUE
    * @return
    */
@@ -142,7 +142,7 @@ public class AttackAISetter {
 
   /**
    * 全てのAIを取り除く
-   * 
+   *
    * @throws SecurityException
    * @throws NoSuchFieldException
    * @throws IllegalAccessException
@@ -161,7 +161,7 @@ public class AttackAISetter {
 
   /**
    * 攻撃対象のAIをセットする
-   * 
+   *
    * @param entityLiving
    * @param tag
    */

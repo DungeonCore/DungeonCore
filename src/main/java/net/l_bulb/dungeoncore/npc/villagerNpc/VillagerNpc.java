@@ -182,7 +182,7 @@ public class VillagerNpc implements CustomNpcInterface {
 
   /*
    * (非 Javadoc)
-   * 
+   *
    * @see lbn.npc.CustomNpcInterface#onNPCLeftClickEvent(net.citizensnpcs.api.event.NPCLeftClickEvent)
    */
   @Override

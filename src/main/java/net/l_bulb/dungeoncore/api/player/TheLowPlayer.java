@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 public interface TheLowPlayer {
   /**
    * The Lowのレベルを取得
-   * 
+   *
    * @param type
    * @return
    */
@@ -23,7 +23,7 @@ public interface TheLowPlayer {
 
   /**
    * The Lowのレベルを取得
-   * 
+   *
    * @param type
    * @return
    */
@@ -31,7 +31,7 @@ public interface TheLowPlayer {
 
   /**
    * The Lowのレベルをセットする
-   * 
+   *
    * @param type
    * @param level
    */
@@ -39,7 +39,7 @@ public interface TheLowPlayer {
 
   /**
    * The Lowの経験値を追加する
-   * 
+   *
    * @param type
    * @return
    */
@@ -47,7 +47,7 @@ public interface TheLowPlayer {
 
   /**
    * 最大レベルを取得する
-   * 
+   *
    * @param type
    * @return
    */
@@ -55,7 +55,7 @@ public interface TheLowPlayer {
 
   /**
    * 最大レベルをセットする
-   * 
+   *
    * @param type
    * @return
    */
@@ -63,7 +63,7 @@ public interface TheLowPlayer {
 
   /**
    * 次にレベルになるまでに必要な総経験値を取得
-   * 
+   *
    * @param type
    * @param level
    * @return
@@ -72,56 +72,56 @@ public interface TheLowPlayer {
 
   /**
    * お金を取得
-   * 
+   *
    * @return
    */
   public int getGalions();
 
   /**
    * お金を与える
-   * 
+   *
    * @return
    */
   public void addGalions(int galions, GalionEditReason reason);
 
   /**
    * お金をセットする
-   * 
+   *
    * @return
    */
   public void setGalions(int galions, GalionEditReason reason);
 
   /**
    * Offline Playerを取得
-   * 
+   *
    * @return
    */
   public OfflinePlayer getOfflinePlayer();
 
   /**
    * Online Playerを取得
-   * 
+   *
    * @return
    */
   public Player getOnlinePlayer();
 
   /**
    * OnlineならTRUE
-   * 
+   *
    * @return
    */
   public boolean isOnline();
 
   /**
    * 今いるダンジョンを取得
-   * 
+   *
    * @return
    */
   public DungeonData getInDungeonId();
 
   /**
    * 今いるダンジョンのIDをセットする
-   * 
+   *
    * @return
    */
   public void setInDungeonId(DungeonDataOld dungeon);
@@ -138,49 +138,49 @@ public interface TheLowPlayer {
 
   /**
    * 現在のSaveTypeを取得
-   * 
+   *
    * @return
    */
   public String getSaveType();
 
   /**
    * 最後に死んだ時間
-   * 
+   *
    * @return
    */
   public Long getLastDeathTimeMillis();
 
   /**
    * 最後に死んだ時間をセット
-   * 
+   *
    * @return
    */
   public void setLastDeathTimeMillis(long time);
 
   /**
    * Abilityを追加
-   * 
+   *
    * @param ablity
    */
   public void addAbility(AbilityInterface ablity);
 
   /**
    * Abilityを削除
-   * 
+   *
    * @param ablity
    */
   public void removeAbility(AbilityInterface ablity);
 
   /**
    * データの整合性をチェックする
-   * 
+   *
    * @param level LEVEL1:チェックを行わないでPlayerステータスの適応を行う, LEVEL2:チェックを行いPlayerステータスの変更を行う
    */
   public void fixIntegrity(CheckIntegrityLevel level);
 
   /**
    * Playerの追加ステータス情報を取得する
-   * 
+   *
    * @param type
    * @return
    */
@@ -188,7 +188,7 @@ public interface TheLowPlayer {
 
   /**
    * 転生を行う
-   * 
+   *
    * @param reincarnationInterface 転生効果
    * @param levelType 転生を行うLevelType
    * @return 転生に成功したらTRUE
@@ -197,7 +197,7 @@ public interface TheLowPlayer {
 
   /**
    * 転生できるならTRUE
-   * 
+   *
    * @param levelType 転生を行うLevelType
    * @return
    */
@@ -205,7 +205,7 @@ public interface TheLowPlayer {
 
   /**
    * 同じPlayerならTRUE
-   * 
+   *
    * @param p
    * @return
    */
@@ -213,7 +213,7 @@ public interface TheLowPlayer {
 
   /**
    * 指定されたLevelTypeで何回転生をしたか取得
-   * 
+   *
    * @param levelType
    * @return
    */

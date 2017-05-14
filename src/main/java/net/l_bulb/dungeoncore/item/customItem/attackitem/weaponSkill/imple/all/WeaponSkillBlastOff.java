@@ -70,7 +70,7 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
 
   /**
    * モブを吹き飛ばす処理
-   * 
+   *
    * @param vector
    * @param livingEntity
    * @param customItem

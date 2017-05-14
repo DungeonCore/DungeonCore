@@ -14,7 +14,7 @@ public class BlockUtil {
 
   /**
    * 感圧板が踏まれていたらTRUE
-   * 
+   *
    * @param b
    * @return
    */
@@ -31,7 +31,7 @@ public class BlockUtil {
 
   /**
    * 感圧板系のブロックならTRUE
-   * 
+   *
    * @param b
    * @return
    */

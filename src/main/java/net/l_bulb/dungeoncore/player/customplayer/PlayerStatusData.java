@@ -18,7 +18,7 @@ import com.google.common.collect.HashMultimap;
 /**
  * プレイヤーの追加ステータスを変更・取得を行う <br />
  * 追加ステータスの変更はAbilityを用いて行う <br />
- * 
+ *
  * @see AbilityInterface
  *
  */
@@ -48,7 +48,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * 指定したAbilityをセットします
-   * 
+   *
    * @param status
    * @param data
    */
@@ -72,7 +72,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * 指定したAbilityを削除します
-   * 
+   *
    * @param status
    * @param data
    */
@@ -95,7 +95,7 @@ public class PlayerStatusData implements Serializable {
   /**
    * このメソッドではすでにAbilityが対応済みか、対応済みでないかチェックを行わないでAbilityを適応します。
    * 事前に適応されてないことを確認しないと効果が重複する可能性があります
-   * 
+   *
    * @param ability
    */
   private void unsafeApplayAbility(AbilityInterface ability) {
@@ -123,7 +123,7 @@ public class PlayerStatusData implements Serializable {
   /**
    * このメソッドではすでにAbilityが対応済みか、対応済みでないかチェックを行わないでAbilityを削除します。
    * 事前に適応されてないことを確認しないと効果がついていないのにステータスが減少する可能性があります
-   * 
+   *
    * @param ability
    */
   private void unsafeDeapplayAbility(AbilityInterface ability) {
@@ -144,7 +144,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * 指定したStatusデータを取得します
-   * 
+   *
    * @param status
    * @return
    */
@@ -155,7 +155,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * プレイヤーデータを実際のPlayerに適応させる
-   * 
+   *
    * @param p
    */
   protected void applyAllAbility() {
@@ -173,7 +173,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * 指定されたAbilityTypeを全て削除する
-   * 
+   *
    * @param type
    */
   public void clear(AbilityType type) {
@@ -186,7 +186,7 @@ public class PlayerStatusData implements Serializable {
 
   /**
    * 適応中のAbilityを取得する
-   * 
+   *
    * @param type
    * @return
    */

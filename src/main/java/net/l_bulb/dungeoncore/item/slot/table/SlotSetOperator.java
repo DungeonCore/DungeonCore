@@ -49,7 +49,7 @@ public class SlotSetOperator {
 
   /**
    * 魔法石をセットできるかセットする
-   * 
+   *
    * @return
    */
   public String check() {
@@ -87,7 +87,7 @@ public class SlotSetOperator {
 
   /**
    * 成功確率
-   * 
+   *
    * @return
    */
   public int getSuccessRate() {
@@ -96,7 +96,7 @@ public class SlotSetOperator {
 
   /**
    * 装着失敗時の処理
-   * 
+   *
    * @param cursor
    */
   public void rollback(ItemStack cursor) {
@@ -122,7 +122,7 @@ public class SlotSetOperator {
 
   /**
    * 成功時のコメント
-   * 
+   *
    * @return
    */
   public String getScuessComment() {
@@ -131,7 +131,7 @@ public class SlotSetOperator {
 
   /**
    * 失敗時のコメント
-   * 
+   *
    * @return
    */
   public String getFailureComment() {

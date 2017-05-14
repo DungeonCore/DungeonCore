@@ -8,7 +8,7 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 public interface BreakBlockItemable extends ItemInterface {
   /**
    * ブロックを壊した時のイベント
-   * 
+   *
    * @param e
    * @param useItem 壊すときに使ったアイテム
    */

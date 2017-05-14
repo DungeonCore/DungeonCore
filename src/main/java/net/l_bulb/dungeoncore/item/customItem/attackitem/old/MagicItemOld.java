@@ -52,7 +52,7 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 
   /**
    * 指定された魔法を発動する
-   * 
+   *
    * @param e
    * @param player
    * @param item
@@ -85,7 +85,7 @@ public abstract class MagicItemOld extends AbstractAttackItem_Old implements Rig
 
   /**
    * 必要のマジックポイントを持っているか
-   * 
+   *
    * @param p
    * @param needMagicPoint
    * @return

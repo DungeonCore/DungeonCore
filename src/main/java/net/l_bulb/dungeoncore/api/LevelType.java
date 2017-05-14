@@ -23,7 +23,7 @@ public enum LevelType {
 
   /**
    * 名称のリストを取得
-   * 
+   *
    * @return
    */
   public static List<String> getNames() {
@@ -32,7 +32,7 @@ public enum LevelType {
 
   /**
    * 日本語表記からインスタンスを取得
-   * 
+   *
    * @param jpName
    * @return
    */
@@ -45,7 +45,7 @@ public enum LevelType {
 
   /**
    * 対応する武器名を取得
-   * 
+   *
    * @return
    */
   public String getWeaponName() {

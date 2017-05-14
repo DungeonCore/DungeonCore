@@ -74,7 +74,7 @@ public class BookItem extends AbstractItem implements RightClickItemable {
 
   /**
    * 本のID
-   * 
+   *
    * @return
    */
   public String getBookId() {

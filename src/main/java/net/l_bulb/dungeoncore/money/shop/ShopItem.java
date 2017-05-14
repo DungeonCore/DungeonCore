@@ -36,7 +36,7 @@ public class ShopItem {
 
   /**
    * 商品としてお店に並べるアイテム
-   * 
+   *
    * @return
    */
   public ItemStack getShopDispItem() {
@@ -76,7 +76,7 @@ public class ShopItem {
 
   /**
    * 実際に購入者に渡すアイテム
-   * 
+   *
    * @return
    */
   public ItemStack getItem() {

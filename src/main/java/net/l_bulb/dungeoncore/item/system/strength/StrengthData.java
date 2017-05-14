@@ -29,7 +29,7 @@ public class StrengthData {
 
   /**
    * 強化するアイテムをセットする
-   * 
+   *
    * @param item1
    */
   public void setItem1(ItemStack item1) {
@@ -68,7 +68,7 @@ public class StrengthData {
 
   /**
    * 強化できるかどうかを記録する
-   * 
+   *
    * @param canStrength
    */
   public void setCanStrength(boolean canStrength) {
@@ -77,7 +77,7 @@ public class StrengthData {
 
   /**
    * 強化できるかどうかを取得
-   * 
+   *
    * @return
    */
   public boolean isCanStrength() {
@@ -86,7 +86,7 @@ public class StrengthData {
 
   /**
    * 強化素材を取得
-   * 
+   *
    * @return
    */
   public ItemStack getMaterial() {
@@ -99,7 +99,7 @@ public class StrengthData {
 
   /**
    * 必要なお金を取得
-   * 
+   *
    * @return
    */
   public int getNeedMoney() {
@@ -108,7 +108,7 @@ public class StrengthData {
 
   /**
    * 強化後のレベルを取得
-   * 
+   *
    * @return
    */
   public int getNextLevel() {
@@ -117,7 +117,7 @@ public class StrengthData {
 
   /**
    * 成功率を取得
-   * 
+   *
    * @return
    */
   public int getSuccessChance() {

@@ -66,7 +66,7 @@ public class Config {
 
   /**
    * ブロックが殴られるのを許可するブロックの種類を取得
-   * 
+   *
    * @return
    */
   public static Set<Material> getDamageAllowBlock() {

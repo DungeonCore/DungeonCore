@@ -49,7 +49,7 @@ public abstract class AbstractCommonSetItem implements SetItemInterface {
 
   /**
    * 指定したパーツの部分が指定したitemと一致したらTRUE
-   * 
+   *
    * @param item
    * @param parts
    * @return

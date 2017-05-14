@@ -20,14 +20,14 @@ public abstract class AbstractAbilityReincarnation implements ReincarnationInter
 
   /**
    * 増加させるStatusType
-   * 
+   *
    * @return
    */
   abstract protected PlayerStatusType getStatusType();
 
   /**
    * 増加値
-   * 
+   *
    * @return
    */
   abstract protected double getAddValue();

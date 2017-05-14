@@ -20,7 +20,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 public class StrengthOperator {
   /**
    * 指定されたアイテムのレベルを取得
-   * 
+   *
    * @param strength
    * @param item
    * @return
@@ -40,7 +40,7 @@ public class StrengthOperator {
 
   /**
    * 指定されたアイテムを指定されたレベルに強化する
-   * 
+   *
    * @param strength
    * @param item
    * @param toLevel
@@ -80,7 +80,7 @@ public class StrengthOperator {
 
   /**
    * 強化性能のLoreを取得
-   * 
+   *
    * @param strength
    * @param level
    * @return
@@ -146,7 +146,7 @@ public class StrengthOperator {
 
   /**
    * 強化できるアイテムならTRUE
-   * 
+   *
    * @param item
    * @return
    */

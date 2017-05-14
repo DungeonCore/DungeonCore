@@ -209,7 +209,7 @@ public class LimitedListener implements Listener {
 
   /**
    * 砂と砂利以外はブロックを設置しない
-   * 
+   *
    * @param e
    */
   @EventHandler
@@ -270,7 +270,7 @@ public class LimitedListener implements Listener {
 
   /**
    * クリエ以外は特定のものを除き、クラフトできない
-   * 
+   *
    * @param e
    */
   @EventHandler

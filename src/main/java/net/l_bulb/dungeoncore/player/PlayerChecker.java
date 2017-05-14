@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class PlayerChecker {
   /**
    * 通常の遊んでいるPlayerならTRUE
-   * 
+   *
    * @param p
    * @return
    */
@@ -22,7 +22,7 @@ public class PlayerChecker {
 
   /**
    * Playerで通常の遊んでいるPlayerでないならTRUE
-   * 
+   *
    * @param p
    * @return
    */

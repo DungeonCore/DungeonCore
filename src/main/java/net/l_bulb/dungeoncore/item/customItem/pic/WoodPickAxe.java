@@ -94,7 +94,7 @@ public class WoodPickAxe extends AbstractPickaxe {
 
   /**
    * 全てのレベルの木のピッケルを取得する
-   * 
+   *
    * @return
    */
   @Override

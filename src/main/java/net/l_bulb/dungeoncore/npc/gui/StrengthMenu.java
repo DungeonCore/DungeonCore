@@ -113,7 +113,7 @@ public class StrengthMenu implements MenuSelectorInterface {
 
   /**
    * ボタンのIDを取得
-   * 
+   *
    * @param item
    * @return
    */

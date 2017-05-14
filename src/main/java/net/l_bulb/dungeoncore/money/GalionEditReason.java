@@ -20,7 +20,7 @@ public enum GalionEditReason {
 
   /**
    * お金の取得・消費のメッセージをPlayerに表示する
-   * 
+   *
    * @param p
    * @param galions
    */

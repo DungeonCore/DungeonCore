@@ -22,7 +22,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 public class MagicStoneEditor {
   /**
    * インスタンスを取得、通常はクラス内からしか呼ばれない
-   * 
+   *
    * @param item
    * @param itemInterface
    */
@@ -38,7 +38,7 @@ public class MagicStoneEditor {
 
   /**
    * ItemStackから武器情報を取得する
-   * 
+   *
    * @param item
    * @return
    */
@@ -60,7 +60,7 @@ public class MagicStoneEditor {
 
   /**
    * キャッシュからインスタンスを取得する
-   * 
+   *
    * @param item
    * @return
    */
@@ -72,7 +72,7 @@ public class MagicStoneEditor {
 
   /**
    * ItemStackを取得
-   * 
+   *
    * @return
    */
   public ItemStack getItem() {
@@ -81,7 +81,7 @@ public class MagicStoneEditor {
 
   /**
    * CustomItemを取得
-   * 
+   *
    * @return
    */
   public AbstractAttackItem getItemInterface() {
@@ -90,7 +90,7 @@ public class MagicStoneEditor {
 
   /**
    * 武器のアイテムタイプを取得
-   * 
+   *
    * @return
    */
   public ItemType getItemType() {
@@ -101,7 +101,7 @@ public class MagicStoneEditor {
 
   /**
    * 使用している魔法石を取得
-   * 
+   *
    * @return
    */
   public ArrayList<SlotInterface> getUseSlot() {
@@ -131,7 +131,7 @@ public class MagicStoneEditor {
 
   /**
    * 魔法石を取り除く
-   * 
+   *
    * @param slot
    * @return
    */
@@ -142,7 +142,7 @@ public class MagicStoneEditor {
 
   /**
    * 空のスロットを追加する
-   * 
+   *
    * @return
    */
   public boolean addEmptySlot() {
@@ -151,7 +151,7 @@ public class MagicStoneEditor {
 
   /**
    * 魔法石を追加する
-   * 
+   *
    * @param slot
    * @return
    */
@@ -167,7 +167,7 @@ public class MagicStoneEditor {
 
   /**
    * 指定されたスロットが存在していたらTRUE
-   * 
+   *
    * @param slot
    * @return
    */
@@ -180,7 +180,7 @@ public class MagicStoneEditor {
 
   /**
    * 強化レベルをセットする
-   * 
+   *
    * @param level
    */
   public void setStrengthLevel(int level) {

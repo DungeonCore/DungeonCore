@@ -16,7 +16,7 @@ public class MinecraftUtil {
   /**
    *
    * //http://wiki.vg/Protocol#Sound_Effect
-   * 
+   *
    * @param center
    * @param sound
    * @param volume
