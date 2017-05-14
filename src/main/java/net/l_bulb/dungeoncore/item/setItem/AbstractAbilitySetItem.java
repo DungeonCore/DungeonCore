@@ -26,7 +26,7 @@ public abstract class AbstractAbilitySetItem extends AbstractCommonSetItem {
 
   /**
    * 効果のないAbilityインスタンスを生成する
-   * 
+   *
    * @return
    */
   protected SetItemAbility createEmptyAbility() {
@@ -45,7 +45,7 @@ public abstract class AbstractAbilitySetItem extends AbstractCommonSetItem {
 
   /**
    * この装備をつけたときのAbilityを登録する
-   * 
+   *
    * @return
    */
   abstract protected void addAbility(SetItemAbility emptyAbility, Player p, ItemStack... item);

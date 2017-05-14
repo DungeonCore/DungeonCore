@@ -21,7 +21,7 @@ import net.minecraft.server.v1_8_R1.PacketPlayOutOpenWindow;
 public class TheLowTrades {
   /**
    * 設定したTrade画面を開く
-   * 
+   *
    * @param merchant
    * @param p
    */

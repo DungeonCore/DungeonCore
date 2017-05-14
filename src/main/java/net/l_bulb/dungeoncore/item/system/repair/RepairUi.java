@@ -70,7 +70,7 @@ public class RepairUi {
 
   /**
    * プレイヤーの全てのアイテムを修理する
-   * 
+   *
    * @param p
    */
   public static void repairItemAll(Player p) {
@@ -124,7 +124,7 @@ public class RepairUi {
 
   /**
    * 指定されたアイテムを修理する
-   * 
+   *
    * @param item
    * @return アイテムを修理したならTRUE
    */

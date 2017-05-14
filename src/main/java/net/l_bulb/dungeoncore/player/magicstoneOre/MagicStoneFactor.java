@@ -16,7 +16,7 @@ public class MagicStoneFactor {
 
   /**
    * 鉱石ブロックの情報を送る
-   * 
+   *
    * @param p
    * @param loc
    */
@@ -41,7 +41,7 @@ public class MagicStoneFactor {
 
   /**
    * 全ての魔法鉱石の種類と座標を取得する
-   * 
+   *
    * @return
    */
   public static HashMap<Location, MagicStoneOreType> getAllMagicStone() {
@@ -50,7 +50,7 @@ public class MagicStoneFactor {
 
   /**
    * 指定された座標から魔法鉱石のタイプを取得
-   * 
+   *
    * @param loc
    * @return
    */
@@ -76,7 +76,7 @@ public class MagicStoneFactor {
 
   /**
    * ブロックをランダム時間後に再配置する すでに再配置スケジューラーが動いているなら何もしない
-   * 
+   *
    * @param loc
    */
   public static void relocationOre(Location loc) {
@@ -137,7 +137,7 @@ class RelocationOreRunnable extends BukkitRunnable {
 
   /**
    * 残り時間を取得 設置済みの場合は-1を返す
-   * 
+   *
    * @return
    */
   public long remainSec() {

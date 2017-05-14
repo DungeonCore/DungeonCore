@@ -61,7 +61,7 @@ public class CommandGiveSetItem implements CommandExecutor, TabCompleter {
 
   /**
    * アイテム名一覧を取得
-   * 
+   *
    * @return
    */
   public HashSet<String> getSetItemNameList() {

@@ -86,7 +86,7 @@ public class MerchantRecipeCreator {
 
   /**
    * 最後の説明にDummyと付けたアイテムを表示する
-   * 
+   *
    * @param itemStack
    * @return
    */
@@ -107,7 +107,7 @@ public class MerchantRecipeCreator {
 
   /**
    * 実際に結果欄に表示されるアイテムを表示
-   * 
+   *
    * @return
    */
   private ItemStack getShowResult(boolean isSufficientMoney, boolean isSufficientMaterial) {

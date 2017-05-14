@@ -44,7 +44,7 @@ public class SpawnScheduler {
 
   /**
    * スケジューラにスポーンポイントをセットする
-   * 
+   *
    * @param spawnPoint
    */
   public void addSpawnPoint(MobSpawnerPoint spawnPoint) {
@@ -61,7 +61,7 @@ public class SpawnScheduler {
 
   /**
    * 現在のスポーンポイントを取得(chunkがアンロードされたものも存在する可能性あり)
-   * 
+   *
    * @param count
    */
   public ArrayList<MobSpawnerPoint> getCurrentSpawnPoint() {

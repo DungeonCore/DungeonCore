@@ -28,7 +28,7 @@ public class VillagerNpcManager {
 
   /**
    * NPCを登録する
-   * 
+   *
    * @param villagerNpc
    */
   public static void regist(VillagerNpc villagerNpc) {
@@ -42,7 +42,7 @@ public class VillagerNpcManager {
 
   /**
    * NPCをスポーンする
-   * 
+   *
    * @param villagerNpc
    */
   public static void spawnNpc(VillagerNpc villagerNpc, Location loc) {
@@ -81,7 +81,7 @@ public class VillagerNpcManager {
 
   /**
    * EntityからVillagerNpcを取得
-   * 
+   *
    * @param entity
    * @return
    */

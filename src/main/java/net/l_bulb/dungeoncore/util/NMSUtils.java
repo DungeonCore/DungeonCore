@@ -16,7 +16,7 @@ import net.minecraft.server.v1_8_R1.MerchantRecipe;
 public class NMSUtils {
   /**
    * オリジナルのEntityを登録する
-   * 
+   *
    * @param name
    * @param id
    * @param nmsClass
@@ -73,7 +73,7 @@ public class NMSUtils {
    * index = 0 : buy1 <br />
    * index = 1 : buy2 <br />
    * index = 2 : result <br />
-   * 
+   *
    * @param recipe
    * @param item
    */

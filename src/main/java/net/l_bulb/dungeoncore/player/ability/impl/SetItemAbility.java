@@ -32,7 +32,7 @@ public class SetItemAbility extends AbstractItemEquipAbility {
 
   /**
    * 追加ステータスを登録する
-   * 
+   *
    * @param type ステータスの種類
    * @param value 増加値
    */

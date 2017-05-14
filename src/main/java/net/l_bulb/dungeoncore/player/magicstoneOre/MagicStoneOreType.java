@@ -6,7 +6,7 @@ import org.bukkit.Material;
 
 /**
  * 魔法鉱石の種類を管理するためのクラス
- * 
+ *
  * @author KENSUKE
  *
  */
@@ -41,7 +41,7 @@ public enum MagicStoneOreType {
 
   /**
    * 掘ったときに取得する経験値
-   * 
+   *
    * @return
    */
   public int getExp() {
@@ -50,7 +50,7 @@ public enum MagicStoneOreType {
 
   /**
    * ブロックの素材を取得する
-   * 
+   *
    * @return
    */
   public Material getMaterial() {
@@ -59,7 +59,7 @@ public enum MagicStoneOreType {
 
   /**
    * 日本語名を取得
-   * 
+   *
    * @return
    */
   public String getJpName() {
@@ -68,7 +68,7 @@ public enum MagicStoneOreType {
 
   /**
    * 鉱石の最大復活時間を取得
-   * 
+   *
    * @return
    */
   public long getMaxRelocationTick() {
@@ -77,7 +77,7 @@ public enum MagicStoneOreType {
 
   /**
    * 鉱石の最小復活時間を取得
-   * 
+   *
    * @return
    */
   public long getMinRelocationTick() {
@@ -88,7 +88,7 @@ public enum MagicStoneOreType {
 
   /**
    * 再配置される時間をランダムに取得
-   * 
+   *
    * @return
    */
   public long getRelocationTick() {
@@ -98,7 +98,7 @@ public enum MagicStoneOreType {
 
   /**
    * マテリアルから魔法鉱石を取得。もし存在しない日本語名の時はnullを返す
-   * 
+   *
    * @param m
    * @return
    */
@@ -113,7 +113,7 @@ public enum MagicStoneOreType {
 
   /**
    * 日本語名から魔法鉱石を取得する。もし存在しない日本語名の時はnullを返す
-   * 
+   *
    * @param jpName
    * @return
    */

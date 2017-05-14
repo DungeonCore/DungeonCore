@@ -38,7 +38,7 @@ public class DropingEntityForPlayer extends AbstractDamageFallingblock {
 
   /**
    * 地面についたときの処理
-   * 
+   *
    * @param spawnEntity
    */
   public void onGround(Entity spawnEntity) {

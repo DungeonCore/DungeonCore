@@ -55,7 +55,7 @@ public class ItemStackData {
 
   /**
    * エンチャントマップを取得。もしエンチャントがない場合はnullを返す
-   * 
+   *
    * @return
    */
   public Map<Enchantment, Integer> getEnchantMap() {
@@ -64,7 +64,7 @@ public class ItemStackData {
 
   /**
    * エンチャントを追加
-   * 
+   *
    * @param enchantment
    * @param level
    */
@@ -76,7 +76,7 @@ public class ItemStackData {
 
   /**
    * ItemStackに変換
-   * 
+   *
    * @return
    */
   @SuppressWarnings("deprecation")

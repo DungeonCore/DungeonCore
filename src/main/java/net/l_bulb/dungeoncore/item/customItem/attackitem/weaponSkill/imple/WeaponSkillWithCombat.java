@@ -46,7 +46,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
 
   /**
    * 効果が続く時間
-   * 
+   *
    * @return
    */
   public double getTimeLimit() {
@@ -55,7 +55,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
 
   /**
    * 攻撃待機中のパーティクル
-   * 
+   *
    * @param loc
    * @param i
    */
@@ -72,7 +72,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
 
   /**
    * スキル発動待機中ならTRUE
-   * 
+   *
    * @param p
    * @return
    */
@@ -82,7 +82,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
 
   /**
    * 効果発動条件を満たして攻撃を行うときの処理
-   * 
+   *
    * @param p
    * @param item
    * @param customItem

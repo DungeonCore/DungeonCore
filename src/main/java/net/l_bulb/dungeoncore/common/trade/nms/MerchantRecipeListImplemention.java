@@ -18,7 +18,7 @@ public class MerchantRecipeListImplemention extends MerchantRecipeList {
 
   /**
    * レシピを追加する
-   * 
+   *
    * @param recipe
    */
   @SuppressWarnings("unchecked")

@@ -99,7 +99,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 指定されたターゲット方法でターゲットを取り、スキルを実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */
@@ -169,7 +169,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 対象にブロックかアイテムを当ててスキルを実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */
@@ -228,7 +228,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * スキル発動成功時、一回だけ実行される
-   * 
+   *
    * @param targetList
    * @param mob
    */
@@ -255,7 +255,7 @@ public class OldNormalMobSkill implements MobSkillInterface {
 
   /**
    * 一人のターゲットに対してスキルを即時実行
-   * 
+   *
    * @param condtionTarget
    * @param mob
    */

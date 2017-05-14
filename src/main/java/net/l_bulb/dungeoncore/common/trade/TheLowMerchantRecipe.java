@@ -66,7 +66,7 @@ public class TheLowMerchantRecipe {
 
   /**
    * 引数のMerchantRecipeに現インスタンスの内容で上書きする
-   * 
+   *
    * @param bukkitRecipe
    */
   public void apply(MerchantRecipe bukkitRecipe) {

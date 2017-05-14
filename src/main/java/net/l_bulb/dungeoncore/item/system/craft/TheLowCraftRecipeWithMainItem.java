@@ -38,7 +38,7 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
 
   /**
    * 指定されたアイテムが指定されたインベントリに入っていたらTRUE
-   * 
+   *
    * @param inv
    * @param item
    * @return

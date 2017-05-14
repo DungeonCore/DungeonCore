@@ -86,7 +86,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
 
   /**
    * スプレットシート接続のセッション用インスタンスを作成する
-   * 
+   *
    * @return
    * @throws Exception
    */

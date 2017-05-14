@@ -24,7 +24,7 @@ public class MagicStoneMerchantRecipe extends MerchantRecipe {
 
   /**
    * 魔法鉱石の種類を取得する
-   * 
+   *
    * @return
    */
   public MagicStoneOreType getType() {

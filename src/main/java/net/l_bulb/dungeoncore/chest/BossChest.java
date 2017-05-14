@@ -32,7 +32,7 @@ public class BossChest extends SpletSheetChest {
 
   /**
    * チェストを設置する
-   * 
+   *
    * @param e
    * @return 設置後のチェストの座標
    */
@@ -59,7 +59,7 @@ public class BossChest extends SpletSheetChest {
 
   /**
    * 指定された場所に実際にチェストを設置する
-   * 
+   *
    * @param chestLocation
    */
   @SuppressWarnings("deprecation")

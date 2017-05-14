@@ -41,7 +41,7 @@ public class FollowerNpcManager {
 
   /**
    * NPCを削除する
-   * 
+   *
    * @param p
    */
   public static void remove(Player p) {
@@ -63,7 +63,7 @@ public class FollowerNpcManager {
 
   /**
    * FollowerNpcを作成しスポーンする
-   * 
+   *
    * @param p
    * @return
    */
@@ -84,7 +84,7 @@ public class FollowerNpcManager {
 
   /**
    * FollowNpcを取得する
-   * 
+   *
    * @param p
    * @return
    */
@@ -100,7 +100,7 @@ public class FollowerNpcManager {
 
   /**
    * 自分のNPC以外を削除する
-   * 
+   *
    * @param p
    */
   public static void hideAllFollowerNpc(Player p) {
@@ -141,7 +141,7 @@ public class FollowerNpcManager {
 
   /**
    * Playerがシフトした時のイベント
-   * 
+   *
    * @param e
    */
   public static void onToggleEvent(PlayerToggleSneakEvent e) {

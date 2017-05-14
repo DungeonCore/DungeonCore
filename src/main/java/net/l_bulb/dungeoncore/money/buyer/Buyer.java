@@ -35,7 +35,7 @@ public class Buyer {
 
   /**
    * Buyer用のクラフトテーブルでは通常のクラフトは行えない
-   * 
+   *
    * @param event
    */
   public static void onCraftItem(PrepareItemCraftEvent event) {
@@ -58,7 +58,7 @@ public class Buyer {
 
   /**
    * 材料欄をクリックした場合はお金を計算し、resultをクリックした場合は全ての材料欄のアイテムを削除する
-   * 
+   *
    * @param event
    */
   public static void onInteractInv(InventoryInteractEvent event) {
@@ -136,7 +136,7 @@ public class Buyer {
 
   /**
    * 材料をすべて調べてGalionsをセットする
-   * 
+   *
    * @param crafting
    * @param e
    */

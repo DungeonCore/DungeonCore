@@ -13,7 +13,7 @@ import net.minecraft.server.v1_8_R1.WorldServer;
 public class PacketUtil {
   /**
    * 攻撃のモーション
-   * 
+   *
    * @param e
    */
   public static void sendAttackMotionPacket(LivingEntity e) {

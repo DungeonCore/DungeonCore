@@ -28,7 +28,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最小ダメージ
-   * 
+   *
    * @param level
    * @return
    */
@@ -46,7 +46,7 @@ public enum ItemType {
 
   /**
    * レベルに応じた武器の最大ダメージを取得
-   * 
+   *
    * @param availableLevel 利用可能レベル
    * @return
    */

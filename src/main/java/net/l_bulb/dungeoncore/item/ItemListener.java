@@ -101,7 +101,7 @@ public class ItemListener implements Listener {
 
   /**
    * プレイヤーが敵にダメージを与える
-   * 
+   *
    * @param e
    */
   @EventHandler(priority = EventPriority.LOW)
@@ -125,7 +125,7 @@ public class ItemListener implements Listener {
 
   /**
    * 防具の処理
-   * 
+   *
    * @param e
    */
   @EventHandler

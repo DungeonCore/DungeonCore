@@ -29,7 +29,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * ピッケルのレベルを取得
-   * 
+   *
    * @return
    */
   public int getLevel() {
@@ -40,7 +40,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * ピッケルの素材の日本語名
-   * 
+   *
    * @return
    */
   abstract String getMaterialName();
@@ -125,14 +125,14 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * 進化時のピッケルを取得する
-   * 
+   *
    * @return
    */
   abstract public AbstractPickaxe getNextPickAxe();
 
   /**
    * このアイテムの最大レベルを取得
-   * 
+   *
    * @return
    */
   abstract public short getMaxExp();
@@ -141,7 +141,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * ピッケルのレベルを取得
-   * 
+   *
    * @param item
    * @return
    */
@@ -152,7 +152,7 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * ピッケルのレベルを設定する
-   * 
+   *
    * @param item
    * @param level
    */
@@ -197,21 +197,21 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
 
   /**
    * Giveコマンドに使うIDを取得
-   * 
+   *
    * @return
    */
   abstract public String getGiveItemId();
 
   /**
    * 全てのレベルのピッケルを取得する
-   * 
+   *
    * @return
    */
   abstract public List<ItemInterface> getAllLevelPick();
 
   /**
    * 関係のあるアイテムを全て取得
-   * 
+   *
    * @return
    */
   public List<ItemInterface> getAllRelativeItem() {

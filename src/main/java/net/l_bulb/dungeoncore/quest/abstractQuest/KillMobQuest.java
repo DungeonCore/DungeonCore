@@ -57,7 +57,7 @@ public class KillMobQuest extends AbstractQuest {
 
   /**
    * どんなモンスターでもカウントを許可するならTRUE
-   * 
+   *
    * @return
    */
   protected boolean allowAnyMob() {

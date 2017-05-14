@@ -71,7 +71,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * 対象のレベル
-   * 
+   *
    * @return
    */
   public int getLevel() {
@@ -80,7 +80,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * ダンジョンの入口の座標
-   * 
+   *
    * @return
    */
   public Location getEntranceLocation() {
@@ -89,7 +89,7 @@ public class DungeonData implements PlaceInterface {
 
   /**
    * ダンジョンのスタート地点の座標
-   * 
+   *
    * @return
    */
   public Location getStartLocation() {

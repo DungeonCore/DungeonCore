@@ -47,7 +47,7 @@ public class SetItemManager {
 
   /**
    * 名前からSetItemInterfaceを取得
-   * 
+   *
    * @param name
    * @return
    */
@@ -57,7 +57,7 @@ public class SetItemManager {
 
   /**
    * 対象のプレイヤーの全てのSetItem情報を取り除く
-   * 
+   *
    * @param p
    */
   public static void removeAll(Player p) {
@@ -69,7 +69,7 @@ public class SetItemManager {
 
   /**
    * check無しでSetItemを取得する
-   * 
+   *
    * @param p
    * @return
    */
@@ -79,7 +79,7 @@ public class SetItemManager {
 
   /**
    * プレイヤーの全てのSetItemをチェックする
-   * 
+   *
    * @param p
    * @return
    */
@@ -182,7 +182,7 @@ public class SetItemManager {
 
   /**
    * ItemStackからSetItem名を取得
-   * 
+   *
    * @param item
    * @return
    */
@@ -197,7 +197,7 @@ public class SetItemManager {
 
   /**
    * ItemStackからSetItemを取得
-   * 
+   *
    * @param item
    * @return
    */
@@ -211,7 +211,7 @@ public class SetItemManager {
 
   /**
    * もしSetItemならTRUE
-   * 
+   *
    * @param item
    * @return
    */

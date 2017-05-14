@@ -69,7 +69,7 @@ public class CraftItemSelectViewerItems {
 
   /**
    * レシピからLoreTokenを取得。もしエラーがあるならnullを返す
-   * 
+   *
    * @param craftRecipe
    * @return
    */
@@ -105,7 +105,7 @@ public class CraftItemSelectViewerItems {
 
   /**
    * 素材が足りないからクラフトできないという文をLoreに追加する
-   * 
+   *
    * @param item
    */
   public static void addDontHasMaterial(ItemStack item) {
@@ -120,7 +120,7 @@ public class CraftItemSelectViewerItems {
 
   /**
    * 素材が足りないからクラフト出来ないという文をLoreから削除する
-   * 
+   *
    * @param item
    * @return
    */

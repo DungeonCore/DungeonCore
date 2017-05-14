@@ -16,7 +16,7 @@ public class NotMonsterDamageExplosion extends AbstractNotDamageExplosion {
 
   /**
    * 爆発のパーティクルを発生させるかどうかセットする
-   * 
+   *
    * @param isRunParticle
    */
   public void setRunParticle(boolean isRunParticle) {

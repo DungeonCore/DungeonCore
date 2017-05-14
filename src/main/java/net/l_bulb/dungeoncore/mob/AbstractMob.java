@@ -57,7 +57,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * LbnNBTTagを取得
-   * 
+   *
    * @return
    */
   public LbnMobTag getLbnMobTag() {
@@ -84,7 +84,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * クリエイティブの時、ダメージ量を表示させる
-   * 
+   *
    * @param mob
    * @param damager
    * @param e
@@ -141,7 +141,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * モンスターがProjectileを発射した時
-   * 
+   *
    * @param mob
    * @param target
    * @param e
@@ -150,7 +150,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * Null mobならTRUE
-   * 
+   *
    * @return
    */
   public boolean isNullMob() {
@@ -159,14 +159,14 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * モンスターがターゲットを定めた時
-   * 
+   *
    * @param event
    */
   public void onTarget(EntityTargetLivingEntityEvent event) {}
 
   /**
    * モンスターをスポーンさせる
-   * 
+   *
    * @param loc
    * @return
    */
@@ -212,7 +212,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * ドロップするアイテムを取得する
-   * 
+   *
    * @param lastDamagePlayer
    * @return
    */
@@ -222,7 +222,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * 現在の指定されたアイテムの中で現在受けていないクエストアイテムを削除する
-   * 
+   *
    * @param p
    * @param itemList
    */
@@ -261,7 +261,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * モンスターの名前を更新
-   * 
+   *
    * @param islater
    */
   public void updateName(boolean islater) {}
@@ -288,7 +288,7 @@ public abstract class AbstractMob<T extends Entity> {
 
   /**
    * PlayerにExpを加算させる
-   * 
+   *
    * @param entity
    * @param type
    * @param p

@@ -125,7 +125,7 @@ public class SlotSetTableOperation {
 
   /**
    * 4番と6番にSlot関係のアイテムが存在してるならそれを返す。それ以外ならnullを返す
-   * 
+   *
    * @param top
    * @return
    */

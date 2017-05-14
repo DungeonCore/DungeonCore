@@ -297,7 +297,7 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
 
   /**
    * このモブが持っているSkillIDを取得する
-   * 
+   *
    * @return
    */
   public HashSet<String> getSkillIdList() {

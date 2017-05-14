@@ -92,7 +92,7 @@ public class StonePickaxe extends AbstractPickaxe {
 
   /**
    * 全てのレベルの石のピッケルを取得する
-   * 
+   *
    * @return
    */
   @Override

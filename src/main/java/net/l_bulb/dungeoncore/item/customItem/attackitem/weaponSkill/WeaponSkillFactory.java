@@ -46,7 +46,7 @@ public class WeaponSkillFactory {
 
   /**
    * SkillListを取得
-   * 
+   *
    * @return
    */
   public static Collection<WeaponSkillInterface> getSortedSkillList() {
@@ -55,7 +55,7 @@ public class WeaponSkillFactory {
 
   /**
    * 武器スキルを登録する
-   * 
+   *
    * @param weaponSkill
    */
   public static void regist(WeaponSkillData data) {
@@ -82,7 +82,7 @@ public class WeaponSkillFactory {
 
   /**
    * 武器スキルを取得する
-   * 
+   *
    * @param id 武器スキルID
    */
   public static WeaponSkillInterface getWeaponSkill(String id) {

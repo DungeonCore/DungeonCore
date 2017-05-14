@@ -50,7 +50,7 @@ public class MobSkillInplemention implements MobSkillInterface {
 
   /**
    * スキル発動時に一回だけ実行
-   * 
+   *
    * @param target
    * @param mob
    */

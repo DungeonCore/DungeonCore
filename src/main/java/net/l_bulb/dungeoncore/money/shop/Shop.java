@@ -22,7 +22,7 @@ public class Shop {
 
   /**
    * ショップ用のインベントリを取得
-   * 
+   *
    * @return
    */
   public Inventory getShopInventory() {
@@ -44,7 +44,7 @@ public class Shop {
 
   /**
    * 商品を取得
-   * 
+   *
    * @return
    */
   protected ArrayList<ShopItem> getShopItemList() {
@@ -96,7 +96,7 @@ public class Shop {
 
   /**
    * ShopItemを設定したItemStackからShopItemを取得
-   * 
+   *
    * @param shopItem
    * @param error
    * @return

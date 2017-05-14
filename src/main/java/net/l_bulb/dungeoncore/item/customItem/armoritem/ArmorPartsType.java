@@ -7,7 +7,7 @@ public enum ArmorPartsType {
 
   /**
    * 防具の種類を取得
-   * 
+   *
    * @param name
    * @return
    */
@@ -22,7 +22,7 @@ public enum ArmorPartsType {
 
   /**
    * アイテムの素材から取得
-   * 
+   *
    * @return
    */
   public static ArmorPartsType getType(Material m) {

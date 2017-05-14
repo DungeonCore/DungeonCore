@@ -89,7 +89,7 @@ public class MeteoStrike extends WeaponSkillForOneType {
 
       /**
        * 爆発をおこしダメージを与える
-       * 
+       *
        * @param e
        * @param centerEntity
        */

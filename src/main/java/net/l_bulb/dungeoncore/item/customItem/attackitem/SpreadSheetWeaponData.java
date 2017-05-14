@@ -63,7 +63,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
-   * 
+   *
    * @param sender
    * @return
    */
@@ -91,7 +91,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 最大耐久を取得, もし設定されていない場合は-1を返す
-   * 
+   *
    * @return
    */
   public short getMaxDurability() {
@@ -100,7 +100,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 最大耐久をセットする
-   * 
+   *
    * @param maxDurability
    */
   public void setMaxDurability(String maxDurability) {
@@ -109,7 +109,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテム名を取得
-   * 
+   *
    * @return
    */
   public String getName() {
@@ -118,7 +118,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテム名をセットする
-   * 
+   *
    * @param name
    */
   public void setName(String name) {
@@ -127,7 +127,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテムIDを取得する
-   * 
+   *
    * @return
    */
   public String getId() {
@@ -136,7 +136,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテムIDを取得する
-   * 
+   *
    * @param id
    */
   public void setId(String id) {
@@ -145,7 +145,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテム自体の素材, またはコマンドをセットする
-   * 
+   *
    * @param item
    */
   public void setItemMaterial(String item, CommandSender sender) {
@@ -169,7 +169,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテムのタイプを取得する、 もし正しい値が設定されていない場合はnullを返す
-   * 
+   *
    * @return
    */
   public ItemType getItemType() {
@@ -178,7 +178,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテムのタイプをセットする
-   * 
+   *
    * @param itemType
    */
   public void setItemType(String itemType) {
@@ -191,7 +191,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 攻撃力の倍率を取得
-   * 
+   *
    * @return
    */
   public double getDamageParcent() {
@@ -200,7 +200,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 攻撃力の倍率をセットする
-   * 
+   *
    * @param damageParcent
    */
   public void setDamageParcent(String damageParcent) {
@@ -209,7 +209,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * スキルレベルを取得
-   * 
+   *
    * @return
    */
   public int getSkillLevel() {
@@ -218,7 +218,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * スキルレベルをセット
-   * 
+   *
    * @param skillLevel
    */
   public void setSkillLevel(String skillLevel) {
@@ -227,7 +227,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 最大スロットを取得
-   * 
+   *
    * @return
    */
   public int getMaxSlot() {
@@ -236,7 +236,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 最大スロットをセットする
-   * 
+   *
    * @param maxSlot
    */
   public void setMaxSlot(String maxSlot) {
@@ -245,7 +245,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * デフォルトスロットを取得
-   * 
+   *
    * @return
    */
   public int getDefaultSlot() {
@@ -254,7 +254,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * デフォルトスロットをセットする
-   * 
+   *
    * @param defaultSlot
    */
   public void setDefaultSlot(String defaultSlot) {
@@ -263,7 +263,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 武器のランクを取得
-   * 
+   *
    * @return
    */
   public int getRank() {
@@ -272,7 +272,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 武器のランクをセット
-   * 
+   *
    * @param rank
    */
   public void setRank(String rank) {
@@ -281,7 +281,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 使用可能レベルを取得
-   * 
+   *
    * @return
    */
   public int getAvailableLevel() {
@@ -290,7 +290,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 使用可能レベルをセット
-   * 
+   *
    * @param availableLevel
    */
   public void setAvailableLevel(String availableLevel) {
@@ -299,7 +299,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテム制作に使うアイテムIDと個数をセットする
-   * 
+   *
    * @param itemid アイテムID
    * @param count 個数
    */
@@ -309,7 +309,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 制作に必要なアイテムIDと個数を取得
-   * 
+   *
    * @return
    */
   public Map<String, Integer> getCraftItem() {
@@ -318,7 +318,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * メインのクラフト素材をセットする
-   * 
+   *
    * @param mainCraftMaterial
    */
   public void setMainCraftMaterial(String mainCraftMaterial) {
@@ -327,7 +327,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * メインのクラフト素材を取得する
-   * 
+   *
    * @return
    */
   public String getMainCraftMaterial() {
@@ -336,7 +336,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * コンソール以外の時、エラーを送信する
-   * 
+   *
    * @param sender
    */
   public void sendError(CommandSender sender, String error) {
@@ -347,7 +347,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * ItemStackを取得する
-   * 
+   *
    * @return
    */
   public ItemStack getItemStack() {
@@ -356,7 +356,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * 詳細を取得する
-   * 
+   *
    * @return
    */
   public String[] getDetail() {
@@ -368,7 +368,7 @@ public class SpreadSheetWeaponData {
 
   /**
    * アイテムの詳細をセットする
-   * 
+   *
    * @param detail
    */
   public void setDetail(String detail) {

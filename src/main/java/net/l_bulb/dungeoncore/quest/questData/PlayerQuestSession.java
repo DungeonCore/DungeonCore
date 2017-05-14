@@ -39,7 +39,7 @@ public class PlayerQuestSession {
 
   /**
    * オンラインのPlayerを取得
-   * 
+   *
    * @return
    */
   public Player getOnlinePlayer() {
@@ -52,7 +52,7 @@ public class PlayerQuestSession {
 
   /**
    * 指定したクエストを受けていたらTRUE
-   * 
+   *
    * @param q
    * @return
    */
@@ -110,7 +110,7 @@ public class PlayerQuestSession {
 
   /**
    * クエストのデータ値を渡す
-   * 
+   *
    * @param q
    * @return
    */

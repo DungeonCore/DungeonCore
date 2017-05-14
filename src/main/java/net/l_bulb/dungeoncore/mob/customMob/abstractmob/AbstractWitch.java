@@ -20,7 +20,7 @@ public abstract class AbstractWitch extends AbstractCustomMob<CustomWitch, Witch
 
   /**
    * アイテムを持ち変えるならTRUE
-   * 
+   *
    * @return
    */
   public boolean isChangeItem() {

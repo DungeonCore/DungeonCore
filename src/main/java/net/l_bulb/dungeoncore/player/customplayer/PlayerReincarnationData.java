@@ -30,7 +30,7 @@ public class PlayerReincarnationData {
 
   /**
    * 転生を行うときのデータを追加
-   * 
+   *
    * @param reincarnationInterface
    * @param levelType
    * @return 今回追加されたOneReincarnationData
@@ -52,7 +52,7 @@ public class PlayerReincarnationData {
 
   /**
    * 現在指定されたレベルタイプで何回転生を行ったのかを取得
-   * 
+   *
    * @return
    */
   public int getNowReincarnationCount(LevelType levelType) {
@@ -62,7 +62,7 @@ public class PlayerReincarnationData {
 
   /**
    * 現在すべてのレベルタイプをを合計して何回転生を行ったのかを取得
-   * 
+   *
    * @return
    */
   public int getNowTotalReincarnationCount() {
@@ -71,7 +71,7 @@ public class PlayerReincarnationData {
 
   /**
    * 対応するレベルタイプに対応したMapを取得
-   * 
+   *
    * @param levelType
    * @return
    */
@@ -90,7 +90,7 @@ public class PlayerReincarnationData {
 
   /**
    * 指定したレベルタイプに対応した転生データを取得
-   * 
+   *
    * @param levelType
    * @return
    */

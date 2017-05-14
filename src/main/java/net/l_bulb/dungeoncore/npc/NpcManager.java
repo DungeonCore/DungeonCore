@@ -57,7 +57,7 @@ public class NpcManager {
 
   /**
    * NPCを登録する
-   * 
+   *
    * @param villagerNpc
    */
   public static void regist(CustomNpcInterface villagerNpc) {
@@ -72,7 +72,7 @@ public class NpcManager {
 
   /**
    * 指定されたエンチティがNPCならTRUE
-   * 
+   *
    * @param entity
    * @return
    */
@@ -82,7 +82,7 @@ public class NpcManager {
 
   /**
    * EntityからVillagerIdを取得
-   * 
+   *
    * @param npc
    * @return
    */
@@ -102,7 +102,7 @@ public class NpcManager {
 
   /**
    * NPCを右クリックをした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCRightClickEvent(NPCRightClickEvent e) {
@@ -115,7 +115,7 @@ public class NpcManager {
 
   /**
    * NPCを左クリックをした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCLeftClickEvent(NPCLeftClickEvent e) {
@@ -128,7 +128,7 @@ public class NpcManager {
 
   /**
    * NPCがダメージを受けたときの処理
-   * 
+   *
    * @param e
    */
   public static void onNPCDamageEvent(NPCDamageEvent e) {
@@ -141,7 +141,7 @@ public class NpcManager {
 
   /**
    * NPCがスポーンした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCSpawnEvent(NPCSpawnEvent e) {
@@ -155,14 +155,14 @@ public class NpcManager {
 
   /**
    * NPCがデスポーンした時の処理
-   * 
+   *
    * @param e
    */
   public static void onNPCDespawnEvent(NPCDespawnEvent e) {}
 
   /**
    * スプレットシートのデータを取得する
-   * 
+   *
    * @param sender
    */
   public static void allReload(CommandSender sender) {
@@ -176,7 +176,7 @@ public class NpcManager {
 
   /**
    * IDからNPCを取得する
-   * 
+   *
    * @return
    */
   public static NPC getSpawnedNpc(String id) {
@@ -185,7 +185,7 @@ public class NpcManager {
 
   /**
    * EntityからIDを取得する
-   * 
+   *
    * @param e
    * @return
    */

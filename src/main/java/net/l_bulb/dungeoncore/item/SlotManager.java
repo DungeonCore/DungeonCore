@@ -51,7 +51,7 @@ public class SlotManager {
 
   /**
    * Loreからスロットを取得
-   * 
+   *
    * @param line
    * @return
    */
@@ -64,7 +64,7 @@ public class SlotManager {
 
   /**
    * スロットのためのLoreを取得する
-   * 
+   *
    * @param slot
    * @return
    */
@@ -88,7 +88,7 @@ public class SlotManager {
   //
   /**
    * スロットTile文ならTrue
-   * 
+   *
    * @param line
    * @return
    */
@@ -99,7 +99,7 @@ public class SlotManager {
 
   /**
    * 指定したLevelからそれにあったMagicStoneを取得する
-   * 
+   *
    * @param level
    * @return
    */

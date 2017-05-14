@@ -25,7 +25,7 @@ public class MagicStoneTradeData {
 
   /**
    * マジックストーンのタイプからランダムでアイテムを取得する
-   * 
+   *
    * @param type
    * @return
    */
@@ -85,7 +85,7 @@ public class MagicStoneTradeData {
 
   /**
    * 指定されたSlotLevelからランダムで魔法石アイテムを取得する
-   * 
+   *
    * @param level
    * @return
    */

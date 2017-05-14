@@ -138,7 +138,7 @@ public class ArmorBase {
 
   /**
    * ダメージのカット率を取得
-   * 
+   *
    * @param totalArmorPoint
    * @return
    */

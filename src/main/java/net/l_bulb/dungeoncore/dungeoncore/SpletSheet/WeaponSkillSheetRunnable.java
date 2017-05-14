@@ -86,7 +86,7 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
 
   /**
    * アイテムの種類を説明
-   * 
+   *
    * @param name
    * @return
    */

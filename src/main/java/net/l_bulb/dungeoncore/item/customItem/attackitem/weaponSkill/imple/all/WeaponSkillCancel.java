@@ -65,7 +65,7 @@ public class WeaponSkillCancel implements WeaponSkillInterface {
 
   /**
    * 指定した武器スキルがこのスキルならTRUE
-   * 
+   *
    * @param skill
    * @return
    */

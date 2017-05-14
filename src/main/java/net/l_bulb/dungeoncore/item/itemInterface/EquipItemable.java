@@ -7,7 +7,7 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 public interface EquipItemable extends ItemInterface, AvailableLevelItemable {
   /**
    * アイテムの最大耐久度を取得
-   * 
+   *
    * @param e
    * @return
    */

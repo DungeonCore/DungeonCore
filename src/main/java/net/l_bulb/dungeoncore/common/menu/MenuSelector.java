@@ -26,7 +26,7 @@ public class MenuSelector implements MenuSelectorInterface {
 
   /**
    * メニューを追加する
-   * 
+   *
    * @param item
    * @param index
    * @param run
@@ -40,7 +40,7 @@ public class MenuSelector implements MenuSelectorInterface {
 
   /**
    * メニューを開く
-   * 
+   *
    * @param p
    */
   @Override
@@ -50,7 +50,7 @@ public class MenuSelector implements MenuSelectorInterface {
 
   /**
    * アイテムを選択したときの処理
-   * 
+   *
    * @param p
    * @param item
    */

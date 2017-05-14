@@ -41,7 +41,7 @@ public class MobSpawnerPointManager {
 
   /**
    * スポーンポイントを追加する
-   * 
+   *
    * @param spawnerPoint
    */
   public static void addSpawnPoint(MobSpawnerPoint spawnerPoint) {

@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.npc.NpcManager;
 
 /**
  * NPCのデータを管理するためのクラス
- * 
+ *
  * @author KENSUKE
  *
  */
