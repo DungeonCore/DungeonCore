@@ -48,14 +48,14 @@ public class DungeonListRunnable extends AbstractComplexSheetRunable {
     switch (placeBean.getType()) {
       case DUNGEON:
         DungeonData place = new DungeonData(placeBean);
+        place.setShowHologram(true);
         DungeonList.addDungeon(place);
         break;
-      case DUNGEON_IMMATURE:
+      // case DUNGEON_IMMATURE:
+      // break;
+      default:
         DungeonData place2 = new DungeonData(placeBean);
         DungeonList.addDungeon(place2);
-        break;
-      default:
-        sendMessage("現在そのTypeは対応していません。id:" + placeBean.getId());
         break;
     }
   }

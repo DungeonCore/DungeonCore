@@ -57,7 +57,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
       HashMap<String, Object> hashMap = new HashMap<>();
       hashMap.put("name", dungeonName);
       hashMap.put("tploc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));
-      hashMap.put("startloc", AbstractComplexSheetRunable.getLocationString(p.getLocation()));
+      hashMap.put("type", "ダンジョン(未完成)");
       hashMap.put("id", dungeon.getId());
       dungeonListRunnable.addData(hashMap);
 
@@ -66,6 +66,10 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
       sender.sendMessage("【/setDungeon set ダンジョン名】 でダンジョンを登録してください");
     }
     return true;
+  }
+
+  public static void main(String[] args) {
+    new SetDungeonCommand().executeTp(null, "10");
   }
 
   private void executeTp(CommandSender sender, String args) {
@@ -82,7 +86,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
     if (dungeon != null) {
       ((Player) sender).teleport(dungeon.getTeleportLocation());
     } else {
-      sender.sendMessage("ダンジョンが存在しません。");
+      sender.sendMessage("ダンジョンが存在しません。[" + args + "]");
     }
   }
 
@@ -110,6 +114,6 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
         sb.append(args[i] + " ");
       }
     }
-    return sb.toString();
+    return sb.toString().trim();
   }
 }

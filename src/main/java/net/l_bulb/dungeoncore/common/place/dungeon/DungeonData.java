@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.common.place.dungeon;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
@@ -11,6 +12,9 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class DungeonData implements PlaceInterface {
 
@@ -25,6 +29,10 @@ public class DungeonData implements PlaceInterface {
   private PlaceBean bean;
 
   Hologram hologram;
+
+  @Getter
+  @Setter
+  boolean isShowHologram = false;
 
   public DungeonData(PlaceBean bean) {
     this.bean = bean;
@@ -47,6 +55,8 @@ public class DungeonData implements PlaceInterface {
 
   @Override
   public void enable() {
+    if (!isShowHologram) { return; }
+
     if (HolographicDisplaysManager.isUseHolographicDisplays()) {
       Location location = getEntranceLocation();
       if (location != null) {
@@ -56,7 +66,9 @@ public class DungeonData implements PlaceInterface {
 
         Hologram hologram = HologramsAPI.createHologram(Main.plugin, location);
         hologram.appendTextLine(ChatColor.AQUA + ChatColor.BOLD.toString() + getName());
-        hologram.appendTextLine(ChatColor.GOLD + "DIFFICULTY : " + getLevel() + "レベル");
+
+        String difficulty = NumberUtils.isDigits(getLevel()) ? getLevel() + "レベル" : getLevel();
+        hologram.appendTextLine(ChatColor.GOLD + "DIFFICULTY : " + difficulty);
         this.hologram = hologram;
       }
     }
@@ -74,7 +86,7 @@ public class DungeonData implements PlaceInterface {
    *
    * @return
    */
-  public int getLevel() {
+  public String getLevel() {
     return bean.getLevel();
   }
 

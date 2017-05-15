@@ -18,7 +18,7 @@ public class PlaceBean {
 
   public Location dungeonStartLocation;
 
-  public int level;
+  public String level;
 
   public int getId() {
     return id;
@@ -72,12 +72,12 @@ public class PlaceBean {
     this.dungeonStartLocation = AbstractSheetRunable.getLocationByString(dungeonStartLocation);
   }
 
-  public int getLevel() {
+  public String getLevel() {
     return level;
   }
 
   public void setLevel(String level) {
-    this.level = JavaUtil.getInt(level, 0);
+    this.level = level;
   }
 
   public boolean isError() {
