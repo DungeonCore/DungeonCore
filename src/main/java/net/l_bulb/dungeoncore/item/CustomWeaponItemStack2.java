@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.slot.table;
+package net.l_bulb.dungeoncore.item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,6 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.SlotManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
@@ -19,14 +16,14 @@ import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
-public class MagicStoneEditor {
+public class CustomWeaponItemStack2 {
   /**
    * インスタンスを取得、通常はクラス内からしか呼ばれない
    *
    * @param item
    * @param itemInterface
    */
-  private MagicStoneEditor(ItemStack item, AbstractAttackItem itemInterface) {
+  private CustomWeaponItemStack2(ItemStack item, AbstractAttackItem itemInterface) {
     this.item = item;
     this.itemInterface = itemInterface;
   }
@@ -34,7 +31,7 @@ public class MagicStoneEditor {
   ItemStack item;
   AbstractAttackItem itemInterface;
 
-  static HashMap<ItemStack, MagicStoneEditor> cache = new HashMap<>();
+  static HashMap<ItemStack, CustomWeaponItemStack2> cache = new HashMap<>();
 
   /**
    * ItemStackから武器情報を取得する
@@ -42,19 +39,14 @@ public class MagicStoneEditor {
    * @param item
    * @return
    */
-  public static MagicStoneEditor getInstance(ItemStack item) {
+  public static CustomWeaponItemStack2 getInstance(ItemStack item) {
     ItemInterface customItem = ItemManager.getCustomItem(item);
-    if (customItem == null) {
-      System.out.println("aaaaaaaaaa1");
-      return null;
-    }
+    if (customItem == null) { return null; }
     // 武器でないならnullを返す
     if (customItem instanceof AbstractAttackItem) {
-      MagicStoneEditor attackItemStack = getCache(item);
-      System.out.println("aaaaaaaaaa2");
+      CustomWeaponItemStack2 attackItemStack = getCache(item);
       return attackItemStack;
     }
-    System.out.println("aaaaaaaaaa3");
     return null;
   }
 
@@ -64,10 +56,10 @@ public class MagicStoneEditor {
    * @param item
    * @return
    */
-  private static MagicStoneEditor getCache(ItemStack item) {
+  private static CustomWeaponItemStack2 getCache(ItemStack item) {
     // キャッシュがあるならそれを取得
     if (cache.containsKey(item)) { return cache.get(item); }
-    return new MagicStoneEditor(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
+    return new CustomWeaponItemStack2(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
   }
 
   /**

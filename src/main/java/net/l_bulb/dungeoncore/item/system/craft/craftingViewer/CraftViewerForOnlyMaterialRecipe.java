@@ -126,7 +126,6 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
     } else {
       p.sendMessage("素材が足りないためアイテムを作成出来ません");
     }
-    p.closeInventory();
   }
 
   @Override

@@ -28,7 +28,7 @@ public class JavaUtil {
 
   public static int getInt(String data, int other) {
     try {
-      return Integer.parseInt(data);
+      return Integer.parseInt(data.trim());
     } catch (Exception e) {
       return other;
     }

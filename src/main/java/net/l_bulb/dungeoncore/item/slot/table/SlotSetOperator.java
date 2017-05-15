@@ -5,22 +5,23 @@ import java.util.ArrayList;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
 
 public class SlotSetOperator {
-  protected SlotSetOperator(MagicStoneEditor attackItem,
+  protected SlotSetOperator(CustomWeaponItemStack2 attackItem,
       SlotInterface magicStone) {
     this.attackItem = attackItem;
     this.magicStone = magicStone;
   }
 
-  MagicStoneEditor attackItem;
+  CustomWeaponItemStack2 attackItem;
   SlotInterface magicStone;
 
-  public MagicStoneEditor getAttackItem() {
+  public CustomWeaponItemStack2 getAttackItem() {
     return attackItem;
   }
 
@@ -100,7 +101,7 @@ public class SlotSetOperator {
    * @param cursor
    */
   public void rollback(ItemStack cursor) {
-    MagicStoneEditor instance = MagicStoneEditor.getInstance(cursor);
+    CustomWeaponItemStack2 instance = CustomWeaponItemStack2.getInstance(cursor);
     // nullの可能性がある
     if (instance == null) {
       new LbnRuntimeException("magic stone is null").printStackTrace();

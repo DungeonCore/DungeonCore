@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchant;
 import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
 import net.l_bulb.dungeoncore.common.trade.TheLowTrades;
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
@@ -95,7 +96,7 @@ public class SlotMerchant extends TheLowMerchant {
     // もしアイテムが不足しているなら何もしない
     if (!(customAttackItem instanceof CombatItemable) || !(customMagicItem instanceof SlotInterface)) { return null; }
 
-    SlotSetOperator slotSetOperator = new SlotSetOperator(MagicStoneEditor.getInstance(attackItem.clone()), (SlotInterface) customMagicItem);
+    SlotSetOperator slotSetOperator = new SlotSetOperator(CustomWeaponItemStack2.getInstance(attackItem.clone()), (SlotInterface) customMagicItem);
     return slotSetOperator;
   }
 

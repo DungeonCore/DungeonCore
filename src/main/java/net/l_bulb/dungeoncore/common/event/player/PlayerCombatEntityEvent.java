@@ -7,7 +7,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,11 +24,11 @@ public class PlayerCombatEntityEvent extends PlayerEvent {
   @Setter
   double damage;
 
-  MagicStoneEditor attackItem;
+  CustomWeaponItemStack2 attackItem;
 
   public PlayerCombatEntityEvent(Player who, LivingEntity enemy, ItemStack item, double damage) {
     super(who);
-    this.attackItem = MagicStoneEditor.getInstance(item);
+    this.attackItem = CustomWeaponItemStack2.getInstance(item);
     this.damage = damage;
     this.enemy = enemy;
   }

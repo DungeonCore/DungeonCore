@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
-import net.l_bulb.dungeoncore.item.slot.table.MagicStoneEditor;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -92,7 +92,7 @@ public class WeaponSkillExecutor {
    * 攻撃をした時、スキルを発動
    */
   public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
-    MagicStoneEditor attackItem = e.getAttackItem();
+    CustomWeaponItemStack2 attackItem = e.getAttackItem();
     ItemStack item = attackItem.getItem();
     Player player = e.getPlayer();
     AbstractAttackItem customItem = attackItem.getItemInterface();
