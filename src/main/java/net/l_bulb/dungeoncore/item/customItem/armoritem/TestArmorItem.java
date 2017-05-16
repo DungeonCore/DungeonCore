@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
@@ -84,11 +83,6 @@ public class TestArmorItem extends AbstractArmorItem {
   @Override
   public void setStrengthDetail(int level, ItemLoreToken loreToken) {
 
-  }
-
-  @Override
-  public TheLowCraftRecipeInterface getCraftRecipe() {
-    return null;
   }
 
   @Override

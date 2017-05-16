@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 
-import java.util.Map.Entry;
-
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -79,19 +77,6 @@ public class SpreadSheetArmor extends AbstractArmorItem {
   public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {}
 
   TheLowCraftRecipeInterface recipe;
-
-  @Override
-  public TheLowCraftRecipeInterface getCraftRecipe() {
-    if (recipe == null) {
-      TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
-      // 素材を追加する
-      for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
-        recipe.addMaterial(entry.getKey(), entry.getValue());
-      }
-      this.recipe = recipe;
-    }
-    return recipe;
-  }
 
   @Override
   protected Material getMaterial() {

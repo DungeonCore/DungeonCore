@@ -24,9 +24,7 @@ public class ArmorSheetRunnable extends AbstractSheetRunable {
 
   @Override
   public String[] getTag() {
-    return new String[] { "id", "name", "detail", "materal", "armorPoint", "armorPointBoss", "dummy1", "durability", "uselevel", "price",
-        "maincraftmaterial", // 10
-        "craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial3", "craftcount3" };
+    return new String[] { "id", "name", "detail", "materal", "armorPoint", "armorPointBoss", "dummy1", "durability", "uselevel", "price"};
   }
 
   @Override
@@ -41,10 +39,6 @@ public class ArmorSheetRunnable extends AbstractSheetRunable {
     data.setMaxDurability(row[7]);
     data.setAvailableLevel(row[8]);
     data.setPrice(row[9]);
-    data.setMainCraftMaterial(row[10]);
-    data.setCraftItem(row[11], row[12]);
-    data.setCraftItem(row[13], row[14]);
-    data.setCraftItem(row[15], row[16]);
 
     if (!data.check(sender)) { return; }
 

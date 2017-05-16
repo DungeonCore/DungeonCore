@@ -16,9 +16,10 @@ import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
+import net.l_bulb.dungeoncore.item.system.craft.CraftItemRecipeFactory;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewerItems;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
+import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeWithMaterial;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -31,16 +32,20 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
   private static final String TITLE = "アイテム製作1";
   private static final String THELOW_CRAFT_BUTTON_NBTTAG = "thelow_craft_button";
 
-  public static void open(Player p, CraftItemable item) {
+  public static void open(Player p, TheLowCraftRecipeWithMaterial recipe) {
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
     if (theLowPlayer == null) {
       TheLowPlayerManager.sendLoingingMessage(p);
       return;
     }
 
-    Inventory createInventory = Bukkit.createInventory(null, 9 * 3, TITLE);
+    // レシピが不正ならクラフトしない
+    if (!recipe.isValidRecipe()) { return; }
 
-    TheLowCraftRecipeInterface recipe = item.getCraftRecipe();
+    // クラフトして出来るアイテム
+    ItemInterface item = recipe.getCraftItem();
+
+    Inventory createInventory = Bukkit.createInventory(null, 9 * 3, TITLE);
 
     // アイテムを作成するボタンを配置する
     // tokenがnullならエラーとする
@@ -93,7 +98,7 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
       return;
     }
 
-    if (!(customItemById instanceof CraftItemable)) {
+    if (!CraftItemRecipeFactory.contains(customItemById)) {
       p.closeInventory();
       p.sendMessage("エラーが発生したため、インベントリを閉じました。(2)");
       return;
@@ -106,10 +111,13 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
       return;
     }
 
+    // レシピを取得
+    TheLowCraftRecipeInterface recipe = CraftItemRecipeFactory.getRecipe(customItemById);
+
     // 念のため素材をもっているか確認
-    if (((CraftItemable) customItemById).getCraftRecipe().hasAllMaterial(p, false)) {
+    if (recipe.hasAllMaterial(p, false)) {
       // アイテムを削除する
-      ((CraftItemable) customItemById).getCraftRecipe().removeMaterial(p.getInventory());
+      recipe.removeMaterial(p.getInventory());
       // アイテムを追加する
       ItemStack craftedItem = customItemById.getItem();
       p.getInventory().addItem(craftedItem);
@@ -122,7 +130,7 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
         }
       }.runTaskLater(Main.plugin, 2);
 
-      new PlayerCraftCustomItemEvent(TheLowPlayerManager.getTheLowPlayer(p), ((CraftItemable) customItemById), craftedItem).callEvent();
+      new PlayerCraftCustomItemEvent(TheLowPlayerManager.getTheLowPlayer(p), recipe, craftedItem).callEvent();
     } else {
       p.sendMessage("素材が足りないためアイテムを作成出来ません");
     }

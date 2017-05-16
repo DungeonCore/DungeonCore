@@ -23,7 +23,8 @@ import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.AbstractSheetRunable;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
+import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForMainItemRecipe;
+import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForOnlyMaterialRecipe;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpc;
 import net.l_bulb.dungeoncore.npc.villagerNpc.VillagerNpcManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -100,7 +101,9 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
     // 設定したインベントリ
     Inventory inventory = invList.get(index);
 
+    // アイテム一覧画面
     Inventory itemViewer = Bukkit.createInventory(null, inventory.getSize(), TITLE);
+    // クラフトアイテム一覧を取得
     ItemStack[] contents = inventory.getContents();
     for (int i = 0; i < contents.length; i++) {
       // アイテムが無い時は無視する
@@ -116,8 +119,10 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
         itemViewer.setItem(i, contents[i]);
       } else {
         // クラフト出来るアイテムならセットする
-        if (ItemManager.isImplemental(CraftItemable.class, customItem)) {
-          itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem((CraftItemable) customItem));
+        if (CraftItemRecipeFactory.contains(customItem.getId())) {
+          // レシピを取得
+          TheLowCraftRecipeInterface recipe = CraftItemRecipeFactory.getRecipe(customItem.getId());
+          itemViewer.setItem(i, CraftItemSelectViewerItems.getViewItem(recipe, contents[i]));
         }
       }
     }
@@ -158,22 +163,28 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
     // クラフトできないアイテムを選択しているので何もしない
     if (nbtTag == null || nbtTag.isEmpty() || item.getType() == Material.BARRIER) { return; }
 
-    CraftItemable customItem = ItemManager.getCustomItem(CraftItemable.class, item);
-    // nullはありえないが念のため
-    if (customItem == null) {
-      new RuntimeException("このアイテムはクラフト出来ません。id:" + nbtTag).printStackTrace();
-      return;
-    }
+    ItemInterface customItem = ItemManager.getCustomItem(item);
+    if (customItem == null) { return; }
+    // クラフト出来ないアイテムなら何もしない
+    if (!CraftItemRecipeFactory.contains(customItem)) { return; }
 
-    TheLowCraftRecipeInterface craftRecipe = customItem.getCraftRecipe();
-    // 素材を持っているか確認
-    if (craftRecipe.hasAllMaterial(p, true)) {
-      craftRecipe.openCraftingViewer(p, customItem);
-    } else {
+    // レシピを取得
+    TheLowCraftRecipeInterface craftRecipe = CraftItemRecipeFactory.getRecipe(customItem.getId());
+    // 素材を持っていなければLoreを書き換える
+    if (!craftRecipe.hasAllMaterial(p, true)) {
       // 書き換える
       CraftItemSelectViewerItems.addDontHasMaterial(item);
       e.setCurrentItem(item);
       p.updateInventory();
+      return;
+    }
+
+    // クラフト画面を開く
+    if (craftRecipe.hasMainItem()) {
+      CraftViewerForMainItemRecipe.open(p, (TheLowCraftRecipeWithMainItem) craftRecipe);
+    } else {
+      CraftViewerForOnlyMaterialRecipe.open(p, (TheLowCraftRecipeWithMaterial) craftRecipe);
+      new RuntimeException("invalid recipe class:" + craftRecipe.getClass()).printStackTrace();
     }
   }
 

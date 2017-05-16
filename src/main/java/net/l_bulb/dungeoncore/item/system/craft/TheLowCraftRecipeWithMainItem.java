@@ -8,8 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
-import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForMainItemRecipe;
 
 public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial {
   // ItemId
@@ -49,10 +47,5 @@ public class TheLowCraftRecipeWithMainItem extends TheLowCraftRecipeWithMaterial
       if (item.isThisItem(i)) { return true; }
     }
     return false;
-  }
-
-  @Override
-  public void openCraftingViewer(Player p, CraftItemable craftingItem) {
-    CraftViewerForMainItemRecipe.open(p, craftingItem);
   }
 }

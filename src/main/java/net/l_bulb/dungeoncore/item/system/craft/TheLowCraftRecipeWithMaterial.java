@@ -10,8 +10,6 @@ import org.bukkit.inventory.PlayerInventory;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
-import net.l_bulb.dungeoncore.item.system.craft.craftingViewer.CraftViewerForOnlyMaterialRecipe;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface {
@@ -67,8 +65,72 @@ public class TheLowCraftRecipeWithMaterial implements TheLowCraftRecipeInterface
     }
   }
 
+  // 成功時のアイテムID
+  String successItemId;
+
+  // 大成功時のアイテムID
+  String greateSuccessItemId;
+
   @Override
-  public void openCraftingViewer(Player p, CraftItemable craftingItem) {
-    CraftViewerForOnlyMaterialRecipe.open(p, craftingItem);
+  public ItemInterface getSuccessItem() {
+    return ItemManager.getCustomItemById(successItemId);
   }
+
+  @Override
+  public void setSuccessItemId(String successItemId) {
+    this.successItemId = successItemId;
+  }
+
+  @Override
+  public ItemInterface getGreateSuccessItem() {
+    return ItemManager.getCustomItemById(greateSuccessItemId);
+  }
+
+  @Override
+  public void setGreateSuccessItemId(String greateSuccessItemId) {
+    this.greateSuccessItemId = greateSuccessItemId;
+  }
+
+  String craftItemId;
+
+  @Override
+  public ItemInterface getCraftItem() {
+    return ItemManager.getCustomItemById(craftItemId);
+  }
+
+  @Override
+  public void setCraftItemId(String id) {
+    this.craftItemId = id;
+  }
+
+  @Override
+  public boolean isValidRecipe() {
+    // クラフトアイテムが存在しないならFALSE
+    if (getCraftItem() == null) { return false; }
+
+    // 成功アイテムが設定されていて、そのIDが存在しないならクラフトできない
+    if (successItemId != null) {
+      if (getSuccessItem() == null) { return false; }
+    }
+
+    // 成功アイテムが設定されていて、そのIDが存在しないならクラフトできない
+    if (greateSuccessItemId != null) {
+      if (getGreateSuccessItem() == null) { return false; }
+    }
+
+    return true;
+  }
+
+  String id;
+
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  public void setId(String id) {
+    this.id = id;
+  }
+
 }

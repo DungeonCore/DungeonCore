@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 
-import java.util.Map.Entry;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -11,16 +9,14 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
-import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
-public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable, CraftItemable {
+public abstract class SpreadSheetAttackItem extends AbstractAttackItem implements StrengthChangeItemable {
   protected SpreadSheetWeaponData data;
 
   public SpreadSheetAttackItem(SpreadSheetWeaponData data) {
@@ -182,20 +178,4 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   @Override
   public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {}
-
-  TheLowCraftRecipeInterface recipe;
-
-  @Override
-  public TheLowCraftRecipeInterface getCraftRecipe() {
-    if (recipe == null) {
-      TheLowCraftRecipeInterface recipe = TheLowCraftRecipeInterface.createNewInstance(data.getMainCraftMaterial());
-      // 素材を追加する
-      for (Entry<String, Integer> entry : data.getCraftItem().entrySet()) {
-        recipe.addMaterial(entry.getKey(), entry.getValue());
-      }
-      this.recipe = recipe;
-    }
-    return recipe;
-  }
-
 }

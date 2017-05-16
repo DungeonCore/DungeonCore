@@ -4,17 +4,16 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 
 public class PlayerCraftCustomItemEvent extends TheLowPlayerEvent {
 
-  private CraftItemable itemInterface;
+  private TheLowCraftRecipeInterface thelowRecipe;
   private ItemStack craftedItem;
 
-  public PlayerCraftCustomItemEvent(TheLowPlayer player, CraftItemable craftItemable, ItemStack craftedItem) {
+  public PlayerCraftCustomItemEvent(TheLowPlayer player, TheLowCraftRecipeInterface thelowRecipe, ItemStack craftedItem) {
     super(player);
-    this.itemInterface = craftItemable;
+    this.thelowRecipe = thelowRecipe;
     this.craftedItem = craftedItem;
   }
 
@@ -30,21 +29,12 @@ public class PlayerCraftCustomItemEvent extends TheLowPlayerEvent {
   }
 
   /**
-   * クラフトしたItemInterface
-   *
-   * @return
-   */
-  public CraftItemable getItemInterface() {
-    return itemInterface;
-  }
-
-  /**
    * クラフトに使用したレシピを取得
    *
    * @return
    */
   public TheLowCraftRecipeInterface getCraftRecipe() {
-    return itemInterface.getCraftRecipe();
+    return thelowRecipe;
   }
 
   /**

@@ -1,8 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -51,9 +48,6 @@ public class SpreadSheetWeaponData {
 
   // 攻撃倍率
   double damageParcent = 1;
-
-  // クラフトに必要なアイテムとその数
-  HashMap<String, Integer> craftMaterial = new HashMap<>();
 
   // エラーかどうか
   boolean isCraftItemError = false;
@@ -295,43 +289,6 @@ public class SpreadSheetWeaponData {
    */
   public void setAvailableLevel(String availableLevel) {
     this.availableLevel = JavaUtil.getInt(availableLevel, this.availableLevel);
-  }
-
-  /**
-   * アイテム制作に使うアイテムIDと個数をセットする
-   *
-   * @param itemid アイテムID
-   * @param count 個数
-   */
-  public void setCraftItem(String itemid, String count) {
-    craftMaterial.put(itemid, JavaUtil.getInt(count, 1));
-  }
-
-  /**
-   * 制作に必要なアイテムIDと個数を取得
-   *
-   * @return
-   */
-  public Map<String, Integer> getCraftItem() {
-    return craftMaterial;
-  }
-
-  /**
-   * メインのクラフト素材をセットする
-   *
-   * @param mainCraftMaterial
-   */
-  public void setMainCraftMaterial(String mainCraftMaterial) {
-    this.mainCraftMaterial = mainCraftMaterial;
-  }
-
-  /**
-   * メインのクラフト素材を取得する
-   *
-   * @return
-   */
-  public String getMainCraftMaterial() {
-    return mainCraftMaterial;
   }
 
   /**

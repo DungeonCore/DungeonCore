@@ -18,7 +18,6 @@ import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
 import net.l_bulb.dungeoncore.common.trade.TheLowTrades;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeWithMainItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -26,16 +25,14 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 
-  private CraftItemable craftItem;
   private TheLowCraftRecipeInterface craftRecipe;
   private ItemInterface mainItem;
   private TheLowPlayer thelowPlayer;
 
-  public CraftViewerForMainItemRecipe(TheLowPlayer thelowPlayer, CraftItemable craftItem) {
+  public CraftViewerForMainItemRecipe(TheLowPlayer thelowPlayer, TheLowCraftRecipeWithMainItem craftRecipe) {
     super(thelowPlayer.getOnlinePlayer());
     this.thelowPlayer = thelowPlayer;
-    this.craftItem = craftItem;
-    craftRecipe = craftItem.getCraftRecipe();
+    this.craftRecipe = craftRecipe;
     mainItem = craftRecipe.getMainItem();
   }
 
@@ -71,7 +68,7 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
     int level = StrengthOperator.getLevel(baseItem);
 
     // 今はレベルだけ引き継ぐ
-    ItemStack item = craftItem.getItem();
+    ItemStack item = craftRecipe.getCraftItem().getItem();
     StrengthOperator.updateLore(item, level);
     return item;
   }
@@ -96,7 +93,7 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
 
   @Override
   public List<TheLowMerchantRecipe> getInitRecipes() {
-    return Arrays.asList(new TheLowMerchantRecipe(mainItem.getItem(), craftItem.getItem()));
+    return Arrays.asList(new TheLowMerchantRecipe(mainItem.getItem(), craftRecipe.getCraftItem().getItem()));
   }
 
   @Override
@@ -111,22 +108,21 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
       }
     }.runTaskLater(Main.plugin, 2);
 
-    new PlayerCraftCustomItemEvent(thelowPlayer, craftItem, recipe.getResult()).callEvent();
+    new PlayerCraftCustomItemEvent(thelowPlayer, craftRecipe, recipe.getResult()).callEvent();
   }
 
-  public static void open(Player p, CraftItemable item) {
+  public static void open(Player p, TheLowCraftRecipeWithMainItem recipe) {
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
     if (theLowPlayer == null) {
       TheLowPlayerManager.sendLoingingMessage(p);
       return;
     }
 
-    if (item.getCraftRecipe() instanceof TheLowCraftRecipeWithMainItem) {
-      CraftViewerForMainItemRecipe craftViewerForMainItemRecipe = new CraftViewerForMainItemRecipe(theLowPlayer, item);
+    if (recipe.isValidRecipe()) {
+      CraftViewerForMainItemRecipe craftViewerForMainItemRecipe = new CraftViewerForMainItemRecipe(theLowPlayer, recipe);
       TheLowTrades.open(craftViewerForMainItemRecipe, p);
-    } else {
-      p.sendMessage("エラーが発生しました(code:1)");
     }
+
   }
 
 }

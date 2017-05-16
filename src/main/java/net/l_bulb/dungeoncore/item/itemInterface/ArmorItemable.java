@@ -4,7 +4,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public interface ArmorItemable extends EquipItemable, Strengthenable, CraftItemable {
+public interface ArmorItemable extends EquipItemable, Strengthenable {
   /**
    * このアイテムを装備しているときの通常モンスターに対するガードポイント
    *

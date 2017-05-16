@@ -32,6 +32,7 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MobSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MobSkillSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ParticleSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.QuestSheetRunnable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.RecipeSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SoundSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
@@ -64,6 +65,7 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter {
     regist(new ArmorSheetRunnable(sender));
     regist(new Mob2SheetRunnable(sender));
     regist(new Mob1SheetRunnable(sender));
+    regist(new RecipeSheetRunnable(sender));
   }
 
   public static void regist(SheetRunnable<String[][]> sheet) {

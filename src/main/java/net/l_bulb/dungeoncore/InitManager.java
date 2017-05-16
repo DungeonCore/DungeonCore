@@ -62,6 +62,7 @@ public class InitManager {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
+    SpletSheetCommand.reloadSheet(null, "craftrecipe");
     SpletSheetCommand.reloadSheet(null, "weapon");
     SpletSheetCommand.reloadSheet(null, "armor");
     CommandChest.allReload();

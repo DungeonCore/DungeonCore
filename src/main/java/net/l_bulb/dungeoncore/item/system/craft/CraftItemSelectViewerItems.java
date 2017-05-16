@@ -16,7 +16,6 @@ import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
-import net.l_bulb.dungeoncore.item.itemInterface.CraftItemable;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
@@ -26,24 +25,21 @@ public class CraftItemSelectViewerItems {
   private static final String NOT_CRAFT_LINE = ChatColor.RED + "" + ChatColor.BOLD + "素材が足りないためアイテムを作成出来ません";
   private static final String CRAFT_MATERIAL_LORE_TITLE = "クラフト素材";
 
-  public static ItemStack getViewItem(CraftItemable craftItem) {
-    ItemStack itemstack = craftItem.getItem();
+  public static ItemStack getViewItem(TheLowCraftRecipeInterface craftRecipe, ItemStack clickItem) {
 
-    TheLowCraftRecipeInterface craftRecipe = craftItem.getCraftRecipe();
+    // クラフトアイテムに不正があるならクラフトできない
+    if (!craftRecipe.isValidRecipe()) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません"); }
 
-    boolean isValid = true;
-
+    // クラフトアイテム
+    ItemInterface craftCustomItem = craftRecipe.getCraftItem();
+    ItemStack craftItemStack = craftCustomItem.getItem();
     // LoreDataを生成
-    ItemLoreData itemLoreData = new ItemLoreData(itemstack, new CraftViewerLoreComparator());
+    ItemLoreData itemLoreData = new ItemLoreData(craftItemStack, new CraftViewerLoreComparator());
 
     // 素材のLoreを取得
     ItemLoreToken materialLore = getLoreTokenFromRecipe(craftRecipe);
-    if (materialLore == null) {
-      isValid = false;
-    }
+    if (materialLore == null) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません"); }
 
-    // エラーがあるなら
-    if (!isValid) { return ItemStackUtil.getItem(craftItem.getItemName(), Material.BARRIER, "エラーがあるので生成出来ません"); }
     // 材料のLoreを追加する
     itemLoreData.addLore(materialLore);
 
@@ -51,20 +47,20 @@ public class CraftItemSelectViewerItems {
     itemLoreData.removeLore(ItemLoreToken.TITLE_SLOT);
 
     // Slotを装着できるならSlotの情報をのせる
-    if (ItemManager.isImplemental(CombatItemable.class, craftItem)) {
+    if (ItemManager.isImplemental(CombatItemable.class, craftCustomItem)) {
       ItemLoreToken loreToken = itemLoreData.getLoreToken(ItemLoreToken.TITLE_STANDARD);
-      loreToken.addLore(LoreLine.getLoreLine("最大スロット数", ((CombatItemable) craftItem).getMaxSlotCount()));
-      loreToken.addLore(LoreLine.getLoreLine("初期スロット数", ((CombatItemable) craftItem).getDefaultSlotCount()));
+      loreToken.addLore(LoreLine.getLoreLine("最大スロット数", ((CombatItemable) craftCustomItem).getMaxSlotCount()));
+      loreToken.addLore(LoreLine.getLoreLine("初期スロット数", ((CombatItemable) craftCustomItem).getDefaultSlotCount()));
 
       itemLoreData.addLore(materialLore);
     }
 
-    ItemStackUtil.setLore(itemstack, itemLoreData.getLore());
+    ItemStackUtil.setLore(craftItemStack, itemLoreData.getLore());
 
     // IDをつける
-    ItemStackUtil.setNBTTag(itemstack, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT, craftItem.getId());
+    ItemStackUtil.setNBTTag(craftItemStack, NbtTagConst.THELOW_ITEM_ID_FOR_CRAFT, craftCustomItem.getId());
 
-    return itemstack;
+    return craftItemStack;
   }
 
   /**

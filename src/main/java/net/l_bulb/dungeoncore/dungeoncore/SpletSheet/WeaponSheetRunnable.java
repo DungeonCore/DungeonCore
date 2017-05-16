@@ -28,8 +28,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable {
   @Override
   public String[] getTag() {
     return new String[] { "id", "name", "material", "detail", "damageparcent", "type", "skilllevel", "defaultslot", "maxslot", "rank", "uselevel", // 10
-        "craftmatrial1", "craftcount1", "craftmatrial2", "craftcount2", "craftmatrial2", "craftcount2", "durability", "maincraftmaterial"// 18
-    };
+        "durability" };
   }
 
   @Override
@@ -46,11 +45,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable {
     data.setMaxSlot(row[8]);
     data.setRank(row[9]);
     data.setAvailableLevel(row[10]);
-    data.setCraftItem(row[11], row[12]);
-    data.setCraftItem(row[13], row[14]);
-    data.setCraftItem(row[15], row[16]);
-    data.setMaxDurability(row[17]);
-    data.setMainCraftMaterial(row[18]);
+    data.setMaxDurability(row[11]);
 
     if (!data.check(sender)) { return; }
 
