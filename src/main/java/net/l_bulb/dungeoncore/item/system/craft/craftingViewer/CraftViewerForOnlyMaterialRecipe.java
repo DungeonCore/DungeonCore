@@ -18,6 +18,7 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemRecipeFactory;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewerItems;
+import net.l_bulb.dungeoncore.item.system.craft.CraftItemUtil;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeWithMaterial;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
@@ -49,7 +50,7 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
 
     // アイテムを作成するボタンを配置する
     // tokenがnullならエラーとする
-    ItemLoreToken loreToken = CraftItemSelectViewerItems.getLoreTokenFromRecipe(recipe);
+    ItemLoreToken loreToken = CraftItemSelectViewerItems.getMaterialLoreToken(recipe);
     // エラーの時はエラーの内容を表示する
     if (loreToken == null) {
       ItemStack errorItem = ItemStackUtil.getItem("アイテムを作成できません", Material.BARRIER, "エラーが発生したため", "アイテムを作成出来ません");
@@ -119,7 +120,7 @@ public class CraftViewerForOnlyMaterialRecipe implements MenuSelectorInterface {
       // アイテムを削除する
       recipe.removeMaterial(p.getInventory());
       // アイテムを追加する
-      ItemStack craftedItem = customItemById.getItem();
+      ItemStack craftedItem = CraftItemUtil.getCraftedItem(recipe, 0);
       p.getInventory().addItem(craftedItem);
 
       // 取引欄に0個のアイテムが残るので2tick後に実行する

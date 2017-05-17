@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.item.system.craft.craftingViewer;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import net.l_bulb.dungeoncore.common.trade.TheLowMerchantRecipe;
 import net.l_bulb.dungeoncore.common.trade.TheLowTrades;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.system.craft.CraftItemUtil;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
 import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeWithMainItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -78,6 +80,8 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
     return "アイテム制作2";
   }
 
+  Random rnd = new Random();
+
   @Override
   public TheLowMerchantRecipe getShowResult(TheLowMerchantRecipe recipe) {
     // 素材を全て持っていないなら取引できない
@@ -86,8 +90,11 @@ public class CraftViewerForMainItemRecipe extends TheLowMerchant {
       return null;
     }
 
+    // バリアブロックの時は何もしない
     if (recipe.getResult() != null && recipe.getResult().getType() == Material.BARRIER) { return null; }
-    p.updateInventory();
+
+    // 結果を代入する
+    recipe.setResult(CraftItemUtil.getCraftedItem(craftRecipe, StrengthOperator.getLevel(recipe.getResult())));
     return recipe;
   }
 

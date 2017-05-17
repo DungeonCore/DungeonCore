@@ -24,6 +24,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 public class CraftItemSelectViewerItems {
   private static final String NOT_CRAFT_LINE = ChatColor.RED + "" + ChatColor.BOLD + "素材が足りないためアイテムを作成出来ません";
   private static final String CRAFT_MATERIAL_LORE_TITLE = "クラフト素材";
+  private static final String CRAFT_RESULT_ITEM_LIST_TITLE = "クラフト後のアイテム";
 
   public static ItemStack getViewItem(TheLowCraftRecipeInterface craftRecipe, ItemStack clickItem) {
 
@@ -37,11 +38,16 @@ public class CraftItemSelectViewerItems {
     ItemLoreData itemLoreData = new ItemLoreData(craftItemStack, new CraftViewerLoreComparator());
 
     // 素材のLoreを取得
-    ItemLoreToken materialLore = getLoreTokenFromRecipe(craftRecipe);
+    ItemLoreToken materialLore = getMaterialLoreToken(craftRecipe);
     if (materialLore == null) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません"); }
-
     // 材料のLoreを追加する
     itemLoreData.addLore(materialLore);
+
+    // 完成形のアイテムリストのLoreを取得
+    ItemLoreToken itemListLore = getShowItemListLoreToken(craftRecipe);
+    if (itemListLore != null) {
+      itemLoreData.addLore(itemListLore);
+    }
 
     // SlotのLoreを削除する
     itemLoreData.removeLore(ItemLoreToken.TITLE_SLOT);
@@ -51,7 +57,6 @@ public class CraftItemSelectViewerItems {
       ItemLoreToken loreToken = itemLoreData.getLoreToken(ItemLoreToken.TITLE_STANDARD);
       loreToken.addLore(LoreLine.getLoreLine("最大スロット数", ((CombatItemable) craftCustomItem).getMaxSlotCount()));
       loreToken.addLore(LoreLine.getLoreLine("初期スロット数", ((CombatItemable) craftCustomItem).getDefaultSlotCount()));
-
       itemLoreData.addLore(materialLore);
     }
 
@@ -64,12 +69,47 @@ public class CraftItemSelectViewerItems {
   }
 
   /**
+   * 完成形アイテムリストのLoreTokenを取得
+   *
+   * @param craftRecipe
+   * @return
+   */
+  private static ItemLoreToken getShowItemListLoreToken(TheLowCraftRecipeInterface craftRecipe) {
+    // 通常アイテムの成功確率
+    int normalParcent = 100;
+
+    ItemLoreToken lore = new ItemLoreToken(CRAFT_RESULT_ITEM_LIST_TITLE);
+
+    // 成功アイテム
+    ItemInterface successItem = craftRecipe.getSuccessItem();
+    if (successItem != null) {
+      lore.addLore(LoreLine.getLoreLine(CraftItemUtil.SUCCESS_RATE + "%", successItem.getItemName()));
+      normalParcent -= CraftItemUtil.SUCCESS_RATE;
+    }
+
+    // 大成功アイテム
+    ItemInterface greateSuccessItem = craftRecipe.getGreateSuccessItem();
+    if (greateSuccessItem != null) {
+      lore.addLore(LoreLine.getLoreLine(CraftItemUtil.GRATE_SUCCESS_RATE + "%", greateSuccessItem.getItemName()));
+      normalParcent -= CraftItemUtil.GRATE_SUCCESS_RATE;
+    }
+
+    // もし大成功も成功もない場合はnullを返す
+    if (lore.size() == 0) { return null; }
+
+    // 通常クラフトのアイテムを追加する
+    lore.addLore(LoreLine.getLoreLine(normalParcent + "%", craftRecipe.getCraftItem().getItemName()));
+
+    return lore;
+  }
+
+  /**
    * レシピからLoreTokenを取得。もしエラーがあるならnullを返す
    *
    * @param craftRecipe
    * @return
    */
-  public static ItemLoreToken getLoreTokenFromRecipe(TheLowCraftRecipeInterface craftRecipe) {
+  public static ItemLoreToken getMaterialLoreToken(TheLowCraftRecipeInterface craftRecipe) {
     ItemLoreToken materialLore = new ItemLoreToken(CRAFT_MATERIAL_LORE_TITLE);
     // メインアイテムがあるならTRUE
     if (craftRecipe.hasMainItem()) {
@@ -148,12 +188,14 @@ public class CraftItemSelectViewerItems {
 
     public int getIndex(String value) {
       if (value.contains(ItemLoreToken.TITLE_STANDARD)) {
-        return 2;
+        return 5;
       } else if (value.contains(CRAFT_MATERIAL_LORE_TITLE)) {
         return 1;
       } else if (value.contains(ItemLoreToken.TITLE_STRENGTH)) {
-        return 3;
-      } else if (value.contains(ItemLoreToken.TITLE_SLOT)) { return 20; }
+        return 9;
+      } else if (value.contains(ItemLoreToken.TITLE_SLOT)) {
+        return 20;
+      } else if (value.contains(CRAFT_RESULT_ITEM_LIST_TITLE)) { return 2; }
       return 10;
     }
   }

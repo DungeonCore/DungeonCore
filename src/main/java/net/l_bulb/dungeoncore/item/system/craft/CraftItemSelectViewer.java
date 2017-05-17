@@ -184,7 +184,6 @@ public class CraftItemSelectViewer implements MenuSelectorInterface {
       CraftViewerForMainItemRecipe.open(p, (TheLowCraftRecipeWithMainItem) craftRecipe);
     } else {
       CraftViewerForOnlyMaterialRecipe.open(p, (TheLowCraftRecipeWithMaterial) craftRecipe);
-      new RuntimeException("invalid recipe class:" + craftRecipe.getClass()).printStackTrace();
     }
   }
 
