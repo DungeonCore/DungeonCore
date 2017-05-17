@@ -1,3 +1,4 @@
 debug : 'false'
+spawn : 'true'
 world : 'world'
 ignore-spawn-world: 

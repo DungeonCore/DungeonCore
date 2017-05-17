@@ -71,6 +71,8 @@ public class Main extends JavaPlugin {
 
   private static boolean debugging = false;
 
+  private static boolean doSpawn = true;
+
   public static boolean isDebugging() {
     return debugging;
   }
@@ -80,8 +82,8 @@ public class Main extends JavaPlugin {
     plugin = this;
     try {
       boolean isDebug = Boolean.parseBoolean(getConfig().getString("debug"));
+      Main.doSpawn = Boolean.parseBoolean(getConfig().getString("spawn"));
       MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
-
       Main.debugging = isDebug;
       DungeonLogger.info("Debug:" + isDebug);
     } catch (Exception p) {
@@ -213,5 +215,9 @@ public class Main extends JavaPlugin {
   public static void save() {
     DungeonLogger.info("[dungeon core]saveします。");
     PlayerIODataManager.allSave();
+  }
+
+  public static boolean isDoSpawn() {
+    return doSpawn;
   }
 }

@@ -189,6 +189,8 @@ public class MobSpawnerPointManager {
   }
 
   public static void startSpawnManage() {
+    if (!Main.isDoSpawn()) { return; }
+
     if (runnable == null) {
       DungeonLogger.info("==START SPAWN SYSTEM==");
       runnable = new SpawnRunnable(true, schedulerList, loadedChunk);
