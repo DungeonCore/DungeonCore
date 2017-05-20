@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.common.place.dungeon;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -14,6 +15,15 @@ public class DungeonList {
 
   public static HashMap<String, DungeonData> dungeonMap = new HashMap<>();
   public static HashMap<Integer, DungeonData> iDMap = new HashMap<>();
+
+  /**
+   * ダンジョンリストを取得
+   * 
+   * @return
+   */
+  public static Collection<DungeonData> getDungeonList() {
+    return dungeonMap.values();
+  }
 
   /**
    * IDから検索する

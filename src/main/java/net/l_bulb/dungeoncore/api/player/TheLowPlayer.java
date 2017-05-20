@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
-import net.l_bulb.dungeoncore.common.place.dungeon.DungeonDataOld;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 
@@ -124,7 +123,7 @@ public interface TheLowPlayer {
    *
    * @return
    */
-  public void setInDungeonId(DungeonDataOld dungeon);
+  public void setInDungeonId(DungeonData dungeon);
 
   /**
    * Player名を取得

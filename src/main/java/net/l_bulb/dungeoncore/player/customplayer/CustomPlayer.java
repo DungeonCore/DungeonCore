@@ -24,7 +24,6 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerChangeStatusLevelEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCompleteReincarnationEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerLevelUpEvent;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
-import net.l_bulb.dungeoncore.common.place.dungeon.DungeonDataOld;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
@@ -214,7 +213,7 @@ public class CustomPlayer implements TheLowPlayer, Serializable {
   }
 
   @Override
-  public void setInDungeonId(DungeonDataOld dungeon) {
+  public void setInDungeonId(DungeonData dungeon) {
     if (dungeon == null) {
       inDungeonId = -1;
     } else {
