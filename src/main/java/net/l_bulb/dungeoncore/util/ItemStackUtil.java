@@ -272,41 +272,41 @@ public class ItemStackUtil {
   @SuppressWarnings("deprecation")
   public static ItemStack getItemStackByCommand(String command, CommandSender sender) {
     try {
-    if (command == null) { return null; }
-    command = command.trim();
-    if (command.startsWith("/give ") || command.startsWith("give ")) {
-      command = command.substring(command.indexOf(" ") + 1);
-    }
-    String[] args = command.split(" ");
+      if (command == null) { return null; }
+      command = command.trim();
+      if (command.startsWith("/give ") || command.startsWith("give ")) {
+        command = command.substring(command.indexOf(" ") + 1);
+      }
+      String[] args = command.split(" ");
 
-    Material material = Material.matchMaterial(args[1]);
-    if (material == null) {
-      material = Bukkit.getUnsafe().getMaterialFromInternalName(args[1]);
-    }
-    if (material != null) {
-      // 個数は絶対に１つ
-      int amount = 1;
-      short data = 0;
-      if (args.length >= 3) {
-        if (args.length >= 4) {
-          try {
-            data = Short.parseShort(args[3]);
-          } catch (NumberFormatException localNumberFormatException) {}
-        }
+      Material material = Material.matchMaterial(args[1]);
+      if (material == null) {
+        material = Bukkit.getUnsafe().getMaterialFromInternalName(args[1]);
       }
-      ItemStack stack = new ItemStack(material, amount, data);
-      try {
-        if (args.length >= 5) {
-          stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
+      if (material != null) {
+        // 個数は絶対に１つ
+        int amount = 1;
+        short data = 0;
+        if (args.length >= 3) {
+          if (args.length >= 4) {
+            try {
+              data = Short.parseShort(args[3]);
+            } catch (NumberFormatException localNumberFormatException) {}
+          }
         }
-      } catch (Throwable t) {
-        sender.sendMessage("コマンド解析中にエラーが発生しました。");
-        t.printStackTrace();
-        return null;
+        ItemStack stack = new ItemStack(material, amount, data);
+        try {
+          if (args.length >= 5) {
+            stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
+          }
+        } catch (Throwable t) {
+          sender.sendMessage("コマンド解析中にエラーが発生しました。");
+          t.printStackTrace();
+          return null;
+        }
+        return stack;
       }
-      return stack;
-    }
-    sender.sendMessage("materialが不正です。");
+      sender.sendMessage("materialが不正です。");
     } catch (Exception e) {
       sender.sendMessage("コマンドが不正です。:" + command);
     }
@@ -419,7 +419,14 @@ public class ItemStackUtil {
     if (isEmpty(item)) { return null; }
     net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
     if (nmsStack.getTag() == null) { return null; }
-    return nmsStack.getTag().getString(name);
+
+    // NBTタグが不正な時はnullを返す
+    String string = nmsStack.getTag().getString(name);
+    if (string == null || string.isEmpty()) {
+      return null;
+    } else {
+      return string;
+    }
   }
 
   /**

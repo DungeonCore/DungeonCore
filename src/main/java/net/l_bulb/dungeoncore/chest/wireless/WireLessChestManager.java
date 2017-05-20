@@ -12,9 +12,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Chest;
 import org.bukkit.craftbukkit.libs.com.google.gson.Gson;
 import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import net.l_bulb.dungeoncore.common.other.SystemLog;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
@@ -40,12 +42,30 @@ public enum WireLessChestManager {
    * @param type
    * @return
    */
-  public Location getChestContentsLocation(Player p, String type) {
+  public Location getChestContentsLocation(Player p, RepositoryType type) {
     Set<PersonalChestData> set = create.get(p.getUniqueId());
     if (set != null) {
       for (PersonalChestData personalChestData : set) {
-        if (personalChestData.type.equals(type)) { return personalChestData.getLocation(); }
+        if (personalChestData.type.equals(type.getType())) { return personalChestData.getLocation(); }
       }
+    }
+    return null;
+  }
+
+  /**
+   * 倉庫のインベントリを取得する
+   *
+   * @param p
+   * @param type
+   * @return
+   */
+  public Inventory getRepositoryInventory(Player p, RepositoryType type) {
+    Location containsLocation = getChestContentsLocation(p, type);
+    if (containsLocation == null) { return null; }
+
+    if (containsLocation.getBlock().getState() instanceof Chest) {
+      Chest c = (Chest) containsLocation.getBlock().getState();
+      return c.getInventory();
     }
     return null;
   }
@@ -57,24 +77,16 @@ public enum WireLessChestManager {
    * @param type
    * @return
    */
-  public boolean exist(Player p, String type) {
+  public boolean exist(Player p, RepositoryType type) {
     Set<PersonalChestData> set = create.get(p.getUniqueId());
     if (set != null) {
       for (PersonalChestData personalChestData : set) {
-        if (personalChestData.type.equals(type)) { return true; }
+        if (personalChestData.type.equals(type.getType())) { return true; }
       }
     }
     return false;
   }
 
-  /**
-   * チェストを作成する → x ↓ cc cc cc cc cc
-   *
-   * z cc cc cc cc cc
-   *
-   * cc cc cc cc cc
-   *
-   */
   public static final World chestWorld = Bukkit.getWorld("chest");
 
   transient int startX = -1000;
@@ -85,16 +97,17 @@ public enum WireLessChestManager {
   int nowY = startY;
   int nowZ = startZ;
 
-  public Location createChest(Player p, String type) {
-    nowX += 3;
-    if (nowX > 1000) {
-      nowX = startX;
-      nowY++;
-      if (nowY > 210) {
-        nowY = startY;
-        nowZ += 2;
-      }
-    }
+  /**
+   * チェストを作成する → x ↓ cc cc cc cc cc
+   *
+   * z cc cc cc cc cc
+   *
+   * cc cc cc cc cc
+   *
+   */
+  public Location createChest(Player p, RepositoryType type) {
+    incrementPotin();
+
     saveManageData();
 
     Location location = new Location(chestWorld, nowX, nowY, nowZ);
@@ -108,6 +121,21 @@ public enum WireLessChestManager {
     create.put(p.getUniqueId(), personalChestData);
     WireLessChestManager.getInstance().save(p);
     return location;
+  }
+
+  /**
+   * チェストの座標を更新する
+   */
+  public void incrementPotin() {
+    nowY++;
+    if (nowY > 210) {
+      nowY = startY;
+      nowX += 3;
+      if (nowX > 16) {
+        nowX = startX;
+        nowZ += 2;
+      }
+    }
   }
 
   /**

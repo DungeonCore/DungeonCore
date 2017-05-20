@@ -6,13 +6,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class PersonalChestData {
-  protected PersonalChestData(int x, int y, int z, String uuid, String type) {
+  protected PersonalChestData(int x, int y, int z, String uuid, RepositoryType type) {
     super();
     this.x = x;
     this.y = y;
     this.z = z;
     this.uuid = uuid;
-    this.type = type;
+    this.type = type.getType();
     playerID = UUID.fromString(uuid);
   }
 
@@ -25,7 +25,7 @@ public class PersonalChestData {
 
   String type;
 
-  public PersonalChestData(Player p, Location loc, String type) {
+  public PersonalChestData(Player p, Location loc, RepositoryType type) {
     playerID = p.getUniqueId();
     uuid = playerID.toString();
 
@@ -33,7 +33,7 @@ public class PersonalChestData {
     y = loc.getBlockY();
     z = loc.getBlockZ();
 
-    this.type = type;
+    this.type = type.getType();
   }
 
   public Location getLocation() {

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
@@ -15,11 +16,26 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.LimitedListener;
+import net.l_bulb.dungeoncore.chest.wireless.RepositoryMenu;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ChestSheetRunnable;
 import net.l_bulb.dungeoncore.util.Message;
 import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class ChestListner implements Listener {
+
+  @EventHandler
+  public void onclick2(PlayerInteractEvent e) {
+    Block clickedBlock = e.getClickedBlock();
+    // エンダーチェストのとき
+    if (clickedBlock != null && clickedBlock.getType() == Material.ENDER_CHEST) {
+      if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        e.getPlayer().playSound(clickedBlock.getLocation(), Sound.CHEST_OPEN, 1, 1);
+        // 倉庫を開く
+        new RepositoryMenu().open(e.getPlayer());
+        e.setCancelled(true);
+      }
+    }
+  }
 
   @EventHandler
   public void onclick(PlayerInteractEvent e) {

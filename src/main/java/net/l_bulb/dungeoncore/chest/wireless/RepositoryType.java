@@ -22,6 +22,8 @@ public enum RepositoryType {
   }
 
   public static RepositoryType getInstance(String type) {
+    if (type == null) { return null; }
+
     for (RepositoryType repositoryType : values()) {
       if (repositoryType.getType().equalsIgnoreCase(type)) { return repositoryType; }
     }

@@ -12,6 +12,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewer;
 import net.l_bulb.dungeoncore.money.BuyerShopSelector;
 import net.l_bulb.dungeoncore.npc.CustomNpcInterface;
 import net.l_bulb.dungeoncore.npc.NpcManager;
@@ -234,6 +235,9 @@ public class VillagerNpc implements CustomNpcInterface {
         break;
       case REST:
         RestVillagerGUI.open(p, this);
+        break;
+      case CRAFT:
+        CraftItemSelectViewer.open(p, getId(), 0);
         break;
       default:
         break;

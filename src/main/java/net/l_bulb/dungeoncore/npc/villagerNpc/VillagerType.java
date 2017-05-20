@@ -1,7 +1,7 @@
 package net.l_bulb.dungeoncore.npc.villagerNpc;
 
 public enum VillagerType {
-  NORMAL, SHOP, BLACKSMITH, REINC, MAGIC_ORE, REST;
+  NORMAL, SHOP, BLACKSMITH, REINC, MAGIC_ORE, REST, CRAFT;
 
   public static VillagerType getValue(String type) {
     for (VillagerType val : values()) {
