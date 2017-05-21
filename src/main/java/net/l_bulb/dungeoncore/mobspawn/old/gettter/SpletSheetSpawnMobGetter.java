@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn.gettter;
+package net.l_bulb.dungeoncore.mobspawn.old.gettter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.bukkit.Location;
 
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.SpletSheetMobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.SpletSheetMobSpawnerPoint;
 
 public class SpletSheetSpawnMobGetter extends AbstractSpawnMobGetter {
 

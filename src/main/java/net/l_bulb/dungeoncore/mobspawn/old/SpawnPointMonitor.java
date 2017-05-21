@@ -1,12 +1,13 @@
-package net.l_bulb.dungeoncore.mobspawn;
+package net.l_bulb.dungeoncore.mobspawn.old;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SpawnPointMonitor {

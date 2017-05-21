@@ -30,7 +30,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerJoinDungeonGameEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerQuitDungeonGameEvent;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.player.status.StatusViewerInventory;

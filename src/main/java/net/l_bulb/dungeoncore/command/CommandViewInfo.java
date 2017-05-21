@@ -41,7 +41,7 @@ import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetMob;
 import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.util.InOutputUtil;

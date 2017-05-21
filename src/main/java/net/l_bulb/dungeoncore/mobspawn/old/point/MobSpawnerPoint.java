@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn.point;
+package net.l_bulb.dungeoncore.mobspawn.old.point;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,8 +14,8 @@ import org.bukkit.entity.LivingEntity;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.customMob.abstractmob.AbstractCombinationMob;
 import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterInterface;
 
 public class MobSpawnerPoint {
   public SpawnMobGetterInterface mobGetter;

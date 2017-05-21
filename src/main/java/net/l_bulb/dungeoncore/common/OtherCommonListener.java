@@ -55,7 +55,7 @@ import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class OtherCommonListener implements Listener {

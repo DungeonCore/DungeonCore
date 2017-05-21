@@ -1,9 +1,9 @@
-package net.l_bulb.dungeoncore.mobspawn.gettter;
+package net.l_bulb.dungeoncore.mobspawn.old.gettter;
 
 import org.bukkit.Location;
 
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
 
 public abstract class AbstractSpawnMobGetter implements SpawnMobGetterInterface {
   @Override

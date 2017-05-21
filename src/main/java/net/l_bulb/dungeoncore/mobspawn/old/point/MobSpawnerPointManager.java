@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn.point;
+package net.l_bulb.dungeoncore.mobspawn.old.point;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,8 +18,8 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnPointMonitor;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 
 import com.google.common.collect.HashMultimap;

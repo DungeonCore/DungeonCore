@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn.point;
+package net.l_bulb.dungeoncore.mobspawn.old.point;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.SystemListener;
 import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
 
 public class SpawnRunnable extends BukkitRunnable {
   public SpawnRunnable(boolean isRunManage,

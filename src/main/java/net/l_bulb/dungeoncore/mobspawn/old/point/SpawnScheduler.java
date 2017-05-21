@@ -1,10 +1,10 @@
-package net.l_bulb.dungeoncore.mobspawn.point;
+package net.l_bulb.dungeoncore.mobspawn.old.point;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnPointMonitor;
 
 public class SpawnScheduler {
   int spawnTick;

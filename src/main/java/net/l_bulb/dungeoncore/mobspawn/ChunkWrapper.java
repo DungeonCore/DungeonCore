@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
 
 public class ChunkWrapper {
   public ChunkWrapper(String wolrdName, int x, int z) {

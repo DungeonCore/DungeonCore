@@ -20,7 +20,7 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SoundSheetRunnable;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerLastSaveType;
@@ -55,20 +55,20 @@ public class InitManager {
   public void reloadSpreadSheet() {
     SpletSheetCommand.reloadSheet(null, "buff");
     SpletSheetCommand.reloadSheet(null, "particle");
-    SpletSheetCommand.reloadSheet(null, "weaponskill");
     MobCommand.reloadAllMob(null);
     MobSkillManager.reloadDataBySystem();
+    SpletSheetCommand.reloadSheet(null, "item");
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
+    SpletSheetCommand.reloadSheet(null, "weaponskill");
     SpletSheetCommand.reloadSheet(null, "craftrecipe");
     SpletSheetCommand.reloadSheet(null, "weapon");
     SpletSheetCommand.reloadSheet(null, "armor");
     CommandChest.allReload();
     SoundSheetRunnable.allReload();
     VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
-    SpletSheetCommand.reloadSheet(null, "item");
     QuestCommand.questReload();
     SpletSheetCommand.reloadSheet(null, "magicore");
     SpletSheetCommand.reloadSheet(null, "food");

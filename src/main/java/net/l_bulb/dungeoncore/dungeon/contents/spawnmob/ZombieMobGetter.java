@@ -7,7 +7,7 @@ import org.bukkit.entity.EntityType;
 
 import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mobspawn.gettter.AbstractSpawnMobGetter;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.AbstractSpawnMobGetter;
 
 public class ZombieMobGetter extends AbstractSpawnMobGetter {
 

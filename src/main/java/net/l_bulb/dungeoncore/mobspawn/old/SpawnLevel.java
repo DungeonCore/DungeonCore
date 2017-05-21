@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn;
+package net.l_bulb.dungeoncore.mobspawn.old;
 
 import java.util.ArrayList;
 

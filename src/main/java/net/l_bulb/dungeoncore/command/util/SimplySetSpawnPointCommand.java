@@ -30,11 +30,11 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterManager;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpletSheetSpawnMobGetter;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterManager;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpletSheetSpawnMobGetter;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 

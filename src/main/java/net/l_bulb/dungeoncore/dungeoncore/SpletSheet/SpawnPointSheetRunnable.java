@@ -10,12 +10,12 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
 import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.boss.SpredSheetSpawnBossGetter;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpletSheetSpawnMobGetter;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.boss.SpredSheetSpawnBossGetter;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterInterface;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpletSheetSpawnMobGetter;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 

@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.mobspawn.gettter;
+package net.l_bulb.dungeoncore.mobspawn.old.gettter;
 
 import java.util.Collection;
 import java.util.HashMap;

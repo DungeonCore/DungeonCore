@@ -19,14 +19,14 @@ import org.bukkit.util.StringUtil;
 import net.l_bulb.dungeoncore.SystemListener;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
-import net.l_bulb.dungeoncore.mobspawn.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterInterface;
-import net.l_bulb.dungeoncore.mobspawn.gettter.SpawnMobGetterManager;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
-import net.l_bulb.dungeoncore.mobspawn.point.SpawnScheduler;
-import net.l_bulb.dungeoncore.mobspawn.point.SpletSheetMobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
+import net.l_bulb.dungeoncore.mobspawn.old.SpawnPointMonitor;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterInterface;
+import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.SpawnScheduler;
+import net.l_bulb.dungeoncore.mobspawn.old.point.SpletSheetMobSpawnerPoint;
 
 import com.google.common.collect.ImmutableList;
 

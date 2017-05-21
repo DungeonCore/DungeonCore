@@ -32,7 +32,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSpider;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomVillager;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomWitch;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomZombie;
-import net.l_bulb.dungeoncore.mobspawn.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.money.MoneyListener;
 import net.l_bulb.dungeoncore.npc.NpcListener;
 import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
