@@ -40,7 +40,7 @@ public class RestVillagerGUI implements MenuSelectorInterface {
 
     Inventory createInventory = Bukkit.createInventory(null, 3 * 9, TITLE);
 
-    ItemStack item1 = ItemStackUtil.getItem(ChatColor.WHITE + "この街をスポーン地点にする", Material.WOOL, ChatColor.GREEN.toString() + (byte) 5, PRICE
+    ItemStack item1 = ItemStackUtil.getItem(ChatColor.WHITE + "この街をスポーン地点にする", Material.WOOL, (byte) 5, ChatColor.GREEN.toString() + PRICE
         + "ガリオンでこの街を", "スポーン地点にします。");
     ItemStackUtil.setNBTTag(item1, "spawn_location", npc.getData());
     createInventory.setItem(11, item1);
