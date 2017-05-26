@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 
 public class FireAspect2 extends CombatSlot {
 

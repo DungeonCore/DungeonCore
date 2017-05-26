@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
-import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;

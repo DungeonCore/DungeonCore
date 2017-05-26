@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.item.customItem.other.SimpleStone;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.UnUseSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.UnUseSlot;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 

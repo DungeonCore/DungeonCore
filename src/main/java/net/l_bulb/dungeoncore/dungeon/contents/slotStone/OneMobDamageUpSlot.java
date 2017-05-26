@@ -8,7 +8,7 @@ import org.bukkit.entity.EntityType;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 
 public class OneMobDamageUpSlot extends CombatSlot {
 

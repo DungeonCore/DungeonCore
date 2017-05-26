@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.KillSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 
 public class MagicHealMagicStone extends KillSlot {

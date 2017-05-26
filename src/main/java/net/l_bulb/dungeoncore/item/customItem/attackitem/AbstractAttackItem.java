@@ -20,7 +20,7 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkill
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
