@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.slot.slot;
+package net.l_bulb.dungeoncore.item.slot.magicstone;
 
 import org.bukkit.ChatColor;
 
@@ -6,31 +6,31 @@ import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 
-public class UnavailableSlot implements SlotInterface {
+public class EmptySlot implements SlotInterface {
 
   @Override
   public String getSlotName() {
-    return "使用不可";
+    return "空のスロット";
   }
 
   @Override
   public String getSlotDetail() {
-    return "このスロットは利用できません";
+    return "スロットを装着できます";
   }
 
   @Override
   public String getId() {
-    return "unavaliable";
+    return "empty";
   }
 
   @Override
   public ChatColor getNameColor() {
-    return ChatColor.GRAY;
+    return ChatColor.WHITE;
   }
 
   @Override
   public SlotType getSlotType() {
-    return SlotType.UNAVAILABLE;
+    return SlotType.EMPTY;
   }
 
   @Override

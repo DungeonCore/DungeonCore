@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.CombatSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class CombatLightningStone extends CombatSlot {

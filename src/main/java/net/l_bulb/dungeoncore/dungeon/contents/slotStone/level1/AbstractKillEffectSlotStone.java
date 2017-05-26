@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.KillSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 
 public abstract class AbstractKillEffectSlotStone extends KillSlot {
 

@@ -14,8 +14,8 @@ import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot;
 import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot2;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.EmptySlot;
-import net.l_bulb.dungeoncore.item.slot.slot.UnavailableSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.UnavailableSlot;
 
 import com.google.common.collect.HashMultimap;
 

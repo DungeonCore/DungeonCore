@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
-import net.l_bulb.dungeoncore.item.slot.slot.UnUseSlot;
+import net.l_bulb.dungeoncore.item.slot.magicstone.UnUseSlot;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 
 public class HealSlotStone extends UnUseSlot implements Cooltimable {
