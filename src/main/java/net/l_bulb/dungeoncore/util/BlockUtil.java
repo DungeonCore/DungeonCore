@@ -10,6 +10,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 
+import lombok.Data;
+
 public class BlockUtil {
 
   /**
@@ -93,16 +95,9 @@ public class BlockUtil {
     }
   }
 
+  @Data
   public static class BlockData {
     Material m;
     byte b;
-
-    public Material getM() {
-      return m;
-    }
-
-    public byte getB() {
-      return b;
-    }
   }
 }

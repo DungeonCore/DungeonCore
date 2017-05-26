@@ -71,6 +71,11 @@ commands:
       permission: main.lbnDungeonUtil.command.builder.sequence_setblock
       usage: /<command> delay_second blockid:data x y z & x y z & x y z & ....
       permission-message: You don't have <permission>
+   sequencemove:
+      description: aaa
+      permission: main.lbnDungeonUtil.command.builder.sequencemove
+      usage: aaa
+      permission-message: You don't have <permission>
    soundPlay:
       description: play sound for command block
       permission: main.lbnDungeonUtil.command.builder.soundPlay

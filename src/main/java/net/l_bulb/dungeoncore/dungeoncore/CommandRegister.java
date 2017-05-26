@@ -40,6 +40,7 @@ import net.l_bulb.dungeoncore.command.notUsually.command.CustomSetBlockCommand;
 import net.l_bulb.dungeoncore.command.notUsually.command.ExecuteMobSkillCommand;
 import net.l_bulb.dungeoncore.command.util.ChangeBiomeCommand;
 import net.l_bulb.dungeoncore.command.util.CommandSavePlayer;
+import net.l_bulb.dungeoncore.command.util.CommandSequencemove;
 import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
 import net.l_bulb.dungeoncore.command.util.DelayCommand;
 import net.l_bulb.dungeoncore.command.util.LoopCommand;
@@ -106,6 +107,7 @@ public class CommandRegister {
     registCommand(new CommandBook(), "book");
     registCommand(new CommandNpcSpawn(), "spawnNpc");
     registCommand(new CommandTag(), "tag");
+    registCommand(new CommandSequencemove(), "sequencemove");
 
     new ExecuteMobSkillCommand().regist();
     new CustomKillCommand().regist();

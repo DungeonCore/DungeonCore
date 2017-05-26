@@ -30,16 +30,18 @@ public class SequenceSetBlockCommand implements CommandExecutor, UsageCommandabl
       return false;
     }
 
-    String id = arg3[1].substring(0, arg3[1].indexOf(":") == -1 ? arg3[1].length() : arg3[1].indexOf(":"));
+    // ブロックのデータ(id:data)
+    String blockString = arg3[1];
+    String id = blockString.substring(0, blockString.indexOf(":") == -1 ? blockString.length() : blockString.indexOf(":"));
     final String data;
-    if (arg3[1].contains(":") && !arg3[1].endsWith(":")) {
-      data = arg3[1].substring(arg3[1].indexOf(":") + 1);
+    if (blockString.contains(":") && !blockString.endsWith(":")) {
+      data = blockString.substring(blockString.indexOf(":") + 1);
     } else {
       data = "0";
     }
 
     if (!NumberUtils.isNumber(id) || !NumberUtils.isNumber(data)) {
-      arg0.sendMessage(arg3[1] + "は不正なブロックIDです");
+      arg0.sendMessage(blockString + "は不正なブロックIDです");
       return false;
     }
 
