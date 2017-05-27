@@ -10,12 +10,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public class PlayerAbilityListener implements Listener {
   @EventHandler
-  public void onDamage(PlayerCombatEntityEvent_old e) {
+  public void onDamage(CombatEntityEvent e) {
+    // 攻撃したのはPlayerでないなら何もしない
+    if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
+
     ItemType attackType = e.getAttackItem().getItemType();
 
     // 武器に対応するStatusのタイプを取得
@@ -42,7 +45,7 @@ public class PlayerAbilityListener implements Listener {
     if (addType == null) { return; }
 
     // Playerデータがロードされていない時は無視する
-    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e);
+    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer((Player) e.getAttacker());
     if (theLowPlayer == null) { return; }
 
     // 攻撃力の増加値を取得

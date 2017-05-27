@@ -25,8 +25,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
 import net.l_bulb.dungeoncore.NbtTagConst;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -122,7 +122,7 @@ public class ItemListener implements Listener {
       // 攻撃したアイテムが剣ならイベントを発動させる
       if (customItem.getAttackType() == ItemType.SWORD) {
         // イベントを発動させる
-        PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(damager, e.getDamage(DamageModifier.BASE), (AbstractAttackItem) customItem,
+        CombatEntityEvent callEvent = new CombatEntityEvent(damager, e.getDamage(DamageModifier.BASE), (AbstractAttackItem) customItem,
             itemInHand, true, (LivingEntity) e.getEntity()).callEvent();
         e.setDamage(DamageModifier.BASE, callEvent.getDamage());
       }
@@ -141,7 +141,7 @@ public class ItemListener implements Listener {
    * @param e
    */
   @EventHandler(priority = EventPriority.LOWEST)
-  public void onAttackDamage(PlayerCombatEntityEvent e) {
+  public void onAttackDamage(CombatEntityEvent e) {
     // last damageを登録する
     if (e.getAttacker().getType() == EntityType.PLAYER) {
       LastDamageManager.addData((Player) e.getAttacker(), e.geLastDamageMethodType(), e.getEnemy());
@@ -237,7 +237,7 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombat(PlayerCombatEntityEvent e) {
+  public void onCombat(CombatEntityEvent e) {
     // 攻撃したのがPlayerでないなら何もしない
     if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
 
@@ -298,7 +298,7 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombatEntity(PlayerCombatEntityEvent e) {
+  public void onCombatEntity(CombatEntityEvent e) {
     // もし指定したアイテムDamageItemableでないなら無視
     AbstractAttackItem itemInterface = e.getCustomItem();
     if (itemInterface == null) { return; }

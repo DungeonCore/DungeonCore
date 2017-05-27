@@ -5,7 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
@@ -38,7 +38,7 @@ public class FireAspect3 extends CombatSlot {
   }
 
   @Override
-  public void onCombat(PlayerCombatEntityEvent e, Player p) {
+  public void onCombat(CombatEntityEvent e, Player p) {
     e.getEnemy().setFireTicks(20 * 6);
 
     for (Entity entity : e.getEnemy().getNearbyEntities(3, 3, 3)) {

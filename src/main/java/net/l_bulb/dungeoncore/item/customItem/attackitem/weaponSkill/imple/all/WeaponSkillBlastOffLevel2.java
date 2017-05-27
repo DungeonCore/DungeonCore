@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
@@ -46,7 +46,7 @@ public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
     livingEntity.damage(attackItemDamage);
 
     // eventを発動する
-    new PlayerCombatEntityEvent(p, attackItemDamage, customItem, item, false, livingEntity).callEvent();
+    new CombatEntityEvent(p, attackItemDamage, customItem, item, false, livingEntity).callEvent();
   }
 
   @Override

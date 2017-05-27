@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
@@ -104,5 +104,5 @@ public abstract class WeaponSkillWithMultiClick extends WeaponSkillForOneType {
   abstract protected void runWaitParticleData(Location loc, int i);
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {}
+  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
 }

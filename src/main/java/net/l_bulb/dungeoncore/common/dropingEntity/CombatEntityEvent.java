@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.common.event.player;
+package net.l_bulb.dungeoncore.common.dropingEntity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PlayerCombatEntityEvent extends Event {
+public class CombatEntityEvent extends Event {
 
   /**
    * @param attacker 攻撃を与えたEntity
@@ -31,7 +31,7 @@ public class PlayerCombatEntityEvent extends Event {
    * @param target 攻撃対象
    * @param isNormalAttack 通常攻撃ならTRUE
    */
-  public PlayerCombatEntityEvent(LivingEntity attacker, double damage, AbstractAttackItem customItem, ItemStack itemStack, boolean isNormalAttack,
+  public CombatEntityEvent(LivingEntity attacker, double damage, AbstractAttackItem customItem, ItemStack itemStack, boolean isNormalAttack,
       LivingEntity target) {
     this.attacker = attacker;
     this.customItem = customItem;
@@ -89,7 +89,7 @@ public class PlayerCombatEntityEvent extends Event {
     return handlers;
   }
 
-  public PlayerCombatEntityEvent callEvent() {
+  public CombatEntityEvent callEvent() {
     Bukkit.getServer().getPluginManager().callEvent(this);
     return this;
   }

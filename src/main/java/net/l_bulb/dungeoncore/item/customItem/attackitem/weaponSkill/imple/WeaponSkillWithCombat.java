@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
@@ -62,7 +62,7 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
   abstract protected void runWaitParticleData(Location loc, int i);
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent event) {
     if (isWaitingSkill(p)) {
       onCombat2(p, item, customItem, livingEntity, event);
       BukkitTask remove = executePlayer.remove(p.getUniqueId());
@@ -89,5 +89,5 @@ public abstract class WeaponSkillWithCombat extends WeaponSkillForOneType {
    * @param livingEntity
    * @param e
    */
-  abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e);
+  abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent e);
 }

@@ -5,7 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 
 public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosion {
@@ -24,7 +24,7 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
   @Override
   public float getDamage(Entity target, float d10) {
     if (target.getType().isAlive()) {
-      PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(sourceEntity, d10, customItem, item, false, (LivingEntity) target).callEvent();
+      CombatEntityEvent callEvent = new CombatEntityEvent(sourceEntity, d10, customItem, item, false, (LivingEntity) target).callEvent();
       return (float) callEvent.getDamage();
     } else {
       return d10;

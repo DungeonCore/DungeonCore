@@ -3,7 +3,7 @@ package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
@@ -48,7 +48,7 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
   }
 
   @Override
-  public void onCombatEntity(PlayerCombatEntityEvent e) {
+  public void onCombatEntity(CombatEntityEvent e) {
 
   }
 
