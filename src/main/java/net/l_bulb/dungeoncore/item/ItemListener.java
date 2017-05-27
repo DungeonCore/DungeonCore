@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -25,6 +26,7 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
@@ -48,6 +50,7 @@ import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
+import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -96,13 +99,14 @@ public class ItemListener implements Listener {
     ProjectileManager.onLaunchProjectile(entity, item, itemInHand);
   }
 
+  // TODO 消す予定
   /**
    * プレイヤーが敵にダメージを与える
    *
    * @param e
    */
   @EventHandler(priority = EventPriority.LOW)
-  public void onDamage(EntityDamageByEntityEvent e) {
+  public void onDamage2(EntityDamageByEntityEvent e) {
     if (!e.getEntityType().isAlive()) { return; }
 
     // プレイヤーがダメージを受けた場合は無視
@@ -116,6 +120,37 @@ public class ItemListener implements Listener {
       MeleeAttackItemable customItem = ItemManager.getCustomItem(MeleeAttackItemable.class, itemInHand);
       if (customItem != null) {
         customItem.excuteOnMeleeAttack(itemInHand, (LivingEntity) e.getDamager(), (LivingEntity) e.getEntity(), e);
+      }
+    }
+  }
+
+  /**
+   * CustomItemの剣でダメージを与えた時にEventを発火させる
+   *
+   * @param e
+   */
+  @EventHandler(priority = EventPriority.LOW)
+  public void onDamage(EntityDamageByEntityEvent e) {
+    // ダメージを受けたのがPlayerならTRUE
+    if (!e.getEntityType().isAlive()) { return; }
+
+    // ダメージを与えたのが生き物じゃないならTRUE
+    if (!e.getDamager().getType().isAlive()) { return; }
+    LivingEntity damager = (LivingEntity) e.getDamager();
+    // 手に持っているアイテムを取得
+    ItemStack itemInHand = damager.getEquipment().getItemInHand();
+
+    if (itemInHand != null) {
+      // custom itemを取得
+      ItemInterface customItem = ItemManager.getCustomItem(itemInHand);
+      if (customItem == null) { return; }
+
+      // 攻撃したアイテムが剣ならイベントを発動させる
+      if (customItem.getAttackType() == ItemType.SWORD) {
+        // イベントを発動させる
+        PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(damager, e.getDamage(DamageModifier.BASE), (AbstractAttackItem) customItem,
+            itemInHand, true, e.getEntity()).callEvent();
+        e.setDamage(DamageModifier.BASE, callEvent.getDamage());
       }
     }
   }

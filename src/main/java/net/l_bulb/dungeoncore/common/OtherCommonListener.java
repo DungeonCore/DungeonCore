@@ -12,7 +12,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,6 +21,7 @@ import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockMultiPlaceEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -42,7 +42,7 @@ import net.l_bulb.dungeoncore.command.CommandChest;
 import net.l_bulb.dungeoncore.command.CommandGetItem;
 import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
 import net.l_bulb.dungeoncore.command.util.SimplySetSpawnPointCommand;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
 import net.l_bulb.dungeoncore.common.other.EndPortalOperator;
@@ -279,12 +279,18 @@ public class OtherCommonListener implements Listener {
 
         if (owner != null && owner.getType() == EntityType.PLAYER) {
           // eventを呼ぶ
-          PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old((Player) owner, (LivingEntity) target, itemstack,
-              e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
-          playerCombatEntityEvent.callEvent();
-
+          // TODO あとで消す
+          // PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old((Player) owner, (LivingEntity) target, itemstack,
+          // e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
+          // playerCombatEntityEvent.callEvent();
           // eventからDamageを取得
-          e.setDamage(playerCombatEntityEvent.getDamage());
+          // e.setDamage(playerCombatEntityEvent.getDamage());
+
+          // イベントを呼ぶ
+          PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
+              target).callEvent();
+          e.setDamage(DamageModifier.BASE, callEvent.getDamage());
+
         } else {
           // 通常通りの計算を行う
           e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());

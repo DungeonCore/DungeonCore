@@ -6,6 +6,10 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * 矢を打って、ダメージを与えた時の処理を行うためのInterface
+ *
+ */
 public interface ProjectileInterface {
   /**
    * Projectileを発射した時の処理

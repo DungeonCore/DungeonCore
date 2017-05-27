@@ -9,8 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
@@ -20,20 +21,22 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
   protected ItemStack item;
   protected Player p;
   protected double damage;
+  private AbstractAttackItem customItem;
+  private boolean isNormalAttack;
 
-  public DamagedFallingBlockForPlayer(Player p, Material m, ItemStack item, double damage) {
-    this(p.getLocation().getDirection(), p.getLocation().add(0, 1, 0), m, item, p, damage, (byte) 0);
+  public DamagedFallingBlockForPlayer(Player p, Material m, ItemStack item, double damage, byte data, AbstractAttackItem customItem,
+      boolean isNormalAttack) {
+    this(p.getLocation().getDirection(), p.getLocation().add(0, 1.2, 0), m, item, p, damage, data, customItem, isNormalAttack);
   }
 
-  public DamagedFallingBlockForPlayer(Player p, Material m, ItemStack item, double damage, byte data) {
-    this(p.getLocation().getDirection(), p.getLocation().add(0, 1.2, 0), m, item, p, damage, data);
-  }
-
-  public DamagedFallingBlockForPlayer(Vector direction, Location loc, Material m, ItemStack item, Player p, double damage, byte data) {
+  public DamagedFallingBlockForPlayer(Vector direction, Location loc, Material m, ItemStack item, Player p, double damage, byte data,
+      AbstractAttackItem customItem, boolean isNormalAttack) {
     super(direction, loc, m, data);
     this.item = item;
     this.p = p;
     this.damage = damage;
+    this.customItem = customItem;
+    this.isNormalAttack = isNormalAttack;
   }
 
   @Override
@@ -52,10 +55,9 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
       LastDamageManager.onDamage(((LivingEntity) entity), p, getAttackType());
 
       // eventを実行
-      PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old(p, (LivingEntity) entity, item, damage);
-      playerCombatEntityEvent.callEvent();
+      PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(p, damage, customItem, item, isNormalAttack, entity).callEvent();
       // ダメージを与える
-      ((LivingEntity) entity).damage(playerCombatEntityEvent.getDamage(), p);
+      ((LivingEntity) entity).damage(callEvent.getDamage(), p);
 
       // もしEntityが死んでいたら今の攻撃で死んだと判断しeventを実行
       if (entity.isDead()) {

@@ -138,7 +138,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
       @Override
       protected DamagedFallingBlockForPlayer getDamagedFallingBlock(Player p, PlayerInteractEvent e) {
         DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p, itemStackData.getMaterial(), item,
-            getAttackItemDamage(StrengthOperator.getLevel(item)), itemStackData.getData()) {
+            getAttackItemDamage(StrengthOperator.getLevel(item)), itemStackData.getData(), MagicItem.this, true) {
           ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8, 0.8);
 
           ParticleData particleData2 = new ParticleData(ParticleType.crit, 40);

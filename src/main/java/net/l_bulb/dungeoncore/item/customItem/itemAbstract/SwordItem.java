@@ -52,8 +52,6 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
     // プレイヤーでないなら関係ない
     if (owner.getType() != EntityType.PLAYER) { return; }
 
-    owner.sendMessage(getAttackItemDamage(0) + "");
-
     Player player = (Player) owner;
     if (!isAvilable(player)) {
       sendNotAvailableMessage(player);
