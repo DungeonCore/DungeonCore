@@ -20,6 +20,7 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.EntityBlockFormEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -90,7 +91,7 @@ public class LimitedListener implements Listener {
       e.setCancelled(true);
     }
   }
-  
+
   @EventHandler
   public void onArmorStandTouching(EntityDamageByEntityEvent e) {
     Entity damager = e.getDamager();
@@ -108,6 +109,11 @@ public class LimitedListener implements Listener {
     if (!Config.getDamageAllowBlock().contains(e.getBlock().getType())) {
       e.setCancelled(true);
     }
+  }
+
+  @EventHandler
+  public void onEntityBlockFormEvent(EntityBlockFormEvent e) {
+    e.setCancelled(true);
   }
 
   //
