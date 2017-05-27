@@ -84,16 +84,6 @@ import com.connorlinfoot.actionbarapi.ActionBarAPI;
 public class PlayerListener implements Listener {
 
   /**
-   * ダメージを受けた時、LastDamageを登録する
-   *
-   * @param e
-   */
-  @EventHandler(priority = EventPriority.LOWEST)
-  public void onDamage(EntityDamageByEntityEvent e) {
-    LastDamageManager.registLastDamageByEvent(e);
-  }
-
-  /**
    * 爆発によるダメージを軽減する
    *
    * @param e
@@ -408,20 +398,7 @@ public class PlayerListener implements Listener {
     if (SummonPlayerManager.isSummonMob(entity)) { return; }
 
     // 攻撃方法が不明な時はEventから取得
-    if (p == null || type == null) {
-      EntityDamageEvent event = entity.getLastDamageCause();
-      if (event instanceof EntityDamageByEntityEvent) {
-        LastDamageManager.registLastDamageByEvent((EntityDamageByEntityEvent) event);
-        p = LastDamageManager.getLastDamagePlayer(entity);
-        type = LastDamageManager.getLastDamageAttackType(entity);
-      }
-      // ここでも取得出来ない場合は無視する
-      if (p == null || type == null) { return; }
-      // Logを出しておく
-      new RuntimeException(
-          MessageFormat.format("type:{0} is not registed last damege(player:{1})", type, p.getCustomName()))
-              .printStackTrace();
-    }
+    if (p == null || type == null) { return; }
 
     // データがロードされていないなら無視する
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);

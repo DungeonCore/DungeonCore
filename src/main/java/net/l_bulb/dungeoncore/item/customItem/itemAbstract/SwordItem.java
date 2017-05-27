@@ -7,15 +7,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import net.l_bulb.dungeoncore.item.itemInterface.MeleeAttackItemable;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItemable {
   public SwordItem(SpreadSheetWeaponData data) {
@@ -57,18 +54,6 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
       sendNotAvailableMessage(player);
       e.setCancelled(true);
       return;
-    }
-
-    if (LivingEntityUtil.isEnemy(target)) {
-      // eventを呼ぶ
-      // 相殺されるはず(e.getDamage() - getNormalDamage() )
-      PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old(player, target, item,
-          e.getDamage() - getMaterialDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
-      playerCombatEntityEvent.callEvent();
-      // ダメージの計算を行う
-      e.setDamage(playerCombatEntityEvent.getDamage());
-    } else {
-      e.setDamage(e.getDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)) - getMaterialDamage());
     }
   }
 

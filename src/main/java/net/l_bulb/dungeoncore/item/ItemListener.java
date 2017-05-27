@@ -99,31 +99,6 @@ public class ItemListener implements Listener {
     ProjectileManager.onLaunchProjectile(entity, item, itemInHand);
   }
 
-  // TODO 消す予定
-  /**
-   * プレイヤーが敵にダメージを与える
-   *
-   * @param e
-   */
-  @EventHandler(priority = EventPriority.LOW)
-  public void onDamage2(EntityDamageByEntityEvent e) {
-    if (!e.getEntityType().isAlive()) { return; }
-
-    // プレイヤーがダメージを受けた場合は無視
-    if (e.getEntityType() == EntityType.PLAYER) { return; }
-
-    Entity damager = e.getDamager();
-    // 直接の攻撃の時
-    if (damager.getType().isAlive() && ((LivingEntity) damager).getEquipment() != null) {
-      // 手に持っているアイテムの情報を取得する
-      ItemStack itemInHand = ((LivingEntity) damager).getEquipment().getItemInHand();
-      MeleeAttackItemable customItem = ItemManager.getCustomItem(MeleeAttackItemable.class, itemInHand);
-      if (customItem != null) {
-        customItem.excuteOnMeleeAttack(itemInHand, (LivingEntity) e.getDamager(), (LivingEntity) e.getEntity(), e);
-      }
-    }
-  }
-
   /**
    * CustomItemの剣でダメージを与えた時にEventを発火させる
    *
@@ -152,6 +127,25 @@ public class ItemListener implements Listener {
             itemInHand, true, e.getEntity()).callEvent();
         e.setDamage(DamageModifier.BASE, callEvent.getDamage());
       }
+
+      // MeleeAttackItemableならEventを発火させる
+      MeleeAttackItemable attackItem = ItemManager.getCustomItem(MeleeAttackItemable.class, itemInHand);
+      if (attackItem != null) {
+        attackItem.excuteOnMeleeAttack(itemInHand, (LivingEntity) e.getDamager(), (LivingEntity) e.getEntity(), e);
+      }
+    }
+  }
+
+  /**
+   * CustomItemでダメージを与えた時のEvent
+   *
+   * @param e
+   */
+  @EventHandler(priority = EventPriority.LOWEST)
+  public void onAttackDamage(PlayerCombatEntityEvent e) {
+    // last damageを登録する
+    if (e.getAttacker().getType() == EntityType.PLAYER) {
+      LastDamageManager.addData((Player) e.getAttacker(), e.geLastDamageMethodType(), e.getTarget());
     }
   }
 
@@ -251,7 +245,6 @@ public class ItemListener implements Listener {
         ((CombatSlot) slot).onCombat(e);
       }
     }
-
     // 武器スキルを実行
     WeaponSkillExecutor.executeWeaponSkillOnCombat(e);
   }
@@ -303,9 +296,9 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombatEntity(PlayerCombatEntityEvent_old e) {
+  public void onCombatEntity(PlayerCombatEntityEvent e) {
     // もし指定したアイテムDamageItemableでないなら無視
-    AbstractAttackItem itemInterface = e.getAttackItem().getItemInterface();
+    AbstractAttackItem itemInterface = e.getCustomItem();
     if (itemInterface == null) { return; }
     itemInterface.onCombatEntity(e);
   }

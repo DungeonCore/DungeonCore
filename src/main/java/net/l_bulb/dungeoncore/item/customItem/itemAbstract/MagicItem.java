@@ -22,7 +22,6 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkill
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.MagicExcuteable;
 import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.util.Message;
@@ -138,7 +137,7 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
       @Override
       protected DamagedFallingBlockForPlayer getDamagedFallingBlock(Player p, PlayerInteractEvent e) {
         DamagedFallingBlockForPlayer fallingBlock = new DamagedFallingBlockForPlayer(p, itemStackData.getMaterial(), item,
-            getAttackItemDamage(StrengthOperator.getLevel(item)), itemStackData.getData(), MagicItem.this, true) {
+            0, itemStackData.getData(), MagicItem.this, true) {
           ParticleData particleData = new ParticleData(ParticleType.snowshovel, 40).setDispersion(0.8, 0.8, 0.8);
 
           ParticleData particleData2 = new ParticleData(ParticleType.crit, 40);

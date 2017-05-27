@@ -277,20 +277,11 @@ public class OtherCommonListener implements Listener {
 
         AbstractAttackItem attackItem = (AbstractAttackItem) ItemManager.getCustomItem(itemstack);
 
-        if (owner != null && owner.getType() == EntityType.PLAYER) {
-          // eventを呼ぶ
-          // TODO あとで消す
-          // PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old((Player) owner, (LivingEntity) target, itemstack,
-          // e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
-          // playerCombatEntityEvent.callEvent();
-          // eventからDamageを取得
-          // e.setDamage(playerCombatEntityEvent.getDamage());
-
+        if (owner != null) {
           // イベントを呼ぶ
           PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
               target).callEvent();
           e.setDamage(DamageModifier.BASE, callEvent.getDamage());
-
         } else {
           // 通常通りの計算を行う
           e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
