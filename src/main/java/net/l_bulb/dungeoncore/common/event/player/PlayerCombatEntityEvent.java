@@ -1,51 +1,81 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.player.ItemType;
 
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * THELoWで登録されている武器(剣、弓、魔法)による通常攻撃が行われたときに発火します
- */
 @Getter
-public class PlayerCombatEntityEvent extends PlayerEvent {
+@Setter
+public class PlayerCombatEntityEvent extends TheLowPlayerEvent {
 
-  private static final HandlerList handlers = new HandlerList();
+  /**
+   * @param player 攻撃を与えたPlayer
+   * @param damage ダメージ
+   * @param customItem 攻撃に使用したカスタムアイテム
+   * @param itemStack 攻撃に使用したアイテム
+   * @param target 攻撃対象
+   * @param isNormalAttack 通常攻撃ならTRUE
+   */
+  public PlayerCombatEntityEvent(TheLowPlayer player, double damage, ItemInterface customItem, ItemStack itemStack, boolean isNormalAttack,
+      Entity target) {
+    super(player);
+    this.damage = damage;
+    this.customItem = customItem;
+    this.itemStack = itemStack;
+    this.isNormalAttack = isNormalAttack;
+    this.target = target;
+  }
 
-  LivingEntity enemy;
-  @Setter
+  /**
+   * @param player 攻撃を与えたPlayer
+   * @param damage ダメージ
+   * @param item 攻撃に使用したアイテム
+   * @param target 攻撃対象
+   * @param isNormalAttack 通常攻撃ならTRUE
+   */
+  public PlayerCombatEntityEvent(TheLowPlayer player, double damage, ItemStack item, boolean isNormalAttack, Entity target) {
+    this(player, damage, ItemManager.getCustomItem(item), item, isNormalAttack, target);
+  }
+
+  // 与えたダメージ
   double damage;
 
-  CustomWeaponItemStack2 attackItem;
+  // 使用したスタムアイテム
+  ItemInterface customItem;
 
-  public PlayerCombatEntityEvent(Player who, LivingEntity enemy, ItemStack item, double damage) {
-    super(who);
-    this.attackItem = CustomWeaponItemStack2.getInstance(item);
-    this.damage = damage;
-    this.enemy = enemy;
+  // 使用したアイテムスタック
+  ItemStack itemStack;
+
+  // 通常攻撃ならTRUE
+  boolean isNormalAttack;
+
+  // 攻撃を受けたEntity
+  Entity target;
+
+  /**
+   * アイテムタイプを取得
+   */
+  public ItemType geItemType() {
+    return customItem.getAttackType();
   }
 
-  @Override
-  public HandlerList getHandlers() {
-    return handlers;
-  }
+  private static final HandlerList handlers = new HandlerList();
 
   public static HandlerList getHandlerList() {
     return handlers;
   }
 
-  public void callEvent() {
-    if (attackItem != null) {
-      Bukkit.getServer().getPluginManager().callEvent(this);
-    }
+  @Override
+  public HandlerList getHandlers() {
+    return null;
   }
 
 }
