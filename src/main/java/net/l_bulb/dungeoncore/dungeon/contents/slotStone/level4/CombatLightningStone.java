@@ -5,7 +5,7 @@ import java.util.Random;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
@@ -40,7 +40,7 @@ public class CombatLightningStone extends CombatSlot {
   static Random rnd = new Random();
 
   @Override
-  public void onCombat(PlayerCombatEntityEvent e) {
+  public void onCombat(PlayerCombatEntityEvent_old e) {
     int nextInt = rnd.nextInt(4);
     if (nextInt == 0) {
       LivingEntity enemy = e.getEnemy();

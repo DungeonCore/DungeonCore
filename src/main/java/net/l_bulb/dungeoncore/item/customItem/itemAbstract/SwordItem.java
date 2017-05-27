@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
@@ -64,7 +64,7 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
     if (LivingEntityUtil.isEnemy(target)) {
       // eventを呼ぶ
       // 相殺されるはず(e.getDamage() - getNormalDamage() )
-      PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent(player, target, item,
+      PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old(player, target, item,
           e.getDamage() - getMaterialDamage() + getAttackItemDamage(StrengthOperator.getLevel(item)));
       playerCombatEntityEvent.callEvent();
       // ダメージの計算を行う

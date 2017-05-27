@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
@@ -45,7 +45,7 @@ public class Lump extends WeaponSkillWithMultiCombat {
   }
 
   @Override
-  protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e,
+  protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent_old e,
       int attackCount) {
     switch (attackCount) {
       case 1:

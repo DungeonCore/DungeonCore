@@ -25,7 +25,7 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -228,7 +228,7 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombat(PlayerCombatEntityEvent e) {
+  public void onCombat(PlayerCombatEntityEvent_old e) {
     ArrayList<SlotInterface> useSlot = e.getAttackItem().getUseSlot();
     for (SlotInterface slot : useSlot) {
       if (slot instanceof CombatSlot) {
@@ -287,7 +287,7 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombatEntity(PlayerCombatEntityEvent e) {
+  public void onCombatEntity(PlayerCombatEntityEvent_old e) {
     // もし指定したアイテムDamageItemableでないなら無視
     AbstractAttackItem itemInterface = e.getAttackItem().getItemInterface();
     if (itemInterface == null) { return; }

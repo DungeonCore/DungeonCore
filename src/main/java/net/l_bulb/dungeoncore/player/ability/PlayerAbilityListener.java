@@ -10,12 +10,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public class PlayerAbilityListener implements Listener {
   @EventHandler
-  public void onDamage(PlayerCombatEntityEvent e) {
+  public void onDamage(PlayerCombatEntityEvent_old e) {
     ItemType attackType = e.getAttackItem().getItemType();
 
     // 武器に対応するStatusのタイプを取得

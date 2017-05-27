@@ -3,7 +3,7 @@ package net.l_bulb.dungeoncore.dungeon.contents.slotStone.other;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
@@ -41,7 +41,7 @@ public class MagicStoneJade extends CombatSlot {
   ParticleData particleData = new ParticleData(ParticleType.heart, 30);
 
   @Override
-  public void onCombat(PlayerCombatEntityEvent e) {
+  public void onCombat(PlayerCombatEntityEvent_old e) {
     LivingEntityUtil.setNoDamageTick(e.getEnemy(), 15);
 
     if (JavaUtil.isRandomTrue(5)) {

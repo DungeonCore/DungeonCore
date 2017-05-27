@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
@@ -91,7 +91,7 @@ public class WeaponSkillExecutor {
   /**
    * 攻撃をした時、スキルを発動
    */
-  public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
+  public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent_old e) {
     CustomWeaponItemStack2 attackItem = e.getAttackItem();
     ItemStack item = attackItem.getItem();
     Player player = e.getPlayer();

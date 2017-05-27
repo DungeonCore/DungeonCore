@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
@@ -65,7 +65,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
   abstract protected void runWaitParticleData(Location loc, int i);
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {
+  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent_old event) {
     if (executePlayer.containsKey(p.getUniqueId())) {
       LbnRunnableImplemantion implemantion = executePlayer.get(p.getUniqueId());
       // カウントを増加させる
@@ -97,7 +97,7 @@ public abstract class WeaponSkillWithMultiCombat extends WeaponSkillForOneType {
    * @param e
    * @param attackCount
    */
-  abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent e,
+  abstract protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent_old e,
       int attackCount);
 
   class LbnRunnableImplemantion extends LbnRunnable {

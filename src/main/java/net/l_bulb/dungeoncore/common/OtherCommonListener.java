@@ -42,7 +42,7 @@ import net.l_bulb.dungeoncore.command.CommandChest;
 import net.l_bulb.dungeoncore.command.CommandGetItem;
 import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
 import net.l_bulb.dungeoncore.command.util.SimplySetSpawnPointCommand;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
 import net.l_bulb.dungeoncore.common.other.EndPortalOperator;
@@ -279,7 +279,7 @@ public class OtherCommonListener implements Listener {
 
         if (owner != null && owner.getType() == EntityType.PLAYER) {
           // eventを呼ぶ
-          PlayerCombatEntityEvent playerCombatEntityEvent = new PlayerCombatEntityEvent((Player) owner, (LivingEntity) target, itemstack,
+          PlayerCombatEntityEvent_old playerCombatEntityEvent = new PlayerCombatEntityEvent_old((Player) owner, (LivingEntity) target, itemstack,
               e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
           playerCombatEntityEvent.callEvent();
 
