@@ -230,7 +230,6 @@ public class ItemListener implements Listener {
       new RuntimeException("Player:" + player.getName() + "がモンスターを倒した際にエラーが発生しました。(manager:" + lastDamageMethod + "と item:"
           + LastDamageMethodType.fromAttackType(customItem.getAttackType())
           + "が一致しません").printStackTrace();
-      ;
     }
 
     PlayerKillEntityEvent playerKillEntityEvent = new PlayerKillEntityEvent(player, entity, item);

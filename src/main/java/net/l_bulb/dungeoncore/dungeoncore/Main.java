@@ -119,6 +119,10 @@ public class Main extends JavaPlugin {
     try {
       // 最大攻撃力書き換え
       ((AttributeRanged) GenericAttributes.maxHealth).b = Double.MAX_VALUE;
+      // walk-exhaustion: 0.1
+      // sprint-exhaustion: 0.4
+      // combat-exhaustion: 0.2
+      // regen-exhaustion: 1.0
     } catch (Exception e) {
       e.printStackTrace();
     }
