@@ -129,26 +129,7 @@ public class ItemListener implements Listener {
   public void onDamageAll(EntityDamageEvent e) {
     EntityType entityType = e.getEntityType();
     if (entityType != EntityType.PLAYER) { return; }
-
-    // しばらくは両方で処理を行う
-    // TODO 後で消す
-    // OldArmorBase.onArmor(e);
     ArmorBase.onArmor(e);
-
-    // Player p = (Player) e.getEntity();
-    // EntityEquipment equipment = p.getEquipment();
-    // //防具を取得
-    // for (ItemStack armor : equipment.getArmorContents()) {
-    // ArmorItemable customItem = ItemManager.getCustomItem(ArmorItemable.class, armor);
-    // if (customItem == null) {
-    // continue;
-    // }
-    // if (e instanceof EntityDamageByEntityEvent) {
-    // customItem.excuteOnDefenceEntity(((EntityDamageByEntityEvent) e).getDamager(), p, (EntityDamageByEntityEvent)e, armor);
-    // } else {
-    // customItem.excuteOnDefenceNotEntity(p, e, armor);
-    // }
-    // }
   }
 
   @EventHandler
