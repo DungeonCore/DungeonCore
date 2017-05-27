@@ -7,7 +7,8 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
 
 import lombok.Getter;
 
@@ -17,12 +18,12 @@ public class PlayerKillEntityEvent extends PlayerEvent {
 
   LivingEntity enemy;
 
-  CustomWeaponItemStack2 attackItem;
+  private ItemStack item;
 
   public PlayerKillEntityEvent(Player who, LivingEntity enemy, ItemStack item) {
     super(who);
-    this.attackItem = CustomWeaponItemStack2.getInstance(item);
     this.enemy = enemy;
+    this.item = item;
   }
 
   @Override
@@ -34,9 +35,11 @@ public class PlayerKillEntityEvent extends PlayerEvent {
     return handlers;
   }
 
+  public ItemInterface getItemInterface() {
+    return ItemManager.getCustomItem(item);
+  }
+
   public void callEvent() {
-    if (attackItem != null) {
-      Bukkit.getServer().getPluginManager().callEvent(this);
-    }
+    Bukkit.getServer().getPluginManager().callEvent(this);
   }
 }

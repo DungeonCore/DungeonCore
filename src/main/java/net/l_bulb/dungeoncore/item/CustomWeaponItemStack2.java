@@ -1,14 +1,13 @@
 package net.l_bulb.dungeoncore.item;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
@@ -16,6 +15,11 @@ import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CustomWeaponItemStack2 {
   /**
    * インスタンスを取得、通常はクラス内からしか呼ばれない
@@ -23,15 +27,13 @@ public class CustomWeaponItemStack2 {
    * @param item
    * @param itemInterface
    */
-  private CustomWeaponItemStack2(ItemStack item, AbstractAttackItem itemInterface) {
+  private CustomWeaponItemStack2(ItemStack item, CombatItemable itemInterface) {
     this.item = item;
     this.itemInterface = itemInterface;
   }
 
   ItemStack item;
-  AbstractAttackItem itemInterface;
-
-  static HashMap<ItemStack, CustomWeaponItemStack2> cache = new HashMap<>();
+  CombatItemable itemInterface;
 
   /**
    * ItemStackから武器情報を取得する
@@ -39,45 +41,8 @@ public class CustomWeaponItemStack2 {
    * @param item
    * @return
    */
-  public static CustomWeaponItemStack2 getInstance(ItemStack item) {
-    ItemInterface customItem = ItemManager.getCustomItem(item);
-    if (customItem == null) { return null; }
-    // 武器でないならnullを返す
-    if (customItem instanceof AbstractAttackItem) {
-      CustomWeaponItemStack2 attackItemStack = getCache(item);
-      return attackItemStack;
-    }
-    return null;
-  }
-
-  /**
-   * キャッシュからインスタンスを取得する
-   *
-   * @param item
-   * @return
-   */
-  private static CustomWeaponItemStack2 getCache(ItemStack item) {
-    // キャッシュがあるならそれを取得
-    if (cache.containsKey(item)) { return cache.get(item); }
-    return new CustomWeaponItemStack2(item, (AbstractAttackItem) ItemManager.getCustomItem(item));
-  }
-
-  /**
-   * ItemStackを取得
-   *
-   * @return
-   */
-  public ItemStack getItem() {
-    return item;
-  }
-
-  /**
-   * CustomItemを取得
-   *
-   * @return
-   */
-  public AbstractAttackItem getItemInterface() {
-    return itemInterface;
+  public static CustomWeaponItemStack2 getInstance(ItemStack item, CombatItemable itemInterface) {
+    return new CustomWeaponItemStack2(item, itemInterface);
   }
 
   /**
@@ -96,7 +61,7 @@ public class CustomWeaponItemStack2 {
    *
    * @return
    */
-  public ArrayList<SlotInterface> getUseSlot() {
+  public List<SlotInterface> getUseSlot() {
     initSlot();
     return slotList;
   }
@@ -128,6 +93,7 @@ public class CustomWeaponItemStack2 {
    * @return
    */
   public boolean removeSlot(SlotInterface slot) {
+
     initSlot();
     return slotList.remove(slotList.indexOf(slot)) != null;
   }
@@ -220,6 +186,10 @@ public class CustomWeaponItemStack2 {
     }
     lore.add("");
     ItemStackUtil.setLore(item, lore);
+  }
+
+  public int getMaxSlotCount() {
+    return itemInterface.getMaxSlotCount();
   }
 
 }

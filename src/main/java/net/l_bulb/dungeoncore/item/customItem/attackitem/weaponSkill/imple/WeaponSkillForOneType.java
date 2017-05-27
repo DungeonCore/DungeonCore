@@ -9,6 +9,7 @@ import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
@@ -64,7 +65,7 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
   }
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
+  public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
 
   protected String getDataString(int i) {
     return String.valueOf(data.getData(i));

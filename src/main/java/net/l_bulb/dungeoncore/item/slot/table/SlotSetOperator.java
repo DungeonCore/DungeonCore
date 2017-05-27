@@ -1,8 +1,6 @@
 package net.l_bulb.dungeoncore.item.slot.table;
 
-import java.util.ArrayList;
-
-import org.bukkit.inventory.ItemStack;
+import java.util.List;
 
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
@@ -54,7 +52,7 @@ public class SlotSetOperator {
    * @return
    */
   public String check() {
-    ArrayList<SlotInterface> useSlot = attackItem.getUseSlot();
+    List<SlotInterface> useSlot = attackItem.getUseSlot();
 
     int emptyNum = 0;
     int unavailableNum = 0;
@@ -69,14 +67,13 @@ public class SlotSetOperator {
     }
 
     SlotType type = magicStone.getSlotType();
-
     if (type == SlotType.NORMAL) {
       // 空のスロットがないなら何もしない
       if (emptyNum <= 0) { return "空きスロットが存在しません。"; }
       // 同じ魔法石は付けれない
       if (useSlot.contains(magicStone)) { return "同じ魔法石はセットできません。"; }
     } else if (type == SlotType.ADD_EMPTY) {
-      if (attackItem.getItemInterface().getMaxSlotCount() - useSlot.size() <= 0) { return "これ以上、このアイテムにスロットを追加できません。"; }
+      if (attackItem.getMaxSlotCount() - useSlot.size() <= 0) { return "これ以上、このアイテムにスロットを追加できません。"; }
     } else if (type == SlotType.REMOVE_UNAVAILABLE) {
       if (unavailableNum <= 0) { return "使用不可のスロットが存在しません。"; }
     } else {
@@ -100,14 +97,9 @@ public class SlotSetOperator {
    *
    * @param cursor
    */
-  public void rollback(ItemStack cursor) {
-    CustomWeaponItemStack2 instance = CustomWeaponItemStack2.getInstance(cursor);
-    // nullの可能性がある
-    if (instance == null) {
-      new LbnRuntimeException("magic stone is null").printStackTrace();
-      ;
-      return;
-    }
+  public void rollback() {
+    // チェックを通ってるのでエラーにならない
+    CustomWeaponItemStack2 instance = getAttackItem();
 
     if (magicStone.getSlotType() == SlotType.NORMAL) {
       instance.removeSlot(magicStone);

@@ -13,8 +13,8 @@ import net.l_bulb.dungeoncore.common.other.Stun;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -30,7 +30,7 @@ public class LightningOrder extends WeaponSkillWithCombat {
   }
 
   @Override
-  public void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent e) {
+  public void onCombat2(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent e) {
     LivingEntityUtil.strikeLightningEffect(livingEntity.getLocation());
 
     Stun.addStun(livingEntity, (int) (20 * getData(1)));

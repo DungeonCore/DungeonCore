@@ -78,15 +78,6 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
   abstract protected int getSkillLevel();
 
   /**
-   * 武器のダメージを取得 (武器本体のダメージも含まれます)
-   *
-   * @param p
-   * @param strengthLevel 強化レベル
-   * @return
-   */
-  abstract public double getAttackItemDamage(int strengthLevel);
-
-  /**
    * クラフトレベルを取得する
    *
    * @return
@@ -103,6 +94,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
    *
    * @return
    */
+  @Override
   public double getMaterialDamage() {
     double vanillaDamage = ItemStackUtil.getVanillaDamage(getMaterial());
     return vanillaDamage;

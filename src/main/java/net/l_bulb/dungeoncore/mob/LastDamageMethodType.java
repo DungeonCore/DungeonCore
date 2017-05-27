@@ -40,7 +40,7 @@ public enum LastDamageMethodType {
   }
 
   public static LastDamageMethodType fromAttackType(ItemType type) {
-    return fromAttackType(type, false);
+    return fromAttackType(type, true);
   }
 
   /**

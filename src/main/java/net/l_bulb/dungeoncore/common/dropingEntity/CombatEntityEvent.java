@@ -2,12 +2,14 @@ package net.l_bulb.dungeoncore.common.dropingEntity;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.Event;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.player.ItemType;
@@ -21,7 +23,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CombatEntityEvent extends Event {
+public class CombatEntityEvent extends PlayerEvent {
 
   /**
    * @param attacker 攻撃を与えたEntity
@@ -31,27 +33,26 @@ public class CombatEntityEvent extends Event {
    * @param target 攻撃対象
    * @param isNormalAttack 通常攻撃ならTRUE
    */
-  public CombatEntityEvent(LivingEntity attacker, double damage, AbstractAttackItem customItem, ItemStack itemStack, boolean isNormalAttack,
+  public CombatEntityEvent(Player attacker, double damage, ItemInterface customItem, ItemStack itemStack, boolean isNormalAttack,
       LivingEntity target) {
-    this.attacker = attacker;
+    super(attacker);
     this.customItem = customItem;
     this.itemStack = itemStack;
     this.isNormalAttack = isNormalAttack;
     this.enemy = target;
 
     // 通常攻撃の時はダメージを修正する
-    if (isNormalAttack) {
+    if (isNormalAttack && ItemManager.isImplemental(CombatItemable.class, customItem)) {
       // 何らかの効果で上乗せされたダメージ + ダメージ
-      this.damage = Math.max(damage - +customItem.getMaterialDamage(), 0) + customItem.getAttackItemDamage(StrengthOperator.getLevel(itemStack));
+      this.damage = Math.max(damage - ((CombatItemable) customItem).getMaterialDamage(), 0)
+          + ((CombatItemable) customItem).getAttackItemDamage(StrengthOperator.getLevel(itemStack));
     } else {
       this.damage = damage;
     }
 
-    this.attackItem = CustomWeaponItemStack2.getInstance(itemStack);
   }
 
   // CustomWeaponItemStack2
-  CustomWeaponItemStack2 attackItem;
 
   // 攻撃者
   LivingEntity attacker;
@@ -60,7 +61,7 @@ public class CombatEntityEvent extends Event {
   double damage;
 
   // 使用したスタムアイテム
-  AbstractAttackItem customItem;
+  ItemInterface customItem;
 
   // 使用したアイテムスタック
   ItemStack itemStack;
@@ -102,14 +103,4 @@ public class CombatEntityEvent extends Event {
   public LastDamageMethodType geLastDamageMethodType() {
     return LastDamageMethodType.fromAttackType(geItemType(), isNormalAttack);
   }
-
-  /**
-   * CustomWeaponItemStackを取得
-   *
-   * @return
-   */
-  public CustomWeaponItemStack2 getCustomWeaponItemStack() {
-    return attackItem;
-  }
-
 }

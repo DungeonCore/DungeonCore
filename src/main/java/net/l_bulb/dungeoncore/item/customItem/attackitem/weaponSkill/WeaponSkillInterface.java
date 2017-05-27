@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public interface WeaponSkillInterface {
@@ -56,7 +57,7 @@ public interface WeaponSkillInterface {
    * @param customItem
    * @param livingEntity
    */
-  void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent event);
+  void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event);
 
   /**
    * スキルのクールタイムを取得

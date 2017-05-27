@@ -8,8 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithCombat;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public class BurstFlame extends WeaponSkillWithCombat {
@@ -27,7 +27,7 @@ public class BurstFlame extends WeaponSkillWithCombat {
   protected void runWaitParticleData(Location loc, int i) {}
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent event) {
+  public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {
     // スキル発動待機中ならスキルを発動する
     if (isWaitingSkill(p)) {
       livingEntity.setFireTicks((int) (20 * getData(1)));
@@ -41,6 +41,6 @@ public class BurstFlame extends WeaponSkillWithCombat {
   }
 
   @Override
-  protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent e) {}
+  protected void onCombat2(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent e) {}
 
 }

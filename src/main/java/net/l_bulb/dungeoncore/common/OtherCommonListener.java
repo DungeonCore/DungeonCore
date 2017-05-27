@@ -12,6 +12,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -277,9 +278,9 @@ public class OtherCommonListener implements Listener {
 
         AbstractAttackItem attackItem = (AbstractAttackItem) ItemManager.getCustomItem(itemstack);
 
-        if (owner != null) {
+        if (owner != null && owner.getType() == EntityType.PLAYER) {
           // イベントを呼ぶ
-          CombatEntityEvent callEvent = new CombatEntityEvent(owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
+          CombatEntityEvent callEvent = new CombatEntityEvent((Player) owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
               (LivingEntity) target).callEvent();
           e.setDamage(DamageModifier.BASE, callEvent.getDamage());
         } else {

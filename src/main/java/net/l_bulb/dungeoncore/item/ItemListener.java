@@ -1,6 +1,6 @@
 package net.l_bulb.dungeoncore.item;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -108,9 +108,9 @@ public class ItemListener implements Listener {
     // ダメージを受けたのが生き物でないなら何もしない
     if (!e.getEntityType().isAlive()) { return; }
 
-    // ダメージを与えたのが生き物じゃないならTRUE
-    if (!e.getDamager().getType().isAlive()) { return; }
-    LivingEntity damager = (LivingEntity) e.getDamager();
+    // ダメージを与えたのがPlayerじゃないならTRUE
+    if (e.getDamager().getType() != EntityType.PLAYER) { return; }
+    Player damager = (Player) e.getDamager();
     // 手に持っているアイテムを取得
     ItemStack itemInHand = damager.getEquipment().getItemInHand();
 
@@ -194,11 +194,12 @@ public class ItemListener implements Listener {
 
     LivingEntity entity = e.getEntity();
     EntityDamageEvent lastDamageCause = entity.getLastDamageCause();
-    // 最後に倒したのがEntityでなければ何もしない
-    if (!(lastDamageCause instanceof EntityDamageByEntityEvent)) { return; }
 
+    // 最後に攻撃した攻撃者を取得
     LastDamageMethodType lastDamageMethod = LastDamageManager.getLastDamageAttackType(entity);
     Player player = LastDamageManager.getLastDamagePlayer(entity);
+    // 攻撃者が記録されていないなら何もしない
+    if (lastDamageMethod == null || player == null) { return; }
 
     // 倒すときに使ったアイテム
     ItemStack item = null;
@@ -241,7 +242,13 @@ public class ItemListener implements Listener {
     // 攻撃したのがPlayerでないなら何もしない
     if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
 
-    ArrayList<SlotInterface> useSlot = e.getAttackItem().getUseSlot();
+    CombatItemable combatItem = ItemManager.getCustomItem(CombatItemable.class, e.getItemStack());
+    // 戦闘用アイテムでないなら何もしない
+    if (combatItem == null) { return; }
+
+    CustomWeaponItemStack2 instance = combatItem.getCombatAttackItemStack(e.getItemStack());
+    List<SlotInterface> useSlot = instance.getUseSlot();
+
     for (SlotInterface slot : useSlot) {
       if (slot instanceof CombatSlot) {
         ((CombatSlot) slot).onCombat(e, (Player) e.getAttacker());
@@ -253,14 +260,20 @@ public class ItemListener implements Listener {
 
   @EventHandler
   public void onKill(PlayerKillEntityEvent e) {
-    ArrayList<SlotInterface> useSlot = e.getAttackItem().getUseSlot();
+    CombatItemable combatItem = ItemManager.getCustomItem(CombatItemable.class, e.getItem());
+    // 戦闘用アイテムでないなら何もしない
+    if (combatItem == null) { return; }
+
+    CustomWeaponItemStack2 combatAttackItemStack = combatItem.getCombatAttackItemStack(e.getItem());
+
+    List<SlotInterface> useSlot = combatAttackItemStack.getUseSlot();
     for (SlotInterface slot : useSlot) {
       if (slot instanceof KillSlot) {
         ((KillSlot) slot).onKill(e);
       }
     }
 
-    EntityKillable customItem = ItemManager.getCustomItem(EntityKillable.class, e.getAttackItem().getItem());
+    EntityKillable customItem = ItemManager.getCustomItem(EntityKillable.class, e.getItem());
     if (customItem != null) {
       customItem.onKillEvent(e);
     }
@@ -300,9 +313,12 @@ public class ItemListener implements Listener {
   @EventHandler
   public void onCombatEntity(CombatEntityEvent e) {
     // もし指定したアイテムDamageItemableでないなら無視
-    AbstractAttackItem itemInterface = e.getCustomItem();
-    if (itemInterface == null) { return; }
-    itemInterface.onCombatEntity(e);
+    ItemInterface itemInterface = e.getCustomItem();
+
+    // 戦闘用のアイテムか確認
+    if (ItemManager.isImplemental(CombatItemable.class, itemInterface)) {
+      ((CombatItemable) itemInterface).onCombatEntity(e);
+    }
   }
 
   @EventHandler

@@ -147,6 +147,8 @@ public class ItemManager {
    * @return
    */
   public static boolean isImplemental(Class<? extends ItemInterface> clazz, ItemInterface item) {
+    if (item == null) { return false; }
+
     HashMap<String, ItemInterface> hashMap = allItemIdClassList.get(clazz);
     // 指定したInterfaceを実装しているItemがない場合はfalse
     if (hashMap == null) { return false; }

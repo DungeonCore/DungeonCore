@@ -12,8 +12,10 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -97,15 +99,17 @@ public class WeaponSkillExecutor {
     Player player = (Player) e.getAttacker();
 
     ItemStack item = e.getItemStack();
-    AbstractAttackItem customItem = e.getCustomItem();
+    CombatItemable customItem = ItemManager.getCustomItem(CombatItemable.class, item);
+    if (customItem != null) {
+      // 武器スキルを取得
+      WeaponSkillInterface skill = getWeaponSkill(item);
+      // 武器スキルが登録されていない場合は何もしない
+      if (skill == null) { return; }
 
-    // 武器スキルを取得
-    WeaponSkillInterface skill = getWeaponSkill(item);
-    // 武器スキルが登録されていない場合は何もしない
-    if (skill == null) { return; }
+      // スキルを発動
+      skill.onCombat(player, item, customItem, e.getEnemy(), e);
+    }
 
-    // スキルを発動
-    skill.onCombat(player, item, customItem, e.getEnemy(), e);
   }
 
   /**

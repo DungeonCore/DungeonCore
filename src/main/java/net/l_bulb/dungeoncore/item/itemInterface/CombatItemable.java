@@ -1,8 +1,10 @@
 package net.l_bulb.dungeoncore.item.itemInterface;
 
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 
 public interface CombatItemable extends RightClickItemable, EquipItemable {
   /**
@@ -32,4 +34,29 @@ public interface CombatItemable extends RightClickItemable, EquipItemable {
    * @return
    */
   int getMaxSlotCount();
+
+  /**
+   * 武器のダメージを取得 (武器本体のダメージも含まれます)
+   *
+   * @param p
+   * @param strengthLevel 強化レベル
+   * @return
+   */
+  double getAttackItemDamage(int strengthLevel);
+
+  /**
+   * この武器のアイテムのデフォルトの攻撃力を取得
+   *
+   * @return
+   */
+  double getMaterialDamage();
+
+  /**
+   * カスタムアイテムスタックを取得する
+   *
+   * @return
+   */
+  default CustomWeaponItemStack2 getCombatAttackItemStack(ItemStack item) {
+    return CustomWeaponItemStack2.getInstance(item, this);
+  }
 }

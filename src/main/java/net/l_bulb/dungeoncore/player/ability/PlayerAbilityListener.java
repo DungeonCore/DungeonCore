@@ -19,7 +19,7 @@ public class PlayerAbilityListener implements Listener {
     // 攻撃したのはPlayerでないなら何もしない
     if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
 
-    ItemType attackType = e.getAttackItem().getItemType();
+    ItemType attackType = e.geItemType();
 
     // 武器に対応するStatusのタイプを取得
     PlayerStatusType addType = null;

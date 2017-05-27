@@ -8,8 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiCombat;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -35,7 +35,7 @@ public class BloodyHeal extends WeaponSkillWithMultiCombat {
   }
 
   @Override
-  protected void onCombat2(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, CombatEntityEvent e,
+  protected void onCombat2(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent e,
       int attackCount) {
     // ダメージを{1}倍する
     e.setDamage(e.getDamage() * getData(1));
