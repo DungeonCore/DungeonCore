@@ -13,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerRightShiftClickEvent;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
@@ -63,11 +62,6 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
       sendNotAvailableMessage(player);
       e.setCancelled(true);
       return;
-    }
-
-    ItemStack item = e.getItem();
-    if (player.isSneaking()) {
-      new PlayerRightShiftClickEvent(player, item).callEvent();
     }
   }
 
