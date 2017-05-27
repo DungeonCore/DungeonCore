@@ -27,7 +27,6 @@ import org.bukkit.projectiles.ProjectileSource;
 import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -106,7 +105,7 @@ public class ItemListener implements Listener {
    */
   @EventHandler(priority = EventPriority.LOW)
   public void onDamage(EntityDamageByEntityEvent e) {
-    // ダメージを受けたのがPlayerならTRUE
+    // ダメージを受けたのが生き物でないなら何もしない
     if (!e.getEntityType().isAlive()) { return; }
 
     // ダメージを与えたのが生き物じゃないならTRUE
@@ -124,7 +123,7 @@ public class ItemListener implements Listener {
       if (customItem.getAttackType() == ItemType.SWORD) {
         // イベントを発動させる
         PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(damager, e.getDamage(DamageModifier.BASE), (AbstractAttackItem) customItem,
-            itemInHand, true, e.getEntity()).callEvent();
+            itemInHand, true, (LivingEntity) e.getEntity()).callEvent();
         e.setDamage(DamageModifier.BASE, callEvent.getDamage());
       }
 
@@ -145,7 +144,7 @@ public class ItemListener implements Listener {
   public void onAttackDamage(PlayerCombatEntityEvent e) {
     // last damageを登録する
     if (e.getAttacker().getType() == EntityType.PLAYER) {
-      LastDamageManager.addData((Player) e.getAttacker(), e.geLastDamageMethodType(), e.getTarget());
+      LastDamageManager.addData((Player) e.getAttacker(), e.geLastDamageMethodType(), e.getEnemy());
     }
   }
 
@@ -238,11 +237,14 @@ public class ItemListener implements Listener {
   }
 
   @EventHandler
-  public void onCombat(PlayerCombatEntityEvent_old e) {
+  public void onCombat(PlayerCombatEntityEvent e) {
+    // 攻撃したのがPlayerでないなら何もしない
+    if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
+
     ArrayList<SlotInterface> useSlot = e.getAttackItem().getUseSlot();
     for (SlotInterface slot : useSlot) {
       if (slot instanceof CombatSlot) {
-        ((CombatSlot) slot).onCombat(e);
+        ((CombatSlot) slot).onCombat(e, (Player) e.getAttacker());
       }
     }
     // 武器スキルを実行

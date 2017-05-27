@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
@@ -53,7 +53,7 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
     // 周囲の敵対モブを取得
     ArrayList<LivingEntity> nearEnemy = LivingEntityUtil.getNearEnemy(p, 7, 4, 7);
     for (LivingEntity livingEntity : nearEnemy) {
-      blastOff(vector, livingEntity, customItem, p);
+      blastOff(vector, livingEntity, customItem, p, item);
     }
 
     // 鈍足を付与
@@ -75,8 +75,9 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
    * @param livingEntity
    * @param customItem
    * @param p
+   * @param item
    */
-  public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p) {
+  public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p, ItemStack item) {
     // 吹き飛ばす
     livingEntity.setVelocity(livingEntity.getLocation().toVector().subtract(vector).normalize().multiply(5).setY(0));
   }
@@ -102,6 +103,6 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
   }
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent_old event) {}
+  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {}
 
 }

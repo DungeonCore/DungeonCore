@@ -1,12 +1,12 @@
 package net.l_bulb.dungeoncore.common.event.player;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
@@ -32,12 +32,12 @@ public class PlayerCombatEntityEvent extends Event {
    * @param isNormalAttack 通常攻撃ならTRUE
    */
   public PlayerCombatEntityEvent(LivingEntity attacker, double damage, AbstractAttackItem customItem, ItemStack itemStack, boolean isNormalAttack,
-      Entity target) {
+      LivingEntity target) {
     this.attacker = attacker;
     this.customItem = customItem;
     this.itemStack = itemStack;
     this.isNormalAttack = isNormalAttack;
-    this.target = target;
+    this.enemy = target;
 
     // 通常攻撃の時はダメージを修正する
     if (isNormalAttack) {
@@ -46,7 +46,12 @@ public class PlayerCombatEntityEvent extends Event {
     } else {
       this.damage = damage;
     }
+
+    this.attackItem = CustomWeaponItemStack2.getInstance(itemStack);
   }
+
+  // CustomWeaponItemStack2
+  CustomWeaponItemStack2 attackItem;
 
   // 攻撃者
   LivingEntity attacker;
@@ -64,13 +69,12 @@ public class PlayerCombatEntityEvent extends Event {
   boolean isNormalAttack;
 
   // 攻撃を受けたEntity
-  Entity target;
+  LivingEntity enemy;
 
   /**
    * アイテムタイプを取得
    */
   public ItemType geItemType() {
-    if (customItem == null) { return null; }
     return customItem.getAttackType();
   }
 
@@ -96,8 +100,16 @@ public class PlayerCombatEntityEvent extends Event {
    * @return
    */
   public LastDamageMethodType geLastDamageMethodType() {
-    if (geItemType() == null) { return LastDamageMethodType.OTHER; }
     return LastDamageMethodType.fromAttackType(geItemType(), isNormalAttack);
+  }
+
+  /**
+   * CustomWeaponItemStackを取得
+   *
+   * @return
+   */
+  public CustomWeaponItemStack2 getCustomWeaponItemStack() {
+    return attackItem;
   }
 
 }

@@ -4,7 +4,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillData;
@@ -64,7 +64,7 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
   }
 
   @Override
-  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent_old event) {}
+  public void onCombat(Player p, ItemStack item, AbstractAttackItem customItem, LivingEntity livingEntity, PlayerCombatEntityEvent event) {}
 
   protected String getDataString(int i) {
     return String.valueOf(data.getData(i));

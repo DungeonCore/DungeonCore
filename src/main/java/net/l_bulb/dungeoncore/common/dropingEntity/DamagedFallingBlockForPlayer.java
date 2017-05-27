@@ -47,7 +47,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
 
   @Override
   protected boolean damageLivingentity(Entity entity) {
-    if (LivingEntityUtil.isEnemy(entity)) {
+    if (LivingEntityUtil.isEnemy(entity) && entity.getType().isAlive()) {
       // すでに死んでいたら何もしない
       if (entity.isDead()) { return false; }
 
@@ -55,7 +55,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
       LastDamageManager.onDamage(((LivingEntity) entity), p, getAttackType());
 
       // eventを実行
-      PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(p, damage, customItem, item, isNormalAttack, entity).callEvent();
+      PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(p, damage, customItem, item, isNormalAttack, (LivingEntity) entity).callEvent();
       // ダメージを与える
       ((LivingEntity) entity).damage(callEvent.getDamage(), p);
 

@@ -4,14 +4,14 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
 import net.l_bulb.dungeoncore.player.ItemType;
@@ -91,11 +91,13 @@ public class WeaponSkillExecutor {
   /**
    * 攻撃をした時、スキルを発動
    */
-  public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent_old e) {
-    CustomWeaponItemStack2 attackItem = e.getAttackItem();
-    ItemStack item = attackItem.getItem();
-    Player player = e.getPlayer();
-    AbstractAttackItem customItem = attackItem.getItemInterface();
+  public static void executeWeaponSkillOnCombat(PlayerCombatEntityEvent e) {
+    // 攻撃したのがPlayerでないなら無視する
+    if (e.getAttacker().getType() != EntityType.PLAYER) { return; }
+    Player player = (Player) e.getAttacker();
+
+    ItemStack item = e.getItemStack();
+    AbstractAttackItem customItem = e.getCustomItem();
 
     // 武器スキルを取得
     WeaponSkillInterface skill = getWeaponSkill(item);

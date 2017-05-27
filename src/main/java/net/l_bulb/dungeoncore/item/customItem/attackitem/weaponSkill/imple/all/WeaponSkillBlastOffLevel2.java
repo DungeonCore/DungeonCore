@@ -2,14 +2,14 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 
 public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
 
@@ -37,13 +37,16 @@ public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
   CircleParticleData circleParticleData = new CircleParticleData(new ParticleData(ParticleType.smoke, 3), 7);
 
   @Override
-  public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p) {
+  public void blastOff(Vector vector, LivingEntity livingEntity, AbstractAttackItem customItem, Player p, ItemStack item) {
     // 敵を吹き飛ばす
-    super.blastOff(vector, livingEntity, customItem, p);
+    super.blastOff(vector, livingEntity, customItem, p, item);
 
     // ダメージを与える
-    livingEntity.damage(customItem.getAttackItemDamage(0));
-    LastDamageManager.addData(p, LastDamageMethodType.fromAttackType(customItem.getAttackType()), livingEntity);
+    double attackItemDamage = customItem.getAttackItemDamage(0);
+    livingEntity.damage(attackItemDamage);
+
+    // eventを発動する
+    new PlayerCombatEntityEvent(p, attackItemDamage, customItem, item, false, livingEntity).callEvent();
   }
 
   @Override

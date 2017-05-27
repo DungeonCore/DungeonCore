@@ -14,9 +14,7 @@ public class MobAttackExplosion extends NotMonsterDamageExplosion {
   LivingEntity mob;
 
   @Override
-  public void damageEntity(Entity craftEntity, float d10) {
-    if (craftEntity.getType().isAlive()) {
-      ((LivingEntity) craftEntity).damage(d10, craftEntity);
-    }
+  public float getDamage(Entity craftEntity, float d10) {
+    return d10;
   }
 }

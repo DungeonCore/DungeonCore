@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R1.event.CraftEventFactory;
 
 import com.google.common.collect.Lists;
@@ -149,7 +148,8 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
             boolean wasDamaged = false;
 
             if (!isNotDamage(entity.getBukkitEntity())) {
-              wasDamaged = entity.damageEntity(DamageSource.explosion(this), (int) ((d13 * d13 + d13) / 2.0D * 8.0D * f3 + 1.0D));
+              float damage = getDamage(entity.getBukkitEntity(), (float) ((d13 * d13 + d13) / 2.0D * 8.0D * f3 + 1.0D));
+              wasDamaged = entity.damageEntity(DamageSource.explosion(this), damage);
             }
 
             CraftEventFactory.entityDamage = null;
@@ -183,8 +183,14 @@ public abstract class AbstractNotDamageExplosion extends Explosion {
     return true;
   }
 
-  public void damageEntity(org.bukkit.entity.Entity craftEntity, float d10) {
-    ((CraftEntity) craftEntity).getHandle().damageEntity(DamageSource.explosion(this), d10);
+  /**
+   * 爆発によるダメージを修正する
+   *
+   * @param craftEntity
+   * @param damage
+   */
+  public float getDamage(org.bukkit.entity.Entity craftEntity, float damage) {
+    return damage;
   }
 
   abstract boolean isNotDamage(org.bukkit.entity.Entity bukkitEntity);

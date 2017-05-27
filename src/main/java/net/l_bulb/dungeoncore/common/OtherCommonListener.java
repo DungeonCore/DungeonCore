@@ -280,7 +280,7 @@ public class OtherCommonListener implements Listener {
         if (owner != null) {
           // イベントを呼ぶ
           PlayerCombatEntityEvent callEvent = new PlayerCombatEntityEvent(owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
-              target).callEvent();
+              (LivingEntity) target).callEvent();
           e.setDamage(DamageModifier.BASE, callEvent.getDamage());
         } else {
           // 通常通りの計算を行う

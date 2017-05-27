@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
-import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent_old;
+import net.l_bulb.dungeoncore.common.event.player.PlayerCombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
@@ -88,7 +89,7 @@ public class OneMobDamageUpSlot extends CombatSlot {
   }
 
   @Override
-  public void onCombat(PlayerCombatEntityEvent_old e) {
+  public void onCombat(PlayerCombatEntityEvent e, Player p) {
     if (e.getEnemy().getType() == getTargetType()) {
       e.setDamage(e.getDamage() * (1.0 + getAddDamagePer() / 100.0));
     }
