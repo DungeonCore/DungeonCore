@@ -20,6 +20,7 @@ import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillNothing;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillSetRedstoneBlock;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillSpawnMob;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillSpawnMob2;
+import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillTeleportPlayerToPoint;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillTpToMob;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillTpToTarget;
 import net.l_bulb.dungeoncore.mob.mobskill.skillrunnable.MobSkillUpperTarget;
@@ -167,7 +168,7 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable {
         return new MobSkillSpawnMob(data);
       case "モンスターを三体召喚する":
         return new MobSkillSpawnMob2(data);
-      case "モンスターを二秒間止めて指定した%回復させる":
+      case "モンスターを指定した%回復させる":
         return new MobSkillHealMob(data);
       case "対象の場所で爆発を起こす":
         return new MobSkillExplosion(data);
@@ -181,6 +182,8 @@ public class MobSkillSheetRunnable extends AbstractSheetRunable {
         return new MobSkillSetRedstoneBlock(data);
       case "モンスターを上にとばす":
         return new MobSkillMobJump(data);
+      case "指定した場所にプレイヤーをTPさせる":
+        return new MobSkillTeleportPlayerToPoint(data);
       default:
         return null;
     }

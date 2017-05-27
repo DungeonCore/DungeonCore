@@ -4,7 +4,6 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
-import net.l_bulb.dungeoncore.common.other.Stun;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -17,9 +16,7 @@ public class MobSkillHealMob extends MobSkillRunnable {
   @Override
   public void execute(Entity target, Entity mob) {
     if (mob.getType().isAlive()) {
-      Stun.addStun((LivingEntity) mob, 20 * 2);
-
-      double parsent = 20;
+      double parsent = 5;
       try {
         parsent = Double.parseDouble(data);
       } catch (Exception e) {}
