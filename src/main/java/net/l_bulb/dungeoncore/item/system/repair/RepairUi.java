@@ -6,12 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.menu.SelectRunnable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
@@ -133,9 +133,11 @@ public class RepairUi {
     if (item == null) { return false; }
     Material type = item.getType();
     if (type.getMaxDurability() < 30) { return false; }
-    // アイテムの耐久を０にする
+
+    ItemStackNbttagSetter nbttagSetter = new ItemStackNbttagSetter(item);
+    // アイテムの消費耐久を０にする
     item.setDurability((short) 0);
-    ItemStackUtil.setNBTTag(item, NbtTagConst.THELOW_DURABILITY, (short) 0);
+    nbttagSetter.setNowDurability(nbttagSetter.getMaxDurability());
     return true;
   }
 }

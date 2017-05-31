@@ -3,23 +3,23 @@ package net.l_bulb.dungeoncore.item.slot.table;
 import java.util.List;
 
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
+import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.magicstone.UnavailableSlot;
 
 public class SlotSetOperator {
-  protected SlotSetOperator(CustomWeaponItemStack2 attackItem,
+  protected SlotSetOperator(CustomWeaponItemStack attackItem,
       SlotInterface magicStone) {
     this.attackItem = attackItem;
     this.magicStone = magicStone;
   }
 
-  CustomWeaponItemStack2 attackItem;
+  CustomWeaponItemStack attackItem;
   SlotInterface magicStone;
 
-  public CustomWeaponItemStack2 getAttackItem() {
+  public CustomWeaponItemStack getAttackItem() {
     return attackItem;
   }
 
@@ -99,7 +99,7 @@ public class SlotSetOperator {
    */
   public void rollback() {
     // チェックを通ってるのでエラーにならない
-    CustomWeaponItemStack2 instance = getAttackItem();
+    CustomWeaponItemStack instance = getAttackItem();
 
     if (magicStone.getSlotType() == SlotType.NORMAL) {
       instance.removeSlot(magicStone);

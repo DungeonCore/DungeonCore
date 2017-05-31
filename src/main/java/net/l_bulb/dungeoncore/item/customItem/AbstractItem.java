@@ -6,9 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -50,7 +50,10 @@ public abstract class AbstractItem implements ItemInterface {
 
     // id付与
     lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
-    ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
+
+    ItemStackNbttagSetter nbttagSetter = new ItemStackNbttagSetter(itemStack);
+    // NBTtagをつける
+    setNbtTag(nbttagSetter);
 
     if (getDetail() != null) {
       for (String string : getDetail()) {
@@ -75,6 +78,15 @@ public abstract class AbstractItem implements ItemInterface {
 
     StrengthOperator.updateLore(itemStack, 0);
     return itemStack;
+  }
+
+  /**
+   * NBTTagを付与する
+   *
+   * @param nbttagSetter
+   */
+  public void setNbtTag(ItemStackNbttagSetter nbttagSetter) {
+    nbttagSetter.setItemId(getId());
   }
 
   /**

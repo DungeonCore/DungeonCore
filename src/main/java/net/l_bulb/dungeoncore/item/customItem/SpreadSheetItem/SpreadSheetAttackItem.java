@@ -71,21 +71,17 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   @Override
   public double getAttackItemDamage(int strengthLevel) {
+    // 攻撃力取得
     double combatLoad = getCombatLoad();
-    if (JavaUtil.isRandomTrue((int) getCriticalHitRate(strengthLevel))) {
-      combatLoad -= getMinusCombatLoadForCritical();
-    }
     double attackDamageValue = AttackDamageValue.getAttackDamageValue(combatLoad, getAvailableLevel());
-    return attackDamageValue * data.getDamageParcent();
-  }
 
-  /**
-   * クリティカル時、減算される戦闘負荷量
-   *
-   * @return
-   */
-  public double getMinusCombatLoadForCritical() {
-    return 0.3;
+    // 倍率をかける
+    double attackDamageValue2 = attackDamageValue * data.getDamageParcent();
+    // クリティカルなら
+    if (JavaUtil.isRandomTrue((int) getCriticalHitRate(strengthLevel))) {
+      attackDamageValue2 += attackDamageValue * 0.15;
+    }
+    return attackDamageValue2;
   }
 
   /**

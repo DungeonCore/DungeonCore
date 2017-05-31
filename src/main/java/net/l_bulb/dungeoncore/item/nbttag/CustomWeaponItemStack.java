@@ -1,16 +1,18 @@
-package net.l_bulb.dungeoncore.item;
+package net.l_bulb.dungeoncore.item.nbttag;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.bukkit.ChatColor;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreSlotToken;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -18,22 +20,31 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class CustomWeaponItemStack2 {
+public class CustomWeaponItemStack {
   /**
    * インスタンスを取得、通常はクラス内からしか呼ばれない
    *
    * @param item
    * @param itemInterface
    */
-  private CustomWeaponItemStack2(ItemStack item, CombatItemable itemInterface) {
+  private CustomWeaponItemStack(ItemStack item, CombatItemable itemInterface) {
     this.item = item;
     this.itemInterface = itemInterface;
+    this.nbtBean = new ItemStackNbttagSetter(item);
+
+    slotList = nbtBean.getGetAllSlotList();
   }
 
+  @Getter
+  @Setter
   ItemStack item;
+  @Getter
+  @Setter
   CombatItemable itemInterface;
+
+  ItemStackNbttagSetter nbtBean;
+
+  List<SlotInterface> slotList = new ArrayList<>();
 
   /**
    * ItemStackから武器情報を取得する
@@ -41,8 +52,8 @@ public class CustomWeaponItemStack2 {
    * @param item
    * @return
    */
-  public static CustomWeaponItemStack2 getInstance(ItemStack item, CombatItemable itemInterface) {
-    return new CustomWeaponItemStack2(item, itemInterface);
+  public static CustomWeaponItemStack getInstance(ItemStack item, CombatItemable itemInterface) {
+    return new CustomWeaponItemStack(item, itemInterface);
   }
 
   /**
@@ -54,36 +65,13 @@ public class CustomWeaponItemStack2 {
     return itemInterface.getAttackType();
   }
 
-  ArrayList<SlotInterface> slotList = null;
-
   /**
    * 使用している魔法石を取得
    *
    * @return
    */
   public List<SlotInterface> getUseSlot() {
-    initSlot();
     return slotList;
-  }
-
-  // 魔法石情報を初期化しているかどうか
-  boolean isInitSlot = false;
-
-  /**
-   * 魔法石情報を取得
-   */
-  protected void initSlot() {
-    // すでに初期化しているなら無視する
-    if (isInitSlot) { return; }
-
-    slotList = new ArrayList<>();
-    for (String string : ItemStackUtil.getLore(item)) {
-      SlotInterface slotByLore = SlotManager.getSlotByLore(string);
-      if (slotByLore != null) {
-        slotList.add(slotByLore);
-      }
-    }
-    isInitSlot = true;
   }
 
   /**
@@ -93,9 +81,7 @@ public class CustomWeaponItemStack2 {
    * @return
    */
   public boolean removeSlot(SlotInterface slot) {
-
-    initSlot();
-    return slotList.remove(slotList.indexOf(slot)) != null;
+    return slotList.remove(slot);
   }
 
   /**
@@ -114,13 +100,7 @@ public class CustomWeaponItemStack2 {
    * @return
    */
   public boolean addSlot(SlotInterface slot) {
-    initSlot();
-
-    if (slotList.size() < 5) {
-      slotList.add(slot);
-      return true;
-    }
-    return false;
+    return slotList.add(slot);
   }
 
   /**
@@ -130,7 +110,6 @@ public class CustomWeaponItemStack2 {
    * @return
    */
   public boolean hasSlot(AbstractSlot slot) {
-    initSlot();
     return slotList.contains(slot);
   }
 
@@ -154,42 +133,43 @@ public class CustomWeaponItemStack2 {
       StrengthOperator.updateLore(getItem(), strengthLevel);
     }
 
-    // Slotの初期化をする
-    initSlot();
+    // nbtタグにセットする
+    nbtBean.setSlotList(slotList);
 
-    List<String> lore = ItemStackUtil.getLore(item);
-    Iterator<String> iterator = lore.iterator();
+    ItemLoreData itemLoreData = new ItemLoreData(item);
+    // タイトルのSlotを削除
+    itemLoreData.removeLore(ItemLoreToken.TITLE_SLOT);
 
-    boolean slotFlg = false;
-    while (iterator.hasNext()) {
-      String next = iterator.next();
-      if (slotFlg) {
-        iterator.remove();
-        // 改行が存在したらSLOT終了とする
-        if (next.trim().equals("")) {
-          break;
-        }
-      }
+    // LoreToken作成
+    ItemLoreSlotToken itemLoreSlotToken = new ItemLoreSlotToken(getMaxSlotCount());
 
-      if (next.contains("[SLOT]")) {
-        iterator.remove();
-        slotFlg = true;
-      }
+    for (SlotInterface slot : slotList) {
+      itemLoreSlotToken.addLoreAsOriginal(StringUtils.join(slot.getNameColor().toString(), "    ■ ", slot.getSlotName()));
     }
-
-    lore.add(ChatColor.GREEN + "[SLOT]");
-    for (SlotInterface abstractSlot : slotList) {
-      String[] slotLore = SlotManager.getLore(abstractSlot);
-      for (String line : slotLore) {
-        lore.add(line);
-      }
-    }
-    lore.add("");
-    ItemStackUtil.setLore(item, lore);
+    itemLoreData.addLore(itemLoreSlotToken);
+    ItemStackUtil.setLore(item, itemLoreData.getLore());
   }
 
   public int getMaxSlotCount() {
-    return itemInterface.getMaxSlotCount();
+    return nbtBean.getMaxSlotSize();
+  }
+
+  public int getDefaultSlotCount() {
+    return nbtBean.getDefaultSlotSize();
+  }
+
+  public double getDamage(int strengthLevel) {
+    return nbtBean.getDamage();
+  }
+
+  /**
+   * クリティカル時のダメージを取得
+   *
+   * @param strengthLevel
+   * @return
+   */
+  public double getCriticalDamage(int strengthLevel) {
+    return nbtBean.getDamage() * 0.15;
   }
 
 }

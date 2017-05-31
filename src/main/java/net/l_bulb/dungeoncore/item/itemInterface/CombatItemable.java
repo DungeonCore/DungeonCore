@@ -4,9 +4,10 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
-import net.l_bulb.dungeoncore.item.CustomWeaponItemStack2;
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 
-public interface CombatItemable extends RightClickItemable, EquipItemable {
+public interface CombatItemable extends RightClickItemable, EquipItemable, ItemInterface {
   /**
    * Entityを攻撃した時
    *
@@ -56,7 +57,7 @@ public interface CombatItemable extends RightClickItemable, EquipItemable {
    *
    * @return
    */
-  default CustomWeaponItemStack2 getCombatAttackItemStack(ItemStack item) {
-    return CustomWeaponItemStack2.getInstance(item, this);
+  default CustomWeaponItemStack getCombatAttackItemStack(ItemStack item) {
+    return CustomWeaponItemStack.getInstance(item, this);
   }
 }

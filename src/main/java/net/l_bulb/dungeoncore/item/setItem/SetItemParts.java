@@ -7,9 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -72,7 +72,7 @@ public class SetItemParts implements SetItemPartable {
     ItemStackUtil.addLore(itemStack, lore.toArray(new String[0]));
 
     // IDを付与
-    ItemStackUtil.setNBTTag(itemStack, NbtTagConst.THELOW_ITEM_ID, getId());
+    new ItemStackNbttagSetter(itemStack).setItemId(getId());
     return itemStack;
   }
 

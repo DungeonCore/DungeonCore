@@ -19,9 +19,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
 
 import com.google.common.base.Joiner;
 
@@ -206,7 +206,7 @@ public class ItemStackUtil {
     if (isEmpty(item)) { return null; }
 
     // nbt tagから取得
-    String nbtTag = getNBTTag(item, NbtTagConst.THELOW_ITEM_ID);
+    String nbtTag = ItemStackNbttagSetter.getItemId(item);
     if (nbtTag != null && !nbtTag.isEmpty()) { return nbtTag; }
 
     List<String> lore = getLore(item);
@@ -455,6 +455,34 @@ public class ItemStackUtil {
     net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
     if (nmsStack.getTag() == null) { return 0; }
     return nmsStack.getTag().getShort(name);
+  }
+
+  /**
+   * NTBTagをセットする
+   *
+   * @param item
+   * @param name
+   * @param value
+   */
+  public static void setNBTTag(ItemStack item, String name, double value) {
+    net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    if (nmsStack.getTag() == null) {
+      nmsStack.setTag(new NBTTagCompound());
+    }
+    nmsStack.getTag().setDouble(name, value);
+    item.setItemMeta(CraftItemStack.getItemMeta(nmsStack));
+  }
+
+  /**
+   * NTBTagを取得する
+   *
+   * @param item
+   * @param name
+   */
+  public static double getNBTTagDouble(ItemStack item, String name) {
+    net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    if (nmsStack.getTag() == null) { return 0; }
+    return nmsStack.getTag().getDouble(name);
   }
 
   /**

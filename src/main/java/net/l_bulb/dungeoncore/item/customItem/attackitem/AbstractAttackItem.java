@@ -1,8 +1,5 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -19,6 +16,7 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkill
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
+import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -114,15 +112,15 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
   @Override
   public ItemStack getItem() {
     ItemStack item = super.getItem();
-    // SLOTを追加
-    ArrayList<String> arrayList = new ArrayList<>();
-    arrayList.add(ChatColor.GREEN + "[SLOT]  " + ChatColor.AQUA + "最大" + getMaxSlotCount() + "個" + ItemLoreToken.TITLE_TAG);
+
+    CustomWeaponItemStack instance = CustomWeaponItemStack.getInstance(item, this);
+
+    // Slotを追加
     EmptySlot slot = new EmptySlot();
-    for (int i = 0; i < getDefaultSlotCount(); i++) {
-      arrayList.add(StringUtils.join(new Object[] { slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId() }));
+    for (int i = 0; i < instance.getDefaultSlotCount(); i++) {
+      instance.addSlot(slot);
     }
-    arrayList.add("");
-    ItemStackUtil.addLore(item, arrayList.toArray(new String[0]));
+    instance.updateItem();
     return item;
   }
 

@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.ChatColor;
-
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem;
 import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem2;
 import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot;
@@ -39,62 +36,8 @@ public class SlotManager {
     levelSlotMap.put(slot.getLevel(), slot);
   }
 
-  // 使わないと思うから一旦コメントアウト
-  // public static AbstractSlot getSlotByName(String name) {
-  // Integer integer = idNameMap.get(name);
-  // if (integer == null) {
-  // return null;
-  // }
-  //
-  // return slotIDMap.get(integer);
-  // }
-
-  /**
-   * Loreからスロットを取得
-   *
-   * @param line
-   * @return
-   */
-  public static SlotInterface getSlotByLore(String line) {
-    if (!isSlotTitleLore(line)) { return null; }
-
-    line = line.substring(line.indexOf("id:") + 3);
-    return slotIDMap.get(line);
-  }
-
-  /**
-   * スロットのためのLoreを取得する
-   *
-   * @param slot
-   * @return
-   */
-  public static String[] getLore(SlotInterface slot) {
-    String[] lore = new String[1];
-    // 表示させないため一旦コメントアウト
-    // String detail = slot.getSlotDetail();
-    // String detail = null;
-    // String[] lore;
-    // if (detail == null) {
-    // lore = new String[1];
-    // }
-    // else {
-    // lore = new String[2];
-    // lore[1] = StringUtils.join(new Object[]{ChatColor.DARK_AQUA, " - ", slot.getSlotDetail()});
-    // }
-    lore[0] = StringUtils.join(new Object[] { slot.getNameColor(), "    ■ ", slot.getSlotName(), ChatColor.BLACK, "id:", slot.getId() });
-    return lore;
-  }
-
-  //
-  /**
-   * スロットTile文ならTrue
-   *
-   * @param line
-   * @return
-   */
-  public static boolean isSlotTitleLore(String line) {
-    if (line == null) { return false; }
-    return line.contains("    ■ ") && line.contains("id:");
+  public static SlotInterface getSlotByID(String id) {
+    return slotIDMap.get(id);
   }
 
   /**

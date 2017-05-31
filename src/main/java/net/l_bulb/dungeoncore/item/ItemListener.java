@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.item;
 
-import java.util.List;
-
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -24,7 +22,6 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-import net.l_bulb.dungeoncore.NbtTagConst;
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
@@ -44,13 +41,14 @@ import net.l_bulb.dungeoncore.item.itemInterface.MagicPickaxeable;
 import net.l_bulb.dungeoncore.item.itemInterface.MeleeAttackItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
+import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
 import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.player.ItemType;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class ItemListener implements Listener {
@@ -245,10 +243,9 @@ public class ItemListener implements Listener {
     // 戦闘用アイテムでないなら何もしない
     if (combatItem == null) { return; }
 
-    CustomWeaponItemStack2 instance = combatItem.getCombatAttackItemStack(e.getItemStack());
-    List<SlotInterface> useSlot = instance.getUseSlot();
+    ItemStackNbttagSetter nbtTagSetter = new ItemStackNbttagSetter(e.getItemStack());
 
-    for (SlotInterface slot : useSlot) {
+    for (SlotInterface slot : nbtTagSetter.getGetAllSlotList(SlotType.NORMAL)) {
       if (slot instanceof CombatSlot) {
         ((CombatSlot) slot).onCombat(e, (Player) e.getAttacker());
       }
@@ -263,10 +260,8 @@ public class ItemListener implements Listener {
     // 戦闘用アイテムでないなら何もしない
     if (combatItem == null) { return; }
 
-    CustomWeaponItemStack2 combatAttackItemStack = combatItem.getCombatAttackItemStack(e.getItem());
-
-    List<SlotInterface> useSlot = combatAttackItemStack.getUseSlot();
-    for (SlotInterface slot : useSlot) {
+    ItemStackNbttagSetter nbtTagSetter = new ItemStackNbttagSetter(e.getItem());
+    for (SlotInterface slot : nbtTagSetter.getGetAllSlotList(SlotType.NORMAL)) {
       if (slot instanceof KillSlot) {
         ((KillSlot) slot).onKill(e);
       }
@@ -281,22 +276,24 @@ public class ItemListener implements Listener {
   @EventHandler
   public void onPlayerItemDamageEvent(PlayerItemDamageEvent e) {
     ItemStack item = e.getItem();
+    ItemStackNbttagSetter nbttagSetter = new ItemStackNbttagSetter(item);
+
     // もし指定したアイテムDamageItemableでないなら無視
     EquipItemable customItem = ItemManager.getCustomItem(EquipItemable.class, item);
     if (customItem == null) { return; }
 
     // 現在の耐久を取得
-    short customDurability = ItemStackUtil.getNBTTagShort(item, NbtTagConst.THELOW_DURABILITY);
+    short customDurability = nbttagSetter.getNowDurability();
     // 耐久値を更新
     customDurability += e.getDamage();
 
     // 設定した固有の最大耐久
-    int customMaxDurability = customItem.getMaxDurability(e.getItem());
+    int customMaxDurability = nbttagSetter.getMaxDurability();
     // 実際の素材の最大耐久
     short itemMaxDurability = item.getType().getMaxDurability();
 
     // 耐久をセットする
-    ItemStackUtil.setNBTTag(item, NbtTagConst.THELOW_DURABILITY, customDurability);
+    nbttagSetter.setNowDurability(customDurability);
 
     short ItemDurability = (short) (itemMaxDurability * customDurability / customMaxDurability);
     // 耐久をセットする

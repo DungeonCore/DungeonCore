@@ -8,8 +8,8 @@ public class ItemLoreSlotToken extends ItemLoreToken {
     super(title, false);
   }
 
-  public ItemLoreSlotToken(int slotCount) {
-    super(ChatColor.GREEN + "[SLOT] " + ChatColor.AQUA + " 最大" + slotCount + "個", false);
+  public ItemLoreSlotToken(int maxSlotCount) {
+    super(ChatColor.GREEN + "[SLOT] " + ChatColor.AQUA + " 最大" + maxSlotCount + "個", true);
   }
 
   @Override

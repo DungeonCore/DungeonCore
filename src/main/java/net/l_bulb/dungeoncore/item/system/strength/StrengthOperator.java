@@ -1,12 +1,8 @@
 package net.l_bulb.dungeoncore.item.system.strength;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.event.ChangeStrengthLevelItemEvent;
@@ -96,43 +92,6 @@ public class StrengthOperator {
     return itemLoreToken;
   }
 
-  @Deprecated
-  public static void addStrengthLore(List<String> strengthLore, List<String> lore) {
-    lore.add(ChatColor.GREEN + "[強化性能]");
-    if (strengthLore == null || strengthLore.size() == 0) {
-      lore.add(ChatColor.YELLOW + "    なし");
-    } else {
-      for (String detail : strengthLore) {
-        if (detail.contains("ADD:")) {
-          lore.add(ChatColor.YELLOW + "    " + detail);
-        } else {
-          lore.add(ChatColor.YELLOW + "    ADD:" + detail);
-        }
-      }
-    }
-    lore.add("");
-  }
-
-  public static void removedStrengthLore(List<String> lore) {
-    boolean inLine = false;
-    // Loreを変更する
-    Iterator<String> iterator = lore.iterator();
-    while (iterator.hasNext()) {
-      String line = iterator.next();
-      if (line.contains("[強化性能]")) {
-        iterator.remove();
-        inLine = true;
-      } else if (inLine) {
-        if (line.isEmpty()) {
-          inLine = false;
-          iterator.remove();
-          break;
-        }
-        iterator.remove();
-      }
-    }
-  }
-
   public static ItemStack getItem(ItemStack item, int level) {
     // 強化できるアイテムか確認
     ItemInterface itemInterface = ItemManager.getCustomItem(item);
@@ -155,15 +114,7 @@ public class StrengthOperator {
     if (customItem == null) {
       return false;
     } else {
-      return customItem instanceof Strengthenable;
+      return ItemManager.isImplemental(Strengthenable.class, customItem);
     }
   }
-
-  public static boolean allowWithStrength(ItemStack item) {
-    if (item == null) { return true; }
-
-    if (item.getType() == Material.AIR) { return true; }
-    return false;
-  }
-
 }
