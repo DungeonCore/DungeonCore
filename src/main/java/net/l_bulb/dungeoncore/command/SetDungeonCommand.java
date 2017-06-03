@@ -104,6 +104,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
   /**
    * ダンジョン名を取得する
    *
+   * @param withOutLast 最後のトークンをいれないならTRUE
    * @param args
    * @return
    */
@@ -111,7 +112,7 @@ public class SetDungeonCommand implements CommandExecutor, TabCompleter {
     StringBuilder sb = new StringBuilder();
     if (args.length >= 2) {
       for (int i = 1; i < (withOutLast ? args.length - 1 : args.length); i++) {
-        sb.append(args[i] + " ");
+        sb.append(args[i]).append(' ');
       }
     }
     return sb.toString().trim();
