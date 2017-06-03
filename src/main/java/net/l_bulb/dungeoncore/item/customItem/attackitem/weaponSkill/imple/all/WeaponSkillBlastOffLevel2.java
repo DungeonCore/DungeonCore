@@ -10,7 +10,7 @@ import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 
 public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
 
@@ -43,7 +43,7 @@ public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
     super.blastOff(vector, livingEntity, customItem, p, item);
 
     // ダメージを与える
-    double attackItemDamage = new ItemStackNbttagSetter(item).getDamage();
+    double attackItemDamage = new ItemStackNbttagAccessor(item).getDamage();
     livingEntity.damage(attackItemDamage);
 
     // eventを発動する

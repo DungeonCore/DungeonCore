@@ -3,7 +3,6 @@ package net.l_bulb.dungeoncore.item.system.lore;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.bukkit.inventory.ItemStack;
@@ -176,10 +175,14 @@ public class ItemLoreData {
   public List<String> getLore() {
     List<String> lore = new ArrayList<>();
     lore.addAll(beforeDetail);
-    for (Entry<String, ItemLoreToken> entry : loreMap.entrySet()) {
-      lore.addAll(entry.getValue().getLoreWithTitle());
-    }
-    lore.add("");
+
+    // もしLoreに内容があれば追加する
+    loreMap.entrySet().stream()
+        .filter(e -> e.getValue().size() != 0)
+        .forEach(e -> {
+          lore.addAll(e.getValue().getLoreWithTitle());
+          lore.add("");
+        });
     lore.addAll(afterDetail);
 
     return lore;

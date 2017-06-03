@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
@@ -35,7 +36,7 @@ public class TestArmorItem extends AbstractArmorItem {
   }
 
   @Override
-  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob) {
+  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob, ItemStackNbttagAccessor accessor) {
     return 0;
   }
 
@@ -81,7 +82,7 @@ public class TestArmorItem extends AbstractArmorItem {
   }
 
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {
 
   }
 

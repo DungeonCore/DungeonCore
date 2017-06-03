@@ -6,6 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
@@ -34,8 +35,8 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     loreToken.addLore("装着成功確率 : " + getLevel().getSucessPer() + "% ");
     return loreToken;
   }

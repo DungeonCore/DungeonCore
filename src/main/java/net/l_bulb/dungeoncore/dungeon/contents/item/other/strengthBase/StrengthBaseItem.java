@@ -8,13 +8,14 @@ import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplat
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.Message;
 
 public abstract class StrengthBaseItem extends AbstractItem implements StrengthChangeItemable {
 
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {}
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {}
 
   @Override
   public StrengthTemplate getStrengthTemplate() {

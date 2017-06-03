@@ -8,15 +8,16 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.SlotManager;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
-public class ItemStackNbttagSetter {
+public class ItemStackNbttagAccessor {
   private ItemStack item;
 
-  public ItemStackNbttagSetter(ItemStack item) {
+  public ItemStackNbttagAccessor(ItemStack item) {
     this.item = item;
   }
 
@@ -88,6 +89,22 @@ public class ItemStackNbttagSetter {
     return ItemStackUtil.getNBTTagShort(item, "thelow_item_default_slot");
   }
 
+  public double getNormalArmorPoint() {
+    return ItemStackUtil.getNBTTagDouble(item, "thelow_item_normal_armor_point");
+  }
+
+  public void setNormalArmorPoint(double value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_normal_armor_point", value);
+  }
+
+  public double getBossArmorPoint() {
+    return ItemStackUtil.getNBTTagDouble(item, "thelow_item_boss_armor_point");
+  }
+
+  public void setBossArmorPoint(double value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_boss_armor_point", value);
+  }
+
   /**
    * すべての装着されているSlotを取得
    *
@@ -123,5 +140,12 @@ public class ItemStackNbttagSetter {
         .filter(slot -> slot != null && slot.getSlotType() == type)
         .collect(Collectors.toList());
     return collect;
+  }
+
+  /**
+   * 指定したCustomItemの情報からすべてのNBTTagの情報を取得する
+   */
+  public void setInitializeNbtTag(ItemInterface itemInterface) {
+    NbtTagSetter.setter(itemInterface, item);
   }
 }

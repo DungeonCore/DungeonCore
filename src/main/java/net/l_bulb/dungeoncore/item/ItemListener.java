@@ -41,7 +41,7 @@ import net.l_bulb.dungeoncore.item.itemInterface.MagicPickaxeable;
 import net.l_bulb.dungeoncore.item.itemInterface.MeleeAttackItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;
@@ -142,7 +142,7 @@ public class ItemListener implements Listener {
   public void onAttackDamage(CombatEntityEvent e) {
     // last damageを登録する
     if (e.getAttacker().getType() == EntityType.PLAYER) {
-      LastDamageManager.addData((Player) e.getAttacker(), e.geLastDamageMethodType(), e.getEnemy());
+      LastDamageManager.addData(e.getAttacker(), e.geLastDamageMethodType(), e.getEnemy());
     }
   }
 
@@ -243,11 +243,11 @@ public class ItemListener implements Listener {
     // 戦闘用アイテムでないなら何もしない
     if (combatItem == null) { return; }
 
-    ItemStackNbttagSetter nbtTagSetter = new ItemStackNbttagSetter(e.getItemStack());
+    ItemStackNbttagAccessor nbtTagSetter = new ItemStackNbttagAccessor(e.getItemStack());
 
     for (SlotInterface slot : nbtTagSetter.getGetAllSlotList(SlotType.NORMAL)) {
       if (slot instanceof CombatSlot) {
-        ((CombatSlot) slot).onCombat(e, (Player) e.getAttacker());
+        ((CombatSlot) slot).onCombat(e, e.getAttacker());
       }
     }
     // 武器スキルを実行
@@ -260,7 +260,7 @@ public class ItemListener implements Listener {
     // 戦闘用アイテムでないなら何もしない
     if (combatItem == null) { return; }
 
-    ItemStackNbttagSetter nbtTagSetter = new ItemStackNbttagSetter(e.getItem());
+    ItemStackNbttagAccessor nbtTagSetter = new ItemStackNbttagAccessor(e.getItem());
     for (SlotInterface slot : nbtTagSetter.getGetAllSlotList(SlotType.NORMAL)) {
       if (slot instanceof KillSlot) {
         ((KillSlot) slot).onKill(e);
@@ -276,7 +276,7 @@ public class ItemListener implements Listener {
   @EventHandler
   public void onPlayerItemDamageEvent(PlayerItemDamageEvent e) {
     ItemStack item = e.getItem();
-    ItemStackNbttagSetter nbttagSetter = new ItemStackNbttagSetter(item);
+    ItemStackNbttagAccessor nbttagSetter = new ItemStackNbttagAccessor(item);
 
     // もし指定したアイテムDamageItemableでないなら無視
     EquipItemable customItem = ItemManager.getCustomItem(EquipItemable.class, item);

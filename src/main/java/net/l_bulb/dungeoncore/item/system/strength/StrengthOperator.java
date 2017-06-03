@@ -9,6 +9,7 @@ import net.l_bulb.dungeoncore.common.event.ChangeStrengthLevelItemEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -58,7 +59,8 @@ public class StrengthOperator {
     }
 
     ItemLoreData itemLoreData = new ItemLoreData(item);
-    itemLoreData.addLore(getStrengthLoreToken(strength, toLevel));
+
+    itemLoreData.addLore(getStrengthLoreToken(strength, toLevel, new ItemStackNbttagAccessor(item)));
 
     ItemStackUtil.setLore(item, itemLoreData.getLore());
 
@@ -81,10 +83,10 @@ public class StrengthOperator {
    * @param level
    * @return
    */
-  public static ItemLoreToken getStrengthLoreToken(Strengthenable strength, int level) {
+  public static ItemLoreToken getStrengthLoreToken(Strengthenable strength, int level, ItemStackNbttagAccessor setter) {
     ItemLoreToken itemLoreToken = new ItemLoreToken(ItemLoreToken.TITLE_STRENGTH);
     // Loreをセットする
-    strength.setStrengthDetail(level, itemLoreToken);
+    strength.setStrengthDetail(level, itemLoreToken, setter);
 
     if (itemLoreToken.size() == 0) {
       itemLoreToken.addLore("なし");

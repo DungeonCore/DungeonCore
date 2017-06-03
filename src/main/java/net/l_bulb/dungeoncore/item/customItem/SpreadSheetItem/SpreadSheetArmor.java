@@ -10,7 +10,7 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEve
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.AbstractArmorItem;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.SpreadSheetArmorData;
-import net.l_bulb.dungeoncore.item.system.craft.TheLowCraftRecipeInterface;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -33,13 +33,16 @@ public class SpreadSheetArmor extends AbstractArmorItem {
   }
 
   @Override
-  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob) {
+  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob,
+      ItemStackNbttagAccessor accessor) {
     return 0;
   }
 
   @Override
   public short getMaxDurability(ItemStack e) {
-    return (short) (data.getMaxDurability() + getAddDurability(StrengthOperator.getLevel(e)));
+    System.out.println(getItemName() + "@" + data.getMaxDurability() + "@" + getAddDurability(StrengthOperator.getLevel(e), data.getMaxDurability())
+        + "@" + StrengthOperator.getLevel(e));
+    return (short) (data.getMaxDurability() + getAddDurability(StrengthOperator.getLevel(e), data.getMaxDurability()));
   }
 
   @Override
@@ -63,14 +66,12 @@ public class SpreadSheetArmor extends AbstractArmorItem {
   }
 
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {
-    loreToken.addLore(LoreLine.getLoreLine("最大耐久力", (data.getMaxDurability() + getAddDurability(level))));
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {
+    loreToken.addLore(LoreLine.getLoreLine("最大耐久力", nbttagSetter.getMaxDurability() + getAddDurability(level, nbttagSetter.getMaxDurability())));
   }
 
   @Override
   public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {}
-
-  TheLowCraftRecipeInterface recipe;
 
   @Override
   protected Material getMaterial() {

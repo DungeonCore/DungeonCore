@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.setItem.AbstractAbilitySetItem;
 import net.l_bulb.dungeoncore.item.setItem.SetItemPartable;
 import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
@@ -67,7 +68,7 @@ class HealthCystal extends SetStrengthableItemParts implements StrengthTemplate 
   }
 
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {
     loreToken.addLore(LoreLine.getLoreLine("最大体力", getMaxHealth(level)));
   }
 

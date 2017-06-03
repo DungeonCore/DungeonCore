@@ -21,7 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 
 import com.google.common.base.Joiner;
 
@@ -206,7 +206,7 @@ public class ItemStackUtil {
     if (isEmpty(item)) { return null; }
 
     // nbt tagから取得
-    String nbtTag = ItemStackNbttagSetter.getItemId(item);
+    String nbtTag = ItemStackNbttagAccessor.getItemId(item);
     if (nbtTag != null && !nbtTag.isEmpty()) { return nbtTag; }
 
     List<String> lore = getLore(item);
@@ -391,6 +391,17 @@ public class ItemStackUtil {
     } else {
       player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
     }
+  }
+
+  /**
+   * 指定したNBTTagがセットされていればTRUE
+   */
+  public static boolean hasNbtTag(ItemStack item, String name) {
+    net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    // NBTTagがないならFALSE
+    if (nmsStack.getTag() == null) { return false; }
+    // セットされているか確認する
+    return nmsStack.getTag().hasKey(name);
   }
 
   /**

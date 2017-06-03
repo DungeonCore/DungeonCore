@@ -7,7 +7,9 @@ import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplat
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
 public abstract class AbstractArmorItem extends AbstractItem implements ArmorItemable, StrengthChangeItemable {
@@ -30,20 +32,21 @@ public abstract class AbstractArmorItem extends AbstractItem implements ArmorIte
    * 加算される耐久力
    *
    * @param level
+   * @param s 最大耐久値
    * @return
    */
-  public short getAddDurability(int level) {
-    return (short) (level * 25);
+  public short getAddDurability(int level, short s) {
+    return (short) (s * (1.0) * level / 13.0);
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     // 使用可能レベル
     loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", LevelType.MAIN.getName(), getAvailableLevel(), ChatColor.GOLD));
     // 防御ポイント
-    loreToken.addLore(Message.getMessage("Mobに対する防具ポイント ： +{0}", getArmorPointForNormalMob()));
-    loreToken.addLore(Message.getMessage("Bossに対する防具ポイント ： +{0}", getArmorPointForBossMob()));
+    loreToken.addLore(Message.getMessage("Mobに対する防具ポイント ： +{0}", JavaUtil.round(newParam.getNormalArmorPoint(), 2)));
+    loreToken.addLore(Message.getMessage("Bossに対する防具ポイント ： +{0}", JavaUtil.round(newParam.getBossArmorPoint(), 2)));
     return loreToken;
   }
 

@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.setItem.AbstractAbilitySetItem;
 import net.l_bulb.dungeoncore.item.setItem.SetItemPartable;
 import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
@@ -69,7 +70,7 @@ class MagicPointCystal extends SetStrengthableItemParts implements StrengthTempl
   }
 
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {
     int maxPoint = ((SetItemMagicPointCrystal) getBelongSetItem()).getMaxMagicPoint(level);
     loreToken.addLore(LoreLine.getLoreLine("最大マジックポイント", maxPoint));
   }

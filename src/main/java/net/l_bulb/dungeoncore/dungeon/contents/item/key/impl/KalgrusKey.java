@@ -57,7 +57,8 @@ public class KalgrusKey extends AbstractKeyItem implements GettingItemable {
     if (count >= 6) {
       // それ以外のキーを全て削除する
       ItemStackUtil.removeAll(inventory, getItem());
-      inventory.setItemInHand(new KalgrusFinishKey().getItem());
+      // TODO add finish item
+      // inventory.setItemInHand(new KalgrusFinishKey().getItem());
       player.updateInventory();
     } else {
       item.setAmount(1);

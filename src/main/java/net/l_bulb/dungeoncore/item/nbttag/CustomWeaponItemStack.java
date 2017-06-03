@@ -30,7 +30,7 @@ public class CustomWeaponItemStack {
   private CustomWeaponItemStack(ItemStack item, CombatItemable itemInterface) {
     this.item = item;
     this.itemInterface = itemInterface;
-    this.nbtBean = new ItemStackNbttagSetter(item);
+    this.nbtBean = new ItemStackNbttagAccessor(item);
 
     slotList = nbtBean.getGetAllSlotList();
   }
@@ -42,7 +42,7 @@ public class CustomWeaponItemStack {
   @Setter
   CombatItemable itemInterface;
 
-  ItemStackNbttagSetter nbtBean;
+  ItemStackNbttagAccessor nbtBean;
 
   List<SlotInterface> slotList = new ArrayList<>();
 

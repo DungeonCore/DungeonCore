@@ -20,6 +20,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.player.PlayerChecker;
@@ -116,17 +117,19 @@ public class ArmorBase {
         continue;
       }
 
+      ItemStackNbttagAccessor accessor = new ItemStackNbttagAccessor(armor);
+
       // 防具でカットできるダメージのみ計算を行う
       if (isArmorCut) {
         // ブロック率を計算
         if (isBoss) {
-          totalArmorPoint += customItem.getArmorPointForBossMob();
+          totalArmorPoint += accessor.getBossArmorPoint();
         } else {
-          totalArmorPoint += customItem.getArmorPointForNormalMob();
+          totalArmorPoint += accessor.getNormalArmorPoint();
         }
       }
       // アーマーポイントを修正する
-      totalArmorPoint += customItem.getOtherArmorPoint(damage, p, e, isBoss, mob);
+      totalArmorPoint += customItem.getOtherArmorPoint(damage, p, e, isBoss, mob, accessor);
     }
     // 防御ポイントを用いてダメージを修正する
     double cutParcent = getDamageCutParcent(totalArmorPoint);

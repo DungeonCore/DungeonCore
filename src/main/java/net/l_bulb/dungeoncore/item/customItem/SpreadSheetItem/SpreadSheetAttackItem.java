@@ -10,6 +10,7 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -62,15 +63,8 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
-    // 通常ダメージ
-    loreToken.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(getAttackItemDamage(0) - getMaterialDamage(), 2)));
-    return loreToken;
-  }
-
-  @Override
   public double getAttackItemDamage(int strengthLevel) {
+    // TODO NBT TAGから取得
     // 攻撃力取得
     double combatLoad = getCombatLoad();
     double attackDamageValue = AttackDamageValue.getAttackDamageValue(combatLoad, getAvailableLevel());
@@ -88,16 +82,16 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
    * 強化レベルによって変化するLoreを取得
    */
   @Override
-  public void setStrengthDetail(int level, ItemLoreToken loreToken) {
+  public void setStrengthDetail(int level, ItemLoreToken loreToken, ItemStackNbttagAccessor nbttagSetter) {
     if (level != 0) {
       loreToken.addLore(LoreLine.getLoreLine("クリティカル率", getCriticalHitRate(level) + "%"));
     }
 
-    double normalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad(), getAvailableLevel());
-    double criticalDamage = AttackDamageValue.getAttackDamageValue(getCombatLoad() - getMinusCombatLoadForCritical(), getAvailableLevel());
+    double normalDamage = nbttagSetter.getDamage();
+    double criticalDamage = normalDamage * 0.15;
 
-    if (criticalDamage > normalDamage) {
-      loreToken.addLore(LoreLine.getLoreLine("クリティカル追加ダメージ", JavaUtil.round(criticalDamage - normalDamage, 2)));
+    if (criticalDamage > 0) {
+      loreToken.addLore(LoreLine.getLoreLine("クリティカル追加ダメージ", JavaUtil.round(criticalDamage, 2)));
     }
   }
 

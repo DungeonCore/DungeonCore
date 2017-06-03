@@ -17,9 +17,12 @@ import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
+import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
 public abstract class AbstractAttackItem extends AbstractItem implements Strengthenable, CombatItemable, LeftClickItemable {
@@ -94,18 +97,20 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
    */
   @Override
   public double getMaterialDamage() {
-    double vanillaDamage = ItemStackUtil.getVanillaDamage(getMaterial());
-    return vanillaDamage;
+    return ItemStackUtil.getVanillaDamage(getMaterial());
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     // 使用可能レベル
     loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
     loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
     // 武器は耐久とレベルが関係ないのでnullでも問題ない
-    loreToken.addLore("耐久値 ： " + ChatColor.GOLD + getMaxDurability(null));
+    loreToken.addLore("耐久値 ： " + ChatColor.GOLD + newParam.getMaxDurability());
+    // 通常ダメージ
+    loreToken.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(newParam.getDamage() - getMaterialDamage(), 2)));
+
     return loreToken;
   }
 

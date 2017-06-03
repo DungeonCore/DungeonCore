@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 
 public abstract class AbstractSlot extends AbstractItem implements SlotInterface {
@@ -28,8 +29,8 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     loreToken.addLore("レア度 : " + getLevel().getStar());
     loreToken.addLore("装着成功確率 : " + getLevel().getSucessPer() + "% ");
     return loreToken;

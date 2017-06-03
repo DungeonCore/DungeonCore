@@ -9,7 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.menu.MenuSelector;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.quest.Quest;
 import net.l_bulb.dungeoncore.quest.QuestManager;
 import net.l_bulb.dungeoncore.quest.QuestManager.QuestStartStatus;
@@ -39,7 +39,7 @@ public class QuestConfirmMenu extends MenuSelector {
     }
     arrayList.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(q.getId()));
     // IDを付与
-    ItemStackNbttagSetter.setItemId(reciveItem, q.getId());
+    ItemStackNbttagAccessor.setItemId(reciveItem, q.getId());
 
     ItemStackUtil.setLore(reciveItem, arrayList);
 

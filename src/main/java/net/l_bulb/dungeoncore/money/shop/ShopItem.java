@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.AvailableLevelItemable;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
@@ -50,7 +50,7 @@ public class ShopItem {
     String id = ItemStackUtil.getId(item);
     if (id != null) {
       // IDを付与
-      ItemStackNbttagSetter.setItemId(dispItem, id);
+      ItemStackNbttagAccessor.setItemId(dispItem, id);
       lore.add(ChatColor.BLACK + ItemStackUtil.getLoreForIdLine(id));
 
       // IDがなければプラグイン用ではないのでloreをそのまま記載する

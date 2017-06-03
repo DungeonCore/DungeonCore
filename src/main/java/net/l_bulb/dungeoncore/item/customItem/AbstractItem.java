@@ -7,8 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
-import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagSetter;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
@@ -51,9 +52,9 @@ public abstract class AbstractItem implements ItemInterface {
     // id付与
     lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
 
-    ItemStackNbttagSetter nbttagSetter = new ItemStackNbttagSetter(itemStack);
-    // NBTtagをつける
-    setNbtTag(nbttagSetter);
+    // NBTTagをセットする
+    ItemStackNbttagAccessor nbttagSetter = new ItemStackNbttagAccessor(itemStack);
+    nbttagSetter.setInitializeNbtTag(this);
 
     if (getDetail() != null) {
       for (String string : getDetail()) {
@@ -61,18 +62,12 @@ public abstract class AbstractItem implements ItemInterface {
       }
     }
 
-    // IDを付与
-
     // Loreを生成
     ItemLoreData itemLoreData = new ItemLoreData();
     itemLoreData.setBefore(lore);
 
     // スタンダートLoreTokenを取得
-    itemLoreData.addLore(getStandardLoreToken());
-
-    // if (isStrengthItem()) {
-    // itemLoreData.addLore(StrengthOperator.getStrengthLoreToken((Strengthenable) this, 0));
-    // }
+    itemLoreData.addLore(getStandardLoreToken(nbttagSetter));
 
     ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
@@ -81,22 +76,15 @@ public abstract class AbstractItem implements ItemInterface {
   }
 
   /**
-   * NBTTagを付与する
-   *
-   * @param nbttagSetter
-   */
-  public void setNbtTag(ItemStackNbttagSetter nbttagSetter) {
-    nbttagSetter.setItemId(getId());
-  }
-
-  /**
    * 基本性能のLoreTokenを取得する
+   * 
+   * @param newParam TODO
    *
    * @return
    */
-  public ItemLoreToken getStandardLoreToken() {
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
     ItemLoreToken loreToken = new ItemLoreToken(ItemLoreToken.TITLE_STANDARD);
-    if (this instanceof Strengthenable) {
+    if (ItemManager.isImplemental(Strengthenable.class, this)) {
       // 最大強化
       if (((Strengthenable) this).getMaxStrengthCount() != 0) {
         loreToken.addLore(Message.getMessage("最大強化 ： {1}+{0}", ((Strengthenable) this).getMaxStrengthCount(), ChatColor.GOLD));

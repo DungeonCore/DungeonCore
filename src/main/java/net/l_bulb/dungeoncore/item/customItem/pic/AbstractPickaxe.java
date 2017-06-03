@@ -14,6 +14,7 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.itemInterface.MagicPickaxeable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -176,8 +177,8 @@ public abstract class AbstractPickaxe extends AbstractItem implements MagicPicka
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     if (getNextPickAxe() != null) {
       loreToken.addLore(getMaxExp() + "レベルで" + getNextPickAxe().getItemName() + "に進化する");
     }

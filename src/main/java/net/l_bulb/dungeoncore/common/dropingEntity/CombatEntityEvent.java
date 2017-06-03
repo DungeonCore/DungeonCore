@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.player.ItemType;
 
@@ -36,6 +36,7 @@ public class CombatEntityEvent extends PlayerEvent {
   public CombatEntityEvent(Player attacker, double damage, ItemInterface customItem, ItemStack itemStack, boolean isNormalAttack,
       LivingEntity target) {
     super(attacker);
+    this.attacker = attacker;
     this.customItem = customItem;
     this.itemStack = itemStack;
     this.isNormalAttack = isNormalAttack;
@@ -45,7 +46,7 @@ public class CombatEntityEvent extends PlayerEvent {
     if (isNormalAttack && ItemManager.isImplemental(CombatItemable.class, customItem)) {
       // 何らかの効果で上乗せされたダメージ + ダメージ
       this.damage = Math.max(damage - ((CombatItemable) customItem).getMaterialDamage(), 0)
-          + ((CombatItemable) customItem).getAttackItemDamage(StrengthOperator.getLevel(itemStack));
+          + new ItemStackNbttagAccessor(itemStack).getDamage();
     } else {
       this.damage = damage;
     }
@@ -55,7 +56,7 @@ public class CombatEntityEvent extends PlayerEvent {
   // CustomWeaponItemStack2
 
   // 攻撃者
-  LivingEntity attacker;
+  Player attacker;
 
   // 与えたダメージ
   double damage;

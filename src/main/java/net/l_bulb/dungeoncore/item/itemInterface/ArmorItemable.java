@@ -4,7 +4,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public interface ArmorItemable extends EquipItemable, Strengthenable {
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
+
+public interface ArmorItemable extends EquipItemable, Strengthenable, ItemInterface {
   /**
    * このアイテムを装備しているときの通常モンスターに対するガードポイント
    *
@@ -27,7 +30,8 @@ public interface ArmorItemable extends EquipItemable, Strengthenable {
    * @param e Event
    * @param isBoss ダメージを与えたものが生き物でかつ、BossならTrue
    * @param mob ダメージを与えたものが生き物(もし生き物以外ならNull)
+   * @param accessor TODO
    * @return 防具ポイント
    */
-  double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob);
+  double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob, ItemStackNbttagAccessor accessor);
 }

@@ -18,6 +18,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleManager;
 import net.l_bulb.dungeoncore.common.sound.SoundData;
 import net.l_bulb.dungeoncore.common.sound.SoundManager;
 import net.l_bulb.dungeoncore.item.customItem.itemAbstract.FoodItem;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
@@ -122,8 +123,8 @@ public class SpreadSheetFoodItem extends FoodItem {
   }
 
   @Override
-  public ItemLoreToken getStandardLoreToken() {
-    ItemLoreToken loreToken = super.getStandardLoreToken();
+  public ItemLoreToken getStandardLoreToken(ItemStackNbttagAccessor newParam) {
+    ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
 
     String buffId1 = data.getBuff1();
     String buffId2 = data.getBuff2();

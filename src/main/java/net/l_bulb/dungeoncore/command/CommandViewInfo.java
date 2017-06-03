@@ -35,6 +35,7 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.ArmorBase;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.table.SlotMerchant;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewer;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
@@ -173,6 +174,7 @@ public class CommandViewInfo implements CommandExecutor {
 
   }
 
+  // TODO nbttagから取得
   private void sendArmorData(Player p) {
     double normalMobArmorPoint = 0;
     double bossArmorPoint = 0;
@@ -183,8 +185,11 @@ public class CommandViewInfo implements CommandExecutor {
       if (customItem == null) {
         continue;
       }
-      normalMobArmorPoint += customItem.getArmorPointForNormalMob();
-      bossArmorPoint += customItem.getArmorPointForBossMob();
+
+      ItemStackNbttagAccessor accessor = new ItemStackNbttagAccessor(itemStack);
+
+      normalMobArmorPoint += accessor.getNormalArmorPoint();
+      bossArmorPoint += accessor.getBossArmorPoint();
     }
 
     p.sendMessage(ChatColor.GOLD + "=========================");

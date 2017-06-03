@@ -2,13 +2,7 @@ package net.l_bulb.dungeoncore.dungeon.contents;
 
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.JumpBoost;
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.magicbook.AbstractMagicBook;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.AllDriedKey;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.Fragment;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.KalgrusFinishKey;
 import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.KalgrusKey;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.MaratKey;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.NativeUnderground;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.SuikaCastle;
 import net.l_bulb.dungeoncore.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
 import net.l_bulb.dungeoncore.dungeon.contents.item.setItem.crystal.SetItemHealthCrystal;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.OneMobDamageUpSlot;
@@ -30,13 +24,7 @@ public class ItemRegister {
   public static void registItem() {
     SetItemManager.regist(new SetItemHealthCrystal());
 
-    ItemManager.registItem(SuikaCastle.getAllKey());
-    ItemManager.registItem(AllDriedKey.getAllKey());
-    ItemManager.registItem(Fragment.getAllFragment());
     ItemManager.registItem(new KalgrusKey());
-    ItemManager.registItem(new KalgrusFinishKey());
-    ItemManager.registItem(new MaratKey());
-    ItemManager.registItem(new NativeUnderground());
 
     // rightClick
     ItemManager.registItem(AbstractMagicBook.getAllItem());
