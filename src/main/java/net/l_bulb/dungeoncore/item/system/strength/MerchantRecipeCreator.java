@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.item.system.strength;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,6 +17,8 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class MerchantRecipeCreator {
+  private static final ItemStack OTHER = new ItemStack(Material.AIR);
+
   /**
    * @param item1 Playerが置いたアイテム1
    * @param item2 Playerが置いたアイテム2
@@ -23,13 +26,20 @@ public class MerchantRecipeCreator {
    * @param strengthData
    */
   public MerchantRecipeCreator(ItemStack item1, ItemStack item2, TheLowPlayer player, StrengthData strengthData) {
-    this.item1 = item1;
-    this.item2 = item2;
-    this.player = player;
-    // 強化後のレベル
-    nextLevel = StrengthOperator.getLevel(item1) + 1;
-
     this.strengthData = strengthData;
+    this.player = player;
+
+    if (item1 != null) {
+      // 強化後のレベル
+      this.item1 = item1.clone();
+      nextLevel = StrengthOperator.getLevel(item1) + 1;
+    }
+
+    if (item2 != null) {
+      this.item2 = item2.clone();
+      // 数を設定 もし素材がnullなら1
+      this.item2.setAmount(Optional.ofNullable(strengthData.getMaterial()).orElse(OTHER).getAmount());
+    }
   }
 
   /** 置いたアイテム1 */
@@ -68,13 +78,12 @@ public class MerchantRecipeCreator {
     strengthData.setCanStrength(isSufficientMoney && isSufficientMaterial);
 
     // 従来の強化のレシピ
-    TheLowMerchantRecipe recipe1 = new TheLowMerchantRecipe(getDummyItem(item1.clone()),
-        strengthData.getMaterial(),
-        StrengthOperator.getItem(item1.clone(), nextLevel));
+    TheLowMerchantRecipe recipe1 = new TheLowMerchantRecipe(item1,
+        strengthData.getMaterial(), StrengthOperator.getItem(item1.clone(), nextLevel));
 
-    // 強化できるかどうかの情報をセットする
+    // 強化できるかどうかの情報をセットする(チェスト)
     ItemStack recipe2Result = getShowResult(isSufficientMoney, isSufficientMaterial);
-    TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, item2, recipe2Result);
+    TheLowMerchantRecipe recipe2 = new TheLowMerchantRecipe(item1, strengthData.getMaterial(), recipe2Result);
 
     // 素材が違っている かつ 素材が置かれていないなら本来のレシピを表示
     if (!isSufficientMaterial && ItemStackUtil.isEmpty(item2)) {
@@ -82,17 +91,6 @@ public class MerchantRecipeCreator {
     } else {
       return Arrays.asList(recipe2, recipe1);
     }
-  }
-
-  /**
-   * 最後の説明にDummyと付けたアイテムを表示する
-   *
-   * @param itemStack
-   * @return
-   */
-  private ItemStack getDummyItem(ItemStack itemStack) {
-    // ItemStackUtil.addLore(itemStack, ChatColor.BLACK + "dummy");
-    return itemStack;
   }
 
   private boolean isSufficientMaterial(ItemStack item2, TheLowPlayer player, int nextLevel) {
