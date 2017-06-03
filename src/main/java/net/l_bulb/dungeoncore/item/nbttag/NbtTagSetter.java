@@ -21,7 +21,7 @@ class NbtTagSetter {
     // 耐久値
     if (ItemManager.isImplemental(EquipItemable.class, itemInterface)) {
       itemStackNbttagSetter.setMaxDurability(nbtTagBean.getMaxDurability());
-      itemStackNbttagSetter.setNowDurability(nbtTagBean.getNowDurability());
+      itemStackNbttagSetter.setNowDurability((short) 0);
     }
 
     // 武器ならスロットなどを追加

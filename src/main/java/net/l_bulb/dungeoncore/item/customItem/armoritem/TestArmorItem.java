@@ -36,7 +36,8 @@ public class TestArmorItem extends AbstractArmorItem {
   }
 
   @Override
-  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob, ItemStackNbttagAccessor accessor) {
+  public double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob,
+      ItemStackNbttagAccessor accessor) {
     return 0;
   }
 
@@ -107,6 +108,7 @@ public class TestArmorItem extends AbstractArmorItem {
   }
 
   public static double getHealthAdd(int level) {
+    level = Math.min(55, level);
     return (20.0 / (-0.0002 * level * level + 1) - 20.0) / 4.0;
   }
 }

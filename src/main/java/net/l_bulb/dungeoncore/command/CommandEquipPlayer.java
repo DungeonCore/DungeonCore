@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.command;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,12 +12,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionType;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.TestArmorItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.test.TestBowWeaponItem;
@@ -70,24 +70,37 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
         new ItemStack(Material.ARROW, 64),
         new ItemStack(Material.BREAD, 64));
 
-    Potion potion = new Potion(PotionType.INSTANT_HEAL, 2);
-    potion.setSplash(true);
+    ItemStack potion = Optional.ofNullable(ItemManager.getCustomItemById(getPotionId(level))).map(val -> val.getItem()).orElse(null);
 
-    for (int i = 0; i < 27; i++) {
-      inventory.addItem(potion.toItemStack(1));
+    if (potion != null) {
+      for (int i = 0; i < 29; i++) {
+        inventory.addItem(potion);
+      }
     }
 
-    Potion potionS = new Potion(PotionType.SPEED, 1);
-    inventory.addItem(potionS.toItemStack(1));
-    inventory.addItem(potionS.toItemStack(1));
-
-    ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 15);
+    ItemStack itemStack = new ItemStack(Material.GOLDEN_APPLE, 5);
     inventory.addItem(itemStack);
 
     updatePlayerLevel(p, Math.max(weaponLevel, level));
 
     p.updateInventory();
     return true;
+  }
+
+  private String getPotionId(int level) {
+    if (level < 10) {
+      return "kyuaaid";
+    } else if (level < 20) {
+      return "hkyuaeid";
+    } else if (level < 30) {
+      return "supereid";
+    } else if (level < 40) {
+      return "hypereid";
+    } else if (level < 50) {
+      return "kyuareal";
+    } else {
+      return "erikusheal";
+    }
   }
 
   public SpreadSheetWeaponData getWeaponData(int level, String itemType, Material m) {
