@@ -174,7 +174,6 @@ public class CommandViewInfo implements CommandExecutor {
 
   }
 
-  // TODO nbttagから取得
   private void sendArmorData(Player p) {
     double normalMobArmorPoint = 0;
     double bossArmorPoint = 0;

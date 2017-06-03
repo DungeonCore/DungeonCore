@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -19,6 +20,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.ItemInterface;
+import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetBossMob;
@@ -122,6 +125,12 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
     e.setCancelled(true);
   }
 
+  /**
+   * 新しいインベントリを作成
+   *
+   * @param p
+   * @return
+   */
   protected Inventory getNewInventory(Player p) {
     Block b = contentLoc.getBlock();
     if (b.getType() != Material.CHEST) {
@@ -134,8 +143,8 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
 
     Random rnd = new Random();
 
+    // チェストの中身のアイテムを全てリストに入れる
     ArrayList<ItemStack> list = new ArrayList<>();
-
     for (ItemStack itemStack : blockInventory) {
       if (itemStack == null || itemStack.getType() == Material.AIR) {
         continue;
@@ -143,21 +152,25 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
       list.add(itemStack);
     }
 
+    // 中身をシャッフルする
     Collections.shuffle(list, rnd);
 
+    // インデックスをシャッフルする
     Collections.shuffle(index, rnd);
 
-    Inventory createInventory = null;
+    // タイトルを作成
+    String title = null;
     if (p.getGameMode() == GameMode.CREATIVE) {
       // chest名を取得
       String name = ChestLocationManager.getName(contentLoc);
       if (name != null) {
-        createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + name);
+        title = name;
       }
     }
-    if (createInventory == null) {
-      createInventory = Bukkit.createInventory(null, 9 * 3);
-    }
+    title = Optional.of(title).orElse("chest");
+
+    // 実際にチェストを開けた時のインベントリを作成
+    Inventory createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + title);
 
     int itemCount = 0;
     if (maxItemCount == minItemCount) {
@@ -169,7 +182,7 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
     if (random) {
       while (itemCount > 0) {
         itemCount--;
-        createInventory.setItem(index.get(itemCount), list.get(itemCount));
+        createInventory.setItem(index.get(itemCount), getContentsItem(list.get(itemCount)));
       }
     } else {
       for (int i = 0; i < blockInventory.getSize(); i++) {
@@ -177,12 +190,29 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
         if (item == null || item.getType() == Material.AIR) {
           continue;
         }
-        createInventory.setItem(i, item);
+        createInventory.setItem(i, getContentsItem(item));
       }
     }
     return createInventory;
   }
 
+  /**
+   * チェストの中のアイテムを取得
+   * ThelowItemなら生成する。thelowアイテムでないなら引数をそのまま返す
+   *
+   * @return
+   */
+  private static ItemStack getContentsItem(ItemStack item) {
+    ItemInterface customItem = ItemManager.getCustomItem(item);
+    ItemStack rtnItem = Optional.ofNullable(customItem).map(val -> val.getItem()).orElse(item);
+    return rtnItem;
+  }
+
+  /**
+   * チェストの中身を指定したものに置き換える
+   *
+   * @param chest
+   */
   abstract public void setRefule(SpletSheetChest chest);
 
   static List<Integer> index = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,

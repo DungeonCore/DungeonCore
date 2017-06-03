@@ -69,7 +69,7 @@ public class NBTTagBean {
   double bossArmorPoint;
 
   // 乱数生成
-  static NormalDistributionRandomGenerator generator = new NormalDistributionRandomGenerator(1, 0.13);
+  static NormalDistributionRandomGenerator generator = new NormalDistributionRandomGenerator(0.9, 0.13);
 
   /**
    * ランダムで値を適切なものに置き換える

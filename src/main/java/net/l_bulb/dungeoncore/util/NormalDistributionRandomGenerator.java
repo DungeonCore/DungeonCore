@@ -1,7 +1,6 @@
 package net.l_bulb.dungeoncore.util;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 //正規分布グラフ参考　http://keisan.casio.jp/exec/system/1161228881
 public class NormalDistributionRandomGenerator {
@@ -42,9 +41,9 @@ public class NormalDistributionRandomGenerator {
     return result * sigma + mu;
   }
 
-  // テスト用メソッド
-  public static void main(String[] args) {
-    NormalDistributionRandomGenerator mathUtil = new NormalDistributionRandomGenerator(1, 0.13);
-    IntStream.range(0, 1000).asDoubleStream().map(d -> mathUtil.next()).sorted().forEach(System.out::println);
-  }
+  // // テスト用メソッド
+  // public static void main(String[] args) {
+  // NormalDistributionRandomGenerator mathUtil = new NormalDistributionRandomGenerator(0.9, 0.13);
+  // IntStream.range(0, 1000).asDoubleStream().map(d -> mathUtil.next()).sorted().forEach(System.out::println);
+  // }
 }
