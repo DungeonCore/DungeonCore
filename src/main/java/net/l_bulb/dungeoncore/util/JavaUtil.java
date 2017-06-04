@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.function.Supplier;
 
 import org.bukkit.Location;
 
@@ -155,6 +156,21 @@ public class JavaUtil {
 
     return new Location(add.getWorld(), add.getX() + Math.sin(Math.toRadians(rndAngle)) * rndRadius, add.getY(),
         add.getZ() + Math.cos(Math.toRadians(rndAngle)) * rndRadius);
+  }
+
+  /**
+   * 指定されたSupplierから値を取得する。もしエラーが起きればdefaultValueから取得する
+   *
+   * @param supplier
+   * @param defaultValue
+   * @return
+   */
+  public static <T> T getValueOrDefaultWhenThrow(Supplier<T> supplier, T defaultValue) {
+    try {
+      return supplier.get();
+    } catch (Exception e) {
+      return defaultValue;
+    }
   }
 }
 

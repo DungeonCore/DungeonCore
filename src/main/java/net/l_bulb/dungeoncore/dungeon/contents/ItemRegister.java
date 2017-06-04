@@ -2,7 +2,6 @@ package net.l_bulb.dungeoncore.dungeon.contents;
 
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.JumpBoost;
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.magicbook.AbstractMagicBook;
-import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.KalgrusKey;
 import net.l_bulb.dungeoncore.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
 import net.l_bulb.dungeoncore.dungeon.contents.item.setItem.crystal.SetItemHealthCrystal;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.OneMobDamageUpSlot;
@@ -23,8 +22,6 @@ import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 public class ItemRegister {
   public static void registItem() {
     SetItemManager.regist(new SetItemHealthCrystal());
-
-    ItemManager.registItem(new KalgrusKey());
 
     // rightClick
     ItemManager.registItem(AbstractMagicBook.getAllItem());

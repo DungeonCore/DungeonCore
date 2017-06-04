@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import net.l_bulb.dungeoncore.dungeon.contents.item.key.KeyItemable;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.itemInterface.GettingItemable;
 
 public class InHandItemClickSign {
   boolean isSuccess = false;
@@ -106,9 +105,6 @@ public class InHandItemClickSign {
     if (itemInHand instanceof KeyItemable) {
       lastLine = itemInHand.getLastLine(e.getPlayer(), null);
       line2 = "IN HAND";
-    } else if (itemInHand instanceof GettingItemable) {
-      lastLine = ((GettingItemable) itemInHand).getLastLine(e.getPlayer(), null);
-      line2 = "FOR GETTING";
     } else {
       return false;
     }

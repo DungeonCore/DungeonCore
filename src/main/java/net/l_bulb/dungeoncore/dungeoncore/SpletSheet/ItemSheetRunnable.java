@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.dungeon.contents.item.key.impl.SpreadSheetMultiPushKey;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetKeyCommandBlockExecuteItem;
@@ -49,6 +50,9 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 
   @Override
   protected void excuteOnerow(String[] row) {
+    // 一行目なら何もしない
+    if (Arrays.equals(row, getTag())) { return; }
+
     try {
       String id = row[0];
       if (id == null || id.isEmpty()) {
@@ -94,6 +98,12 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
           item = new SpreadSheetQuestItem(name, id, price, command, detail);
         } else if (row[3].startsWith("5.")) {
           item = new SpreadSheetMaterialItem(name, id, price, command, detail);
+        } else if (row[3].startsWith("6.")) {
+          item = new SpreadSheetMultiPushKey(name, id, price, command, dungeonName, dungeonLoc, data, detail);
+          if (((SpreadSheetMultiPushKey) item).isError()) {
+            sendMessage("dataが不正です。(回数:itemid)");
+            return;
+          }
         } else {
           item = new SpreadSheetOtherItem(name, id, price, command, detail);
         }

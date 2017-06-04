@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,8 +24,9 @@ import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 
-import com.google.common.base.Joiner;
-
+import net.minecraft.server.v1_8_R1.CommandAbstract;
+import net.minecraft.server.v1_8_R1.Item;
+import net.minecraft.server.v1_8_R1.MojangsonParser;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 
 public class ItemStackUtil {
@@ -279,35 +281,46 @@ public class ItemStackUtil {
       }
       String[] args = command.split(" ");
 
-      Material material = Material.matchMaterial(args[1]);
-      if (material == null) {
-        material = Bukkit.getUnsafe().getMaterialFromInternalName(args[1]);
-      }
-      if (material != null) {
-        // 個数は絶対に１つ
-        int amount = 1;
-        short data = 0;
-        if (args.length >= 3) {
-          if (args.length >= 4) {
-            try {
-              data = Short.parseShort(args[3]);
-            } catch (NumberFormatException localNumberFormatException) {}
-          }
+      // 個数とデータ値
+      int amount = 1;
+      short data = 0;
+      if (args.length >= 3) {
+        if (args.length >= 4) {
+          data = JavaUtil.getShort(args[3], (short) 0);
         }
-        ItemStack stack = new ItemStack(material, amount, data);
-        try {
-          if (args.length >= 5) {
-            stack = Bukkit.getUnsafe().modifyItemStack(stack, Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length)));
-          }
-        } catch (Throwable t) {
-          sender.sendMessage("コマンド解析中にエラーが発生しました。");
-          t.printStackTrace();
+      }
+
+      net.minecraft.server.v1_8_R1.ItemStack itemStack = null;
+
+      Item minecraftItem = JavaUtil.getValueOrDefaultWhenThrow(() -> CommandAbstract.f(null, args[1]), null);
+      if (minecraftItem != null) {
+        itemStack = new net.minecraft.server.v1_8_R1.ItemStack(minecraftItem, amount, data);
+      } else {
+        Material material = Optional.ofNullable(Material.matchMaterial(args[1]))
+            .orElse(Bukkit.getUnsafe().getMaterialFromInternalName(args[1]));
+        // マテリアルがnullならnullを返す
+        if (material == null) {
+          sender.sendMessage("アイテムのタイプ[" + args[1] + "]が不正です。");
           return null;
         }
-        return stack;
+        itemStack = CraftItemStack.asNMSCopy(new ItemStack(material, amount, data));
       }
-      sender.sendMessage("materialが不正です。");
+
+      try {
+        // NBTTagを適用する
+        if (args.length >= 5) {
+          // asNMSCopy.setTag(MojangsonParser.parse(Joiner.on(' ').join(Arrays.asList(args).subList(4, args.length))));
+          // stack = Bukkit.getUnsafe().modifyItemStack(stack, );
+          itemStack.setTag(MojangsonParser.parse(CommandAbstract.a(null, args, 4).c()));
+        }
+        return CraftItemStack.asBukkitCopy(itemStack);
+      } catch (Throwable t) {
+        sender.sendMessage("コマンド解析中にエラーが発生しました。");
+        t.printStackTrace();
+        return null;
+      }
     } catch (Exception e) {
+      e.printStackTrace();
       sender.sendMessage("コマンドが不正です。:" + command);
     }
     return null;
