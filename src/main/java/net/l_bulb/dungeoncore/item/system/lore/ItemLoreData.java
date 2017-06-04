@@ -175,6 +175,7 @@ public class ItemLoreData {
   public List<String> getLore() {
     List<String> lore = new ArrayList<>();
     lore.addAll(beforeDetail);
+    lore.add("");
 
     // もしLoreに内容があれば追加する
     loreMap.entrySet().stream()

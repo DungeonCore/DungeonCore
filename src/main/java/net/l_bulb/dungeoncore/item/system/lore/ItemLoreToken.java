@@ -39,14 +39,13 @@ public class ItemLoreToken {
    * @param isFormated すでにフォーマットが終わってるならTRUE
    */
   public ItemLoreToken(String title, boolean isFormated) {
-    lore.add("");
     if (!isFormated) {
       title = ChatColor.stripColor(title.replace("[", "").replace("]", "").replace(TITLE_TAG, ""));
       lore.add(MessageFormat.format("{0}[{1}]{2}", ChatColor.GREEN, title, getTag(title)));
     } else {
       lore.add(title + getTag(title));
     }
-    this.title = lore.get(1);
+    this.title = lore.get(0);
   }
 
   public String getTag(String title) {
