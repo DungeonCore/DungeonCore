@@ -80,7 +80,7 @@ public class MagicOreRegistPic extends AbstractItem implements BreakBlockItemabl
     SpletSheetExecutor.onExecute(runnable);
 
     // 鉱石を登録する
-    MagicStoneFactor.regist(location, magicStoneByLocation);
+    MagicStoneFactor.regist(location, MagicStoneOreType.FromMaterial(e.getBlock().getType()));
     // ブロックを再配置する
     MagicStoneFactor.relocationOre(location);
   }

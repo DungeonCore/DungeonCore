@@ -59,7 +59,7 @@ public class MagicStoneFactor {
   }
 
   /**
-   * 魔法鉱石と座標を取得する
+   * 魔法鉱石と座標を登録する
    */
   public static void regist(Location loc, MagicStoneOreType type) {
     magicStoneOres.put(loc, type);
