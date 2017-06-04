@@ -12,7 +12,6 @@ import org.bukkit.metadata.MetadataValue;
 
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class NormalSummonZombie extends AbstractSummonZombie {
@@ -96,10 +95,5 @@ public class NormalSummonZombie extends AbstractSummonZombie {
           new ItemStack(Material.IRON_LEGGINGS), new ItemStack(Material.IRON_BOOTS), 0);
       LivingEntityUtil.setItemInHand(e, new ItemStack(Material.IRON_SWORD), 0);
     }
-  }
-
-  @Override
-  public ItemType getUseItemType() {
-    return ItemType.MAGIC;
   }
 }

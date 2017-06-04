@@ -56,7 +56,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
       // eventを実行
       CombatEntityEvent callEvent = new CombatEntityEvent(p, damage, customItem, item, isNormalAttack, (LivingEntity) entity).callEvent();
       // ダメージを与える
-      ((LivingEntity) entity).damage(callEvent.getDamage(), p);
+      callEvent.damageEntity();
 
       // もしEntityが死んでいたら今の攻撃で死んだと判断しeventを実行
       if (entity.isDead()) {

@@ -24,6 +24,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
@@ -185,6 +186,32 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     // もとのmobの効果
     if (this.mob == null) { return; }
     this.mob.onAttack(mob, target, e);
+  }
+
+  @Override
+  public void onDamagePlayer(CombatEntityEvent e) {
+    switch (e.geItemType()) {
+      case SWORD:
+        if (swordRegistance == 100) {
+          e.setCancelled(true);
+        }
+        e.setDamage(e.getDamage() * (1 - swordRegistance / 100.0));
+        break;
+      case MAGIC:
+        if (magicRegistance == 100) {
+          e.setCancelled(true);
+        }
+        e.setDamage(e.getDamage() * (1 - magicRegistance / 100.0));
+        break;
+      case BOW:
+        if (bowRegistance == 100) {
+          e.setCancelled(true);
+        }
+        e.setDamage(e.getDamage() * (1 - bowRegistance / 100.0));
+        break;
+      default:
+        break;
+    }
   }
 
   @Override

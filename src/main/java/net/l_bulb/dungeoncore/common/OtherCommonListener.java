@@ -282,7 +282,11 @@ public class OtherCommonListener implements Listener {
           // イベントを呼ぶ
           CombatEntityEvent callEvent = new CombatEntityEvent((Player) owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
               (LivingEntity) target).callEvent();
-          e.setDamage(DamageModifier.BASE, callEvent.getDamage());
+          if (!callEvent.isCancel()) {
+            e.setDamage(DamageModifier.BASE, callEvent.getDamage());
+          } else {
+            e.setCancelled(true);
+          }
         } else {
           // 通常通りの計算を行う
           e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());

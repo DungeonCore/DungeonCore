@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.common.dropingEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +24,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CombatEntityEvent extends PlayerEvent {
+public class CombatEntityEvent extends PlayerEvent implements Cancellable {
 
   /**
    * @param attacker 攻撃を与えたEntity
@@ -82,6 +83,8 @@ public class CombatEntityEvent extends PlayerEvent {
 
   private static final HandlerList handlers = new HandlerList();
 
+  private boolean isCancel;
+
   public static HandlerList getHandlerList() {
     return handlers;
   }
@@ -103,5 +106,24 @@ public class CombatEntityEvent extends PlayerEvent {
    */
   public LastDamageMethodType geLastDamageMethodType() {
     return LastDamageMethodType.fromAttackType(geItemType(), isNormalAttack);
+  }
+
+  @Override
+  public boolean isCancelled() {
+    return isCancel;
+  }
+
+  @Override
+  public void setCancelled(boolean isCancel) {
+    this.isCancel = isCancel;
+  }
+
+  /**
+   * イベントを呼ばれた後にダメージの処理を行う
+   */
+  public void damageEntity() {
+    if (isCancelled()) {
+      enemy.damage(getDamage());
+    }
   }
 }

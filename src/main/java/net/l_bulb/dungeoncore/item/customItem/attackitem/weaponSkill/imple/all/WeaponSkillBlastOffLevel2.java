@@ -44,10 +44,9 @@ public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
 
     // ダメージを与える
     double attackItemDamage = new ItemStackNbttagAccessor(item).getDamage();
-    livingEntity.damage(attackItemDamage);
-
     // eventを発動する
-    new CombatEntityEvent(p, attackItemDamage, customItem, item, false, livingEntity).callEvent();
+    CombatEntityEvent event = new CombatEntityEvent(p, attackItemDamage, customItem, item, false, livingEntity).callEvent();
+    event.damageEntity();
   }
 
   @Override

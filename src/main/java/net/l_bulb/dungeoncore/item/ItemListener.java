@@ -122,7 +122,11 @@ public class ItemListener implements Listener {
         // イベントを発動させる
         CombatEntityEvent callEvent = new CombatEntityEvent(damager, e.getDamage(DamageModifier.BASE), (AbstractAttackItem) customItem,
             itemInHand, true, (LivingEntity) e.getEntity()).callEvent();
-        e.setDamage(DamageModifier.BASE, callEvent.getDamage());
+        if (!callEvent.isCancel()) {
+          e.setDamage(DamageModifier.BASE, callEvent.getDamage());
+        } else {
+          e.setCancelled(true);
+        }
       }
 
       // MeleeAttackItemableならEventを発火させる

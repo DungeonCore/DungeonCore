@@ -27,7 +27,12 @@ public class NoPlayerDamageExplotionForAttackType extends NotPlayerDamageExplosi
   public float getDamage(Entity target, float d10) {
     if (target.getType().isAlive() && sourceEntity.getType() == EntityType.PLAYER) {
       CombatEntityEvent callEvent = new CombatEntityEvent((Player) sourceEntity, d10, customItem, item, false, (LivingEntity) target).callEvent();
-      return (float) callEvent.getDamage();
+      if (callEvent.isCancel()) {
+        // キャンセルされていたら0ダメージにする
+        return 0;
+      } else {
+        return (float) callEvent.getDamage();
+      }
     } else {
       return d10;
     }

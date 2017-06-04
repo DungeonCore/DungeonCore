@@ -16,7 +16,6 @@ import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.customMob.SummonMobable;
 import net.l_bulb.dungeoncore.mob.customMob.abstractmob.AbstractSkelton;
-import net.l_bulb.dungeoncore.player.ItemType;
 
 public class SummonSkelton extends AbstractSkelton implements SummonMobable {
 
@@ -65,10 +64,4 @@ public class SummonSkelton extends AbstractSkelton implements SummonMobable {
     lbnMobTag.setSummonMob(true);
     return lbnMobTag;
   }
-
-  @Override
-  public ItemType getUseItemType() {
-    return ItemType.BOW;
-  }
-
 }

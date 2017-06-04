@@ -12,7 +12,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class SummonHealSheep extends SummonSheep {
@@ -56,11 +55,6 @@ public class SummonHealSheep extends SummonSheep {
     } else {
       return 2;
     }
-  }
-
-  @Override
-  public ItemType getUseItemType() {
-    return ItemType.MAGIC;
   }
 
 }

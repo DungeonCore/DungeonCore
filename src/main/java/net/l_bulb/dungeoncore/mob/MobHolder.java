@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.mob;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.function.Consumer;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
@@ -77,6 +78,19 @@ public class MobHolder {
       return getMob(entity);
     } else {
       return new NormalMob(e.getEntityType());
+    }
+  }
+
+  /**
+   * AbstractMobのメソッドを実行する
+   *
+   * @param e
+   * @param consumer
+   */
+  public static void consume(Entity e, Consumer<AbstractMob<?>> consumer) {
+    AbstractMob<?> mob = getMob(e);
+    if (!mob.isNullMob()) {
+      consumer.accept(mob);
     }
   }
 

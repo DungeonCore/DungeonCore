@@ -30,6 +30,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.chest.CustomChestManager;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
@@ -109,7 +110,7 @@ public class MobListener implements Listener {
     } else if (damager instanceof Projectile) {
       // mobが放ったProjectileがダメージを与えた時
       ProjectileSource shooter = ((Projectile) damager).getShooter();
-      if (MobHolder.isExtraMobByProjectile(shooter) && e.getEntity() instanceof LivingEntity) {
+      if (MobHolder.isExtraMobByProjectile(shooter) && e.getEntity().getType().isAlive()) {
         AbstractMob<?> mob = MobHolder.getMob((LivingEntity) shooter);
         mob.onProjectileHitEntity((LivingEntity) shooter, (LivingEntity) e.getEntity(), e);
       }
@@ -127,12 +128,10 @@ public class MobListener implements Listener {
 
   @EventHandler
   public void onDamageOther(EntityDamageEvent e) {
-    Entity entity = e.getEntity();
-    if (MobHolder.isCustomMob(entity)) {
-      AbstractMob<?> mob = MobHolder.getMob(entity);
+    MobHolder.consume(e.getEntity(), mob -> {
       mob.onOtherDamage(e);
       mob.updateName(false);
-    }
+    });
   }
 
   static Random rnd = new Random();
@@ -162,16 +161,19 @@ public class MobListener implements Listener {
   }
 
   @EventHandler
+  public void onPlayerCombat(CombatEntityEvent e) {
+    MobHolder.consume(e.getEnemy(), mob -> mob.onDamagePlayer(e));
+  }
+
+  @EventHandler
   public void onShotbow(EntityShootBowEvent e) {
-    AbstractMob<?> mob = MobHolder.getMob(e.getEntity());
-    mob.onShotbow(e);
+    MobHolder.consume(e.getEntity(), mob -> mob.onShotbow(e));
   }
 
   @EventHandler
   public void onInteractEntity(PlayerInteractEntityEvent e) {
     if (e.getRightClicked() != null && e.getRightClicked() instanceof LivingEntity) {
-      AbstractMob<?> mob = MobHolder.getMob(e.getRightClicked());
-      mob.onInteractEntity(e);
+      MobHolder.consume(e.getRightClicked(), mob -> mob.onInteractEntity(e));
     }
   }
 

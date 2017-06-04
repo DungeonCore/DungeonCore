@@ -25,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemInterface;
@@ -77,6 +78,13 @@ public abstract class AbstractMob<T extends Entity> {
   abstract public void onAttack(LivingEntity mob, LivingEntity target, EntityDamageByEntityEvent e);
 
   abstract public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e);
+
+  /**
+   * プレイヤーから攻撃を受けた時のイベント
+   *
+   * @param e
+   */
+  public void onDamagePlayer(CombatEntityEvent e) {}
 
   public int getDropGalions() {
     return 10;
