@@ -40,8 +40,6 @@ public class SpreadSheetArmor extends AbstractArmorItem {
 
   @Override
   public short getMaxDurability(ItemStack e) {
-    System.out.println(getItemName() + "@" + data.getMaxDurability() + "@" + getAddDurability(StrengthOperator.getLevel(e), data.getMaxDurability())
-        + "@" + StrengthOperator.getLevel(e));
     return (short) (data.getMaxDurability() + getAddDurability(StrengthOperator.getLevel(e), data.getMaxDurability()));
   }
 

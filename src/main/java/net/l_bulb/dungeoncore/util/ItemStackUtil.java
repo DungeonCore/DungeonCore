@@ -427,8 +427,8 @@ public class ItemStackUtil {
    * @param name
    */
   public static String getNBTTag(ItemStack item, String name) {
-    if (isEmpty(item)) { return null; }
     net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    if (nmsStack == null) { return null; }
     if (nmsStack.getTag() == null) { return null; }
 
     // NBTタグが不正な時はnullを返す
@@ -464,6 +464,7 @@ public class ItemStackUtil {
    */
   public static short getNBTTagShort(ItemStack item, String name) {
     net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    if (nmsStack == null) { return 0; }
     if (nmsStack.getTag() == null) { return 0; }
     return nmsStack.getTag().getShort(name);
   }
@@ -492,6 +493,7 @@ public class ItemStackUtil {
    */
   public static double getNBTTagDouble(ItemStack item, String name) {
     net.minecraft.server.v1_8_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+    if (nmsStack == null) { return 0; }
     if (nmsStack.getTag() == null) { return 0; }
     return nmsStack.getTag().getDouble(name);
   }

@@ -44,6 +44,6 @@ public class NormalDistributionRandomGenerator {
   // // テスト用メソッド
   // public static void main(String[] args) {
   // NormalDistributionRandomGenerator mathUtil = new NormalDistributionRandomGenerator(0.9, 0.13);
-  // IntStream.range(0, 1000).asDoubleStream().map(d -> mathUtil.next()).sorted().forEach(System.out::println);
+  // IntStream.range(0, 1000).asDoubleStream().map(d -> mathUtil.next()).sorted().forEach(d -> DungeonLogger.debug(Double.toString(d)));
   // }
 }
