@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.command.CommandGetItem;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetKeyCommandBlockExecuteItem;
@@ -123,7 +122,5 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
     super.onCallbackFunction(submit);
-
-    CommandGetItem.initFlg = true;
   }
 }
