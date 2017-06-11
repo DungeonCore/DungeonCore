@@ -1,13 +1,9 @@
 package net.l_bulb.dungeoncore.command;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,42 +16,36 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.buff.BuffData;
 import net.l_bulb.dungeoncore.common.buff.BuffDataFactory;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
+import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleManager;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.ArmorBase;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.table.SlotMerchant;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewer;
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetMob;
-import net.l_bulb.dungeoncore.mobspawn.ChunkWrapper;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
-import net.l_bulb.dungeoncore.util.InOutputUtil;
-import net.l_bulb.dungeoncore.util.LivingEntityUtil;
-
-import com.google.common.collect.HashMultimap;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class CommandViewInfo implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender paramCommandSender, Command paramCommand, String paramString, String[] paramArrayOfString) {
     if (paramArrayOfString.length == 0) {
-      paramCommandSender.sendMessage("パラメータ:appendix");
-      return false;
+      new CommandMenu().open((Player) paramCommandSender);
+      return true;
     }
 
     if (!(paramCommandSender instanceof Player)) { return false; }
@@ -87,9 +77,6 @@ public class CommandViewInfo implements CommandExecutor {
       case "cooltime":
         CooltimeManager.clear();
         break;
-      case "chunk":
-        sendChunkInfo(target);
-        break;
       case "stop":
         try {
           Thread.sleep(1000 * 20);
@@ -108,32 +95,8 @@ public class CommandViewInfo implements CommandExecutor {
       case "status":
         sendPlayerStatus(target);
         break;
-      case "addEffect":
-        addEffect(target);
-        break;
       case "version":
         paramCommandSender.sendMessage("1.1");
-        break;
-      case "mobskill":
-        showMobSkill(paramArrayOfString[1], paramCommandSender);
-        break;
-      case "zipworld":
-        File file = new File(Main.dataFolder);
-        File parentFile = file.getParentFile().getParentFile();
-        File file2 = new File(parentFile, "world");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HHmmss");
-        String format = sdf.format(new Date());
-        String fileName = "backup_world_" + format + ".zip";
-        InOutputUtil.compressDirectory(Main.dataFolder + File.separator + "worldbackup" + File.separator + fileName + ".zip",
-            file2.getAbsolutePath());
-        break;
-      // case "doragon":
-      // makeDragon();
-      // case "doragon1":
-      // makeDragon1();
-      // break;
-      case "dungeon":
-        makeDungeonGround((Player) paramCommandSender);
         break;
       case "npc":
         NpcManager.onTest();
@@ -155,17 +118,20 @@ public class CommandViewInfo implements CommandExecutor {
             + target.getLocation().getBlockZ() + "\"}}";
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command2);
         break;
+      case "score":
+        TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(target);
+        theLowPlayer.setShowSideBar(!theLowPlayer.isShowSideBar());
+        break;
       case "particle":
         ParticleData particle = ParticleManager.getParticleData(paramArrayOfString[1]);
         if (particle != null) {
           particle.run(((Player) paramCommandSender).getLocation());
         }
         break;
-      case "kaminari":
-        LivingEntityUtil.strikeLightningEffect(((Player) paramCommandSender).getLocation());
-        break;
       case "armor":
         sendArmorData((Player) paramCommandSender);
+        break;
+      case "test":
         break;
       default:
         paramCommandSender.sendMessage("unknown param");
@@ -201,140 +167,12 @@ public class CommandViewInfo implements CommandExecutor {
     p.sendMessage(ChatColor.GOLD + "=========================");
   }
 
-  private void showMobSkill(String string, CommandSender paramCommandSender) {
-    AbstractMob<?> mob = MobHolder.getMob(string);
-    if (mob == null) { return; }
-
-    if (mob instanceof SpreadSheetMob) {
-      HashSet<String> skillIdList = ((SpreadSheetMob) mob).getSkillIdList();
-      for (String skill : skillIdList) {
-        paramCommandSender.sendMessage(skill);
-      }
-    }
-  }
-
-  private void addEffect(Player target) {
-    new PotionEffect(PotionEffectType.SPEED, 80, 1).apply(target);
-    new PotionEffect(PotionEffectType.POISON, 80, 1).apply(target);
-  }
-
   private void sendPlayerStatus(Player target) {
     Collection<PotionEffect> activePotionEffects = target.getActivePotionEffects();
     target.sendMessage("active potion effect:");
     for (PotionEffect potionEffect : activePotionEffects) {
       target.sendMessage("    " + potionEffect.getType() + ", " + (potionEffect.getDuration() / 20) + "s");
     }
-  }
-
-  private void makeDungeonGround(Player p) {
-    Location location = p.getLocation();
-    if (!location.getWorld().getName().equals("dungeon")) { return; }
-
-    new BukkitRunnable() {
-      int xx = location.getBlockX() + 150;
-      int c = 0;
-
-      int blockCount = 0;
-
-      @Override
-      public void run() {
-        for (int z = location.getBlockZ() - 150; z < location.getBlockZ() + 150; z++) {
-          if (!new Location(location.getWorld(), xx, 3, z).getBlock().getType().equals(Material.GRASS)) {
-            continue;
-          }
-
-          if (location.getWorld().getHighestBlockYAt(location) != 4) {
-            continue;
-          }
-
-          for (int y = 2; y <= 200; y++) {
-            new Location(location.getWorld(), xx, y, z).getBlock().setType(Material.STONE);
-            blockCount++;
-          }
-        }
-
-        xx--;
-        c++;
-
-        if (xx % 10 == 0) {
-          p.sendMessage(c * 100 / 300 + "%  完了 :" + blockCount);
-          blockCount = 0;
-        }
-
-        if (xx < location.getBlockX() - 150) {
-          p.sendMessage("100%  完了");
-          cancel();
-        }
-      }
-    }.runTaskTimer(Main.plugin, 0, 1);
-  }
-
-  void makeDragon1() {
-    for (int i = 44; i >= 3; i--) {
-      for (int j = 200; j <= 254; j++) {
-        for (int l = 555; l <= 733; l++) {
-          Location location = new Location(Bukkit.getWorld("world"), i, j, l);
-          if (location.getBlock().getType() != Material.AIR) {
-            create.put(l, new BlockData(location));
-            location.getBlock().setType(Material.AIR);
-          }
-        }
-      }
-    }
-  }
-
-  HashMultimap<Integer, BlockData> create = HashMultimap.create();
-
-  void makeDragon() {
-    // Location start = new Location(Bukkit.getWorld("world"), 44, 200, 555);
-    new BukkitRunnable() {
-      int i = 555;
-
-      @Override
-      public void run() {
-        Set<BlockData> set = create.get(i);
-        for (BlockData blockData : set) {
-          blockData.setBlock();
-        }
-
-        i++;
-        if (i > 734) {
-          cancel();
-        }
-      }
-    }.runTaskTimer(Main.plugin, 0, 2);
-    // Location end = new Location(Bukkit.getWorld("world"), 3, 254, 733);
-  }
-
-  class BlockData {
-    @SuppressWarnings("deprecation")
-    protected BlockData(Location loc) {
-      Block block = loc.getBlock();
-      this.m = block.getType();
-      this.loc = loc;
-      this.data = block.getData();
-    }
-
-    Material m;
-    Location loc;
-    byte data;
-
-    @SuppressWarnings("deprecation")
-    void setBlock() {
-      loc.getBlock().setType(m);
-      loc.getBlock().setData(data);
-    }
-  }
-
-  private void sendChunkInfo(Player target) {
-    target.sendMessage(ChatColor.GREEN + "=== CHUNK INFO ===");
-    Chunk chunk = target.getLocation().getChunk();
-    target.sendMessage("loaded:" + chunk.isLoaded());
-    target.sendMessage("name:" + target.getName());
-    target.sendMessage(chunk.toString());
-    target.sendMessage("hashcode:" + chunk.hashCode());
-    target.sendMessage("system loaded:" + MobSpawnerPointManager.loadedChunk.contains(new ChunkWrapper(chunk)));
-    target.sendMessage(ChatColor.GREEN + "=== CHUNK INFO ===");
   }
 
   private void showLoadedChunk(CommandSender paramCommandSender) {
@@ -344,6 +182,47 @@ public class CommandViewInfo implements CommandExecutor {
         paramCommandSender.sendMessage(world.getName() + ":" + c.getX() + "@" + c.getZ());
       }
     }
+  }
+}
+
+class CommandMenu implements MenuSelectorInterface {
+  static {
+    MenuSelectorManager.regist(new CommandMenu());
+  }
+
+  @Override
+  public void open(Player p) {
+    Inventory createInventory = Bukkit.createInventory(null, 9 * 1, getTitle());
+    createInventory.addItem(getItem("座標取得", "tl xyz", Material.COMPASS, 0, "/tl xyzを実行", "x y z形式で座標を取得"));
+    createInventory.addItem(getItem("座標取得2", "tl xyz2", Material.COMPASS, 0, "/tl xyz2を実行", "world:x,y,z形式で座標を取得"));
+    createInventory.addItem(getItem("クールタイム初期化", "tl cooltime", Material.CACTUS, 0, "/tl cooltimeを実行", "全てのPlayerのクールタイムをリセット"));
+    createInventory.addItem(getItem("スコアボード", "tl score", Material.MAP, 0, "/tl scoreを実行", "スコアボードの表示/非表示切り替え"));
+    createInventory.addItem(getItem("装備", "tl armor", Material.DIAMOND_CHESTPLATE, 0, "/tl armorを実行", "現在装備中の防具情報を取得"));
+    p.openInventory(createInventory);
+  }
+
+  ItemStack getItem(String name, String command, Material m, int data, String... line) {
+    List<String> collect = Arrays.stream(line).map(val -> ChatColor.WHITE.toString() + val).collect(Collectors.toList());
+    ItemStack item = ItemStackUtil.getItem(ChatColor.GREEN + name, m, (byte) data, collect.toArray(new String[collect.size()]));
+    ItemStackUtil.setNBTTag(item, "thelow_command", command);
+
+    return item;
+  }
+
+  @Override
+  public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
+    if (item == null) { return; }
+
+    String nbtTag = ItemStackUtil.getNBTTag(item, "thelow_command");
+    if (nbtTag != null && !nbtTag.isEmpty()) {
+      Bukkit.dispatchCommand(p, nbtTag);
+      p.sendMessage(ChatColor.YELLOW + "コマンド:/" + nbtTag + "を実行しました。");
+    }
+  }
+
+  @Override
+  public String getTitle() {
+    return "view info table";
   }
 
 }

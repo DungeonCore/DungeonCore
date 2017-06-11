@@ -28,6 +28,7 @@ import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.ExpTable;
+import net.l_bulb.dungeoncore.player.PlayerListener;
 import net.l_bulb.dungeoncore.player.ability.AbilityType;
 import net.l_bulb.dungeoncore.player.ability.AbstractTimeLimitAbility;
 import net.l_bulb.dungeoncore.player.ability.impl.LevelUpAbility;
@@ -366,5 +367,25 @@ public class CustomPlayer implements TheLowPlayer, Serializable {
   public boolean equalsPlayer(Player p) {
     if (p == null) { return false; }
     return getUUID().equals(p.getUniqueId());
+  }
+
+  boolean isShowSideBar = true;
+
+  @Override
+  public boolean isShowSideBar() {
+    return isShowSideBar;
+  }
+
+  @Override
+  public void setShowSideBar(boolean isShowSideBar) {
+    this.isShowSideBar = isShowSideBar;
+
+    if (getOnlinePlayer() != null) {
+      if (isShowSideBar) {
+        PlayerListener.updateSidebar(getOnlinePlayer());
+      } else {
+        getOnlinePlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+      }
+    }
   }
 }

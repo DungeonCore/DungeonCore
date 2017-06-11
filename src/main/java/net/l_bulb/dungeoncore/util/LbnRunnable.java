@@ -13,7 +13,7 @@ public abstract class LbnRunnable extends BukkitRunnable {
   private static HashSet<LbnRunnable> aliveRunnableList = new HashSet<>();
 
   public String getName() {
-    return "nune";
+    return "none";
   }
 
   private long privateTick = 0;

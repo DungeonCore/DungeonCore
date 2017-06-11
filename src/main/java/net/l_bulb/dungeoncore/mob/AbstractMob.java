@@ -208,7 +208,9 @@ public abstract class AbstractMob<T extends Entity> {
 
   abstract public EntityType getEntityType();
 
-  public boolean isThisMob(LivingEntity e) {
+  public boolean isThisMob(Entity e) {
+    // 別のタイプならFALSE
+    if (e.getType() != getEntityType()) { return false; }
     if (e.getCustomName() == null) {
       if (getName() == null) { return true; }
     } else {

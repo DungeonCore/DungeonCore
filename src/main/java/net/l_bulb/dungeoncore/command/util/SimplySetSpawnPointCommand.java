@@ -1,7 +1,7 @@
 package net.l_bulb.dungeoncore.command.util;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,23 +23,23 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
-import org.bukkit.util.StringUtil;
 import org.bukkit.util.Vector;
 
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
-import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterManager;
-import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpletSheetSpawnMobGetter;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointFactory;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointGroupFactory;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointSpreadSheetData;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointSpreadSheetData.TargetType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
+
+import lombok.Getter;
 
 public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter {
   static HashMultimap<Player, MobLocation> create = HashMultimap.create();
@@ -84,32 +84,30 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
   }
 
   private static void executeLook(Player p, String[] arg3) {
-    Collection<MobSpawnerPoint> allSpawnerPointList = MobSpawnerPointManager.getAllSpawnerPointList();
-    ArrayList<MobSpawnerPoint> allList = new ArrayList<>(allSpawnerPointList);
-
+    ArrayList<Location> list = new ArrayList<>(SpawnPointFactory.getSpawnPointLocation());
     new LbnRunnable() {
       int i = 0;
 
       @Override
       public void run2() {
-        for (; i < allList.size() || (i != 0 && i % 2000 == 0); i++) {
-          MobSpawnerPoint mobSpawnerPoint = allList.get(i);
+        for (; i < list.size() || (i != 0 && i % 2000 == 0); i++) {
+          Location spawnPointLocation = list.get(i);
           if (look_flg) {
-            Chunk chunk = mobSpawnerPoint.getChunk();
+            Chunk chunk = spawnPointLocation.getChunk();
             if (!chunk.isLoaded()) {
               chunk.load();
             }
-            mobSpawnerPoint.getLocation().getBlock().setType(Material.SPONGE);
+            spawnPointLocation.getBlock().setType(Material.SPONGE);
           } else {
-            Chunk chunk = mobSpawnerPoint.getChunk();
+            Chunk chunk = spawnPointLocation.getChunk();
             if (!chunk.isLoaded()) {
               chunk.load();
             }
-            mobSpawnerPoint.getLocation().getBlock().setType(Material.AIR);
+            spawnPointLocation.getBlock().setType(Material.AIR);
           }
         }
 
-        if (i >= allList.size()) {
+        if (i >= list.size()) {
           if (!look_flg) {
             p.sendMessage("スポーン地点のスポンジを削除しました。");
           } else {
@@ -123,12 +121,12 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 
       @Override
       protected void runIfServerEnd() {
-        for (MobSpawnerPoint mobSpawnerPoint : allList) {
-          Chunk chunk = mobSpawnerPoint.getChunk();
+        for (Location spawnPointLocation : list) {
+          Chunk chunk = spawnPointLocation.getChunk();
           if (!chunk.isLoaded()) {
             chunk.load();
           }
-          mobSpawnerPoint.getLocation().getBlock().setType(Material.AIR);
+          spawnPointLocation.getBlock().setType(Material.AIR);
         }
       }
     }.runTaskTimer(1);
@@ -186,14 +184,18 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 
     Set<MobLocation> set = create.get(p);
     for (MobLocation mobLocation : set) {
-      // getterにセット
-      SimpleMobSpawnGetter simpleMobSpawnGetter = new SimpleMobSpawnGetter(MobSpawnerPointManager.getNextId());
-      simpleMobSpawnGetter.addMob(mobLocation.getMobList());
+      SpawnPointSpreadSheetData data = new SpawnPointSpreadSheetData();
+      data.setId(SpawnPointFactory.getNextId());
+      data.setLocation(mobLocation.getLoc());
+      data.setMaxSpawnCount(5);
+      data.setType(TargetType.MONSTER);
+      String[] array = mobLocation.getMobList().stream().map(mob -> mob.getName()).toArray(String[]::new);
 
-      MobSpawnerPoint spawnerPoint = simpleMobSpawnGetter.getMobSpawnerPoint(mobLocation.loc, 3, SpawnLevel.LEVEL3);
-      MobSpawnerPointManager.addSpawnPoint(spawnerPoint);
+      spawnPointSheetRunnable.addData(data, array, memo);
 
-      spawnPointSheetRunnable.addData(spawnerPoint, memo);
+      // スポーン登録する
+      Arrays.stream(array).map(t -> new SpawnPointSpreadSheetData(data, t)).map(SpawnPointFactory::getNewInstance)
+          .forEach(SpawnPointGroupFactory::registSpawnPoint);
     }
     SpletSheetExecutor.onExecute(spawnPointSheetRunnable);
 
@@ -321,37 +323,12 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 
   @Override
   public List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
-    if (arg3.length > 1) {
-      if ("set".equalsIgnoreCase(arg3[0])) {
-        if (arg3.length == 2) { return StringUtil.copyPartialMatches(arg3[1].toUpperCase(), SpawnMobGetterManager.getNames(),
-            new ArrayList<String>(SpawnMobGetterManager.getNames().size())); }
-      }
-    }
     return ImmutableList.of();
   }
 
 }
 
-class SimpleMobSpawnGetter extends SpletSheetSpawnMobGetter {
-
-  public SimpleMobSpawnGetter(int id) {
-    super(id);
-  }
-
-  @Override
-  public String getName() {
-    return "simpleCommand";
-  }
-
-  public void addMob(AbstractMob<?> mob) {
-    moblist.add(mob);
-  }
-
-  public void addMob(List<AbstractMob<?>> mobList) {
-    moblist.addAll(mobList);
-  }
-}
-
+@Getter
 class MobLocation {
   List<AbstractMob<?>> mobList = new ArrayList<>();
   Location loc;

@@ -511,6 +511,8 @@ public class PlayerListener implements Listener {
     TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
     if (theLowPlayer == null) { return; }
 
+    if (!theLowPlayer.isShowSideBar()) { return; }
+
     new BukkitRunnable() {
       @Override
       public void run() {

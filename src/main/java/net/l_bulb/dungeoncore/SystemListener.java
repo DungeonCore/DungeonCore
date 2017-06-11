@@ -21,7 +21,6 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.event.server.ServerCommandEvent;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -29,8 +28,6 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerJoinDungeonGameEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerQuitDungeonGameEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.player.status.StatusViewerInventory;
@@ -71,18 +68,10 @@ public class SystemListener implements Listener {
 
     Player player = e.getPlayer();
     PlayerIODataManager.load(player);
-
-    // if (!MobSpawnerPointManager.isRunSpawnManage()) {
-    // MobSpawnerPointManager.startSpawnManage();
-    // }
   }
 
   @EventHandler
   public void quitDungeon(PlayerQuitDungeonGameEvent e) {
-    if (Main.getOnlinePlayer().size() == 0) {
-      MobSpawnerPointManager.stopSpawnManage();
-    }
-
     PlayerIODataManager.save(e.getPlayer());
   }
 
@@ -100,16 +89,6 @@ public class SystemListener implements Listener {
       loginPlayer += players.size();
     }
     loginPlayer++;
-  }
-
-  @EventHandler
-  public void loadChunk(ChunkLoadEvent e) {
-    MobSpawnerPointManager.loadChunk(e.getChunk());
-  }
-
-  @EventHandler
-  public void unloadChunk(ChunkUnloadEvent e) {
-    MobSpawnerPointManager.unloadChunk(e.getChunk());
   }
 
   private static String[] getLoginMessage(Player player) {

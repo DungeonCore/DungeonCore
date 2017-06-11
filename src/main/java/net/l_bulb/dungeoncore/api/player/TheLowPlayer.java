@@ -211,6 +211,20 @@ public interface TheLowPlayer {
   public boolean equalsPlayer(Player p);
 
   /**
+   * サイドバーを表示するならTRUE
+   *
+   * @return
+   */
+  public boolean isShowSideBar();
+
+  /**
+   * サイドバーを表示するかどうかをセットする
+   * @param isShowSideBar TODO
+   * @param 表示するならTRUE
+   */
+  public void setShowSideBar(boolean isShowSideBar);
+
+  /**
    * 指定されたLevelTypeで何回転生をしたか取得
    *
    * @param levelType

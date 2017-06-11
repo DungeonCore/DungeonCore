@@ -32,7 +32,6 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSpider;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomVillager;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomWitch;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomZombie;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
 import net.l_bulb.dungeoncore.money.MoneyListener;
 import net.l_bulb.dungeoncore.npc.NpcListener;
 import net.l_bulb.dungeoncore.npc.followNpc.FollowerNpcManager;
@@ -83,7 +82,6 @@ public class Main extends JavaPlugin {
     try {
       boolean isDebug = Boolean.parseBoolean(getConfig().getString("debug"));
       Main.doSpawn = Boolean.parseBoolean(getConfig().getString("spawn"));
-      MobSpawnerPointManager.ignoreSpawnWorld = getConfig().getString("ignore-spawn-world");
       Main.debugging = isDebug;
       DungeonLogger.info("Debug:" + isDebug);
     } catch (Exception p) {

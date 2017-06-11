@@ -2,21 +2,17 @@ package net.l_bulb.dungeoncore.dungeoncore.SpletSheet;
 
 import java.util.HashMap;
 import java.util.concurrent.Future;
+import java.util.stream.IntStream;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 
-import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mobspawn.old.SpawnLevel;
-import net.l_bulb.dungeoncore.mobspawn.old.boss.SpredSheetSpawnBossGetter;
-import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpawnMobGetterInterface;
-import net.l_bulb.dungeoncore.mobspawn.old.gettter.SpletSheetSpawnMobGetter;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPoint;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
-import net.l_bulb.dungeoncore.util.DungeonLogger;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointFactory;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointGroupFactory;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointSpreadSheetData;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointSpreadSheetData.TargetType;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
@@ -25,7 +21,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     super(p);
   }
 
-  public void addData(MobSpawnerPoint point, String memo) {
+  public void addData(SpawnPointSpreadSheetData point, String[] array, String memo) {
     HashMap<String, Object> map = new HashMap<>();
     map.put("id", point.getId());
     Location location = point.getLocation();
@@ -33,24 +29,11 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     map.put("x", location.getX());
     map.put("y", location.getY());
     map.put("z", location.getZ());
-    map.put("最大湧き数", point.getMaxMobCount());
-    map.put("level", point.getLevel());
-    SpawnMobGetterInterface spawnMobGetter = point.getSpawnMobGetter();
+    map.put("最大湧き数", point.getMaxSpawnCount());
+    map.put("type", point.getType());
 
-    int i = 1;
-    for (AbstractMob<?> mob : spawnMobGetter.getAllMobList()) {
-      String name = mob.getName();
-      if (name == null || name.isEmpty()) {
-        if (mob.getEntityType() == null) {
-          // どうせ召喚できない, 起こり得ない
-          DungeonLogger.error("mob's name and EntityType is null");
-          continue;
-        }
-        name = mob.getEntityType().toString().toLowerCase();
-      }
-      map.put("mob" + i, name);
-      i++;
-    }
+    IntStream.range(0, array.length).filter(i -> array[i] != null && array[i].length() != 0)
+        .forEach(i -> map.put("mob" + (i + 1), array[i]));
     if (memo != null && !memo.isEmpty()) {
       map.put("memo", memo);
     }
@@ -64,49 +47,35 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   @Override
   public String[] getTag() {
-    return new String[] { "id", "world", "x", "y", "z", "最大湧き数", "level", "dungeonhight", "looknearchunk", "mob1",
-        "mob2", "mob3", "mob4", "mob5", "mob6", "mob7", "mob8", "mob9", "mob10", "mob11", "mob12", "mob13", "mob14",
-        "mob15", "mob16", "mob17", "mob18", "mob19", "mob20" };
+    return new String[] { "id", "world", "x", "y", "z", "最大湧き数", "type", "dungeonhight", "looknearchunk",// 8
+        "mob1", "mob2", "mob3", "mob4", "mob5" };
   }
 
   @Override
   protected void excuteOnerow(String[] row) {
     try {
-      int id = Integer.parseInt(row[0]);
+      SpawnPointSpreadSheetData data = new SpawnPointSpreadSheetData();
+      data.setId(Integer.parseInt(row[0]));
+
       World world = Bukkit.getWorld(row[1]);
-      double x = Double.parseDouble(row[2]);
-      double y = Double.parseDouble(row[3]);
-      double z = Double.parseDouble(row[4]);
-      int maxCount = Integer.parseInt(row[5]);
+      if (world == null) { return; }
 
-      SpawnLevel level = SpawnLevel.getLevel(row[6]);
+      data.setLocation(new Location(world, Integer.parseInt(row[2]), Integer.parseInt(row[3]), Integer.parseInt(row[4])));
+      data.setMaxSpawnCount(Integer.parseInt(row[5]));
+      data.setType(TargetType.getType(row[6]));
+      data.setDungeonHight((int) JavaUtil.getDouble(row[7], 8));
+      data.setLookNearChunk(JavaUtil.getBoolean(row[8], TargetType.valueOf(row[6]).isCheckNearChunk()));
 
-      if (world == null) {
-        sendMessage("world:" + row[1] + "が存在しません。:" + id);
-        return;
-      }
-
-      SpletSheetSpawnMobGetter spletSheetSpawnMobGetter;
-      if (level == SpawnLevel.BOSS) {
-        spletSheetSpawnMobGetter = new SpredSheetSpawnBossGetter(id);
-      } else {
-        spletSheetSpawnMobGetter = new SpletSheetSpawnMobGetter(id);
-      }
-      for (int i = 9; i < getTag().length; i++) {
-        boolean addMob = spletSheetSpawnMobGetter.addMob(row[i]);
-        if (!addMob && row[i] != null && !row[i].isEmpty()) {
-          sendMessage(row[i] + "は無視されました。");
-        }
-      }
-
-      MobSpawnerPoint mobSpawnerPoint = spletSheetSpawnMobGetter.getMobSpawnerPoint(new Location(world, x, y, z),
-          maxCount, level);
-      mobSpawnerPoint.setDungeonHight(JavaUtil.getInt(row[7], 6));
-      mobSpawnerPoint.setLookNearChunk(JavaUtil.getBoolean(row[8], true));
-      MobSpawnerPointManager.addSpawnPoint(mobSpawnerPoint);
+      // スポーンポイントを登録する
+      IntStream.rangeClosed(9, 13)
+          .filter(i -> row[i] != null && !row[i].isEmpty())
+          .mapToObj(i -> new SpawnPointSpreadSheetData(data, row[i]))
+          .map(SpawnPointFactory::getNewInstance)
+          .filter(d -> d != null)
+          .forEach(SpawnPointGroupFactory::registSpawnPoint);
     } catch (Exception e) {
       e.printStackTrace();
-      sendMessage("入力されたデータが不正です。(spawn mob 設定)");
+      sendMessage("入力されたデータが不正です。(spawn mob 設定 ID:" + row[0] + ")");
     }
   }
 
@@ -120,16 +89,8 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
-    MobSpawnerPointManager.clear();
-
+    SpawnPointGroupFactory.clear();
     super.onCallbackFunction(submit);
-
-    for (World world : Bukkit.getWorlds()) {
-      // loadされているchunkを設定する
-      Chunk[] loadedChunks = world.getLoadedChunks();
-      for (Chunk chunk : loadedChunks) {
-        MobSpawnerPointManager.loadChunk(chunk);
-      }
-    }
   }
+
 }

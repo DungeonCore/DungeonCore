@@ -56,7 +56,7 @@ import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
-import net.l_bulb.dungeoncore.mobspawn.old.point.MobSpawnerPointManager;
+import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
 import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class OtherCommonListener implements Listener {
@@ -250,7 +250,7 @@ public class OtherCommonListener implements Listener {
 
   @EventHandler
   public void onBrakeSponge(BlockBreakEvent e) {
-    MobSpawnerPointManager.onBrakeSponge(e);
+    SpawnPointMonitor.onBrakeSponge(e);
   }
 
   @EventHandler(priority = EventPriority.HIGHEST)
