@@ -166,22 +166,6 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     // 攻撃力ポイント
     e.setDamage(e.getDamage() * attackPoint);
 
-    // ジャイアントの攻撃範囲調整
-    if (getEntityType() == EntityType.GIANT) {
-      Location location = mob.getLocation();
-      location.setY(0);
-      Location location2 = target.getLocation();
-      location2.setY(0);
-      if (location.distance(location2) > 2.5) {
-        e.setCancelled(true);
-      }
-    } else if (getEntityType() == EntityType.GUARDIAN) {
-      // ガーディアンの攻撃速度調整
-      if (rnd.nextInt(4) != 0) {
-        e.setCancelled(true);
-      }
-    }
-
     // もとのmobの効果
     if (this.mob == null) { return; }
     this.mob.onAttack(mob, target, e);
@@ -328,12 +312,14 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   @Override
   public void onTarget(EntityTargetLivingEntityEvent event) {
     LivingEntity target = event.getTarget();
-    if (target == null || target == event.getEntity()) {
-      event.setCancelled(true);
-      return;
+    if (event.getEntity().getType() != EntityType.GUARDIAN) {
+      if (target == null || target == event.getEntity()) {
+        event.setCancelled(true);
+        return;
+      }
     }
 
-    if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
+    if (target != null && (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target))) {
       executeMobSkill((LivingEntity) event.getEntity(), event.getTarget(), MobSkillExcuteConditionType.TARGET_PLAYER);
     }
   }

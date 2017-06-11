@@ -29,6 +29,10 @@ public class CustomGiant extends EntityGiantZombie implements ICustomUndeadEntit
 
   public CustomGiant(World world, LbnMobTag tag) {
     super(world);
+    // 腕の長さを3にする
+    if (tag.getAttackReach() == -1) {
+      tag.setAttackReach(3);
+    }
     this.tag = tag;
     try {
       AttackAISetter.removeAllAi(this);
