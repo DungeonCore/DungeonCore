@@ -126,7 +126,6 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   @Override
   public void onProjectileHitEntity(LivingEntity mob, LivingEntity target,
       EntityDamageByEntityEvent e) {
-
     // mobskill
     if (target.getType() == EntityType.PLAYER || SummonPlayerManager.isSummonMob(target)) {
       executeMobSkill(mob, target, MobSkillExcuteConditionType.MOB_ATTACK);
