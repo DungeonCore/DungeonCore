@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
@@ -26,8 +27,8 @@ public class MagicBookLevel1Flame extends AbstractMagicBook {
   }
 
   @Override
-  protected void onDamage(Player player, LivingEntity entity) {
-    super.onDamage(player, entity);
+  protected void onDamage(Player player, LivingEntity entity, ItemStack item) {
+    super.onDamage(player, entity, item);
     entity.setFireTicks(20 * 4);
     // パーティクル
     particleData.run(entity.getLocation());

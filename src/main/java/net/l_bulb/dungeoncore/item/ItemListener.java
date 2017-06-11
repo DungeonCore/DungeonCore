@@ -1,6 +1,5 @@
 package net.l_bulb.dungeoncore.item;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -146,7 +145,7 @@ public class ItemListener implements Listener {
   public void onAttackDamage(CombatEntityEvent e) {
     // last damageを登録する
     if (e.getAttacker().getType() == EntityType.PLAYER) {
-      LastDamageManager.addData(e.getAttacker(), e.geLastDamageMethodType(), e.getEnemy());
+      LastDamageManager.onDamage(e.getEnemy(), e.getAttacker(), e.geLastDamageMethodType(), e.getItemStack());
     }
   }
 
@@ -195,44 +194,13 @@ public class ItemListener implements Listener {
     if (!LivingEntityUtil.isEnemy(e.getEntity())) { return; }
 
     LivingEntity entity = e.getEntity();
-    EntityDamageEvent lastDamageCause = entity.getLastDamageCause();
 
     // 最後に攻撃した攻撃者を取得
     LastDamageMethodType lastDamageMethod = LastDamageManager.getLastDamageAttackType(entity);
     Player player = LastDamageManager.getLastDamagePlayer(entity);
+    ItemStack item = LastDamageManager.getLastDamageItem(entity);
     // 攻撃者が記録されていないなら何もしない
     if (lastDamageMethod == null || player == null) { return; }
-
-    // 倒すときに使ったアイテム
-    ItemStack item = null;
-
-    // 最後に攻撃をしたEntityを取得
-    Entity damager = ((EntityDamageByEntityEvent) lastDamageCause).getDamager();
-
-    if (lastDamageMethod == LastDamageMethodType.SWORD || lastDamageMethod == LastDamageMethodType.BOW) {
-      // 攻撃をしたのが生き物なら
-      if (damager.getType().isAlive()) {
-        // 手に持っているアイテムで倒したと判断
-        item = player.getItemInHand();
-      } else {
-        // 攻撃したのがProjectileならその情報からItemを取得
-        item = ProjectileManager.getItemStack(damager);
-      }
-    }
-
-    // 攻撃につかったアイテムが不明な時は無視する
-    if (item == null) { return; }
-
-    ItemInterface customItem = ItemManager.getCustomItem(item);
-    // カスタムアイテムでないなら何もしない
-    if (customItem == null) { return; }
-
-    // もしLastDamageManagerの攻撃手段と、使ったアイテムの攻撃手段が異なるならエラーにする
-    if (LastDamageMethodType.fromAttackType(customItem.getAttackType()) != lastDamageMethod) {
-      new RuntimeException("Player:" + player.getName() + "がモンスターを倒した際にエラーが発生しました。(manager:" + lastDamageMethod + "と item:"
-          + LastDamageMethodType.fromAttackType(customItem.getAttackType())
-          + "が一致しません").printStackTrace();
-    }
 
     PlayerKillEntityEvent playerKillEntityEvent = new PlayerKillEntityEvent(player, entity, item);
     playerKillEntityEvent.callEvent();

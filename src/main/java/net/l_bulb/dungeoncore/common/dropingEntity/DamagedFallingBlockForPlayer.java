@@ -51,7 +51,7 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
       if (entity.isDead()) { return false; }
 
       // LastDamageを登録
-      LastDamageManager.onDamage(((LivingEntity) entity), p, getAttackType());
+      LastDamageManager.onDamage((entity), p, getAttackType(), item);
 
       // eventを実行
       CombatEntityEvent callEvent = new CombatEntityEvent(p, damage, customItem, item, isNormalAttack, (LivingEntity) entity).callEvent();

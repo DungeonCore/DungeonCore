@@ -232,10 +232,10 @@ public class LivingEntityUtil {
     e.setHealth(nextHealth);
   }
 
-  public static void trueDamage(LivingEntity target, double val, LivingEntity damager, LastDamageMethodType type) {
+  public static void trueDamage(LivingEntity target, double val, LivingEntity damager, LastDamageMethodType type, ItemStack item) {
     // 攻撃を与えたのがPlayerの場合はLastDamageを登録する
     if (damager.getType() == EntityType.PLAYER) {
-      LastDamageManager.onDamage(target, (Player) damager, type);
+      LastDamageManager.onDamage(target, (Player) damager, type, item);
     }
 
     // ダメージを与える対象がクリエイティブなら何もしない

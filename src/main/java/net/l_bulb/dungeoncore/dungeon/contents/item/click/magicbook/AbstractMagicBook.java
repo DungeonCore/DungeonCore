@@ -23,7 +23,7 @@ public abstract class AbstractMagicBook extends RightClickItem {
     List<Entity> nearbyEntities = getNearEntitys(player);
     for (Entity entity : nearbyEntities) {
       if (LivingEntityUtil.isEnemy(entity)) {
-        onDamage(player, (LivingEntity) entity);
+        onDamage(player, (LivingEntity) entity, e.getItem());
       }
     }
     return true;
@@ -31,11 +31,18 @@ public abstract class AbstractMagicBook extends RightClickItem {
 
   abstract protected List<Entity> getNearEntitys(Player player);
 
-  protected void onDamage(Player player, LivingEntity entity) {
+  /**
+   * 効果を発動したときのダメージを与える
+   * 
+   * @param player
+   * @param entity
+   * @param item itemstack or null
+   */
+  protected void onDamage(Player player, LivingEntity entity, ItemStack item) {
     // ダメージを与える
     entity.damage(getDamageVal(), player);
     // LastDamageを登録
-    LastDamageManager.onDamage(entity, player, LastDamageMethodType.USE_ITEM);
+    LastDamageManager.onDamage(entity, player, LastDamageMethodType.USE_ITEM, item);
   }
 
   abstract protected double getDamageVal();

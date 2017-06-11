@@ -122,7 +122,7 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
    * イベントを呼ばれた後にダメージの処理を行う
    */
   public void damageEntity() {
-    if (isCancelled()) {
+    if (!isCancelled()) {
       enemy.damage(getDamage());
     }
   }

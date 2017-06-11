@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -60,8 +61,8 @@ public class MagicBookFireLevel2 extends AbstractMagicBook {
   }
 
   @Override
-  protected void onDamage(Player player, LivingEntity entity) {
-    super.onDamage(player, entity);
+  protected void onDamage(Player player, LivingEntity entity, ItemStack item) {
+    super.onDamage(player, entity, item);
     entity.setFireTicks(20 * 8);
     // パーティクル
     particleData.run(entity.getLocation());
