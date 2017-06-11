@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.mobspawn;
 
+import net.l_bulb.dungeoncore.util.JavaUtil;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +31,10 @@ public class SpawnResult {
     setReslt(0, "プレイヤーが周囲のチャンクにいないためスポーンされませんでした。");
   }
 
+  public void ofMostEntityCount(int entityCount) {
+    setReslt(0, "スポーンポイントの周りにモンスターが多すぎます(" + entityCount + "体)");
+  }
+
   int tempLastSpawnCount = -1;
 
   /**
@@ -48,6 +54,8 @@ public class SpawnResult {
       setMessage(spawTargetName + "をスポーンしました。");
       // スポーンした時間を取得
       lastSpawnDate = System.currentTimeMillis();
+    } else {
+      setReslt(0, "他のスポーンポイントでモンスターがスポーンしたためこのスポーンポイントはスキップされました。");
     }
     tempLastSpawnCount = -1;
   }
@@ -57,9 +65,8 @@ public class SpawnResult {
    *
    * @return
    */
-  public long getSpawnSecoundAge() {
-    if (lastSpawnDate == -1) { return -1; }
-
-    return (System.currentTimeMillis() - lastSpawnCount) / 1000;
+  public double getSpawnSecoundAge() {
+    if (lastSpawnDate == 0) { return -1; }
+    return JavaUtil.round((System.currentTimeMillis() - lastSpawnDate) / 1000.0, 2);
   }
 }

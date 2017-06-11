@@ -66,6 +66,30 @@ public class JavaUtil {
     }
   }
 
+  /**
+   * targetがmin(含まない)とmax(含まない)の間に入っていればTRUE
+   *
+   * @param target
+   * @param min
+   * @param max
+   * @return
+   */
+  public static boolean inInt(int target, int min, int max) {
+    return target > min && target < max;
+  }
+
+  /**
+   * targetがmin(含む)とmax(含む)の間に入っていればTRUE
+   *
+   * @param target
+   * @param min
+   * @param max
+   * @return
+   */
+  public static boolean inInt2(int target, int min, int max) {
+    return target >= min && target <= max;
+  }
+
   static TimeZone timeZone = TimeZone.getTimeZone("Asia/Tokyo");
 
   public static long getJapanTimeInMillis() {

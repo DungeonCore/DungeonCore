@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointSpreadSheetData.TargetType;
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkGroup;
 
 public interface SpawnPoint {
   /**
@@ -17,6 +18,15 @@ public interface SpawnPoint {
   public Location getLocation();
 
   public Chunk getChunk();
+
+  /**
+   * チャンクグループを取得
+   * 
+   * @return
+   */
+  default public ChunkGroup getChunkGroup() {
+    return new ChunkGroup(getLocation());
+  }
 
   /**
    * 最大湧き数
@@ -48,7 +58,7 @@ public interface SpawnPoint {
 
   /**
    * モンスターをスポーンさせる
-   * 
+   *
    * @return TODO
    *
    * @return

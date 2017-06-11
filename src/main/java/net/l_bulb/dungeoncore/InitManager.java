@@ -39,6 +39,8 @@ public class InitManager {
       // Citizenのバグを治す
       CitizenBugFixPatch.doPatch();
       WeaponSkillFactory.allRegist();
+      // スポーンを開始する
+      SpawnManager.startSpawnEntity();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -79,7 +81,6 @@ public class InitManager {
             SpletSheetCommand.reloadSheet(null, "spawnpoint");
             break;
           case 12:
-            SpawnManager.startSpawnEntity();
             break;
           default:
             break;

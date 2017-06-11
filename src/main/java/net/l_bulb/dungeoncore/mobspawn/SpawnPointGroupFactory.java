@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkGroup;
+
 import com.google.common.collect.HashMultimap;
 
 public class SpawnPointGroupFactory {
 
-  private static List<SpawnPointGroup> spawnPointGroupList = new ArrayList<>();
+  static List<SpawnPointGroup> spawnPointGroupList = new ArrayList<>();
 
-  private static HashMultimap<ChunkGroup, SpawnPointGroup> spawnPointGroupChunkMap = HashMultimap.create();
+  static HashMultimap<ChunkGroup, SpawnPointGroup> spawnPointGroupChunkMap = HashMultimap.create();
 
   /**
    * スポーンポイントを登録する
@@ -21,9 +23,10 @@ public class SpawnPointGroupFactory {
     // スポーンポイントを登録
     SpawnPointFactory.addSpawnPoint(point);
 
+    ChunkGroup chunkGroup = point.getChunkGroup();
+
     // すでにスポーンポイントグループが存在するか確認する
-    Optional<SpawnPointGroup> spawnPointGroup = spawnPointGroupList.stream()
-        .filter(s -> Math.abs(s.getChunkGroup().getY() - point.getLocation().getY()) < 8 && s.isSameAs(point)).findFirst();
+    Optional<SpawnPointGroup> spawnPointGroup = spawnPointGroupChunkMap.get(chunkGroup).stream().filter(s -> s.isSameAs(point)).findFirst();
 
     if (spawnPointGroup.isPresent()) {
       spawnPointGroup.get().addSpawnPoint(point);

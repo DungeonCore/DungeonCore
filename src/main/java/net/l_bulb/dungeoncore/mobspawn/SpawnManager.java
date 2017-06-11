@@ -1,12 +1,14 @@
 package net.l_bulb.dungeoncore.mobspawn;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkData;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 
@@ -25,7 +27,7 @@ public class SpawnManager {
     // スポーンさせない
     if (!Main.isDoSpawn()) { return; }
 
-    DungeonLogger.info(ChatColor.GREEN + "==MOB SPAWN SYSTEM START!!==");
+    DungeonLogger.info("==MOB SPAWN SYSTEM START!!==");
 
     List<SpawnPointGroup> allSpawnPoint = SpawnPointGroupFactory.getAllSpawnPoint();
     new LbnRunnable() {
@@ -73,17 +75,8 @@ public class SpawnManager {
       return;
     }
 
-    // チャンクからPlayerとスポーンするEntityの数を取得
-    pointGroup.consume(e -> {
-      // Playerならインクリメント
-      if (e.getType() == EntityType.PLAYER) {
-        counter.incrementPlayer();
-      }
-      // TargetのEntityならインクリメント
-      if (pointGroup.isSameEntity(e)) {
-        counter.incrementTarget();
-      }
-    });
+    // 周囲のチャンクからEntityとPlayer数をカウント
+    pointGroup.consumeNearChunk(new CountUpEntity(pointGroup)::accept);
 
     // Playerがいないならスポーンさせない
     if (counter.getPlayerCount() == 0) {
@@ -93,6 +86,11 @@ public class SpawnManager {
 
     // スポーンできるモンスターの数に応じて順次スポーンさせる
     int canCountCount = pointGroup.getMaxCount() - counter.getTargetCount();
+    if (canCountCount <= 0) {
+      pointGroup.acceptAllResult(result -> result.ofMostEntityCount(counter.getTargetCount()));
+      return;
+    }
+
     if (canCountCount > 0) {
       Stream.generate(() -> pointGroup.next()).limit(canCountCount)
           // スポーンできるものだけスポーンさせる
@@ -125,6 +123,34 @@ public class SpawnManager {
       targetCount++;
     }
 
+  }
+
+  static class CountUpEntity implements BiConsumer<Entity, ChunkData> {
+    private SpawnPointGroup pointGroup;
+
+    public CountUpEntity(SpawnPointGroup pointGroup) {
+      this.pointGroup = pointGroup;
+    }
+
+    @Override
+    public void accept(Entity e, ChunkData c) {
+      // Playerならインクリメント
+      if (e.getType() == EntityType.PLAYER) {
+        counter.incrementPlayer();
+      }
+
+      // 近くのチャンクでないならカウントしない
+      if (!c.isNear()) { return; }
+
+      // entityのy座標がchunkHightの範囲に収まっていないならカウントしない
+      if (Math.abs(e.getLocation().getY() - pointGroup.getY()) > pointGroup.getChunkHight()) { return; }
+
+      // 同じ種類のmobでないならカウントしない
+      if (!pointGroup.isSameEntity(e)) { return; }
+
+      // TargetのEntityならインクリメント
+      counter.incrementTarget();
+    }
   }
 
 }

@@ -2,9 +2,13 @@ package net.l_bulb.dungeoncore.mobspawn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.bukkit.entity.Entity;
+
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkData;
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkGroup;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +32,7 @@ public class SpawnPointGroup {
   // テンプレートのスポーンポイント
   SpawnPoint firstSpawnPoint;
 
+  @Getter
   int chunkHight;
 
   // 周囲のチャンクを見るならTRUE
@@ -37,7 +42,7 @@ public class SpawnPointGroup {
     // スポーンポイント追加
     spawnPointList.add(p);
     // 中心のチャンクを設定
-    chunkGroup = new ChunkGroup(p.getLocation());
+    chunkGroup = p.getChunkGroup();
     // 最大湧き数を設定
     maxCount = p.getMaxSpawnCount();
     // 最初のチャンクとして設定
@@ -115,8 +120,8 @@ public class SpawnPointGroup {
    *
    * @param consumer
    */
-  public void consume(Consumer<Entity> consumer) {
-    chunkGroup.consume(e -> Math.abs(e.getLocation().getY() - chunkGroup.getY()) > chunkHight, consumer);
+  public void consumeNearChunk(BiConsumer<Entity, ChunkData> consumer) {
+    chunkGroup.consumeChunk(e -> true, consumer);
   }
 
   /**
@@ -133,6 +138,15 @@ public class SpawnPointGroup {
    */
   public String getSpawnTargetName() {
     return firstSpawnPoint.getSpawnTargetName();
+  }
+
+  /**
+   * このスポーンポイントのY座標の中心を取得
+   *
+   * @return
+   */
+  public int getY() {
+    return chunkGroup.getY();
   }
 
 }

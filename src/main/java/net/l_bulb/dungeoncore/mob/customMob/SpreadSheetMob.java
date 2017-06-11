@@ -394,8 +394,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   public void setSwordRegistance(double swordRegistance) {
     if (swordRegistance < 0) {
       swordRegistance = 0;
-    } else if (swordRegistance > 200) {
-      swordRegistance = 200;
+    } else if (swordRegistance > 100) {
+      swordRegistance = 100;
     }
     this.swordRegistance = swordRegistance;
   }
@@ -403,8 +403,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   public void setBowRegistance(double bowRegistance) {
     if (bowRegistance < 0) {
       bowRegistance = 0;
-    } else if (bowRegistance > 200) {
-      bowRegistance = 200;
+    } else if (bowRegistance > 100) {
+      bowRegistance = 100;
     }
     this.bowRegistance = bowRegistance;
   }
@@ -412,8 +412,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
   public void setMagicRegistance(double magicRegistance) {
     if (magicRegistance < 0) {
       magicRegistance = 0;
-    } else if (magicRegistance > 200) {
-      magicRegistance = 200;
+    } else if (magicRegistance > 100) {
+      magicRegistance = 100;
     }
     this.magicRegistance = magicRegistance;
   }
