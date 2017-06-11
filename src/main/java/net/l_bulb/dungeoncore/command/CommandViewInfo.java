@@ -131,6 +131,9 @@ public class CommandViewInfo implements CommandExecutor {
       case "armor":
         sendArmorData((Player) paramCommandSender);
         break;
+      case "heal":
+        target.setHealth(target.getMaxHealth());
+        break;
       case "test":
         break;
       default:
@@ -198,6 +201,7 @@ class CommandMenu implements MenuSelectorInterface {
     createInventory.addItem(getItem("クールタイム初期化", "tl cooltime", Material.CACTUS, 0, "/tl cooltimeを実行", "全てのPlayerのクールタイムをリセット"));
     createInventory.addItem(getItem("スコアボード", "tl score", Material.MAP, 0, "/tl scoreを実行", "スコアボードの表示/非表示切り替え"));
     createInventory.addItem(getItem("装備", "tl armor", Material.DIAMOND_CHESTPLATE, 0, "/tl armorを実行", "現在装備中の防具情報を取得"));
+    createInventory.addItem(getItem("回復", "tl heal", Material.GHAST_TEAR, 0, "/tl healを実行", "体力を全回復する"));
     p.openInventory(createInventory);
   }
 

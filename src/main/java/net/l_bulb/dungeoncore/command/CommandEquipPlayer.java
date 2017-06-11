@@ -12,10 +12,12 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.TestArmorItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
@@ -84,6 +86,14 @@ public class CommandEquipPlayer implements CommandExecutor, TabCompleter {
     updatePlayerLevel(p, Math.max(weaponLevel, level));
 
     p.updateInventory();
+
+    // HPを回復させる
+    new BukkitRunnable() {
+      @Override
+      public void run() {
+        p.setHealth(p.getMaxHealth());
+      }
+    }.runTaskLater(Main.plugin, 5);
     return true;
   }
 
