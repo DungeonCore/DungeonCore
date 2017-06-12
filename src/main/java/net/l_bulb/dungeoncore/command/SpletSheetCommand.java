@@ -23,6 +23,7 @@ import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.BookSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.BuffSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ChestSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.DungeonListRunnable;
+import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.Food2SheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.FoodSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.ItemSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MagicStoneOreSheetRunnable;
@@ -66,6 +67,7 @@ public class SpletSheetCommand implements CommandExecutor, TabCompleter {
     regist(new Mob2SheetRunnable(sender));
     regist(new Mob1SheetRunnable(sender));
     regist(new RecipeSheetRunnable(sender));
+    regist(new Food2SheetRunnable(sender));
   }
 
   public static void regist(SheetRunnable<String[][]> sheet) {

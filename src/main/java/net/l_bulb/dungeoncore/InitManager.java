@@ -58,6 +58,7 @@ public class InitManager {
     MobCommand.reloadAllMob(null);
     MobSkillManager.reloadDataBySystem();
     SpletSheetCommand.reloadSheet(null, "item");
+    SpletSheetCommand.reloadSheet(null, "food2");
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
@@ -73,7 +74,6 @@ public class InitManager {
     SpletSheetCommand.reloadSheet(null, "magicore");
     SpletSheetCommand.reloadSheet(null, "food");
     BookManager.reloadSpletSheet(Bukkit.getConsoleSender());
-    // SystemSqlExecutor.execute();
     new LbnRunnable() {
       @Override
       public void run2() {

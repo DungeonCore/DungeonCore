@@ -67,7 +67,8 @@ public abstract class AbstractItem implements ItemInterface {
     itemLoreData.setBefore(lore);
 
     // スタンダートLoreTokenを取得
-    itemLoreData.addLore(getStandardLoreToken(nbttagSetter));
+    ItemLoreToken standardLoreToken = getStandardLoreToken(nbttagSetter);
+    itemLoreData.addLore(standardLoreToken);
 
     ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
@@ -77,7 +78,7 @@ public abstract class AbstractItem implements ItemInterface {
 
   /**
    * 基本性能のLoreTokenを取得する
-   * 
+   *
    * @param newParam TODO
    *
    * @return

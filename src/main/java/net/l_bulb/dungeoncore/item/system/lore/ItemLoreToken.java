@@ -87,7 +87,7 @@ public class ItemLoreToken {
   }
 
   public int size() {
-    return lore.size() - 2;
+    return lore.size() - 1;
   }
 
   /**

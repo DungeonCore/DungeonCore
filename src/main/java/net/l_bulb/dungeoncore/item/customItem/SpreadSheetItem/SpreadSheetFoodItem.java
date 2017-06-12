@@ -23,6 +23,7 @@ import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 public class SpreadSheetFoodItem extends FoodItem {
 
@@ -43,15 +44,15 @@ public class SpreadSheetFoodItem extends FoodItem {
     // バフ効果を与える
     BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
     if (buff1 != null) {
-      buff1.addBuff(player);
+      TheLowExecutor.executeLater(data.getBuff1DelayTick(), () -> buff1.addBuff(player));
     }
     BuffData buff2 = BuffDataFactory.getBuffFromId(buffId2);
     if (buff2 != null) {
-      buff2.addBuff(player);
+      TheLowExecutor.executeLater(data.getBuff2DelayTick(), () -> buff2.addBuff(player));
     }
     BuffData buff3 = BuffDataFactory.getBuffFromId(buffId3);
     if (buff3 != null) {
-      buff3.addBuff(player);
+      TheLowExecutor.executeLater(data.getBuff3DelayTick(), () -> buff3.addBuff(player));
     }
 
     // パーティクル
@@ -131,7 +132,7 @@ public class SpreadSheetFoodItem extends FoodItem {
     String buffId3 = data.getBuff3();
 
     BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
-    if (buff1 != null && (int) (buff1.getTick() / 20.0) > 0) {
+    if (buff1 != null && (buff1.getTick() / 20.0) > 0) {
       loreToken.addLore(MessageFormat.format("{0}(レベル{1})を{2}秒付与", buff1.getEffect().getName(), (buff1.getLevel() + 1),
           (int) (buff1.getTick() / 20.0)));
     }
@@ -161,5 +162,4 @@ public class SpreadSheetFoodItem extends FoodItem {
 
     return loreToken;
   }
-
 }

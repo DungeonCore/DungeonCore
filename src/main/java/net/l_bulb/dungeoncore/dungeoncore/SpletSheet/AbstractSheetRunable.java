@@ -124,7 +124,7 @@ public abstract class AbstractSheetRunable implements SheetRunnable<String[][]> 
           e.printStackTrace();
         }
       }
-      sender.sendMessage("更新が完了しました。" + getSheetName());
+      sender.sendMessage("更新が完了しました。" + getSheetName() + ": " + allData.length + "件");
       lastUpDate.put(getClass(), System.currentTimeMillis());
     } finally {
       isTransaction = false;

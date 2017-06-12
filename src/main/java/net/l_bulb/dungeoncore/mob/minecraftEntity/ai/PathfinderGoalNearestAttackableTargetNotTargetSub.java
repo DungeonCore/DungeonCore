@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -80,68 +81,47 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
 
   @Override
   public boolean a() {
-    if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) { return false; }
-    // double d0 = f();
-    double d0 = 16;
-    @SuppressWarnings("unchecked")
-    List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0), Predicates.and(this.c, predicateEntity));
+    try {
+      if ((this.g > 0) && (this.e.bb().nextInt(this.g) != 0)) { return false; }
+      // double d0 = f();
+      double d0 = 16;
+      @SuppressWarnings("unchecked")
+      List<EntityLiving> list = this.e.world.a(this.a, this.e.getBoundingBox().grow(d0, 8.0D, d0), Predicates.and(this.c, predicateEntity));
 
-    Collections.sort(list, this.b);
-    if (list.isEmpty()) {
-      return false;
-    } else {
-      for (Entity e : list) {
-        if (e == null) {
-          continue;
-        }
-        // 動物には攻撃しない
-        if (e instanceof EntityAnimal) {
-          continue;
-        }
+      Collections.sort(list, this.b);
+      if (list.isEmpty()) {
+        return false;
+      } else {
+        for (Entity e : list) {
+          if (e == null) {
+            continue;
+          }
+          // 動物には攻撃しない
+          if (e instanceof EntityAnimal) {
+            continue;
+          }
 
-        CraftEntity bukkitEntity = e.getBukkitEntity();
-        boolean targetIsSummon = SummonPlayerManager.isSummonMob(bukkitEntity);
-        if (isSummon) {
-          // ターゲットがプレイヤーでなくsummonでないなら
-          if (!targetIsSummon && bukkitEntity.getType() != EntityType.PLAYER) {
-            this.d = (EntityLiving) e;
-            return true;
-          }
-        } else {
-          // ターゲットがプレイヤーまたはsummonなら
-          if (targetIsSummon || bukkitEntity.getType() == EntityType.PLAYER) {
-            this.d = (EntityLiving) e;
-            return true;
+          CraftEntity bukkitEntity = e.getBukkitEntity();
+          // エラーになることがあるのでtry-catchで囲む
+          boolean targetIsSummon = TheLowExecutor.executeBooleanIgnoreException(() -> SummonPlayerManager.isSummonMob(bukkitEntity), false);
+          if (isSummon) {
+            // ターゲットがプレイヤーでなくsummonでないなら
+            if (!targetIsSummon && bukkitEntity.getType() != EntityType.PLAYER) {
+              this.d = (EntityLiving) e;
+              return true;
+            }
+          } else {
+            // ターゲットがプレイヤーまたはsummonなら
+            if (targetIsSummon || bukkitEntity.getType() == EntityType.PLAYER) {
+              this.d = (EntityLiving) e;
+              return true;
+            }
           }
         }
-        // else if (SummonPlayerManager.isSummonMob(e.getBukkitEntity())) {
-        // if (isSummon) {
-        // //ターゲットがSUMMONならスキップする
-        // continue;
-        // } else {
-        // this.d = (EntityLiving) e;
-        // return true;
-        // }
-        // } else if (e.getBukkitEntity().getType() == EntityType.PLAYER) {
-        // //クエリに場合には何もしない
-        // if (((Player)e.getBukkitEntity()).getGameMode() == GameMode.CREATIVE) {
-        // continue;
-        // }
-        // if (isSummon) {
-        // continue;
-        // } else {
-        // this.d = (EntityLiving) e;
-        // return true;
-        // }
-        // } else {
-        // if (isSummon) {
-        // this.d = (EntityLiving) e;
-        // return true;
-        // } else {
-        // continue;
-        // }
-        // }
+        return false;
       }
+    } catch (Exception | Error e) {
+      e.printStackTrace();
       return false;
     }
   }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -187,6 +188,11 @@ public class ItemLoreData {
     lore.addAll(afterDetail);
 
     return lore;
+  }
+
+  @Override
+  public String toString() {
+    return getLore().stream().collect(Collectors.joining("\n"));
   }
 
   /**
