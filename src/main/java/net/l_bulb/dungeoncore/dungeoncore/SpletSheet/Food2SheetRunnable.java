@@ -34,7 +34,7 @@ public class Food2SheetRunnable extends AbstractSheetRunable {
   @Override
   public String[] getTag() {
     return new String[] { "id", "name", "command", "price", "buff1", "time1", "level1", "buff2", "time2", "level2", "buff3", "time3", "level3", "mp",// 13
-        "buff1delay", "buff2delay", "buff3delay" };
+        "buff1delay", "buff2delay", "buff3delay", "instant" };
   }
 
   @Override
@@ -67,6 +67,8 @@ public class Food2SheetRunnable extends AbstractSheetRunable {
       foodItemData.setBuff1DelayTick((int) (JavaUtil.getDouble(row[14], 0) * 20));
       foodItemData.setBuff2DelayTick((int) (JavaUtil.getDouble(row[15], 0) * 20));
       foodItemData.setBuff3DelayTick((int) (JavaUtil.getDouble(row[16], 0) * 20));
+
+      foodItemData.setCanClickEat(JavaUtil.getBoolean(row[17], false));
 
       SpreadSheetFoodItem spreadSheetFoodItem = new SpreadSheetFoodItem(foodItemData);
       ItemManager.registItem(spreadSheetFoodItem);

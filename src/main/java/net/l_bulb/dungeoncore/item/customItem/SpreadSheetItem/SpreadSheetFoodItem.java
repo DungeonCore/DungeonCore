@@ -4,7 +4,9 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,6 +20,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleManager;
 import net.l_bulb.dungeoncore.common.sound.SoundData;
 import net.l_bulb.dungeoncore.common.sound.SoundManager;
 import net.l_bulb.dungeoncore.item.customItem.itemAbstract.FoodItem;
+import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
@@ -25,7 +28,7 @@ import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
-public class SpreadSheetFoodItem extends FoodItem {
+public class SpreadSheetFoodItem extends FoodItem implements RightClickItemable {
 
   FoodItemData data;
 
@@ -35,24 +38,31 @@ public class SpreadSheetFoodItem extends FoodItem {
 
   @Override
   public void onPlayerItemConsumeEvent(PlayerItemConsumeEvent event) {
+    onEat(event.getPlayer());
+  }
+
+  /**
+   * Playerがこのアイテムを消費したときの処理
+   *
+   * @param player
+   */
+  public void onEat(Player player) {
     String buffId1 = data.getBuff1();
     String buffId2 = data.getBuff2();
     String buffId3 = data.getBuff3();
 
-    Player player = event.getPlayer();
-
     // バフ効果を与える
     BuffData buff1 = BuffDataFactory.getBuffFromId(buffId1);
     if (buff1 != null) {
-      TheLowExecutor.executeLater(data.getBuff1DelayTick(), () -> buff1.addBuff(player));
+      TheLowExecutor.executeLater(data.getBuff1DelayTick(), () -> buff1.addBuff(player, true));
     }
     BuffData buff2 = BuffDataFactory.getBuffFromId(buffId2);
     if (buff2 != null) {
-      TheLowExecutor.executeLater(data.getBuff2DelayTick(), () -> buff2.addBuff(player));
+      TheLowExecutor.executeLater(data.getBuff2DelayTick(), () -> buff2.addBuff(player, true));
     }
     BuffData buff3 = BuffDataFactory.getBuffFromId(buffId3);
     if (buff3 != null) {
-      TheLowExecutor.executeLater(data.getBuff3DelayTick(), () -> buff3.addBuff(player));
+      TheLowExecutor.executeLater(data.getBuff3DelayTick(), () -> buff3.addBuff(player, true));
     }
 
     // パーティクル
@@ -120,7 +130,18 @@ public class SpreadSheetFoodItem extends FoodItem {
 
   @Override
   public String[] getDetail() {
-    return data.getDetail();
+    String[] detailArray = data.getDetail();
+    // 消費できるアイテムのときは文言を追加する
+    if (data.isCanClickEat()) {
+      // detailがnullのとき
+      if (detailArray == null) { return new String[] { "右クリックで消費可能" }; }
+      // detail + 1の大きさの配列を作成する
+      String[] detail = Arrays.copyOf(detailArray, detailArray.length + 1);
+      detail[detailArray.length] = "右クリックで消費可能";
+      return detail;
+    } else {
+      return detailArray;
+    }
   }
 
   @Override
@@ -161,5 +182,18 @@ public class SpreadSheetFoodItem extends FoodItem {
     }
 
     return loreToken;
+  }
+
+  @Override
+  public void excuteOnRightClick(PlayerInteractEvent e) {
+    if (data.isCanClickEat()) {
+      Player player = e.getPlayer();
+      // 食べた判定にする
+      onEat(player);
+      // 消費する
+      ItemStackUtil.consumeItemInHand(player);
+      // 音を鳴らす
+      player.getWorld().playSound(player.getLocation(), Sound.EAT, 1, 1);
+    }
   }
 }

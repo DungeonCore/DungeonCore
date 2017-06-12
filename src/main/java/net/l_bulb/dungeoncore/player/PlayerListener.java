@@ -272,6 +272,8 @@ public class PlayerListener implements Listener {
             break;
           case MUSHROOM_SOUP:
             e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
+          case RABBIT_STEW:
+            e.getPlayer().getInventory().remove(new ItemStack(Material.BOWL));
             break;
           default:
             break;

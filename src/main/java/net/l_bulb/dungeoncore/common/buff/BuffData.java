@@ -25,9 +25,24 @@ public class BuffData {
   private int tick;
   private int level = 1;
 
+  /**
+   * バフ効果を適当させる。上書きしない
+   * 
+   * @param e
+   */
   public void addBuff(LivingEntity e) {
+    addBuff(e, false);
+  }
+
+  /**
+   * バフ効果を適当させる。
+   * 
+   * @param e
+   * @param force 上書きするならTRUE
+   */
+  public void addBuff(LivingEntity e, boolean force) {
     if (e.isValid()) {
-      e.addPotionEffect(new PotionEffect(effect, tick, level), false);
+      e.addPotionEffect(new PotionEffect(effect, tick, level), force);
     }
   }
 

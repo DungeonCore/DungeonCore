@@ -20,6 +20,8 @@ public class FoodItemData {
   String buff3;
   String sound;
   String particle;
+  boolean canClickEat = false;
+
   int price;
   int swordExp;
   int bowExp;
