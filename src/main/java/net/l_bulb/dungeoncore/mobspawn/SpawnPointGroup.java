@@ -17,13 +17,21 @@ public class SpawnPointGroup {
   // スポーンポイントのリスト
   ArrayList<SpawnPoint> spawnPointList = new ArrayList<>();
 
+  @Getter
+  @Setter
+  int id;
+
   // チャンク
   @Getter
   ChunkGroup chunkGroup;
 
   // 最大カウント数
   @Getter
-  int maxCount;
+  int maxCount = 0;
+
+  // スポーン時間の倍率
+  @Getter
+  double spawnTimeScale = 1;
 
   @Setter
   @Getter
@@ -44,7 +52,7 @@ public class SpawnPointGroup {
     // 中心のチャンクを設定
     chunkGroup = p.getChunkGroup();
     // 最大湧き数を設定
-    maxCount = p.getMaxSpawnCount();
+    setMaxCount(p.getMaxSpawnCount());
     // 最初のチャンクとして設定
     this.firstSpawnPoint = p;
 
@@ -56,12 +64,24 @@ public class SpawnPointGroup {
   }
 
   /**
+   * 最大湧き数をセットする
+   *
+   * @param maxCount
+   */
+  public void setMaxCount(int maxCount) {
+    // 2×2chunk分の湧き数なのでチャンク数に応じて最大湧き数を調整する
+    int newMaxCount = (int) (maxCount * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0 * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0);
+
+    this.maxCount = Math.max(this.maxCount, newMaxCount);
+  }
+
+  /**
    * スポーンポイントを追加する
    */
   public void addSpawnPoint(SpawnPoint point) {
     spawnPointList.add(point);
     // 最大湧き数を更新する
-    maxCount = Math.max(maxCount, point.getMaxSpawnCount());
+    setMaxCount(point.getMaxSpawnCount());
     // 高さ
     chunkHight = Math.max(point.getCheckHight(), chunkHight);
   }

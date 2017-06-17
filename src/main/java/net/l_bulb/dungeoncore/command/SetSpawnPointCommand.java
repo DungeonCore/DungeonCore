@@ -19,6 +19,7 @@ import org.bukkit.util.StringUtil;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpawnPointSheetRunnable;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SpletSheetExecutor;
 import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mobspawn.SpawnManager;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPoint;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointFactory;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointGroupFactory;
@@ -85,41 +86,11 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
   }
 
   protected boolean listOperate(CommandSender sender, String[] args, Location location) {
-    sender.sendMessage(ChatColor.GREEN + "現在使えません");
-    // sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
-    // sender.sendMessage("全スポーンポイント : " + MobSpawnerPointManager.getAllSpawnerPointList().size());
-    // sender.sendMessage("ロード済みスポーンポイント : " + MobSpawnerPointManager.getSpawnerPointListByLoadedChunk().size());
-    // sender.sendMessage("Player数 : " + SystemListener.loginPlayer);
-    //
-    // HashMap<SpawnLevel, String> spawnDetailMap = MobSpawnerPointManager.getSpawnDetail();
-    //
-    // int count = 0;
-    // for (Entry<SpawnLevel, SpawnScheduler> entry : MobSpawnerPointManager.getSchedulerList().entrySet()) {
-    // count += entry.getValue().getSize();
-    // }
-    // sender.sendMessage("スポーン処理実行中スポーンポイント : " + count);
-    // HashMap<SpawnLevel, SpawnScheduler> schedulerList = MobSpawnerPointManager.getSchedulerList();
-    // for (SpawnLevel level : SpawnLevel.values()) {
-    // // スポーンポイントの情報を取得
-    // String spawnDetail = null;
-    // if (spawnDetailMap == null) {
-    // spawnDetail = "spawn point system is not working";
-    // } else {
-    // spawnDetail = spawnDetailMap.get(level);
-    // if (spawnDetail == null) {
-    // spawnDetail = "only this level is not working";
-    // }
-    // }
-    //
-    // SpawnScheduler spawnScheduler = schedulerList.get(level);
-    // if (spawnScheduler == null) {
-    // sender.sendMessage(" " + level + " : 0 " + spawnDetail);
-    // } else {
-    // sender.sendMessage(" " + level + " : " + spawnScheduler.getSize() + " " + spawnDetail);
-    // }
-    // }
-    //
-    // sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
+    sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
+    sender.sendMessage("全スポーンポイント数：" + SpawnPointFactory.getSpawnPointList().size());
+    sender.sendMessage("全スポーンポイントグル―プ数：" + SpawnPointGroupFactory.getAllSpawnPoint().size());
+    sender.sendMessage("スポーンターム：" + (SpawnManager.SpawnPointRouteTick / 20.0) + "秒");
+    sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
     return true;
   }
 
@@ -166,7 +137,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
   private static final ArrayList<String> operatorList = new ArrayList<>();
   {
     operatorList.add("set");
-    // operatorList.add("list");
+    operatorList.add("list");
     operatorList.add("reload");
     operatorList.add("monitor");
   }

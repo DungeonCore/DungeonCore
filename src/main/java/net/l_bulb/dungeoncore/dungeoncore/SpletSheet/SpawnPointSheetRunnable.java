@@ -26,9 +26,9 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
     map.put("id", point.getId());
     Location location = point.getLocation();
     map.put("world", location.getWorld().getName());
-    map.put("x", location.getX());
-    map.put("y", location.getY());
-    map.put("z", location.getZ());
+    map.put("x", location.getBlockX());
+    map.put("y", location.getBlockY());
+    map.put("z", location.getBlockZ());
     map.put("最大湧き数", point.getMaxSpawnCount());
     map.put("type", point.getType());
 

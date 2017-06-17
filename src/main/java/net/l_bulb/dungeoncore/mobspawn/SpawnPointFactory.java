@@ -79,7 +79,7 @@ public class SpawnPointFactory {
    * @return
    */
   public static Collection<SpawnPoint> getSpawnPointList() {
-    return spawnPointMap.values();
+    return spawnPointIdMap.values();
   }
 
   /**

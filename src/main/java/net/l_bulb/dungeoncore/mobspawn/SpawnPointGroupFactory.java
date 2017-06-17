@@ -14,6 +14,8 @@ public class SpawnPointGroupFactory {
 
   static HashMultimap<ChunkGroup, SpawnPointGroup> spawnPointGroupChunkMap = HashMultimap.create();
 
+  static int SPAWN_GROUP_ID = 0;
+
   /**
    * スポーンポイントを登録する
    *
@@ -33,6 +35,9 @@ public class SpawnPointGroupFactory {
     } else {
       // 空の場合は新しく作成し追加する
       SpawnPointGroup pointGroup = new SpawnPointGroup(point);
+      pointGroup.setId(SPAWN_GROUP_ID);
+      SPAWN_GROUP_ID++;
+
       spawnPointGroupList.add(pointGroup);
       spawnPointGroupChunkMap.put(pointGroup.getChunkGroup(), pointGroup);
     }
@@ -47,7 +52,7 @@ public class SpawnPointGroupFactory {
   }
 
   /**
-   * すべてのスポーンポイントを取得する
+   * すべてのスポーンポイントグループを取得する
    *
    * @return
    */
@@ -62,5 +67,6 @@ public class SpawnPointGroupFactory {
     spawnPointGroupList.clear();
     spawnPointGroupChunkMap.clear();
     SpawnPointFactory.clear();
+    SPAWN_GROUP_ID = 0;
   }
 }

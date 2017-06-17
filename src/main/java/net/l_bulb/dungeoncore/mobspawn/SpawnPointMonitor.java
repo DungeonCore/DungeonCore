@@ -31,7 +31,8 @@ public class SpawnPointMonitor {
       // チャンク情報
       ChunkGroup chunkGroup = spawnPointGroup.getChunkGroup();
       sender.sendMessage(
-          MessageFormat.format("{0}ChunkData  x:{1}, z:{2}, y:{3}", ChatColor.GREEN, chunkGroup.getX(), chunkGroup.getZ(), chunkGroup.getY()));
+          MessageFormat.format("{0}ChunkData  x:{1}, z:{2}, y:{3}  (group id:{4})", ChatColor.GREEN, chunkGroup.getX(), chunkGroup.getZ(),
+              chunkGroup.getY(), spawnPointGroup.getId()));
       // スポーンmob情報
       sender.sendMessage(ChatColor.GREEN + "Entity名:" + spawnPoint.getSpawnTargetName());
       // 待ち時間

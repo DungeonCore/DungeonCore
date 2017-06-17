@@ -17,8 +17,9 @@ import net.l_bulb.dungeoncore.util.JavaUtil;
 import lombok.Data;
 
 /**
- * (2n+1,2m)(2n+1, 2m+1)
- * (2n,2m)(2n, 2m+1)
+ * (3n+2,3m)(3n+2, 3m+1) (3n+2, 3m+2)
+ * (3n+1,3m)(3n+1, 3m+1) (3n+1, 3m+2)
+ * (3n,3m) (3n, 3m+1) (3n, 3m+2)
  *
  * @author KENSUKE
  *
@@ -27,6 +28,9 @@ import lombok.Data;
 public class ChunkGroup {
 
   transient List<ChunkData> chunkList = null;
+
+  // 一辺のチャンク数
+  public static final int ONE_SIDE_CHUNK_NUMBER = 3;
 
   // 左下のChunkの番号
   int x;
@@ -44,12 +48,17 @@ public class ChunkGroup {
     z = c.getZ();
     world = c.getWorld();
 
-    if (this.x % 2 != 0) {
-      x--;
+    int xRemainder = x % ONE_SIDE_CHUNK_NUMBER;
+    if (xRemainder < 0) {
+      xRemainder += ONE_SIDE_CHUNK_NUMBER;
     }
-    if (this.z % 2 != 0) {
-      z--;
+    x -= xRemainder;
+
+    int zRemainder = z % ONE_SIDE_CHUNK_NUMBER;
+    if (zRemainder < 0) {
+      zRemainder += ONE_SIDE_CHUNK_NUMBER;
     }
+    z -= zRemainder;
 
     y = (int) (loc.getBlockY() / 16.0) * 16 + 8;
   }
@@ -70,10 +79,11 @@ public class ChunkGroup {
     if (chunkList == null) {
       chunkList = new ArrayList<>();
 
-      IntStream.rangeClosed(-1, 2)
-          .forEach(dx -> IntStream.rangeClosed(-1, 2)
+      IntStream.rangeClosed(-1, ONE_SIDE_CHUNK_NUMBER)
+          .forEach(dx -> IntStream.rangeClosed(-1, ONE_SIDE_CHUNK_NUMBER)
               .mapToObj(dz -> world.getChunkAt(x + dx, z + dz))
-              .map(c -> new ChunkData(c, JavaUtil.inInt2(c.getX() - x, 0, 1) && JavaUtil.inInt2(c.getZ() - z, 0, 1)))
+              .map(c -> new ChunkData(c, JavaUtil.inInt2(c.getX() - x, 0, ONE_SIDE_CHUNK_NUMBER - 1)
+                  && JavaUtil.inInt2(c.getZ() - z, 0, ONE_SIDE_CHUNK_NUMBER - 1)))
               .forEach(chunkList::add));
     }
   }

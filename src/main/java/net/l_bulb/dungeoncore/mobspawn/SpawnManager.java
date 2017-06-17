@@ -34,7 +34,10 @@ public class SpawnManager {
       @Override
       public void run2() {
         for (int i = SpawnScheduleNumber; i < allSpawnPoint.size(); i += SpawnPointRouteTick) {
-          spawnEntity(allSpawnPoint.get(i));
+          SpawnPointGroup pointGroup = allSpawnPoint.get(i);
+          if (pointGroup != null) {
+            spawnEntity(pointGroup);
+          }
         }
         SpawnScheduleNumber++;
         SpawnScheduleNumber %= SpawnPointRouteTick;
