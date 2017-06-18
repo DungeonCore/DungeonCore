@@ -1,14 +1,15 @@
 package net.l_bulb.dungeoncore.command.util;
 
+import java.text.MessageFormat;
+
 import org.bukkit.Location;
-import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import net.l_bulb.dungeoncore.util.BlockUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
+import net.l_bulb.dungeoncore.util.MinecraftUtil;
 
 public class SetRedStoneBlockCommand implements CommandExecutor {
 
@@ -17,25 +18,15 @@ public class SetRedStoneBlockCommand implements CommandExecutor {
       String[] arg3) {
     if (arg3.length != 3) { return false; }
 
-    double x = JavaUtil.getDouble(arg3[0], Double.NaN);
-    double y = JavaUtil.getDouble(arg3[1], Double.NaN);
-    double z = JavaUtil.getDouble(arg3[2], Double.NaN);
+    Location locationByCommandParam = JavaUtil
+        .getValueOrDefaultWhenThrow(() -> MinecraftUtil.getLocationByCommandParam(sender, arg3[0], arg3[1], arg3[2], false), null);
 
-    if (x == Double.NaN || y == Double.NaN || z == Double.NaN) {
-      sender.sendMessage("座標が不正です");
+    if (locationByCommandParam == null) {
+      sender.sendMessage(MessageFormat.format("指定された座標が不正です：{0}, {1}, {2}", arg3[0], arg3[1], arg3[2]));
       return true;
     }
 
-    Location senderLoc = null;
-    if ((sender instanceof BlockCommandSender)) {
-      senderLoc = ((BlockCommandSender) sender).getBlock().getLocation();
-    } else if (sender instanceof Player) {
-      senderLoc = ((Player) sender).getLocation();
-    }
-    if (senderLoc == null) { return false; }
-
-    BlockUtil.setRedstone(new Location(senderLoc.getWorld(), x, y, z));
-
+    BlockUtil.setRedstone(locationByCommandParam);
     return true;
   }
 
