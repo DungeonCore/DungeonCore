@@ -148,6 +148,7 @@ public class MobListener implements Listener {
     mob.onDeath(e);
 
     Player lastDamagePlayer = LastDamageManager.getLastDamagePlayer(e.getEntity());
+
     if (lastDamagePlayer != null) {
       // ドロップアイテムをセットする
       List<ItemStack> dropItem = mob.getDropItem(lastDamagePlayer);

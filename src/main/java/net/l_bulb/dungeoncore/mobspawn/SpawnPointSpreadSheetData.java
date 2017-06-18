@@ -13,8 +13,7 @@ public class SpawnPointSpreadSheetData {
     setMaxSpawnCount(data.getMaxSpawnCount());
     setDungeonHight(data.getDungeonHight());
     setLookNearChunk(data.isLookNearChunk());
-    setTargetName(getTargetName());
-    setType(getType());
+    setType(data.getType());
     setTargetName(targetName);
   }
 

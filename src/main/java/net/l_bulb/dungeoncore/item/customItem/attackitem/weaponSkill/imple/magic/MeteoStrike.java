@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.dropingEntity.DropingEntityForPlayer;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
@@ -41,7 +42,7 @@ public class MeteoStrike extends WeaponSkillForOneType {
     return true;
   }
 
-  public void executeMeteo(Entity centerEntity, AbstractAttackItem customItem, Player p) {
+  public void executeMeteo(Entity centerEntity, AbstractAttackItem customItem, Player p, ItemStack itemInHand) {
     // 落下地点
     final Location target = centerEntity.getLocation();
 
@@ -80,7 +81,7 @@ public class MeteoStrike extends WeaponSkillForOneType {
         time++;
         if (time >= 20 * 2) {
           // 爆発を起こす
-          explode(customItem, centerEntity, p);
+          explode(customItem, centerEntity, p, itemInHand);
           cancel();
           // アイテムを消す
           centerEntity.remove();
@@ -93,7 +94,7 @@ public class MeteoStrike extends WeaponSkillForOneType {
        * @param e
        * @param centerEntity
        */
-      protected void explode(AbstractAttackItem item, Entity centerEntity, Player p) {
+      protected void explode(AbstractAttackItem item, Entity centerEntity, Player p, ItemStack itemInHand) {
         // 爆発パーティクル
         new ParticleData(ParticleType.hugeexplosion, 10).setFarParticle(true).run(target);
         // 爆発音
@@ -107,8 +108,12 @@ public class MeteoStrike extends WeaponSkillForOneType {
           if (!mob.isBoss()) {
             entity.setVelocity(getMoveVector(centerEntity, entity, 2));
           }
-          // 2倍のダメージを与える
-          entity.damage(item.getAttackItemDamage(0) * getData(0), p);
+
+          CombatEntityEvent event = new CombatEntityEvent(p, item.getAttackItemDamage(0) * getData(0), item, itemInHand, false, entity);
+          event.callEvent();
+
+          // ダメージを与える
+          event.damageEntity();
           // 15秒燃やす
           entity.setFireTicks((int) (20 * getData(1)));
         }
@@ -125,9 +130,12 @@ public class MeteoStrike extends WeaponSkillForOneType {
 
     AbstractAttackItem customItem;
 
+    ItemStack itemInHand = null;
+
     public DropItemImplement(Player p, AbstractAttackItem customItem) {
       super(p.getLocation().getDirection().add(new Vector(0, 0.5, 0)).multiply(0.8), p.getLocation(), Material.NETHER_STAR, (byte) 0);
       this.customItem = customItem;
+      itemInHand = p.getItemInHand();
       this.p = p;
     }
 
@@ -137,7 +145,7 @@ public class MeteoStrike extends WeaponSkillForOneType {
 
     @Override
     public void onGround(Entity spawnEntity) {
-      executeMeteo(spawnEntity, customItem, p);
+      executeMeteo(spawnEntity, customItem, p, itemInHand);
     }
 
     @Override

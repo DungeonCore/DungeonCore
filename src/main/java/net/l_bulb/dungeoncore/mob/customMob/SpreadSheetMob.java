@@ -3,9 +3,12 @@ package net.l_bulb.dungeoncore.mob.customMob;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -26,6 +29,7 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
+import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
@@ -277,33 +281,41 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     return nbtTag.getType();
   }
 
-  private int index = 0;
+  ArrayList<Pair<String, Double>> dropItemList = new ArrayList<>();
 
-  private double[] dropPerList = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-  private ItemStack[] dropItemList = { null, null, null, null, null, null, null, null, null, null };
-
-  public void setDropItem(ItemStack item, double dropPer) {
-    dropPerList[index] = dropPer;
-    dropItemList[index] = item;
-    index++;
+  /**
+   * DropItemをセットする
+   *
+   * @param itemId
+   * @param dropPer
+   */
+  public void setDropItem(String itemId, double dropPer) {
+    if (itemId == null || dropPer <= 0) { return; }
+    dropItemList.add(Pair.of(itemId, dropPer));
   }
 
   @Override
   public List<ItemStack> getDropItem(Player lastDamagePlayer) {
-    List<ItemStack> dropItem = new ArrayList<>();
-    if (this.mob != null) {
-      dropItem.addAll(this.mob.getDropItem(lastDamagePlayer));
-    }
     Random random = new Random();
-    for (int i = 0; i < index; i++) {
-      // 確率を調べる
-      if (random.nextInt(1000) < dropPerList[i] * 10) {
-        dropItem.add(dropItemList[i]);
-      }
+
+    // 確率を考慮する
+    List<ItemStack> dropItems = dropItemList.stream().filter(p -> random.nextInt(1000) < p.getRight() * 10)
+        // CustomItemに変換
+        .map(p -> ItemManager.getCustomItemById(p.getKey()))
+        // CustomItemが存在しないなら無視
+        .filter(Objects::nonNull)
+        // ItemStackに変換
+        .map(item -> item.getItem())
+        .collect(Collectors.toList());
+
+    if (this.mob != null) {
+      dropItems.addAll(this.mob.getDropItem(lastDamagePlayer));
     }
+
     // 関係のないクエストのアイテムを削除する
-    removeOtherQuestItem(lastDamagePlayer, dropItem);
-    return dropItem;
+    removeOtherQuestItem(lastDamagePlayer, dropItems);
+
+    return dropItems;
   }
 
   /**

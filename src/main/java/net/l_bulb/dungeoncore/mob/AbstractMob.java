@@ -241,7 +241,6 @@ public abstract class AbstractMob<T extends Entity> {
     if (itemList.isEmpty()) { return; }
 
     PlayerQuestSession questSession = PlayerQuestSessionManager.getQuestSession(p.getPlayer());
-    ;
 
     // DROPするのがクエストアイテムの場合、クエスト進行中でないからドロップさせない
     Iterator<ItemStack> iterator = itemList.iterator();

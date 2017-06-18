@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
@@ -14,7 +13,6 @@ import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag;
 import net.l_bulb.dungeoncore.mob.customMob.LbnMobTag2;
 import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetMob;
 import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetMob2;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class Mob1SheetRunnable extends AbstractSheetRunable {
@@ -123,22 +121,18 @@ public class Mob1SheetRunnable extends AbstractSheetRunable {
   }
 
   /**
-   * Set
+   * ドロップアイテムを登録する
    *
    * @param itemId
    * @param parcent
    * @param instance
    */
   public void setDropItem(String itemId, String parcent, SpreadSheetMob instance) {
-    // DROP ITEM の設定
-    if (itemId != null && !itemId.isEmpty()) {
-      ItemStack item = ItemStackUtil.getItemStack(itemId);
-      if (item != null) {
-        double dropRate1 = Double.parseDouble(parcent);
-        instance.setDropItem(item, dropRate1);
-      } else {
-        sendMessage("入力されたdrop_itemが不正です。" + itemId);
-      }
+    double rate = JavaUtil.getDouble(parcent, -1);
+    if (rate == -1) {
+      sendMessage("mob名：" + instance.getName() + "のアイテムのドロップ確率が不正です。 確率:" + parcent);
+      return;
     }
+    instance.setDropItem(itemId, rate);
   }
 }

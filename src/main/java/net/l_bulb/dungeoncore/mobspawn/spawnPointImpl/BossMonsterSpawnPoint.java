@@ -15,9 +15,7 @@ public class BossMonsterSpawnPoint extends AbstractSpawnPoint {
 
   public BossMonsterSpawnPoint(SpawnPointSpreadSheetData data, AbstractMob<?> mob) {
     super(data);
-    if (mob.isBoss()) {
-      boss = (BossMobable) mob;
-    }
+    boss = (BossMobable) mob;
     this.mob = mob;
   }
 
@@ -44,9 +42,10 @@ public class BossMonsterSpawnPoint extends AbstractSpawnPoint {
   public boolean canSpawn() {
     if (boss == null) {
       getSpawnResult().setReslt(0, "ボスモンスターでないためスポーンできません");
+      return false;
     }
 
-    if (nextSpawnFlag = true) {
+    if (nextSpawnFlag) {
       nextSpawnFlag = false;
       return true;
     }

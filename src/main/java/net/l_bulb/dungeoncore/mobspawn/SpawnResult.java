@@ -37,6 +37,10 @@ public class SpawnResult {
     setReslt(0, "スポーンポイントの周りにモンスターが多すぎます(" + entityCount + "体)");
   }
 
+  public void ofOtherSpawnPointRun() {
+    setReslt(0, "他のスポーンポイントでモンスターがスポーンしたためこのスポーンポイントはスキップされました。");
+  }
+
   int tempLastSpawnCount = -1;
 
   /**
@@ -56,8 +60,6 @@ public class SpawnResult {
       setMessage(spawTargetName + "をスポーンしました。");
       // スポーンした時間を取得
       lastSpawnDate = System.currentTimeMillis();
-    } else {
-      setReslt(0, "他のスポーンポイントでモンスターがスポーンしたためこのスポーンポイントはスキップされました。");
     }
     tempLastSpawnCount = -1;
   }

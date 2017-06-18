@@ -94,6 +94,9 @@ public class SpawnManager {
       return;
     }
 
+    // 一旦全てのスポーンポイントを書き換える
+    pointGroup.acceptAllResult(result -> result.ofOtherSpawnPointRun());
+
     Stream.generate(() -> pointGroup.next()).limit(canCountCount)
         // スポーンできるものだけスポーンさせる
         .filter(val -> val.canSpawn())

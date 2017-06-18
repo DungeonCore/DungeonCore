@@ -40,7 +40,7 @@ public class SpawnPointFactory {
         break;
       case BOSS:
         AbstractMob<?> mob1 = MobHolder.getMob(targetName);
-        if (mob1 != null) { return new BossMonsterSpawnPoint(data, mob1); }
+        if (mob1 != null && mob1.isBoss()) { return new BossMonsterSpawnPoint(data, mob1); }
         break;
       default:
         break;
