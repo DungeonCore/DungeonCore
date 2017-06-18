@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.mobspawn;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -18,7 +19,6 @@ public class SpawnPointGroup {
   ArrayList<SpawnPoint> spawnPointList = new ArrayList<>();
 
   @Getter
-  @Setter
   int id;
 
   // チャンク
@@ -26,7 +26,6 @@ public class SpawnPointGroup {
   ChunkGroup chunkGroup;
 
   // 最大カウント数
-  @Getter
   int maxCount = 0;
 
   // スポーン時間の倍率
@@ -46,7 +45,14 @@ public class SpawnPointGroup {
   // 周囲のチャンクを見るならTRUE
   boolean isLookNearChunk = true;
 
-  public SpawnPointGroup(SpawnPoint p) {
+  // スポーンポイントが設定されているチャンク間の最大距離
+  private double maxChunkDistinct = 0;
+
+  @Getter
+  final EntityCounter counter = new EntityCounter();
+
+  public SpawnPointGroup(SpawnPoint p, int id) {
+    this.id = id;
     // スポーンポイント追加
     spawnPointList.add(p);
     // 中心のチャンクを設定
@@ -69,10 +75,16 @@ public class SpawnPointGroup {
    * @param maxCount
    */
   public void setMaxCount(int maxCount) {
-    // 2×2chunk分の湧き数なのでチャンク数に応じて最大湧き数を調整する
-    int newMaxCount = (int) (maxCount * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0 * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0);
+    this.maxCount = Math.max(this.maxCount, maxCount);
+  }
 
-    this.maxCount = Math.max(this.maxCount, newMaxCount);
+  public int getMaxCount() {
+    // 2×2chunk分の湧き数なのでチャンク数に応じて最大湧き数を調整する
+    if (maxChunkDistinct > 1.5) {
+      return (int) (maxCount * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0 * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0);
+    } else {
+      return maxCount;
+    }
   }
 
   /**
@@ -84,6 +96,15 @@ public class SpawnPointGroup {
     setMaxCount(point.getMaxSpawnCount());
     // 高さ
     chunkHight = Math.max(point.getCheckHight(), chunkHight);
+
+    // chunk間の最大の距離を取得
+    maxChunkDistinct = spawnPointList.stream().map(s -> s.getChunk())
+        .mapToDouble(c1 -> spawnPointList.stream()
+            // 同じチャンクなら無視する
+            .filter(s2 -> c1 != s2.getChunk())
+            // チャンク間の距離を取得
+            .map(s2 -> ChunkGroup.getDistinct(c1, s2.getChunk())).max(Comparator.naturalOrder()).orElse(0.0))
+        .max().orElse(0.0);
   }
 
   /**
@@ -140,7 +161,7 @@ public class SpawnPointGroup {
    *
    * @param consumer
    */
-  public void consumeNearChunk(BiConsumer<Entity, ChunkData> consumer) {
+  public void consumeAllChunk(BiConsumer<Entity, ChunkData> consumer) {
     chunkGroup.consumeChunk(e -> true, consumer);
   }
 

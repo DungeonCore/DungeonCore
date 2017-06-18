@@ -20,4 +20,12 @@ public class ChunkData {
   public Entity[] getEntities() {
     return chunk.getEntities();
   }
+
+  public int getX() {
+    return chunk.getX();
+  }
+
+  public int getZ() {
+    return chunk.getZ();
+  }
 }

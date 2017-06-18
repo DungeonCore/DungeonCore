@@ -26,6 +26,9 @@ public class SpawnPointMonitor {
 
       SpawnPointGroup spawnPointGroup = SpawnPointGroupFactory.getSpawnPointGroup(spawnPoint);
       SpawnResult result = spawnPoint.getSpawnResult();
+
+      // カウント情報を出力する
+      spawnPointGroup.getCounter().setDebug(true);
       // spawn point情報
       sender.sendMessage(ChatColor.YELLOW + "[spawn point] ID:" + spawnPoint.getId() + "  (" + spawnPoint.getTargetType() + ")");
       // チャンク情報
@@ -46,6 +49,8 @@ public class SpawnPointMonitor {
             JavaUtil.round((SpawnManager.SpawnPointRouteTick + diffIndex) / 20.0, 2),
             spawnPointGroup.getBeforeSpawnScheduleNumber(), SpawnManager.getSpawnScheduleNumber()));
       }
+      // 周囲のmobの数
+      sender.sendMessage(ChatColor.GREEN + "沸きモブ数:" + result.getCanSpawnCount());
       // メッセージ
       sender.sendMessage(ChatColor.GREEN + "メッセージ:" + result.getMessage());
       sender.sendMessage(

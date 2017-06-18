@@ -14,6 +14,8 @@ public class SpawnResult {
 
   long lastSpawnDate = 0;
 
+  String canSpawnCount = "unknown";
+
   public void setReslt(int lastSpawnCount, String message) {
     setLastSpawnCount(lastSpawnCount);
     setMessage(message);

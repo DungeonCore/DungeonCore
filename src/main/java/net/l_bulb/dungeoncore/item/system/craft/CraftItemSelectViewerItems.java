@@ -29,7 +29,7 @@ public class CraftItemSelectViewerItems {
   public static ItemStack getViewItem(TheLowCraftRecipeInterface craftRecipe, ItemStack clickItem) {
 
     // クラフトアイテムに不正があるならクラフトできない
-    if (!craftRecipe.isValidRecipe()) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません"); }
+    if (!craftRecipe.isValidRecipe()) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません(1)"); }
 
     // クラフトアイテム
     ItemInterface craftCustomItem = craftRecipe.getCraftItem();
@@ -39,7 +39,7 @@ public class CraftItemSelectViewerItems {
 
     // 素材のLoreを取得
     ItemLoreToken materialLore = getMaterialLoreToken(craftRecipe);
-    if (materialLore == null) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません"); }
+    if (materialLore == null) { return ItemStackUtil.getItem(ItemStackUtil.getName(clickItem), Material.BARRIER, "エラーがあるので生成出来ません(2)"); }
     // 材料のLoreを追加する
     itemLoreData.addLore(materialLore);
 
@@ -113,13 +113,8 @@ public class CraftItemSelectViewerItems {
     ItemLoreToken materialLore = new ItemLoreToken(CRAFT_MATERIAL_LORE_TITLE);
     // メインアイテムがあるならTRUE
     if (craftRecipe.hasMainItem()) {
-      // メインアイテムがないならエラーとする
       ItemInterface mainItem = craftRecipe.getMainItem();
-      if (mainItem != null) {
-        materialLore.addLore(mainItem.getItemName(), ChatColor.LIGHT_PURPLE);
-      } else {
-        return null;
-      }
+      materialLore.addLore(mainItem.getItemName(), ChatColor.LIGHT_PURPLE);
     }
 
     // 材料を追加する

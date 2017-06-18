@@ -34,8 +34,7 @@ public class SpawnPointGroupFactory {
       spawnPointGroup.get().addSpawnPoint(point);
     } else {
       // 空の場合は新しく作成し追加する
-      SpawnPointGroup pointGroup = new SpawnPointGroup(point);
-      pointGroup.setId(SPAWN_GROUP_ID);
+      SpawnPointGroup pointGroup = new SpawnPointGroup(point, SPAWN_GROUP_ID);
       SPAWN_GROUP_ID++;
 
       spawnPointGroupList.add(pointGroup);

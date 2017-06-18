@@ -97,4 +97,18 @@ public class ChunkGroup {
     initChunkData();
     return chunkList.stream().filter(c -> c.isNear()).anyMatch(c -> c.isLoaded());
   }
+
+  /**
+   * チャンク間の距離を取得する
+   *
+   * @param chunk1
+   * @param chunk2
+   * @return
+   */
+  public static double getDistinct(Chunk chunk1, Chunk chunk2) {
+    int dx = chunk1.getX() - chunk2.getX();
+    int dz = chunk1.getZ() - chunk2.getZ();
+
+    return Math.sqrt(dx * dx + dz * dz);
+  }
 }

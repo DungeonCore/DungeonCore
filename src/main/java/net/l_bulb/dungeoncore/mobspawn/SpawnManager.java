@@ -1,18 +1,11 @@
 package net.l_bulb.dungeoncore.mobspawn;
 
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-
 import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkData;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
-
-import lombok.Getter;
 
 public class SpawnManager {
   // スポーンさせる周期Tick
@@ -36,7 +29,12 @@ public class SpawnManager {
         for (int i = SpawnScheduleNumber; i < allSpawnPoint.size(); i += SpawnPointRouteTick) {
           SpawnPointGroup pointGroup = allSpawnPoint.get(i);
           if (pointGroup != null) {
+            // カウンター開始
+            pointGroup.getCounter().start();
+            // スポーン処理
             spawnEntity(pointGroup);
+            // カウンター終了
+            pointGroup.getCounter().end();
           }
         }
         SpawnScheduleNumber++;
@@ -54,15 +52,15 @@ public class SpawnManager {
     return SpawnScheduleNumber;
   }
 
-  static Counter counter = new Counter();
-
   /**
    * Entityをスポーンする
    *
    * @param pointGroup
    */
   public static void spawnEntity(SpawnPointGroup pointGroup) {
-    counter.clear();
+    EntityCounter counter = pointGroup.getCounter();
+    // 近くの敵の数を未知数にしておく
+    pointGroup.acceptAllResult(r -> r.setCanSpawnCount("unknown"));
 
     pointGroup.setBeforeSpawnScheduleNumber(SpawnScheduleNumber);
 
@@ -79,7 +77,7 @@ public class SpawnManager {
     }
 
     // 周囲のチャンクからEntityとPlayer数をカウント
-    pointGroup.consumeNearChunk(new CountUpEntity(pointGroup)::accept);
+    pointGroup.consumeAllChunk(counter.getCountUpConsumer(pointGroup)::accept);
 
     // Playerがいないならスポーンさせない
     if (counter.getPlayerCount() == 0) {
@@ -89,71 +87,22 @@ public class SpawnManager {
 
     // スポーンできるモンスターの数に応じて順次スポーンさせる
     int canCountCount = pointGroup.getMaxCount() - counter.getTargetCount();
+    // モブの数を記録する
+    pointGroup.acceptAllResult(r -> r.setCanSpawnCount(canCountCount + "体"));
     if (canCountCount <= 0) {
       pointGroup.acceptAllResult(result -> result.ofMostEntityCount(counter.getTargetCount()));
       return;
     }
 
-    if (canCountCount > 0) {
-      Stream.generate(() -> pointGroup.next()).limit(canCountCount)
-          // スポーンできるものだけスポーンさせる
-          .filter(val -> val.canSpawn())
-          // スポーンさせる
-          .peek(val -> val.spawn())
-          // スポーン数をインクリメントする
-          .forEach(val -> val.getSpawnResult().incrementSpawnMob());
-    }
+    Stream.generate(() -> pointGroup.next()).limit(canCountCount)
+        // スポーンできるものだけスポーンさせる
+        .filter(val -> val.canSpawn())
+        // スポーンさせる
+        .peek(val -> val.spawn())
+        // スポーン数をインクリメントする
+        .forEach(val -> val.getSpawnResult().incrementSpawnMob());
 
     // スポーン結果を更新する
     pointGroup.acceptAllResult(result -> result.build(pointGroup.getSpawnTargetName()));
   }
-
-  @Getter
-  static class Counter {
-    int playerCount = 0;
-    int targetCount = 0;
-
-    public void clear() {
-      playerCount = 0;
-      targetCount = 0;
-    }
-
-    public void incrementPlayer() {
-      playerCount++;
-    }
-
-    public void incrementTarget() {
-      targetCount++;
-    }
-
-  }
-
-  static class CountUpEntity implements BiConsumer<Entity, ChunkData> {
-    private SpawnPointGroup pointGroup;
-
-    public CountUpEntity(SpawnPointGroup pointGroup) {
-      this.pointGroup = pointGroup;
-    }
-
-    @Override
-    public void accept(Entity e, ChunkData c) {
-      // Playerならインクリメント
-      if (e.getType() == EntityType.PLAYER) {
-        counter.incrementPlayer();
-      }
-
-      // 近くのチャンクでないならカウントしない
-      if (!c.isNear()) { return; }
-
-      // entityのy座標がchunkHightの範囲に収まっていないならカウントしない
-      if (Math.abs(e.getLocation().getY() - pointGroup.getY()) > pointGroup.getChunkHight()) { return; }
-
-      // 同じ種類のmobでないならカウントしない
-      if (!pointGroup.isSameEntity(e)) { return; }
-
-      // TargetのEntityならインクリメント
-      counter.incrementTarget();
-    }
-  }
-
 }

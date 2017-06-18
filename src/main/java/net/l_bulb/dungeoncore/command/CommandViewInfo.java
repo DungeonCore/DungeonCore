@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.command;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,9 +36,11 @@ import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.table.SlotMerchant;
 import net.l_bulb.dungeoncore.item.system.craft.CraftItemSelectViewer;
+import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkGroup;
 import net.l_bulb.dungeoncore.npc.NpcManager;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class CommandViewInfo implements CommandExecutor {
   @Override
@@ -53,10 +55,6 @@ public class CommandViewInfo implements CommandExecutor {
     // if (!((Player)paramCommandSender).isOp()) {
     // return false;
     // }
-
-    if (paramArrayOfString[0].equals("chunk")) {
-      showLoadedChunk(paramCommandSender);
-    }
 
     String param = paramArrayOfString[0];
     if (param == null) {
@@ -136,11 +134,39 @@ public class CommandViewInfo implements CommandExecutor {
         break;
       case "test":
         break;
+      case "chunk":
+        sendChunkData(target);
+        break;
       default:
         paramCommandSender.sendMessage("unknown param");
     }
     return true;
 
+  }
+
+  public void sendChunkData(Player target) {
+    target.sendMessage(ChatColor.GREEN + "======= chunk data =======");
+    Chunk chunk = target.getLocation().getChunk();
+    target.sendMessage("chunkId(x:" + chunk.getX() + ", z:" + chunk.getZ() + ")");
+    ChunkGroup chunkGroup = new ChunkGroup(target.getLocation());
+    target.sendMessage("chunk group id(x:" + chunkGroup.getX() + ", y:" + chunkGroup.getY() + ", z:" + chunkGroup.getZ() + ")");
+
+    HashMap<String, Integer> nearMob = new HashMap<>();
+    HashMap<String, Integer> farMob = new HashMap<>();
+    chunkGroup.consumeChunk(e -> true, (e, c) -> {
+      String key = JavaUtil.getNull(e.getCustomName(), e.getType().toString());
+      if (c.isNear()) {
+        nearMob.put(key, nearMob.getOrDefault(key, 0) + 1);
+      } else {
+        farMob.put(key, nearMob.getOrDefault(key, 0) + 1);
+      }
+    });
+
+    nearMob.entrySet().stream().forEach(e -> {
+      target.sendMessage(e.getKey() + ":" + (e.getValue() + farMob.getOrDefault(e.getKey(), 0) + "(近く：" + e.getValue() + ")"));
+      farMob.remove(e.getKey());
+    });
+    farMob.entrySet().stream().forEach(e -> target.sendMessage(e.getKey() + ":" + e.getValue() + "(近く：0)"));
   }
 
   private void sendArmorData(Player p) {
@@ -175,15 +201,6 @@ public class CommandViewInfo implements CommandExecutor {
     target.sendMessage("active potion effect:");
     for (PotionEffect potionEffect : activePotionEffects) {
       target.sendMessage("    " + potionEffect.getType() + ", " + (potionEffect.getDuration() / 20) + "s");
-    }
-  }
-
-  private void showLoadedChunk(CommandSender paramCommandSender) {
-    List<World> worlds = Bukkit.getWorlds();
-    for (World world : worlds) {
-      for (Chunk c : world.getLoadedChunks()) {
-        paramCommandSender.sendMessage(world.getName() + ":" + c.getX() + "@" + c.getZ());
-      }
     }
   }
 }

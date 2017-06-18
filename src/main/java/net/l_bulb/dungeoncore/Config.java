@@ -42,6 +42,7 @@ public class Config {
     clickIgnoredBlocks.add(Material.HOPPER);
     clickIgnoredBlocks.add(Material.HOPPER_MINECART);
     clickIgnoredBlocks.add(Material.FIRE);
+    clickIgnoredBlocks.add(Material.BREWING_STAND);
 
     damageIgnoredBlocks.add(Material.DIAMOND_ORE);
     damageIgnoredBlocks.add(Material.IRON_ORE);

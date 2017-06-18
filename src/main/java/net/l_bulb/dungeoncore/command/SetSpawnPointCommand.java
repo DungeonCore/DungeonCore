@@ -123,6 +123,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
     SpawnPoint newInstance = SpawnPointFactory.getNewInstance(data);
     if (newInstance == null) {
       sender.sendMessage(ChatColor.RED + "コマンドが不正です。モンスター名/item名が違うかも");
+      return false;
     }
 
     // スポーン登録する

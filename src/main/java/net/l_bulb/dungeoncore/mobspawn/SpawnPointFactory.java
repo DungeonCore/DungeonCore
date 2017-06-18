@@ -12,6 +12,7 @@ import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mobspawn.spawnPointImpl.BossMonsterSpawnPoint;
 import net.l_bulb.dungeoncore.mobspawn.spawnPointImpl.ItemSpawnPoint;
 import net.l_bulb.dungeoncore.mobspawn.spawnPointImpl.MonsterSpawnPoint;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 
 import com.google.common.collect.HashMultimap;
 
@@ -26,17 +27,19 @@ public class SpawnPointFactory {
    */
   public static SpawnPoint getNewInstance(SpawnPointSpreadSheetData data) {
     maxId = Math.max(data.getId(), maxId);
+
+    String targetName = JavaUtil.getValueOrDefaultWhenThrow(() -> data.getTargetName().replace("_", " "), "");
     switch (data.getType()) {
       case MONSTER:
-        AbstractMob<?> mob = MobHolder.getMob(data.getTargetName());
+        AbstractMob<?> mob = MobHolder.getMob(targetName);
         if (mob != null && !mob.isNullMob()) { return new MonsterSpawnPoint(data, mob); }
         break;
       case ITEM:
-        ItemInterface customItem = ItemManager.getCustomItemById(data.getTargetName());
+        ItemInterface customItem = ItemManager.getCustomItemById(targetName);
         if (customItem != null) { return new ItemSpawnPoint(data, customItem); }
         break;
       case BOSS:
-        AbstractMob<?> mob1 = MobHolder.getMob(data.getTargetName());
+        AbstractMob<?> mob1 = MobHolder.getMob(targetName);
         if (mob1 != null) { return new BossMonsterSpawnPoint(data, mob1); }
         break;
       default:
