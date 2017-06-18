@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.command;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.bukkit.util.StringUtil;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.MinecraftUtil;
 
 import com.google.common.collect.ImmutableList;
@@ -25,7 +27,14 @@ public class CommandDropItem implements CommandExecutor, TabCompleter {
   public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     if (arg3.length < 4) { return false; }
 
-    Location loc = MinecraftUtil.getLocationByCommandParam(arg0, arg3[1], arg3[2], arg3[3], false);
+    // 座標を取得
+    Location loc = JavaUtil
+        .getValueOrDefaultWhenThrow(() -> MinecraftUtil.getLocationByCommandParam(arg0, arg3[1], arg3[2], arg3[3], false), null);
+    if (loc == null) {
+      arg0.sendMessage(MessageFormat.format("指定された座標が不正です：{0}, {1}, {2}", arg3[1], arg3[2], arg3[3]));
+      return true;
+    }
+
     // アイテムを取得
     ItemInterface item = ItemManager.getCustomItemById(arg3[0]);
     if (item == null) {
