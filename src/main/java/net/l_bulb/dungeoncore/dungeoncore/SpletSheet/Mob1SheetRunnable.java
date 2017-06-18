@@ -108,8 +108,6 @@ public class Mob1SheetRunnable extends AbstractSheetRunable {
       }
 
       MobHolder.registMob(instance);
-    } catch (NumberFormatException e) {
-      sendMessage("入力されたDropItemRateが不正です。" + row[0]);
     } catch (Exception e) {
       e.printStackTrace();
       sendMessage("エラーが発生しました。モンスターを登録出来ませんでした:" + row[0]);
