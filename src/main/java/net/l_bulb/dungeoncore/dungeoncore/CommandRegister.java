@@ -8,6 +8,7 @@ import net.l_bulb.dungeoncore.command.CommandAnnounce;
 import net.l_bulb.dungeoncore.command.CommandAttention;
 import net.l_bulb.dungeoncore.command.CommandBook;
 import net.l_bulb.dungeoncore.command.CommandChest;
+import net.l_bulb.dungeoncore.command.CommandDropItem;
 import net.l_bulb.dungeoncore.command.CommandEquipPlayer;
 import net.l_bulb.dungeoncore.command.CommandExecuteLockByTimeCommand;
 import net.l_bulb.dungeoncore.command.CommandExtraMob;
@@ -38,7 +39,6 @@ import net.l_bulb.dungeoncore.command.notUsually.command.CustomEffectCommand;
 import net.l_bulb.dungeoncore.command.notUsually.command.CustomKillCommand;
 import net.l_bulb.dungeoncore.command.notUsually.command.CustomSetBlockCommand;
 import net.l_bulb.dungeoncore.command.notUsually.command.ExecuteMobSkillCommand;
-import net.l_bulb.dungeoncore.command.util.ChangeBiomeCommand;
 import net.l_bulb.dungeoncore.command.util.CommandSavePlayer;
 import net.l_bulb.dungeoncore.command.util.CommandSequencemove;
 import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
@@ -77,7 +77,6 @@ public class CommandRegister {
     registCommand(new SoundPlayCommand(), "soundPlay");
     registCommand(new TimerExcuteCommand(), "timer_command");
     registCommand(new CommandQuestOperate(), "quest_operate");
-    registCommand(new ChangeBiomeCommand(), "change_biome");
     registCommand(new QuestCommand(), "quest");
     registCommand(new TmCommand(), "tm");
     registCommand(new MoneyCommand(), "galion");
@@ -108,6 +107,7 @@ public class CommandRegister {
     registCommand(new CommandNpcSpawn(), "spawnNpc");
     registCommand(new CommandTag(), "tag");
     registCommand(new CommandSequencemove(), "sequencemove");
+    registCommand(new CommandDropItem(), "dropItem");
 
     new ExecuteMobSkillCommand().regist();
     new CustomKillCommand().regist();

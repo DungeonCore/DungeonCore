@@ -96,6 +96,15 @@ public class ItemManager {
   }
 
   /**
+   * 全てのアイテムIDを取得する
+   *
+   * @return
+   */
+  public static Set<String> getAllItemID() {
+    return allItemIdList.keySet();
+  }
+
+  /**
    * clazz, itemに対応したアイテムを取得する
    *
    * @param clazz

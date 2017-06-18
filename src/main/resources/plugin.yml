@@ -92,11 +92,6 @@ commands:
       usage: /<command> start|remove|complate quest_name [player_name]
       permission-message: You don't have <permission>
       aliases: [qo]
-   change_biome:
-      description: change biome
-      permission: main.lbnDungeonUtil.command.builder.change_biome
-      usage: /<command> biome x1 z1 x2 z2
-      permission-message: You don't have <permission>
    quest:
       description: view quest list
       permission: main.lbnDungeonUtil.command.player.useable.quest
@@ -118,11 +113,6 @@ commands:
       permission:  main.lbnDungeonUtil.command.admin.shop
       usage: /<command>
       permission-message: You don't have <permission>
-   deletemob:
-      description: delete mob
-      permission:  main.lbnDungeonUtil.command.builder.deletemob
-      usage: /<command> mobname
-      permission-message: You don't have <permission>
    Villager:
       description: spawn or remove or reload spletsheet villager
       permission:  main.lbnDungeonUtil.command.mod.villager
@@ -134,7 +124,7 @@ commands:
       usage: /<command> reloadまたはdelete または 中身のチェストのx y z [リフィール時間(秒) TRUE|FALSE アイテムの最小数 アイテムの最大数 チェストを開けたあとの移動先座標x y z]\n []内は省略可 詳しくは下記URLを参照\n https://goo.gl/UJAC8Y
       permission-message: You don't have <permission>
    removemob:
-      description: chestを設定するためのコマンド
+      description: モンスターを削除するためのコマンド
       permission:  main.lbnDungeonUtil.command.builder.removemob
       usage: /<command> x y z [mob_name or all]
       permission-message: You don't have <permission>
@@ -208,11 +198,6 @@ commands:
       permission: main.lbnDungeonUtil.command.message
       usage: /<command> message
       permission-message: You don't have <permission>
-   addBene:
-      description: 手持ちのBene装備にBene効果をつける
-      permission:  main.lbnDungeonUtil.command.mod.addBene
-      usage: /<command> benetype benetype ....
-      permission-message: You don't have <permission>
    sheet_reload:
       description: スプレットシートの内容を適応させる
       permission:  main.lbnDungeonUtil.command.mod.sheet_reload
@@ -258,6 +243,11 @@ commands:
       description: Playerのタグを追加します
       permission:  main.lbnDungeonUtil.command.nametag
       usage: /<command>
+      permission-message: You don't have <permission>
+   dropItem:
+      description: アイテムを召喚するためのコマンド
+      permission:  main.lbnDungeonUtil.command.dropitem
+      usage: /<command> itemid x y z
       permission-message: You don't have <permission>
 
 

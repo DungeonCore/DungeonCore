@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import net.l_bulb.dungeoncore.util.BlockUtil.BlockData;
 
+import net.minecraft.server.v1_8_R1.CommandAbstract;
 import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
 
 public class MinecraftUtil {
@@ -95,6 +96,24 @@ public class MinecraftUtil {
     } catch (Exception e) {
       return null;
     }
+  }
+
+  /**
+   * コマンドの引数からLocationを取得する。
+   *
+   * @param sender コマンドのsender
+   * @param paramX コマンド引数のx
+   * @param paramY コマンド引数のy
+   * @param paramZ コマンド引数のz
+   * @param isCenterLoc +0.5をしてブロックの中心の座標を取得するならTRUE
+   * @return
+   */
+  public static Location getLocationByCommandParam(CommandSender sender, String paramX, String paramY, String paramZ, boolean isCenterLoc) {
+    Location senderLoc = getSenderLocation(sender);
+    double x = CommandAbstract.b(senderLoc.getX(), paramX, -30000000, 30000000, isCenterLoc);
+    double y = CommandAbstract.b(senderLoc.getY(), paramY, 0, 256, isCenterLoc);
+    double z = CommandAbstract.b(senderLoc.getZ(), paramZ, -30000000, 30000000, isCenterLoc);
+    return new Location(senderLoc.getWorld(), x, y, z);
   }
 
 }
