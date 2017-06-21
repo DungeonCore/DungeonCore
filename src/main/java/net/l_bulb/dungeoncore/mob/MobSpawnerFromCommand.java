@@ -15,6 +15,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomBat;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEnderDragon;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEnderman;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomGiant;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomIronGolem;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomPig;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomPigZombie;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSkeleton;
@@ -146,6 +147,8 @@ public class MobSpawnerFromCommand {
         break;
       case BAT:
         entity = new CustomBat(world, tag);
+      case IRON_GOLEM:
+        entity = new CustomIronGolem(world, tag);
         break;
       default:
         updateFlg = false;

@@ -24,6 +24,7 @@ import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomCow;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomEnderman;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomGiant;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomGuardian;
+import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomIronGolem;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomPig;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomPigZombie;
 import net.l_bulb.dungeoncore.mob.minecraftEntity.CustomSkeleton;
@@ -52,6 +53,7 @@ import net.minecraft.server.v1_8_R1.EntityCow;
 import net.minecraft.server.v1_8_R1.EntityEnderman;
 import net.minecraft.server.v1_8_R1.EntityGiantZombie;
 import net.minecraft.server.v1_8_R1.EntityGuardian;
+import net.minecraft.server.v1_8_R1.EntityIronGolem;
 import net.minecraft.server.v1_8_R1.EntityPig;
 import net.minecraft.server.v1_8_R1.EntityPigZombie;
 import net.minecraft.server.v1_8_R1.EntitySkeleton;
@@ -103,6 +105,7 @@ public class Main extends JavaPlugin {
       NMSUtils.registerEntity("Bat", 65, EntityBat.class, CustomBat.class);
       NMSUtils.registerEntity("Cow", 92, EntityCow.class, CustomCow.class);
       NMSUtils.registerEntity("Chicken", 93, EntityChicken.class, CustomChicken.class);
+      NMSUtils.registerEntity("IronGolem", 99, EntityIronGolem.class, CustomIronGolem.class);
     } catch (Exception e) {
       e.printStackTrace();
     }
