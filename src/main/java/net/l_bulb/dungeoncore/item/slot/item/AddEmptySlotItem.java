@@ -16,7 +16,7 @@ public class AddEmptySlotItem extends AbstractItem implements SlotInterface {
 
   @Override
   public String getItemName() {
-    return "精錬されたシーグル";
+    return "精錬されたオーブ";
   }
 
   @Override
@@ -68,7 +68,7 @@ public class AddEmptySlotItem extends AbstractItem implements SlotInterface {
 
   @Override
   protected Material getMaterial() {
-    return Material.FLINT_AND_STEEL;
+    return Material.ENDER_PEARL;
   }
 
   @Override

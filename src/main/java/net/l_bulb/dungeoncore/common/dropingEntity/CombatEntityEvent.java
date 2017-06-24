@@ -54,8 +54,6 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
 
   }
 
-  // CustomWeaponItemStack2
-
   // 攻撃者
   Player attacker;
 

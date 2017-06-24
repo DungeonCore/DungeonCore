@@ -1,11 +1,14 @@
 package net.l_bulb.dungeoncore.item.nbttag;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.slot.AbstractSlot;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
@@ -122,6 +125,51 @@ public class CustomWeaponItemStack {
    */
   public void setStrengthLevel(int level) {
     this.strengthLevel = level;
+  }
+
+  /**
+   * 特攻効果を取得する
+   *
+   * @return
+   */
+  public Map<SpecialType, Double> getSpecialTypeList() {
+    HashMap<SpecialType, Double> specialMap = new HashMap<>();
+
+    // 特攻データ１を挿入する
+    String specialAttackType1 = nbtBean.getSpecialAttackValue1();
+    if (specialAttackType1 != null && !specialAttackType1.isEmpty()) {
+      String[] split = specialAttackType1.split(":");
+      specialMap.put(SpecialType.valueOf(split[0]), Double.parseDouble(split[1]));
+    }
+    // 特攻データ2を挿入する
+    String specialAttackData2 = nbtBean.getSpecialAttackValue1();
+    if (specialAttackData2 != null && !specialAttackData2.isEmpty()) {
+      String[] split = specialAttackData2.split(":");
+      specialMap.put(SpecialType.valueOf(split[0]), Double.parseDouble(split[1]));
+    }
+
+    return specialMap;
+  }
+
+  /**
+   * 特攻効果をセットする
+   *
+   * @return
+   */
+  public void setSpecialTypeList(SpecialType type, double value, int index) {
+    // 特攻データ
+    String specialData = type.toString() + value;
+
+    switch (index) {
+      case 1:
+        nbtBean.setSpecialAttackType1(specialData);
+        break;
+      case 2:
+        nbtBean.setSpecialAttackType2(specialData);
+        break;
+      default:
+        throw new RuntimeException("index is invalid:" + index);
+    }
   }
 
   /**

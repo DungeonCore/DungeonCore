@@ -1,14 +1,22 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem;
 
+import java.util.HashMap;
+
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 /**
  * 武器のデータを保持するためのクラス
  */
@@ -26,7 +34,7 @@ public class SpreadSheetWeaponData {
   ItemType itemType = null;
 
   // アイテムの素材
-  ItemStack itemstack = null;
+  ItemStack itemStack = null;
 
   // スキルレベル
   int skillLevel = 0;
@@ -55,6 +63,9 @@ public class SpreadSheetWeaponData {
   // メインのクラフト素材
   String mainCraftMaterial;
 
+  // 特殊ダメージデータ
+  HashMap<SpecialType, Double> specialDamageMap = new HashMap<>();
+
   /**
    * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない
    *
@@ -76,20 +87,11 @@ public class SpreadSheetWeaponData {
       sendError(sender, "IDが不正です");
       isError = true;
     }
-    if (itemstack == null) {
+    if (itemStack == null) {
       sendError(sender, "アイテムの素材が不正です");
       isError = true;
     }
     return !isError;
-  }
-
-  /**
-   * 最大耐久を取得, もし設定されていない場合は-1を返す
-   *
-   * @return
-   */
-  public short getMaxDurability() {
-    return maxDurability;
   }
 
   /**
@@ -99,42 +101,6 @@ public class SpreadSheetWeaponData {
    */
   public void setMaxDurability(String maxDurability) {
     this.maxDurability = JavaUtil.getShort(maxDurability, (short) -1);
-  }
-
-  /**
-   * アイテム名を取得
-   *
-   * @return
-   */
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * アイテム名をセットする
-   *
-   * @param name
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * アイテムIDを取得する
-   *
-   * @return
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * アイテムIDを取得する
-   *
-   * @param id
-   */
-  public void setId(String id) {
-    this.id = id;
   }
 
   /**
@@ -153,21 +119,12 @@ public class SpreadSheetWeaponData {
 
     // 素材が設定されていなければコマンドを取得する
     if (m != null) {
-      itemstack = new ItemStack(m);
+      itemStack = new ItemStack(m);
       return;
     }
 
     // コマンドからItemを取得する
-    itemstack = ItemStackUtil.getItemStackByCommand(item, sender);
-  }
-
-  /**
-   * アイテムのタイプを取得する、 もし正しい値が設定されていない場合はnullを返す
-   *
-   * @return
-   */
-  public ItemType getItemType() {
-    return itemType;
+    itemStack = ItemStackUtil.getItemStackByCommand(item, sender);
   }
 
   /**
@@ -184,30 +141,12 @@ public class SpreadSheetWeaponData {
   }
 
   /**
-   * 攻撃力の倍率を取得
-   *
-   * @return
-   */
-  public double getDamageParcent() {
-    return damageParcent;
-  }
-
-  /**
    * 攻撃力の倍率をセットする
    *
    * @param damageParcent
    */
   public void setDamageParcent(String damageParcent) {
     this.damageParcent = JavaUtil.getDouble(damageParcent, 1);
-  }
-
-  /**
-   * スキルレベルを取得
-   *
-   * @return
-   */
-  public int getSkillLevel() {
-    return skillLevel;
   }
 
   /**
@@ -220,30 +159,12 @@ public class SpreadSheetWeaponData {
   }
 
   /**
-   * 最大スロットを取得
-   *
-   * @return
-   */
-  public int getMaxSlot() {
-    return maxSlot;
-  }
-
-  /**
    * 最大スロットをセットする
    *
    * @param maxSlot
    */
   public void setMaxSlot(String maxSlot) {
     this.maxSlot = JavaUtil.getInt(maxSlot, this.maxSlot);
-  }
-
-  /**
-   * デフォルトスロットを取得
-   *
-   * @return
-   */
-  public int getDefaultSlot() {
-    return defaultSlot;
   }
 
   /**
@@ -256,30 +177,12 @@ public class SpreadSheetWeaponData {
   }
 
   /**
-   * 武器のランクを取得
-   *
-   * @return
-   */
-  public int getRank() {
-    return rank;
-  }
-
-  /**
    * 武器のランクをセット
    *
    * @param rank
    */
   public void setRank(String rank) {
     this.rank = JavaUtil.getInt(rank, this.rank);
-  }
-
-  /**
-   * 使用可能レベルを取得
-   *
-   * @return
-   */
-  public int getAvailableLevel() {
-    return availableLevel;
   }
 
   /**
@@ -300,15 +203,6 @@ public class SpreadSheetWeaponData {
     if (!(sender instanceof ConsoleCommandSender)) {
       sender.sendMessage(error);
     }
-  }
-
-  /**
-   * ItemStackを取得する
-   *
-   * @return
-   */
-  public ItemStack getItemStack() {
-    return itemstack;
   }
 
   /**
@@ -334,6 +228,25 @@ public class SpreadSheetWeaponData {
     } else {
       this.detail = new String[0];
     }
+  }
+
+  /**
+   * 特殊ダメージ効果を追加
+   *
+   * @param type type
+   * @param value 増加倍率
+   */
+  public boolean addSpecialDamage(String type, String value) {
+    SpecialType specialType = SpecialType.fromName(type);
+    double specialDamageParcent = JavaUtil.getDouble(value, -1);
+
+    // 値が不正ならfalse
+    if (specialType == null || specialDamageParcent == -1) { return false; }
+
+    // 値を格納する
+    specialDamageMap.put(specialType, specialDamageParcent / 100.0);
+
+    return true;
   }
 
 }

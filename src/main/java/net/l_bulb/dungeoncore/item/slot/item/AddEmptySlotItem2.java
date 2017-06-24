@@ -8,7 +8,7 @@ import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 public class AddEmptySlotItem2 extends AddEmptySlotItem {
   @Override
   public String getItemName() {
-    return "シーグル";
+    return "オーブ";
   }
 
   @Override

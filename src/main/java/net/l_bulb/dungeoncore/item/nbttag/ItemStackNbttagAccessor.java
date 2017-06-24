@@ -105,6 +105,22 @@ public class ItemStackNbttagAccessor {
     ItemStackUtil.setNBTTag(item, "thelow_item_boss_armor_point", value);
   }
 
+  public String getSpecialAttackValue1() {
+    return ItemStackUtil.getNBTTag(item, "thelow_item_special_attack_value1");
+  }
+
+  public void setSpecialAttackType1(String value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_special_attack_value1", value);
+  }
+
+  public String getSpecialAttackValue2() {
+    return ItemStackUtil.getNBTTag(item, "thelow_item_special_attack_value2");
+  }
+
+  public void setSpecialAttackType2(String value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_special_attack_value2", value);
+  }
+
   /**
    * すべての装着されているSlotを取得
    *

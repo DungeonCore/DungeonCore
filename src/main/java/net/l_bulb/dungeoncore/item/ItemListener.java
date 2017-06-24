@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.item;
 
+import java.util.Map;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,6 +31,7 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.ArmorBase;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillExecutor;
 import net.l_bulb.dungeoncore.item.itemInterface.BowItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
@@ -40,6 +43,7 @@ import net.l_bulb.dungeoncore.item.itemInterface.MagicPickaxeable;
 import net.l_bulb.dungeoncore.item.itemInterface.MeleeAttackItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
+import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
@@ -224,6 +228,12 @@ public class ItemListener implements Listener {
     }
     // 武器スキルを実行
     WeaponSkillExecutor.executeWeaponSkillOnCombat(e);
+
+    // 特定の対象に対して武器固有のダメージを加算させる
+    CustomWeaponItemStack instance = CustomWeaponItemStack.getInstance(e.getItemStack(), (CombatItemable) e.getCustomItem());
+    Map<SpecialType, Double> specialTypeList = instance.getSpecialTypeList();
+    specialTypeList.keySet().stream().filter(t -> t.getIsTarget().test(e.getEnemy())).map(specialTypeList::get)
+        .forEach(t -> e.setDamage(e.getDamage() * specialTypeList.get(t)));
   }
 
   @EventHandler
