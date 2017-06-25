@@ -45,7 +45,7 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 
   @Override
   public String[] getTag() {
-    return new String[] { "id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation", "detail" };
+    return new String[] { "id", "name", "command", "type", "data", "price", "dungeonname", "dungeonlocation", "detail", "dropitem" };
   }
 
   @Override
@@ -82,6 +82,8 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
 
       String detail = row[8];
 
+      boolean remveFlg = JavaUtil.getBoolean(row[9], false);
+
       // アイテムを生成
       ItemInterface item;
       if (row[3] != null) {
@@ -93,23 +95,23 @@ public class ItemSheetRunnable extends AbstractSheetRunable {
             sendMessage("TP先の座標が不正です。(dataで指定してください)");
             return;
           }
-          item = new SpreadSheetKeyTpItem(name, id, price, command, dungeonName, dungeonLoc, tpLoc);
+          item = new SpreadSheetKeyTpItem(name, id, price, command, dungeonName, dungeonLoc, tpLoc, remveFlg);
         } else if (row[3].startsWith("3.")) {
-          item = new SpreadSheetQuestItem(name, id, price, command, detail);
+          item = new SpreadSheetQuestItem(name, id, price, command, detail, remveFlg);
         } else if (row[3].startsWith("5.")) {
-          item = new SpreadSheetMaterialItem(name, id, price, command, detail);
+          item = new SpreadSheetMaterialItem(name, id, price, command, detail, remveFlg);
         } else if (row[3].startsWith("6.")) {
-          item = new SpreadSheetMultiPushKey(name, id, price, command, dungeonName, dungeonLoc, data, detail);
+          item = new SpreadSheetMultiPushKey(name, id, price, command, dungeonName, dungeonLoc, data, detail, remveFlg);
           if (((SpreadSheetMultiPushKey) item).isError()) {
             sendMessage("dataが不正です。(回数:itemid)");
             return;
           }
         } else {
-          item = new SpreadSheetOtherItem(name, id, price, command, detail);
+          item = new SpreadSheetOtherItem(name, id, price, command, detail, remveFlg);
         }
       } else {
         sendMessage("Typeを選択していないため自動的に「その他」に設定されました。:" + Arrays.toString(row));
-        item = new SpreadSheetOtherItem(name, id, price, command, detail);
+        item = new SpreadSheetOtherItem(name, id, price, command, detail, remveFlg);
       }
       ItemManager.registItem(item);
 

@@ -33,15 +33,17 @@ public class SpreadSheetMultiPushKey extends AbstractKeyItem implements ItemInte
   private Material m;
   private ItemInterface customItemById;
   private String[] detailLineList;
+  private boolean remveWhenDeath;
 
   public SpreadSheetMultiPushKey(String name, String id, int price,
-      String command, String dungeon, Location dungeonLoc, String data, String detail) {
+      String command, String dungeon, Location dungeonLoc, String data, String detail, boolean remveWhenDeath) {
     this.name = name;
     this.id = id;
     this.price = price;
     this.command = command;
     this.dungeon = dungeon;
     this.dungeonLoc = dungeonLoc;
+    this.remveWhenDeath = remveWhenDeath;
     this.count = JavaUtil.getInt(data.split(":")[0], -1);
 
     customItemById = ItemManager.getCustomItemById(data.split(":")[1]);
@@ -49,6 +51,11 @@ public class SpreadSheetMultiPushKey extends AbstractKeyItem implements ItemInte
 
     ItemStack itemStackByCommand = ItemStackUtil.getItemStackByCommand(command);
     m = itemStackByCommand.getType();
+  }
+
+  @Override
+  public boolean isRemoveWhenDeath() {
+    return remveWhenDeath;
   }
 
   /**

@@ -72,6 +72,11 @@ public abstract class AbstractItem implements ItemInterface {
 
     setLore(itemLoreData, nbttagAccessor);
 
+    // ドロップするアイテムなら文言を追加する
+    if (isRemoveWhenDeath()) {
+      itemLoreData.addBefore("ダンジョン内で死んだらこのアイテムは消えます");
+    }
+
     ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
     StrengthOperator.updateLore(itemStack, 0);

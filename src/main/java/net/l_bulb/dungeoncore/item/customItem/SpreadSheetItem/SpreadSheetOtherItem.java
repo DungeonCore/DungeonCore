@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SpreadSheetOtherItem extends AbstractItem {
   public SpreadSheetOtherItem(String name, String id, int price,
-      String command, String detail) {
+      String command, String detail, boolean remveWhenDeath) {
     super();
     this.name = name;
     this.id = id;
@@ -27,6 +27,15 @@ public class SpreadSheetOtherItem extends AbstractItem {
     } else {
       lore = Arrays.asList(detail.split(","));
     }
+
+    this.remveWhenDeath = remveWhenDeath;
+  }
+
+  private boolean remveWhenDeath;
+
+  @Override
+  public boolean isRemoveWhenDeath() {
+    return remveWhenDeath;
   }
 
   String name;

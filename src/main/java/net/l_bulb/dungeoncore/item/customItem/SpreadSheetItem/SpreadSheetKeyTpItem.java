@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.util.ItemStackUtil;
 public class SpreadSheetKeyTpItem extends AbstractTeleportKey {
 
   public SpreadSheetKeyTpItem(String name, String id, int price,
-      String command, String dungeon, Location dungeonLoc, Location data) {
+      String command, String dungeon, Location dungeonLoc, Location data, boolean remveWhenDeath) {
     super(data);
     this.name = name;
     this.id = id;
@@ -22,10 +22,18 @@ public class SpreadSheetKeyTpItem extends AbstractTeleportKey {
     this.command = command;
     this.dungeon = dungeon;
     this.dungeonLoc = dungeonLoc;
+    this.remveWhenDeath = remveWhenDeath;
 
     ItemStack itemStackByCommand = ItemStackUtil.getItemStackByCommand(command);
     m = itemStackByCommand.getType();
     lore = ItemStackUtil.getLore(itemStackByCommand);
+  }
+
+  private boolean remveWhenDeath;
+
+  @Override
+  public boolean isRemoveWhenDeath() {
+    return remveWhenDeath;
   }
 
   String name;

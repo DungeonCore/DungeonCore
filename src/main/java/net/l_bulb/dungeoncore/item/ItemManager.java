@@ -16,6 +16,7 @@ import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.customItem.other.EnderChestAccesssor;
 import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
 import net.l_bulb.dungeoncore.item.customItem.other.MagicStoneOre;
+import net.l_bulb.dungeoncore.item.customItem.other.RepatriationItem;
 import net.l_bulb.dungeoncore.item.customItem.other.RepositoryAccessor;
 import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollArmor;
 import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollWeapon;
@@ -244,5 +245,7 @@ public class ItemManager {
     // 倉庫アクセスアイテム
     Arrays.stream(RepositoryType.values()).map(RepositoryAccessor::new).forEach(ItemManager::registItem);
     registItem(new EnderChestAccesssor());
+
+    registItem(new RepatriationItem());
   }
 }
