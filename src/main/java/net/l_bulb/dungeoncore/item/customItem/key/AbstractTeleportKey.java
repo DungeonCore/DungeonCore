@@ -24,7 +24,7 @@ public abstract class AbstractTeleportKey extends AbstractKeyItem {
     try {
       Player p = e.getPlayer();
       new ParticleData(ParticleType.portal, 50).run(loc);
-      p.playSound(loc, Sound.PORTAL_TRAVEL, 1, 1);
+      p.playSound(loc, Sound.PORTAL_TRAVEL, (float) 0.5, 1);
       loc.setDirection(p.getLocation().getDirection());
       // TPする
       p.teleport(loc);
