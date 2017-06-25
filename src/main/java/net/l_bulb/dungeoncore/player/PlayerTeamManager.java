@@ -25,7 +25,7 @@ public class PlayerTeamManager {
 
   public static void setTeam(Player p) {
     Team team = board.getTeam(DEFAULT_TEAM);
-    team.addPlayer(p);
+    team.addEntry(p.getName());
   }
 
   public static void setTeamAllPlayer() {
