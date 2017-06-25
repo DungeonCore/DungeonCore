@@ -24,19 +24,13 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
-    super.excuteOnRightClick(e);
-    // レベルなどを確認する
-    Player player = e.getPlayer();
-    if (!isAvilable(player)) {
-      sendNotAvailableMessage(player);
-      e.setCancelled(true);
-      return;
-    }
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
+    if (!super.excuteOnRightClick(e)) { return false; }
     if (!e.getPlayer().isSneaking()) {
       // スキルを発動
       WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
     }
+    return true;
   }
 
   @Override
@@ -64,5 +58,10 @@ public class SwordItem extends SpreadSheetAttackItem implements MeleeAttackItema
 
   @Override
   public void excuteOnLeftClick(PlayerInteractEvent e) {}
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return false;
+  }
 
 }

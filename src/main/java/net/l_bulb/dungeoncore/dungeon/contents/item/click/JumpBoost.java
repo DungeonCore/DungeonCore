@@ -10,19 +10,20 @@ import org.bukkit.util.Vector;
 
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.player.PlayerChecker;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
-public class JumpBoost extends RightClickItem {
+public class JumpBoost extends AbstractItem implements RightClickItemable {
   @Override
   public String getItemName() {
     return "Jumping Feather";
   }
 
   @Override
-  protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     Player player = e.getPlayer();
     Location location = player.getLocation();
     location.setY(0);
@@ -60,13 +61,13 @@ public class JumpBoost extends RightClickItem {
   }
 
   @Override
-  protected boolean isConsumeWhenUse() {
-    return true;
+  public int getBuyPrice(ItemStack item) {
+    return 2000;
   }
 
   @Override
-  public int getBuyPrice(ItemStack item) {
-    return 2000;
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return true;
   }
 
 }

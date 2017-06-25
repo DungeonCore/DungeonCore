@@ -49,17 +49,12 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
   }
 
   @Override
-  final public void excuteOnRightClick(PlayerInteractEvent e) {
-    super.excuteOnRightClick(e);
+  final public boolean excuteOnRightClick(PlayerInteractEvent e) {
+    if (!super.excuteOnRightClick(e)) { return false; }
     e.setCancelled(true);
-    Player player = e.getPlayer();
-
-    if (!isAvilable(player)) {
-      e.setCancelled(true);
-      return;
-    }
     // スキルを発動
     WeaponSkillExecutor.executeWeaponSkillOnClick(e, this);
+    return true;
   }
 
   /**
@@ -167,6 +162,11 @@ public class MagicItem extends SpreadSheetAttackItem implements RightClickItemab
         return fallingBlock;
       }
     };
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return false;
   }
 }
 

@@ -48,8 +48,8 @@ public class MagicBookFireLevel2 extends AbstractMagicBook {
   ParticleData particleData2 = new CircleParticleData(new ParticleData(ParticleType.lava, 3), 6);
 
   @Override
-  protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
-    super.excuteOnRightClick2(e);
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
+    super.excuteOnRightClick(e);
 
     Player player = e.getPlayer();
     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 5, 1));

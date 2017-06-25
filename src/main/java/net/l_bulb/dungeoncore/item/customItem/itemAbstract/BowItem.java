@@ -76,4 +76,9 @@ public class BowItem extends SpreadSheetAttackItem implements BowItemable, LeftC
 
   }
 
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return false;
+  }
+
 }

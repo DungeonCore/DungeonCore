@@ -16,8 +16,8 @@ import net.l_bulb.dungeoncore.common.particle.ParticleType;
 public class MagicBookLevel1Flame extends AbstractMagicBook {
 
   @Override
-  protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
-    super.excuteOnRightClick2(e);
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
+    super.excuteOnRightClick(e);
     Player player = e.getPlayer();
     // 音を再生
     player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 1, 1);

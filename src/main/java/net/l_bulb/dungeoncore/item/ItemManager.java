@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +10,13 @@ import java.util.Set;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.chest.wireless.RepositoryType;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
+import net.l_bulb.dungeoncore.item.customItem.other.EnderChestAccesssor;
 import net.l_bulb.dungeoncore.item.customItem.other.GalionItem;
 import net.l_bulb.dungeoncore.item.customItem.other.MagicStoneOre;
+import net.l_bulb.dungeoncore.item.customItem.other.RepositoryAccessor;
 import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollArmor;
 import net.l_bulb.dungeoncore.item.customItem.other.StrengthScrollWeapon;
 import net.l_bulb.dungeoncore.item.customItem.pic.DiamondPickaxe;
@@ -237,5 +241,8 @@ public class ItemManager {
     registItem(new MagicOreRegistPic());
     // お金
     registItem(GalionItem.getInstance(0));
+    // 倉庫アクセスアイテム
+    Arrays.stream(RepositoryType.values()).map(RepositoryAccessor::new).forEach(ItemManager::registItem);
+    registItem(new EnderChestAccesssor());
   }
 }

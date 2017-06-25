@@ -130,11 +130,6 @@ public abstract class AbstractItem implements ItemInterface {
   }
 
   @Override
-  public String getSimpleName() {
-    return ChatColor.stripColor(getItemName());
-  }
-
-  @Override
   public boolean isQuestItem() {
     return false;
   }

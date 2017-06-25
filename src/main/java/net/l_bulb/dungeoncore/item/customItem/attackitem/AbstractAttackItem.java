@@ -61,14 +61,15 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     // レベルを確認
     Player player = e.getPlayer();
     if (!isAvilable(player)) {
       sendNotAvailableMessage(player);
       e.setCancelled(true);
-      return;
+      return true;
     }
+    return false;
   }
 
   @Override

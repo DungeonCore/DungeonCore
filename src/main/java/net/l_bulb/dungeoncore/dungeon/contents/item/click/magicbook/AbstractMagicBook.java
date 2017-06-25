@@ -11,13 +11,14 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
-import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
+import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
-public abstract class AbstractMagicBook extends RightClickItem {
+public abstract class AbstractMagicBook extends AbstractItem implements RightClickItemable {
 
   @Override
-  protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     Player player = e.getPlayer();
     List<Entity> nearbyEntities = getNearEntitys(player);
     for (Entity entity : nearbyEntities) {
@@ -48,11 +49,6 @@ public abstract class AbstractMagicBook extends RightClickItem {
   abstract protected double getDamageVal();
 
   @Override
-  protected boolean isConsumeWhenUse() {
-    return true;
-  }
-
-  @Override
   public int getBuyPrice(ItemStack item) {
     return 400;
   }
@@ -63,5 +59,10 @@ public abstract class AbstractMagicBook extends RightClickItem {
     arrayList.add(new MagicBookFireLevel2());
     arrayList.add(new MagicBookFireLevel3());
     return arrayList;
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return true;
   }
 }

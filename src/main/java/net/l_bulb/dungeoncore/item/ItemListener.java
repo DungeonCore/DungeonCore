@@ -52,6 +52,7 @@ import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class ItemListener implements Listener {
@@ -66,7 +67,11 @@ public class ItemListener implements Listener {
     if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
       RightClickItemable clickItem = ItemManager.getCustomItem(RightClickItemable.class, item);
       if (clickItem != null) {
-        clickItem.excuteOnRightClick(e);
+        boolean useFlg = clickItem.excuteOnRightClick(e);
+        // アイテムの効果が発動し、消費するなら手持ちのアイテムを１つ消費する
+        if (useFlg && clickItem.isConsumeWhenRightClick(e)) {
+          ItemStackUtil.consumeItemInHand(player);
+        }
       }
     } else if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
       LeftClickItemable clickItem = ItemManager.getCustomItem(LeftClickItemable.class, item);

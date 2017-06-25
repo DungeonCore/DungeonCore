@@ -62,14 +62,14 @@ public class BookItem extends AbstractItem implements RightClickItemable {
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     // もし本でなくても本のGUIを強制的に開かせる
     if (getMaterial() != Material.WRITTEN_BOOK) {
       BookManager.openBook(data.toBookItem(), e.getPlayer());
       e.setCancelled(true);
     }
-
-    // 本を開くのを記録する
+    return true;
+    // TODO 本を開くのを記録する
   }
 
   /**
@@ -83,6 +83,11 @@ public class BookItem extends AbstractItem implements RightClickItemable {
 
   @Override
   public boolean isShowItemList() {
+    return false;
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
     return false;
   }
 }

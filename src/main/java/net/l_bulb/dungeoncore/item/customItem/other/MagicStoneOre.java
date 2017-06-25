@@ -11,7 +11,6 @@ import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.itemInterface.RightClickItemable;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
-import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
 public class MagicStoneOre extends AbstractItem implements RightClickItemable {
 
@@ -84,13 +83,18 @@ public class MagicStoneOre extends AbstractItem implements RightClickItemable {
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     if (type == MagicStoneOreType.LAPIS_ORE) {
       MagicPointManager.addMagicPoint(e.getPlayer(), 20);
       e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.DRINK, 1, 5);
-      // アイテムを1つ消費する
-      ItemStackUtil.consumeItemInHand(e.getPlayer());
+      return true;
     }
+    return false;
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return true;
   }
 
 }

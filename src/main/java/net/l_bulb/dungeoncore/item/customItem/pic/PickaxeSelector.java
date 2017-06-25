@@ -54,8 +54,9 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable 
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     pickSelectorMenu.open(e.getPlayer());
+    return true;
   }
 
   class PickSelectorMenu implements MenuSelectorInterface {
@@ -94,5 +95,10 @@ public class PickaxeSelector extends AbstractItem implements RightClickItemable 
       return "pick_selec_" + pickaxe.getGiveItemId();
     }
 
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return false;
   }
 }

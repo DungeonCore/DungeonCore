@@ -50,8 +50,8 @@ public class MagicBookFireLevel3 extends AbstractMagicBook {
   ParticleData particleData = new ParticleData(ParticleType.flame, 20);
 
   @Override
-  protected boolean excuteOnRightClick2(PlayerInteractEvent e) {
-    super.excuteOnRightClick2(e);
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
+    super.excuteOnRightClick(e);
 
     Player player = e.getPlayer();
     // 周りのプレイヤーに火炎耐性をつける

@@ -185,7 +185,7 @@ public class SpreadSheetFoodItem extends FoodItem implements RightClickItemable 
   }
 
   @Override
-  public void excuteOnRightClick(PlayerInteractEvent e) {
+  public boolean excuteOnRightClick(PlayerInteractEvent e) {
     if (data.isCanClickEat()) {
       Player player = e.getPlayer();
       // 食べた判定にする
@@ -194,6 +194,14 @@ public class SpreadSheetFoodItem extends FoodItem implements RightClickItemable 
       ItemStackUtil.consumeItemInHand(player);
       // 音を鳴らす
       player.getWorld().playSound(player.getLocation(), Sound.EAT, 1, 1);
+
+      return true;
     }
+    return false;
+  }
+
+  @Override
+  public boolean isConsumeWhenRightClick(PlayerInteractEvent event) {
+    return true;
   }
 }

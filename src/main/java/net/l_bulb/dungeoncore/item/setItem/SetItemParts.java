@@ -95,11 +95,6 @@ public class SetItemParts implements SetItemPartable {
   }
 
   @Override
-  public String getSimpleName() {
-    return ChatColor.stripColor(getItemName());
-  }
-
-  @Override
   public boolean isQuestItem() {
     return false;
   }
