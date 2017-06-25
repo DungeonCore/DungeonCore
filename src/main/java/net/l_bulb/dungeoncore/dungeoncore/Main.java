@@ -78,6 +78,9 @@ public class Main extends JavaPlugin {
     return debugging;
   }
 
+  /** オーバーワールドの名前を取得 */
+  public static final String OVER_WORLD_NAME = "thelow";
+
   @Override
   public void onEnable() {
     plugin = this;

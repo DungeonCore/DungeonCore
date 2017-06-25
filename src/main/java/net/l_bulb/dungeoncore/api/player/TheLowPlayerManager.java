@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -51,6 +52,25 @@ public class TheLowPlayerManager {
       if (theLowPlayer == null) { return; }
       saveFile((CustomPlayer) theLowPlayer);
     } catch (ClassNotFoundException | IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * TheLowPlayerに処理を行う。
+   * データがロードされていなければロードされた後に指定した処理を行う。
+   *
+   * @param p
+   * @param consumer
+   */
+  public static void consume(Player p, Consumer<TheLowPlayer> consumer) {
+    try {
+      if (!isLoaded(p)) {
+        loadData(p);
+      }
+      TheLowPlayer theLowPlayer = getTheLowPlayer(p);
+      consumer.accept(theLowPlayer);
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

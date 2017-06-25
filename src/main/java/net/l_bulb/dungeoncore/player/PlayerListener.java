@@ -29,6 +29,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -53,6 +54,7 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerChangeStatusExpEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerChangeStatusLevelEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCompleteReincarnationEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCraftCustomItemEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerDeathInDungeonEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerJoinDungeonGameEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerLevelUpEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerLoadedDataEvent;
@@ -193,17 +195,26 @@ public class PlayerListener implements Listener {
 
   @EventHandler
   public void onJoin(PlayerJoinEvent e) {
-    MagicPointManager.onJoinServer(e.getPlayer());
-    updateSidebar(e.getPlayer());
+    Player player = e.getPlayer();
+    MagicPointManager.onJoinServer(player);
+    updateSidebar(player);
 
     // チームに配属する
-    PlayerTeamManager.setTeam(e.getPlayer());
+    PlayerTeamManager.setTeam(player);
 
     // Abilityを適応
-    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(e.getPlayer());
+    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
     if (theLowPlayer != null) {
       theLowPlayer.fixIntegrity(CheckIntegrityLevel.LEVEL1);
     }
+
+    // スポーン地点にTPさせる
+    TheLowPlayerManager.consume(player, t -> {
+      if (t.getTeleportBedSpawnWhenJoin()) {
+        player.teleport(t.getRespawnLocation());
+        theLowPlayer.setTeleportBedSpawnWhenJoin(false);
+      }
+    });
   }
 
   @EventHandler
@@ -249,16 +260,32 @@ public class PlayerListener implements Listener {
 
     // レベルを存続させる
     e.setKeepLevel(true);
+    // インベントリを存続させる
+    e.setKeepInventory(true);
 
     // ポーション効果を消す
-    new BukkitRunnable() {
-      @Override
-      public void run() {
-        for (PotionEffect potionEffect : e.getEntity().getActivePotionEffects()) {
-          e.getEntity().removePotionEffect(potionEffect.getType());
-        }
+    TheLowExecutor.executeLater(20, () -> e.getEntity().getActivePotionEffects().stream()
+        .map(p -> p.getType())
+        .forEach(e.getEntity()::removePotionEffect));
+
+    // ダンジョンワールドの時はイベントを発動させる
+    if (!e.getEntity().getWorld().getName().equalsIgnoreCase(Main.OVER_WORLD_NAME)) {
+      new PlayerDeathInDungeonEvent(e.getEntity()).callEvent();
+    }
+  }
+
+  @EventHandler
+  public void onQuit(PlayerQuitEvent e) {
+    if (!e.getPlayer().getWorld().getName().equalsIgnoreCase(Main.OVER_WORLD_NAME)) {
+      // ダンジョンワールドの時はイベントを発動させる
+      new PlayerDeathInDungeonEvent(e.getPlayer()).callEvent();
+
+      // スポーン場所にテレポートさせるフラグを立てる
+      Player player = e.getPlayer();
+      if (PlayerChecker.isNormalPlayer(player)) {
+        TheLowPlayerManager.consume(player, p -> p.setTeleportBedSpawnWhenJoin(true));
       }
-    }.runTaskLater(Main.plugin, 20);
+    }
   }
 
   @EventHandler

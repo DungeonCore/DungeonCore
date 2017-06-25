@@ -97,4 +97,9 @@ public class RepositoryAccessor extends AbstractItem implements RightClickItemab
     return true;
   }
 
+  @Override
+  public boolean isRemoveWhenDeath() {
+    return true;
+  }
+
 }

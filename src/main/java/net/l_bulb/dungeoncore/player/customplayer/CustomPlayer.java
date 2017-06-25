@@ -388,4 +388,16 @@ public class CustomPlayer implements TheLowPlayer, Serializable {
       }
     }
   }
+
+  boolean isTeleportBedSpawn = false;
+
+  @Override
+  public void setTeleportBedSpawnWhenJoin(boolean isTeleport) {
+    this.isTeleportBedSpawn = isTeleport;
+  }
+
+  @Override
+  public boolean getTeleportBedSpawnWhenJoin() {
+    return isTeleportBedSpawn;
+  }
 }

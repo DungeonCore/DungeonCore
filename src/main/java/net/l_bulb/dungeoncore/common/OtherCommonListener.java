@@ -1,6 +1,5 @@
 package net.l_bulb.dungeoncore.common;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -27,13 +26,10 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
@@ -49,7 +45,6 @@ import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
 import net.l_bulb.dungeoncore.common.other.EndPortalOperator;
 import net.l_bulb.dungeoncore.common.other.GetItemSign;
 import net.l_bulb.dungeoncore.common.other.InHandItemClickSign;
-import net.l_bulb.dungeoncore.common.other.SoulBound;
 import net.l_bulb.dungeoncore.common.other.Stun;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
@@ -57,38 +52,13 @@ import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
-import net.l_bulb.dungeoncore.util.TheLowUtil;
 
 public class OtherCommonListener implements Listener {
-  @EventHandler
-  public void StopDrops(PlayerDropItemEvent event) {
-    SoulBound.onDrops(event);
-  }
-
-  @EventHandler
-  public void onCraftSoulBound(PrepareItemCraftEvent e) {
-    SoulBound.onCraftSoulBound(e);
-  }
-
-  @EventHandler
-  public void onDeathPlayer(PlayerDeathEvent e) {
-    for (ItemStack s : new ArrayList<>(e.getDrops())) {
-      if (TheLowUtil.isSoulBound(s)) {
-        e.getDrops().remove(s);
-      }
-    }
-  }
 
   @EventHandler
   public void onDeath(EntityDeathEvent e) {
     // 取得経験値は常にゼロ
     e.setDroppedExp(0);
-  }
-
-  @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-  public void StopClicking(InventoryClickEvent event) {
-    // soulboundの処理
-    SoulBound.onInventoryClick(event);
   }
 
   @EventHandler

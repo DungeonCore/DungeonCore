@@ -21,10 +21,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.ProjectileSource;
 
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
+import net.l_bulb.dungeoncore.common.event.player.PlayerDeathInDungeonEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
@@ -52,6 +54,7 @@ import net.l_bulb.dungeoncore.item.slot.magicstone.KillSlot;
 import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.player.ItemType;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -323,6 +326,30 @@ public class ItemListener implements Listener {
       e.setCancelled(true);
     } else {
       customItem.onPlayerBreakMagicOreEvent(e);
+    }
+  }
+
+  /**
+   * Playerがダンジョンで死んだ時アイテムを削除する
+   *
+   * @param e
+   */
+  @EventHandler
+  public void onPlayerDeathInDungeonEvent(PlayerDeathInDungeonEvent e) {
+    Player player = e.getPlayer();
+    if (PlayerChecker.isNonNormalPlayer(player)) { return; }
+
+    PlayerInventory inv = player.getInventory();
+    ItemStack[] contents = inv.getContents();
+    for (int i = 0; i < contents.length; i++) {
+      ItemInterface customItem = ItemManager.getCustomItem(contents[i]);
+      if (customItem == null) {
+        continue;
+      }
+      if (!customItem.isRemoveWhenDeath()) {
+        continue;
+      }
+      inv.clear(i);
     }
   }
 }

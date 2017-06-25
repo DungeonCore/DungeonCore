@@ -2,12 +2,16 @@ package net.l_bulb.dungeoncore.api.player;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
+import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
 
@@ -27,6 +31,20 @@ public interface TheLowPlayer {
    * @return
    */
   public int getExp(LevelType type);
+
+  /**
+   * ログインした時スポーン地点にTPさせるかどうかをセットする
+   *
+   * @return
+   */
+  public void setTeleportBedSpawnWhenJoin(boolean isTeleport);
+
+  /**
+   * ログインした時スポーン地点にTPさせるかどうかを取得する
+   *
+   * @return
+   */
+  public boolean getTeleportBedSpawnWhenJoin();
 
   /**
    * The Lowのレベルをセットする
@@ -219,6 +237,7 @@ public interface TheLowPlayer {
 
   /**
    * サイドバーを表示するかどうかをセットする
+   *
    * @param isShowSideBar TODO
    * @param 表示するならTRUE
    */
@@ -231,6 +250,21 @@ public interface TheLowPlayer {
    * @return
    */
   public int getEachReincarnationCount(LevelType levelType);
+
+  /**
+   * リスポーン地点を取得
+   * もしリスポーン地点が登録されていなければTheLowワールドのリスポーン地点を取得する
+   *
+   * @return
+   */
+  default public Location getRespawnLocation() {
+    Location bedSpawnLocation = getOfflinePlayer().getBedSpawnLocation();
+    if (bedSpawnLocation != null) { return bedSpawnLocation; }
+
+    World world = Bukkit.getWorld(Main.OVER_WORLD_NAME);
+    Location spawnLocation = world.getSpawnLocation();
+    return spawnLocation;
+  }
 
   public static enum CheckIntegrityLevel {
     LEVEL1, // チェックを行わないでPlayerステータスの変更を行う
