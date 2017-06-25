@@ -19,9 +19,6 @@ import net.l_bulb.dungeoncore.util.Message;
 import net.md_5.bungee.api.ChatColor;
 
 public class RepairUi {
-  {
-
-  }
 
   public static void onOpenUi(Player p) {
     MenuSelector menuSelecor = new MenuSelector("Repair Menu");

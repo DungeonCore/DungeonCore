@@ -16,6 +16,8 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -40,6 +42,8 @@ import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.EntityKillable;
 import net.l_bulb.dungeoncore.item.itemInterface.EquipItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.FoodItemable;
+import net.l_bulb.dungeoncore.item.itemInterface.InventoryClickItemable;
+import net.l_bulb.dungeoncore.item.itemInterface.InventoryClickItemable.TheLowInventoryType;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.MagicPickaxeable;
 import net.l_bulb.dungeoncore.item.itemInterface.MeleeAttackItemable;
@@ -350,6 +354,34 @@ public class ItemListener implements Listener {
         continue;
       }
       inv.clear(i);
+    }
+  }
+
+  @EventHandler
+  public void onInventoryClickEvent(InventoryClickEvent e) {
+    TheLowInventoryType inventoryType = InventoryClickItemable.getInventoryType(e.getInventory());
+    InventoryClickItemable customIte1 = ItemManager.getCustomItem(InventoryClickItemable.class, e.getCurrentItem());
+    if (customIte1 != null) {
+      customIte1.onInventoryClick(e, e.getCurrentItem(), inventoryType);
+    }
+    InventoryClickItemable customItem2 = ItemManager.getCustomItem(InventoryClickItemable.class, e.getCursor());
+    if (customItem2 != null) {
+      customItem2.onInventoryClick(e, e.getCursor(), inventoryType);
+    }
+  }
+
+  @EventHandler
+  public void onInventoryDragEvent(InventoryDragEvent e) {
+    TheLowInventoryType inventoryType = InventoryClickItemable.getInventoryType(e.getInventory());
+
+    InventoryClickItemable customIte1 = ItemManager.getCustomItem(InventoryClickItemable.class, e.getOldCursor());
+    if (customIte1 != null) {
+      customIte1.onInventoryClick(e, e.getOldCursor(), inventoryType);
+    }
+
+    InventoryClickItemable customItem2 = ItemManager.getCustomItem(InventoryClickItemable.class, e.getCursor());
+    if (customItem2 != null) {
+      customItem2.onInventoryClick(e, e.getCursor(), inventoryType);
     }
   }
 }

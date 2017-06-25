@@ -63,12 +63,6 @@ public abstract class AbstractSlot extends AbstractItem implements SlotInterface
   }
 
   @Override
-  public boolean isSame(SlotInterface slot) {
-    if (slot != null) { return getId().equals(slot.getId()); }
-    return false;
-  }
-
-  @Override
   public int hashCode() {
     return getId().hashCode();
   }

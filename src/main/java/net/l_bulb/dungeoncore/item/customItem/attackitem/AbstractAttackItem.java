@@ -22,7 +22,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
-import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
@@ -126,9 +125,8 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     CustomWeaponItemStack instance = CustomWeaponItemStack.getInstance(item, this);
 
     // Slotを追加
-    EmptySlot slot = new EmptySlot();
     for (int i = 0; i < instance.getDefaultSlotCount(); i++) {
-      instance.addSlot(slot);
+      instance.addEmptySlot();
     }
     instance.updateItem();
     return item;

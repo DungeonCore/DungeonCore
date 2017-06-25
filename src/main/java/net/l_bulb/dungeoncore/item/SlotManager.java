@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem;
-import net.l_bulb.dungeoncore.item.customItem.other.AddEmptySlotItem2;
-import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot;
-import net.l_bulb.dungeoncore.item.customItem.other.RemoveUnavailableSlot2;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
+import net.l_bulb.dungeoncore.item.slot.item.AddEmptySlotItem;
+import net.l_bulb.dungeoncore.item.slot.item.AddEmptySlotItem2;
+import net.l_bulb.dungeoncore.item.slot.item.RemoveUnavailableSlot;
+import net.l_bulb.dungeoncore.item.slot.item.RemoveUnavailableSlot2;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
 import net.l_bulb.dungeoncore.item.slot.magicstone.UnavailableSlot;
 

@@ -51,19 +51,19 @@ public class InitManager {
   }
 
   public void reloadSpreadSheet() {
-    SpletSheetCommand.reloadSheet(null, "buff");
-    SpletSheetCommand.reloadSheet(null, "particle");
     MobCommand.reloadAllMob(null);
     MobSkillManager.reloadDataBySystem();
     SpletSheetCommand.reloadSheet(null, "item");
-    SpletSheetCommand.reloadSheet(null, "food2");
+    SpletSheetCommand.reloadSheet(null, "weapon");
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
+    SpletSheetCommand.reloadSheet(null, "buff");
+    SpletSheetCommand.reloadSheet(null, "particle");
+    SpletSheetCommand.reloadSheet(null, "food2");
     SpletSheetCommand.reloadSheet(null, "weaponskill");
     SpletSheetCommand.reloadSheet(null, "craftrecipe");
-    SpletSheetCommand.reloadSheet(null, "weapon");
     SpletSheetCommand.reloadSheet(null, "armor");
     CommandChest.allReload();
     SoundSheetRunnable.allReload();

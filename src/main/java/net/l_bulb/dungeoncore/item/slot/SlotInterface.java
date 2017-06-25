@@ -15,5 +15,8 @@ public interface SlotInterface {
 
   public SlotLevel getLevel();
 
-  public boolean isSame(SlotInterface slot);
+  default public boolean isSame(SlotInterface slot) {
+    if (slot != null) { return getId().equals(slot.getId()); }
+    return false;
+  }
 }

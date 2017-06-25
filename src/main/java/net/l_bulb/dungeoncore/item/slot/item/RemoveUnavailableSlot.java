@@ -62,11 +62,6 @@ public class RemoveUnavailableSlot extends AbstractItem implements SlotInterface
   }
 
   @Override
-  public boolean isSame(SlotInterface slot) {
-    return slot.getClass().equals(AddEmptySlotItem.class);
-  }
-
-  @Override
   protected Material getMaterial() {
     return Material.SHEARS;
   }

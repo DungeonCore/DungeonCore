@@ -30,7 +30,7 @@ public class ItemStackNbttagAccessor {
     // IDで連結する
     slotList.stream()
         .filter(val -> val != null)
-        .peek(val -> {
+        .forEach(val -> {
           sb.appendSeparator(",");
           sb.append(val.getId());
         });

@@ -35,6 +35,7 @@ public class CustomWeaponItemStack {
     this.itemInterface = itemInterface;
     this.nbtBean = new ItemStackNbttagAccessor(item);
 
+    // TODO 必要なときだけにする
     slotList = nbtBean.getGetAllSlotList();
   }
 
@@ -180,7 +181,6 @@ public class CustomWeaponItemStack {
     if (strengthLevel != -1) {
       StrengthOperator.updateLore(getItem(), strengthLevel);
     }
-
     // nbtタグにセットする
     nbtBean.setSlotList(slotList);
 
