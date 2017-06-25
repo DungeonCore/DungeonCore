@@ -12,7 +12,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -25,14 +24,12 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.projectiles.ProjectileSource;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
@@ -199,6 +196,12 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
       default:
         break;
     }
+
+    Player attacker = e.getAttacker();
+    // skillを発動
+    if (attacker.getType().isAlive()) {
+      executeMobSkill(e.getEnemy(), attacker, MobSkillExcuteConditionType.MOB_DAMAGED);
+    }
   }
 
   @Override
@@ -208,43 +211,6 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
       e.setCancelled(true);
       return;
     }
-
-    // skill
-    if (damager.getType().isAlive()) {
-      executeMobSkill(mob, (LivingEntity) damager, MobSkillExcuteConditionType.MOB_DAMAGED);
-    } else if (damager.getType() == EntityType.ARROW) {
-      ProjectileSource shooter = ((Arrow) damager).getShooter();
-      if (shooter instanceof Player) {
-        executeMobSkill(mob, (LivingEntity) shooter, MobSkillExcuteConditionType.MOB_DAMAGED);
-      }
-    }
-
-    // 耐性
-    switch (LastDamageManager.getLastDamageAttackType(mob)) {
-      case SWORD:
-        if (swordRegistance == 100) {
-          e.setCancelled(true);
-        }
-        e.setDamage(e.getDamage() * (1 - swordRegistance / 100.0));
-        break;
-      case MAGIC:
-        if (magicRegistance == 100) {
-          e.setCancelled(true);
-        }
-        e.setDamage(e.getDamage() * (1 - magicRegistance / 100.0));
-        break;
-      case BOW:
-        if (bowRegistance == 100) {
-          e.setCancelled(true);
-        }
-        e.setDamage(e.getDamage() * (1 - bowRegistance / 100.0));
-        break;
-      default:
-        break;
-    }
-
-    // 防御ポイント
-    e.setDamage(e.getDamage() * defencePoint);
 
     if (this.mob == null) { return; }
     this.mob.onDamage(mob, damager, e);
@@ -256,6 +222,8 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     if (e.getCause() == DamageCause.DROWNING && nbtTag.isWaterMonster()) {
       e.setCancelled(true);
     }
+    // 防御ポイント
+    e.setDamage(e.getDamage() * defencePoint);
 
     if (this.mob != null) {
       this.mob.onOtherDamage(e);

@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithMultiCombat;

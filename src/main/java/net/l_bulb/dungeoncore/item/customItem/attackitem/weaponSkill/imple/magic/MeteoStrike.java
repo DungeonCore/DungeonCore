@@ -12,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.dropingEntity.DropingEntityForPlayer;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.dungeoncore.Main;

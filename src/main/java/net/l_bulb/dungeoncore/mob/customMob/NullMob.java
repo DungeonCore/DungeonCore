@@ -13,6 +13,12 @@ import net.l_bulb.dungeoncore.mob.AbstractMob;
 
 public class NullMob extends AbstractMob<LivingEntity> {
 
+  private EntityType type = EntityType.ZOMBIE;
+
+  public NullMob(EntityType type) {
+    this.type = type;
+  }
+
   public NullMob() {
     this("");
   }
@@ -50,12 +56,12 @@ public class NullMob extends AbstractMob<LivingEntity> {
 
   @Override
   public LivingEntity spawnPrivate(Location loc) {
-    return null;
+    return (LivingEntity) loc.getWorld().spawnEntity(loc, getEntityType());
   }
 
   @Override
   public EntityType getEntityType() {
-    return null;
+    return type;
   }
 
 }

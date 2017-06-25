@@ -28,7 +28,7 @@ public class WeaponSheetRunnable extends AbstractSheetRunable {
   @Override
   public String[] getTag() {
     return new String[] { "id", "name", "material", "detail", "damageparcent", "type", "skilllevel", "defaultslot", "maxslot", "rank", "uselevel", // 10
-        "durability" };
+        "durability", "special1", "specialvalue1", "special2", "specialvalue2" };
   }
 
   @Override
@@ -57,6 +57,10 @@ public class WeaponSheetRunnable extends AbstractSheetRunable {
     } else if ("魔法".equals(type)) {
       item = new MagicItem(data);
     }
+
+    // 特殊ダメ－ジ
+    data.addSpecialDamage(row[12], row[13]);
+    data.addSpecialDamage(row[14], row[15]);
 
     if (item == null) {
       sendMessage("武器のタイプが不正です");

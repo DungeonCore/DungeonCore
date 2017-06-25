@@ -36,7 +36,7 @@ public class LoreLine {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(ChatColor.YELLOW);
     stringBuilder.append(subTitle);
-    stringBuilder.append(" ：");
+    stringBuilder.append(" ： ");
     stringBuilder.append(ChatColor.GOLD);
     stringBuilder.append(value);
     return stringBuilder.toString();

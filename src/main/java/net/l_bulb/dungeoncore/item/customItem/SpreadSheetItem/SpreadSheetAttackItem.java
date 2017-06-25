@@ -1,14 +1,18 @@
 package net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerStrengthFinishEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AttackDamageValue;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.SpreadSheetWeaponData;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.item.itemInterface.StrengthChangeItemable;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
@@ -90,8 +94,8 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
     double normalDamage = nbttagSetter.getDamage();
     double criticalDamage = normalDamage * 0.15;
 
-    if (criticalDamage > 0) {
-      loreToken.addLore(LoreLine.getLoreLine("クリティカル追加ダメージ", JavaUtil.round(criticalDamage, 2)));
+    if (criticalDamage > 0 && getCriticalHitRate(level) > 0) {
+      loreToken.addLore(LoreLine.getLoreLine("クリティカル時", "+" + JavaUtil.round(criticalDamage, 2)));
     }
   }
 
@@ -168,4 +172,9 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
 
   @Override
   public void onPlayerStrengthFinishEvent(PlayerStrengthFinishEvent event) {}
+
+  @Override
+  public Map<SpecialType, Double> getSpecialDamageTypeMap() {
+    return JavaUtil.getNull(data.getSpecialDamageMap(), Collections.emptyMap());
+  }
 }

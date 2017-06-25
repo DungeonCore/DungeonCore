@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.Stun;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;

@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;

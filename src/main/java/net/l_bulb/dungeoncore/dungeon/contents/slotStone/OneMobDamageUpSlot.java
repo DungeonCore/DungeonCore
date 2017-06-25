@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.slot.SlotLevel;
 import net.l_bulb.dungeoncore.item.slot.magicstone.CombatSlot;

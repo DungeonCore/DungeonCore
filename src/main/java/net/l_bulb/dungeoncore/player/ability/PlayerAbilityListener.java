@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.player.ItemType;
 
 public class PlayerAbilityListener implements Listener {

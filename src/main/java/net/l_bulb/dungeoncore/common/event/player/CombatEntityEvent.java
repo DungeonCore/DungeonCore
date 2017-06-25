@@ -1,6 +1,7 @@
-package net.l_bulb.dungeoncore.common.dropingEntity;
+package net.l_bulb.dungeoncore.common.event.player;
 
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -17,6 +18,7 @@ import net.l_bulb.dungeoncore.player.ItemType;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.server.v1_8_R1.DamageSource;
 
 /**
  * CustomItemでダメージを与えた時のEvent
@@ -120,8 +122,7 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
    * イベントを呼ばれた後にダメージの処理を行う
    */
   public void damageEntity() {
-    if (!isCancelled()) {
-      enemy.damage(getDamage());
-    }
+    DamageSource dummySource = DamageSource.FIRE;
+    ((CraftLivingEntity) enemy).getHandle().damageEntity(dummySource, (float) getDamage());
   }
 }

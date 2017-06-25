@@ -30,7 +30,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.chest.CustomChestManager;
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
@@ -98,9 +98,7 @@ public class MobListener implements Listener {
     if (MobHolder.isCustomMob(entity)) {
       // mobがダメージを受けるとき
       AbstractMob<?> mob = MobHolder.getMob(entity);
-      mob.onDamageBefore((LivingEntity) entity, damager, e);
       mob.onDamage((LivingEntity) entity, damager, e);
-      mob.updateName(true);
     }
     if (MobHolder.isCustomMob(damager)) {
       // mobがダメージを与える時
@@ -116,9 +114,7 @@ public class MobListener implements Listener {
       }
     }
 
-    if (entity.getType() == EntityType.VILLAGER) {
-      e.setCancelled(true);
-    } else if (entity.getType() == EntityType.ARMOR_STAND) {
+    if (entity.getType() == EntityType.ARMOR_STAND) {
       // 管理者でないなら攻撃をキャンセルする
       if (!PlayerChecker.isNonNormalPlayer(e.getDamager())) {
         e.setCancelled(true);
@@ -132,6 +128,10 @@ public class MobListener implements Listener {
       mob.onOtherDamage(e);
       mob.updateName(false);
     });
+
+    if (e.getEntity().getType() == EntityType.VILLAGER) {
+      e.setCancelled(true);
+    }
   }
 
   static Random rnd = new Random();

@@ -7,10 +7,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.MobSheetRunnable;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
+import net.l_bulb.dungeoncore.mob.customMob.NullMob;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillRunnable;
 
 public class MobSkillSpawnMob2 extends MobSkillRunnable {
@@ -25,7 +25,7 @@ public class MobSkillSpawnMob2 extends MobSkillRunnable {
 
   ArrayList<AbstractMob<?>> customMobList = new ArrayList<>();
 
-  NormalMob normalMob = new NormalMob(EntityType.ZOMBIE);
+  NullMob normalMob = new NullMob(EntityType.ZOMBIE);
 
   @Override
   public void execute(Entity target, Entity mob) {

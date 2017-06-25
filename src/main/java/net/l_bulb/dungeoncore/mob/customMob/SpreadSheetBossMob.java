@@ -29,6 +29,7 @@ import net.l_bulb.dungeoncore.chest.AbstractCustomChest;
 import net.l_bulb.dungeoncore.chest.BossChest;
 import net.l_bulb.dungeoncore.chest.CustomChestManager;
 import net.l_bulb.dungeoncore.chest.SpletSheetChest;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
@@ -39,15 +40,13 @@ import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillExcuteConditionType;
 import net.l_bulb.dungeoncore.player.status.StatusAddReason;
-import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import com.google.common.collect.HashBasedTable;
 
 public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
-
-  static HashMap<String, LivingEntity> entityList = new HashMap<>();
 
   protected SpreadSheetBossMob(LbnMobTag nbtTag, String[] command, String name) {
     super(nbtTag, command, name);
@@ -91,7 +90,6 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
   @Override
   public void setEntity(LivingEntity e) {
     this.e = e;
-    entityList.put(getName(), e);
 
     // すでにキャンセルされてる可能性もあるのエラーを無視
     try {
@@ -155,24 +153,11 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
   @Override
   protected Entity spawnPrivate(Location loc) {
     Entity spawnPrivate = super.spawnPrivate(loc);
-    // String eInfo = null;
-    // if (e != null) {
-    // eInfo = e + "(isDead:" + e.isDead() + ")";
-    // }
-    //
-    // String eList = null;
-    // LivingEntity livingEntity = entityList.get(getName());
-    // if (livingEntity != null) {
-    // eList = livingEntity + "(isDead:" + livingEntity.isDead() + ")";
-    // }
-
-    // DungeonLog.printDevelopln(getEntity() + " will be spawn!!(" + getName() + ") entity:" + eInfo + ", entityList:" + eList);
     return spawnPrivate;
   }
 
   @Override
   public LivingEntity getEntity() {
-    if (e == null) { return entityList.get(getName()); }
     return e;
   }
 
@@ -181,8 +166,21 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
   private HashBasedTable<TheLowPlayer, LevelType, Double> combatDamagePlayerMap = HashBasedTable.create();
 
   @Override
-  public void onDamage(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
-    super.onDamage(mob, damager, e);
+  public void onAttack(LivingEntity mob, LivingEntity target,
+      EntityDamageByEntityEvent e) {
+    super.onAttack(mob, target, e);
+
+    // ボスモブとして認識されていないなら再セットする
+    if ((this.e == null || !this.e.isValid()) && mob != this.e) {
+      setEntity(mob);
+    }
+  }
+
+  @Override
+  public void onDamagePlayer(CombatEntityEvent e) {
+    super.onDamagePlayer(e);
+
+    LivingEntity mob = e.getEnemy();
 
     // 最後に攻撃したPlayerと攻撃方法を取得
     Player player = LastDamageManager.getLastDamagePlayer(mob);
@@ -212,17 +210,6 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
   }
 
   @Override
-  public void onAttack(LivingEntity mob, LivingEntity target,
-      EntityDamageByEntityEvent e) {
-    super.onAttack(mob, target, e);
-
-    // ボスモブとして認識されていないなら再セットする
-    if ((this.e == null || !this.e.isValid()) && mob != this.e) {
-      setEntity(mob);
-    }
-  }
-
-  @Override
   public Set<TheLowPlayer> getCombatPlayer() {
     Iterator<Entry<TheLowPlayer, Long>> iterator = combatPlayerSet.entrySet().iterator();
     while (iterator.hasNext()) {
@@ -235,6 +222,82 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     return combatPlayerSet.keySet();
   }
 
+  @Override
+  public void onDeathPrivate(EntityDeathEvent e) {
+    super.onDeathPrivate(e);
+
+    if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
+      for (TheLowPlayer p : combatPlayerSet.keySet()) {
+        if (p.isOnline()) {
+          ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
+        }
+      }
+    }
+
+    // 数チック後に削除する
+    TheLowExecutor.executeLater(2, () -> {
+      combatPlayerSet.clear();
+      combatDamagePlayerMap.clear();
+    });
+  }
+
+  @Override
+  @EventHandler
+  public void updateName(boolean islater) {
+    if (isNullMob()) { return; }
+    new UpdateNameLater().runTaskLater(Main.plugin, 1);
+  }
+
+  @Override
+  public void onTarget(EntityTargetLivingEntityEvent event) {
+    super.onTarget(event);
+  }
+
+  @Override
+  public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
+    int exp = getExp(type);
+    if (exp == -1) {
+      exp = (int) (((Damageable) entity).getMaxHealth() * 1.3);
+    }
+
+    // totalダメージを取得
+    double totalDamage = combatDamagePlayerMap.values().stream()
+        .filter(d -> d != null)
+        .mapToDouble(d -> d.doubleValue())
+        .sum();
+
+    // 経験値を分配する
+    for (Entry<TheLowPlayer, Map<LevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
+      TheLowPlayer theLowPlayer = entry.getKey();
+      for (Entry<LevelType, Double> typeEntry : entry.getValue().entrySet()) {
+        if (typeEntry.getKey() != null) {
+          theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
+        }
+      }
+    }
+  }
+
+  @Override
+  public boolean isCombatPlayer(Player player) {
+    // onlineでないならfalse
+    if (player == null || !player.isOnline()) { return false; }
+
+    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
+    if (theLowPlayer == null) { return false; }
+
+    if (combatPlayerSet.containsKey(theLowPlayer)) {
+      // 攻撃をした時よりも後に死んだらコンバットと認めない
+      return theLowPlayer.getLastDeathTimeMillis() < combatPlayerSet.get(theLowPlayer);
+    }
+    return false;
+  }
+
+  /**
+   * ボススキルを発動するためのクラス
+   *
+   * @author KENSUKE
+   *
+   */
   class RuntineRunnable extends BukkitRunnable {
     MobSkillExcuteConditionType condtion;
     int term;
@@ -253,13 +316,11 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
         runtineMap.remove(condtion);
         return;
       }
-      // ランダムで一番近くのプレイヤー
+      // ランダムで一番近くの友好モブに対してダメージを与える
       for (LivingEntity entity : LivingEntityUtil.getNearFrendly(getEntity(), 30, 20, 30)) {
-        // combatプレイやーでないなら無視
-        if (entity.getType() == EntityType.PLAYER && TheLowPlayerManager.isLoaded((Player) entity)) {
-          if (!combatPlayerSet.containsKey(TheLowPlayerManager.getTheLowPlayer((Player) entity))) {
-            continue;
-          }
+        // Playerだがコンバットプレイヤーでないときは無視する
+        if (entity.getType() == EntityType.PLAYER && !isCombatPlayer((Player) entity)) {
+          continue;
         }
         executeMobSkill(getEntity(), entity, condtion);
         return;
@@ -271,105 +332,26 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     }
   }
 
-  @Override
-  public void onDeathPrivate(EntityDeathEvent e) {
-    super.onDeathPrivate(e);
-
-    entityList.remove(getName());
-
-    if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
-      for (TheLowPlayer p : combatPlayerSet.keySet()) {
-        if (p.isOnline()) {
-          ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
-        }
-      }
-    }
-
-    // 数チック後に削除する
-    new LbnRunnable() {
-      @Override
-      public void run2() {
-        // コンバットプレイヤーをクリア
-        combatPlayerSet.clear();
-        combatDamagePlayerMap.clear();
-      }
-    }.runTaskLater(Main.plugin, 2);
-  }
-
-  @Override
-  @EventHandler
-  public void updateName(boolean islater) {
-    if (isNullMob()) { return; }
-    new UpdateNameLater().runTaskLater(Main.plugin, 1);
-  }
-
-  @Override
-  public void onTarget(EntityTargetLivingEntityEvent event) {
-    super.onTarget(event);
-  }
-
   class UpdateNameLater extends BukkitRunnable {
     @SuppressWarnings("unchecked")
     @Override
     public void run() {
+      // ActionBarAPIがないなら無視する
+      if (!Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) { return; }
+
       LivingEntity entity = getEntity();
       if (entity != null) {
         double maxHealth = ((Damageable) entity).getMaxHealth();
         double nowHealth = ((Damageable) entity).getHealth();
-        entity.setCustomName(StringUtils.join(getName(), ChatColor.RED, " [", (int) nowHealth, "/", (int) maxHealth, "]"));
+        String hpMessage = StringUtils.join(getName(), ChatColor.RED, " [", (int) nowHealth, "/", (int) maxHealth, "]");
+        entity.setCustomName(hpMessage);
 
-        if (Main.plugin.getServer().getPluginManager().isPluginEnabled("ActionBarAPI")) {
-          for (TheLowPlayer p : combatPlayerSet.keySet()) {
-            if (p == null) {
-              continue;
-            }
-            if (p.isOnline()) {
-              if (nowHealth <= 0) {
-                ActionBarAPI.sendActionBar(p.getOnlinePlayer(), "");
-              } else {
-                ActionBarAPI.sendActionBar(p.getOnlinePlayer(), getName() + ChatColor.RED + " [" + (int) nowHealth + "/" + (int) maxHealth + "]");
-              }
-            }
-          }
-        }
+        // onlineのコンバットプレイヤーならメッセージを与える。
+        combatPlayerSet.keySet().stream()
+            .map(p -> p.getOnlinePlayer())
+            .filter(SpreadSheetBossMob.this::isCombatPlayer)
+            .forEach(p -> ActionBarAPI.sendActionBar(p, nowHealth <= 0 ? "" : hpMessage));
       }
     }
-  }
-
-  @Override
-  public void addExp(LivingEntity entity, LastDamageMethodType type, TheLowPlayer p) {
-    int exp = getExp(type);
-    if (exp == -1) {
-      exp = (int) (((Damageable) entity).getMaxHealth() * 1.3);
-    }
-
-    // totalダメージを取得
-    double totalDamage = 0;
-    for (Double damage : combatDamagePlayerMap.values()) {
-      if (damage != null) {
-        totalDamage += damage.doubleValue();
-      }
-    }
-    // 経験値を分配する
-    for (Entry<TheLowPlayer, Map<LevelType, Double>> entry : combatDamagePlayerMap.rowMap().entrySet()) {
-      TheLowPlayer theLowPlayer = entry.getKey();
-      for (Entry<LevelType, Double> typeEntry : entry.getValue().entrySet()) {
-        if (typeEntry.getKey() != null) {
-          theLowPlayer.addExp(typeEntry.getKey(), (int) (exp * typeEntry.getValue() / totalDamage), StatusAddReason.monster_drop);
-        }
-      }
-    }
-  }
-
-  @Override
-  public boolean isCombatPlayer(Player player) {
-    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(player);
-    if (theLowPlayer == null) { return false; }
-
-    if (combatPlayerSet.containsKey(theLowPlayer)) {
-      // 攻撃をした時よりも後に死んだらコンバットと認めない
-      return theLowPlayer.getLastDeathTimeMillis() < combatPlayerSet.get(theLowPlayer);
-    }
-    return false;
   }
 }

@@ -53,8 +53,8 @@ public abstract class AbstractItem implements ItemInterface {
     lore.add(ChatColor.DARK_GRAY + ItemStackUtil.getLoreForIdLine(getId()));
 
     // NBTTagをセットする
-    ItemStackNbttagAccessor nbttagSetter = new ItemStackNbttagAccessor(itemStack);
-    nbttagSetter.setInitializeNbtTag(this);
+    ItemStackNbttagAccessor nbttagAccessor = new ItemStackNbttagAccessor(itemStack);
+    nbttagAccessor.setInitializeNbtTag(this);
 
     if (getDetail() != null) {
       for (String string : getDetail()) {
@@ -67,14 +67,24 @@ public abstract class AbstractItem implements ItemInterface {
     itemLoreData.setBefore(lore);
 
     // スタンダートLoreTokenを取得
-    ItemLoreToken standardLoreToken = getStandardLoreToken(nbttagSetter);
+    ItemLoreToken standardLoreToken = getStandardLoreToken(nbttagAccessor);
     itemLoreData.addLore(standardLoreToken);
+
+    setLore(itemLoreData, nbttagAccessor);
 
     ItemStackUtil.setLore(itemStack, itemLoreData.getLore());
 
     StrengthOperator.updateLore(itemStack, 0);
     return itemStack;
   }
+
+  /**
+   * Loreにデータを挿入する
+   *
+   * @param itemLoreData
+   * @param nbttagAccessor
+   */
+  protected void setLore(ItemLoreData itemLoreData, ItemStackNbttagAccessor nbttagAccessor) {}
 
   /**
    * 基本性能のLoreTokenを取得する

@@ -12,7 +12,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
-import net.l_bulb.dungeoncore.dungeon.contents.mob.NormalMob;
 import net.l_bulb.dungeoncore.mob.customMob.NullMob;
 
 public class MobHolder {
@@ -77,7 +76,7 @@ public class MobHolder {
     if (entity.getType().isAlive()) {
       return getMob(entity);
     } else {
-      return new NormalMob(e.getEntityType());
+      return new NullMob(e.getEntityType());
     }
   }
 
@@ -123,7 +122,7 @@ public class MobHolder {
           continue;
         }
         // normalMobでラッピングする
-        return new NormalMob(valueOf);
+        return new NullMob(valueOf);
       } catch (Exception e) {
         continue;
       }

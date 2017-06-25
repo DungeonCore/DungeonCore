@@ -167,7 +167,7 @@ public abstract class SpletSheetChest extends AbstractCustomChest {
         title = name;
       }
     }
-    title = Optional.of(title).orElse("chest");
+    title = Optional.ofNullable(title).orElse("chest");
 
     // 実際にチェストを開けた時のインベントリを作成
     Inventory createInventory = Bukkit.createInventory(null, 9 * 3, ChatColor.WHITE + title);

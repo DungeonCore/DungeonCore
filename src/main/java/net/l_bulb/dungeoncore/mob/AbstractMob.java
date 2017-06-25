@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
@@ -22,12 +21,10 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
-import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.mob.customMob.BossMobable;
@@ -38,8 +35,6 @@ import net.l_bulb.dungeoncore.quest.QuestProcessingStatus;
 import net.l_bulb.dungeoncore.quest.abstractQuest.PickItemQuest;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSession;
 import net.l_bulb.dungeoncore.quest.questData.PlayerQuestSessionManager;
-import net.l_bulb.dungeoncore.util.JavaUtil;
-import net.l_bulb.dungeoncore.util.Message;
 
 public abstract class AbstractMob<T extends Entity> {
   protected Random rnd = new Random();
@@ -88,38 +83,6 @@ public abstract class AbstractMob<T extends Entity> {
 
   public int getDropGalions() {
     return 10;
-  }
-
-  /**
-   * クリエイティブの時、ダメージ量を表示させる
-   *
-   * @param mob
-   * @param damager
-   * @param e
-   */
-  public void onDamageBefore(LivingEntity mob, Entity damager, EntityDamageByEntityEvent e) {
-    if (isSummonMob()) { return; }
-
-    Player player = LastDamageManager.getLastDamagePlayer(mob);
-    LastDamageMethodType type = LastDamageManager.getLastDamageAttackType(mob);
-    if (player == null) { return; }
-    e.setDamage(e.getDamage());
-
-    if (mob.getType().isAlive()) {
-      // クエリの時だけダメージを表示させる
-      if (player.getGameMode() == GameMode.CREATIVE) {
-        new BukkitRunnable() {
-          double health = ((Damageable) mob).getHealth();
-
-          @Override
-          public void run() {
-            Message.sendMessage(player, "{0}:{1}ダメージ！！(MobHP : {2}/{3})",
-                type.getText(), JavaUtil.round(health - ((Damageable) mob).getHealth(), 2),
-                JavaUtil.round(((Damageable) mob).getHealth(), 2), JavaUtil.round(((Damageable) mob).getMaxHealth(), 2));
-          }
-        }.runTaskLater(Main.plugin, 2);
-      }
-    }
   }
 
   abstract public void onOtherDamage(EntityDamageEvent e);

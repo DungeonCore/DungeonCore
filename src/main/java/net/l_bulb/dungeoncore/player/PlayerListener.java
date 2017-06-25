@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.player;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.DoubleSupplier;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -45,6 +46,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayer.CheckIntegrityLevel;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.command.TpCutCommand;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerChangeGalionsEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerChangeStatusExpEvent;
@@ -74,9 +76,11 @@ import net.l_bulb.dungeoncore.player.customplayer.PlayerChestTpManager;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneFactor;
 import net.l_bulb.dungeoncore.player.magicstoneOre.MagicStoneOreType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.JavaUtil;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 import net.l_bulb.dungeoncore.util.Message;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 import net.l_bulb.dungeoncore.util.TitleSender;
 
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
@@ -557,5 +561,25 @@ public class PlayerListener implements Listener {
         return;
       }
     }
+  }
+
+  @EventHandler(priority = EventPriority.MONITOR)
+  public void onDamageEntity(CombatEntityEvent e) {
+    Player player = e.getPlayer();
+
+    // 通常Playerなら無視
+    if (PlayerChecker.isNormalPlayer(player)) { return; }
+
+    // ダメージを受ける前のHP
+    double oldHp = e.getEnemy().getHealth();
+    // ダメージを受けた後のHP
+    DoubleSupplier nowHp = () -> e.getEnemy().getHealth();
+
+    TheLowExecutor.executeLater(1,
+        () -> player.sendMessage(MessageFormat.format("{0}:{1}ダメージ!!({2}/{3})",
+            e.geItemType().getJpName(),
+            JavaUtil.round(oldHp - nowHp.getAsDouble(), 2),
+            JavaUtil.round(nowHp.getAsDouble(), 2),
+            e.getEnemy().getMaxHealth())));
   }
 }

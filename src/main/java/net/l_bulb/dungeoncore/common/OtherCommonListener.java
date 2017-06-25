@@ -43,7 +43,7 @@ import net.l_bulb.dungeoncore.command.CommandChest;
 import net.l_bulb.dungeoncore.command.CommandGetItem;
 import net.l_bulb.dungeoncore.command.util.CommandSpecialSign;
 import net.l_bulb.dungeoncore.command.util.SimplySetSpawnPointCommand;
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.common.other.BookshelfCommandRunner;
 import net.l_bulb.dungeoncore.common.other.EndPortalOperator;

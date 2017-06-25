@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
@@ -49,10 +49,6 @@ public abstract class DamagedFallingBlockForPlayer extends AbstractDamageFalling
     if (LivingEntityUtil.isEnemy(entity) && entity.getType().isAlive()) {
       // すでに死んでいたら何もしない
       if (entity.isDead()) { return false; }
-
-      // LastDamageを登録
-      LastDamageManager.onDamage((entity), p, getAttackType(), item);
-
       // eventを実行
       CombatEntityEvent callEvent = new CombatEntityEvent(p, damage, customItem, item, isNormalAttack, (LivingEntity) entity).callEvent();
       // ダメージを与える

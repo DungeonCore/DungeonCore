@@ -9,10 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.customItem.itemAbstract.RightClickItem;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
-import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public abstract class AbstractMagicBook extends RightClickItem {
@@ -33,16 +32,17 @@ public abstract class AbstractMagicBook extends RightClickItem {
 
   /**
    * 効果を発動したときのダメージを与える
-   * 
+   *
    * @param player
    * @param entity
-   * @param item itemstack or null
+   * @param item
    */
   protected void onDamage(Player player, LivingEntity entity, ItemStack item) {
+    CombatEntityEvent entityEvent = new CombatEntityEvent(player, getDamageVal(), this, item, false, entity);
+    // イベントを呼ぶ
+    entityEvent.callEvent();
     // ダメージを与える
-    entity.damage(getDamageVal(), player);
-    // LastDamageを登録
-    LastDamageManager.onDamage(entity, player, LastDamageMethodType.USE_ITEM, item);
+    entityEvent.damageEntity();
   }
 
   abstract protected double getDamageVal();

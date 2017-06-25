@@ -1,11 +1,13 @@
 package net.l_bulb.dungeoncore.item.nbttag;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.ItemManager;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.EquipItemable;
@@ -35,6 +37,8 @@ public class NBTTagBean {
       defaultSlot = combatItemable.getDefaultSlotCount();
       // 最大スロット数
       maxSlot = combatItemable.getMaxSlotCount();
+      // 特殊攻撃のMap
+      specialDamageTypeMap = combatItemable.getSpecialDamageTypeMap();
     }
 
     // 防具なら防御ポイントを追加
@@ -68,8 +72,13 @@ public class NBTTagBean {
   // ボスモンスターの防御ポイント
   double bossArmorPoint;
 
-  // 乱数生成
+  // 乱数生成(幅が広い)
   static NormalDistributionRandomGenerator generator = new NormalDistributionRandomGenerator(0.9, 0.13);
+
+  // 乱数生成(幅が狭い)
+  static NormalDistributionRandomGenerator generatorSharp = new NormalDistributionRandomGenerator(1, 0.05);
+
+  private Map<SpecialType, Double> specialDamageTypeMap;
 
   /**
    * ランダムで値を適切なものに置き換える
@@ -86,6 +95,14 @@ public class NBTTagBean {
       Random random = new Random();
       // 最大スロット数
       maxSlot = random.nextInt(maxSlot) + 1;
+
+      // 特殊ダメージ
+      specialDamageTypeMap.entrySet().stream()
+          // 乱数に変換
+          .peek(e -> e.setValue(generatorSharp.next() * e.getValue()))
+          // Mapに再挿入する
+          .forEach(e -> specialDamageTypeMap.put(e.getKey(), e.getValue()));
+
     } else if (ItemManager.isImplemental(ArmorItemable.class, item)) {
       // 耐久値
       maxDurability = (short) (maxDurability * generator.next());

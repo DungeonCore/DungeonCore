@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;

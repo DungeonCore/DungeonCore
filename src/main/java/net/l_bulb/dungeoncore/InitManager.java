@@ -13,7 +13,6 @@ import net.l_bulb.dungeoncore.common.other.SystemLog;
 import net.l_bulb.dungeoncore.common.place.HolographicDisplaysManager;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.dungeon.contents.ItemRegister;
-import net.l_bulb.dungeoncore.dungeon.contents.MobRegister;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SoundSheetRunnable;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
@@ -33,7 +32,6 @@ public class InitManager {
       // ホログラムを全て削除
       HolographicDisplaysManager.removeAllHologram();
       ItemRegister.registItem();
-      MobRegister.registMob();
       SystemLog.init();
       SetItemManager.startRutine();
       SetItemManager.initServer();

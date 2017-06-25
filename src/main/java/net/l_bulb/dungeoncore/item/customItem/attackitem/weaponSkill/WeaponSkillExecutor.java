@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.cooltime.Cooltimable;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;

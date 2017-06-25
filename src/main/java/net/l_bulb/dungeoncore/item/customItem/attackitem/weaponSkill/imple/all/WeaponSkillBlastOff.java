@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.common.particle.CircleParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;

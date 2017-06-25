@@ -1,5 +1,8 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -12,6 +15,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
 import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
@@ -19,6 +23,7 @@ import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
 import net.l_bulb.dungeoncore.item.nbttag.CustomWeaponItemStack;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.item.slot.magicstone.EmptySlot;
+import net.l_bulb.dungeoncore.item.system.lore.ItemLoreData;
 import net.l_bulb.dungeoncore.item.system.lore.ItemLoreToken;
 import net.l_bulb.dungeoncore.item.system.lore.LoreLine;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -106,10 +111,9 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     // 使用可能レベル
     loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
     loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
-    // 武器は耐久とレベルが関係ないのでnullでも問題ない
     loreToken.addLore("耐久値 ： " + ChatColor.GOLD + newParam.getMaxDurability());
     // 通常ダメージ
-    loreToken.addLore(LoreLine.getLoreLine("ダメージ", JavaUtil.round(newParam.getDamage() - getMaterialDamage(), 2)));
+    loreToken.addLore(LoreLine.getLoreLine("攻撃力", "+" + JavaUtil.round(newParam.getDamage() - getMaterialDamage(), 2)));
 
     return loreToken;
   }
@@ -127,6 +131,25 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     }
     instance.updateItem();
     return item;
+  }
+
+  @Override
+  protected void setLore(ItemLoreData itemLoreData, ItemStackNbttagAccessor nbttagAccessor) {
+    super.setLore(itemLoreData, nbttagAccessor);
+
+    // 特殊攻撃のLoreを挿入する
+    Map<SpecialType, Double> specialDamageTypeMap = getSpecialDamageTypeMap();
+
+    // 追加ダメージのLoreを追加する
+    ItemLoreToken loreToken = new ItemLoreToken("追加ダメージ");
+    for (Entry<SpecialType, Double> entry : specialDamageTypeMap.entrySet()) {
+      // 追加ダメージ
+      double addDamage = nbttagAccessor.getDamage() * entry.getValue();
+      loreToken.addLore(LoreLine.getLoreLine(entry.getKey().getName(), "+" + JavaUtil.round(addDamage, 2)));
+    }
+    if (loreToken.size() != 0) {
+      itemLoreData.addLore(loreToken);
+    }
   }
 
   /**

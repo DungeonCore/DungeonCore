@@ -23,7 +23,7 @@ import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 
-import net.l_bulb.dungeoncore.common.dropingEntity.CombatEntityEvent;
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerBreakMagicOreEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerKillEntityEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerSetStrengthItemResultEvent;
@@ -142,15 +142,14 @@ public class ItemListener implements Listener {
 
   /**
    * CustomItemでダメージを与えた時のEvent
+   * 最終ダメージをセットする
    *
    * @param e
    */
-  @EventHandler(priority = EventPriority.LOWEST)
+  @EventHandler
   public void onAttackDamage(CombatEntityEvent e) {
     // last damageを登録する
-    if (e.getAttacker().getType() == EntityType.PLAYER) {
-      LastDamageManager.onDamage(e.getEnemy(), e.getAttacker(), e.geLastDamageMethodType(), e.getItemStack());
-    }
+    LastDamageManager.onDamage(e.getEnemy(), e.getAttacker(), e.geLastDamageMethodType(), e.getItemStack());
   }
 
   /**

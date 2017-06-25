@@ -126,11 +126,17 @@ public class Mob1SheetRunnable extends AbstractSheetRunable {
    * @param instance
    */
   public void setDropItem(String itemId, String parcent, SpreadSheetMob instance) {
+    if (isEmpty(itemId) || isEmpty(parcent)) { return; }
+
     double rate = JavaUtil.getDouble(parcent, -1);
     if (rate == -1) {
       sendMessage("mob名：" + instance.getName() + "のアイテムのドロップ確率が不正です。 確率:" + parcent);
       return;
     }
     instance.setDropItem(itemId, rate);
+  }
+
+  public static boolean isEmpty(String value) {
+    return value == null || value.isEmpty();
   }
 }
