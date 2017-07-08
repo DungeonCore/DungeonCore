@@ -57,7 +57,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
       SpawnPointSpreadSheetData data = new SpawnPointSpreadSheetData();
       data.setId(Integer.parseInt(row[0]));
 
-      World world = Bukkit.getWorld(row[1]);
+      World world = getWorld(row[1]);
       if (world == null) { return; }
 
       data.setLocation(new Location(world, Integer.parseInt(row[2]), Integer.parseInt(row[3]), Integer.parseInt(row[4])));
@@ -70,14 +70,31 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
       IntStream.rangeClosed(9, 13)
           .filter(i -> row[i] != null && !row[i].isEmpty())
           .mapToObj(i -> new SpawnPointSpreadSheetData(data, row[i]))
-          .map(SpawnPointFactory::getNewInstance)
+          .map(spawnPointFactory::getNewInstance)
           .filter(d -> d != null)
-          .forEach(SpawnPointGroupFactory::registSpawnPoint);
-    } catch (Exception e) {
+          .forEach(groupFactory::registSpawnPoint);
+    } catch (NumberFormatException e) {
       e.printStackTrace();
       sendMessage("入力されたデータが不正です。(spawn mob 設定 ID:" + row[0] + ")");
+
     }
   }
+
+  /**
+   * ワールドを取得する
+   *
+   * @param name
+   * @return
+   */
+  World getWorld(String name) {
+    return Bukkit.getWorld(name);
+  }
+
+  /** スポーングループのファクトリインスタンス */
+  SpawnPointGroupFactory groupFactory = SpawnPointGroupFactory.getInstance();
+
+  /** スポーンポイントのファクトリインスタンス */
+  SpawnPointFactory spawnPointFactory = SpawnPointFactory.getInstance();
 
   @Override
   public void getData(String query) {
@@ -89,7 +106,7 @@ public class SpawnPointSheetRunnable extends AbstractComplexSheetRunable {
 
   @Override
   public void onCallbackFunction(Future<String[][]> submit) throws Exception {
-    SpawnPointGroupFactory.clear();
+    groupFactory.clear();
     super.onCallbackFunction(submit);
   }
 

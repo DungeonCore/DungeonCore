@@ -48,6 +48,8 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
 
   static boolean look_flg = false;
 
+  SpawnPointFactory spawnPointFactory = SpawnPointFactory.getInstance();
+
   @Override
   public boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3) {
     Player p = (Player) arg0;
@@ -83,8 +85,8 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
     return true;
   }
 
-  private static void executeLook(Player p, String[] arg3) {
-    ArrayList<Location> list = new ArrayList<>(SpawnPointFactory.getSpawnPointLocation());
+  private void executeLook(Player p, String[] arg3) {
+    ArrayList<Location> list = new ArrayList<>(spawnPointFactory.getSpawnPointLocation());
     new LbnRunnable() {
       int i = 0;
 
@@ -172,6 +174,8 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
     p.sendMessage("すべての仮登録を削除しました。");
   }
 
+  SpawnPointGroupFactory groupFactory = SpawnPointGroupFactory.getInstance();
+
   private void executeCommit(Player p, String[] arg3) {
     if (!begin.contains(p)) {
       p.sendMessage("開始されていません。/setSpawn beginで開始してください。");
@@ -185,7 +189,7 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
     Set<MobLocation> set = create.get(p);
     for (MobLocation mobLocation : set) {
       SpawnPointSpreadSheetData data = new SpawnPointSpreadSheetData();
-      data.setId(SpawnPointFactory.getNextId());
+      data.setId(spawnPointFactory.getNextId());
       data.setLocation(mobLocation.getLoc());
       data.setMaxSpawnCount(5);
       data.setType(TargetType.MONSTER);
@@ -194,12 +198,13 @@ public class SimplySetSpawnPointCommand implements CommandExecutor, TabCompleter
       spawnPointSheetRunnable.addData(data, array, memo);
 
       // スポーン登録する
-      Arrays.stream(array).map(t -> new SpawnPointSpreadSheetData(data, t)).map(SpawnPointFactory::getNewInstance)
-          .forEach(SpawnPointGroupFactory::registSpawnPoint);
+      Arrays.stream(array).map(t -> new SpawnPointSpreadSheetData(data, t)).map(spawnPointFactory::getNewInstance)
+          .forEach(groupFactory::registSpawnPoint);
     }
     SpletSheetExecutor.onExecute(spawnPointSheetRunnable);
 
     clear(p);
+
   }
 
   protected void clear(Player p) {

@@ -17,7 +17,15 @@ import net.l_bulb.dungeoncore.util.JavaUtil;
 import com.google.common.collect.HashMultimap;
 
 public class SpawnPointFactory {
-  private static int maxId;
+  static SpawnPointFactory INSTANCE = new SpawnPointFactory();
+
+  private SpawnPointFactory() {}
+
+  public static SpawnPointFactory getInstance() {
+    return INSTANCE;
+  }
+
+  private int maxId;
 
   /**
    * 新しいインスタンスを作成する
@@ -25,7 +33,7 @@ public class SpawnPointFactory {
    * @param data
    * @return
    */
-  public static SpawnPoint getNewInstance(SpawnPointSpreadSheetData data) {
+  public SpawnPoint getNewInstance(SpawnPointSpreadSheetData data) {
     maxId = Math.max(data.getId(), maxId);
 
     String targetName = JavaUtil.getValueOrDefaultWhenThrow(() -> data.getTargetName().replace("_", " "), "");
@@ -53,12 +61,12 @@ public class SpawnPointFactory {
    *
    * @return
    */
-  public static int getNextId() {
+  public int getNextId() {
     maxId++;
     return maxId;
   }
 
-  static HashMultimap<Location, SpawnPoint> spawnPointMap = HashMultimap.create();
+  static HashMultimap<Location, SpawnPoint> spawnPointLocationMap = HashMultimap.create();
   static HashMultimap<Integer, SpawnPoint> spawnPointIdMap = HashMultimap.create();
 
   /**
@@ -66,13 +74,17 @@ public class SpawnPointFactory {
    *
    * @param point
    */
-  static void addSpawnPoint(SpawnPoint point) {
-    spawnPointMap.put(point.getLocation(), point);
+  void addSpawnPoint(SpawnPoint point) {
+    spawnPointLocationMap.put(point.getLocation(), point);
     spawnPointIdMap.put(point.getId(), point);
+
+    if (point.getId() == 513) {
+      System.out.println(spawnPointIdMap.get(513));
+    }
   }
 
-  static void clear() {
-    spawnPointMap.clear();
+  void clear() {
+    spawnPointLocationMap.clear();
     spawnPointIdMap.clear();
   }
 
@@ -81,7 +93,7 @@ public class SpawnPointFactory {
    *
    * @return
    */
-  public static Collection<SpawnPoint> getSpawnPointList() {
+  public Collection<SpawnPoint> getSpawnPointList() {
     return spawnPointIdMap.values();
   }
 
@@ -90,8 +102,8 @@ public class SpawnPointFactory {
    *
    * @return
    */
-  public static Set<Location> getSpawnPointLocation() {
-    return spawnPointMap.keySet();
+  public Set<Location> getSpawnPointLocation() {
+    return spawnPointLocationMap.keySet();
   }
 
   /**
@@ -100,8 +112,8 @@ public class SpawnPointFactory {
    * @param loc
    * @return
    */
-  public static Set<SpawnPoint> getSpawnPointFromLocation(Location loc) {
-    return spawnPointMap.get(loc);
+  public Set<SpawnPoint> getSpawnPointFromLocation(Location loc) {
+    return spawnPointLocationMap.get(loc);
   }
 
   /**
@@ -110,7 +122,7 @@ public class SpawnPointFactory {
    * @param id
    * @return
    */
-  public static Set<SpawnPoint> getSpawnPointFromId(int id) {
+  public Set<SpawnPoint> getSpawnPointFromId(int id) {
     return spawnPointIdMap.get(id);
   }
 

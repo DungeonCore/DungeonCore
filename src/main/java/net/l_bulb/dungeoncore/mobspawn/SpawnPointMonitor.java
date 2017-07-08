@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SpawnPointMonitor {
   public static void sendMonitor(Set<SpawnPoint> spawnPointFromLocation, CommandSender sender) {
-    sender.sendMessage(ChatColor.RED + "====Spawn Point====");
+    sender.sendMessage(ChatColor.RED + "====Spawn Point (" + spawnPointFromLocation.size() + ")====");
     boolean isFirst = true;
     for (SpawnPoint spawnPoint : spawnPointFromLocation) {
       if (isFirst) {
@@ -24,7 +24,7 @@ public class SpawnPointMonitor {
         sender.sendMessage("");
       }
 
-      SpawnPointGroup spawnPointGroup = SpawnPointGroupFactory.getSpawnPointGroup(spawnPoint);
+      SpawnPointGroup spawnPointGroup = SpawnPointGroupFactory.getInstance().getSpawnPointGroup(spawnPoint);
       SpawnResult result = spawnPoint.getSpawnResult();
 
       // カウント情報を出力する
@@ -72,7 +72,7 @@ public class SpawnPointMonitor {
 
     if (e.getPlayer().getGameMode() != GameMode.CREATIVE) { return; }
 
-    Set<SpawnPoint> points = SpawnPointFactory.getSpawnPointFromLocation(block.getLocation());
+    Set<SpawnPoint> points = SpawnPointFactory.getInstance().getSpawnPointFromLocation(block.getLocation());
     if (points == null || points.isEmpty()) { return; }
 
     e.setCancelled(true);

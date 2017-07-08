@@ -22,7 +22,7 @@ public class SpawnManager {
 
     DungeonLogger.info("==MOB SPAWN SYSTEM START!!==");
 
-    List<SpawnPointGroup> allSpawnPoint = SpawnPointGroupFactory.getAllSpawnPoint();
+    List<SpawnPointGroup> allSpawnPoint = SpawnPointGroupFactory.getInstance().getAllSpawnPoint();
     new LbnRunnable() {
       @Override
       public void run2() {

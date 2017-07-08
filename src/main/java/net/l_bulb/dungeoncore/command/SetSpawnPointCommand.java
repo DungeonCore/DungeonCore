@@ -66,7 +66,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
     String id = args[1];
 
     int idInt = JavaUtil.getInt(id, -1);
-    Set<SpawnPoint> spawnPointFromId = SpawnPointFactory.getSpawnPointFromId(idInt);
+    Set<SpawnPoint> spawnPointFromId = spawnPointFactory.getSpawnPointFromId(idInt);
     if (spawnPointFromId == null || spawnPointFromId.isEmpty()) {
       sender.sendMessage("そのIDのスポーンポイントは存在しません");
       return true;
@@ -75,8 +75,14 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
     return true;
   }
 
+  /** スポーングループのファクトリインスタンス */
+  SpawnPointGroupFactory groupFactory = SpawnPointGroupFactory.getInstance();
+
+  /** スポーンポイントのファクトリインスタンス */
+  SpawnPointFactory spawnPointFactory = SpawnPointFactory.getInstance();
+
   private boolean reloadOperate(CommandSender sender, String[] args) {
-    SpawnPointGroupFactory.clear();
+    groupFactory.clear();
 
     // 全てを更新する
     SpawnPointSheetRunnable spawnPointSheetRunnable = new SpawnPointSheetRunnable(sender);
@@ -87,8 +93,8 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
 
   protected boolean listOperate(CommandSender sender, String[] args, Location location) {
     sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
-    sender.sendMessage("全スポーンポイント数：" + SpawnPointFactory.getSpawnPointList().size());
-    sender.sendMessage("全スポーンポイントグル―プ数：" + SpawnPointGroupFactory.getAllSpawnPoint().size());
+    sender.sendMessage("全スポーンポイント数：" + spawnPointFactory.getSpawnPointList().size());
+    sender.sendMessage("全スポーンポイントグル―プ数：" + groupFactory.getAllSpawnPoint().size());
     sender.sendMessage("スポーンターム：" + (SpawnManager.SpawnPointRouteTick / 20.0) + "秒");
     sender.sendMessage(ChatColor.GREEN + "========spwan point info========");
     return true;
@@ -102,6 +108,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
       return true;
     }
 
+    // TargetTypeが指定されていない時はmonsterにする
     TargetType type = TargetType.MONSTER;
     if (args.length == 4) {
       type = TargetType.getType(args[3]);
@@ -114,13 +121,13 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
       memo = ((Player) sender).getDisplayName();
     }
     SpawnPointSpreadSheetData data = new SpawnPointSpreadSheetData();
-    data.setId(SpawnPointFactory.getNextId());
+    data.setId(spawnPointFactory.getNextId());
     data.setLocation(location);
     data.setTargetName(args[1]);
     data.setMaxSpawnCount(Integer.parseInt(args[2]));
     data.setType(type);
 
-    SpawnPoint newInstance = SpawnPointFactory.getNewInstance(data);
+    SpawnPoint newInstance = spawnPointFactory.getNewInstance(data);
     if (newInstance == null) {
       sender.sendMessage(ChatColor.RED + "コマンドが不正です。モンスター名/item名が違うかも");
       return false;
@@ -129,7 +136,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
     // スポーン登録する
     spawnPointSheetRunnable.addData(data, new String[] { args[1] }, memo);
     SpletSheetExecutor.onExecute(spawnPointSheetRunnable);
-    SpawnPointGroupFactory.registSpawnPoint(newInstance);
+    groupFactory.registSpawnPoint(newInstance);
 
     sender.sendMessage(ChatColor.GREEN + "spawn pointを設定しました。");
     return true;

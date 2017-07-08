@@ -74,23 +74,4 @@ public abstract class AbstractSpawnPoint implements SpawnPoint {
   public boolean isSameAs(SpawnPoint point) {
     return point.getTargetType() == getTargetType() && point.getSpawnTargetName().equals(getSpawnTargetName());
   }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + getId();
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null) return false;
-    if (getClass() != obj.getClass()) return false;
-    AbstractSpawnPoint other = (AbstractSpawnPoint) obj;
-    if (getId() != other.getId()) return false;
-    return true;
-  }
-
 }

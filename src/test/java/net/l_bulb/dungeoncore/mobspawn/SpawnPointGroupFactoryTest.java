@@ -28,17 +28,35 @@ public class SpawnPointGroupFactoryTest {
     when(point1.getChunkGroup()).thenReturn(chunk1);
     when(point2.getChunkGroup()).thenReturn(chunk1);
 
-    when(point1.isSameAs(point2)).thenReturn(true);
+    factory.clear();
   }
+
+  SpawnPointGroupFactory factory = SpawnPointGroupFactory.getInstance();
 
   @Test
   public void testRegistSpawnPoint() {
+    // setup
+    when(point1.isSameAs(point2)).thenReturn(true);
+
     // 実行
-    SpawnPointGroupFactory.registSpawnPoint(point1);
-    SpawnPointGroupFactory.registSpawnPoint(point2);
+    factory.registSpawnPoint(point1);
+    factory.registSpawnPoint(point2);
 
     // 検証
-    assertThat(SpawnPointGroupFactory.spawnPointGroupChunkMap.size(), is(1));
+    assertThat(factory.spawnPointGroupChunkMap.size(), is(1));
+  }
+
+  @Test
+  public void testRegistSpawnPoint2() {
+    // setup
+    when(point1.isSameAs(point2)).thenReturn(false);
+
+    // 実行
+    factory.registSpawnPoint(point1);
+    factory.registSpawnPoint(point2);
+
+    // 検証
+    assertThat(factory.spawnPointGroupChunkMap.size(), is(2));
   }
 
 }
