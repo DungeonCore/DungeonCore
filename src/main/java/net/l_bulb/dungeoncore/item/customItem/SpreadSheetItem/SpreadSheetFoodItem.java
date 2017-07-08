@@ -193,7 +193,7 @@ public class SpreadSheetFoodItem extends FoodItem implements RightClickItemable 
       // 消費する
       ItemStackUtil.consumeItemInHand(player);
       // 音を鳴らす
-      player.getWorld().playSound(player.getLocation(), Sound.EAT, 1, 1);
+      player.getWorld().playSound(player.getLocation(), Sound.BURP, 1, 1);
 
       return true;
     }

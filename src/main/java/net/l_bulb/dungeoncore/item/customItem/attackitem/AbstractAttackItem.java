@@ -66,9 +66,9 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     if (!isAvilable(player)) {
       sendNotAvailableMessage(player);
       e.setCancelled(true);
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   @Override

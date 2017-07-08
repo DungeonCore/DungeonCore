@@ -14,7 +14,7 @@ public class SpawnPointGroupFactory {
 
   static HashMultimap<ChunkGroup, SpawnPointGroup> spawnPointGroupChunkMap = HashMultimap.create();
 
-  static int SPAWN_GROUP_ID = 0;
+  private static int SPAWN_GROUP_ID = 0;
 
   /**
    * スポーンポイントを登録する

@@ -101,8 +101,8 @@ public class CommandExtraMob implements CommandExecutor, TabCompleter {
         if (arg3.length == 1) {
           mob.spawn(arg0.getBlock().getLocation());
         } else {
-          mob.spawn(new Location(arg0.getBlock().getWorld(), Double.parseDouble(arg3[1]), Double.parseDouble(arg3[2]),
-              Double.parseDouble(arg3[3])));
+          mob.spawn(new Location(arg0.getBlock().getWorld(), Double.parseDouble(arg3[1]) + 0.5, Double.parseDouble(arg3[2]),
+              Double.parseDouble(arg3[3]) + 0.5));
         }
       }
       return true;

@@ -129,43 +129,6 @@ public class CommandChest implements CommandExecutor, TabCompleter {
     double moveX = 0;
     double moveY = 0;
     double moveZ = 0;
-    //
-    // if (params.length < 3) {
-    // return false;
-    // }
-    //
-    // if (params.length == 8 || params.length == 9) {
-    // paramCommandSender.sendMessage("チェストを開けた後の移動先の座標が足りません。x y z全て必要です");
-    // return true;
-    // }
-    //
-    // try {
-    // switch (params.length) {
-    // case 10:
-    // moveX = Double.parseDouble(params[9]);
-    // case 9:
-    // moveY = Double.parseDouble(params[8]);
-    // case 8:
-    // moveZ = Double.parseDouble(params[7]);
-    // case 7:
-    // maxItemCount = Integer.parseInt(params[6]);
-    // case 6:
-    // minItemCount = Integer.parseInt(params[5]);
-    // case 5:
-    // allPlayerSameFlg = Boolean.parseBoolean(params[4]);
-    // case 4:
-    // refuelTime = Double.parseDouble(params[3]);
-    // case 3:
-    // x = Double.parseDouble(params[0]);
-    // y = Double.parseDouble(params[1]);
-    // z = Double.parseDouble(params[2]);
-    // default:
-    // break;
-    // }
-    // } catch (Exception e) {
-    // paramCommandSender.sendMessage("入力したデータに誤りがあります。");
-    // return true;
-    // }
     Player p = (Player) paramCommandSender;
 
     Location contentsLoc = null;

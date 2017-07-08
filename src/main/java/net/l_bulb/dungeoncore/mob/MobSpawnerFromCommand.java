@@ -147,6 +147,7 @@ public class MobSpawnerFromCommand {
         break;
       case BAT:
         entity = new CustomBat(world, tag);
+        break;
       case IRON_GOLEM:
         entity = new CustomIronGolem(world, tag);
         break;
