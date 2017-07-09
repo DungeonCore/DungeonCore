@@ -133,11 +133,17 @@ public class SpreadSheetMob extends AbstractMob<Entity> {
     }
     super.onProjectileHitEntity(mob, target, e);
 
+    if (getAttackValue() >= 0) {
+      if (e.isApplicable(DamageModifier.BASE)) {
+        e.setDamage(DamageModifier.BASE, getAttackValue());
+      }
+    }
+
     // 攻撃ポイント
     e.setDamage(e.getDamage() * attackPoint);
   }
 
-  double attackValue = 0;
+  double attackValue = -1;
 
   public void setAttackValue(double attackValue) {
     this.attackValue = attackValue;
