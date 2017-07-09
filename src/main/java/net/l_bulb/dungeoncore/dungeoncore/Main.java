@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import net.l_bulb.dungeoncore.InitManager;
 import net.l_bulb.dungeoncore.LimitedListener;
-import net.l_bulb.dungeoncore.RecipeRegister;
 import net.l_bulb.dungeoncore.SystemListener;
 import net.l_bulb.dungeoncore.chest.ChestListner;
 import net.l_bulb.dungeoncore.chest.wireless.WireLessChestManager;
@@ -44,9 +43,9 @@ import net.l_bulb.dungeoncore.quest.QuestListener;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.NMSUtils;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 import lombok.val;
-import net.minecraft.server.v1_8_R1.AttributeRanged;
 import net.minecraft.server.v1_8_R1.EntityBat;
 import net.minecraft.server.v1_8_R1.EntityChicken;
 import net.minecraft.server.v1_8_R1.EntityCow;
@@ -62,7 +61,6 @@ import net.minecraft.server.v1_8_R1.EntitySpider;
 import net.minecraft.server.v1_8_R1.EntityVillager;
 import net.minecraft.server.v1_8_R1.EntityWitch;
 import net.minecraft.server.v1_8_R1.EntityZombie;
-import net.minecraft.server.v1_8_R1.GenericAttributes;
 
 public class Main extends JavaPlugin {
 
@@ -113,35 +111,18 @@ public class Main extends JavaPlugin {
       e.printStackTrace();
     }
 
-    try {
-      registerListener();
-      CommandRegister.registCommand();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // Eventリスナーを登録
+    TheLowExecutor.executeIgnoreException(() -> registerListener(), e -> e.printStackTrace());
 
-    try {
-      // 最大攻撃力書き換え
-      ((AttributeRanged) GenericAttributes.maxHealth).b = Double.MAX_VALUE;
-      // walk-exhaustion: 0.1
-      // sprint-exhaustion: 0.4
-      // combat-exhaustion: 0.2
-      // regen-exhaustion: 1.0
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // コマンドを登録
+    TheLowExecutor.executeIgnoreException(() -> CommandRegister.registCommand(), e -> e.printStackTrace());
 
-    try {
-      RecipeRegister.registerRecipe();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // Playerデータを保存
+    TheLowExecutor.executeIgnoreException(() -> PlayerIODataManager.saveAsZip(), e -> e.printStackTrace());
 
-    try {
-      PlayerIODataManager.saveAsZip();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // ワールド設定を行う
+    TheLowExecutor.executeIgnoreException(() -> ServerSetting.setting(), e -> e.printStackTrace());
+
     new InitManager().init();
 
     getConfig().options().copyDefaults(true);

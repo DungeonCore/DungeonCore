@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.util;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
@@ -36,11 +37,25 @@ public class TheLowExecutor {
    * @param defaultValue
    * @return
    */
-  public static <T> T executeIgnoreException(Supplier<T> supplier, T defaultValue) {
+  public static <T> T getObjectIgnoreException(Supplier<T> supplier, T defaultValue) {
     try {
       return supplier.get();
     } catch (Exception e) {
       return defaultValue;
+    }
+  }
+
+  /**
+   * メソッドを実行する。もしExceptionが発生した場合はexceptionConsumerを実行する
+   *
+   * @param runnable
+   * @param exceptionConsumer
+   */
+  public static void executeIgnoreException(Runnable runnable, Consumer<Exception> exceptionConsumer) {
+    try {
+      runnable.run();
+    } catch (Exception e) {
+      exceptionConsumer.accept(e);
     }
   }
 
@@ -51,7 +66,7 @@ public class TheLowExecutor {
    * @param defaultValue
    * @return
    */
-  public static double executeDoubleIgnoreException(DoubleSupplier supplier, double defaultValue) {
+  public static double getDoubleIgnoreException(DoubleSupplier supplier, double defaultValue) {
     try {
       return supplier.getAsDouble();
     } catch (Exception e) {
@@ -66,7 +81,7 @@ public class TheLowExecutor {
    * @param defaultValue
    * @return
    */
-  public static boolean executeBooleanIgnoreException(BooleanSupplier supplier, boolean defaultValue) {
+  public static boolean getBooleanIgnoreException(BooleanSupplier supplier, boolean defaultValue) {
     try {
       return supplier.getAsBoolean();
     } catch (Exception e) {

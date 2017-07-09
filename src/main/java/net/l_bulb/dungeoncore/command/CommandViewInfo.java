@@ -15,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -63,7 +64,7 @@ public class CommandViewInfo implements CommandExecutor {
     }
 
     Player target = (Player) paramCommandSender;
-    ;
+
     if (paramArrayOfString.length == 2) {
       target = Bukkit.getPlayer(paramArrayOfString[1]);
     }
@@ -133,6 +134,8 @@ public class CommandViewInfo implements CommandExecutor {
         target.setHealth(target.getMaxHealth());
         break;
       case "test":
+        target.sendMessage(target.getWorld().getGameRuleValue("naturalRegeneration"));
+        target.sendMessage(Boolean.toString(((CraftWorld) target.getWorld()).getHandle().getGameRules().getBoolean("naturalRegeneration")));
         break;
       case "chunk":
         sendChunkData(target);
