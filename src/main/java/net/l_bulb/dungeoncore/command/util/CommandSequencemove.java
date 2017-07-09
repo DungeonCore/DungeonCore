@@ -141,7 +141,7 @@ public class CommandSequencemove implements CommandExecutor, UsageCommandable {
   Vector vecCorner4 = new Vector(-1, 0, -1);
 
   /**
-   * 足場の座標を取得する
+   * 指定した座標を中心とした3×３の座標群を取得する
    *
    * @param center
    * @return
@@ -215,10 +215,6 @@ class RemoveBlockBean {
 
     // 座標を追加する
     nowLocationl.add(dX, dY, dZ);
-
-    // 座標を追加する
-    nowLocationl.add(dX, dY, dZ);
-
     count--;
   }
 

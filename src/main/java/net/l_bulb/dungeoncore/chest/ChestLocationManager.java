@@ -37,29 +37,33 @@ public class ChestLocationManager {
     return chestLoc.get(loc);
   }
 
+  /**
+   * アルファベット名から日本語名を取得
+   *
+   * @param alphabetName
+   * @return
+   */
+  public static String getJpName(String alphabetName) {
+    return chestNameMap.get(alphabetName);
+  }
+
+  public static HashMap<String, String> chestNameMap = new HashMap<>();
+
   static {
-    ChestLocationManager.regist("potion_common", new double[] { 110, 42, 828 }, "world");
-    ChestLocationManager.regist("potion_uncommon", new double[] { 110, 42, 826 }, "world");
-    ChestLocationManager.regist("potion_rare", new double[] { 110, 42, 824 }, "world");
-    ChestLocationManager.regist("potion_epic", new double[] { 110, 42, 822 }, "world");
-    ChestLocationManager.regist("potion_dungeon", new double[] { 110, 42, 820 }, "world");
-    ChestLocationManager.regist("potion_dungeon_rare", new double[] { 110, 42, 818 }, "world");
-    ChestLocationManager.regist("potion_legendary", new double[] { 110, 42, 816 }, "world");
-    ChestLocationManager.regist("dungeon_epic", new double[] { 113, 42, 820 }, "world");
-    ChestLocationManager.regist("dungeon_legendary", new double[] { 113, 42, 818 }, "world");
-    ChestLocationManager.regist("dungeon_godly", new double[] { 116, 42, 818 }, "world");
-    ChestLocationManager.regist("food", new double[] { 113, 42, 828 }, "world");
-    ChestLocationManager.regist("food_rare", new double[] { 113, 42, 826 }, "world");
-    ChestLocationManager.regist("military_common", new double[] { 113, 42, 824 }, "world");
-    ChestLocationManager.regist("military_uncommon", new double[] { 113, 42, 822 }, "world");
-    ChestLocationManager.regist("military_rare", new double[] { 116, 42, 828 }, "world");
-    ChestLocationManager.regist("military_epic", new double[] { 116, 42, 826 }, "world");
-    ChestLocationManager.regist("military_legendary", new double[] { 116, 42, 824 }, "world");
-    ChestLocationManager.regist("money_drop", new double[] { 113, 42, 816 }, "world");
-    ChestLocationManager.regist("magic_stone_common", new double[] { 119, 42, 828 }, "world");
-    ChestLocationManager.regist("magic_stone_uncommon", new double[] { 119, 42, 826 }, "world");
-    ChestLocationManager.regist("magic_stone_rare", new double[] { 119, 42, 824 }, "world");
-    ChestLocationManager.regist("magic_stone_epic", new double[] { 119, 42, 822 }, "world");
-    ChestLocationManager.regist("magic_stone_legendary", new double[] { 119, 42, 820 }, "world");
+    ChestLocationManager.regist("mori", new double[] { 23, 77, 69 }, "thelow");
+    ChestLocationManager.regist("yuki", new double[] { 23, 77, 72 }, "thelow");
+    ChestLocationManager.regist("sabaku", new double[] { 23, 77, 77 }, "thelow");
+    ChestLocationManager.regist("umi", new double[] { 23, 77, 80 }, "thelow");
+    ChestLocationManager.regist("sogen", new double[] { 23, 77, 84 }, "thelow");
+    ChestLocationManager.regist("dokutu", new double[] { 23, 77, 88 }, "thelow");
+    ChestLocationManager.regist("mati", new double[] { 23, 77, 92 }, "thelow");
+
+    chestNameMap.put("mori", "森チェスト");
+    chestNameMap.put("yuki", "雪チェスト");
+    chestNameMap.put("sabaku", "砂漠チェスト");
+    chestNameMap.put("umi", "海チェスト");
+    chestNameMap.put("sogen", "草原チェスト");
+    chestNameMap.put("dokutu", "洞窟チェスト");
+    chestNameMap.put("mati", "街チェスト");
   }
 }

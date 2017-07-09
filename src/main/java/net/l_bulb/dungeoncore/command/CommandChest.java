@@ -124,7 +124,7 @@ public class CommandChest implements CommandExecutor, TabCompleter {
     double refuelTime = 180;
     boolean allPlayerSameFlg = true;
     int minItemCount = 1;
-    int maxItemCount = 4;
+    int maxItemCount = 3;
 
     double moveX = 0;
     double moveY = 0;

@@ -28,6 +28,9 @@ import net.l_bulb.dungeoncore.mob.customMob.SpreadSheetBossMob;
 import net.l_bulb.dungeoncore.player.customplayer.PlayerChestTpManager;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
 
+import lombok.Getter;
+
+@Getter
 public abstract class SpletSheetChest extends AbstractCustomChest {
 
   Location contentLoc;

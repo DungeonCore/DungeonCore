@@ -10,7 +10,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import net.l_bulb.dungeoncore.mob.SummonPlayerManager;
-import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -103,7 +102,7 @@ public class PathfinderGoalNearestAttackableTargetNotTargetSub extends Pathfinde
 
           CraftEntity bukkitEntity = e.getBukkitEntity();
           // エラーになることがあるのでtry-catchで囲む
-          boolean targetIsSummon = TheLowExecutor.executeBooleanIgnoreException(() -> SummonPlayerManager.isSummonMob(bukkitEntity), false);
+          boolean targetIsSummon = SummonPlayerManager.isSummonMob(bukkitEntity);
           if (isSummon) {
             // ターゲットがプレイヤーでなくsummonでないなら
             if (!targetIsSummon && bukkitEntity.getType() != EntityType.PLAYER) {
