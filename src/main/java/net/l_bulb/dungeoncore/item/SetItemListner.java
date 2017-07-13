@@ -1,52 +1,37 @@
 package net.l_bulb.dungeoncore.item;
 
-import java.util.Collection;
+import java.util.stream.Stream;
 
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import net.l_bulb.dungeoncore.dungeoncore.Main;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
-import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
+import net.l_bulb.dungeoncore.item.itemInterface.StatusItemable;
+import net.l_bulb.dungeoncore.item.statusItem.SetItemManager;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 public class SetItemListner implements Listener {
   @EventHandler
   public void onInventoryClick(InventoryClickEvent e) {
-    if (((Player) e.getWhoClicked()).getGameMode() == GameMode.CREATIVE) { return; }
+    Player player = (Player) e.getWhoClicked();
 
-    // クリックした場所がSetItemの可能性がある場合
-    if (SetItemPartsType.getTypeBySlot(e.getSlot()) != null && e.getClickedInventory().getType() == InventoryType.PLAYER) {
-      // クリックしたアイテムがSETITEMのとき
-      if (SetItemManager.isSetItem(e.getCurrentItem()) || SetItemManager.isSetItem(e.getCursor())) {
-        // アイテムを置き終わった後のデータを見たいので２tick後に実行する
-        new BukkitRunnable() {
-          @Override
-          public void run() {
-            SetItemManager.updateAllSetItem((Player) e.getWhoClicked());
-          }
-        }.runTaskLater(Main.plugin, 2);
-      }
-    }
-  }
+    // クリックしたのがPlayerのインベントリでないならなにもしない
+    InventoryType type = e.getClickedInventory().getType();
+    if (type != InventoryType.PLAYER) { return; }
 
-  @EventHandler
-  public void changeGameMode(PlayerGameModeChangeEvent e) {
-    GameMode newGameMode = e.getNewGameMode();
-    if (newGameMode != GameMode.CREATIVE) {
-      SetItemManager.updateAllSetItem(e.getPlayer());
-    }
+    // クリックしたのがステータスアイテムでないなら何もしない
+    if (ItemManager.getCustomItem(StatusItemable.class, e.getCurrentItem()) == null
+        && ItemManager.getCustomItem(StatusItemable.class, e.getCursor()) == null) { return; }
+
+    // ステータス変化処理を実行
+    onClickItem(player);
   }
 
   @EventHandler
@@ -58,8 +43,7 @@ public class SetItemListner implements Listener {
   @EventHandler
   public void onPlayerItemBreakEvent(PlayerItemBreakEvent e) {
     // 壊れたアイテムがセットアイテムならチェックする
-    ItemStack brokenItem = e.getBrokenItem();
-    if (SetItemManager.isSetItem(brokenItem)) {
+    if (ItemManager.getCustomItem(StatusItemable.class, e.getBrokenItem()) != null) {
       SetItemManager.updateAllSetItem(e.getPlayer());
     }
   }
@@ -69,45 +53,31 @@ public class SetItemListner implements Listener {
     SetItemManager.removeAll(e.getPlayer());
   }
 
-  // TODO 効率悪いので後で修正する
   @EventHandler
   public void click(final PlayerInteractEvent e) {
-    ItemStack item = e.getItem();
-    if (ItemStackUtil.isEmpty(item)) { return; }
-    boolean checkFlg = false;
-
-    // クリックした部分のパーツが存在しない
-    Collection<SetItemPartsType> partsTypeList = SetItemManager.getPartsTypeListByMaterial(item.getType());
-    for (SetItemPartsType setItemPartsType : partsTypeList) {
-      // もし装備するパーツでないならスキップする
-      if (!setItemPartsType.isEquipParts()) {
-        continue;
-      }
-      // 該当箇所にあるパーツを取得
-      ItemStack equipItem = setItemPartsType.getItemStackByParts(e.getPlayer());
-      // もし何もなければ装備したものとする
-      if (ItemStackUtil.isEmpty(equipItem)) {
-        checkFlg = true;
-        break;
-      }
-    }
-
-    if (!checkFlg) { return; }
-
-    String setitemName = SetItemManager.getSetItemName(item);
-    if (setitemName != null) {
-      checkFlg = true;
-    }
-
-    if (checkFlg) {
-      // 装備をきた後に処理を行う
-      new BukkitRunnable() {
-        @Override
-        public void run() {
-          SetItemManager.updateAllSetItem(e.getPlayer());
-        }
-      }.runTaskLater(Main.plugin, 1);
-    }
+    // クリックしたアイテムがステータスアイテムでないなら何もしない
+    StatusItemable customItem = ItemManager.getCustomItem(StatusItemable.class, e.getItem());
+    if (customItem == null) { return; }
+    // ステータス変化処理を実行
+    onClickItem(e.getPlayer());
   }
 
+  /**
+   * アイテムをクリックした時の処理
+   *
+   * @param player
+   */
+  private void onClickItem(Player player) {
+    // クリックする前の装備の数
+    int beforeArmorCount = (int) Stream.of(player.getEquipment().getArmorContents()).filter(ItemStackUtil::isNotEmpty).count();
+
+    TheLowExecutor.executeLater(2, () -> {
+      // クリックした後の装備の数
+      int afterArmorCount = (int) Stream.of(player.getEquipment().getArmorContents()).filter(ItemStackUtil::isNotEmpty).count();
+      // 装備に変化があればステータスのチェック処理を行う
+      if (beforeArmorCount != afterArmorCount) {
+        SetItemManager.updateAllSetItem(player, true);
+      }
+    });
+  }
 }

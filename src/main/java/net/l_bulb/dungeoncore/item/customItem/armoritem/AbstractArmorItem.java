@@ -47,6 +47,7 @@ public abstract class AbstractArmorItem extends AbstractItem implements ArmorIte
     // 防御ポイント
     loreToken.addLore(Message.getMessage("Mobに対する防具ポイント ： +{0}", JavaUtil.round(newParam.getNormalArmorPoint(), 2)));
     loreToken.addLore(Message.getMessage("Bossに対する防具ポイント ： +{0}", JavaUtil.round(newParam.getBossArmorPoint(), 2)));
+    loreToken.addLore(Message.getMessage("最大体力 ： +{0}", JavaUtil.round(newParam.getAddMaxHealth(), 2)));
     return loreToken;
   }
 

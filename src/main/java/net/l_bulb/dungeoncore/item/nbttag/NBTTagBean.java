@@ -45,6 +45,7 @@ public class NBTTagBean {
     if (ItemManager.isImplemental(ArmorItemable.class, customItem)) {
       normalArmorPoint = ((ArmorItemable) customItem).getArmorPointForNormalMob();
       bossArmorPoint = ((ArmorItemable) customItem).getArmorPointForBossMob();
+      addMaxHealth = ((ArmorItemable) customItem).getAddMaxHealth();
     }
   }
 
@@ -71,6 +72,9 @@ public class NBTTagBean {
 
   // ボスモンスターの防御ポイント
   double bossArmorPoint;
+
+  // 装備時の体力の増加値
+  double addMaxHealth;
 
   // 乱数生成(幅が広い)
   static NormalDistributionRandomGenerator generator = new NormalDistributionRandomGenerator(0.9, 0.13);
@@ -111,10 +115,11 @@ public class NBTTagBean {
       // 防御ポイント
       normalArmorPoint *= generator.next();
       bossArmorPoint *= generator.next();
-    }
-  }
 
-  enum ItemNbttagType {
-    WEAPON, ARMOR, OTHER
+      // 最大体力増加値
+      // 1を超えた分だけはマイナスになるようににする
+      double decrementParcent = 1 + Math.abs(generator.next() - 1) * -1.0;
+      addMaxHealth = decrementParcent * addMaxHealth;
+    }
   }
 }

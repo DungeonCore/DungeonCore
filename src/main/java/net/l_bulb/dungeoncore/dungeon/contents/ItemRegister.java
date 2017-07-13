@@ -3,7 +3,6 @@ package net.l_bulb.dungeoncore.dungeon.contents;
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.JumpBoost;
 import net.l_bulb.dungeoncore.dungeon.contents.item.click.magicbook.AbstractMagicBook;
 import net.l_bulb.dungeoncore.dungeon.contents.item.other.strengthBase.StrengthBaseJade;
-import net.l_bulb.dungeoncore.dungeon.contents.item.setItem.crystal.SetItemHealthCrystal;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.OneMobDamageUpSlot;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.level1.FireAspect1;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.level1.KillEffectSlotStone1;
@@ -17,12 +16,9 @@ import net.l_bulb.dungeoncore.dungeon.contents.slotStone.other.KillEffectTutoria
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.other.MagicHealMagicStone;
 import net.l_bulb.dungeoncore.dungeon.contents.slotStone.other.MagicStoneJade;
 import net.l_bulb.dungeoncore.item.ItemManager;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
 
 public class ItemRegister {
   public static void registItem() {
-    SetItemManager.regist(new SetItemHealthCrystal());
-
     // rightClick
     ItemManager.registItem(AbstractMagicBook.getAllItem());
     ItemManager.registItem(new JumpBoost());

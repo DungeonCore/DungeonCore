@@ -47,6 +47,7 @@ class NbtTagSetter {
     if (ItemManager.isImplemental(ArmorItemable.class, itemInterface)) {
       itemStackNbttagSetter.setNormalArmorPoint(nbtTagBean.getNormalArmorPoint());
       itemStackNbttagSetter.setBossArmorPoint(nbtTagBean.getBossArmorPoint());
+      itemStackNbttagSetter.setAddMaxHealth(nbtTagBean.getAddMaxHealth());
     }
   }
 }

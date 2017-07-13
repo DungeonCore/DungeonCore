@@ -3,7 +3,7 @@ package net.l_bulb.dungeoncore.player.ability.impl;
 import java.util.HashMap;
 
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
-import net.l_bulb.dungeoncore.item.setItem.SetItemPartsType;
+import net.l_bulb.dungeoncore.item.statusItem.SetItemPartsType;
 import net.l_bulb.dungeoncore.player.ability.AbstractItemEquipAbility;
 
 public class SetItemAbility extends AbstractItemEquipAbility {

@@ -13,7 +13,6 @@ import net.l_bulb.dungeoncore.command.CommandEquipPlayer;
 import net.l_bulb.dungeoncore.command.CommandExecuteLockByTimeCommand;
 import net.l_bulb.dungeoncore.command.CommandExtraMob;
 import net.l_bulb.dungeoncore.command.CommandGetItem;
-import net.l_bulb.dungeoncore.command.CommandGiveSetItem;
 import net.l_bulb.dungeoncore.command.CommandItem;
 import net.l_bulb.dungeoncore.command.CommandMobSkill;
 import net.l_bulb.dungeoncore.command.CommandNpcSpawn;
@@ -63,7 +62,6 @@ public class CommandRegister {
     registCommand(new CommandAnnounce(), "announce");
     registCommand(new CommandAttention(), "attention");
     registCommand(new CommandGetItem(), "getItem");
-    registCommand(new CommandGiveSetItem(), "getSetItem");
     registCommand(new CommandExtraMob(), "spawnmob");
     registCommand(new CommandViewInfo(), "viewinfo");
     registCommand(new CommandStatusView(), "statusview");

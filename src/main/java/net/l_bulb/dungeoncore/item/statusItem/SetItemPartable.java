@@ -1,12 +1,11 @@
-package net.l_bulb.dungeoncore.item.setItem;
+package net.l_bulb.dungeoncore.item.statusItem;
 
 import org.bukkit.Material;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 
 public interface SetItemPartable extends ItemInterface {
-
-  public SetItemInterface getBelongSetItem();
+  public StatusItemData getBelongSetItem();
 
   public SetItemPartsType getItemSetPartsType();
 

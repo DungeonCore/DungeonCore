@@ -121,6 +121,14 @@ public class ItemStackNbttagAccessor {
     ItemStackUtil.setNBTTag(item, "thelow_item_special_attack_value2", value);
   }
 
+  public double getAddMaxHealth() {
+    return ItemStackUtil.getNBTTagDouble(item, "thelow_item_add_max_health");
+  }
+
+  public void setAddMaxHealth(double value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_add_max_health", value);
+  }
+
   /**
    * すべての装着されているSlotを取得
    *

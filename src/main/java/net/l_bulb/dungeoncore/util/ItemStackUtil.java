@@ -110,8 +110,24 @@ public class ItemStackUtil {
     item.setItemMeta(itemMeta);
   }
 
+  /**
+   * アイテムがnullまたはAIRならTRUE
+   *
+   * @param item
+   * @return
+   */
   public static boolean isEmpty(ItemStack item) {
     return item == null || item.getType() == Material.AIR;
+  }
+
+  /**
+   * アイテムがnullまたはAIRでないならTRUE
+   *
+   * @param item
+   * @return
+   */
+  public static boolean isNotEmpty(ItemStack item) {
+    return !isEmpty(item);
   }
 
   /**

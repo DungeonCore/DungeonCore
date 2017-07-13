@@ -9,11 +9,6 @@ commands:
       usage: /<command> [item name]
       permission: main.lbnDungeonUtil.command.admin.item
       permission-message: You don't have <permission>
-   getSetItem:
-      description: This is to get set item.
-      usage: /<command> [set item name]
-      permission: main.lbnDungeonUtil.command.admin.setitem
-      permission-message: You don't have <permission>
    spawnmob:
       description: This is to operate mob.
       usage: /<command> [mob_Name]

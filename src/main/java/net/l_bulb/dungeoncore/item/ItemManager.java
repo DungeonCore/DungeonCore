@@ -134,9 +134,6 @@ public class ItemManager {
     String name = ItemStackUtil.getName(item);
     if (name == null || name.isEmpty()) { return null; }
 
-    // ヘルスクリスタルだけ別処理
-    if (!name.contains("CRYSTAL")) { return null; }
-
     name = ChatColor.stripColor(name).toUpperCase();
     // interfaceが登録されていない場合は無視する
     if (!allItemNameClassList.containsKey(clazz)) { return null; }
@@ -151,6 +148,17 @@ public class ItemManager {
       return hashMap2.get(name);
     }
     return null;
+  }
+
+  /**
+   * 指定したItemStackが指定したInterfaceを実装しているかどうかを調べる。(instanceOfの高速版)
+   *
+   * @param clazz
+   * @param item
+   * @return
+   */
+  public static boolean isImplemental(Class<? extends ItemInterface> clazz, ItemStack item) {
+    return isImplemental(clazz, getCustomItem(item));
   }
 
   /**

@@ -34,4 +34,11 @@ public interface ArmorItemable extends EquipItemable, Strengthenable, ItemInterf
    * @return 防具ポイント
    */
   double getOtherArmorPoint(double damage, Player me, EntityDamageEvent e, boolean isBoss, LivingEntity mob, ItemStackNbttagAccessor accessor);
+
+  /**
+   * 装備した時の最大体力を取得する
+   */
+  default double getAddMaxHealth() {
+    return 1;
+  }
 }

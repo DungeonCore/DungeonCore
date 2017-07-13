@@ -25,7 +25,7 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerCompleteReincarnationEve
 import net.l_bulb.dungeoncore.common.event.player.PlayerLevelUpEvent;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonData;
 import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
+import net.l_bulb.dungeoncore.item.statusItem.SetItemManager;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
 import net.l_bulb.dungeoncore.player.ExpTable;
 import net.l_bulb.dungeoncore.player.PlayerListener;

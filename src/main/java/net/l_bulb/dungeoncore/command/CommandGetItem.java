@@ -27,7 +27,6 @@ import net.l_bulb.dungeoncore.item.itemInterface.AvailableLevelItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.FoodItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.MaterialItemable;
-import net.l_bulb.dungeoncore.item.setItem.SetItemParts;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -171,8 +170,6 @@ public class CommandGetItem implements CommandExecutor, MenuSelectorInterface {
       ButtonType type;
       if (ItemManager.isImplemental(CombatItemable.class, item)) {
         type = ButtonType.WEAPON;
-      } else if (ItemManager.isImplemental(SetItemParts.class, item)) {
-        type = ButtonType.ARMOR;
       } else if (ItemManager.isImplemental(ArmorItemable.class, item)) {
         type = ButtonType.ARMOR;
       } else if (ItemManager.isImplemental(FoodItemable.class, item)) {
@@ -314,8 +311,6 @@ class ComparatorImplemention implements Comparator<ItemInterface> {
       rtn = 3;
     } else if (item instanceof KeyItemable) {
       rtn = 4;
-    } else if (item instanceof SetItemParts) {
-      rtn = 5;
     } else if (item instanceof ArmorItemable) {
       rtn = 7;
     } else if (item instanceof SlotInterface) {

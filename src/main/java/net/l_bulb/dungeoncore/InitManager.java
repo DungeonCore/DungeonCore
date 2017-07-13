@@ -16,7 +16,7 @@ import net.l_bulb.dungeoncore.dungeon.contents.ItemRegister;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SoundSheetRunnable;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
-import net.l_bulb.dungeoncore.item.setItem.SetItemManager;
+import net.l_bulb.dungeoncore.item.statusItem.SetItemManager;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
 import net.l_bulb.dungeoncore.mobspawn.SpawnManager;
 import net.l_bulb.dungeoncore.npc.NpcManager;
@@ -33,7 +33,6 @@ public class InitManager {
       HolographicDisplaysManager.removeAllHologram();
       ItemRegister.registItem();
       SystemLog.init();
-      SetItemManager.startRutine();
       SetItemManager.initServer();
       NpcManager.init();
       // スプレットシートを読み込む
@@ -51,20 +50,20 @@ public class InitManager {
   }
 
   public void reloadSpreadSheet() {
-    MobCommand.reloadAllMob(null);
-    MobSkillManager.reloadDataBySystem();
-    SpletSheetCommand.reloadSheet(null, "item");
-    SpletSheetCommand.reloadSheet(null, "weapon");
+    SpletSheetCommand.reloadSheet(null, "armor");
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
+    MobCommand.reloadAllMob(null);
+    MobSkillManager.reloadDataBySystem();
+    SpletSheetCommand.reloadSheet(null, "item");
+    SpletSheetCommand.reloadSheet(null, "weapon");
     SpletSheetCommand.reloadSheet(null, "buff");
     SpletSheetCommand.reloadSheet(null, "particle");
     SpletSheetCommand.reloadSheet(null, "food2");
     SpletSheetCommand.reloadSheet(null, "weaponskill");
     SpletSheetCommand.reloadSheet(null, "craftrecipe");
-    SpletSheetCommand.reloadSheet(null, "armor");
     CommandChest.allReload();
     SoundSheetRunnable.allReload();
     VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
