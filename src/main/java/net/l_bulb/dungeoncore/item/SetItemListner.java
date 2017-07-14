@@ -22,6 +22,9 @@ public class SetItemListner implements Listener {
   public void onInventoryClick(InventoryClickEvent e) {
     Player player = (Player) e.getWhoClicked();
 
+    // インベントリが無いなら無視する
+    if (e.getClickedInventory() == null) { return; }
+
     // クリックしたのがPlayerのインベントリでないならなにもしない
     InventoryType type = e.getClickedInventory().getType();
     if (type != InventoryType.PLAYER) { return; }
@@ -76,7 +79,7 @@ public class SetItemListner implements Listener {
       int afterArmorCount = (int) Stream.of(player.getEquipment().getArmorContents()).filter(ItemStackUtil::isNotEmpty).count();
       // 装備に変化があればステータスのチェック処理を行う
       if (beforeArmorCount != afterArmorCount) {
-        SetItemManager.updateAllSetItem(player, true);
+        SetItemManager.updateAllSetItem(player);
       }
     });
   }

@@ -13,6 +13,7 @@ import net.l_bulb.dungeoncore.common.buff.BuffType;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.FoodItemData;
 import net.l_bulb.dungeoncore.item.customItem.SpreadSheetItem.SpreadSheetFoodItem;
+import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class Food2SheetRunnable extends AbstractSheetRunable {
@@ -42,6 +43,9 @@ public class Food2SheetRunnable extends AbstractSheetRunable {
     try {
       FoodItemData foodItemData = new FoodItemData(row[0]);
       foodItemData.setName(row[1]);
+
+      if (ItemStackUtil.getItemStackByCommand(row[2]) == null) { throw new RuntimeException(""); }
+
       foodItemData.setCommand(row[2]);
       foodItemData.setPrice(JavaUtil.getInt(row[8], 0));
 

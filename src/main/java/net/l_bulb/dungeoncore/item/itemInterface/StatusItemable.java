@@ -1,5 +1,7 @@
 package net.l_bulb.dungeoncore.item.itemInterface;
 
+import org.bukkit.inventory.ItemStack;
+
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.statusItem.StatusItemData;
 
@@ -17,7 +19,11 @@ public interface StatusItemable extends ItemInterface {
   /**
    * ステータスアイテムを取得する
    *
+   * @param item 装備しているアイテム
+   *
    * @return
    */
-  StatusItemData getStatusItem();
+  default StatusItemData getStatusItem(ItemStack item) {
+    return new StatusItemData(item);
+  }
 }

@@ -1,7 +1,5 @@
 package net.l_bulb.dungeoncore.item.statusItem;
 
-import java.util.Optional;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,21 +10,13 @@ import net.l_bulb.dungeoncore.player.ability.impl.SetItemAbility;
 
 public class StatusItemData {
 
-  private Optional<SetItemAbility> setItemAbility;
+  private SetItemAbility setItemAbility;
 
   SetItemPartsType type;
 
   public StatusItemData(ItemStack item) {
     ItemStackNbttagAccessor itemStackNbttagAccessor = new ItemStackNbttagAccessor(item);
     double addMaxHealth = itemStackNbttagAccessor.getAddMaxHealth();
-
-    // 増加分のHP
-    if (addMaxHealth > 0) {
-      setItemAbility = Optional.of(new SetItemAbility(getItemPartsType()));
-    } else {
-      setItemAbility = Optional.empty();
-    }
-    setItemAbility.ifPresent(a -> a.addData(PlayerStatusType.MAX_HP, addMaxHealth));
 
     String type = item.getType().toString();
     if (type.contains("BOOTS")) {
@@ -37,7 +27,18 @@ public class StatusItemData {
       this.type = SetItemPartsType.CHEST_PLATE;
     } else if (type.contains("HELMET") || type.contains("SKULL")) {
       this.type = SetItemPartsType.HELMET;
+    } else {
+      throw new RuntimeException("防具として不正なアイテムです。:" + type);
     }
+
+    System.out.println(addMaxHealth);
+    // 増加分のHP
+    if (addMaxHealth > 0) {
+      setItemAbility = new SetItemAbility(getItemPartsType());
+      setItemAbility.addData(PlayerStatusType.MAX_HP, addMaxHealth);
+      System.out.println("aaa");
+    }
+
   }
 
   /**
@@ -46,7 +47,10 @@ public class StatusItemData {
    * @param p
    */
   public void onStartJob(Player p) {
-    TheLowPlayerManager.consume(p, p1 -> setItemAbility.ifPresent(p1::addAbility));
+    if (setItemAbility != null) {
+      System.out.println("aaaaaa");
+      TheLowPlayerManager.consume(p, thelowPlayer -> thelowPlayer.addAbility(setItemAbility));
+    }
   }
 
   /**
@@ -55,7 +59,9 @@ public class StatusItemData {
    * @param p
    */
   public void onEndJob(Player p) {
-    TheLowPlayerManager.consume(p, p1 -> setItemAbility.ifPresent(p1::removeAbility));
+    if (setItemAbility != null) {
+      TheLowPlayerManager.consume(p, thelowPlayer -> thelowPlayer.removeAbility(setItemAbility));
+    }
   }
 
   /**

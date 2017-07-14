@@ -161,6 +161,8 @@ public class PlayerStatusData implements Serializable {
   protected void applyAllAbility() {
     Player onlinePlayer = player.getOnlinePlayer();
     if (onlinePlayer == null || !onlinePlayer.isOnline()) { return; }
+    System.out.println(abilityType);
+    System.out.println(dataMapDouble);
     if (dataMapDouble.containsKey(PlayerStatusType.MAX_HP)) {
       onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP));
     }

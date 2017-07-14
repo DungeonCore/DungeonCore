@@ -66,16 +66,18 @@ public class SetItemManager {
 
     // 今持っているステータスアイテムをセットする
     for (ItemStack armorItem : p.getEquipment().getArmorContents()) {
+      System.out.println(armorItem);
       // ステータスアイテムでないなら無視する
       StatusItemable customItem = ItemManager.getCustomItem(StatusItemable.class, armorItem);
       if (customItem == null) {
+        System.out.println(armorItem + "@1");
         continue;
       }
       // ステータスアイテムを取得
-      StatusItemData statusItem = customItem.getStatusItem();
+      StatusItemData statusItem = customItem.getStatusItem(armorItem);
 
       // リストに格納する
-      if (statusItem == null) {
+      if (statusItem != null) {
         statusItemList.add(statusItem);
       }
     }

@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 
-public interface ArmorItemable extends EquipItemable, Strengthenable, ItemInterface {
+public interface ArmorItemable extends EquipItemable, Strengthenable, ItemInterface, StatusItemable {
   /**
    * このアイテムを装備しているときの通常モンスターに対するガードポイント
    *

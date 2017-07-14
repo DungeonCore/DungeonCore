@@ -2,6 +2,8 @@ package net.l_bulb.dungeoncore.player.ability.impl;
 
 import java.util.HashMap;
 
+import org.apache.commons.lang3.Validate;
+
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.item.statusItem.SetItemPartsType;
 import net.l_bulb.dungeoncore.player.ability.AbstractItemEquipAbility;
@@ -9,6 +11,7 @@ import net.l_bulb.dungeoncore.player.ability.AbstractItemEquipAbility;
 public class SetItemAbility extends AbstractItemEquipAbility {
 
   public SetItemAbility(SetItemPartsType partsType) {
+    Validate.notNull(partsType);
     id = "setitemability_" + partsType;
   }
 
