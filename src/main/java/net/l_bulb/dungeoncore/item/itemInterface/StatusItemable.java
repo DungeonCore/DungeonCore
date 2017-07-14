@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.statusItem.StatusItemData;
 
-public interface StatusItemable extends ItemInterface {
+public interface StatusItemable extends ItemInterface, AvailableLevelItemable {
   // /**
   // * アイテムの装備を解除または装備した時の処理
   // *

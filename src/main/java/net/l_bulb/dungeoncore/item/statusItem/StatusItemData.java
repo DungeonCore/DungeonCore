@@ -31,12 +31,10 @@ public class StatusItemData {
       throw new RuntimeException("防具として不正なアイテムです。:" + type);
     }
 
-    System.out.println(addMaxHealth);
     // 増加分のHP
     if (addMaxHealth > 0) {
       setItemAbility = new SetItemAbility(getItemPartsType());
       setItemAbility.addData(PlayerStatusType.MAX_HP, addMaxHealth);
-      System.out.println("aaa");
     }
 
   }
@@ -48,7 +46,6 @@ public class StatusItemData {
    */
   public void onStartJob(Player p) {
     if (setItemAbility != null) {
-      System.out.println("aaaaaa");
       TheLowPlayerManager.consume(p, thelowPlayer -> thelowPlayer.addAbility(setItemAbility));
     }
   }

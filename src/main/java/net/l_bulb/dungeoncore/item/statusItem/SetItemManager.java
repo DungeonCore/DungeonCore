@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import net.l_bulb.dungeoncore.api.player.TheLowPlayer;
+import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.itemInterface.StatusItemable;
 import net.l_bulb.dungeoncore.util.TheLowExecutor;
@@ -62,17 +64,24 @@ public class SetItemManager {
    * @return
    */
   public static void updateAllSetItem(Player p) {
+    TheLowPlayer theLowPlayer = TheLowPlayerManager.getTheLowPlayer(p);
+    if (theLowPlayer == null) { return; }
+
     ArrayList<StatusItemData> statusItemList = new ArrayList<>();
 
     // 今持っているステータスアイテムをセットする
     for (ItemStack armorItem : p.getEquipment().getArmorContents()) {
-      System.out.println(armorItem);
       // ステータスアイテムでないなら無視する
       StatusItemable customItem = ItemManager.getCustomItem(StatusItemable.class, armorItem);
       if (customItem == null) {
-        System.out.println(armorItem + "@1");
         continue;
       }
+
+      // レベルが足りないなら無視する
+      if (customItem.getAvailableLevel() > theLowPlayer.getLevel(customItem.getLevelType())) {
+        continue;
+      }
+
       // ステータスアイテムを取得
       StatusItemData statusItem = customItem.getStatusItem(armorItem);
 

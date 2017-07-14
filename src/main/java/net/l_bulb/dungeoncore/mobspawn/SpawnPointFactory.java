@@ -77,10 +77,6 @@ public class SpawnPointFactory {
   void addSpawnPoint(SpawnPoint point) {
     spawnPointLocationMap.put(point.getLocation(), point);
     spawnPointIdMap.put(point.getId(), point);
-
-    if (point.getId() == 513) {
-      System.out.println(spawnPointIdMap.get(513));
-    }
   }
 
   void clear() {
