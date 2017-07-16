@@ -60,11 +60,11 @@ public class SpreadSheetWeaponData {
   // エラーかどうか
   boolean isCraftItemError = false;
 
-  // メインのクラフト素材
-  String mainCraftMaterial;
-
   // 特殊ダメージデータ
   HashMap<SpecialType, Double> specialDamageMap = new HashMap<>();
+
+  // 武器スキルID
+  String weaponSkillId;
 
   /**
    * エラーがどうか確認し、エラーならFALSEを返し、エラーメッセージを送信する。ただし実行者がコンソールの時はメッセージを送信しない

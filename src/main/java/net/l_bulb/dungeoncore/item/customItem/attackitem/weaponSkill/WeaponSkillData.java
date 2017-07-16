@@ -2,31 +2,42 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
 import org.bukkit.Material;
 
-import net.l_bulb.dungeoncore.player.ItemType;
+import lombok.Getter;
+import lombok.Setter;
 
 public class WeaponSkillData {
-  double[] data = new double[5];
+  double[] data = new double[10];
 
-  public WeaponSkillData(String name, ItemType type, String id) {
+  public WeaponSkillData(String name, String id) {
     this.name = name;
-    this.type = type;
     this.id = id;
   }
 
-  int skillLevel = 0;
+  @Getter
+  @Setter
   int cooltime = 0;
+
+  @Getter
+  @Setter
   int needMp = 0;
 
   String[] detail;
 
+  @Getter
   String name;
 
+  @Getter
   String id;
 
-  ItemType type;
-
+  @Getter
   Material material = Material.STONE;
 
+  @Setter
+  @Getter
+  WeaponSkillType weaponSkillType = null;
+
+  @Getter
+  @Setter
   byte materialdata = 0;
 
   public void setMaterial(int materialId) {
@@ -35,26 +46,6 @@ public class WeaponSkillData {
     if (material2 != null) {
       material = material2;
     }
-  }
-
-  public void setMaterialdata(byte materialdata) {
-    this.materialdata = materialdata;
-  }
-
-  public Material getMaterial() {
-    return material;
-  }
-
-  public byte getMaterialdata() {
-    return materialdata;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public void setDetail(String detail) {
@@ -70,40 +61,11 @@ public class WeaponSkillData {
     return detail;
   }
 
-  public ItemType getType() {
-    return type;
-  }
-
-  public int getSkillLevel() {
-    return skillLevel;
-  }
-
-  public void setSkillLevel(int skillLevel) {
-    this.skillLevel = skillLevel;
-  }
-
-  public int getCooltime() {
-    return cooltime;
-  }
-
-  public void setCooltime(int cooltime) {
-    this.cooltime = cooltime;
-  }
-
-  public int getNeedMp() {
-    return needMp;
-  }
-
-  public void setNeedMp(int needMp) {
-    this.needMp = needMp;
-  }
-
   public double getData(int i) {
     return data[i];
   }
 
   public void setData(double data0, int index) {
     data[index] = data0;
-    ;
   }
 }

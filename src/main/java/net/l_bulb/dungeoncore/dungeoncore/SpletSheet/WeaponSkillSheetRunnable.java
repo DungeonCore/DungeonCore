@@ -36,12 +36,6 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
   protected void excuteOnerow(String[] row) {
     String name = row[1];
 
-    ItemType itemType = getItemType(row[0]);
-    if (itemType == null) {
-      sendMessage(itemType + "が不正です(name:" + name + ")");
-      return;
-    }
-
     int level = JavaUtil.getInt(row[2], -1);
     int cooltime = JavaUtil.getInt(row[3], -1);
 
@@ -62,11 +56,10 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
       return;
     }
 
-    WeaponSkillData weaponSkillData = new WeaponSkillData(name, itemType, row[11]);
+    WeaponSkillData weaponSkillData = new WeaponSkillData(name, row[11]);
     weaponSkillData.setCooltime(cooltime);
-    weaponSkillData.setSkillLevel(level);
     weaponSkillData.setNeedMp(needMp);
-    ;
+
     weaponSkillData.setDetail(detail);
     weaponSkillData.setData(data0, 0);
     weaponSkillData.setData(data1, 1);

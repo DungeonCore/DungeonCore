@@ -9,6 +9,7 @@ import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillType;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.player.ItemType;
 
@@ -30,10 +31,6 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
     return data.getName();
   }
 
-  public ItemType getType() {
-    return data.getType();
-  }
-
   @Override
   public String[] getDetail() {
     return data.getDetail();
@@ -47,16 +44,6 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
   @Override
   public int getNeedMagicPoint() {
     return data.getNeedMp();
-  }
-
-  @Override
-  public int getSkillLevel() {
-    return data.getSkillLevel();
-  }
-
-  @Override
-  public boolean canUse(ItemType type) {
-    return this.type == type;
   }
 
   @Override
@@ -78,5 +65,10 @@ public abstract class WeaponSkillForOneType implements WeaponSkillInterface {
   @Override
   public ItemStackData getViewItemStackData() {
     return new ItemStackData(data.getMaterial(), data.getMaterialdata());
+  }
+
+  @Override
+  public WeaponSkillType geWeaponSkillType() {
+    return data.getWeaponSkillType();
   }
 }

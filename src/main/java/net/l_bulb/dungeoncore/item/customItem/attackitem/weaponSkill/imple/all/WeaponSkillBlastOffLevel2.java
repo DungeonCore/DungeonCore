@@ -15,11 +15,6 @@ import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 public class WeaponSkillBlastOffLevel2 extends WeaponSkillBlastOff {
 
   @Override
-  public int getSkillLevel() {
-    return 2;
-  }
-
-  @Override
   public String getName() {
     return "ブラスト・オフ Lv.2";
   }

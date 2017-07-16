@@ -115,8 +115,8 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
   }
 
   @Override
-  protected int getSkillLevel() {
-    return data.getSkillLevel();
+  public String getWeaponSkillSetId() {
+    return data.getWeaponSkillId();
   }
 
   @Override

@@ -1,19 +1,15 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
-import java.util.Collection;
 import java.util.HashMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
-import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
@@ -24,55 +20,31 @@ import net.md_5.bungee.api.ChatColor;
  *
  */
 public class WeaponSkillSelector implements MenuSelectorInterface {
+
+  private WeaponSkillSet weaponSkillSet;
+
   static {
-    MenuSelectorManager.regist(new WeaponSkillSelector(ItemType.SWORD, 0));
+    MenuSelectorManager.regist(null);
   }
 
   /**
-   * @param type 武器のタイプ
-   * @param weaponSkillLevel 武器スキルレベル
+   * スキルセットID
+   *
+   * @param weaponSkillSetId
    */
-  public WeaponSkillSelector(ItemType type, int weaponSkillLevel) {
-    this.type = type;
-    this.weaponSkillLevel = weaponSkillLevel;
+  public WeaponSkillSelector(WeaponSkillSet weaponSkillSet) {
+    this.weaponSkillSet = weaponSkillSet;
   }
-
-  ItemType type;
-
-  int weaponSkillLevel;
 
   @Override
   public void open(Player p) {
-    // インベントリ作成
-    Inventory createInventory = Bukkit.createInventory(null, 9 * 2, getTitle());
-    // 武器スキルを全て取得
-    Collection<WeaponSkillInterface> sortedSkillList = WeaponSkillFactory.getSortedSkillList();
-    for (WeaponSkillInterface weaponSkillInterface : sortedSkillList) {
-      // スキルレベルを確認
-      if (weaponSkillLevel < weaponSkillInterface.getSkillLevel()) {
-        continue;
-      }
-      // ItemTypeを確認
-      if (!weaponSkillInterface.canUse(type)) {
-        continue;
-      }
-
-      // アイテムを配置する
-      createInventory.addItem(getViewItemStack(weaponSkillInterface));
-    }
-    p.openInventory(createInventory);
+    // TODO
   }
 
-  static HashMap<WeaponSkillInterface, ItemStack> viewItemCache = new HashMap<>();
-
   // ItemStackと武器スキルを結びつけたMap
-  static HashMap<ItemStack, WeaponSkillInterface> viewItemIdCache = new HashMap<>();
+  static HashMap<ItemStack, WeaponSkillInterface> viewItemMap = new HashMap<>();
 
   private ItemStack getViewItemStack(WeaponSkillInterface skill) {
-    // キャッシュから取得する
-    ItemStack cacheViewItem = viewItemCache.get(skill);
-    // キャッシュが存在するならそれを返す
-    if (cacheViewItem != null) { return cacheViewItem; }
     // アイテムを生成
     ItemStack itemStack = skill.getViewItemStackData().toItemStack();
     // 名前をセットする
@@ -85,25 +57,28 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
 
     ItemStackUtil.addLore(itemStack, "");
     ItemStackUtil.addLore(itemStack, ChatColor.GREEN + "[INFO]");
-    ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    スキルレベル:" + skill.getSkillLevel());
-    ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    消費MP:" + skill.getNeedMagicPoint());
-    ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + "    クールタイム:" + skill.getCooltime() + "秒");
+    ItemStackUtil.addLore(itemStack, ChatColor.RED + skill.geWeaponSkillType().getJpName());
+    ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + " 消費MP:" + skill.getNeedMagicPoint());
+    ItemStackUtil.addLore(itemStack, ChatColor.YELLOW + " クールタイム:" + skill.getCooltime() + "秒");
 
-    // キャッシュにセットする
-    viewItemCache.put(skill, itemStack);
-    viewItemIdCache.put(itemStack, skill);
+    viewItemMap.put(itemStack, skill);
     return itemStack;
   }
 
   @Override
   public void onSelectItem(Player p, ItemStack item, InventoryClickEvent e) {
     // クリックしたアイテムがWeaponSkillのViewアイテムでないなら無視する
-    if (!viewItemIdCache.containsKey(item)) { return; }
+    if (!viewItemMap.containsKey(item)) { return; }
     ItemStack itemInHand = p.getItemInHand();
     // 武器スキルをクリックしたViewから取得
-    WeaponSkillInterface weaponSkill = viewItemIdCache.get(item);
+    WeaponSkillInterface weaponSkill = viewItemMap.get(item);
+
     // 手持ちのアイテムのNBTTagに武器スキルのIDをセットする
-    ItemStackUtil.setNBTTag(itemInHand, "weaponskill", weaponSkill.getId());
+    if (weaponSkill.geWeaponSkillType() == WeaponSkillType.NORMAL_SKILL) {
+      ItemStackUtil.setNBTTag(itemInHand, "normal_weaponskill", weaponSkill.getId());
+    } else {
+      ItemStackUtil.setNBTTag(itemInHand, "special_weaponskill", weaponSkill.getId());
+    }
 
     // スキル解除の時は通知しない
     if (WeaponSkillCancel.isThisSkill(weaponSkill)) {
@@ -126,7 +101,6 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
    * キャッシュをクリア
    */
   public static void clearCache() {
-    viewItemCache.clear();
-    viewItemIdCache.clear();
+    viewItemMap.clear();
   }
 }

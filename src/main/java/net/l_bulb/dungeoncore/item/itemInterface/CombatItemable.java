@@ -70,4 +70,11 @@ public interface CombatItemable extends RightClickItemable, EquipItemable, ItemI
    * @return
    */
   Map<SpecialType, Double> getSpecialDamageTypeMap();
+
+  /**
+   * 武器スキル名を取得
+   *
+   * @return
+   */
+  String getWeaponSkillSetId();
 }

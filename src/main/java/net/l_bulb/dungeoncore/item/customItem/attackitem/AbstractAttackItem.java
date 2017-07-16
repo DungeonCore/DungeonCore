@@ -16,7 +16,9 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.dungeon.contents.strength_template.StrengthTemplate;
 import net.l_bulb.dungeoncore.item.customItem.AbstractItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.specialDamage.SpecialType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillSelector;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillSet;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.LeftClickItemable;
 import net.l_bulb.dungeoncore.item.itemInterface.Strengthenable;
@@ -77,13 +79,6 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
   }
 
   /**
-   * スキルレベルを取得
-   *
-   * @return
-   */
-  abstract protected int getSkillLevel();
-
-  /**
    * クラフトレベルを取得する
    *
    * @return
@@ -110,7 +105,7 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     ItemLoreToken loreToken = super.getStandardLoreToken(newParam);
     // 使用可能レベル
     loreToken.addLore(Message.getMessage("使用可能 ： {2}{0}{1}以上", getAttackType().getLevelType().getName(), getAvailableLevel(), ChatColor.GOLD));
-    loreToken.addLore("スキルレベル ： " + ChatColor.GOLD + getSkillLevel() + "レベル");
+    loreToken.addLore("武器スキル： " + ChatColor.GOLD + getWeaponSkillSetId() + "レベル");
     loreToken.addLore("耐久値 ： " + ChatColor.GOLD + newParam.getMaxDurability());
     // 通常ダメージ
     loreToken.addLore(LoreLine.getLoreLine("攻撃力", "+" + JavaUtil.round(newParam.getDamage() - getMaterialDamage(), 2)));
@@ -169,11 +164,15 @@ public abstract class AbstractAttackItem extends AbstractItem implements Strengt
     e.setCancelled(true);
 
     // レベルが足りないなら何もしない
-    if (isAvilable(player)) {
-      // 選択メニューを開く
-      new WeaponSkillSelector(getAttackType(), getSkillLevel()).open(player);
-    } else {
+    if (!isAvilable(player)) {
       sendNotAvailableMessage(player);
+      return;
+    }
+
+    WeaponSkillSet weaponSkillSet = WeaponSkillFactory.getWeaponSkillSet(getWeaponSkillSetId());
+    // 選択メニューを開く
+    if (weaponSkillSet != null) {
+      new WeaponSkillSelector(weaponSkillSet).open(player);
     }
   }
 }

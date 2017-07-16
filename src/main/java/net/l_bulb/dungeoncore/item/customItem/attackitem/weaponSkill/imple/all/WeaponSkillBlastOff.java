@@ -18,16 +18,11 @@ import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillType;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
-import net.l_bulb.dungeoncore.player.ItemType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class WeaponSkillBlastOff implements WeaponSkillInterface {
-
-  @Override
-  public int getSkillLevel() {
-    return 0;
-  }
 
   @Override
   public String getName() {
@@ -99,11 +94,11 @@ public class WeaponSkillBlastOff implements WeaponSkillInterface {
   }
 
   @Override
-  public boolean canUse(ItemType type) {
-    return true;
-  }
+  public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
 
   @Override
-  public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
+  public WeaponSkillType geWeaponSkillType() {
+    return WeaponSkillType.NORMAL_SKILL;
+  }
 
 }

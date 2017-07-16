@@ -1,9 +1,9 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
@@ -32,17 +32,7 @@ import net.l_bulb.dungeoncore.util.DungeonLogger;
 public class WeaponSkillFactory {
   private static HashMap<String, WeaponSkillInterface> skillMap = new HashMap<>();
 
-  private static TreeSet<WeaponSkillInterface> skillLevelSkillMap = new TreeSet<>(new Comparator<WeaponSkillInterface>() {
-    @Override
-    public int compare(WeaponSkillInterface o1, WeaponSkillInterface o2) {
-      // スキル解除は一番最初に表示する
-      if (WeaponSkillCancel.isThisSkill(o1)) { return -1; }
-      if (WeaponSkillCancel.isThisSkill(o2)) { return 1; }
-
-      if (o1.getSkillLevel() != o2.getSkillLevel()) { return o1.getSkillLevel() - o2.getSkillLevel(); }
-      return o1.getId().compareTo(o2.getId());
-    }
-  });
+  private static Set<WeaponSkillInterface> skillLevelSkillMap = new HashSet<>();
 
   /**
    * SkillListを取得
@@ -87,6 +77,16 @@ public class WeaponSkillFactory {
    */
   public static WeaponSkillInterface getWeaponSkill(String id) {
     return skillMap.get(id);
+  }
+
+  /**
+   * 武器スキルセットを取得する
+   * 
+   * @param id
+   * @return
+   */
+  public static WeaponSkillSet getWeaponSkillSet(String id) {
+    return null;
   }
 
   // 一時的なインスンタンスを保持するためのクラス

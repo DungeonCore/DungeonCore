@@ -9,17 +9,12 @@ import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillType;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
-import net.l_bulb.dungeoncore.player.ItemType;
 
 public class WeaponSkillCancel implements WeaponSkillInterface {
 
   private static final String SKILL_CANCEL = "skill_cancel";
-
-  @Override
-  public int getSkillLevel() {
-    return 0;
-  }
 
   @Override
   public String getName() {
@@ -59,11 +54,6 @@ public class WeaponSkillCancel implements WeaponSkillInterface {
     return new ItemStackData(Material.GLASS);
   }
 
-  @Override
-  public boolean canUse(ItemType type) {
-    return true;
-  }
-
   /**
    * 指定した武器スキルがこのスキルならTRUE
    *
@@ -74,6 +64,11 @@ public class WeaponSkillCancel implements WeaponSkillInterface {
     if (skill == null) { return false; }
 
     return skill.getId().equals(SKILL_CANCEL);
+  }
+
+  @Override
+  public WeaponSkillType geWeaponSkillType() {
+    return WeaponSkillType.NORMAL_SKILL;
   }
 
 }

@@ -8,15 +8,8 @@ import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
-import net.l_bulb.dungeoncore.player.ItemType;
 
 public interface WeaponSkillInterface {
-  /**
-   * スキルレベルを取得
-   *
-   * @return
-   */
-  int getSkillLevel();
 
   /**
    * スキル名を取得
@@ -38,6 +31,13 @@ public interface WeaponSkillInterface {
    * @return
    */
   String[] getDetail();
+
+  /**
+   * スキルタイプを取得
+   * 
+   * @return
+   */
+  WeaponSkillType geWeaponSkillType();
 
   /**
    * スキル選択後にクリックした時の処理
@@ -79,12 +79,4 @@ public interface WeaponSkillInterface {
    * @return
    */
   ItemStackData getViewItemStackData();
-
-  /**
-   * もし指定したタイプの武器で使えるならTRUE
-   *
-   * @param type
-   * @return
-   */
-  boolean canUse(ItemType type);
 }
