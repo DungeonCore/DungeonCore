@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.command.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,11 +23,12 @@ public class CommandSequencemove implements CommandExecutor, UsageCommandable {
 
   @Override
   public String getUsage() {
-    return "<command> second count id:data x y z dx dy dz  \n" +
+    return "<command> second count id:data x y z dx dy dz (-l)  \n" +
         "second ・・・何秒間に一回動くか  \n" +
-        "count ・・・何回動くか  \n" +
+        "count ・・・何回動くか  (-l ありの時は無視)\n" +
         "x y z　・・スタート地点の座標(3×3の中心)  \n" +
-        "dx dy dz ・・・動く方向  \n" +
+        "dx dy dz ・・・動く方向  (-l なし)\n" +
+        "dx dy dz ・・・終了地点の座標  (-l あり)\n" +
         "id:data  ・・・ブロックIDとデータ値";
   }
 
@@ -49,7 +51,7 @@ public class CommandSequencemove implements CommandExecutor, UsageCommandable {
       public void run2() {
         // 一番最初は足場を設置する
         if (isFirst) {
-          for (Vector vec : getScaffoldLocation(bean.getBeforeLocationl())) {
+          for (Vector vec : getScaffoldLocation(bean.getBeforeLocation())) {
             setBlock(vec, bean.getW(), bean.getBlockData());
           }
           // 座標を更新する
@@ -59,10 +61,10 @@ public class CommandSequencemove implements CommandExecutor, UsageCommandable {
         }
 
         // 前の座標
-        List<Vector> beforeScaffoldLocation1 = getScaffoldLocation(bean.getBeforeLocationl());
+        List<Vector> beforeScaffoldLocation1 = getScaffoldLocation(bean.getBeforeLocation());
         List<Vector> beforeScaffoldLocation2 = new ArrayList<>(beforeScaffoldLocation1);
         // 次の座標
-        List<Vector> nowScaffoldLocation = getScaffoldLocation(bean.getNowLocationl());
+        List<Vector> nowScaffoldLocation = getScaffoldLocation(bean.getNowLocation());
 
         // 消える座標
         beforeScaffoldLocation1.removeAll(nowScaffoldLocation);
@@ -111,8 +113,9 @@ public class CommandSequencemove implements CommandExecutor, UsageCommandable {
   }
 
   public RemoveBlockBean createData(String[] arg3, World w) {
+    boolean withEndLocation = (arg3.length == 10) && Objects.equals(arg3[9], "-l");
     try {
-      RemoveBlockBean removeBlockBean = new RemoveBlockBean(w);
+      RemoveBlockBean removeBlockBean = withEndLocation ? new RemoveBlockBeanWithFinishLocation(w) : new RemoveBlockBean(w);
       removeBlockBean.setSecond(Double.parseDouble(arg3[0]));
       removeBlockBean.setCount(Integer.parseInt(arg3[1]));
 
@@ -192,7 +195,7 @@ class RemoveBlockBean {
    */
   public void init() {
     // 合計
-    double sum = dX + dY + dZ;
+    double sum = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
     if (sum != 0) {
       // 正規化する
       dX = dX / sum;
@@ -201,7 +204,7 @@ class RemoveBlockBean {
     }
 
     // スタート地点を登録する
-    nowLocationl = new Location(w, startX, startY, startZ);
+    nowLocation = new Location(w, startX, startY, startZ);
   }
 
   /**
@@ -209,12 +212,12 @@ class RemoveBlockBean {
    */
   public void incrementPoint() {
     // 座標を記録する
-    beforeLocationl.setX(nowLocationl.getX());
-    beforeLocationl.setY(nowLocationl.getY());
-    beforeLocationl.setZ(nowLocationl.getZ());
+    beforeLocation.setX(nowLocation.getX());
+    beforeLocation.setY(nowLocation.getY());
+    beforeLocation.setZ(nowLocation.getZ());
 
     // 座標を追加する
-    nowLocationl.add(dX, dY, dZ);
+    nowLocation.add(dX, dY, dZ);
     count--;
   }
 
@@ -232,12 +235,65 @@ class RemoveBlockBean {
    *
    * @return
    */
-  Location nowLocationl;
+  Location nowLocation;
 
   /**
    * 1つ前の座標を取得
    *
    * @return
    */
-  Location beforeLocationl = new Location(w, 0, 0, 0);
+  Location beforeLocation = new Location(w, 0, 0, 0);
+}
+
+class RemoveBlockBeanWithFinishLocation extends RemoveBlockBean {
+
+  public RemoveBlockBeanWithFinishLocation(World w) {
+    super(w);
+  }
+
+  // 終了地点の座標
+  double endX;
+  double endY;
+  double endZ;
+
+  // 現在の座標と終了地点座標の座標の２乗
+  double distanceSquare;
+
+  @Override
+  public void init() {
+    // 終了地点の座標を登録する
+    endX = getDX();
+    endY = getDY();
+    endZ = getDZ();
+
+    // 移動方向をセット
+    setDX(endX - getStartX());
+    setDY(endY - getStartY());
+    setDZ(endZ - getStartZ());
+
+    super.init();
+
+    distanceSquare = getDistanceSquareBetweenEndAndNow();
+  }
+
+  /**
+   * 現在の座標と終了地点座標の座標の２乗
+   *
+   * @return
+   */
+  protected double getDistanceSquareBetweenEndAndNow() {
+    return Math.pow(endX - getNowLocation().getX(), 2) + Math.pow(endY - getNowLocation().getY(), 2)
+        + Math.pow(endZ - getNowLocation().getZ(), 2);
+  }
+
+  @Override
+  public boolean isFinish() {
+    double beforeDistanceSquare = distanceSquare;
+    double nowDistanceSquare = getDistanceSquareBetweenEndAndNow();
+
+    if (beforeDistanceSquare < nowDistanceSquare) { return true; }
+
+    distanceSquare = nowDistanceSquare;
+    return false;
+  }
 }
