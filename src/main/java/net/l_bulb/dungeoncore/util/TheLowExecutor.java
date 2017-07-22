@@ -37,7 +37,7 @@ public class TheLowExecutor {
    * @param isEnd 終了条件
    * @param endingTick 開始してから終了までの時間(tick) この時間は含めません
    */
-  public static void executeLater(long periodTick, Predicate<LbnRunnable> isEnd, Consumer<LbnRunnable> runnable) {
+  public static void executeTimer(long periodTick, Predicate<LbnRunnable> isEnd, Consumer<LbnRunnable> runnable) {
     new LbnRunnable() {
       @Override
       public void run2() {
@@ -57,7 +57,7 @@ public class TheLowExecutor {
    * @param endingTick 開始してから終了までの時間(tick) この時間は含めません
    */
   public static void executeLater(long periodTick, long endingTick, Consumer<LbnRunnable> runnable) {
-    executeLater(periodTick, r -> r.getAgeTick() > endingTick, runnable);
+    executeTimer(periodTick, r -> r.getAgeTick() > endingTick, runnable);
   }
 
   /**

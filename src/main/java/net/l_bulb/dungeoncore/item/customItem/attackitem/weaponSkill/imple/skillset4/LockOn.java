@@ -35,7 +35,7 @@ public class LockOn extends WeaponSkillWithProjectile {
   @Override
   public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
     // パーティクルを発生させる
-    TheLowExecutor.executeLater(2,
+    TheLowExecutor.executeTimer(2,
         // 一定時間が過ぎる または モンスターが死んだら終了
         r -> (r.getAgeTick() > getData(1) * 20.0) || target.isDead(),
         (r) -> particle.runParticle((Player) owner, target.getLocation()));

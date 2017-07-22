@@ -55,7 +55,7 @@ public class EnkyoriSnipe extends WeaponSkillWithProjectile {
     Arrow projectile = p.launchProjectile(Arrow.class, p.getLocation().getDirection().multiply(3));
     projectile.setVelocity(arrowDirection);
 
-    TheLowExecutor.executeLater(2,
+    TheLowExecutor.executeTimer(2,
         l -> projectile.isOnGround() || !projectile.isValid() || projectile.getVelocity().equals(ZERO_VEC) || l.getAgeTick() > 30 * 20,
         r -> {
           // パーティクルを発生させる
