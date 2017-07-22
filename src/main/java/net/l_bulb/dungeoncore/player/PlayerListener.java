@@ -1,8 +1,10 @@
 package net.l_bulb.dungeoncore.player;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 
 import org.apache.commons.lang.StringUtils;
@@ -609,4 +611,22 @@ public class PlayerListener implements Listener {
             JavaUtil.round(nowHp.getAsDouble(), 2),
             e.getEnemy().getMaxHealth())));
   }
+
+  @EventHandler
+  public void onLogout(PlayerQuitEvent e) {
+    logoutConsumer.stream().forEach(c -> c.accept(e.getPlayer()));
+  }
+
+  // Logout時の処理
+  static List<Consumer<Player>> logoutConsumer = new ArrayList<>();
+
+  /**
+   * Logout時の処理を追加する
+   *
+   * @param consumer
+   */
+  public static void registerLogoutEvent(Consumer<Player> consumer) {
+    logoutConsumer.add(consumer);
+  }
+
 }

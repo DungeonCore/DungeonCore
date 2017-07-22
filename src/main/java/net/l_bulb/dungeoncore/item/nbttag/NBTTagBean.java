@@ -32,7 +32,7 @@ public class NBTTagBean {
     if (ItemManager.isImplemental(CombatItemable.class, customItem)) {
       CombatItemable combatItemable = (CombatItemable) customItem;
       // 攻撃力
-      damage = combatItemable.getAttackItemDamage(0);
+      damage = combatItemable.getAttackItemDamage(null);
       // デフォルトスロット数
       defaultSlot = combatItemable.getDefaultSlotCount();
       // 最大スロット数

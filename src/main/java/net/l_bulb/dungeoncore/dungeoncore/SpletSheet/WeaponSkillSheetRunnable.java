@@ -70,7 +70,7 @@ public class WeaponSkillSheetRunnable extends AbstractSheetRunable {
     weaponSkillData.setMaterial(JavaUtil.getInt(row[12], 1));
     weaponSkillData.setMaterialdata((byte) JavaUtil.getInt((row[13]), 0));
 
-    WeaponSkillFactory.regist(weaponSkillData);
+    WeaponSkillFactory.registData(weaponSkillData);
   }
 
   public String getNull(String val) {

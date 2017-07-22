@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.item.ItemInterface;
 import net.l_bulb.dungeoncore.item.SlotManager;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillType;
 import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
@@ -127,6 +128,26 @@ public class ItemStackNbttagAccessor {
 
   public void setAddMaxHealth(double value) {
     ItemStackUtil.setNBTTag(item, "thelow_item_add_max_health", value);
+  }
+
+  /**
+   * 選択している武器スキルを取得
+   *
+   * @param type
+   * @return
+   */
+  public String getSelectedWeaponSkillId(WeaponSkillType type) {
+    return ItemStackUtil.getNBTTag(item, "thelow_item_weapon_skill_" + type.toString().toLowerCase());
+  }
+
+  /**
+   * 選択している武器スキルをセットする
+   *
+   * @param type
+   * @param weaponSkillId 武器スキルのID
+   */
+  public void setSelectedWeaponSkillId(WeaponSkillType type, String weaponSkillId) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_weapon_skill_" + type.toString().toLowerCase(), weaponSkillId);
   }
 
   /**

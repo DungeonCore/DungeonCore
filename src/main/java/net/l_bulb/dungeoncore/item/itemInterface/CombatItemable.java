@@ -42,11 +42,10 @@ public interface CombatItemable extends RightClickItemable, EquipItemable, ItemI
   /**
    * 武器のダメージを取得 (武器本体のダメージも含まれます)
    *
-   * @param p
-   * @param strengthLevel 強化レベル
+   * @param item 実際に使っているアイテム itemがnullのときはテンプレートを取得
    * @return
    */
-  double getAttackItemDamage(int strengthLevel);
+  double getAttackItemDamage(ItemStack item);
 
   /**
    * この武器のアイテムのデフォルトの攻撃力を取得

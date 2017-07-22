@@ -119,10 +119,19 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
   }
 
   /**
-   * イベントを呼ばれた後にダメージの処理を行う
+   * イベントを呼ばれた後に防具貫通なしダメージの処理を行う
    */
   public void damageEntity() {
-    DamageSource dummySource = DamageSource.FIRE;
+    damageEntity(false);
+  }
+
+  /**
+   * イベントを呼ばれた後にダメージの処理を行う
+   *
+   * @param ignoreArmor 防具無視ならTRUE
+   */
+  public void damageEntity(boolean ignoreArmor) {
+    DamageSource dummySource = ignoreArmor ? DamageSource.GENERIC : DamageSource.FIRE;
     ((CraftLivingEntity) enemy).getHandle().damageEntity(dummySource, (float) getDamage());
   }
 }

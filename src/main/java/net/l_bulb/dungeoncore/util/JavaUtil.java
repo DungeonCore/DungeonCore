@@ -18,6 +18,8 @@ public class JavaUtil {
   private static Random rnd = new Random();
 
   public static boolean isRandomTrue(int percent) {
+    // 確率が0なら何もしない
+    if (percent == 0) { return false; }
     if (rnd.nextInt(100) < percent) { return true; }
     return false;
   }
@@ -195,6 +197,15 @@ public class JavaUtil {
     } catch (Exception e) {
       return defaultValue;
     }
+  }
+
+  /**
+   * メッセージ付きでExceptionを投げる
+   *
+   * @param message
+   */
+  public static void throwException(String message) {
+    throw new RuntimeException(message);
   }
 }
 

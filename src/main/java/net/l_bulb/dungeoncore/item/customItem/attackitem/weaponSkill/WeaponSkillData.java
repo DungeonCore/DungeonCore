@@ -40,6 +40,14 @@ public class WeaponSkillData {
   @Setter
   byte materialdata = 0;
 
+  @Getter
+  @Setter
+  String skillSetId;
+
+  @Getter
+  @Setter
+  String skillSetName;
+
   public void setMaterial(int materialId) {
     @SuppressWarnings("deprecation")
     Material material2 = Material.getMaterial(materialId);

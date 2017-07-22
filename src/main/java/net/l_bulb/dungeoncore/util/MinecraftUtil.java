@@ -7,44 +7,36 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_8_R1.CraftSound;
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import net.l_bulb.dungeoncore.util.BlockUtil.BlockData;
 
 import net.minecraft.server.v1_8_R1.CommandAbstract;
-import net.minecraft.server.v1_8_R1.PacketPlayOutNamedSoundEffect;
 
 public class MinecraftUtil {
 
   /**
+   * 指定したPlayerに聞こえるようにだけ音を鳴らす
    *
-   * //http://wiki.vg/Protocol#Sound_Effect
-   *
-   * @param center
+   * @param p
    * @param sound
    * @param volume
    * @param pitch
-   * @param range
    */
-  public static void sendSound(Location center, Sound sound, float volume, float pitch, double range) {
-    // packetを送信
-    for (Player p : center.getWorld().getPlayers()) {
-      if (!p.isOnline()) {
-        continue;
-      }
-      Location loc = p.getLocation();
+  public static void playSoundForPlayer(Player p, Sound sound, float volume, float pitch) {
+    p.playSound(p.getLocation(), sound, volume, pitch);
+  }
 
-      // 聞こえるが遠い場所
-      if (loc.distance(center) <= range && loc.distance(center) > (range / 2)) {
-        volume = volume * 0.7f;
-      }
-
-      PacketPlayOutNamedSoundEffect packet = new PacketPlayOutNamedSoundEffect(CraftSound.getSound(sound), center.getX(), center.getY(),
-          center.getZ(), volume, pitch);
-      ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
-    }
+  /**
+   * 周囲のPlayerに聞こえるように音を鳴らす
+   *
+   * @param location
+   * @param sound
+   * @param volume
+   * @param pitch
+   */
+  public static void playSoundForAll(Location location, Sound sound, float volume, float pitch) {
+    location.getWorld().playSound(location, sound, volume, pitch);
   }
 
   public static void chunkLoadIfUnload(Chunk c) {

@@ -2,28 +2,43 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
 import java.util.List;
 
+import net.l_bulb.dungeoncore.util.TheLowValidates;
+
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class WeaponSkillSet {
-  private String weaponSkillSet;
+  private String weaponSkillSetName;
 
-  public WeaponSkillSet(String weaponSkillSet) {
-    this.weaponSkillSet = weaponSkillSet;
+  private String skillSetId;
+
+  public WeaponSkillSet(String skillSetId, String weaponSkillSetName) {
+    this.skillSetId = skillSetId;
+    this.weaponSkillSetName = weaponSkillSetName;
   }
 
-  @Setter
+  // スペシャルスキル
   private WeaponSkillInterface specialSkill;
 
+  // ノーマルスキル
   private List<WeaponSkillInterface> normalSkillList;
 
   /**
-   * 通常スキルを追加する
+   * 武器スキルを追加する
    *
    * @param weaponSkill
    */
-  public void addNormalSkill(WeaponSkillInterface weaponSkill) {
-    normalSkillList.add(weaponSkill);
+  public void addSkill(WeaponSkillInterface weaponSkill) {
+    switch (weaponSkill.geWeaponSkillType()) {
+      case NORMAL_SKILL:
+        normalSkillList.add(weaponSkill);
+        break;
+      case SPECIAL_SKILL:
+        specialSkill = weaponSkill;
+        break;
+      default:
+        TheLowValidates.throwIllegalState("不正なスキルタイプです：" + weaponSkill.geWeaponSkillType());
+        break;
+    }
   }
 }

@@ -50,7 +50,6 @@ import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.system.strength.StrengthOperator;
 import net.l_bulb.dungeoncore.mobspawn.SpawnPointMonitor;
 
 public class OtherCommonListener implements Listener {
@@ -259,7 +258,7 @@ public class OtherCommonListener implements Listener {
           }
         } else {
           // 通常通りの計算を行う
-          e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(StrengthOperator.getLevel(itemstack)) - attackItem.getMaterialDamage());
+          e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(itemstack) - attackItem.getMaterialDamage());
         }
 
         projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity) ((Projectile) damager).getShooter(), (LivingEntity) target);

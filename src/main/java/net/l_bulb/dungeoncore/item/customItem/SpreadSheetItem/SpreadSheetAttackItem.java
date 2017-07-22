@@ -67,19 +67,24 @@ public abstract class SpreadSheetAttackItem extends AbstractAttackItem implement
   }
 
   @Override
-  public double getAttackItemDamage(int strengthLevel) {
-    // TODO NBT TAGから取得
-    // 攻撃力取得
-    double combatLoad = getCombatLoad();
-    double attackDamageValue = AttackDamageValue.getAttackDamageValue(combatLoad, getAvailableLevel());
+  public double getAttackItemDamage(ItemStack item) {
+    // itemがnullのときはテンプレートの攻撃力を返す
+    if (item == null) {
+      // 攻撃力取得
+      double combatLoad = getCombatLoad();
+      double attackDamageValue = AttackDamageValue.getAttackDamageValue(combatLoad, getAvailableLevel());
+      return attackDamageValue * data.getDamageParcent();
+    } else {
+      ItemStackNbttagAccessor accessor = new ItemStackNbttagAccessor(item);
 
-    // 倍率をかける
-    double attackDamageValue2 = attackDamageValue * data.getDamageParcent();
-    // クリティカルなら
-    if (JavaUtil.isRandomTrue((int) getCriticalHitRate(strengthLevel))) {
-      attackDamageValue2 += attackDamageValue * 0.15;
+      double attackDamageValue = accessor.getDamage();
+      // クリティカルなら1.15倍する
+      if (JavaUtil.isRandomTrue((int) getCriticalHitRate(StrengthOperator.getLevel(item)))) {
+        attackDamageValue += attackDamageValue * 0.15;
+      }
+      return attackDamageValue;
     }
-    return attackDamageValue2;
+
   }
 
   /**

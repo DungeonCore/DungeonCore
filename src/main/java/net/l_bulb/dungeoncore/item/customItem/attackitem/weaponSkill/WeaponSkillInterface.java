@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
@@ -34,7 +35,7 @@ public interface WeaponSkillInterface {
 
   /**
    * スキルタイプを取得
-   * 
+   *
    * @return
    */
   WeaponSkillType geWeaponSkillType();
@@ -60,7 +61,7 @@ public interface WeaponSkillInterface {
   void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event);
 
   /**
-   * スキルのクールタイムを取得
+   * スキルのクールタイムを取得(秒)
    *
    * @return
    */
@@ -79,4 +80,19 @@ public interface WeaponSkillInterface {
    * @return
    */
   ItemStackData getViewItemStackData();
+
+  /**
+   * このスキルが選択されているアイテムに持ち替えたときの処理
+   */
+  default void onHeldThisItem(Player player, ItemStack item) {}
+
+  /**
+   * このスキルが選択されているアイテムから別のアイテムに持ち替えたときの処理
+   */
+  default void offHeldThisItem(Player player, ItemStack item) {}
+
+  /**
+   * このスキルが選択されているアイテムから別のアイテムに持ち替えたときの処理
+   */
+  default void onDamage(Player player, ItemStack item, EntityDamageByEntityEvent e) {}
 }

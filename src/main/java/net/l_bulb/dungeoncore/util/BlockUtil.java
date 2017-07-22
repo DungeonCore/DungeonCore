@@ -54,7 +54,7 @@ public class BlockUtil {
         loadChunk(loc);
         loc.getBlock().setType(Material.AIR);
       }
-    }.runTaskLater(Main.plugin, 2);
+    }.runTaskLater(Main.plugin, 4);
   }
 
   public static void loadChunk(Location loc) {

@@ -1,15 +1,22 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;
 
@@ -38,7 +45,23 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
 
   @Override
   public void open(Player p) {
-    // TODO
+    Inventory skillSelector = Bukkit.createInventory(null, InventoryType.CHEST, getTitle());
+
+    // スペシャルスキル
+    WeaponSkillInterface specialSkill = weaponSkillSet.getSpecialSkill();
+    if (specialSkill != null) {
+      skillSelector.setItem(0, getViewItemStack(specialSkill));
+    }
+
+    // 通常スキル
+    List<WeaponSkillInterface> normalSkillList = Optional.ofNullable(weaponSkillSet.getNormalSkillList()).orElse(Collections.emptyList());
+    int i = 0;
+    for (WeaponSkillInterface weaponSkillInterface : normalSkillList) {
+      skillSelector.setItem(9 + i, getViewItemStack(weaponSkillInterface));
+      i++;
+    }
+
+    p.openInventory(skillSelector);
   }
 
   // ItemStackと武器スキルを結びつけたMap
@@ -73,11 +96,12 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
     // 武器スキルをクリックしたViewから取得
     WeaponSkillInterface weaponSkill = viewItemMap.get(item);
 
+    // NBTtagをセットする
+    ItemStackNbttagAccessor accessor = new ItemStackNbttagAccessor(itemInHand);
+
     // 手持ちのアイテムのNBTTagに武器スキルのIDをセットする
-    if (weaponSkill.geWeaponSkillType() == WeaponSkillType.NORMAL_SKILL) {
-      ItemStackUtil.setNBTTag(itemInHand, "normal_weaponskill", weaponSkill.getId());
-    } else {
-      ItemStackUtil.setNBTTag(itemInHand, "special_weaponskill", weaponSkill.getId());
+    if (weaponSkill.geWeaponSkillType() == WeaponSkillType.NORMAL_SKILL || weaponSkill.geWeaponSkillType() == WeaponSkillType.SPECIAL_SKILL) {
+      accessor.setSelectedWeaponSkillId(weaponSkill.geWeaponSkillType(), weaponSkill.getId());
     }
 
     // スキル解除の時は通知しない
