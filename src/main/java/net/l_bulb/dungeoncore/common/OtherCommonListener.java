@@ -249,8 +249,13 @@ public class OtherCommonListener implements Listener {
 
         if (owner != null && owner.getType() == EntityType.PLAYER) {
           // イベントを呼ぶ
-          CombatEntityEvent callEvent = new CombatEntityEvent((Player) owner, e.getDamage(DamageModifier.BASE), attackItem, itemstack, true,
-              (LivingEntity) target).callEvent();
+          CombatEntityEvent callEvent = new CombatEntityEvent(
+              (Player) owner,
+              projectileInterface.fixedDamage(e.getDamage(DamageModifier.BASE), target),
+              attackItem, itemstack,
+              projectileInterface.isNormalAttack(),
+              (LivingEntity) target)
+                  .callEvent();
           if (!callEvent.isCancel()) {
             e.setDamage(DamageModifier.BASE, callEvent.getDamage());
           } else {
@@ -258,7 +263,8 @@ public class OtherCommonListener implements Listener {
           }
         } else {
           // 通常通りの計算を行う
-          e.setDamage(e.getDamage() + attackItem.getAttackItemDamage(itemstack) - attackItem.getMaterialDamage());
+          double damage = e.getDamage() + attackItem.getAttackItemDamage(itemstack) - attackItem.getMaterialDamage();
+          e.setDamage(projectileInterface.fixedDamage(damage, target));
         }
 
         projectileInterface.onProjectileDamage(e, itemstack, (LivingEntity) ((Projectile) damager).getShooter(), (LivingEntity) target);

@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillWithProjectile;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithProjectile;
 
 public class IceArrow extends WeaponSkillWithProjectile {
 
@@ -50,4 +50,5 @@ public class IceArrow extends WeaponSkillWithProjectile {
     }.runTaskTimer(Main.plugin, 0, 2);
     return launchProjectile;
   }
+
 }

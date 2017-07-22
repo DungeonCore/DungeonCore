@@ -7,9 +7,14 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import net.minecraft.server.v1_8_R1.BlockPosition;
+import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.EnumParticle;
+import net.minecraft.server.v1_8_R1.PacketPlayOutWorldParticles;
 
 /**
  * パーティクル種類を保持するクラス
@@ -143,6 +148,26 @@ public class ParticleData {
 
   final protected void run(World w, List<Vector> v) {
     run(w, v.toArray(new Vector[0]));
+  }
+
+  /**
+   * 単独のPlayerだけに実行する
+   *
+   * @param p
+   * @param loc
+   */
+  public void runParticle(Player p, Location loc) {
+    PacketPlayOutWorldParticles packetplayoutworldparticles = new PacketPlayOutWorldParticles(particleEnum, isFar,
+        (float) loc.getX(), (float) loc.getY(), (float) loc.getZ(),
+        (float) dx, (float) dy, (float) dz, (float) lastArgument, amount);
+
+    EntityPlayer entityplayer = ((CraftPlayer) p).getHandle();
+    BlockPosition blockposition = entityplayer.getChunkCoordinates();
+    double d7 = blockposition.c((float) loc.getX(), (float) loc.getY(), (float) loc.getZ());
+
+    if ((d7 <= 256.0D) || ((isFar) && (d7 <= 65536.0D))) {
+      entityplayer.playerConnection.sendPacket(packetplayoutworldparticles);
+    }
   }
 
   /**

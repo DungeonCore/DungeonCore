@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.common.projectile;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -44,4 +45,24 @@ public interface ProjectileInterface {
    * @return
    */
   public String getId();
+
+  /**
+   * Projectileによって与えるダメージを変更する
+   *
+   * @param damage
+   * @param target ダメージを受けたEntity
+   * @return
+   */
+  default public double fixedDamage(double damage, Entity target) {
+    return damage;
+  }
+
+  /**
+   * 通常攻撃ならTRUE
+   *
+   * @return
+   */
+  default public boolean isNormalAttack() {
+    return true;
+  }
 }

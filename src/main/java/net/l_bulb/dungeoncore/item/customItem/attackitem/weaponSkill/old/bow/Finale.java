@@ -154,4 +154,5 @@ public class Finale extends WeaponSkillWithMultiClick implements ProjectileInter
       return "weapon_skill_finale_shot_cooltime";
     }
   }
+
 }
