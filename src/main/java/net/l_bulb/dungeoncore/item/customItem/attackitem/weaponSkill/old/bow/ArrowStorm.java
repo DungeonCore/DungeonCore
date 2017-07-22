@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.bow;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.bow;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillForOneType;
 import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 

@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.magic;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.magic;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillForOneType;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;

@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.bow;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.bow;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillForOneType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class ReleaseAura extends WeaponSkillForOneType {

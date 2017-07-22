@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.sword;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.sword;
 
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;

@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.bow;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.bow;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ import net.l_bulb.dungeoncore.common.projectile.ProjectileInterface;
 import net.l_bulb.dungeoncore.common.projectile.ProjectileManager;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillWithMultiClick;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillWithMultiClick;
 
 public class Finale extends WeaponSkillWithMultiClick implements ProjectileInterface {
 

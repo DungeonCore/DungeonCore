@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.all.WeaponSkillCancel;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 import net.l_bulb.dungeoncore.util.Message;

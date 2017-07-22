@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.bow;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.bow;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillWithProjectile;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillWithProjectile;
 
 public class IceArrow extends WeaponSkillWithProjectile {
 

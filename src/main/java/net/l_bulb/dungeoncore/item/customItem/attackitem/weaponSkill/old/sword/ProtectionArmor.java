@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.sword;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.sword;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillForOneType;
 
 public class ProtectionArmor extends WeaponSkillForOneType {
 

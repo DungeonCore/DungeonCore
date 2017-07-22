@@ -17,7 +17,7 @@ import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.all.WeaponSkillCancel;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.all.WeaponSkillCancel;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 import net.l_bulb.dungeoncore.player.customplayer.MagicPointManager;

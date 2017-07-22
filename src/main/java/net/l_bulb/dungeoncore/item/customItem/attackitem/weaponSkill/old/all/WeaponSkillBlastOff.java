@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.all;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.all;
 
 import java.util.ArrayList;
 

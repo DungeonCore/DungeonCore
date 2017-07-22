@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.all;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.all;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

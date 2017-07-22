@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.magic;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.magic;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -14,7 +14,7 @@ import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillForOneType;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillForOneType;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
 public class Explosion extends WeaponSkillForOneType {

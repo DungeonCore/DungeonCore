@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.sword;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.sword;
 
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.impleold.WeaponSkillWithMultiCombat;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.WeaponSkillWithMultiCombat;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 

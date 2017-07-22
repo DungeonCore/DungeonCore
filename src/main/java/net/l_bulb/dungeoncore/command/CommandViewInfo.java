@@ -16,6 +16,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -29,8 +30,10 @@ import net.l_bulb.dungeoncore.common.buff.BuffDataFactory;
 import net.l_bulb.dungeoncore.common.cooltime.CooltimeManager;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorInterface;
 import net.l_bulb.dungeoncore.common.menu.MenuSelectorManager;
+import net.l_bulb.dungeoncore.common.other.BattleTrap;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleManager;
+import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.item.ItemManager;
 import net.l_bulb.dungeoncore.item.customItem.armoritem.ArmorBase;
 import net.l_bulb.dungeoncore.item.itemInterface.ArmorItemable;
@@ -139,6 +142,13 @@ public class CommandViewInfo implements CommandExecutor {
         break;
       case "chunk":
         sendChunkData(target);
+        break;
+      case "trap":
+        BattleTrap battleTrap = new BattleTrap(ParticleType.portal, 5, e -> e.getType() == EntityType.ZOMBIE);
+        battleTrap.setTrap(target.getLocation());
+        Player p = target;
+        battleTrap.setFiring(e -> p.sendMessage("着火しました"));
+        battleTrap.setOnRemove(e -> p.sendMessage("消滅しました"));
         break;
       default:
         paramCommandSender.sendMessage("unknown param");
