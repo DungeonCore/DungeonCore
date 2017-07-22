@@ -34,9 +34,9 @@ public class BattleTrap {
   // Trapの中心の置くアーマースタンド
   private ArmorStand spawnEntity;
 
-  // Trapが自然消滅する時間
+  // Trapが自然消滅する時間(秒)
   @Setter
-  private int deadline = 30;
+  private double deadlineSecond = 30;
 
   // トラップの半径
   private int radius;
@@ -112,7 +112,7 @@ public class BattleTrap {
       }
 
       // 自然消滅の時間になったらアーマースタンドを消す
-      if (getAgeTick() >= deadline * 20) {
+      if (getAgeTick() >= deadlineSecond * 20) {
         cancel();
         return;
       }
