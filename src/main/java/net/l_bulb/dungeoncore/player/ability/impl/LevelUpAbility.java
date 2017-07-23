@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.player.ability.impl;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.api.player.AbilityInterface;
@@ -8,10 +9,10 @@ import net.l_bulb.dungeoncore.player.ability.AbilityType;
 
 public class LevelUpAbility implements AbilityInterface {
 
-  private int nextMainLevel;
+  // private int nextMainLevel;
 
   public LevelUpAbility(int nextMainLevel) {
-    this.nextMainLevel = nextMainLevel;
+    // this.nextMainLevel = nextMainLevel;
   }
 
   @Override
@@ -22,8 +23,8 @@ public class LevelUpAbility implements AbilityInterface {
   HashMap<PlayerStatusType, Double> abilityMap = new HashMap<>();
 
   @Override
-  public HashMap<PlayerStatusType, Double> getAbilityMap() {
-    abilityMap.put(PlayerStatusType.MAX_HP, nextMainLevel / 3.0);
+  public Map<PlayerStatusType, Double> getAbilityMap() {
+    // abilityMap.put(PlayerStatusType.MAX_HP, nextMainLevel / 3.0);
     return abilityMap;
   }
 

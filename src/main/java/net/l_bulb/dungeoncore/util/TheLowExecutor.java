@@ -18,7 +18,7 @@ public class TheLowExecutor {
    * @param delayTick
    * @param runnable
    */
-  public static void executeLater(long delayTick, Runnable runnable) {
+  public static void executeLater(double delayTick, Runnable runnable) {
     if (delayTick == 0) {
       runnable.run();
     } else {
@@ -27,7 +27,7 @@ public class TheLowExecutor {
         public void run() {
           runnable.run();
         }
-      }.runTaskLater(Main.plugin, delayTick);
+      }.runTaskLater(Main.plugin, (long) delayTick);
     }
   }
 

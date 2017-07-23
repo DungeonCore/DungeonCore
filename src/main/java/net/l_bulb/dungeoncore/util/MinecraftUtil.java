@@ -35,8 +35,8 @@ public class MinecraftUtil {
    * @param volume
    * @param pitch
    */
-  public static void playSoundForAll(Location location, Sound sound, float volume, float pitch) {
-    location.getWorld().playSound(location, sound, volume, pitch);
+  public static void playSoundForAll(Location location, Sound sound, double volume, double pitch) {
+    location.getWorld().playSound(location, sound, (float) volume, (float) pitch);
   }
 
   public static void chunkLoadIfUnload(Chunk c) {

@@ -3,6 +3,7 @@ package net.l_bulb.dungeoncore.player.customplayer;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -99,7 +100,7 @@ public class PlayerStatusData implements Serializable {
    * @param ability
    */
   private void unsafeApplayAbility(AbilityInterface ability) {
-    HashMap<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
+    Map<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
     // 適応効果がない場合は何もしない
     if (dataMap == null) { return; }
 
@@ -107,12 +108,18 @@ public class PlayerStatusData implements Serializable {
     for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
       // もしすでにデータがある場合はそれに追加する
       if (dataMapDouble.containsKey(entry.getKey())) {
-        // 割合で表している時はかけていく
-        if (entry.getKey().isPercentage()) {
-          dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) * entry.getValue());
-        } else {
-          // 直接の値の時は加算する
-          dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
+        switch (entry.getKey().getApplyMethod()) {
+          case ADDITION:
+            // 直接の値の時は加算する
+            dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
+          case MULTIPLICATION:
+            // 割合で表している時はかけていく
+            dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) * entry.getValue());
+          case OVERWRITE:
+            dataMapDouble.put(entry.getKey(), entry.getValue());
+            break;
+          default:
+            break;
         }
       } else {
         dataMapDouble.put(entry.getKey(), entry.getValue());
@@ -127,17 +134,24 @@ public class PlayerStatusData implements Serializable {
    * @param ability
    */
   private void unsafeDeapplayAbility(AbilityInterface ability) {
-    HashMap<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
+    Map<PlayerStatusType, Double> dataMap = ability.getAbilityMap();
     // 適応効果がない場合は何もしない
     if (dataMap == null) { return; }
 
     // 1つずつ効果を削除していく
     for (Entry<PlayerStatusType, Double> entry : dataMap.entrySet()) {
-      // 割合で表している時は割る
-      if (entry.getKey().isPercentage()) {
-        dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) / entry.getValue());
-      } else {
-        dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) - entry.getValue());
+      switch (entry.getKey().getApplyMethod()) {
+        case ADDITION:
+          dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) - entry.getValue());
+          break;
+        case MULTIPLICATION:
+          dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) / entry.getValue());
+          break;
+        case OVERWRITE:
+          // TODO 前の効果のものがあればそれを適応させる
+          break;
+        default:
+          break;
       }
     }
   }
@@ -161,8 +175,14 @@ public class PlayerStatusData implements Serializable {
   protected void applyAllAbility() {
     Player onlinePlayer = player.getOnlinePlayer();
     if (onlinePlayer == null || !onlinePlayer.isOnline()) { return; }
+    // 最大HPを加算する
     if (dataMapDouble.containsKey(PlayerStatusType.MAX_HP)) {
       onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP));
+    }
+
+    // 最大HPを固定する
+    if (dataMapDouble.containsKey(PlayerStatusType.SET_MAX_HP) && getData(PlayerStatusType.SET_MAX_HP) > 0) {
+      onlinePlayer.setMaxHealth(getData(PlayerStatusType.SET_MAX_HP));
     }
 
     // マジックポイントの回復を開始する

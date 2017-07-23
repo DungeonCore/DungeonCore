@@ -14,12 +14,14 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.particle.ParticleData;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
 import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithProjectile;
+import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
 import net.l_bulb.dungeoncore.util.MinecraftUtil;
 import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
@@ -45,6 +47,13 @@ public class LockOn extends WeaponSkillWithProjectile {
 
     // ターゲットから削除する
     TheLowExecutor.executeLater((long) (getData(1) * 20.0), () -> targetMap.remove(target));
+  }
+
+  @Override
+  public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {
+    if (targetMap.putIfAbsent(livingEntity, p) != null) {
+      event.setDamage(event.getDamage() * getData(2));
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 package net.l_bulb.dungeoncore.api.player;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
 import net.l_bulb.dungeoncore.player.ability.AbilityType;
@@ -12,7 +12,7 @@ import net.l_bulb.dungeoncore.player.ability.AbilityType;
 public interface AbilityInterface {
   String getId();
 
-  HashMap<PlayerStatusType, Double> getAbilityMap();
+  Map<PlayerStatusType, Double> getAbilityMap();
 
   AbilityType getAbilityType();
 }

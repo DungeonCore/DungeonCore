@@ -1,17 +1,17 @@
 package net.l_bulb.dungeoncore.api;
 
 public enum PlayerStatusType {
-  ADD_SWORD_ATTACK, ADD_BOW_ATTACK, ADD_MAGIC_ATTACK, MULTIPLY_SWORD_ATTACK(true), MULTIPLY_BOW_ATTACK(true), MULTIPLY_MAGIC_ATTACK(
-      true), MAX_MAGIC_POINT, MAX_HP;
+  ADD_SWORD_ATTACK, ADD_BOW_ATTACK, ADD_MAGIC_ATTACK, MULTIPLY_SWORD_ATTACK(ApplyMethod.MULTIPLICATION), MULTIPLY_BOW_ATTACK(
+      ApplyMethod.MULTIPLICATION), MULTIPLY_MAGIC_ATTACK(ApplyMethod.MULTIPLICATION), MAX_MAGIC_POINT, MAX_HP, SET_MAX_HP(ApplyMethod.OVERWRITE);
 
-  private final boolean usingPercentage;
+  private final ApplyMethod method;
 
-  private PlayerStatusType(boolean isPercent) {
-    this.usingPercentage = isPercent;
+  private PlayerStatusType(ApplyMethod method) {
+    this.method = method;
   }
 
   private PlayerStatusType() {
-    this(false);
+    this(ApplyMethod.ADDITION);
   }
 
   /**
@@ -19,7 +19,11 @@ public enum PlayerStatusType {
    *
    * @return
    */
-  public boolean isPercentage() {
-    return usingPercentage;
+  public ApplyMethod getApplyMethod() {
+    return method;
+  }
+
+  public enum ApplyMethod {
+    ADDITION, MULTIPLICATION, OVERWRITE;
   }
 }

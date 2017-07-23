@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.bukkit.inventory.ItemStack;
 
@@ -128,6 +129,21 @@ public class ItemStackNbttagAccessor {
 
   public void setAddMaxHealth(double value) {
     ItemStackUtil.setNBTTag(item, "thelow_item_add_max_health", value);
+  }
+
+  public String getSerialData() {
+    String nbtTag = ItemStackUtil.getNBTTag(item, "thelow_item_serial_data");
+    // すでにシリアルデータが付与されているならこのまま返す
+    if (nbtTag != null) { return nbtTag; }
+
+    // もしシリアルデータが存在しない場合はセットする
+    String serialData = RandomStringUtils.randomAlphanumeric(6);
+    setSerialData(serialData);
+    return serialData;
+  }
+
+  public void setSerialData(String value) {
+    ItemStackUtil.setNBTTag(item, "thelow_item_serial_data", value);
   }
 
   /**

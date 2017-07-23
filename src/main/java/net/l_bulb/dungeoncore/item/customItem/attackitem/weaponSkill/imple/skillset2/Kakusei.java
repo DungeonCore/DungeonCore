@@ -13,11 +13,6 @@ public class Kakusei extends SpreadSheetWeaponSkill {
 
   private static final String NAME = new Kaiho().getName();
 
-  final PotionEffect REGENERATION = new PotionEffect(PotionEffectType.REGENERATION, (int) (getData(2) * 20), getDataAsInt(5) - 1);
-  final PotionEffect ABSORPTION = new PotionEffect(PotionEffectType.ABSORPTION, (int) (getData(2) * 20), getDataAsInt(3) - 1);
-  final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, (int) (getData(2) * 20), getDataAsInt(4) - 1);
-  final PotionEffect STRENGTH = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, (int) (getData(2) * 20), getDataAsInt(1) - 1);
-
   @Override
   public String getId() {
     return "wskill8";
@@ -25,6 +20,11 @@ public class Kakusei extends SpreadSheetWeaponSkill {
 
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    final PotionEffect REGENERATION = new PotionEffect(PotionEffectType.REGENERATION, (int) (getData(2) * 20), getDataAsInt(5) - 1);
+    final PotionEffect ABSORPTION = new PotionEffect(PotionEffectType.ABSORPTION, (int) (getData(2) * 20), getDataAsInt(3) - 1);
+    final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, (int) (getData(2) * 20), getDataAsInt(4) - 1);
+    final PotionEffect STRENGTH = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, (int) (getData(2) * 20), getDataAsInt(1) - 1);
+
     Long executeSkillMillisTile = Kaiho.getExecuteSkillMillisTile(p);
 
     // 予兆を実行してから指定時間経っているかしらべる

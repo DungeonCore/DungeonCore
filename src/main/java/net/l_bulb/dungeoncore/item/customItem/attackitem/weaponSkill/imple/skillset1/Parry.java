@@ -26,11 +26,11 @@ public class Parry extends SpreadSheetWeaponSkill {
     return "wskill3";
   }
 
-  final PotionEffect SLOW_POTION = new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(0)), 100);
-  final PotionEffect REGENERATION_POTION = new PotionEffect(PotionEffectType.REGENERATION, (int) (20 * getData(0)), 100);
-
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    final PotionEffect SLOW_POTION = new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(0)), 100);
+    final PotionEffect REGENERATION_POTION = new PotionEffect(PotionEffectType.REGENERATION, (int) (20 * getData(0)), 100);
+
     // ポーションエフェクトをつける
     p.addPotionEffect(SLOW_POTION, true);
     p.addPotionEffect(REGENERATION_POTION, true);
@@ -44,6 +44,9 @@ public class Parry extends SpreadSheetWeaponSkill {
 
   @Override
   public void onDamage(Player player, ItemStack item, EntityDamageByEntityEvent e) {
+    final PotionEffect SLOW_POTION = new PotionEffect(PotionEffectType.SLOW, (int) (20 * getData(0)), 100);
+    final PotionEffect REGENERATION_POTION = new PotionEffect(PotionEffectType.REGENERATION, (int) (20 * getData(0)), 100);
+
     // 攻撃者が生き物でないなら何もしない
     if (!e.getEntity().getType().isAlive()) { return; }
 

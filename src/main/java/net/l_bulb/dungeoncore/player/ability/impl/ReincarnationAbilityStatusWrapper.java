@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.player.ability.impl;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 import net.l_bulb.dungeoncore.api.LevelType;
 import net.l_bulb.dungeoncore.api.PlayerStatusType;
@@ -34,7 +35,7 @@ public class ReincarnationAbilityStatusWrapper extends AbstractReincarnationAbil
   }
 
   @Override
-  public HashMap<PlayerStatusType, Double> getAbilityMap() {
+  public Map<PlayerStatusType, Double> getAbilityMap() {
     return ability;
   }
 }

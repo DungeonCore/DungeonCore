@@ -1,6 +1,7 @@
 package net.l_bulb.dungeoncore.player.ability.impl;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
@@ -29,7 +30,7 @@ public class SetItemAbility extends AbstractItemEquipAbility {
   HashMap<PlayerStatusType, Double> statusMap = new HashMap<>();
 
   @Override
-  public HashMap<PlayerStatusType, Double> getAbilityMap() {
+  public Map<PlayerStatusType, Double> getAbilityMap() {
     return statusMap;
   }
 

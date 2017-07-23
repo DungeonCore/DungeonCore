@@ -20,10 +20,10 @@ public class HiNoMai extends WeaponSkillWithThrowItem {
     return "wskill11";
   }
 
-  final PotionEffect SLOW = new PotionEffect(PotionEffectType.SLOW, (int) (getData(3) * 20), (int) (getData(2) - 1));
-
   @Override
   public void onGround(Player p, ItemStack item, Entity spawnEntity) {
+    final PotionEffect SLOW = new PotionEffect(PotionEffectType.SLOW, (int) (getData(3) * 20), (int) (getData(2) - 1));
+
     ArrayList<LivingEntity> nearEnemy = LivingEntityUtil.getNearEnemy(spawnEntity, getData(0), getData(0), getData(0));
     for (LivingEntity e : nearEnemy) {
       // 燃えている周囲のデバフ効果を与える
