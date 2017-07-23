@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.command;
 
+import net.l_bulb.dungeoncore.twitter.Twitter4JGateway;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -21,12 +22,12 @@ public class BroadCastCommand implements CommandExecutor {
       return true;
     }
 
-    // posting tweet
-    AsyncTwitterFactory factory = new AsyncTwitterFactory();
-    AsyncTwitter twitter = factory.getInstance();
-    twitter.updateStatus(args.toString());
-
-    Bukkit.broadcastMessage(args.toString());
+    try {
+      Twitter4JGateway.postTweet(args.toString());
+    } catch (TwitterException ex) {
+      sender.sendMessage(ChatColor.RED + "POSTING FAILED");
+      ex.printStackTrace();
+    }
     return true;
   }
 }
