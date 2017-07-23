@@ -149,7 +149,7 @@ public class Main extends JavaPlugin {
   }
 
   public void registerListener() {
-    val manager = getServer().getPluginManager();
+    val manager = (val) getServer().getPluginManager();
     manager.registerEvents(new LimitedListener(), this);
     manager.registerEvents(new SystemListener(), this);
     manager.registerEvents(new MobListener(), this);
