@@ -11,7 +11,7 @@ public class BroadCastCommand implements CommandExecutor {
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (args.length == 0) {
-      sender.sendMessage(ChatColor.AQUA + "BroadCast: " + ChatColor.GOLD + "ゲーム内のチャットとLBNのTwitterAccountでツイートをするコマンドです。");
+      sender.sendMessage(ChatColor.AQUA + "BroadCast: " + ChatColor.GOLD + "ゲーム内のチャットとTHELoWのTwitterAccountでツイートをするコマンドです。");
       sender.sendMessage(ChatColor.GOLD + "利用例: /BroadCast こんにちは");
       return true;
     }
