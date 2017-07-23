@@ -1,114 +1,114 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>DungeonCore</groupId>
-	<artifactId>DungeonCore</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>DungeonCore</groupId>
+    <artifactId>DungeonCore</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<bukkit.version>1.8.8-R0.1-SNAPSHOT</bukkit.version>
-		<java.version>1.8</java.version>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
+    <properties>
+        <bukkit.version>1.8.8-R0.1-SNAPSHOT</bukkit.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.source>${java.version}</maven.compiler.source>
-	</properties>
+    </properties>
 
-	<repositories>
-		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<id>vault-repo</id>
-			<url>http://nexus.hc.to/content/repositories/pub_releases</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>vault-repo</id>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
+        </repository>
+    </repositories>
 
-	<dependencies>
-		<!-- Spigot API -->
-		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>${bukkit.version}</version>
-		</dependency>
-		<!-- Bukkit API -->
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>${bukkit.version}</version>
-		</dependency>
-		<!-- ActionBar -->
-		<dependency>
-			<groupId>ActionBarAPI-1.5.2.jar</groupId>
-			<artifactId>ActionBarAPI-1.5.2.jar</artifactId>
-			<version>1.5.2</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/ActionBarAPI-1.5.2.jar</systemPath>
-		</dependency>
-		<!-- Citizens -->
-		<dependency>
-			<groupId>Citizens.jar</groupId>
-			<artifactId>Citizens.jar</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/Citizens.jar</systemPath>
-		</dependency>
-		<!-- HolographicDisplays -->
-		<dependency>
-			<groupId>HolographicDisplays.jar</groupId>
-			<artifactId>HolographicDisplays.jar</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/HolographicDisplays.jar</systemPath>
-		</dependency>
-		<!-- Sentry -->
-		<dependency>
-			<groupId>Sentry.jar</groupId>
-			<artifactId>Sentry.jar</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/Sentry.jar</systemPath>
-		</dependency>
-		<!-- sheet -->
-		<dependency>
-			<groupId>sheet.jar</groupId>
-			<artifactId>sheet.jar</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/sheet.jar</systemPath>
-		</dependency>
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.16.16</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Vault -->
-		<dependency>
-			<groupId>net.milkbowl.vault</groupId>
-			<artifactId>VaultAPI</artifactId>
-			<version>1.6</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- junit4.0 -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.4</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- assertJ -->
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>2.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- mockito -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <!-- Spigot API -->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>${bukkit.version}</version>
+        </dependency>
+        <!-- Bukkit API -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>${bukkit.version}</version>
+        </dependency>
+        <!-- ActionBar -->
+        <dependency>
+            <groupId>ActionBarAPI-1.5.2.jar</groupId>
+            <artifactId>ActionBarAPI-1.5.2.jar</artifactId>
+            <version>1.5.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/ActionBarAPI-1.5.2.jar</systemPath>
+        </dependency>
+        <!-- Citizens -->
+        <dependency>
+            <groupId>Citizens.jar</groupId>
+            <artifactId>Citizens.jar</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Citizens.jar</systemPath>
+        </dependency>
+        <!-- HolographicDisplays -->
+        <dependency>
+            <groupId>HolographicDisplays.jar</groupId>
+            <artifactId>HolographicDisplays.jar</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/HolographicDisplays.jar</systemPath>
+        </dependency>
+        <!-- Sentry -->
+        <dependency>
+            <groupId>Sentry.jar</groupId>
+            <artifactId>Sentry.jar</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Sentry.jar</systemPath>
+        </dependency>
+        <!-- sheet -->
+        <dependency>
+            <groupId>sheet.jar</groupId>
+            <artifactId>sheet.jar</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/sheet.jar</systemPath>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Vault -->
+        <dependency>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- junit4.0 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- assertJ -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+    </dependencies>
 </project>
