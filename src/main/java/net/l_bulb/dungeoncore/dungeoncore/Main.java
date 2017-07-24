@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.l_bulb.dungeoncore.InitManager;
@@ -45,7 +46,6 @@ import net.l_bulb.dungeoncore.util.LbnRunnable;
 import net.l_bulb.dungeoncore.util.NMSUtils;
 import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
-import lombok.val;
 import net.minecraft.server.v1_8_R1.EntityBat;
 import net.minecraft.server.v1_8_R1.EntityChicken;
 import net.minecraft.server.v1_8_R1.EntityCow;
@@ -149,7 +149,7 @@ public class Main extends JavaPlugin {
   }
 
   public void registerListener() {
-    val manager = getServer().getPluginManager();
+    final PluginManager manager = getServer().getPluginManager();
     manager.registerEvents(new LimitedListener(), this);
     manager.registerEvents(new SystemListener(), this);
     manager.registerEvents(new MobListener(), this);

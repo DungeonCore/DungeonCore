@@ -11,3 +11,5 @@ spigot-1.8.jar
 .idea/workspace.xml
 THE-LoW.iml
 /target/
+.idea/
+*.iml
