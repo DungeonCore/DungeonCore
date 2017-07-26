@@ -3,15 +3,17 @@ package net.l_bulb.dungeoncore;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -64,8 +66,6 @@ public class SystemListener implements Listener {
 
   @EventHandler
   public void joinDungeon(PlayerJoinDungeonGameEvent e) {
-    e.getPlayer().sendMessage(getLoginMessage(e.getPlayer()));
-
     Player player = e.getPlayer();
     PlayerIODataManager.load(player);
   }
@@ -89,36 +89,6 @@ public class SystemListener implements Listener {
       loginPlayer += players.size();
     }
     loginPlayer++;
-  }
-
-  private static String[] getLoginMessage(Player player) {
-    if (player.hasPermission("main.lbnDungeonUtil.command.mod.login_msg")) {
-      String[] msg = new String[] {
-          ChatColor.RED + "====LOGIN====",
-          ChatColor.AQUA + "以下のコマンドを使うことが出来ます。",
-          "/sequence_setblock second blockid:blockdata x y z & x y z & x y z &... ",
-          ChatColor.GREEN
-              + "---- 連続でブロックを設置する(/help sequence_setblock で詳細表示)",
-          "/sequencecommand second command1 & command2 & command3 &...",
-          ChatColor.GREEN
-              + "---- 連続でコマンドを実行する(/help sequencecommand で詳細表示)",
-          "/delaycommand second command",
-          ChatColor.GREEN
-              + "---- 一定時間後にコマンドを実行(/help delaycommand で詳細表示)",
-          "/soundPlaye list or /soundPlaye sound_name volume pitch",
-          ChatColor.GREEN + "---- 音を再生する(/help soundPlaye で詳細表示)",
-          "/timer_command id scound type comand1 & command2",
-          ChatColor.GREEN + "---- 感圧板を一定時間踏んだ時実行 or 踏んでいる間ずっと実行 ",
-          ChatColor.GREEN + "------- (/help timer_command で詳細表示)",
-          ChatColor.RED + "====LOGIN====" };
-      return msg;
-    } else {
-      String[] msg = new String[] { ChatColor.RED + "====LOGIN====",
-          ChatColor.AQUA + "以下のコマンドを使うことが出来ます。", "/statusview",
-          ChatColor.RED + "====LOGIN====" };
-      return msg;
-    }
-
   }
 
   @EventHandler
@@ -165,6 +135,14 @@ public class SystemListener implements Listener {
     // + spawnReason}));
     // }
     // }
+  }
+
+  @EventHandler
+  public void onEntityChangeBlockEvent(EntityChangeBlockEvent e) {
+    Entity entity = e.getEntity();
+    if (entity.getType() == EntityType.WITHER || entity.getType() == EntityType.ENDER_DRAGON) {
+      e.setCancelled(true);
+    }
   }
 
   @EventHandler
