@@ -71,7 +71,7 @@ public class SetSpawnPointCommand implements CommandExecutor, TabCompleter {
       sender.sendMessage("そのIDのスポーンポイントは存在しません");
       return true;
     }
-    SpawnPointMonitor.sendMonitor(spawnPointFromId, sender);
+    SpawnPointMonitor.sendMonitor(spawnPointFromId, sender, false);
     return true;
   }
 

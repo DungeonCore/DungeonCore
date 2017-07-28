@@ -81,7 +81,9 @@ public class SpawnPointGroup {
   public int getMaxCount() {
     // 2×2chunk分の湧き数なのでチャンク数に応じて最大湧き数を調整する
     if (maxChunkDistinct > 1.5) {
-      return (int) (maxCount * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0 * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0);
+      // 多すぎるので修正
+      // return (int) (maxCount * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0 * ChunkGroup.ONE_SIDE_CHUNK_NUMBER / 2.0);
+      return (int) (maxCount * 1.4);
     } else {
       return maxCount;
     }
