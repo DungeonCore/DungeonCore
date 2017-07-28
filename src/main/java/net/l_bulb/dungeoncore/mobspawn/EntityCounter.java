@@ -60,6 +60,7 @@ class EntityCounter {
         // Playerならインクリメント
         if (e.getType() == EntityType.PLAYER) {
           incrementPlayer();
+          print("カウントしました。 name:{0} , type:{1}, count:{2}", e.getCustomName(), e.getType(), targetCount);
         }
 
         // 近くのチャンクでないならカウントしない

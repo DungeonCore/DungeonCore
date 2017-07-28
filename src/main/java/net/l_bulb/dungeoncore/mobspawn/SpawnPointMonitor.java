@@ -14,7 +14,14 @@ import net.l_bulb.dungeoncore.mobspawn.chunk.ChunkGroup;
 import net.l_bulb.dungeoncore.util.JavaUtil;
 
 public class SpawnPointMonitor {
-  public static void sendMonitor(Set<SpawnPoint> spawnPointFromLocation, CommandSender sender) {
+  /**
+   * スポーンポイントの監視状況をSenderに表示する
+   *
+   * @param spawnPointFromLocation
+   * @param sender
+   * @param breakSponge スポンジを壊した場合ならTRUE
+   */
+  public static void sendMonitor(Set<SpawnPoint> spawnPointFromLocation, CommandSender sender, boolean breakSponge) {
     sender.sendMessage(ChatColor.RED + "====Spawn Point (" + spawnPointFromLocation.size() + ")====");
     boolean isFirst = true;
     for (SpawnPoint spawnPoint : spawnPointFromLocation) {
@@ -27,8 +34,10 @@ public class SpawnPointMonitor {
       SpawnPointGroup spawnPointGroup = SpawnPointGroupFactory.getInstance().getSpawnPointGroup(spawnPoint);
       SpawnResult result = spawnPoint.getSpawnResult();
 
-      // カウント情報を出力する
-      spawnPointGroup.getCounter().setDebug(true);
+      // スポンジを壊す以外で監視状況を取得したならカウント情報を出力する
+      if (!breakSponge) {
+        spawnPointGroup.getCounter().setDebug(true);
+      }
       // spawn point情報
       sender.sendMessage(ChatColor.YELLOW + "[spawn point] ID:" + spawnPoint.getId() + "  (" + spawnPoint.getTargetType() + ")");
       // チャンク情報
@@ -76,6 +85,6 @@ public class SpawnPointMonitor {
     if (points == null || points.isEmpty()) { return; }
 
     e.setCancelled(true);
-    SpawnPointMonitor.sendMonitor(points, e.getPlayer());
+    SpawnPointMonitor.sendMonitor(points, e.getPlayer(), true);
   }
 }
