@@ -49,7 +49,7 @@ public class RouteSearcher {
     soilList.add(location);
     if (block.getType() == Material.DIAMOND_BLOCK) {
       sb.append((int) location.getX() + " " + (int) location.getY() + " " + (int) location.getZ() + " & ");
-    } else if (block.getType() == Material.EMERALD_BLOCK) {
+    } else if (block.getType() == Material.EMERALD_ORE) {
       sb.append("0 0 0 & ");
     }
 
