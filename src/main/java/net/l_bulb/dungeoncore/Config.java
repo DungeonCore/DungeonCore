@@ -59,6 +59,8 @@ public class Config {
     // clickCancelledItems.add(Material.WATER_BUCKET);
     clickCancelledItems.add(Material.FLINT_AND_STEEL);
     clickCancelledItems.add(Material.ARMOR_STAND);
+    clickCancelledItems.add(Material.BOAT);
+    clickCancelledItems.add(Material.MINECART);
 
     clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
     damageCancelledEntityType.add(EntityType.ITEM_FRAME);

@@ -52,6 +52,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.player.PlayerChecker;
+import net.l_bulb.dungeoncore.util.TheLowExecutor;
 
 public class LimitedListener implements Listener {
   static String targetWorldName = "world";
@@ -196,6 +197,8 @@ public class LimitedListener implements Listener {
 
     if (Config.getClickCancelItems().contains(itemInHand.getType())) {
       e.setCancelled(true);
+      // アイテムが消えることがあるのでインベントリを更新する
+      TheLowExecutor.executeLater(1, () -> e.getPlayer().updateInventory());
     }
   }
 
