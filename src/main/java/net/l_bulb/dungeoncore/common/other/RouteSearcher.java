@@ -41,7 +41,7 @@ public class RouteSearcher {
   StringBuilder sb = new StringBuilder();
 
   private void searchAndSetSoil(Block block, SearchDirection beforeDirection) {
-    if (block.getType() != Material.DIAMOND_BLOCK && block.getType() != Material.DIAMOND_ORE && block.getType() != Material.EMERALD_BLOCK) { return; }
+    if (block.getType() != Material.DIAMOND_BLOCK && block.getType() != Material.DIAMOND_ORE && block.getType() != Material.EMERALD_ORE) { return; }
 
     Location location = block.getLocation();
     if (soilList.contains(location)) { return; }
