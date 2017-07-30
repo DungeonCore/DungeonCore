@@ -2,6 +2,7 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
@@ -40,13 +41,45 @@ public abstract class SpreadSheetWeaponSkill implements WeaponSkillInterface {
     return data.getNeedMp();
   }
 
+  /**
+   * 対象のアイテムをクリックしたときの処理
+   *
+   * @return スキルを実行したならTRUE
+   */
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
     return false;
   }
 
+  /**
+   * このスキルが選択されているアイテムを使って戦闘を行った時の処理
+   */
   @Override
   public void onCombat(Player p, ItemStack item, CombatItemable customItem, LivingEntity livingEntity, CombatEntityEvent event) {}
+
+  /**
+   * このスキルが選択されているアイテムから別のアイテムに持ち替えたときの処理
+   */
+  @Override
+  public void offHeldThisItem(Player player, ItemStack item) {
+    WeaponSkillInterface.super.offHeldThisItem(player, item);
+  }
+
+  /**
+   * このスキルが選択されているアイテムに持ち替えたときの処理
+   */
+  @Override
+  public void onHeldThisItem(Player player, ItemStack item) {
+    WeaponSkillInterface.super.onHeldThisItem(player, item);
+  }
+
+  /**
+   * このスキルが選択されているアイテムに持ち替えたときの処理
+   */
+  @Override
+  public void onDamage(Player player, ItemStack item, EntityDamageByEntityEvent e) {
+    WeaponSkillInterface.super.onDamage(player, item, e);
+  }
 
   protected String getDataString(int i) {
     return String.valueOf(data.getData(i));

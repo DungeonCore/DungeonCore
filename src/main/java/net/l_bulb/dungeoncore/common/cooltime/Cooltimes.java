@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 
 public class Cooltimes {
-  private final static CooltimeKeyClass COOLTIME_KEY = new CooltimeKeyClass(null, null);
+  private final static CooltimeKeyClass COOLTIME_KEY = new CooltimeKeyClass();
 
   /**
    * クールタイムが終了していて利用できるならTRUE

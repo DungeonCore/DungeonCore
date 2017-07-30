@@ -34,7 +34,6 @@ import net.l_bulb.dungeoncore.common.event.player.PlayerCustomMobSpawnEvent;
 import net.l_bulb.dungeoncore.dungeoncore.LbnRuntimeException;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.mob.AbstractMob;
-import net.l_bulb.dungeoncore.mob.LastDamageManager;
 import net.l_bulb.dungeoncore.mob.LastDamageMethodType;
 import net.l_bulb.dungeoncore.mob.MobHolder;
 import net.l_bulb.dungeoncore.mob.MobSpawnerFromCommand;
@@ -92,11 +91,9 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     this.e = e;
 
     // すでにキャンセルされてる可能性もあるのエラーを無視
-    try {
-      for (BukkitRunnable rutineRun : runtineMap.values()) {
-        rutineRun.cancel();
-      }
-    } catch (Exception ex) {}
+    for (BukkitRunnable rutineRun : runtineMap.values()) {
+      TheLowExecutor.executeIgnoreException(() -> rutineRun.cancel(), ex -> {});
+    }
 
     // mobskillをスタート
     for (MobSkillExcuteConditionType condtion : Arrays.asList(MobSkillExcuteConditionType.RUNTINE_10SEC, MobSkillExcuteConditionType.RUNTINE_30SEC,
@@ -120,11 +117,7 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
         continue;
       }
       // 念のため
-      try {
-        val.cancel();
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+      TheLowExecutor.executeIgnoreException(() -> val.cancel(), ex -> ex.printStackTrace());
     }
 
     // mobskillをスタート
@@ -183,13 +176,12 @@ public class SpreadSheetBossMob extends SpreadSheetMob implements BossMobable {
     LivingEntity mob = e.getEnemy();
 
     // 最後に攻撃したPlayerと攻撃方法を取得
-    Player player = LastDamageManager.getLastDamagePlayer(mob);
+    Player player = e.getPlayer();
     if (player == null) { return; }
     TheLowPlayer p = TheLowPlayerManager.getTheLowPlayer(player);
-    LastDamageMethodType lastDamageType = LastDamageManager.getLastDamageAttackType(mob);
 
     // 攻撃方法を対応するステータスのTypeに変換
-    LevelType type = lastDamageType.getLevelType();
+    LevelType type = e.geItemType().getLevelType();
 
     // 攻撃者がいる または 攻撃方法に対応するステータスが存在するならダメージを記録する
     if (p != null && type != null) {
