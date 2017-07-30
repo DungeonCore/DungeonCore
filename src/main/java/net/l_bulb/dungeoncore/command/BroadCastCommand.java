@@ -1,12 +1,13 @@
 package net.l_bulb.dungeoncore.command;
 
-import net.l_bulb.dungeoncore.twitter.Twitter4JGateway;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import twitter4j.*;
+
+import net.l_bulb.dungeoncore.twitter.Twitter4JGateway;
+
+import twitter4j.TwitterException;
 
 public class BroadCastCommand implements CommandExecutor {
   @Override

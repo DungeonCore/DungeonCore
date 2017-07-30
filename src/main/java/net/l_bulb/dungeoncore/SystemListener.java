@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
@@ -23,6 +22,7 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.event.server.ServerCommandEvent;
+import org.bukkit.event.vehicle.VehicleDestroyEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -31,6 +31,7 @@ import net.l_bulb.dungeoncore.api.player.TheLowPlayerManager;
 import net.l_bulb.dungeoncore.common.event.player.PlayerJoinDungeonGameEvent;
 import net.l_bulb.dungeoncore.common.event.player.PlayerQuitDungeonGameEvent;
 import net.l_bulb.dungeoncore.money.GalionEditReason;
+import net.l_bulb.dungeoncore.player.PlayerChecker;
 import net.l_bulb.dungeoncore.player.playerIO.PlayerIODataManager;
 import net.l_bulb.dungeoncore.player.status.StatusViewerInventory;
 import net.l_bulb.dungeoncore.util.DungeonLogger;
@@ -120,21 +121,28 @@ public class SystemListener implements Listener {
     }
   }
 
-  @EventHandler(priority = EventPriority.MONITOR)
-  public void onSpawn(CreatureSpawnEvent e) {
-    // Logは一旦止めておく
-    // SpawnReason spawnReason = e.getSpawnReason();
-    // if (!e.isCancelled()) {
-    // if ((e.getEntity().getCustomName() == null ||
-    // e.getEntity().getCustomName().isEmpty())) {
-    // Location location = e.getLocation();
-    // DungeonLog.errorln(StringUtils.join(new Object[]{
-    // "spawned Creature[", (int)location.getBlockX(), ",",
-    // (int)location.getBlockY(),",",
-    // (int)location.getBlockZ(), "], type:", e.getEntityType(), ", reason:"
-    // + spawnReason}));
-    // }
-    // }
+  @EventHandler
+  public void onVehicleDestroy(VehicleDestroyEvent e) {
+    EntityType type = e.getVehicle().getType();
+    if (type == null) { return; }
+
+    // 乗り物が壊れなようにする
+    switch (type) {
+      case BOAT:
+      case MINECART:
+      case MINECART_COMMAND:
+      case MINECART_CHEST:
+      case MINECART_HOPPER:
+      case MINECART_FURNACE:
+      case MINECART_MOB_SPAWNER:
+      case MINECART_TNT:
+        // 管理者でないなら壊さないようにする
+        if (!PlayerChecker.isNonNormalPlayer(e.getAttacker())) {
+          e.setCancelled(true);
+        }
+      default:
+        break;
+    }
   }
 
   @EventHandler

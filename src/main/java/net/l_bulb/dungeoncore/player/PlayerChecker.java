@@ -13,6 +13,7 @@ public class PlayerChecker {
    * @return
    */
   public static boolean isNormalPlayer(Entity entity) {
+    if (entity == null) { return false; }
     if (entity.getType() == EntityType.PLAYER) {
       Player p = (Player) entity;
       return p.getGameMode() == GameMode.ADVENTURE || p.getGameMode() == GameMode.SURVIVAL;
@@ -27,6 +28,7 @@ public class PlayerChecker {
    * @return
    */
   public static boolean isNonNormalPlayer(Entity entity) {
+    if (entity == null) { return false; }
     if (entity.getType() == EntityType.PLAYER) { return !isNormalPlayer(entity); }
     return false;
   }
