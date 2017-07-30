@@ -41,16 +41,16 @@ public class RouteSearcher {
   StringBuilder sb = new StringBuilder();
 
   private void searchAndSetSoil(Block block, SearchDirection beforeDirection) {
-    if (block.getType() != Material.DIAMOND_BLOCK && block.getType() != Material.DIAMOND_ORE && block.getType() != Material.EMERALD_BLOCK) { return; }
+    if (block.getType() != Material.DIAMOND_BLOCK && block.getType() != Material.DIAMOND_ORE) { return; }
 
     Location location = block.getLocation();
     if (soilList.contains(location)) { return; }
     // リストにセットする
     soilList.add(location);
     if (block.getType() == Material.DIAMOND_BLOCK) {
+      // DungeonLog.println((int)location.getX() + " " + (int)location.getY() +
+      // " " + (int)location.getZ() + " & ");
       sb.append((int) location.getX() + " " + (int) location.getY() + " " + (int) location.getZ() + " & ");
-    } else if (block.getType() == Material.EMERALD_BLOCK) {
-      sb.append("0 0 0 & ");
     }
 
     for (SearchDirection direction : directionList) {

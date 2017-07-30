@@ -43,7 +43,7 @@ public class CooltimeManager {
 
   /**
    * クールタイムが終了しているならTRUE
-   *
+   * 
    * @return
    */
   public boolean canUse() {
@@ -76,8 +76,6 @@ class CooltimeKeyClass {
     this.cooltimeName = cooltime.getId();
     this.playerUUID = p.getUniqueId();
   }
-
-  public CooltimeKeyClass() {}
 
   UUID playerUUID;
   String cooltimeName;

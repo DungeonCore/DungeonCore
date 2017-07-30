@@ -50,13 +50,12 @@ public class InitManager {
   }
 
   public void reloadSpreadSheet() {
-    MobCommand.reloadAllMob(null);
-    CommandChest.allReload();
+    SpletSheetCommand.reloadSheet(null, "armor");
     if (Main.isDebugging()) {
       DungeonLogger.info("デバッグモードなのでスプレットシートのデータ取得を無視します。");
       return;
     }
-    SpletSheetCommand.reloadSheet(null, "armor");
+    MobCommand.reloadAllMob(null);
     MobSkillManager.reloadDataBySystem();
     SpletSheetCommand.reloadSheet(null, "item");
     SpletSheetCommand.reloadSheet(null, "weapon");
@@ -65,6 +64,7 @@ public class InitManager {
     SpletSheetCommand.reloadSheet(null, "food2");
     SpletSheetCommand.reloadSheet(null, "weaponskill");
     SpletSheetCommand.reloadSheet(null, "craftrecipe");
+    CommandChest.allReload();
     SoundSheetRunnable.allReload();
     VillagerCommand.reloadAllVillager(Bukkit.getConsoleSender(), true);
     QuestCommand.questReload();

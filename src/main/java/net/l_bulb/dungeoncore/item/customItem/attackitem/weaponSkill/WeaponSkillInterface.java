@@ -35,9 +35,8 @@ public interface WeaponSkillInterface {
 
   /**
    * スキルタイプを取得
-   * 
-   * @return
    *
+   * @return
    */
   WeaponSkillType geWeaponSkillType();
 
@@ -93,11 +92,7 @@ public interface WeaponSkillInterface {
   default void offHeldThisItem(Player player, ItemStack item) {}
 
   /**
-   * このスキルが選択されているアイテムをもってダメージを受けたときの処理
-   *
-   * @param player
-   * @param item
-   * @param e
+   * このスキルが選択されているアイテムから別のアイテムに持ち替えたときの処理
    */
   default void onDamage(Player player, ItemStack item, EntityDamageByEntityEvent e) {}
 }

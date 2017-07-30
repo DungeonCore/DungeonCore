@@ -200,9 +200,7 @@ public class PlayerQuestSession implements Serializable {
   }
 }
 
-class ComplateData implements Serializable {
-  private static final long serialVersionUID = 3696665586229178577L;
-
+class ComplateData {
   long complateData = 0;
   int complateCount = 0;
 }
