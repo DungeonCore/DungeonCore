@@ -28,10 +28,10 @@ public class Yochou extends SpreadSheetWeaponSkill {
     return "wskill6";
   }
 
-  final PotionEffect SLOW = new PotionEffect(PotionEffectType.SLOW, (int) (getData(0) * 20), 100);
-
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    final PotionEffect SLOW = new PotionEffect(PotionEffectType.SLOW, (int) (getData(0) * 20), 100);
+
     p.addPotionEffect(SLOW, true);
     executeLog.put(p.getUniqueId(), System.currentTimeMillis());
     return true;

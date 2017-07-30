@@ -11,8 +11,6 @@ import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.Sprea
 
 public class Kakusei extends SpreadSheetWeaponSkill {
 
-  private static final String NAME = new Kaiho().getName();
-
   @Override
   public String getId() {
     return "wskill8";
@@ -20,6 +18,8 @@ public class Kakusei extends SpreadSheetWeaponSkill {
 
   @Override
   public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
+    final String NAME = new Kaiho().getName();
+
     final PotionEffect REGENERATION = new PotionEffect(PotionEffectType.REGENERATION, (int) (getData(2) * 20), getDataAsInt(5) - 1);
     final PotionEffect ABSORPTION = new PotionEffect(PotionEffectType.ABSORPTION, (int) (getData(2) * 20), getDataAsInt(3) - 1);
     final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, (int) (getData(2) * 20), getDataAsInt(4) - 1);

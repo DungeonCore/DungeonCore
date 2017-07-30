@@ -15,7 +15,6 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Kaiho extends SpreadSheetWeaponSkill {
 
-  private static final String YOCHO_ID = new Yochou().getId();
   /**
    * スキルの実行時間とPlayerのMap
    */
@@ -36,7 +35,9 @@ public class Kaiho extends SpreadSheetWeaponSkill {
 
     // 予兆を実行してから指定時間経っているかしらべる
     if (executeSkillMillisTile == -1 || executeSkillMillisTile + getData(0) * 1000 > System.currentTimeMillis()) {
-      p.sendMessage(ChatColor.RED + "このスキルはまだ実行できません。" + WeaponSkillFactory.getWeaponSkill(YOCHO_ID) + "を実行してから" + getData(0) + "秒以上経過する必要があります。");
+      p.sendMessage(
+          ChatColor.RED + "このスキルはまだ実行できません。" + WeaponSkillFactory.getWeaponSkill(new Yochou().getName()) + "を実行してから" + getData(0)
+              + "秒以上経過する必要があります。");
       return false;
     }
 
