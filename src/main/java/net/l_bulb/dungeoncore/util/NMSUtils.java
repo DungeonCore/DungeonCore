@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+
 import net.minecraft.server.v1_8_R1.BiomeBase;
 import net.minecraft.server.v1_8_R1.BiomeMeta;
 import net.minecraft.server.v1_8_R1.EntityInsentient;
@@ -97,5 +101,17 @@ public class NMSUtils {
     } else {
       throw new RuntimeException("index is invaild : " + index);
     }
+  }
+
+  /**
+   * EntityがTargetを攻撃対象にする
+   *
+   * @param entity
+   * @param target
+   */
+  public static void setTarget(LivingEntity entity, LivingEntity target) {
+    if (entity.getType() == EntityType.ARMOR_STAND || entity.getType() == EntityType.PLAYER) { return; }
+
+    ((EntityInsentient) ((CraftLivingEntity) entity).getHandle()).getNavigation().a(((CraftLivingEntity) entity).getHandle(), 1);
   }
 }

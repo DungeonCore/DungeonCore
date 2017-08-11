@@ -107,6 +107,12 @@ public abstract class LbnRunnable extends BukkitRunnable {
     return privateTick;
   }
 
+  /**
+   * 指定した時間以上経過していたらTRUE
+   * 
+   * @param tick
+   * @return
+   */
   public boolean isElapsedTick(long tick) {
     return privateTick >= tick;
   }

@@ -1,10 +1,11 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.bow;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.skillset7;
 
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -15,17 +16,18 @@ import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithProjectile;
 
-public class IceArrow extends WeaponSkillWithProjectile {
+public class FlostArrow extends WeaponSkillWithProjectile {
 
   @Override
   public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
     Stun.addStun(target, (int) (20 * getData(0)));
     Particles.runParticle(target.getEyeLocation(), ParticleType.snowballpoof, 100);
+    e.setDamage(DamageModifier.BASE, getNBTTagAccessor(item).getDamage() * getData(1));
   }
 
   @Override
   public String getId() {
-    return "skill4";
+    return "wskill28";
   }
 
   @Override

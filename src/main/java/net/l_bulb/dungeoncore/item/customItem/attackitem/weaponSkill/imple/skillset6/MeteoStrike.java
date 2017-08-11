@@ -1,4 +1,4 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.old.magic;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.skillset6;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class MeteoStrike extends SpreadSheetWeaponSkill {
 
   @Override
   public String getId() {
-    return "skill3";
+    return "wskill24";
   }
 
   @Override
@@ -96,7 +96,7 @@ public class MeteoStrike extends SpreadSheetWeaponSkill {
         PacketUtil.sendSound(target, Sound.EXPLODE, 3f, 0.1f, 50);
 
         // 敵にダメージを与え吹っ飛ばす
-        List<LivingEntity> nearEmemy = LivingEntityUtil.getNearEnemy(centerEntity, 15, 15, 15);
+        List<LivingEntity> nearEmemy = LivingEntityUtil.getNearEnemy(centerEntity, getData(0), getData(0), getData(0));
         for (LivingEntity entity : nearEmemy) {
           // ボスで無いならEntityを吹っ飛ばす
           AbstractMob<?> mob = MobHolder.getMob(entity);
@@ -104,13 +104,13 @@ public class MeteoStrike extends SpreadSheetWeaponSkill {
             entity.setVelocity(getMoveVector(centerEntity, entity, 2));
           }
 
-          CombatEntityEvent event = new CombatEntityEvent(p, item.getAttackItemDamage(item.getItem()) * getData(0), item, itemInHand, false, entity);
+          CombatEntityEvent event = new CombatEntityEvent(p, item.getAttackItemDamage(item.getItem()) * getData(1), item, itemInHand, false, entity);
           event.callEvent();
 
           // ダメージを与える
           event.damageEntity();
-          // 15秒燃やす
-          entity.setFireTicks((int) (20 * getData(1)));
+          // 燃やす
+          entity.setFireTicks((int) (20 * getData(2)));
         }
       }
 

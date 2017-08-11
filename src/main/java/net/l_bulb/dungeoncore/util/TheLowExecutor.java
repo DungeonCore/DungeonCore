@@ -56,7 +56,7 @@ public class TheLowExecutor {
    * @param periodTick 実行間隔(tick)
    * @param endingTick 開始してから終了までの時間(tick) この時間は含めません
    */
-  public static void executeLater(long periodTick, long endingTick, Consumer<LbnRunnable> runnable) {
+  public static void executeTimer(long periodTick, long endingTick, Consumer<LbnRunnable> runnable) {
     executeTimer(periodTick, r -> r.getAgeTick() > endingTick, runnable);
   }
 

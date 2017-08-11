@@ -23,6 +23,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.l_bulb.dungeoncore.dungeoncore.Main;
@@ -342,5 +343,22 @@ public class LivingEntityUtil {
       default:
         return false;
     }
+  }
+
+  /**
+   * 指定したEntityからデバフを消す
+   * 
+   * @param e
+   */
+  public static void removeDebuff(LivingEntity e) {
+    e.removePotionEffect(PotionEffectType.CONFUSION);
+    e.removePotionEffect(PotionEffectType.HARM);
+    e.removePotionEffect(PotionEffectType.HUNGER);
+    e.removePotionEffect(PotionEffectType.BLINDNESS);
+    e.removePotionEffect(PotionEffectType.POISON);
+    e.removePotionEffect(PotionEffectType.SATURATION);
+    e.removePotionEffect(PotionEffectType.SLOW);
+    e.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+    e.removePotionEffect(PotionEffectType.WEAKNESS);
   }
 }

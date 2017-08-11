@@ -61,6 +61,12 @@ public class Config {
     clickCancelledItems.add(Material.ARMOR_STAND);
     clickCancelledItems.add(Material.BOAT);
     clickCancelledItems.add(Material.MINECART);
+    clickCancelledItems.add(Material.COMMAND_MINECART);
+    clickCancelledItems.add(Material.EXPLOSIVE_MINECART);
+    clickCancelledItems.add(Material.HOPPER_MINECART);
+    clickCancelledItems.add(Material.HOPPER_MINECART);
+    clickCancelledItems.add(Material.POWERED_MINECART);
+    clickCancelledItems.add(Material.STORAGE_MINECART);
 
     clickCancelledEntityTypes.add(EntityType.ITEM_FRAME);
     damageCancelledEntityType.add(EntityType.ITEM_FRAME);

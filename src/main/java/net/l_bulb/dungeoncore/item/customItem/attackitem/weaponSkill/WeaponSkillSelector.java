@@ -31,7 +31,7 @@ public class WeaponSkillSelector implements MenuSelectorInterface {
   private WeaponSkillSet weaponSkillSet;
 
   static {
-    MenuSelectorManager.regist(null);
+    MenuSelectorManager.regist(new WeaponSkillSelector(null));
   }
 
   /**

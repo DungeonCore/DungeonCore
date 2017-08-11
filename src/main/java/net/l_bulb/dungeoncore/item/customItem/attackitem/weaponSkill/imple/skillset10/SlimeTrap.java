@@ -1,33 +1,33 @@
-package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.skillset4;
+package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.skillset10;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
+import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.BattleTrap;
-import net.l_bulb.dungeoncore.common.other.Stun;
 import net.l_bulb.dungeoncore.common.particle.ParticleType;
-import net.l_bulb.dungeoncore.common.particle.Particles;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.WeaponSkillWithTrap;
 import net.l_bulb.dungeoncore.util.LivingEntityUtil;
 
-public class Trap extends WeaponSkillWithTrap {
+public class SlimeTrap extends WeaponSkillWithTrap {
+
   @Override
   public String getId() {
-    return "wskill14";
+    return "wskill39";
   }
 
   @Override
   public BattleTrap getBattleTrap(Player p, ItemStack item, AbstractAttackItem customItem) {
-    BattleTrap battleTrap = new BattleTrap(ParticleType.portal, 3, LivingEntityUtil::isEnemy);
+    // ダメージを与えて上にノックアップする
+    BattleTrap battleTrap = new BattleTrap(ParticleType.slime, 4, e -> LivingEntityUtil.isEnemy(e) && e.getType().isAlive());
     battleTrap.setDeadlineSecond(getData(0));
-    // モンスターが踏んだ時の処理
     battleTrap.setFiring(e -> {
-      Stun.addStun((LivingEntity) e, (int) (getData(1) * 20.0));
-      Particles.runParticle(e.getLocation(), ParticleType.slime, 100);
-      e.getWorld().playSound(e.getLocation(), Sound.SLIME_ATTACK, 2, (float) 0.5);
+      new CombatEntityEvent(p, getNBTTagAccessor(item).getDamage() * getData(3), customItem, item, false, (LivingEntity) e).callEvent()
+          .damageEntity();
+      e.setVelocity(new Vector(0, 3, 0));
     });
     return battleTrap;
   }
@@ -37,13 +37,9 @@ public class Trap extends WeaponSkillWithTrap {
     return getDataAsInt(2);
   }
 
-  /**
-   * 1つあたりのトラップのクールタイムを取得
-   *
-   * @return
-   */
   @Override
   public double getOneTrapCooltime() {
-    return getData(4);
+    return getData(3) * 20;
   }
+
 }

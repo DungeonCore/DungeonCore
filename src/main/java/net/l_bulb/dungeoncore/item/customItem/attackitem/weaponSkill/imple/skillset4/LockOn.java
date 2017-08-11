@@ -10,7 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -29,9 +29,6 @@ public class LockOn extends WeaponSkillWithProjectile {
 
   static HashMap<Entity, Player> targetMap = new HashMap<>();
 
-  @Override
-  public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {}
-
   ParticleData particle = new ParticleData(ParticleType.portal, 100).setDispersion(1, 1, 1);
 
   @Override
@@ -47,6 +44,8 @@ public class LockOn extends WeaponSkillWithProjectile {
 
     // ターゲットから削除する
     TheLowExecutor.executeLater((long) (getData(1) * 20.0), () -> targetMap.remove(target));
+
+    e.setDamage(DamageModifier.BASE, getNBTTagAccessor(item).getDamage() * getData(0));
   }
 
   @Override
@@ -65,11 +64,6 @@ public class LockOn extends WeaponSkillWithProjectile {
    */
   public static boolean isTargeted(Player p, Entity e) {
     return Objects.equals(targetMap.get(p), p);
-  }
-
-  @Override
-  public double fixedDamage(double damage, Entity target) {
-    return damage * getData(0);
   }
 
   @Override

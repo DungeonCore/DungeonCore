@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,10 +17,19 @@ import net.l_bulb.dungeoncore.item.slot.SlotInterface;
 import net.l_bulb.dungeoncore.item.slot.SlotType;
 import net.l_bulb.dungeoncore.util.ItemStackUtil;
 
+import lombok.Getter;
+
 public class ItemStackNbttagAccessor {
+  @Getter
   private ItemStack item;
 
   public ItemStackNbttagAccessor(ItemStack item) {
+    this.item = item;
+  }
+
+  public void setItem(ItemStack item) {
+    // nullを許可しない
+    Validate.notNull(item);
     this.item = item;
   }
 

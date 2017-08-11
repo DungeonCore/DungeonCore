@@ -2,12 +2,10 @@ package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.imple.skil
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -22,20 +20,14 @@ import net.l_bulb.dungeoncore.util.TheLowExecutor;
 public class EnkyoriSnipe extends WeaponSkillWithProjectile {
 
   @Override
-  public void onProjectileLaunchEvent(ProjectileLaunchEvent e, ItemStack item) {
-
-  }
-
-  @Override
-  public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {}
-
-  @Override
-  public double fixedDamage(double damage, Entity target) {
+  public void onProjectileDamage(EntityDamageByEntityEvent e, ItemStack item, LivingEntity owner, LivingEntity target) {
+    double damage = getNBTTagAccessor(item).getDamage();
     if (Stun.isStun(target)) {
-      return damage * getData(1);
+      damage *= getData(1);
     } else {
-      return damage * getData(0);
+      damage *= getData(0);
     }
+    e.setDamage(damage);
   }
 
   @Override

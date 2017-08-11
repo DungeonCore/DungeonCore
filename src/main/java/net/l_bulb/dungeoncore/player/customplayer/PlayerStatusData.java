@@ -42,8 +42,8 @@ public class PlayerStatusData implements Serializable {
   TheLowPlayer player;
 
   public PlayerStatusData(TheLowPlayer player) {
-    dataMapDouble.put(PlayerStatusType.MAX_HP, 20.0);
-    dataMapDouble.put(PlayerStatusType.MAX_MAGIC_POINT, 100.0);
+    dataMapDouble.put(PlayerStatusType.MAX_HP, 0.0);
+    dataMapDouble.put(PlayerStatusType.MAX_MAGIC_POINT, 0.0);
     this.player = player;
   }
 
@@ -112,9 +112,11 @@ public class PlayerStatusData implements Serializable {
           case ADDITION:
             // 直接の値の時は加算する
             dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) + entry.getValue());
+            break;
           case MULTIPLICATION:
             // 割合で表している時はかけていく
             dataMapDouble.put(entry.getKey(), dataMapDouble.get(entry.getKey()) * entry.getValue());
+            break;
           case OVERWRITE:
             dataMapDouble.put(entry.getKey(), entry.getValue());
             break;
@@ -177,7 +179,9 @@ public class PlayerStatusData implements Serializable {
     if (onlinePlayer == null || !onlinePlayer.isOnline()) { return; }
     // 最大HPを加算する
     if (dataMapDouble.containsKey(PlayerStatusType.MAX_HP)) {
-      onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP));
+      onlinePlayer.setMaxHealth(getData(PlayerStatusType.MAX_HP) + 20.0);
+    } else {
+      onlinePlayer.setMaxHealth(20.0);
     }
 
     // 最大HPを固定する

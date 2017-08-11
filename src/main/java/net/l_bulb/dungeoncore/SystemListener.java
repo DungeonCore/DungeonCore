@@ -132,7 +132,6 @@ public class SystemListener implements Listener {
       case MINECART:
       case MINECART_COMMAND:
       case MINECART_CHEST:
-      case MINECART_HOPPER:
       case MINECART_FURNACE:
       case MINECART_MOB_SPAWNER:
       case MINECART_TNT:
@@ -140,6 +139,11 @@ public class SystemListener implements Listener {
         if (!PlayerChecker.isNonNormalPlayer(e.getAttacker())) {
           e.setCancelled(true);
         }
+        break;
+      case MINECART_HOPPER:
+        e.getVehicle().remove();
+        e.setCancelled(true);
+        break;
       default:
         break;
     }

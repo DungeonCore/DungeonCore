@@ -60,7 +60,7 @@ public abstract class WeaponSkillWithTrap extends SpreadSheetWeaponSkill {
    *
    * @return
    */
-  abstract public double getMaxTrapCount();
+  abstract public int getMaxTrapCount();
 
   /**
    * クールタイムが切れているTrapを削除する
@@ -83,7 +83,7 @@ public abstract class WeaponSkillWithTrap extends SpreadSheetWeaponSkill {
   }
 
   /**
-   * 1つあたりのトラップのクールタイムを取得
+   * 1つあたりのトラップのクールタイムを取得(秒)
    *
    * @return
    */

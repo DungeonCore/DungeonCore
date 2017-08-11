@@ -30,7 +30,7 @@ public interface ProjectileInterface {
   public void onProjectileHit(ProjectileHitEvent event, ItemStack item);
 
   /**
-   * ProjectileがEntityにダメージを与えたときの処理
+   * ProjectileがEntityにダメージを与えたときの処理。
    *
    * @param e
    * @param item

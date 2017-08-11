@@ -1,5 +1,6 @@
 package net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill;
 
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -9,6 +10,7 @@ import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.itemInterface.CombatItemable;
+import net.l_bulb.dungeoncore.item.nbttag.ItemStackNbttagAccessor;
 
 public interface WeaponSkillInterface {
 
@@ -35,7 +37,7 @@ public interface WeaponSkillInterface {
 
   /**
    * スキルタイプを取得
-   * 
+   *
    * @return
    *
    */
@@ -100,4 +102,18 @@ public interface WeaponSkillInterface {
    * @param e
    */
   default void onDamage(Player player, ItemStack item, EntityDamageByEntityEvent e) {}
+
+  // 空のNBTTagアクセッサ－
+  static ItemStackNbttagAccessor accessor = new ItemStackNbttagAccessor(new ItemStack(Material.AIR));
+
+  /**
+   * アイテムスタックアクセッサ－
+   *
+   * @param item
+   * @return
+   */
+  default public ItemStackNbttagAccessor getNBTTagAccessor(ItemStack item) {
+    accessor.setItem(item);
+    return accessor;
+  }
 }

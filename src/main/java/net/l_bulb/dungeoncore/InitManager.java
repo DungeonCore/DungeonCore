@@ -15,7 +15,7 @@ import net.l_bulb.dungeoncore.common.place.dungeon.DungeonList;
 import net.l_bulb.dungeoncore.dungeon.contents.ItemRegister;
 import net.l_bulb.dungeoncore.dungeoncore.Main;
 import net.l_bulb.dungeoncore.dungeoncore.SpletSheet.SoundSheetRunnable;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillFactory;
+import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillRegister;
 import net.l_bulb.dungeoncore.item.statusItem.SetItemManager;
 import net.l_bulb.dungeoncore.mob.mobskill.MobSkillManager;
 import net.l_bulb.dungeoncore.mobspawn.SpawnManager;
@@ -39,9 +39,9 @@ public class InitManager {
       reloadSpreadSheet();
       PlayerLastSaveType.load();
       PlayerIODataManager.allLoad();
+      WeaponSkillRegister.registWeaponSkill();
       // Citizenのバグを治す
       CitizenBugFixPatch.doPatch();
-      WeaponSkillFactory.allRegist();
       // スポーンを開始する
       SpawnManager.startSpawnEntity();
     } catch (Exception e) {

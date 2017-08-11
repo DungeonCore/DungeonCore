@@ -53,8 +53,10 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
     } else {
       this.damage = damage;
     }
-
   }
+
+  // 通常攻撃ならTRUE
+  boolean isNormalAttack;
 
   // 攻撃者
   Player attacker;
@@ -67,9 +69,6 @@ public class CombatEntityEvent extends PlayerEvent implements Cancellable {
 
   // 使用したアイテムスタック
   ItemStack itemStack;
-
-  // 通常攻撃ならTRUE
-  boolean isNormalAttack;
 
   // 攻撃を受けたEntity
   LivingEntity enemy;

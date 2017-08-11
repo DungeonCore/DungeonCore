@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 
 import net.l_bulb.dungeoncore.common.event.player.CombatEntityEvent;
 import net.l_bulb.dungeoncore.common.other.ItemStackData;
-import net.l_bulb.dungeoncore.item.customItem.attackitem.AbstractAttackItem;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillData;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillInterface;
 import net.l_bulb.dungeoncore.item.customItem.attackitem.weaponSkill.WeaponSkillType;
@@ -39,16 +38,6 @@ public abstract class SpreadSheetWeaponSkill implements WeaponSkillInterface {
   @Override
   public int getNeedMagicPoint() {
     return data.getNeedMp();
-  }
-
-  /**
-   * 対象のアイテムをクリックしたときの処理
-   *
-   * @return スキルを実行したならTRUE
-   */
-  @Override
-  public boolean onClick(Player p, ItemStack item, AbstractAttackItem customItem) {
-    return false;
   }
 
   /**
